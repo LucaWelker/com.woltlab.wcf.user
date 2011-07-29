@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="com.woltlab.wcf.user" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+	<packageinformation>
+		<packagename>User System</packagename>
+		<packagedescription>Provides functions to create and view user profiles</packagedescription>
+		<isunique>1</isunique>
+		<version>1.0.0 Alpha 1</version>
+		<date>2011-03-01</date>
+	</packageinformation>
+	
+	<authorinformation>
+		<author>WoltLab GmbH</author>
+		<authorurl>http://www.woltlab.com</authorurl>
+	</authorinformation>
+	
+	<requiredpackages>
+		<requiredpackage minversion="2.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.notification</requiredpackage>
+	</requiredpackages>
+	
+	<instructions type="install">
+		<instruction type="files">files.tar</instruction>
+		<instruction type="sql">install.sql</instruction>
+		<instruction type="templates">templates.tar</instruction>
+		<instruction type="userNotificationObjectType">userNotificationObjectType.xml</instruction>
+		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
+		<instruction type="coreobject">coreobject.xml</instruction>
+	</instructions>
+</package>
