@@ -35,7 +35,7 @@ class UserFriend extends DatabaseObject {
 		$sql = "SELECT	*
 			FROM	wcf".WCF_N."_user_friend
 			WHERE	userID = ?
-				AND friendID = ?";
+				AND friendUserID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($userID, $friendUserID));
 		$row = $statement->fetchArray();

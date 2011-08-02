@@ -4,6 +4,7 @@ use wcf\data\user\friend\UserFriendEditor;
 use wcf\data\user\friend\UserFriend;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\ValidateActionException;
+use wcf\system\storage\StorageHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\notification\object\UserFriendRequestUserNotificationObject;
 use wcf\system\WCF;
@@ -40,13 +41,13 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 		// try to find existing friendship 
 		$friend = UserFriend::getFriend(WCF::getUser()->userID, $this->parameters['data']['friendUserID']);
 		if ($friend !== null) {
-			throw new ValidateActionException();
+			throw new ValidateActionException('given user is one of your friends already');
 		}
 		
 		// try to find existing friend request
 		$request = UserFriendRequest::getRequest(WCF::getUser()->userID, $this->parameters['data']['friendUserID']);
 		if ($request !== null) {
-			throw new ValidateActionException();
+			throw new ValidateActionException('there is a friend request for this user already');
 		}
 	}
 	
@@ -54,14 +55,17 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 	 * @see	wcf\data\AbstractDatabaseObjectAction::create()
 	 */
 	public function create() {
-		if (!isset($this->parameters['data']['userID'])) {
-			$this->parameters['data']['userID'] = WCF::getUser()->userID;
-		}
-
+		if (!isset($this->parameters['data']['userID'])) $this->parameters['data']['userID'] = WCF::getUser()->userID;
+		$this->parameters['data']['time'] = TIME_NOW;
+		
 		$request = parent::create();
 		
 		// send notification
 		UserNotificationHandler::getInstance()->fireEvent('create', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($request), array($request->friendUserID));
+		
+		// reset storage
+		StorageHandler::getInstance()->reset($this->parameters['data']['userID'], 'requestedFriendIDs', 1);
+		StorageHandler::getInstance()->reset($this->parameters['data']['friendUserID'], 'requestingFriendIDs', 1);
 		
 		return $request;
 	}
@@ -94,6 +98,10 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			$object->update(array(
 				'ignore' => 1
 			));
+			
+			// reset storage
+			StorageHandler::getInstance()->reset($object->userID, 'requestedFriendIDs', 1);
+			StorageHandler::getInstance()->reset($object->friendUserID, 'requestingFriendIDs', 1);
 		}
 	}
 	
@@ -130,6 +138,12 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			
 			// send notification
 			UserNotificationHandler::getInstance()->fireEvent('accept', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object), array($object->userID));
+			
+			// reset storage
+			StorageHandler::getInstance()->reset($object->userID, 'requestedFriendIDs', 1);
+			StorageHandler::getInstance()->reset($object->friendUserID, 'requestingFriendIDs', 1);
+			StorageHandler::getInstance()->reset($object->userID, 'friendIDs', 1);
+			StorageHandler::getInstance()->reset($object->friendUserID, 'friendIDs', 1);
 		}
 	}
 	
@@ -154,6 +168,10 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			
 			// send notification
 			UserNotificationHandler::getInstance()->fireEvent('reject', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object), array($object->userID));
+			
+			// reset storage
+			StorageHandler::getInstance()->reset($object->userID, 'requestedFriendIDs', 1);
+			StorageHandler::getInstance()->reset($object->friendUserID, 'requestingFriendIDs', 1);
 		}
 	}
 	
@@ -182,8 +200,52 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 		}
 		
 		foreach ($this->objects as $object) {
-			// delete canceled
+			// delete canceled request
 			$object->delete();
+			
+			// revoke notification
+			UserNotificationHandler::getInstance()->revokeEvent('create', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object));
+			
+			// reset storage
+			StorageHandler::getInstance()->reset($object->userID, 'requestedFriendIDs', 1);
+			StorageHandler::getInstance()->reset($object->friendUserID, 'requestingFriendIDs', 1);
+		}
+	}
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::readObjects()
+	 */
+	protected function readObjects() {
+		if (count($this->objectIDs)) {
+			return parent::readObjects();
+		}
+		
+		if (WCF::getUser()->userID) {
+			// get base class
+			$baseClass = call_user_func(array($this->className, 'getBaseClass'));
+			
+			if (isset($this->parameters['friendUserID'])) {
+				$sql = "SELECT	*
+					FROM	wcf".WCF_N."_user_friend_request
+					WHERE	userID = ?
+						AND friendUserID = ?";
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array(WCF::getUser()->userID, $this->parameters['friendUserID']));
+				while ($object = $statement->fetchObject($baseClass)) {
+					$this->objects[] = new $this->className($object);
+				}
+			}
+			if (isset($this->parameters['userID'])) {
+				$sql = "SELECT	*
+					FROM	wcf".WCF_N."_user_friend_request
+					WHERE	userID = ?
+						AND friendUserID = ?";
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($this->parameters['userID'], WCF::getUser()->userID));
+				while ($object = $statement->fetchObject($baseClass)) {
+					$this->objects[] = new $this->className($object);
+				}
+			}
 		}
 	}
 }

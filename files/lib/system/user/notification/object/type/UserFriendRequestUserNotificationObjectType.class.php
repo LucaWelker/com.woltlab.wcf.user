@@ -15,7 +15,7 @@ use wcf\system\user\notification\object\UserFriendRequestUserNotificationObject;
  * @subpackage	system.user.notification.object.type
  * @category 	Community Framework
  */
-class UserUserNotificationObjectType extends AbstractUserNotificationObjectType {
+class UserFriendRequestUserNotificationObjectType extends AbstractUserNotificationObjectType {
 	/**
 	 * @see wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectByID()
 	 */

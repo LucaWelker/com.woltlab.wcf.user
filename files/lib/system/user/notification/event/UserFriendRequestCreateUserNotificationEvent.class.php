@@ -1,9 +1,9 @@
 <?php
-namespace app\system\user\notification\event;
+namespace wcf\system\user\notification\event;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\user\notification\type\IUserNotificationType;
 
-class UserFriendRequestAcceptUserNotificationEvent extends AbstractUserNotificationEvent {
+class UserFriendRequestCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 	public function getMessage(IUserNotificationType $notificationType) {
 		return '';
 	}

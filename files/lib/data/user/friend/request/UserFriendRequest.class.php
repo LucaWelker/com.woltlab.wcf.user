@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\friend\request;
 use wcf\data\DatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a friend request.
@@ -34,7 +35,7 @@ class UserFriendRequest extends DatabaseObject {
 		$sql = "SELECT	*
 			FROM	wcf".WCF_N."_user_friend_request
 			WHERE	userID = ?
-				AND friendID = ?";
+				AND friendUserID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($userID, $friendUserID));
 		$row = $statement->fetchArray();

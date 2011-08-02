@@ -2,6 +2,7 @@
 namespace wcf\data\user;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\storage\StorageHandler;
+use wcf\system\WCF;
 
 /**
  * Decorates the user object and provides functions to retrieve data for user profiles.
@@ -23,11 +24,11 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * user ids of friends
 	 * @var array<integer>
 	 */
-	protected $friendIDs = array();
+	protected $friendIDs = null;
 	
 	
-	protected $requestedFriendIDs = array();
-	protected $requestingFriendIDs = array();
+	protected $requestedFriendIDs = null;
+	protected $requestingFriendIDs = null;
 	
 	/**
 	 * Returns the list of friends of this user.
@@ -36,29 +37,32 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	public function getFriends() {
 		if ($this->friendIDs === null) {
-			// load storage data
-			StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+			$this->friendIDs = array();
 			
-			// get group ids
-			$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'friendIDs', 1);
-			
-			// cache does not exist or is outdated
-			if ($data[$this->userID] === null) {
-				$this->friendIDs = array();
-				$sql = "SELECT	friendUserID
-					FROM	wcf".WCF_N."_user_friend
-					WHERE	userID = ?";
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($this->userID));
-				while ($row = $statement->fetchArray()) {
-					$this->friendIDs[] = $row['friendUserID'];
-				}
+			if ($this->userID) {
+				// load storage data
+				StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
 				
-				// update storage data
-				StorageHandler::getInstance()->update($this->userID, 'friendIDs', serialize($this->friendIDs), 1);
-			}
-			else {
-				$this->friendIDs = unserialize($data[$this->userID]);
+				// get ids
+				$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'friendIDs', 1);
+				
+				// cache does not exist or is outdated
+				if ($data[$this->userID] === null) {
+					$sql = "SELECT	friendUserID
+						FROM	wcf".WCF_N."_user_friend
+						WHERE	userID = ?";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute(array($this->userID));
+					while ($row = $statement->fetchArray()) {
+						$this->friendIDs[] = $row['friendUserID'];
+					}
+					
+					// update storage data
+					StorageHandler::getInstance()->update($this->userID, 'friendIDs', serialize($this->friendIDs), 1);
+				}
+				else {
+					$this->friendIDs = unserialize($data[$this->userID]);
+				}
 			}
 		}
 		
@@ -66,8 +70,75 @@ class UserProfile extends DatabaseObjectDecorator {
 	}
 	
 	
-	public function getRequestedFriends() {}
-	public function getRequestingFriends() {}
+	public function getRequestedFriends() {
+		if ($this->requestedFriendIDs === null) {
+			$this->requestedFriendIDs = array();
+			
+			if ($this->userID) {
+				// load storage data
+				StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				
+				// get ids
+				$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'requestedFriendIDs', 1);
+				
+				// cache does not exist or is outdated
+				if ($data[$this->userID] === null) {
+					$sql = "SELECT	friendUserID
+						FROM	wcf".WCF_N."_user_friend_request
+						WHERE	userID = ?
+							AND ignored = 0";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute(array($this->userID));
+					while ($row = $statement->fetchArray()) {
+						$this->requestedFriendIDs[] = $row['friendUserID'];
+					}
+					
+					// update storage data
+					StorageHandler::getInstance()->update($this->userID, 'requestedFriendIDs', serialize($this->requestedFriendIDs), 1);
+				}
+				else {
+					$this->requestedFriendIDs = unserialize($data[$this->userID]);
+				}
+			}
+		}
+		
+		return $this->requestedFriendIDs;
+	}
+	
+	public function getRequestingFriends() {
+		if ($this->requestingFriendIDs === null) {
+			$this->requestingFriendIDs = array();
+			
+			if ($this->userID) {
+				// load storage data
+				StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				
+				// get ids
+				$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'requestingFriendIDs', 1);
+				
+				// cache does not exist or is outdated
+				if ($data[$this->userID] === null) {
+					$sql = "SELECT	userID
+						FROM	wcf".WCF_N."_user_friend_request
+						WHERE	friendUserID = ?
+							AND ignored = 0";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute(array($this->userID));
+					while ($row = $statement->fetchArray()) {
+						$this->requestedFriendIDs[] = $row['userID'];
+					}
+					
+					// update storage data
+					StorageHandler::getInstance()->update($this->userID, 'requestingFriendIDs', serialize($this->requestingFriendIDs), 1);
+				}
+				else {
+					$this->requestedFriendIDs = unserialize($data[$this->userID]);
+				}
+			}
+		}
+		
+		return $this->requestingFriendIDs;
+	}
 
 	/**
 	 * Returns true, if the given user is a friend of this user.
@@ -79,8 +150,23 @@ class UserProfile extends DatabaseObjectDecorator {
 		return in_array($userID, $this->getFriends());
 	}
 	
+	/**
+	 * Returns true, if there is a open friend request for the given user.
+	 * 
+	 * @param	integer		$userID
+	 * @return	boolean
+	 */
+	public function isRequestedFriend($userID) {
+		return in_array($userID, $this->getRequestedFriends());
+	}
 	
-	public function isRequestedFriend($userID) {}
-	
-	public function isRequestingFriend($userID) {}
+	/**
+	 * Returns true, if there is a open friend request by the given user.
+	 * 
+	 * @param	integer		$userID
+	 * @return	boolean
+	 */
+	public function isRequestingFriend($userID) {
+		return in_array($userID, $this->getRequestingFriends());
+	}
 }

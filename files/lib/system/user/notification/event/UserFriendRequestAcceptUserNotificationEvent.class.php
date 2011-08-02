@@ -1,5 +1,5 @@
 <?php
-namespace app\system\user\notification\event;
+namespace wcf\system\user\notification\event;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\user\notification\type\IUserNotificationType;
 

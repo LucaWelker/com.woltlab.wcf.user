@@ -17,6 +17,8 @@
 
 <p>Welcome {if $__wcf->user->userID}{$__wcf->user->username}{else}guest{/if}</p>
 
+<p>You have {#$__wcf->getUserNotificationHandler()->getNotificationCount()} outstanding notifications!</p>
+
 <p>{$user->username}</p>
 
 
@@ -24,14 +26,56 @@
 	- delete friend
 {else}
 	{if $__wcf->getUserProfileHandler()->isRequestedFriend($user->userID)}
-		- cancel friend request
+		<button id="foobar">cancel friend request</button>
+		<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			new WCF.Action.SimpleProxy({
+				action: 'cancel',
+				className: 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
+				elements: $('#foobar')
+			}, {
+				init: function(proxy) {
+					proxy.options.data['parameters'] = {
+						friendUserID: {@$user->userID}
+					};
+				},
+				success: function(data, statusText, jqXHR) {
+					alert('success');
+				}
+			});
+		});
+		//]]>
+		</script>
 	{else}
 		{if $__wcf->getUserProfileHandler()->isRequestingFriend($user->userID)}
 			- accept friend request
 			- reject friend request
 			- ignore friend request
 		{else}
-			- create friend request
+			<button id="foobar">create friend request</button>
+			<script type="text/javascript">
+			//<![CDATA[
+			$(function() {
+				new WCF.Action.SimpleProxy({
+					action: 'create',
+					className: 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
+					elements: $('#foobar')
+				}, {
+					init: function(proxy) {
+						proxy.options.data['parameters'] = {
+							data: {
+								friendUserID: {@$user->userID}
+							}
+						};
+					},
+					success: function(data, statusText, jqXHR) {
+						alert('success');
+					}
+				});
+			});
+			//]]>
+		</script>
 		{/if}
 	{/if}
 {/if}
