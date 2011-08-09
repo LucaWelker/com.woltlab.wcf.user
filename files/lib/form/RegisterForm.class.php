@@ -78,7 +78,7 @@ class RegisterForm extends UserAddForm {
 			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.register.error.disabled'));
 		}
 		
-		if (REGISTER_USE_CAPTCHA || WCF::getSession()->getVar('captchaDone')) {
+		if (!REGISTER_USE_CAPTCHA || WCF::getSession()->getVar('recaptchaDone')) {
 			$this->useCaptcha = false;
 		}
 	}
@@ -99,7 +99,9 @@ class RegisterForm extends UserAddForm {
 	 */
 	public function validate() {
 		// validate captcha first
-		$this->validateCaptcha();
+		if ($this->useCaptcha) {
+			$this->validateCaptcha();
+		}
 		
 		parent::validate();
 	}
@@ -134,7 +136,8 @@ class RegisterForm extends UserAddForm {
 			'availableLanguages' => $this->getAvailableLanguages(),
 			'languageID' => $this->languageID,
 			'visibleLanguages' => $this->visibleLanguages,
-			'availableContentLanguages' => $this->getAvailableContentLanguages()
+			'availableContentLanguages' => $this->getAvailableContentLanguages(),
+			'useCaptcha' => $this->useCaptcha
 		));
 	}
 	
@@ -284,6 +287,7 @@ class RegisterForm extends UserAddForm {
 		
 		// login user
 		UserAuth::getInstance()->storeAccessData($user, $this->username, $this->password);
+		WCF::getSession()->unregister('recaptchaDone');
 		$this->saved();
 		
 		// forward to index page
