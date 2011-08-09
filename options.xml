@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/options.xsd">
+	<import>
+		<categories>
+			<category name="user"></category>
+			<category name="user.general">
+				<parent>user</parent>
+			</category>
+			<category name="user.password">
+				<parent>security.general</parent>
+			</category>
+			<category name="user.register">
+				<parent>user</parent>
+			</category>
+			<category name="user.ban">
+				<parent>user.general</parent>
+			</category>
+		</categories>
+
+		<options>
+			<!-- user.general -->
+			<option name="register_username_min_length">
+				<categoryname>user.general</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue><![CDATA[3]]></defaultvalue>
+			</option>
+			<option name="register_username_max_length">
+				<categoryname>user.general</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue><![CDATA[25]]></defaultvalue>
+			</option>
+			<!-- /user.general -->
+			
+			<!-- user.password -->
+			<option name="encryption_method">
+				<categoryname>user.password</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue><![CDATA[sha1]]></defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="encryption_enable_salting">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="encryption_salt_position">
+				<categoryname>user.password</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue><![CDATA[before]]></defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="encryption_encrypt_before_salting">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			
+			<option name="register_enable_password_security_check">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<enableoptions><![CDATA[register_password_min_length,register_password_must_contain_lower_case,register_password_must_contain_upper_case,register_password_must_contain_digit,register_password_must_contain_special_char]]></enableoptions>
+			</option>
+			<option name="register_password_min_length">
+				<categoryname>user.password</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue><![CDATA[8]]></defaultvalue>
+			</option>
+			<option name="register_password_must_contain_lower_case">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<option name="register_password_must_contain_upper_case">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<option name="register_password_must_contain_digit">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<option name="register_password_must_contain_special_char">
+				<categoryname>user.password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<!-- /user.password -->
+			
+			<!-- user.ban -->
+			<option name="register_forbidden_usernames">
+				<categoryname>user.ban</categoryname>
+				<optiontype>textarea</optiontype>
+			</option>
+			<option name="register_forbidden_emails">
+				<categoryname>user.ban</categoryname>
+				<optiontype>textarea</optiontype>
+			</option>
+			<option name="register_allowed_emails">
+				<categoryname>user.ban</categoryname>
+				<optiontype>textarea</optiontype>
+			</option>
+			<!-- /user.ban -->
+			
+			<!-- user.register -->
+			<option name="register_disabled">
+				<categoryname>user.register</categoryname>
+				<optiontype>boolean</optiontype>
+				<enableoptions><![CDATA[!register_enable_disclaimer,!register_admin_notification,!register_activation_method,!register_unique_ip_address]]></enableoptions>
+			</option>
+			<option name="register_enable_disclaimer">
+				<categoryname>user.register</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<option name="register_admin_notification">
+				<categoryname>user.register</categoryname>
+				<optiontype>boolean</optiontype>
+			</option>
+			<option name="register_activation_method">
+				<categoryname>user.register</categoryname>
+				<optiontype>radiobuttons</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+				<selectoptions><![CDATA[0:wcf.acp.option.register_activation_method.disabled
+1:wcf.acp.option.register_activation_method.byUser
+2:wcf.acp.option.register_activation_method.byAdmin]]></selectoptions>
+			</option>
+			<!-- /user.register -->
+			
+			<!-- user.security -->
+			<option name="register_use_captcha">
+				<categoryname>security.antispam</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<option name="login_use_captcha">
+				<categoryname>security.antispam</categoryname>
+				<optiontype>boolean</optiontype>
+			</option>
+			<option name="lost_password_use_captcha">
+				<categoryname>security.antispam</categoryname>
+				<optiontype>boolean</optiontype>
+			</option>
+			<!-- /user.security -->
+		</options>
+	</import>
+</data>

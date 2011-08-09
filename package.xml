@@ -15,6 +15,7 @@
 	
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.recaptcha</requiredpackage>
 		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.notification</requiredpackage>
 	</requiredpackages>
 	
@@ -25,5 +26,6 @@
 		<instruction type="userNotificationObjectType">userNotificationObjectType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
 		<instruction type="coreobject">coreobject.xml</instruction>
+		<instruction type="options">options.xml</instruction>
 	</instructions>
 </package>

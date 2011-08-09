@@ -1,3 +1,6 @@
+ALTER TABLE wcf1_user ADD activationCode INT(10) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_user ADD registrationIpAddress VARCHAR(39) NOT NULL DEFAULT '';
+
 -- friends
 DROP TABLE IF EXISTS wcf1_user_friend;
 CREATE TABLE wcf1_user_friend (

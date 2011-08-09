@@ -1,7 +1,9 @@
 <?php
 namespace wcf\form;
 use wcf\system\auth\UserAuth;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -27,6 +29,11 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
+		if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'register') {
+			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('index.php?form=Register&username='.rawurlencode($this->username)));
+			exit;
+		}
+		
 		$this->useCookies = 0;
 		if (isset($_POST['useCookies'])) $this->useCookies = intval($_POST['useCookies']);
 		if (isset($_POST['url'])) $this->url = StringUtil::trim($_POST['url']);
@@ -36,7 +43,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
-		\wcf\form\AbstractForm::save();
+		AbstractForm::save();
 		
 		// set cookies
 		if ($this->useCookies == 1) {
