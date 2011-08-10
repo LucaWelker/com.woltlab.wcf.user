@@ -164,7 +164,7 @@
 	{* avatar *}
 
 	{* user note *}
-	<p>Welcome {$__wcf->user->username}!</p>
+	<p>Hello {$__wcf->user->username}!</p>
 
 	{* functions (login, registration) *}
 	<ul id="userPanel">
