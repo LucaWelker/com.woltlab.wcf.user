@@ -1,14 +1,14 @@
 {*
 	TODO:
 
-	CSS should be moved to an user css-file, whereas many parts may be left out except for the following ones:
+	CSS should be moved to a user css-file, whereas many parts may be left out except for the following ones:
 	 - [.scrollableContainer] Don't touch!
-	 - [.scrollableItems] Keep the inflated width, you may lower it's number but it must be incredible bloated
+	 - [.scrollableItems] Keep the inflated width, you may lower its number but it must be incredible bloated
 	 - [.scrollableItems > div] Must be a fixed-width float, otherwise it would break the scrollable class
 	   from jQueryTools. Do NOT use css-tables or [display: inline-block] as it won't work with the whole magic
 
 	A quick note on element nesting:
-	 - [.userNotificationContainer] Container which holds all elements (must be positioned absolutes, values
+	 - [.userNotificationContainer] Container which holds all elements (must be positioned absolute, values
 	   for top and left are determined during runtime using JavaScript)
 	 - [#userNotificationContainer] This is a pretty nasty pitfall, as #userNotificationContainer (equal to
 	   .scrollableContainer references to the direct descendant of .userNotificationContainer (same name to
@@ -184,10 +184,10 @@
 	<pre id="log"></pre>
 {else}
 	{* user note *}
-	<p>Welcome guest!</p>
+	<p>Hello guest!</p>
 	
 	{* login box *}
-	<div style="display:none">
+	<div style="display: none">
 		<form method="post" action="{link}index.php?form=Login{/link}">
 			<input type="text" name="username" value="" />
 			<input type="password" name="password" value="" />
@@ -200,6 +200,5 @@
 		<li><a href="{link}index.php?form=Login{/link}">Login</a></li>
 		<li><a href="{link}index.php?form=Register{/link}">Register</a></li>
 	</ul>
-	
 	
 {/if}
