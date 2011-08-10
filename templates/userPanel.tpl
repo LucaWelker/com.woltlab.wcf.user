@@ -24,12 +24,12 @@
 		padding: 0;
 	}
 
-	ul#userPanel {
+	ul#userMenu {
 		margin: 0;
 		padding: 0;
 	}
 
-	ul#userPanel > li {
+	ul#userMenu > li {
 		background-color: rgb(224, 224, 224);
 		border-radius: 3px;
 		box-shadow: 0 0 5px rgb(151, 151, 151);
@@ -161,13 +161,10 @@
 	}
 </style>
 {if $__wcf->user->userID}
-	{* avatar *}
-
-	{* user note *}
-	<p>Hello {$__wcf->user->username}!</p>
-
+	
 	{* functions (login, registration) *}
-	<ul id="userPanel">
+	<ul id="userMenu"><!-- renamed! -->
+		<li><span>{* avatar *}</span> Hello {$__wcf->user->username}!</li>
 		<li><a href="{link}index.php?action=Logout&t={@SECURITY_TOKEN}{/link}" onclick="return confirm('Are you sure?')">Logout</a></li>
 		<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
 	</ul>
@@ -184,13 +181,13 @@
 	<pre id="log"></pre>
 {else}
 	{* user note *}
-	<p>Hello guest!</p>
+	<p>Hello guest!</p><!-- should this also be inside a list? -->
 	
 	{* login box *}
 	<div style="display: none">
 		<form method="post" action="{link}index.php?form=Login{/link}">
-			<input type="text" name="username" value="" />
-			<input type="password" name="password" value="" />
+			<input type="text" name="username" value="" class="short" />
+			<input type="password" name="password" value="" class="short" />
 			<input type="submit" value="submit" />
 		</form>
 	</div>
