@@ -29,7 +29,9 @@
 		}
 	</style>
 </head>
+
 <body>
+
 {include file='header' sandbox=false __disableLoginLink=true}
 
 {if $errorField}
@@ -62,9 +64,9 @@
 		//]]>
 	</script>
 	
-	
 	<fieldset>
 		<legend>{lang}wcf.user.email{/lang}</legend>
+		
 		<dl>
 			<dt{if $errorType.email|isset} class="formError"{/if}><label for="email">{lang}wcf.user.email{/lang}</label></dt>
 			<dd>	
@@ -101,6 +103,7 @@
 	
 	<fieldset>
 		<legend>{lang}wcf.user.password{/lang}</legend>
+		
 		<dl>
 			<dt{if $errorType.password|isset} class="formError"{/if}><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 			<dd>
