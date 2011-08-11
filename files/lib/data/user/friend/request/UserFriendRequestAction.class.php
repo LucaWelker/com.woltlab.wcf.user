@@ -8,6 +8,7 @@ use wcf\system\storage\StorageHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\notification\object\UserFriendRequestUserNotificationObject;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 
 /**
  * Executes friend request-related actions.
@@ -24,6 +25,12 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	public $className = 'wcf\data\user\friend\request\UserFriendRequestEditor';
+	
+	/**
+	 * list of notification ids
+	 * @var	array<integer>
+	 */	
+	protected $notificationIDs = array();
 	
 	/**
 	 * @see wcf\data\AbstractDatabaseObjectAction::validateCreate()
@@ -79,7 +86,15 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			throw new ValidateActionException('Invalid object id');
 		}
 		
+		if (isset($this->parameters['notificationID']) && is_array($this->parameters['notificationID'])) {
+			$this->notificationIDs = ArrayUtil::toIntegerArray($this->parameters['notificationID']);
+		}
+		
 		foreach ($this->objects as $object) {
+			if (!isset($this->notificationIDs[$object->requestID]) || !$this->notificationIDs[$object->requestID]) {
+				throw new ValidateActionException('Invalid notification id');
+			}
+			
 			if ($object->friendUserID != WCF::getUser()->userID) {
 				throw new ValidateActionException('Insufficient permissions');
 			}
@@ -137,13 +152,15 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			$object->delete();
 			
 			// send notification
-			UserNotificationHandler::getInstance()->fireEvent('accept', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object), array($object->userID));
+			UserNotificationHandler::getInstance()->fireEvent('accept', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object->getDecoratedObject()), array($object->userID));
+			
+			// mark current notification as confirmed
+			UserNotificationHandler::getInstance()->markAsConfirmed($this->notificationIDs[$object->requestID]);
 			
 			// reset storage
 			StorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
 			StorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->userID), 'friendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->friendUserID), 'friendIDs', 1);
+			StorageHandler::getInstance()->reset(array($object->userID, $object->friendUserID), 'friendIDs', 1);
 		}
 	}
 	

@@ -1,5 +1,5 @@
 {*
-	TODO:
+	TODO: This css should be part of com.woltlab.wcf.notification (w/o parts related to userMenu of course!)
 
 	CSS should be moved to a user css-file, whereas many parts may be left out except for the following ones:
 	 - [.scrollableContainer] Don't touch!
@@ -14,7 +14,7 @@
 	   .scrollableContainer references to the direct descendant of .userNotificationContainer (same name to
 	   preserve logic within JavaScript)
 
-											-- Alexander (2011-08-10)
+											-- Alexander (2011-08-11)
 *}
 <style type="text/css">
 	* {
@@ -169,10 +169,15 @@
 		<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
 	</ul>
 
+	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
+			WCF.Language.addObject({
+				'wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}',
+				'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}'
+			});
 			new WCF.Notification.Handler();
 		});
 		//]]>
