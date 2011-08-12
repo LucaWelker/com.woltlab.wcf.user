@@ -4,6 +4,7 @@
 	
 	{include file='headInclude' sandbox=false}
 </head>
+
 <body>
 {include file='header' sandbox=false}
 
@@ -15,12 +16,11 @@
 	{/foreach}
 </ul>
 
-<p>Welcome {if $__wcf->user->userID}{$__wcf->user->username}{else}guest{/if}</p>
+<p>Hello {if $__wcf->user->userID}{$__wcf->user->username}{else}guest{/if}</p>
 
 <p>You have {#$__wcf->getUserNotificationHandler()->getNotificationCount()} outstanding notifications!</p>
 
 <p>{$user->username}</p>
-
 
 {if $__wcf->getUserProfileHandler()->isFriend($user->userID)}
 	- delete friend

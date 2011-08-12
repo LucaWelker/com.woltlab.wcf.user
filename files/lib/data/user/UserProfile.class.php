@@ -1,7 +1,7 @@
 <?php
 namespace wcf\data\user;
 use wcf\data\DatabaseObjectDecorator;
-use wcf\system\storage\StorageHandler;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
 /**
@@ -41,10 +41,10 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			if ($this->userID) {
 				// load storage data
-				StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
 				
 				// get ids
-				$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'friendIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'friendIDs', 1);
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
@@ -58,7 +58,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					}
 					
 					// update storage data
-					StorageHandler::getInstance()->update($this->userID, 'friendIDs', serialize($this->friendIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'friendIDs', serialize($this->friendIDs), 1);
 				}
 				else {
 					$this->friendIDs = unserialize($data[$this->userID]);
@@ -76,10 +76,10 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			if ($this->userID) {
 				// load storage data
-				StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
 				
 				// get ids
-				$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'requestedFriendIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'requestedFriendIDs', 1);
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
@@ -94,7 +94,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					}
 					
 					// update storage data
-					StorageHandler::getInstance()->update($this->userID, 'requestedFriendIDs', serialize($this->requestedFriendIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'requestedFriendIDs', serialize($this->requestedFriendIDs), 1);
 				}
 				else {
 					$this->requestedFriendIDs = unserialize($data[$this->userID]);
@@ -111,10 +111,10 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			if ($this->userID) {
 				// load storage data
-				StorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
 				
 				// get ids
-				$data = StorageHandler::getInstance()->getStorage(array($this->userID), 'requestingFriendIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'requestingFriendIDs', 1);
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
@@ -129,7 +129,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					}
 					
 					// update storage data
-					StorageHandler::getInstance()->update($this->userID, 'requestingFriendIDs', serialize($this->requestingFriendIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'requestingFriendIDs', serialize($this->requestingFriendIDs), 1);
 				}
 				else {
 					$this->requestedFriendIDs = unserialize($data[$this->userID]);
