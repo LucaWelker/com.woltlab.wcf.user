@@ -1,7 +1,7 @@
 <?php
 namespace wcf\form;
-use wcf\system\auth\UserAuth;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\authentication\UserAuthenticationFactory;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
@@ -47,7 +47,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		
 		// set cookies
 		if ($this->useCookies == 1) {
-			UserAuth::getInstance()->storeAccessData($this->user, $this->username, $this->password);
+			UserAuthenticationFactory::getUserAuthentication()->storeAccessData($this->user, $this->username, $this->password);
 		}
 		
 		// change user
@@ -75,7 +75,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		
 		WCF::getTPL()->assign(array(
 			'useCookies' => $this->useCookies,
-			'supportsPersistentLogins' => UserAuth::getInstance()->supportsPersistentLogins()
+			'supportsPersistentLogins' => UserAuthenticationFactory::getUserAuthentication()->supportsPersistentLogins()
 		));
 	}
 	
