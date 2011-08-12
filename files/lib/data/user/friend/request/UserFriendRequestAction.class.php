@@ -4,7 +4,7 @@ use wcf\data\user\friend\UserFriendEditor;
 use wcf\data\user\friend\UserFriend;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\ValidateActionException;
-use wcf\system\storage\StorageHandler;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\notification\object\UserFriendRequestUserNotificationObject;
 use wcf\system\WCF;
@@ -71,8 +71,8 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 		UserNotificationHandler::getInstance()->fireEvent('create', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($request), array($request->friendUserID));
 		
 		// reset storage
-		StorageHandler::getInstance()->reset(array($this->parameters['data']['userID']), 'requestedFriendIDs', 1);
-		StorageHandler::getInstance()->reset(array($this->parameters['data']['friendUserID']), 'requestingFriendIDs', 1);
+		UserStorageHandler::getInstance()->reset(array($this->parameters['data']['userID']), 'requestedFriendIDs', 1);
+		UserStorageHandler::getInstance()->reset(array($this->parameters['data']['friendUserID']), 'requestingFriendIDs', 1);
 		
 		return $request;
 	}
@@ -115,8 +115,8 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			));
 			
 			// reset storage
-			StorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
 		}
 	}
 	
@@ -158,9 +158,9 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			UserNotificationHandler::getInstance()->markAsConfirmed($this->notificationIDs[$object->requestID]);
 			
 			// reset storage
-			StorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->userID, $object->friendUserID), 'friendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->userID, $object->friendUserID), 'friendIDs', 1);
 		}
 	}
 	
@@ -187,8 +187,8 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			UserNotificationHandler::getInstance()->fireEvent('reject', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object), array($object->userID));
 			
 			// reset storage
-			StorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
 		}
 	}
 	
@@ -224,8 +224,8 @@ class UserFriendRequestAction extends AbstractDatabaseObjectAction {
 			UserNotificationHandler::getInstance()->revokeEvent('create', 'com.woltlab.wcf.user.friend.request', new UserFriendRequestUserNotificationObject($object));
 			
 			// reset storage
-			StorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
-			StorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->userID), 'requestedFriendIDs', 1);
+			UserStorageHandler::getInstance()->reset(array($object->friendUserID), 'requestingFriendIDs', 1);
 		}
 	}
 	

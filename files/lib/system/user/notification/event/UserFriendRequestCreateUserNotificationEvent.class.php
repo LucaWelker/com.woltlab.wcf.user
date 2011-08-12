@@ -39,7 +39,7 @@ class UserFriendRequestCreateUserNotificationEvent extends AbstractUserNotificat
 			)
 		);
 		
-		// TODO: Avatar is still hard-coded, fetch via StorageHandler?
+		// TODO: Avatar is still hard-coded, fetch via UserStorageHandler?
 		WCF::getTPL()->assign(array(
 			'buttons' => $buttons,
 			'className' => 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
