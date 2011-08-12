@@ -5,13 +5,13 @@ use wcf\data\option\Option;
 use wcf\data\language\Language;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\UserAction;
-use wcf\system\auth\UserAuth;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\mail\Mail;
 use wcf\system\recaptcha\RecaptchaHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\authentication\UserAuthenticationFactory;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\util\UserRegistrationUtil;
@@ -286,7 +286,7 @@ class RegisterForm extends UserAddForm {
 		}
 		
 		// login user
-		UserAuth::getInstance()->storeAccessData($user, $this->username, $this->password);
+		UserAuthenticationFactory::getUserAuthentication()->storeAccessData($user, $this->username, $this->password);
 		WCF::getSession()->unregister('recaptchaDone');
 		$this->saved();
 		
