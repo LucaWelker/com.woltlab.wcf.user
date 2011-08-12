@@ -55,8 +55,8 @@
 		//<![CDATA[
 		$(function() {
 			new WCF.User.Registration.ValidateUsername($('#username'), {
-				minlength: REGISTER_USERNAME_MIN_LENGTH,
-				maxlength: REGISTER_USERNAME_MAX_LENGTH
+				minlength: {@REGISTER_USERNAME_MIN_LENGTH},
+				maxlength: {@REGISTER_USERNAME_MAX_LENGTH}
 			});
 		});
 		//]]>
