@@ -188,19 +188,56 @@
 	{* user note *}
 	<p>Hello guest!</p><!-- should this also be inside a list? -->
 	
-	{* login box *}
-	<div style="display: none">
-		<form method="post" action="{link}index.php?form=Login{/link}">
-			<input type="text" name="username" value="" class="short" />
-			<input type="password" name="password" value="" class="short" />
-			<input type="submit" value="submit" />
-		</form>
-	</div>
-
-	{* functions (login, registration) *}
-	<ul>
-		<li><a href="{link}index.php?form=Login{/link}">Login</a></li>
-		<li><a href="{link}index.php?form=Register{/link}">Register</a></li>
-	</ul>
+	{if !$__disableLoginLink|isset}
+		{* login box *}
+		<div id="loginBox" style="display:none; border: 1px solid #000">
+			<form method="post" action="{link}index.php?form=Login{/link}">
+				<dl>
+					<dt><label for="username">Username or email address</label></dt>
+					<dd><input type="text" id="username" name="username" value="" required="true" class="short" /></dd>
+				</dl>
+			
+				<dl>
+					<dt>Do you have an account?</dt>
+					<dd>
+						<label><input type="radio" name="action" value="register" /> No, I am a new user.</label>
+						<label><input type="radio" name="action" value="login" checked="checked" /> Yes, my password is:</label>
+					</dd>
+				</dl>
+			
+				<dl>
+					<dt><label for="password">Password</label></dt>
+					<dd><input type="password" id="password" name="password" value="" class="short" /></dd>
+				</dl>
+				
+				<dl>
+					<dt><label for="useCookies">Stay logged in</label></dt>
+					<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" /></dd>
+				</dl>
+			
+				<input type="submit" value="Login" />
+			</form>
+		</div>
 	
+		{* functions (login, registration) *}
+		<ul>
+			<li><a id="loginLink" href="{link}index.php?form=Login{/link}">Login or Register</a></li>
+		</ul>
+
+		<script type="text/javascript">
+			//<![CDATA[
+			$(function() {
+				$('#loginLink').click(function(event) {
+					if ($('#loginBox').is(':visible')) {
+						$('#loginBox').hide('slow');
+					}
+					else {
+						$('#loginBox').show('slow');
+					}
+					return false;
+				});
+			});
+			//]]>
+		</script>
+	{/if}
 {/if}
