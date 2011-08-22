@@ -21,9 +21,12 @@ class UserFriendRequestUserNotificationObjectType extends AbstractUserNotificati
 	 */
 	public function getObjectByID($objectID) {
 		$request = new UserFriendRequest($objectID);
-		if ($request->requestID) return new UserFriendRequestUserNotificationObject($request);
+		if (!$request->requestID) {
+			// create empty object for unknown request id
+			$request = new UserFriendRequest(null, array('requestID' => $objectID));
+		}
 		
-		return null;
+		return array($request->requestID => new UserFriendRequestUserNotificationObject($request));
 	}
 
 	/**
@@ -36,7 +39,14 @@ class UserFriendRequestUserNotificationObjectType extends AbstractUserNotificati
 		$requests = array();
 		
 		foreach ($requestList->getObjects() as $request) {
-			$requests[] = new UserFriendRequestUserNotificationObject($request);
+			$requests[$request->requestID] = new UserFriendRequestUserNotificationObject($request);
+		}
+		
+		foreach ($objectIDs as $objectID) {
+			// append empty objects for unknown ids
+			if (!isset($requests[$objectID])) {
+				$requests[$objectID] = new UserFriendRequestUserNotificationObjectType(new UserFriendRequest(null, array('requestID' => $objectID)));
+			}
 		}
 		
 		return $requests;

@@ -5,46 +5,60 @@ use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\WCF;
 
 class UserFriendRequestCreateUserNotificationEvent extends AbstractUserNotificationEvent {
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
+	 */
 	public function getMessage(IUserNotificationType $notificationType) {
 		return '';
 	}
 	
 	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getShortOutput()
 	 * @todo	use language variables
 	 */
 	public function getShortOutput() {
 		return 'Eingehende Freundschaftsanfrage';
 	}
 	
-	public function getMediumOutput() {
-		return '';
-	}
-	
 	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getOutput()
 	 * @todo	use language variables
 	 */
 	public function getOutput() {
-		$buttons = array(
+		return '<strong>dtdesign</strong> möchte dich zu seiner Freundesliste hinzufügen.';
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getActions()
+	 */
+	public function getActions() {
+		return array(
 			array(
 				'action' => 'accept',
 				'label' => 'Akzeptieren',
+				'objectID' => $this->userNotificationObject->requestID
 			),
 			array(
 				'action' => 'reject',
-				'label' => 'Ablehnen'
+				'label' => 'Ablehnen',
+				'objectID' => $this->userNotificationObject->requestID
 			),
 			array(
 				'action' => 'ignore',
-				'label' => 'Ignorieren'
+				'label' => 'Ignorieren',
+				'objectID' => $this->userNotificationObject->requestID
 			)
 		);
-		
-		// TODO: Avatar is still hard-coded, fetch via UserStorageHandler?
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getRenderedOutput()
+	 */
+	public function getRenderedOutput() {
 		WCF::getTPL()->assign(array(
-			'buttons' => $buttons,
+			'buttons' => $this->getActions(),
 			'className' => 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
-			'message' => '<strong>dtdesign</strong> möchte dich zu seiner Freundesliste hinzufügen.',
-			'objectID' => $this->userNotificationObject->requestID,
+			'message' => $this->getOutput(),
 			'time' => $this->userNotificationObject->time,
 			'username' => 'dtdesign'	// fetch with left join?
 		));
@@ -52,10 +66,16 @@ class UserFriendRequestCreateUserNotificationEvent extends AbstractUserNotificat
 		return WCF::getTPL()->fetch('userNotificationDetails');
 	}
 	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
+	 */
 	public function getTitle() {
 		return '';
 	}
 	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getDescription()
+	 */
 	public function getDescription() {
 		return '';
 	}
