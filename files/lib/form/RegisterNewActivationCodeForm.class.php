@@ -2,7 +2,7 @@
 namespace wcf\form;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
-use wcf\system\exeption\UserInputException;
+use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
