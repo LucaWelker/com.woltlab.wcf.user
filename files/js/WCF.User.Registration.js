@@ -220,3 +220,71 @@ WCF.User.Registration.ValidatePassword.prototype = {
 		element.next('small.innerError').remove();
 	}
 };
+
+/**
+ * Toggles input fields for lost password form.
+ */
+WCF.User.Registration.LostPassword = function() { this.init(); };
+WCF.User.Registration.LostPassword.prototype = {
+	/**
+	 * email input
+	 * @var	jQuery
+	 */
+	_email: null,
+	
+	/**
+	 * username input
+	 * @var	jQuery
+	 */
+	_username: null,
+	
+	/**
+	 * Initializes LostPassword-form class.
+	 */
+	init: function() {
+		// bind input fields
+		this._email = $('#emailInput');
+		this._username = $('#usernameInput');
+		
+		// bind event listener
+		this._email.keyup($.proxy(this._checkEmail, this));
+		this._username.keyup($.proxy(this._checkUsername, this));
+		$('#resetButton').click($.proxy(this._reset, this));
+		
+		// toggle fields on init
+		this._checkEmail();
+		this._checkUsername();
+	},
+	
+	/**
+	 * Checks for content in email field and toggles username.
+	 */
+	_checkEmail: function() {
+		if (this._email.val() == '') {
+			this._username.enable();
+		}
+		else {
+			this._username.disable();
+		}
+	},
+	
+	/**
+	 * Checks for content in username field and toggles email.
+	 */
+	_checkUsername: function() {
+		if (this._username.val() == '') {
+			this._email.enable();
+		}
+		else {
+			this._email.disable();
+		}
+	},
+	
+	/**
+	 * Restores field state.
+	 */
+	_reset: function() {
+		this._email.enable();
+		this._username.enable();
+	}
+}

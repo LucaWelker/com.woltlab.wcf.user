@@ -4,6 +4,7 @@ use wcf\data\user\UserEditor;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserRegistrationUtil;
 use wcf\util\UserUtil;
@@ -199,7 +200,7 @@ class AccountManagementForm extends AbstractSecureForm {
 			'newPassword' => $this->newPassword,
 			'confirmNewPassword' => $this->confirmNewPassword,
 			'username' => $this->username,
-			'renamePeriod' => WCF::getUser()->getPermission('user.profile.renamePeriod'),
+			'renamePeriod' => WCF::getSession()->getPermission('user.profile.renamePeriod'),
 			'canChangeUsername' => $this->canChangeUsername,
 			'quitStarted' => $this->quitStarted,
 			'quit' => $this->quit,
@@ -216,7 +217,7 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 				
 		// set active tab
-		UserCPMenu::getInstance()->setActiveMenuItem('wcf.user.usercp.menu.link.profile.account');
+		/* UserCPMenu::getInstance()->setActiveMenuItem('wcf.user.usercp.menu.link.profile.account'); */
 		
 		parent::show();
 	}
@@ -260,7 +261,7 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 		
 		// email
-		if (WCF::getUser()->getPermission('user.profile.canChangeEmail') && $this->email != WCF::getUser()->email && $this->email != WCF::getUser()->newEmail) {
+		if (WCF::getSession()->getPermission('user.profile.canChangeEmail') && $this->email != WCF::getUser()->email && $this->email != WCF::getUser()->newEmail) {
 			if (REGISTER_ACTIVATION_METHOD == 0 || REGISTER_ACTIVATION_METHOD == 2 || StringUtil::toLowerCase($this->email) == StringUtil::toLowerCase(WCF::getUser()->email)) {
 				// update email
 				$updateParameters['email'] = $this->email;
@@ -277,33 +278,36 @@ class AccountManagementForm extends AbstractSecureForm {
 				$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
 				$messageData = array(
 					'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
-					'$username' => WCF::getUser()->username,
-					'$userID' => WCF::getUser()->userID,
-					'$activationCode' => $activationCode,
+					'username' => WCF::getUser()->username,
+					'userID' => WCF::getUser()->userID,
+					'activationCode' => $activationCode,
 					'PAGE_URL' => PAGE_URL,
 					'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS
 				);
 				
-				$mail = new Mail(array(WCF::getUser()->username => $this->email), WCF::getLanguage()->get('wcf.user.emailChange.needReactivation.mail.subject', $subjectData), WCF::getLanguage()->get('wcf.user.emailChange.needReactivation.mail', $messageData));
+				$mail = new Mail(array(WCF::getUser()->username => $this->email), WCF::getLanguage()->getDynamicVariable('wcf.user.emailChange.needReactivation.mail.subject', $subjectData), WCF::getLanguage()->getDynamicVariable('wcf.user.emailChange.needReactivation.mail', $messageData));
 				$mail->send();
 				$success[] = 'wcf.user.emailChange.needReactivation';
 			}
 		}
 		
+		$userEditor = new UserEditor(WCF::getUser());
+		
 		// password
 		if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
-			$updateParameters['password'] = $this->newPassword;
-		
+			$userEditor->update(array(
+				'password' => $this->newPassword
+			));
+			
 			// update cookie
 			if (isset($_COOKIE[COOKIE_PREFIX.'password'])) {
-				HeaderUtil::setCookie('password', StringUtil::getSaltedHash($this->newPassword, $editor->salt), TIME_NOW + 365 * 24 * 3600);
+				HeaderUtil::setCookie('password', StringUtil::getSaltedHash($this->newPassword, $userEditor->salt), TIME_NOW + 365 * 24 * 3600);
 			}
 			
 			$success[] = 'wcf.user.passwordChange.success';
 		}
 		
 		if (!empty($updateParameters)) {
-			$userEditor = new UserEditor(WCF::getUser());
 			$userEditor->update($updateParameters);
 		}
 		
