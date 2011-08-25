@@ -2,6 +2,7 @@
 namespace wcf\form;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
+use wcf\page\AbstractPage;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\WCF;
@@ -99,13 +100,13 @@ class NewPasswordForm extends AbstractForm {
 		$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
 		$messageData = array(
 			'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
-			'$username' => $this->user->username,
-			'$userID' => $this->user->userID,
-			'$newPassword' => $this->newPassword,
+			'username' => $this->user->username,
+			'userID' => $this->user->userID,
+			'newPassword' => $this->newPassword,
 			'PAGE_URL' => PAGE_URL,
 			'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS
 		);
-		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->get('wcf.user.lostPassword.newPassword.mail.subject', $subjectData), WCF::getLanguage()->get('wcf.user.lostPassword.newPassword.mail', $messageData));
+		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.newPassword.mail.subject', $subjectData), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.newPassword.mail', $messageData));
 		$mail->send();
 		$this->saved();
 		
