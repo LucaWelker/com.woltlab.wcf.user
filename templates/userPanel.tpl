@@ -165,7 +165,7 @@
 	{* functions (login, registration) *}
 	<ul id="userMenu"><!-- renamed! -->
 		<li><span>{* avatar *}</span> Hello {$__wcf->user->username}!</li>
-		<li><a href="{link}index.php?action=Logout&t={@SECURITY_TOKEN}{/link}" onclick="return confirm('Are you sure?')">Logout</a></li>
+		<li><a href="{link}index.php?action=Logout&amp;t={@SECURITY_TOKEN}{/link}" onclick="return confirm('Are you sure?')">Logout</a></li>
 		<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
 	</ul>
 
