@@ -1,9 +1,12 @@
 {include file="documentHeader"}
+
 <head>
 	<title>{lang}wcf.user.accountManagement.title{/lang} - {lang}wcf.user.usercp{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 	{include file='headInclude' sandbox=false}
 </head>
+
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+
 {include file='header' sandbox=false}
 
 {capture append=userMessages}
@@ -25,136 +28,123 @@
 <form method="post" action="index.php?form=AccountManagement">
 	<div class="border tabMenuContent">
 		<div class="container-1">
-			<h3 class="subHeadline">{lang}wcf.user.accountManagement.title{/lang}</h3>
-				
+			<hgroup class="subHeading">
+				<h1>{lang}wcf.user.accountManagement.title{/lang}</h1>
+			</hgroup>
+							
 			<p class="warning">{lang}wcf.user.accountManagement.edit.warning{/lang}</p>
 				
-			<div class="formElement{if $errorField == 'password'} formError{/if}">
-				<div class="formFieldLabel">
-					<label for="password">{lang}wcf.user.accountManagement.password{/lang}</label>
-				</div>
-				<div class="formField">
-					<input type="password" class="inputText" name="password" value="" id="password" />
+			<dl{if $errorField == 'password'} class="formError"{/if}>
+				<dt><label for="password">{lang}wcf.user.accountManagement.password{/lang}</label></dt>
+				<dd>
+					<input type="password" id="password" name="password" value="" class="medium" />
 					{if $errorField == 'password'}
-						<p class="innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
-						</p>
+						</small>
 					{/if}
-				</div>
-				<div class="formFieldDesc">
-					<p>{lang}wcf.user.accountManagement.password.description{/lang}</p>
-				</div>
-			</div>
+					<small>{lang}wcf.user.accountManagement.password.description{/lang}</small>
+				</dd>
+			</dl>
 				
 			{if $canChangeUsername}
 				<fieldset>
 					<legend><label for="username">{lang}wcf.user.rename.title{/lang}</label></legend>
 						
-					<div class="formElement{if $errorField == 'username'} formError{/if}">
-						<div class="formFieldLabel">
-							<label for="username">{lang}wcf.user.username{/lang}</label>
-						</div>
-							
-						<div class="formField">
-							<input type="text" class="inputText" name="username" value="{$username}" id="username" />
+					<dl{if $errorField == 'username'} class="formError"{/if}>
+						<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
+						<dd>
+							<input type="text" id="username" name="username" value="{$username}" class="medium" />
 								
 							{if $errorField == 'username'}
-								<p class="innerError">
+								<small class="innerError">
 									{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 									{if $errorType == 'notValid'}{lang}wcf.user.error.username.notValid{/lang}{/if}
 									{if $errorType == 'notUnique'}{lang}wcf.user.error.username.notUnique{/lang}{/if}
 									{if $errorType == 'notChanged'}{lang}wcf.user.rename.error.username.notChanged{/lang}{/if}
-								</p>
+								</small>
 							{/if}
-						</div>
-						{if $renamePeriod > 0}
-							<div class="formFieldDesc">
-								<p>{lang}wcf.user.rename.description{/lang}</p>
-							</div>
-						{/if}
-					</div>
+							{if $renamePeriod > 0}
+								<small>{lang}wcf.user.rename.description{/lang}</small>
+							{/if}
+						</dd>
+					</dl>
+					
 				</fieldset>
 			{/if}
 				
 			<fieldset>
 				<legend><label for="newPassword">{lang}wcf.user.passwordChange.title{/lang}</label></legend>
 					
-				<div class="formElement{if $errorField == 'newPassword'} formError{/if}">
-					<div class="formFieldLabel">
-						<label for="newPassword">{lang}wcf.user.passwordChange.newPassword{/lang}</label>
-					</div>
-					<div class="formField">
-						<input type="password" class="inputText" name="newPassword" value="{$newPassword}" id="newPassword" />
+				<dl{if $errorField == 'newPassword'} class="formError"{/if}>
+					<dt><label for="newPassword">{lang}wcf.user.passwordChange.newPassword{/lang}</label></dt>
+					<dd>
+						<input type="password" id="newPassword" name="newPassword" value="{$newPassword}" class="medium" />
 							
 						{if $errorField == 'newPassword'}
-							<p class="innerError">
+							<small class="innerError">
 								{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 								{if $errorType == 'notSecure'}{lang}wcf.user.error.password.notSecure{/lang}{/if}
-							</p>
+							</small>
 						{/if}
-					</div>
-				</div>
+					</dd>
+				</dl>
 					
-				<div class="formElement{if $errorField == 'confirmNewPassword'} formError{/if}">
-					<div class="formFieldLabel">
-						<label for="confirmNewPassword">{lang}wcf.user.passwordChange.confirmNewPassword{/lang}</label>
-					</div>
-					<div class="formField">
-						<input type="password" class="inputText" name="confirmNewPassword" value="{$confirmNewPassword}" id="confirmNewPassword" />
+				<dl class="{if $errorField == 'confirmNewPassword'} formError{/if}">
+					<dt><label for="confirmNewPassword">{lang}wcf.user.passwordChange.confirmNewPassword{/lang}</label></dt>
+					<dd>
+						<input type="password" id="confirmNewPassword" name="confirmNewPassword" value="{$confirmNewPassword}" class="inputText" />
 							
 						{if $errorField == 'confirmNewPassword'}
-							<p class="innerError">
+							<small class="innerError">
 								{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 								{if $errorType == 'notEqual'}{lang}wcf.user.error.confirmPassword.notEqual{/lang}{/if}
-							</p>
+							</small>
 						{/if}
-					</div>
-				</div>
+					</dd>
+				</dl>
+				
 			</fieldset>
 				
 			{if $__wcf->getSession()->getPermission('user.profile.canChangeEmail')}
 				<fieldset>
 					<legend><label for="email">{lang}wcf.user.emailChange.title{/lang}</label></legend>
 						
-					<div class="formElement{if $errorField == 'email'} formError{/if}">
-						<div class="formFieldLabel">
-							<label for="email">{lang}wcf.user.email{/lang}</label>
-						</div>
-						<div class="formField">
-							<input type="text" class="inputText" name="email" value="{$email}" id="email" />
+					<dl{if $errorField == 'email'} class="formError"{/if}>
+						<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
+						<dd>
+							<input type="email" id="email" name="email" value="{$email}" class="medium" />
 								
 							{if $errorField == 'email'}
-								<p class="innerError">
+								<small class="innerError">
 									{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 									{if $errorType == 'notValid'}{lang}wcf.user.error.email.notValid{/lang}{/if}
 									{if $errorType == 'notUnique'}{lang}wcf.user.error.email.notUnique{/lang}{/if}
 									{if $errorType == 'notChanged'}{lang}wcf.user.emailChange.error.email.notChanged{/lang}{/if}
-								</p>
+								</small>
 							{/if}
-						</div>
-					</div>
+						</dd>
+					</dl>
 						
-					<div class="formElement{if $errorField == 'confirmEmail'} formError{/if}">
-						<div class="formFieldLabel">
-							<label for="confirmEmail">{lang}wcf.user.confirmEmail{/lang}</label>
-						</div>
-						<div class="formField">
-							<input type="text" class="inputText" name="confirmEmail" value="{$confirmEmail}" id="confirmEmail" />
+					<dl{if $errorField == 'confirmEmail'} class="formError"{/if}>
+						<dt><label for="confirmEmail">{lang}wcf.user.confirmEmail{/lang}</label></dt>
+						<dd>
+							<input type="email" id="confirmEmail" name="confirmEmail" value="{$confirmEmail}" class="medium" />
 								
 							{if $errorField == 'confirmEmail'}
-								<p class="innerError">
+								<small class="innerError">
 									{if $errorType == 'notEqual'}{lang}wcf.user.error.confirmEmail.notEqual{/lang}{/if}
-								</p>
+								</small>
 							{/if}
-						</div>
-					</div>
+						</dd>
+					</dl>
 						
 					{if REGISTER_ACTIVATION_METHOD == 1 && $__wcf->getUser()->reactivationCode != 0}
 						<div class="formElement">
 							<div class="formField">
 								<ul class="formOptionsLong">
-									<li><img src="{icon}emailS.png{/icon}" alt="" /> <a href="index.php?page=Register&amp;action=reenable{@SID_ARG_2ND}">{lang}wcf.user.emailChange.reactivation.title{/lang}</a></li>
+									<li><img src="{icon}email.svg{/icon}" alt="" /> <a href="index.php?page=Register&amp;action=reenable{@SID_ARG_2ND}">{lang}wcf.user.emailChange.reactivation.title{/lang}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -192,11 +182,12 @@
 	<div class="formSubmit">
 		{@SID_INPUT_TAG}
 		{@SECURITY_TOKEN_INPUT_TAG}
-		<input type="submit" accesskey="s" value="{lang}wcf.global.button.submit{/lang}" />
-		<input type="reset" accesskey="r" value="{lang}wcf.global.button.reset{/lang}" />
+		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 	</div>
 </form>
 
 {include file='footer' sandbox=false}
+
 </body>
 </html>

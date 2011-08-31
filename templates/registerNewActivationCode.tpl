@@ -1,18 +1,21 @@
 {include file="documentHeader"}
+
 <head>
 	<title>{lang}wcf.user.register.newActivationCode{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 	{include file='headInclude' sandbox=false}
 </head>
+
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+
 {include file='header' sandbox=false}
 
-<div class="mainHeadline">
-	{* <img src="{icon}registerL.png{/icon}" alt="" /> *}
-	<div class="headlineContainer">
-		<h2>{lang}wcf.user.register.newActivationCode{/lang}</h2>
-	</div>
-</div>
-	
+<header class="mainHeading">
+	{* <img src="{icon}register.svg{/icon}" alt="" /> *}
+	<hgroup>
+		<h1>{lang}wcf.user.register.newActivationCode{/lang}</h1>
+	</hgroup>
+</header>
+
 {if $userMessages|isset}{@$userMessages}{/if}
 	
 {if $errorField}
@@ -22,67 +25,61 @@
 <form method="post" action="index.php?form=RegisterNewActivationCode">
 	<div class="border content">
 		<div class="container-1">
-			<div class="formElement{if $errorField == 'username'} formError{/if}">
-				<div class="formFieldLabel">
-					<label for="username">{lang}wcf.user.username{/lang}</label>
-				</div>
-				<div class="formField">
-					<input type="text" class="inputText" name="username" value="{@$username}" id="username" />
+			<dl{if $errorField == 'username'} class="formError"{/if}>
+				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
+				<dd>
+					<input type="text" id="username" name="username" value="{@$username}" class="medium" />
 					{if $errorField == 'username'}
-						<p class="innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
 							{if $errorType == 'alreadyEnabled'}{lang}wcf.user.register.error.userAlreadyEnabled{/lang}{/if}
-						</p>
+						</small>
 					{/if}
-				</div>
-			</div>
+				</dd>
+			</dl>
 	
-			<div class="formElement{if $errorField == 'password'} formError{/if}">
-				<div class="formFieldLabel">
-					<label for="password">{lang}wcf.user.password{/lang}</label>
-				</div>
-				<div class="formField">
-					<input type="password" class="inputText" name="password" value="{@$password}" id="password" />
+			<dl{if $errorField == 'password'} class="formError"{/if}>
+				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
+				<dd>
+					<input type="password" id="password" name="password" value="{@$password}" class="medium" />
 					{if $errorField == 'password'}
-						<p class="innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
-						</p>
+						</small>
 					{/if}
-				</div>
-			</div>
+				</dd>
+			</dl>
 				
-			<div class="formElement{if $errorField == 'email'} formError{/if}">
-				<div class="formFieldLabel">
-					<label for="email">{lang}wcf.user.email{/lang}</label>
-				</div>
-				<div class="formField">
-					<input type="text" class="inputText" name="email" value="{@$email}" id="email" />
+			<dl{if $errorField == 'email'} class="formError"{/if}>
+				<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
+				<dd>
+					<input type="text" id="email" name="email" value="{@$email}" class="medium" />
 					{if $errorField == 'email'}
-						<p class="innerError">
+						<small class="innerError">
 							{if $errorType == 'notValid'}{lang}wcf.user.error.email.notValid{/lang}{/if}
 							{if $errorType == 'notUnique'}{lang}wcf.user.error.email.notUnique{/lang}{/if}
-						</p>
+						</small>
 					{/if}
-				</div>
-				<div class="formFieldDesc">
-					<p>{lang}wcf.user.register.newActivationCode.email.description{/lang}</p>
-				</div>
-			</div>
+					<small>{lang}wcf.user.register.newActivationCode.email.description{/lang}</small>
+				</dd>
+				
+			</dl>
 				
 			{if $additionalFields|isset}{@$additionalFields}{/if}
 		</div>
 	</div>
 	
 	<div class="formSubmit">
-		<input type="submit" accesskey="s" value="{lang}wcf.global.button.submit{/lang}" />
-		<input type="reset" accesskey="r" value="{lang}wcf.global.button.reset{/lang}" />
+		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="newActivationCode" />
 	</div>
 </form>
 
 {include file='footer' sandbox=false}
+
 </body>
 </html>

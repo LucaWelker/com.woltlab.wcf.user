@@ -1,8 +1,9 @@
 {include file='documentHeader'}
+
 <head>
 	<title>Register form</title>
-	
 	{include file='headInclude' sandbox=false}
+	
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.Registration.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
@@ -20,7 +21,7 @@
 		});
 		//]]>
 	</script>
-	<style type="text/css">
+	<style type="text/css"><!-- ToDo: is this still necessary? -->
 		.formError, .innerError {
 			color: red;
 		}

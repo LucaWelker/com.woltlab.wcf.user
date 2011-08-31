@@ -16,6 +16,7 @@
 
 											-- Alexander (2011-08-11)
 *}
+
 <style type="text/css">
 	* {
 		font-family: Calibri;
@@ -39,7 +40,7 @@
 	}
 
 	div.userNotificationContainer {
-		background-color: rgba(224, 224, 224, 0.9);
+		background-color: rgba(224, 224, 224, .9);
 		border: 1px solid rgb(192, 192, 192);
 		position: absolute;
 		width: 250px;
@@ -160,15 +161,18 @@
 		position: absolute;
 	}
 </style>
+
+<!-- ToDo: It would be great if everything (every element of the "user panel") could be placed into one large list with sub-lists, with all elements in it. Even if registered or not, all should be in one list! Should be easy to separate things with "if". That would keep the code simpler and more logical, and handling with css more easy and uniform. -->
+
 {if $__wcf->user->userID}
 	
 	{* functions (login, registration) *}
 	<ul id="userMenu"><!-- renamed! -->
-		<li><span>{* avatar *}</span> Hello {$__wcf->user->username}!</li>
+		<li><span>{* include avatar here *}</span> Hello {$__wcf->user->username}!</li>
 		<li><a href="{link}index.php?action=Logout&amp;t={@SECURITY_TOKEN}{/link}" onclick="return confirm('Are you sure?')">Logout</a></li>
 		<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
 	</ul>
-
+	
 	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
 	<script type="text/javascript">
@@ -182,21 +186,21 @@
 		});
 		//]]>
 	</script>
-
+	
 	<pre id="log"></pre>
 {else}
 	{* user note *}
-	<p>Hello guest!</p><!-- should this also be inside a list? -->
+	<p>Hello guest!</p><!-- This should also be inside a list element! -->
 	
 	{if !$__disableLoginLink|isset}
 		{* login box *}
-		<div id="loginBox" style="display:none; border: 1px solid #000">
+		<div id="loginBox" style="display: none; border: 1px solid #000">
 			<form method="post" action="{link}index.php?form=Login{/link}">
 				<dl>
 					<dt><label for="username">Username or email address</label></dt>
 					<dd><input type="text" id="username" name="username" value="" required="true" class="short" /></dd>
 				</dl>
-			
+				
 				<dl>
 					<dt>Do you have an account?</dt>
 					<dd>
@@ -204,7 +208,7 @@
 						<label><input type="radio" name="action" value="login" checked="checked" /> Yes, my password is:</label>
 					</dd>
 				</dl>
-			
+				
 				<dl>
 					<dt><label for="password">Password</label></dt>
 					<dd><input type="password" id="password" name="password" value="" class="short" /></dd>
@@ -214,16 +218,16 @@
 					<dt><label for="useCookies">Stay logged in</label></dt>
 					<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" /></dd>
 				</dl>
-			
+				
 				<input type="submit" value="Login" />
 			</form>
 		</div>
-	
+		
 		{* functions (login, registration) *}
 		<ul>
 			<li><a id="loginLink" href="{link}index.php?form=Login{/link}">Login or Register</a></li>
 		</ul>
-
+		
 		<script type="text/javascript">
 			//<![CDATA[
 			$(function() {

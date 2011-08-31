@@ -1,11 +1,12 @@
 {include file='documentHeader'}
+
 <head>
 	<title>User profile page</title>
-	
 	{include file='headInclude' sandbox=false}
 </head>
 
 <body>
+
 {include file='header' sandbox=false}
 
 <ul>

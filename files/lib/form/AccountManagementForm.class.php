@@ -17,7 +17,7 @@ use wcf\util\UserUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class AccountManagementForm extends AbstractSecureForm {
 	/**
@@ -26,7 +26,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $templateName = 'accountManagement';
 	
 	/**
-	 * user's password
+	 * user password
 	 * @var string
 	 */
 	public $password = '';
@@ -56,7 +56,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $confirmNewPassword = '';
 	
 	/**
-	 * new username
+	 * new user name
 	 * @var string
 	 */
 	public $username = '';
@@ -67,7 +67,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $quitStarted = 0;
 	
 	/**
-	 * indicates whether the user can changed his username.
+	 * indicates whether the user can change his user name.
 	 * @var	boolean
 	 */
 	public $canChangeUsername = true;
@@ -116,15 +116,15 @@ class AccountManagementForm extends AbstractSecureForm {
 			throw new UserInputException('password', 'false');
 		}
 		
-		// username
+		// user name
 		if ($this->canChangeUsername && $this->username != WCF::getUser()->username) {
 			if (StringUtil::toLowerCase($this->username) != StringUtil::toLowerCase(WCF::getUser()->username)) {
-				// check for forbidden chars (e.g. the ",")
+				// checks for forbidden chars (e.g. the ",")
 				if (!UserRegistrationUtil::isValidUsername($this->username)) {
 					throw new UserInputException('username', 'notValid');
 				}
 				
-				// Check if username exists already.
+				// checks if user name exists already.
 				if (!UserUtil::isAvailableUsername($this->username)) {
 					throw new UserInputException('username', 'notUnique');
 				}
@@ -154,20 +154,20 @@ class AccountManagementForm extends AbstractSecureForm {
 				throw new UserInputException('email');
 			}
 		
-			// check if only letter case is changed
+			// checks if only letter case has changed
 			if (StringUtil::toLowerCase($this->email) != StringUtil::toLowerCase(WCF::getUser()->email)) {
 				// check for valid email (one @ etc.)
 				if (!UserRegistrationUtil::isValidEmail($this->email)) {
 					throw new UserInputException('email', 'notValid');
 				}
 				
-				// Check if email exists already.
+				// checks if email already exists.
 				if (!UserUtil::isAvailableEmail($this->email)) {
 					throw new UserInputException('email', 'notUnique');
 				}
 			}
 			
-			// check confirm input
+			// checks confirm input
 			if (StringUtil::toLowerCase($this->email) != StringUtil::toLowerCase($this->confirmEmail)) {
 				throw new UserInputException('confirmEmail', 'notEqual');
 			}
@@ -245,7 +245,7 @@ class AccountManagementForm extends AbstractSecureForm {
 			}
 		}
 		
-		// username
+		// user name
 		if ($this->canChangeUsername && $this->username != WCF::getUser()->username) {
 			if (StringUtil::toLowerCase($this->username) != StringUtil::toLowerCase(WCF::getUser()->username)) {
 				if (!$this->canChangeUsername) {
