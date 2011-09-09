@@ -59,8 +59,8 @@ class LostPasswordForm extends ReCaptchaForm {
 		}
 		
 		// check whether a lost password request was sent in the last 24 hours
-		if ($this->user->lastLostPasswordRequest && TIME_NOW - 86400 < $this->user->lastLostPasswordRequest) {
-			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.error.tooManyRequests', array('hours' => ceil(($this->user->lastLostPasswordRequest - (TIME_NOW - 86400)) / 3600))));
+		if ($this->user->lastLostPasswordRequestTime && TIME_NOW - 86400 < $this->user->lastLostPasswordRequestTime) {
+			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.error.tooManyRequests', array('hours' => ceil(($this->user->lastLostPasswordRequestTime - (TIME_NOW - 86400)) / 3600))));
 		}
 	}
 	
@@ -77,7 +77,7 @@ class LostPasswordForm extends ReCaptchaForm {
 		$userEditor = new UserEditor($this->user);
 		$userEditor->update(array(
 			'lostPasswordKey' => $lostPasswordKey,
-			'lastLostPasswordRequest' => TIME_NOW
+			'lastLostPasswordRequestTime' => TIME_NOW
 		));
 			
 		// send mail

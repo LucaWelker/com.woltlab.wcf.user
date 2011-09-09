@@ -92,7 +92,7 @@ class NewPasswordForm extends AbstractForm {
 		$userEditor = new UserEditor($this->user);
 		$userEditor->update(array(
 			'password' => $this->newPassword,
-			'lastLostPasswordRequest' => 0,
+			'lastLostPasswordRequestTime' => 0,
 			'lostPasswordKey' => ''
 		));
 		

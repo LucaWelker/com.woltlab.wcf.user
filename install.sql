@@ -1,5 +1,5 @@
 ALTER TABLE wcf1_user ADD activationCode INT(10) NOT NULL DEFAULT 0;
-ALTER TABLE wcf1_user ADD lastLostPasswordRequest INT(10) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_user ADD lastLostPasswordRequestTime INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD lostPasswordKey VARCHAR(40) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD lastUsernameChange INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD newEmail VARCHAR(255) NOT NULL DEFAULT '';
