@@ -1,6 +1,7 @@
 <?php
 namespace wcf\form;
 use wcf\data\user\UserEditor;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\WCF;
