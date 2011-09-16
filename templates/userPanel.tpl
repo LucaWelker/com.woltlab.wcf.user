@@ -232,12 +232,7 @@
 			//<![CDATA[
 			$(function() {
 				$('#loginLink').click(function(event) {
-					if ($('#loginBox').is(':visible')) {
-						$('#loginBox').hide('slow');
-					}
-					else {
-						$('#loginBox').show('slow');
-					}
+					$('#loginBox').toggle('slow');
 					return false;
 				});
 			});
