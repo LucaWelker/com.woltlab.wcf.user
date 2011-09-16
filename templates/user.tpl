@@ -3,6 +3,20 @@
 <head>
 	<title>User profile page</title>
 	{include file='headInclude' sandbox=false}
+
+	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.Profile.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			WCF.Language.addObject({
+				'wcf.user.profile.ignoreUser': 'ignore user',
+				'wcf.user.profile.unignoreUser': 'unignore user'
+			});
+
+			new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
+		});
+		//]]>
+	</script>
 </head>
 
 <body>
@@ -80,6 +94,8 @@
 		{/if}
 	{/if}
 {/if}
+
+<button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
 
 {include file='footer' sandbox=false}
 
