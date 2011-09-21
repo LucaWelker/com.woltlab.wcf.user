@@ -99,30 +99,32 @@ WCF.User.Profile.Friend.prototype = {
 	 */
 	_click: function(event) {
 		var $action = $(event.target).data('action');
+		var $className = 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction';
+		var $parameters = {
+			data: {
+				friendUserID: this._userID
+			}
+		};
 		
 		switch ($action) {
 			case 'accept':
 			case 'ignore':
 			case 'reject':
-				var $parameters = {
+				$parameters = {
 					data: {
 						userID: this._userID
 					}
-				}
+				};
 			break;
 			
-			default:
-				var $parameters = {
-					data: {
-						friendUserID: this._userID
-					}
-				}
+			case 'delete':
+				$className = 'wcf\\data\\user\\friend\\UserFriendAction';
 			break;
 		}
 		
 		this._proxy.setOption('data', {
 			actionName: $action,
-			className: 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
+			className: $className,
 			parameters: $parameters
 		});
 		
