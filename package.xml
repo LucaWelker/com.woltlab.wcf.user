@@ -27,5 +27,6 @@
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
 		<instruction type="coreobject">coreobject.xml</instruction>
 		<instruction type="options">options.xml</instruction>
+		<instruction type="templatelistener">templatelistener.xml</instruction>
 	</instructions>
 </package>

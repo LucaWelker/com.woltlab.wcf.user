@@ -16,7 +16,7 @@
 
 											-- Alexander (2011-08-11)
 *}
-
+{*
 <style type="text/css">
 	* {
 		font-family: Calibri;
@@ -161,18 +161,18 @@
 		position: absolute;
 	}
 </style>
-
-<!-- ToDo: It would be great if everything (every element of the "user panel") could be placed into one large list with sub-lists, with all elements in it. Even if registered or not, all should be in one list! Should be easy to separate things with "if". That would keep the code simpler and more logical, and handling with css more easy and uniform. -->
+*}
 
 {if $__wcf->user->userID}
 	
-	{* functions (login, registration) *}
-	<ul id="userMenu"><!-- renamed! -->
-		<li><span>{* include avatar here *}</span> Hello {$__wcf->user->username}!</li>
-		<li><a href="{link}index.php?action=Logout&amp;t={@SECURITY_TOKEN}{/link}" onclick="return confirm('Are you sure?')">Logout</a></li>
-		<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
-	</ul>
-	
+	<li id="userMenu" class="userMenu">
+		<span class="dropdownCaption">{lang}wcf.user.userNote{/lang}</span>
+		<ul class="dropdown">
+			<li><a href="{link}index.php?action=Logout&amp;t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
+		</ul>
+	</li>
+	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
+		
 	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
 	<script type="text/javascript">
@@ -189,54 +189,51 @@
 	
 	<pre id="log"></pre>
 {else}
-	{* user note *}
-	<p>Hello guest!</p><!-- This should also be inside a list element! -->
+	<li>Hello guest!<li>
 	
 	{if !$__disableLoginLink|isset}
 		{* login box *}
-		<div id="loginBox" style="display: none; border: 1px solid #000">
-			<form method="post" action="{link}index.php?form=Login{/link}">
-				<dl>
-					<dt><label for="username">Username or email address</label></dt>
-					<dd><input type="text" id="username" name="username" value="" required="true" class="short" /></dd>
-				</dl>
-				
-				<dl>
-					<dt>Do you have an account?</dt>
-					<dd>
-						<label><input type="radio" name="action" value="register" /> No, I am a new user.</label>
-						<label><input type="radio" name="action" value="login" checked="checked" /> Yes, my password is:</label>
-					</dd>
-				</dl>
-				
-				<dl>
-					<dt><label for="password">Password</label></dt>
-					<dd><input type="password" id="password" name="password" value="" class="short" /></dd>
-				</dl>
-				
-				<dl>
-					<dt><label for="useCookies">Stay logged in</label></dt>
-					<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" /></dd>
-				</dl>
-				
-				<input type="submit" value="Login" />
-			</form>
-		</div>
+		<li><a id="loginLink" href="{link}index.php?form=Login{/link}">Login or Register</a>
+			<div id="loginBox" style="display: none; border: 1px solid #000">
+				<form method="post" action="{link}index.php?form=Login{/link}">
+					<dl>
+						<dt><label for="username">Username or email address</label></dt>
+						<dd><input type="text" id="username" name="username" value="" required="true" class="short" /></dd>
+					</dl>
+					
+					<dl>
+						<dt>Do you have an account?</dt>
+						<dd>
+							<label><input type="radio" name="action" value="register" /> No, I am a new user.</label>
+							<label><input type="radio" name="action" value="login" checked="checked" /> Yes, my password is:</label>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt><label for="password">Password</label></dt>
+						<dd><input type="password" id="password" name="password" value="" class="short" /></dd>
+					</dl>
+					
+					<dl>
+						<dt><label for="useCookies">Stay logged in</label></dt>
+						<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" /></dd>
+					</dl>
+					
+					<input type="submit" value="Login" />
+				</form>
+			</div>
 		
-		{* functions (login, registration) *}
-		<ul>
-			<li><a id="loginLink" href="{link}index.php?form=Login{/link}">Login or Register</a></li>
-		</ul>
-		
-		<script type="text/javascript">
-			//<![CDATA[
-			$(function() {
-				$('#loginLink').click(function(event) {
-					$('#loginBox').toggle('slow');
-					return false;
+			<script type="text/javascript">
+				//<![CDATA[
+				$(function() {
+					$('#loginLink').click(function(event) {
+						$('#loginBox').toggle('slow');
+						return false;
+					});
 				});
-			});
-			//]]>
-		</script>
+				//]]>
+			</script>
+		</li>
+		
 	{/if}
 {/if}
