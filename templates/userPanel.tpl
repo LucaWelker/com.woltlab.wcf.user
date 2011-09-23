@@ -19,7 +19,7 @@
 {*
 <style type="text/css">
 	* {
-		font-family: Calibri;
+		font-family: 'Trebuchet MS', Arial, sans-serif;
 		font-size: 10pt;
 		margin: 0;
 		padding: 0;
@@ -193,11 +193,11 @@
 	
 	{if !$__disableLoginLink|isset}
 		{* login box *}
-		<li><a id="loginLink" href="{link}index.php?form=Login{/link}">Login or Register</a>
+		<li><a id="loginLink" class="loginBox" href="{link}index.php?form=Login{/link}">Login or Register</a>
 			<div id="loginBox" style="display: none; border: 1px solid #000">
 				<form method="post" action="{link}index.php?form=Login{/link}">
 					<dl>
-						<dt><label for="username">Username or email address</label></dt>
+						<dt><label for="username">Username or e-mail address</label></dt>
 						<dd><input type="text" id="username" name="username" value="" required="true" class="short" /></dd>
 					</dl>
 					

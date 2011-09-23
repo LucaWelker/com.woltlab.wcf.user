@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user;
 use wcf\data\DatabaseObjectDecorator;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
@@ -29,6 +30,8 @@ class UserProfile extends DatabaseObjectDecorator {
 	
 	protected $requestedFriendIDs = null;
 	protected $requestingFriendIDs = null;
+	
+	protected $ignoredUserIDs = null;
 	
 	/**
 	 * Returns the list of friends of this user.
@@ -125,7 +128,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					$statement = WCF::getDB()->prepareStatement($sql);
 					$statement->execute(array($this->userID));
 					while ($row = $statement->fetchArray()) {
-						$this->requestedFriendIDs[] = $row['userID'];
+						$this->requestingFriendIDs[] = $row['userID'];
 					}
 					
 					// update storage data
@@ -138,6 +141,40 @@ class UserProfile extends DatabaseObjectDecorator {
 		}
 		
 		return $this->requestingFriendIDs;
+	}
+	
+	public function getIgnoredUsers() {
+		if ($this->ignoredUserIDs === null) {
+			$this->ignoredUserIDs = array();
+			
+			if ($this->userID) {
+				// load storage data
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				
+				// get ids
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'ignoredUserIDs', 1);
+				
+				// cache does not exist or is outdated
+				if ($data[$this->userID] === null) {
+					$sql = "SELECT	ignoreUserID
+						FROM	wcf".WCF_N."_user_ignore
+						WHERE	userID = ?";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute(array($this->userID));
+					while ($row = $statement->fetchArray()) {
+						$this->ignoredUserIDs[] = $row['ignoreUserID'];
+					}
+					
+					// update storage data
+					UserStorageHandler::getInstance()->update($this->userID, 'ignoredUserIDs', serialize($this->ignoredUserIDs), 1);
+				}
+				else {
+					$this->ignoredUserIDs = unserialize($data[$user->userID]);
+				}
+			}
+		}
+		
+		return $this->ignoredUserIDs;
 	}
 
 	/**
@@ -168,5 +205,15 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	public function isRequestingFriend($userID) {
 		return in_array($userID, $this->getRequestingFriends());
+	}
+	
+	/**
+	 * Returns true, if given user is ignored.
+	 * 
+	 * @param	integer		$userID
+	 * @return	boolean
+	 */
+	public function isIgnoredUser($userID) {
+		return in_array($userID, $this->getIgnoredUsers());
 	}
 }

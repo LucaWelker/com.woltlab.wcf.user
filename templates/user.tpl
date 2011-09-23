@@ -3,6 +3,50 @@
 <head>
 	<title>User profile page</title>
 	{include file='headInclude' sandbox=false}
+
+	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.Profile.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			WCF.Language.addObject({
+				'wcf.user.profile.friend.acceptRequest': 'accept friend request',
+				'wcf.user.profile.friend.cancelRequest': 'cancel friend request',
+				'wcf.user.profile.friend.createRequest': 'create friend request',
+				'wcf.user.profile.friend.deleteFriend': 'evaporate friend',
+				'wcf.user.profile.friend.ignoreRequest': 'ignore friend request',
+				'wcf.user.profile.friend.rejectRequest': 'reject friend request',
+				'wcf.user.profile.ignoreUser': 'ignore user',
+				'wcf.user.profile.unignoreUser': 'unignore user'
+			});
+
+			var $isFriend = {if $__wcf->getUserProfileHandler()->isFriend($user->userID)}true{else}false{/if};
+			var $isRequestedFriend = {if $__wcf->getUserProfileHandler()->isRequestedFriend($user->userID)}true{else}false{/if};
+			var $isRequestingFriend = {if $__wcf->getUserProfileHandler()->isRequestingFriend($user->userID)}true{else}false{/if};
+			
+			new WCF.User.Profile.Friend({$user->userID}, $isFriend, $isRequestedFriend, $isRequestingFriend);
+			new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
+		});
+		//]]>
+	</script>
+	<style type="text/css">
+		div#profileButtonContainer {
+			margin: 7px;
+		}
+
+		div#profileButtonContainer button {
+			background-image: -o-linear-gradient(top, rgb(192, 192, 192), rgb(224, 224, 224));
+			border: 1px solid rgb(192, 192, 192);
+			border-radius: 3px;
+			cursor: pointer;
+			margin-right: 3px;
+			height: 60px;
+			padding: 3px;
+		}
+
+		div#profileButtonContainer button:hover {
+			background-image: -o-linear-gradient(top, rgb(224, 224, 224), rgb(192, 192, 192));
+		}
+	</style>
 </head>
 
 <body>
@@ -23,63 +67,9 @@
 
 <p>{$user->username}</p>
 
-{if $__wcf->getUserProfileHandler()->isFriend($user->userID)}
-	- delete friend
-{else}
-	{if $__wcf->getUserProfileHandler()->isRequestedFriend($user->userID)}
-		<button id="foobar">cancel friend request</button>
-		<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			new WCF.Action.SimpleProxy({
-				action: 'cancel',
-				className: 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
-				elements: $('#foobar')
-			}, {
-				init: function(proxy) {
-					proxy.options.data['parameters'] = {
-						friendUserID: {@$user->userID}
-					};
-				},
-				success: function(data, statusText, jqXHR) {
-					alert('success');
-				}
-			});
-		});
-		//]]>
-		</script>
-	{else}
-		{if $__wcf->getUserProfileHandler()->isRequestingFriend($user->userID)}
-			- accept friend request
-			- reject friend request
-			- ignore friend request
-		{else}
-			<button id="foobar">create friend request</button>
-			<script type="text/javascript">
-			//<![CDATA[
-			$(function() {
-				new WCF.Action.SimpleProxy({
-					action: 'create',
-					className: 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction',
-					elements: $('#foobar')
-				}, {
-					init: function(proxy) {
-						proxy.options.data['parameters'] = {
-							data: {
-								friendUserID: {@$user->userID}
-							}
-						};
-					},
-					success: function(data, statusText, jqXHR) {
-						alert('success');
-					}
-				});
-			});
-			//]]>
-		</script>
-		{/if}
-	{/if}
-{/if}
+<div id="profileButtonContainer"></div>
+
+<button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
 
 {include file='footer' sandbox=false}
 
