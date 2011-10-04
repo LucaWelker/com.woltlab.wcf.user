@@ -20,13 +20,13 @@
 	</requiredpackages>
 	
 	<instructions type="install">
-		<instruction type="files">files.tar</instruction>
+		<instruction type="file">files.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
-		<instruction type="templates">templates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
 		<instruction type="userNotificationObjectType">userNotificationObjectType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
-		<instruction type="coreobject">coreobject.xml</instruction>
+		<instruction type="coreObject">coreObject.xml</instruction>
 		<instruction type="options">options.xml</instruction>
-		<instruction type="templatelistener">templatelistener.xml</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
 	</instructions>
 </package>
