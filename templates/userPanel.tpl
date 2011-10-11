@@ -49,7 +49,7 @@
 				<form method="post" action="{link}index.php?form=Login{/link}">
 					<dl>
 						<dt><label for="username">User-name or e-mail address</label></dt>
-						<dd><input type="text" id="username" name="username" value="" required="true" class="medium" /></dd>
+						<dd><input type="text" id="username" name="username" value="" required="required=" class="medium" /></dd>
 					</dl>
 					
 					<dl>
@@ -79,14 +79,8 @@
 			<script type="text/javascript">
 				//<![CDATA[
 				$(function() {
-					var $loginBox = $('#loginBox');
 					$('#loginLink').click(function(event) {
-						if ($loginBox.is(':visible')) {
-							$loginBox.wcfBlindOut();
-						}
-						else {
-							$loginBox.wcfBlindIn();
-						}
+						WCF.showDialog('loginBox');
 						return false;
 					});
 				});
