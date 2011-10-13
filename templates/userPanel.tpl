@@ -16,7 +16,7 @@
 	<li id="userMenu" class="userMenu">
 		<span class="dropdownCaption">{lang}wcf.user.userNote{/lang}</span>
 		<ul class="dropdown">
-			<li><a href="{link}index.php?action=Logout&amp;t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
+			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
 	
@@ -44,9 +44,9 @@
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link}index.php?form=Login{/link}" title="Login or Register">Login or Register</a></span>
+			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}" title="Login or Register">Login or Register</a></span>
 			<div id="loginBox" class="" style="display: none;>
-				<form method="post" action="{link}index.php?form=Login{/link}">
+				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
 						<dt><label for="username">User-name or e-mail address</label></dt>
 						<dd><input type="text" id="username" name="username" value="" required="required" class="medium" /></dd>
