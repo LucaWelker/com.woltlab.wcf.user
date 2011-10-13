@@ -1,20 +1,20 @@
 <?php
-namespace wcf\data\user\friend;
+namespace wcf\data\user\follow;
 use wcf\data\DatabaseObjectEditor;
 
 /**
- * Provides functions to edit friends.
+ * Provides functions to edit followers.
  *
  * @author	Alexander Ebert
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.friend
+ * @subpackage	data.user.follow
  * @category 	Community Framework
  */
-class UserFriendEditor extends DatabaseObjectEditor {
+class UserFollowEditor extends DatabaseObjectEditor {
 	/**
 	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'wcf\data\user\friend\UserFriend';
+	protected static $baseClass = 'wcf\data\user\follow\UserFollow';
 }

@@ -22,127 +22,106 @@ class UserProfile extends DatabaseObjectDecorator {
 	protected static $baseClass = 'wcf\data\user\User';
 	
 	/**
-	 * user ids of friends
-	 * @var array<integer>
+	 * list of ignored user ids
+	 * @var	array<integer>
 	 */
-	protected $friendIDs = null;
-	
-	
-	protected $requestedFriendIDs = null;
-	protected $requestingFriendIDs = null;
-	
 	protected $ignoredUserIDs = null;
 	
 	/**
-	 * Returns the list of friends of this user.
-	 * 
-	 * @return array<integer>
+	 * list of follower user ids
+	 * @var	array<integer>
 	 */
-	public function getFriends() {
-		if ($this->friendIDs === null) {
-			$this->friendIDs = array();
+	protected $followerUserIDs = null;
+	
+	/**
+	 * list of following user ids
+	 * @var	array<integer>
+	 */
+	protected $followingUserIDs = null;
+	
+	/**
+	 * Returns a list of all user ids being followed by current user.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getFollowingUsers() {
+		if ($this->followingUserIDs === null) {
+			$this->followingUserIDs = array();
 			
 			if ($this->userID) {
 				// load storage data
 				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
 				
 				// get ids
-				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'friendIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'followingUserIDs', 1);
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
-					$sql = "SELECT	friendUserID
-						FROM	wcf".WCF_N."_user_friend
+					$sql = "SELECT	followUserID
+						FROM	wcf".WCF_N."_user_follow
 						WHERE	userID = ?";
 					$statement = WCF::getDB()->prepareStatement($sql);
 					$statement->execute(array($this->userID));
 					while ($row = $statement->fetchArray()) {
-						$this->friendIDs[] = $row['friendUserID'];
+						$this->followingUserIDs[] = $row['followUserID'];
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'friendIDs', serialize($this->friendIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'followingUserIDs', serialize($this->followingUserIDs), 1);
 				}
 				else {
-					$this->friendIDs = unserialize($data[$this->userID]);
+					$this->followingUserIDs = unserialize($data[$user->userID]);
 				}
 			}
 		}
 		
-		return $this->friendIDs;
+		return $this->followingUserIDs;
 	}
 	
-	
-	public function getRequestedFriends() {
-		if ($this->requestedFriendIDs === null) {
-			$this->requestedFriendIDs = array();
+	/**
+	 * Returns a list of user ids following current user.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getFollowers() {
+		if ($this->followerUserIDs === null) {
+			$this->followerUserIDs = array();
 			
 			if ($this->userID) {
 				// load storage data
 				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
 				
 				// get ids
-				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'requestedFriendIDs', 1);
-				
-				// cache does not exist or is outdated
-				if ($data[$this->userID] === null) {
-					$sql = "SELECT	friendUserID
-						FROM	wcf".WCF_N."_user_friend_request
-						WHERE	userID = ?
-							AND ignored = 0";
-					$statement = WCF::getDB()->prepareStatement($sql);
-					$statement->execute(array($this->userID));
-					while ($row = $statement->fetchArray()) {
-						$this->requestedFriendIDs[] = $row['friendUserID'];
-					}
-					
-					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'requestedFriendIDs', serialize($this->requestedFriendIDs), 1);
-				}
-				else {
-					$this->requestedFriendIDs = unserialize($data[$this->userID]);
-				}
-			}
-		}
-		
-		return $this->requestedFriendIDs;
-	}
-	
-	public function getRequestingFriends() {
-		if ($this->requestingFriendIDs === null) {
-			$this->requestingFriendIDs = array();
-			
-			if ($this->userID) {
-				// load storage data
-				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
-				
-				// get ids
-				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'requestingFriendIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'followerUserIDs', 1);
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
 					$sql = "SELECT	userID
-						FROM	wcf".WCF_N."_user_friend_request
-						WHERE	friendUserID = ?
-							AND ignored = 0";
+						FROM	wcf".WCF_N."_user_follow
+						WHERE	followUserID = ?";
 					$statement = WCF::getDB()->prepareStatement($sql);
 					$statement->execute(array($this->userID));
 					while ($row = $statement->fetchArray()) {
-						$this->requestingFriendIDs[] = $row['userID'];
+						$this->followerUserIDs[] = $row['userID'];
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'requestingFriendIDs', serialize($this->requestingFriendIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'followerUserIDs', serialize($this->followerUserIDs), 1);
 				}
 				else {
-					$this->requestedFriendIDs = unserialize($data[$this->userID]);
+					$this->followerUserIDs = unserialize($data[$user->userID]);
 				}
 			}
 		}
 		
-		return $this->requestingFriendIDs;
+		return $this->followerUserIDs;
 	}
 	
+	/**
+	 * Returns a list of ignored user ids.
+	 * 
+	 * @return	array<integer>
+	 */
 	public function getIgnoredUsers() {
 		if ($this->ignoredUserIDs === null) {
 			$this->ignoredUserIDs = array();
@@ -176,35 +155,25 @@ class UserProfile extends DatabaseObjectDecorator {
 		
 		return $this->ignoredUserIDs;
 	}
-
+	
 	/**
-	 * Returns true, if the given user is a friend of this user.
+	 * Returns true, if current user is following given user id.
 	 * 
 	 * @param	integer		$userID
 	 * @return	boolean
 	 */
-	public function isFriend($userID) {
-		return in_array($userID, $this->getFriends());
+	public function isFollowing($userID) {
+		return in_array($userID, $this->getFollowingUsers());
 	}
 	
 	/**
-	 * Returns true, if there is a open friend request for the given user.
+	 * Returns true, if given user ids follows current user.
 	 * 
 	 * @param	integer		$userID
 	 * @return	boolean
 	 */
-	public function isRequestedFriend($userID) {
-		return in_array($userID, $this->getRequestedFriends());
-	}
-	
-	/**
-	 * Returns true, if there is a open friend request by the given user.
-	 * 
-	 * @param	integer		$userID
-	 * @return	boolean
-	 */
-	public function isRequestingFriend($userID) {
-		return in_array($userID, $this->getRequestingFriends());
+	public function isFollower($userID) {
+		return in_array($userID, $this->getFollowers());
 	}
 	
 	/**

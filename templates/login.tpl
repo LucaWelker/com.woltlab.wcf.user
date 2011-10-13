@@ -11,7 +11,7 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
-<form method="post" action="{link}index.php?form=Login{/link}">
+<form method="post" action="{link controller='Login'}{/link}">
 	<dl>
 		<dt><label for="username">Username or email address</label></dt>
 		<dd><input type="text" id="username" name="username" value="{$username}" /></dd>
