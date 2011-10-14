@@ -41,7 +41,7 @@ class LogoutAction extends \wcf\acp\action\LogoutAction {
 		$this->executed();
 		
 		// forward to index page
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('index.php'));
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Index'));
 		exit;
 	}
 }
