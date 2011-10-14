@@ -103,5 +103,5 @@ ALTER TABLE wcf1_user_profile_post ADD FOREIGN KEY (profileUserID) REFERENCES wc
 ALTER TABLE wcf1_user_profile_post ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE wcf1_user_profile_post ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
 
-ALTER TABLE wcf1_user_profile_post_comment ADD FOREIGN KEY (profilePostID) REFERENCES wcf1_user_profile_post (profileUserID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_profile_post_comment ADD FOREIGN KEY (profilePostID) REFERENCES wcf1_user_profile_post (profilePostID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_profile_post_comment ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
