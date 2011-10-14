@@ -45,7 +45,7 @@
 		<!-- login box -->
 		<li>
 			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}" title="Login or Register">Login or Register</a></span>
-			<div id="loginBox" class="" style="display: none;>
+			<div id="loginBox" class="" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
 						<dt><label for="username">User-name or e-mail address</label></dt>
