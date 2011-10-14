@@ -11,25 +11,14 @@ ALTER TABLE wcf1_user ADD registrationIpAddress VARCHAR(39) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
 
--- friends
-DROP TABLE IF EXISTS wcf1_user_friend;
-CREATE TABLE wcf1_user_friend (
-	friendID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+-- follower list
+DROP TABLE IF EXISTS wcf1_user_follow;
+CREATE TABLE wcf1_user_follow (
+	followID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	userID INT(10) NOT NULL,
-	friendUserID INT(10) NOT NULL,
+	followUserID INT(10) NOT NULL,
 	time INT(10) NOT NULL DEFAULT 0,
-	UNIQUE KEY (userID, friendUserID)
-);
-
--- friend requests
-DROP TABLE IF EXISTS wcf1_user_friend_request;
-CREATE TABLE wcf1_user_friend_request (
-	requestID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	userID INT(10) NOT NULL,
-	friendUserID INT(10) NOT NULL,
-	time INT(10) NOT NULL DEFAULT 0,
-	ignored TINYINT(1) NOT NULL DEFAULT 0,
-	UNIQUE KEY (userID, friendUserID)
+	UNIQUE KEY (userID, followUserID)
 );
 
 -- ignore list
@@ -88,14 +77,11 @@ CREATE TABLE wcf1_user_profile_post_comment (
 	time INT(10) NOT NULL DEFAULT 0
 );
 
-ALTER TABLE wcf1_user_friend ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE wcf1_user_friend ADD FOREIGN KEY (friendUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (followUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 
 ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (ignoreUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-
-ALTER TABLE wcf1_user_friend_request ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE wcf1_user_friend_request ADD FOREIGN KEY (friendUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 
 ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
 

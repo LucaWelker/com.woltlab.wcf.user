@@ -4,175 +4,102 @@
 WCF.User.Profile = {};
 
 /**
- * UserProfile friend system.
- * 
+ * Provides methods to follow an user.
+ *
  * @param	integer		userID
- * @param	boolean		isFriend
- * @param	boolean		isRequested
- * @param	boolean		isRequesting
+ * @param	boolean		following
  */
-WCF.User.Profile.Friend = function(userID, isFriend, isRequested, isRequesting) { this.init(userID, isFriend, isRequested, isRequesting); };
-WCF.User.Profile.Friend.prototype = {
+WCF.User.Profile.Follow = function (userID, following) { this.init(userID, following);  };
+WCF.User.Profile.Follow.prototype = {
 	/**
-	 * list of action buttons
-	 * @var	object
+	 * follow button
+	 * @var	jQuery
 	 */
-	_buttons: {},
+	_button: null,
 	
 	/**
-	 * user is already a friend
+	 * true if following current user
 	 * @var	boolean
 	 */
-	_isFriend: false,
+	_following: false,
 	
 	/**
-	 * user requested friendship
-	 * @var	boolean
-	 */
-	_isRequested: false,
-	
-	/**
-	 * requesting friendship with user
-	 * @var	boolean
-	 */
-	_isRequesting: false,
-	
-	/**
-	 * action proxy
+	 * action proxy object
 	 * @var	WCF.Action.Proxy
 	 */
 	_proxy: null,
 	
 	/**
-	 * target user id
+	 * user id
 	 * @var	integer
 	 */
 	_userID: 0,
 	
 	/**
-	 * Creates a new instance of UserProfile friend system.
+	 * Creates a new follow object.
 	 * 
 	 * @param	integer		userID
-	 * @param	boolean		isFriend
-	 * @param	boolean		isRequested
-	 * @param	boolean		isRequesting
+	 * @param	boolean		following
 	 */
-	init: function(userID, isFriend, isRequested, isRequesting) {
+	init: function (userID, following) {
+		this._following = following;
 		this._userID = userID;
-		this._isFriend = isFriend;
-		this._isRequested = isRequested;
-		this._isRequesting = isRequesting;
-		
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
 		
-		this._createButtons();
+		this._createButton();
+		this._showButton();
 	},
 	
 	/**
-	 * Creates buttons for friendship management.
+	 * Creates the (un-)follow button
 	 */
-	_createButtons: function() {
-		this._buttons = {
-			accept: $('<button id="acceptRequest">' + WCF.Language.get('wcf.user.profile.friend.acceptRequest') + '</button>').data('action', 'accept').hide(),
-			cancel: $('<button id="cancelRequest">' + WCF.Language.get('wcf.user.profile.friend.cancelRequest') + '</button>').data('action', 'cancel').hide(),
-			create: $('<button id="createRequest">' + WCF.Language.get('wcf.user.profile.friend.createRequest') + '</button>').data('action', 'create').hide(),
-			deleteFriend: $('<button id="deleteFriend">' + WCF.Language.get('wcf.user.profile.friend.deleteFriend') + '</button>').data('action', 'delete').hide(),
-			ignore: $('<button id="ignoreRequest">' + WCF.Language.get('wcf.user.profile.friend.ignoreRequest') + '</button>').data('action', 'ignore').hide(),
-			reject: $('<button id="rejectRequest">' + WCF.Language.get('wcf.user.profile.friend.rejectRequest') + '</button>').data('action', 'reject').hide()
-		}
-		
-		// insert buttons and bind listener
-		for (var $type in this._buttons) {
-			this._buttons[$type].appendTo('div#profileButtonContainer').click($.proxy(this._click, this));
-		}
-		
-		// toggle displayed buttons
-		this._setActiveButtons();
+	_createButton: function () {
+		this._button = $('<button id="followUser">follow</button>').appendTo($('#profileButtonContainer'));
+		this._button.click($.proxy(this._execute, this));
 	},
 	
 	/**
-	 * Handles button clicks.
-	 * 
-	 * @param	object		event
+	 * Follows or unfollows an user.
 	 */
-	_click: function(event) {
-		var $action = $(event.target).data('action');
-		var $className = 'wcf\\data\\user\\friend\\request\\UserFriendRequestAction';
-		var $parameters = {
-			data: {
-				friendUserID: this._userID
-			}
-		};
-		
-		switch ($action) {
-			case 'accept':
-			case 'ignore':
-			case 'reject':
-				$parameters = {
-					data: {
-						userID: this._userID
-					}
-				};
-			break;
-			
-			case 'delete':
-				$className = 'wcf\\data\\user\\friend\\UserFriendAction';
-			break;
-		}
-		
+	_execute: function () {
+		var $actionName = (this._following) ? 'unfollow' : 'follow';
 		this._proxy.setOption('data', {
-			actionName: $action,
-			className: $className,
-			parameters: $parameters
+			'actionName': $actionName,
+			'className': 'wcf\\data\\user\\follow\\UserFollowAction',
+			'parameters': {
+				data: {
+					userID: this._userID
+				}
+			}
 		});
-		
 		this._proxy.sendRequest();
 	},
 	
 	/**
-	 * Updates buttons on success.
+	 * Displays current follow state.
+	 */
+	_showButton: function () {
+		var $label = 'follow';
+		if(this._following) {
+			$label = 'unfollow';
+		}
+
+		// update label
+		this._button.text($label);
+	},
+	
+	/**
+	 * Update object state on success.
 	 * 
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
 	 */
-	_success: function(data, textStatus, jqXHR) {
-		this._isFriend = data.returnValues.isFriend;
-		this._isRequested = data.returnValues.isRequested;
-		this._isRequesting = data.returnValues.isRequesting;
-		
-		this._setActiveButtons();
-	},
-	
-	/**
-	 * Sets active buttons.
-	 */
-	_setActiveButtons: function() {
-		// hide all buttons
-		for (var $type in this._buttons) {
-			this._buttons[$type].hide();
-		}
-		
-		if (this._isFriend) {
-			this._buttons.deleteFriend.show();
-		}
-		else {
-			if (this._isRequested) {
-				this._buttons.cancel.show();
-			}
-			else {
-				if (this._isRequesting) {
-					this._buttons.accept.show();
-					this._buttons.ignore.show();
-					this._buttons.reject.show();
-				}
-				else {
-					this._buttons.create.show();
-				}
-			}
-		}
+	_success: function (data, textStatus, jqXHR) {
+		this._following = data.returnValues.following;
+		this._showButton();
 	}
 };
 

@@ -9,21 +9,13 @@
 		//<![CDATA[
 		$(function() {
 			WCF.Language.addObject({
-				'wcf.user.profile.friend.acceptRequest': 'accept friend request',
-				'wcf.user.profile.friend.cancelRequest': 'cancel friend request',
-				'wcf.user.profile.friend.createRequest': 'create friend request',
-				'wcf.user.profile.friend.deleteFriend': 'evaporate friend',
-				'wcf.user.profile.friend.ignoreRequest': 'ignore friend request',
-				'wcf.user.profile.friend.rejectRequest': 'reject friend request',
+				'wcf.user.profile.followUser': 'follow',
+				'wcf.user.profile.unfollowUser': 'unfollow',
 				'wcf.user.profile.ignoreUser': 'ignore user',
 				'wcf.user.profile.unignoreUser': 'unignore user'
 			});
 
-			var $isFriend = {if $__wcf->getUserProfileHandler()->isFriend($user->userID)}true{else}false{/if};
-			var $isRequestedFriend = {if $__wcf->getUserProfileHandler()->isRequestedFriend($user->userID)}true{else}false{/if};
-			var $isRequestingFriend = {if $__wcf->getUserProfileHandler()->isRequestingFriend($user->userID)}true{else}false{/if};
-			
-			new WCF.User.Profile.Friend({$user->userID}, $isFriend, $isRequestedFriend, $isRequestingFriend);
+			new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 			new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
 		});
 		//]]>

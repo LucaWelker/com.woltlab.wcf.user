@@ -38,7 +38,7 @@ class UserPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if (isset($_REQUEST['userID'])) $this->userID = intval($_REQUEST['userID']);
+		if (isset($_REQUEST['id'])) $this->userID = intval($_REQUEST['id']);
 		$this->user = new User($this->userID);
 		if (!$this->user->userID) {
 			throw new IllegalLinkException();

@@ -4,26 +4,26 @@ use wcf\data\DatabaseObjectDecorator;
 use wcf\system\user\notification\object\IUserNotificationObject;
 
 /**
- * Represents a user friend request as a notification object.
+ * Represents a following user as a notification object.
  *
- * @author	Marcel Werk
+ * @author	Alexander Ebert
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.object
  * @category 	Community Framework
  */
-class UserFriendRequestUserNotificationObject extends DatabaseObjectDecorator implements IUserNotificationObject {
+class UserFollowUserNotificationObject extends DatabaseObjectDecorator implements IUserNotificationObject {
 	/**
 	 * @see wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'wcf\data\user\friend\request\UserFriendRequest';
+	protected static $baseClass = 'wcf\data\user\follow\UserFollow';
 	
 	/**
 	 * @see wcf\system\user\notification\object\IUserNotificationObject::getObjectID()
 	 */
 	public function getObjectID() {
-		return $this->requestID;
+		return $this->followID;
 	}
 
 	/**
