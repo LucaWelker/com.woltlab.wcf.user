@@ -29,29 +29,15 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getActions()
-	 */
-	public function getActions() {
-		return array(
-			array(
-				'action' => 'confirm',
-				'label' => 'OK',
-				'objectID' => $this->notification->notificationID
-			),
-		);
-	}
-	
-	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getRenderedOutput()
 	 */
 	public function getRenderedOutput() {
 		WCF::getTPL()->assign(array(
 			'buttons' => $this->getActions(),
-			'className' => 'wcf\\data\\user\\follow\\UserFollowAction',
 			'message' => $this->getOutput(),
 			'time' => $this->userNotificationObject->time,
 			'username' => 'dtdesign'	// fetch with left join?
-			));
+		));
 		
 		return WCF::getTPL()->fetch('userNotificationDetails');
 	}
