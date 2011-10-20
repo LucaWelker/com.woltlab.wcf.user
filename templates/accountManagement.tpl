@@ -94,7 +94,7 @@
 				<dl class="{if $errorField == 'confirmNewPassword'} formError{/if}">
 					<dt><label for="confirmNewPassword">{lang}wcf.user.passwordChange.confirmNewPassword{/lang}</label></dt>
 					<dd>
-						<input type="password" id="confirmNewPassword" name="confirmNewPassword" value="{$confirmNewPassword}" class="inputText" />
+						<input type="password" id="confirmNewPassword" name="confirmNewPassword" value="{$confirmNewPassword}" class="medium" />
 							
 						{if $errorField == 'confirmNewPassword'}
 							<small class="innerError">
