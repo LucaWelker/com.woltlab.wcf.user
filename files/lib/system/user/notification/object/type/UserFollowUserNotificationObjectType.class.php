@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\user\notification\object\type;
+use wcf\data\object\type\AbstractObjectTypeProcessor;
 use wcf\data\user\follow\UserFollow;
 use wcf\data\user\follow\UserFollowList;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
@@ -15,7 +16,7 @@ use wcf\system\user\notification\object\UserFollowUserNotificationObject;
  * @subpackage	system.user.notification.object.type
  * @category 	Community Framework
  */
-class UserFollowUserNotificationObjectType extends AbstractUserNotificationObjectType {
+class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor implements IUserNotificationObjectType {
 	/**
 	 * @see wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectByID()
 	 */
