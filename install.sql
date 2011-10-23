@@ -8,7 +8,6 @@ ALTER TABLE wcf1_user ADD quitStarted INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD reactivationCode INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD registrationIpAddress VARCHAR(39) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD avatarID INT(10);
-ALTER TABLE wcf1_user ADD lastGravatarUpdateTime INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD disableAvatar TINYINT(1) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD disableAvatarReason TEXT;
 

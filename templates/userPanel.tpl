@@ -13,7 +13,7 @@
 
 {if $__wcf->user->userID}
 	{if $__wcf->getUserProfileHandler()->getAvatar()}
-		{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(24, 24)}
+		{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(32, 32)}
 		<li>{@$__wcf->getUserProfileHandler()->getAvatar()}</li>
 	{/if}
 	
