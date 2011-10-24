@@ -1,9 +1,14 @@
 <?php
 namespace wcf\data\user;
+use wcf\data\user\avatar\Gravatar;
+use wcf\data\user\avatar\UserAvatar;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
+
+define('MODULE_AVATAR', 1);
+define('MODULE_GRAVATAR', 1);
 
 /**
  * Decorates the user object and provides functions to retrieve data for user profiles.
@@ -38,6 +43,12 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * @var	array<integer>
 	 */
 	protected $followingUserIDs = null;
+	
+	/**
+	 * user avatar
+	 * @var wcf\data\user\avatar\IUserAvatar
+	 */
+	protected $avatar = null;
 	
 	/**
 	 * Returns a list of all user ids being followed by current user.
@@ -184,5 +195,25 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	public function isIgnoredUser($userID) {
 		return in_array($userID, $this->getIgnoredUsers());
+	}
+	
+	/**
+	 * Gets the user's avatar.
+	 * 
+	 * @return	wcf\data\user\avatar\IUserAvatar
+	 */ 
+	public function getAvatar() {
+		if ($this->avatar === null) {
+			if (MODULE_AVATAR && !$this->disableAvatar && (!WCF::getUser()->userID || true/*WCF::getUser()->showAvatar*/) && ($this->userID == WCF::getUser()->userID || true /*WCF::getUser()->getPermission('user.profile.avatar.canViewAvatar')*/)) {
+				if ($this->avatarID) {
+					$this->avatar = new UserAvatar(null, $this->data);
+				}
+				else if (MODULE_GRAVATAR) {
+					$this->avatar = new Gravatar($this->email);
+				}
+			}
+		}
+		
+		return $this->avatar;
 	}
 }

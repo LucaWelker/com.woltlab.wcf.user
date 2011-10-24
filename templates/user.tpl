@@ -45,20 +45,6 @@
 
 {include file='header' sandbox=false}
 
-<ul>
-	{foreach from=$__wcf->getBreadcrumbs()->get() item=$breadcrumb}
-		<li>
-			{if $breadcrumb->getURL()}<a href="{$breadcrumb->getURL()}">{/if}<span>{$breadcrumb->getLabel()}</span>{if $breadcrumb->getURL()}</a>{/if} &raquo;
-		</li>
-	{/foreach}
-</ul>
-
-<p>Hello {if $__wcf->user->userID}{$__wcf->user->username}{else}guest{/if}</p>
-
-<p>You have {#$__wcf->getUserNotificationHandler()->getNotificationCount()} outstanding notifications!</p>
-
-<p>{$user->username}</p>
-
 <div id="profileButtonContainer"></div>
 
 <button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>

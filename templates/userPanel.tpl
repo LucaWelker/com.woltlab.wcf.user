@@ -12,6 +12,11 @@
 *}
 
 {if $__wcf->user->userID}
+	{if $__wcf->getUserProfileHandler()->getAvatar()}
+		{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(32, 32)}
+		<li>{@$__wcf->getUserProfileHandler()->getAvatar()}</li>
+	{/if}
+	
 	<!-- user Menu -->
 	<li id="userMenu" class="userMenu">
 		<span class="dropdownCaption">{lang}wcf.user.userNote{/lang}</span>
