@@ -19,13 +19,13 @@ class Gravatar implements IUserAvatar {
 	 * gravatar base url
 	 * @var string
 	 */
-	const GRAVATAR_BASE = 'http://gravatar.com/avatar/%s?&s=%s&r=g&d=%s';
+	const GRAVATAR_BASE = 'http://gravatar.com/avatar/%s?s=%d&r=g&d=%s';
 	
 	/**
 	 * gravatar local cache location
 	 * @var string
 	 */
-	const GRAVATAR_CACHE_LOCATION = 'images/avatars/gravatars/%s-%s.jpg';
+	const GRAVATAR_CACHE_LOCATION = 'images/avatars/gravatars/%s-%s.png';
 	
 	/**
 	 * gravatar expire time (days)
