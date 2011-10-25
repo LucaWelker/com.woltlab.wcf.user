@@ -85,7 +85,7 @@
 				//<![CDATA[
 				$(function() {
 					$('#loginLink').click(function(event) {
-						WCF.showDialog('loginBox');
+						WCF.showDialog('loginBox', true);
 						return false;
 					});
 				});
