@@ -7,7 +7,6 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
-
 {include file='header' sandbox=false __disableLoginLink=true}
 
 <header class="mainHeading">
