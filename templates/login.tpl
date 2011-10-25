@@ -10,7 +10,7 @@
 {include file='header' sandbox=false __disableLoginLink=true}
 
 <header class="mainHeading">
-	<img src="{@RELATIVE_WCF_DIR}icon/logIn1.svg" alt="" />
+	<img src="{icon size='L'}logIn1{/icon}" alt="" />
 	<hgroup>
 		<h1>{lang}wcf.user.login{/lang}</h1>
 	</hgroup>
