@@ -20,13 +20,13 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
-<form method="post" action="{link controller='Login'}{/link}">
+<form method="post" action="{link controller='Login'}{/link}" id="loginForm">
 	<div class="border content">
 		<fieldset>
 			<legend>{lang}wcf.user.login.data{/lang}</legend>
 	
 			<dl>
-				<dt><label for="username">Username or email address</label></dt>
+				<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
 				<dd>
 					<input type="text" id="username" name="username" value="{$username}" required="required" class="medium" />
 					{if $errorField == 'username'}
@@ -40,9 +40,9 @@
 			</dl>
 			
 			<dl>
-				<dt>Do you have an account?</dt>
-				<dd><label><input type="radio" name="action" value="register" /> No, I am a new user.</label></dd>
-				<dd><label><input type="radio" name="action" value="login" checked="checked" /> Yes, my password is:</label></dd>
+				<dt>{lang}wcf.user.login.action{/lang}</dt>
+				<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
+				<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
 			</dl>
 			
 			<dl>
@@ -60,7 +60,7 @@
 			
 			{if $supportsPersistentLogins}
 				<dl>
-					<dt class="reversed"><label for="useCookies">Stay logged in</label></dt>
+					<dt class="reversed"><label for="useCookies">{lang}wcf.user.useCookies{/lang}</label></dt>
 					<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" {if $useCookies}checked="checked" {/if}/></dd>
 				</dl>
 			{/if}
@@ -73,6 +73,23 @@
 		{@SID_INPUT_TAG}
  	</div>
 </form>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		$('#loginForm input[name=action]').change(function(event) {
+			if ($(event.target).val() == 'register') {
+				$('#password').attr('disabled', 'disabled');
+				$('#useCookies').attr('disabled', 'disabled');
+			}
+			else {
+				$('#password').removeAttr('disabled');
+				$('#useCookies').removeAttr('disabled');
+			}
+		});
+	});
+	//]]>
+</script>
 
 {include file='footer' sandbox=false}
 

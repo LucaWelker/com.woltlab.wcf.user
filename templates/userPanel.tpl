@@ -44,39 +44,36 @@
 	
 	<pre id="log"></pre>
 {else}
-	<li>Hello Guest!</li>
-	
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}" title="Login or Register">Login or Register</a></span>
+			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
 			<div id="loginBox" class="" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
-						<dt><label for="username">User-name or e-mail address</label></dt>
+						<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
 						<dd><input type="text" id="username" name="username" value="" required="required" class="medium" /></dd>
 					</dl>
 					
 					<dl>
-						<dt>Do you have an account?</dt>
-						<dd><label><input type="radio" name="action" value="register" /> No, I am a new user.</label></dd>
-						<dd><label><input type="radio" name="action" value="login" checked="checked" /> Yes, my password is:</label></dd>
-						
+						<dt>{lang}wcf.user.login.action{/lang}</dt>
+						<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
+						<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
 					</dl>
 					
 					<dl>
-						<dt><label for="password">Password</label></dt>
+						<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 						<dd><input type="password" id="password" name="password" value="" class="medium" /></dd>
 					</dl>
 					
 					<dl>
-						<dt class="reversed"><label for="useCookies">Stay logged in</label></dt>
+						<dt class="reversed"><label for="useCookies">{lang}wcf.user.useCookies{/lang}</label></dt>
 						<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" /></dd>
 					</dl>
 					
 					<div class="formSubmit">
 						<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-						<input type="submit" name="submitButton" value="Login" accesskey="s" />
+						<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
 					</div>
 				</form>
 			</div>
@@ -84,7 +81,7 @@
 			<script type="text/javascript">
 				//<![CDATA[
 				$(function() {
-					$('#loginLink').click(function(event) {
+					$('#loginLink').click(function() {
 						WCF.showDialog('loginBox', true);
 						return false;
 					});
@@ -92,6 +89,5 @@
 				//]]>
 			</script>
 		</li>
-		
 	{/if}
 {/if}

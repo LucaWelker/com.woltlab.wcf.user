@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
+	<category name="wcf.user">
+		<item name="wcf.user.loginOrRegister"><![CDATA[Login or Register]]></item>
+		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
+		<item name="wcf.user.login.action"><![CDATA[Do you have an account?]]></item>
+		<item name="wcf.user.login.action.register"><![CDATA[No, I am a new user.]]></item>
+		<item name="wcf.user.login.action.login"><![CDATA[Yes, my password is:]]></item>
+		<item name="wcf.user.useCookies"><![CDATA[Stay logged in]]></item>
+		<item name="wcf.user.button.login"><![CDATA[Login]]></item>
+		<item name="wcf.user.button.register"><![CDATA[Register]]></item>
+	</category>
+</language>
