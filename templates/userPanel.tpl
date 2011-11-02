@@ -82,7 +82,9 @@
 				//<![CDATA[
 				$(function() {
 					$('#loginLink').click(function() {
-						WCF.showDialog('loginBox', true);
+						WCF.showDialog('loginBox', true, {
+							title: '{lang}wcf.user.login{/lang}'
+						});
 						return false;
 					});
 				});
