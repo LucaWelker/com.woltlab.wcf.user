@@ -2,6 +2,7 @@
 namespace wcf\data\user\avatar;
 use wcf\system\exception\SystemException;
 use wcf\util\FileUtil;
+use wcf\util\StringUtil;
 
 /**
  * Represents a gravatar.
@@ -66,12 +67,12 @@ class Gravatar implements IUserAvatar {
 	public function getURL() {
 		if ($this->url === null) {
 			// try to use cached gravatar
-			$cachedFilename = sprintf(self::GRAVATAR_CACHE_LOCATION, md5($this->gravatar), $this->size);
+			$cachedFilename = sprintf(self::GRAVATAR_CACHE_LOCATION, md5(StringUtil::toLowerCase($this->gravatar)), $this->size);
 			if (file_exists(WCF_DIR.$cachedFilename) && filemtime(WCF_DIR.$cachedFilename) > (TIME_NOW - (self::GRAVATAR_CACHE_EXPIRE * 86400))) {
 				$this->url = RELATIVE_WCF_DIR.$cachedFilename;
 			}
 			else {
-				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5($this->gravatar), $this->size, 'mm');
+				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($this->gravatar)), $this->size, 'mm');
 				try {
 					$tmpFile = FileUtil::downloadFileFromHttp($gravatarURL, 'gravatar');
 					copy($tmpFile, WCF_DIR.$cachedFilename);
