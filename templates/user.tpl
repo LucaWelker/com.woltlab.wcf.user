@@ -17,6 +17,8 @@
 
 			new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 			new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
+
+			WCF.TabMenu.init();
 		});
 		//]]>
 	</script>
@@ -48,6 +50,16 @@
 <div id="profileButtonContainer"></div>
 
 <button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
+
+<section id="profileContent" class="tabMenuContainer">
+	<nav class="tabMenu">
+		<ul>
+			{event name='contentListItems'}
+		</ul>
+	</nav>
+
+	{event name='content'}
+</section>
 
 {include file='footer' sandbox=false}
 
