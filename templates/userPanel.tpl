@@ -87,6 +87,23 @@
 						});
 						return false;
 					});
+
+					$('#loginBox input[name=action]').live('change', function(event) {
+						if ($(event.target).val() == 'register') {
+							$('#password').disable();
+							$('#password').parents('dl').addClass('disabled');
+							$('#useCookies').disable();
+							$('#useCookies').parents('dl').addClass('disabled');
+							$('#loginSubmitButton').val('{lang}wcf.user.button.register{/lang}');
+						}
+						else {
+							$('#password').enable();
+							$('#password').parents('dl').removeClass('disabled');
+							$('#useCookies').enable();
+							$('#useCookies').parents('dl').removeClass('disabled');
+							$('#loginSubmitButton').val('{lang}wcf.user.button.login{/lang}');
+						}
+					});
 				});
 				//]]>
 			</script>
