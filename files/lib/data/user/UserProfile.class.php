@@ -216,4 +216,38 @@ class UserProfile extends DatabaseObjectDecorator {
 		
 		return $this->avatar;
 	}
+	
+	/**
+	 * Returns a new user profile object.
+	 * 
+	 * @param	integer				$userID
+	 * @return	wcf\data\user\UserProfile
+	 */
+	public static function getUserProfile($userID) {
+		$users = self::getUserProfiles(array($userID));
+		
+		return $users[$userID];
+	}
+	
+	/**
+	 * Returns a list of user profiles.
+	 * 
+	 * @param	array				$userIDs
+	 * @return	array<wcf\data\user\UserProfile>
+	 */
+	public static function getUserProfiles(array $userIDs) {
+		$userList = new UserList();
+		$userList->getConditionBuilder()->add("user_table.userID IN (?)", array($userIDs));
+		$userList->sqlSelects .= "user_avatar.*";
+		$userList->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
+		$userList->sqlLimit = 0;
+		$userList->readObjects();
+		
+		$users = array();
+		foreach ($userList as $user) {
+			$users[$user->userID] = new UserProfile($user);
+		}
+		
+		return $users;
+	}
 }
