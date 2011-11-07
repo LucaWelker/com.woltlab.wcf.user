@@ -14,6 +14,30 @@ ALTER TABLE wcf1_user ADD disableAvatarReason TEXT;
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
 
+-- avatar table
+DROP TABLE IF EXISTS wcf1_user_avatar;
+CREATE TABLE wcf1_user_avatar (
+	avatarID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	avatarCategoryID INT(10),
+	avatarName VARCHAR(255) NOT NULL DEFAULT '',
+	avatarExtension VARCHAR(7) NOT NULL DEFAULT '',
+	width SMALLINT(5) NOT NULL DEFAULT 0,
+	height SMALLINT(5) NOT NULL DEFAULT 0,
+	groupID INT(10),
+	neededPoints INT(10) NOT NULL DEFAULT 0,
+	userID INT(10)
+);
+
+-- avatar categories
+DROP TABLE IF EXISTS wcf1_user_avatar_category;
+CREATE TABLE wcf1_user_avatar_category (
+	avatarCategoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	title VARCHAR(255) NOT NULL DEFAULT '',
+	showOrder MEDIUMINT(5) NOT NULL DEFAULT 0,
+	groupID INT(10),
+	neededPoints INT(10) NOT NULL DEFAULT 0
+);
+
 -- follower list
 DROP TABLE IF EXISTS wcf1_user_follow;
 CREATE TABLE wcf1_user_follow (
@@ -32,6 +56,20 @@ CREATE TABLE wcf1_user_ignore (
 	ignoreUserID INT(10) NOT NULL,
 	time INT(10) NOT NULL DEFAULT 0,
 	UNIQUE KEY (userID, ignoreUserID)
+);
+
+-- user profile menu
+DROP TABLE IF EXISTS wcf1_user_profile_menu_item;
+CREATE TABLE wcf1_user_profile_menu_item (
+	menuItemID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	menuItem VARCHAR(255) NOT NULL DEFAULT '',
+	parentMenuItem VARCHAR(255) NOT NULL DEFAULT '',
+	showOrder INT(10) NOT NULL DEFAULT 0,
+	permissions TEXT NULL,
+	options TEXT NULL,
+	className VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY (packageID, menuItem)
 );
 
 -- user ranks
@@ -58,28 +96,13 @@ INSERT INTO wcf1_user_rank (groupID, neededPoints, rankTitle, rankImage, repeatI
 	(3, 9000, 'wcf.user.rank.user4', 'icon/userRank4S.png', 1),
 	(3, 15000, 'wcf.user.rank.user5', 'icon/userRank5S.png', 1);
 
--- avatar table
-DROP TABLE IF EXISTS wcf1_user_avatar;
-CREATE TABLE wcf1_user_avatar (
-	avatarID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	avatarCategoryID INT(10),
-	avatarName VARCHAR(255) NOT NULL DEFAULT '',
-	avatarExtension VARCHAR(7) NOT NULL DEFAULT '',
-	width SMALLINT(5) NOT NULL DEFAULT 0,
-	height SMALLINT(5) NOT NULL DEFAULT 0,
-	groupID INT(10),
-	neededPoints INT(10) NOT NULL DEFAULT 0,
-	userID INT(10)
-);
+ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
 
-DROP TABLE IF EXISTS wcf1_user_avatar_category;
-CREATE TABLE wcf1_user_avatar_category (
-	avatarCategoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	title VARCHAR(255) NOT NULL DEFAULT '',
-	showOrder MEDIUMINT(5) NOT NULL DEFAULT 0,
-	groupID INT(10),
-	neededPoints INT(10) NOT NULL DEFAULT 0
-);
+ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (avatarCategoryID) REFERENCES wcf1_user_avatar_category (avatarCategoryID) ON DELETE SET NULL;
+ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
+ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_user_avatar_category ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (followUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
@@ -87,11 +110,6 @@ ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (followUserID) REFERENCES wcf1_user
 ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (ignoreUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 
+ALTER TABLE wcf1_user_profile_menu_item ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
+
 ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
-
-ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
-
-ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (avatarCategoryID) REFERENCES wcf1_user_avatar_category (avatarCategoryID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE wcf1_user_avatar_category ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;

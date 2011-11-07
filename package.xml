@@ -20,6 +20,7 @@
 	</requiredpackages>
 	
 	<instructions type="install">
+		<instruction type="packageInstallationPlugin">pip.xml</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
