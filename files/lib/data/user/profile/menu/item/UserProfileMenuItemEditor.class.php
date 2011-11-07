@@ -94,7 +94,7 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	 * @param	integer		$showOrder
 	 * @return	integer
 	 */
-	protected static function getShowOrder($showOrder) {
+	protected static function getShowOrder($showOrder = 0) {
 		if ($showOrder == 0) {
 			// get next number in row
 			$sql = "SELECT	MAX(showOrder) AS showOrder

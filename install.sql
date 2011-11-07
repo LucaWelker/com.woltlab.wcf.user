@@ -68,7 +68,6 @@ CREATE TABLE wcf1_user_profile_menu_item (
 	showOrder INT(10) NOT NULL DEFAULT 0,
 	permissions TEXT NULL,
 	options TEXT NULL,
-	className VARCHAR(255) NOT NULL DEFAULT '',
 	UNIQUE KEY (packageID, menuItem)
 );
 
