@@ -79,12 +79,16 @@
 	$(function() {
 		$('#loginForm input[name=action]').change(function(event) {
 			if ($(event.target).val() == 'register') {
-				$('#password').attr('disabled', 'disabled');
-				$('#useCookies').attr('disabled', 'disabled');
+				$('#password').disable();
+				$('#password').parents('dl').addClass('disabled');
+				$('#useCookies').disable();
+				$('#useCookies').parents('dl').addClass('disabled');
 			}
 			else {
-				$('#password').removeAttr('disabled');
-				$('#useCookies').removeAttr('disabled');
+				$('#password').enable();
+				$('#password').parents('dl').removeClass('disabled');
+				$('#useCookies').enable();
+				$('#useCookies').parents('dl').removeClass('disabled');
 			}
 		});
 	});
