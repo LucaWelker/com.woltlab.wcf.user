@@ -218,6 +218,18 @@ class UserProfile extends DatabaseObjectDecorator {
 	}
 	
 	/**
+	 * Returns true, if this user is currently online.
+	 * 
+	 * @return	boolean
+	 */
+	public function isOnline() {
+		if ($this->lastActivityTime && $this->lastActivityTime > (TIME_NOW - USER_ONLINE_TIMEOUT) && (WCF::getUser()->userID == $this->userID || !$this->invisible || WCF::getUser()->getPermission('admin.general.canViewInvisible') || ($this->invisible == 2 && WCF::getUserProfileHandler()->isFollowing($this->userID)))) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Returns a new user profile object.
 	 * 
 	 * @param	integer				$userID
@@ -226,7 +238,7 @@ class UserProfile extends DatabaseObjectDecorator {
 	public static function getUserProfile($userID) {
 		$users = self::getUserProfiles(array($userID));
 		
-		return $users[$userID];
+		return (isset($users[$userID]) ? $users[$userID] : null);
 	}
 	
 	/**
