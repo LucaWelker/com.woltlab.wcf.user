@@ -31,11 +31,15 @@
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\UserOptionOutputMessage</outputclass>
 			</option>
-			<option name="birthday">
-				<categoryname>profile.personal</categoryname>
-				<optiontype>birthday</optiontype>
-				<outputclass>wcf\system\option\user\UserOptionOutputDate</outputclass>
-			</option>
+			<!--
+				TODO:	Disabled until DateOptionType is fixed.
+				
+				<option name="birthday">
+					<categoryname>profile.personal</categoryname>
+					<optiontype>birthday</optiontype>
+					<outputclass>wcf\system\option\user\UserOptionOutputDate</outputclass>
+				</option>
+			-->
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>radiobuttons</optiontype>
