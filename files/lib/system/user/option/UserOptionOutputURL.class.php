@@ -1,39 +1,40 @@
 <?php
-// wcf imports
-require_once(WCF_DIR.'lib/data/user/User.class.php');
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutput.class.php');
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutputContactInformation.class.php');
+namespace wcf\system\user\option;
+use wcf\data\user\option\UserOption;
+use wcf\data\user\User;
+use wcf\system\style\StyleHandler;
+use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputURL is an implementation of UserOptionOutput for the output of an url.
+ * UserOptionOutputURL is an implementation of IUserOptionOutput for the output of an url.
  *
  * @author	Marcel Werk
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.option
+ * @subpackage	system.user.option
  * @category 	Community Framework
  */
-class UserOptionOutputURL implements UserOptionOutput, UserOptionOutputContactInformation {
-	// UserOptionOutput implementation
+class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContactInformation {
 	/**
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
-	public function getShortOutput(User $user, $optionData, $value) {
+	public function getShortOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user, $value, 'S');
 	}
 	
 	/**
-	 * @see UserOptionOutput::getMediumOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getMediumOutput()
 	 */
-	public function getMediumOutput(User $user, $optionData, $value) {
+	public function getMediumOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user, $value);
 	}
 	
 	/**
-	 * @see UserOptionOutput::getOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getOutput()
 	 */
-	public function getOutput(User $user, $optionData, $value) {
+	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == 'http://') return '';
 		
 		$value = self::getURL($value);
@@ -41,19 +42,18 @@ class UserOptionOutputURL implements UserOptionOutput, UserOptionOutputContactIn
 		return '<a href="'.$value.'">'.$value.'</a>';
 	}
 	
-	// UserOptionOutputContactInformation implementation
 	/**
-	 * @see UserOptionOutputContactInformation::getOutput()
+	 * @see wcf\system\user\option\IUserOptionOutputContactInformation::getOutput()
 	 */
-	public function getOutputData(User $user, $optionData, $value) {
+	public function getOutputData(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == 'http://') return null;
 		
 		$value = self::getURL($value);
 		$value = StringUtil::encodeHTML($value);
 		
 		return array(
-			'icon' => StyleManager::getStyle()->getIconPath('websiteM.png'),
-			'title' => WCF::getLanguage()->get('wcf.user.option.'.$optionData['optionName']),
+			'icon' => StyleManager::getStyle()->getIconPath('website', 'M'),
+			'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
 			'value' => $value,
 			'url' => $value
 		);
@@ -62,14 +62,14 @@ class UserOptionOutputURL implements UserOptionOutput, UserOptionOutputContactIn
 	/**
 	 * Generates an image button.
 	 * 
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
 	protected function getImage(User $user, $value, $imageSize = 'M') {
 		if (empty($value) || $value == 'http://') return '';
 		
 		$value = self::getURL($value);
-		$title = WCF::getLanguage()->get('wcf.user.profile.homepage.title', array('$username' => StringUtil::encodeHTML($user->username)));
-		return '<a href="'.StringUtil::encodeHTML($value).'"><img src="'.StyleManager::getStyle()->getIconPath('website'.$imageSize.'.png').'" alt="" title="'.$title.'" /></a>';
+		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.homepage.title', array('$usernam' => StringUtil::encodeHTML($user->username)));
+		return '<a href="'.StringUtil::encodeHTML($value).'"><img src="'.StyleManager::getInstance()->getStyle()->getIconPath('website', $imageSize).'" alt="" title="'.$title.'" /></a>';
 	}
 	
 	/**

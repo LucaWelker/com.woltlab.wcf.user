@@ -1,24 +1,28 @@
 <?php
-// wcf imports
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutput.class.php');
-require_once(WCF_DIR.'lib/data/user/User.class.php');
+namespace wcf\system\user\option;
+use wcf\data\user\option\UserOption;
+use wcf\data\user\User;
+use wcf\system\style\StyleHandler;
+use wcf\system\WCF;
+use wcf\util\DateUtil;
+use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputDate is an implementation of UserOptionOutput for the output of a date input.
+ * UserOptionOutputDate is an implementation of IUserOptionOutput for the output of a date input.
  *
  * @author	Marcel Werk
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.option
+ * @subpackage	system.user.option
  * @category 	Community Framework
  */
-class UserOptionOutputDate implements UserOptionOutput {
+class UserOptionOutputDate implements IUserOptionOutput {
 	/**
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
-	public function getShortOutput(User $user, $optionData, $value) {
-		if ($optionData['optionType'] == 'birthday') {
+	public function getShortOutput(User $user, UserOption $option, $value) {
+		if ($option->optionType == 'birthday') {
 			// show cake icon
 			if (empty($value) || $value == '0000-00-00') return '';
 			
@@ -31,44 +35,39 @@ class UserOptionOutputDate implements UserOptionOutput {
 					'age' => $age,
 					'username' => $user->username
 				));
-				return '<img src="'.StyleManager::getStyle()->getIconPath('birthdayS.png').'" alt="'.WCF::getLanguage()->getDynamicVariable('wcf.user.profile.birthday').'" title="'.WCF::getLanguage()->getDynamicVariable('wcf.user.profile.birthday').'" />';
+				return '<img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('birthday', 'S').'" alt="'.WCF::getLanguage()->getDynamicVariable('wcf.user.profile.birthday').'" title="'.WCF::getLanguage()->getDynamicVariable('wcf.user.profile.birthday').'" />';
 			}
 		}
 		else {
-			return $this->getOutput($user, $optionData, $value);
+			return $this->getOutput($user, $option, $value);
 		}
 	}
 	
 	/**
-	 * @see UserOptionOutput::getMediumOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getMediumOutput()
 	 */
-	public function getMediumOutput(User $user, $optionData, $value) {
-		return $this->getOutput($user, $optionData, $value);
+	public function getMediumOutput(User $user, UserOption $option, $value) {
+		return $this->getOutput($user, $option, $value);
 	}
 
 	/**
-	 * @see UserOptionOutput::getOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getOutput()
 	 */
-	public function getOutput(User $user, $optionData, $value) {
+	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == '0000-00-00') return '';
 		
 		$age = 0;
 		$date = self::splitDate($value);
 		
 		// format date
-		try {
-			$dateString = DateUtil::formatDate(null, gmmktime(12, 1, 1, $date['month'], $date['day'], ($date['year'] ? $date['year'] : 2028)));
-			if (!$date['year']) $dateString = StringUtil::replace('2028', '', $dateString);
-		}
-		catch (Exception $e) {
-			// fallback for negative timestamps under windows before php 5.1.0
-			$dateString = $value;
-		}
+		$dateString = DateUtil::formatDate(null, gmmktime(12, 1, 1, $date['month'], $date['day'], ($date['year'] ? $date['year'] : 2028)));
+		if (!$date['year']) $dateString = StringUtil::replace('2028', '', $dateString);
 		
 		// calc age
-		if ($date['year'] && $optionData['optionType'] == 'birthday') {
+		if ($date['year'] && $option->optionType == 'birthday') {
 			$age = self::calcAge($date['year'], $date['month'], $date['day']);
 		}
+		
 		return $dateString . ($age ? ' ('.$age.')' : '');
 	}
 	

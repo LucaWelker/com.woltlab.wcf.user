@@ -1,37 +1,38 @@
 <?php
-// wcf imports
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutput.class.php');
-require_once(WCF_DIR.'lib/data/user/User.class.php');
+namespace wcf\system\user\option;
+use wcf\data\user\option\UserOption;
+use wcf\data\user\User;
+use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputFloat is an implementation of UserOptionOutput for the output of a float.
+ * UserOptionOutputFloat is an implementation of IUserOptionOutput for the output of a float.
  *
  * @author	Tobias Friebel
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.option
+ * @subpackage	system.user.option
  * @category 	Community Framework
  */
-class UserOptionOutputFloat implements UserOptionOutput {
+class UserOptionOutputFloat implements IUserOptionOutput {
 	/**
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
-	public function getShortOutput(User $user, $optionData, $value) {
-		return $this->getOutput($user, $optionData, $value);
+	public function getShortOutput(User $user, UserOption $option, $value) {
+		return $this->getOutput($user, $option, $value);
 	}
 
 	/**
-	 * @see UserOptionOutput::getMediumOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getMediumOutput()
 	 */
-	public function getMediumOutput(User $user, $optionData, $value) {
-		return $this->getOutput($user, $optionData, $value);
+	public function getMediumOutput(User $user, UserOption $option, $value) {
+		return $this->getOutput($user, $option, $value);
 	}
 
 	/**
-	 * @see UserOptionOutput::getOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getOutput()
 	 */
-	public function getOutput(User $user, $optionData, $value) {
+	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == '0') {
 			$value = 0.00;
 		}

@@ -1,39 +1,40 @@
 <?php
-// wcf imports
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutput.class.php');
-require_once(WCF_DIR.'lib/data/user/User.class.php');
+namespace wcf\system\user\option;
+use wcf\data\user\option\UserOption;
+use wcf\data\user\User;
+use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputNewlineToBreak is an implementation of UserOptionOutput for an image.
+ * UserOptionOutputImage is an implementation of IUserOptionOutput for an image.
  *
  * @author	Marcel Werk
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.option
+ * @subpackage	system.user.option
  * @category 	Community Framework
  */
-class UserOptionOutputImage implements UserOptionOutput {
+class UserOptionOutputImage implements IUserOptionOutput {
 	/**
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
-	public function getShortOutput(User $user, $optionData, $value) {
-		return $this->getOutput($user, $optionData, $value);
+	public function getShortOutput(User $user, UserOption $option, $value) {
+		return $this->getOutput($user, $option, $value);
 	}
 	
 	/**
-	 * @see UserOptionOutput::getMediumOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getMediumOutput()
 	 */
-	public function getMediumOutput(User $user, $optionData, $value) {
+	public function getMediumOutput(User $user, UserOption $option, $value) {
 		if (empty($value)) return '';
 		
 		return '<img src="'.StringUtil::encodeHTML($value).'" alt="" style="max-width: 50px; max-height: 50px" />';
 	}
 	
 	/**
-	 * @see UserOptionOutput::getOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getOutput()
 	 */
-	public function getOutput(User $user, $optionData, $value) {
+	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value)) return '';
 		
 		return '<img src="'.StringUtil::encodeHTML($value).'" alt="" />';

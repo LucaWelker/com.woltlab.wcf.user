@@ -1,67 +1,68 @@
 <?php
-// wcf imports
-require_once(WCF_DIR.'lib/data/user/User.class.php');
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutput.class.php');
-require_once(WCF_DIR.'lib/data/user/option/UserOptionOutputContactInformation.class.php');
+namespace wcf\system\user\option;
+use wcf\data\user\option\UserOption;
+use wcf\data\user\User;
+use wcf\system\request\LinkHandler;
+use wcf\system\style\StyleHandler;
+use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputEmail is an implementation of UserOptionOutput for the output of a user email.
+ * UserOptionOutputEmail is an implementation of IUserOptionOutput for the output of a user email.
  *
  * @author	Marcel Werk
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.option
+ * @subpackage	system.user.option
  * @category 	Community Framework
  */
-class UserOptionOutputEmail implements UserOptionOutput, UserOptionOutputContactInformation {
-	// UserOptionOutput implementation
+class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputContactInformation {
 	/**
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
-	public function getShortOutput(User $user, $optionData, $value) {
+	public function getShortOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user, 'S');
 	}
 	
 	/**
-	 * @see UserOptionOutput::getMediumOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getMediumOutput()
 	 */
-	public function getMediumOutput(User $user, $optionData, $value) {
+	public function getMediumOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user);
 	}
 	
 	/**
-	 * @see UserOptionOutput::getOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getOutput()
 	 */
-	public function getOutput(User $user, $optionData, $value) {
+	public function getOutput(User $user, UserOption $option, $value) {
 		if (!$user->email) return '';
-		if ($user->hideEmailAddress && !WCF::getUser()->getPermission('admin.user.canMailUser')) return '';
-		if (!WCF::getUser()->getPermission('user.mail.canMail')) return '';
+		if ($user->hideEmailAddress && !WCF::getSession()->getPermission('admin.user.canMailUser')) return '';
+		if (!WCF::getSession()->getPermission('user.mail.canMail')) return '';
 		$email = StringUtil::encodeAllChars($user->email);
 		return '<a href="mailto:'.$email.'">'.$email.'</a>';
 	}
 	
-	// UserOptionOutputContactInformation implementation
 	/**
-	 * @see UserOptionOutputContactInformation::getOutput()
+	 * @see	wcf\system\user\option\IUserOptionOutputContactInformation::getOutput()
 	 */
-	public function getOutputData(User $user, $optionData, $value) {
+	public function getOutputData(User $user, UserOption $option, $value) {
 		if (!$user->email) return null;
-		if (!$user->hideEmailAddress || WCF::getUser()->getPermission('admin.user.canMailUser')) {
+		if (!$user->hideEmailAddress || WCF::getSession()->getPermission('admin.user.canMailUser')) {
 			$email = StringUtil::encodeAllChars($user->email);
 			return array(
-				'icon' => StyleManager::getStyle()->getIconPath('emailM.png'),
-				'title' => WCF::getLanguage()->get('wcf.user.option.'.$optionData['optionName']),
+				'icon' => StyleManager::getInstance()->getStyle()->getIconPath('email', 'M'),
+				'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
 				'value' => $email,
 				'url' => 'mailto:'.$email
 			);
 		}
-		else if ($user->userCanMail && WCF::getUser()->getPermission('user.mail.canMail')) {
+		else if ($user->userCanMail && WCF::getSession()->getPermission('user.mail.canMail')) {
 			return array(
-				'icon' => StyleManager::getStyle()->getIconPath('emailM.png'),
-				'title' => WCF::getLanguage()->get('wcf.user.option.'.$optionData['optionName']),
-				'value' => WCF::getLanguage()->get('wcf.user.profile.email.title', array('$username' => StringUtil::encodeHTML($user->username))),
-				'url' => 'index.php?form=Mail&amp;userID='.$user->userID.SID_ARG_2ND
+				'icon' => StyleManager::getInstance()->getStyle()->getIconPath('email', 'M'),
+				'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
+				'value' => WCF::getLanguage()->getDynamicVariable('wcf.user.profile.email.title', array('username' => StringUtil::encodeHTML($user->username))),
+				'url' => StringUtil::encodeHTML(LinkHandler::getInstance()->getLink('Mail', array('id' => $user->userID)))
 			);
 		}
 		else {
@@ -72,22 +73,22 @@ class UserOptionOutputEmail implements UserOptionOutput, UserOptionOutputContact
 	/**
 	 * Generates an image button.
 	 * 
-	 * @see UserOptionOutput::getShortOutput()
+	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
 	protected function getImage(User $user, $imageSize = 'M') {
 		if (!$user->email) return '';
-		if (!$user->hideEmailAddress || WCF::getUser()->getPermission('admin.user.canMailUser')) {
+		if (!$user->hideEmailAddress || WCF::getSession()->getPermission('admin.user.canMailUser')) {
 			$url = 'mailto:'.StringUtil::encodeAllChars($user->email);
 		}
-		else if ($user->userCanMail && WCF::getUser()->getPermission('user.mail.canMail')) {
-			$url = 'index.php?form=Mail&amp;userID='.$user->userID.SID_ARG_2ND;
+		else if ($user->userCanMail && WCF::getSession()->getPermission('user.mail.canMail')) {
+			$url = StringUtil::encodeHTML(LinkHandler::getInstance()->getLink('Mail', array('id' => $user->userID)));
 		}
 		else {
 			return '';
 		}
 		
-		$title = WCF::getLanguage()->get('wcf.user.profile.email.title', array('$username' => StringUtil::encodeHTML($user->username)));
-		return '<a href="'.$url.'"><img src="'.StyleManager::getStyle()->getIconPath('email'.$imageSize.'.png').'" alt="" title="'.$title.'" /></a>';
+		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.email.title', array('username' => StringUtil::encodeHTML($user->username)));
+		return '<a href="'.$url.'"><img src="'.StyleManager::getInstance()->getStyle()->getIconPath('email', $imageSize).'" alt="" title="'.$title.'" /></a>';
 	}
 }
 ?>

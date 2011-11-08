@@ -246,13 +246,13 @@ class UserOptions extends SingletonFactory {
 			
 			if ($this->outputType == 'normal') $option->optionValue = $outputObj->getOutput($user, $option, $optionValue);
 			else if ($this->outputType == 'short') $option->optionValue = $outputObj->getShortOutput($user, $option, $optionValue);
-			else $optionValue = $outputObj->getMediumOutput($user, $option, $optionValue);
+			else $option->optionValue = $outputObj->getMediumOutput($user, $option, $optionValue);
 		}
 		else {
-			$optionValue = StringUtil::encodeHTML($optionValue);
+			$option->optionValue = StringUtil::encodeHTML($optionValue);
 		}
 		
-		if (empty($optionValue) && empty($option->outputData)) return false;
+		if (empty($option->optionValue) && empty($option->outputData)) return false;
 		return $option;
 	}
 		
