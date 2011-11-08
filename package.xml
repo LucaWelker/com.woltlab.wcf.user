@@ -32,5 +32,6 @@
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="userOption">useroptions.xml</instruction>
+		<instruction type="userProfileMenu">userProfileMenu.xml</instruction>
 	</instructions>
 </package>
