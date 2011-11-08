@@ -31,5 +31,6 @@
 		<instruction type="option">options.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
+		<instruction type="userOption">useroptions.xml</instruction>
 	</instructions>
 </package>
