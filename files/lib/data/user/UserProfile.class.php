@@ -50,6 +50,9 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	protected $avatar = null;
 	
+	const GENDER_MALE = 1;
+	const GENDER_FEMALE = 2;
+	
 	/**
 	 * Returns a list of all user ids being followed by current user.
 	 * 

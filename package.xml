@@ -17,9 +17,11 @@
 		<requiredpackage minversion="2.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.recaptcha</requiredpackage>
 		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.notification</requiredpackage>
+		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.bbcode</requiredpackage>
 	</requiredpackages>
 	
 	<instructions type="install">
+		<instruction type="packageInstallationPlugin">pip.xml</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
@@ -29,5 +31,7 @@
 		<instruction type="option">options.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
+		<instruction type="userOption">useroptions.xml</instruction>
+		<instruction type="userProfileMenu">userProfileMenu.xml</instruction>
 	</instructions>
 </package>

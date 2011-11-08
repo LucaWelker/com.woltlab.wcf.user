@@ -2,11 +2,11 @@
 
 <head>
 	<title>{lang}wcf.user.accountManagement.title{/lang} - {lang}wcf.user.usercp{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+	
 	{include file='headInclude' sandbox=false}
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
-
 {include file='header' sandbox=false}
 
 {capture append=userMessages}
