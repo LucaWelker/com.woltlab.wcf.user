@@ -2,6 +2,7 @@
 namespace wcf\system\user\option;
 use wcf\data\user\option\UserOption;
 use wcf\data\user\User;
+use wcf\data\user\UserProfile;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 
@@ -20,11 +21,11 @@ class UserOptionOutputGender extends UserOptionOutputSelectOptions {
 	 * @see wcf\system\user\option\IUserOptionOutput::getShortOutput()
 	 */
 	public function getShortOutput(User $user, UserOption $option, $value) {
-		if ($value == 1) {
+		if ($value == UserProfile::GENDER_MALE) {
 			$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.gender.male', array('username' => $user->username));
 			return '<img src="'.StyleManager::getInstance()->getStyle()->getIconPath('genderMale', 'S').'" alt="'.$title.'" title="'.$title.'" />';
 		}
-		else if ($value == 2) {
+		else if ($value == UserProfile::GENDER_FEMALE) {
 			$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.gender.female', array('username' => $user->username));
 			return '<img src="'.StyleManager::getInstance()->getStyle()->getIconPath('genderFemale', 'S').'" alt="'.$title.'" title="'.$title.'" />';
 		}
