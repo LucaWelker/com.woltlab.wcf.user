@@ -4,5 +4,9 @@
 		<coreobject>
 			<objectname><![CDATA[wcf\system\user\UserProfileHandler]]></objectname>
 		</coreobject>
+
+		<coreobject>
+			<objectname><![CDATA[wcf\system\menu\user\profile\UserProfileMenu]]></objectname>
+		</coreobject>
 	</import>
 </data>
