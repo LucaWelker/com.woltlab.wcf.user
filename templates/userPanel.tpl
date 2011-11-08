@@ -26,7 +26,7 @@
 	</li>
 	
 	<!-- user notifications -->
-	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</li>
+	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{lang}wcf.user.notification.title{/lang} <span class="badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></li>
 		
 	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
