@@ -22,7 +22,13 @@
 		<options>
 			<option name="aboutMe">
 				<categoryname>profile.aboutMe</categoryname>
-				<optiontype>message</optiontype>
+				<!--
+					TODO:	This should be a message type, but OptionTypeMessage is
+						missing so far. Change the type once it's implemented
+					
+					<optiontype>message</optiontype>
+				-->
+				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\UserOptionOutputMessage</outputclass>
 			</option>
 			<option name="birthday">
