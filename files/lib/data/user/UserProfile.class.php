@@ -223,7 +223,7 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * @return	boolean
 	 */
 	public function isOnline() {
-		if ($this->lastActivityTime && $this->lastActivityTime > (TIME_NOW - USER_ONLINE_TIMEOUT) && (WCF::getUser()->userID == $this->userID || !$this->invisible || WCF::getUser()->getPermission('admin.general.canViewInvisible') || ($this->invisible == 2 && WCF::getUserProfileHandler()->isFollowing($this->userID)))) {
+		if ($this->lastActivityTime && $this->lastActivityTime > (TIME_NOW - USER_ONLINE_TIMEOUT) && (WCF::getUser()->userID == $this->userID || !$this->invisible || WCF::getUser()->getPermission('admin.general.canViewInvisible') || ($this->invisible == 2 && WCF::getUserProfileHandler()->isFollower($this->userID)))) {
 			return true;
 		}
 		return false;
