@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\menu\user\profile\content;
+use wcf\system\SingletonFactory;
 
 /**
  * Handles user profile overview content.
@@ -11,11 +12,11 @@ namespace wcf\system\menu\user\profile\content;
  * @subpackage	system.menu.user.profile.content
  * @category 	Community Framework
  */
-class OverviewUserProfileMenuContent implements IUserProfileMenuContent {
+class OverviewUserProfileMenuContent extends SingletonFactory implements IUserProfileMenuContent {
 	/**
 	 * @see	wcf\system\menu\user\profile\content\IUserProfileMenuContent::getContent()
 	 */
-	public function getContent() {
+	public function getContent($userID) {
 		return 'IMPLEMENT ME: '.get_class($this);
 	}
 }

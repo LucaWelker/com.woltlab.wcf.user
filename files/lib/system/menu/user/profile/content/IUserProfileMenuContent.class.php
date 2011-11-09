@@ -15,7 +15,8 @@ interface IUserProfileMenuContent {
 	/**
 	 * Returns content for this user profile menu item.
 	 * 
+	 * @param	integer		$userID
 	 * @return	string
 	 */
-	public function getContent();
+	public function getContent($userID);
 }

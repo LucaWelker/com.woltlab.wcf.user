@@ -57,7 +57,7 @@ class UserPage extends AbstractPage {
 		
 		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
 		$contentManager = $activeMenuItem->getContentManager();
-		$this->profileContent = $contentManager->getContent();
+		$this->profileContent = $contentManager->getContent($this->user->userID);
 	}
 	
 	/**

@@ -189,7 +189,7 @@ WCF.User.Profile.IgnoreUser.prototype = {
 /**
  * Provides methods to load tab menu content upon request.
  */
-WCF.User.Profile.TabMenu = function() { this.init(); };
+WCF.User.Profile.TabMenu = function(userID) { this.init(userID); };
 WCF.User.Profile.TabMenu.prototype = {
 	/**
 	 * list of containers
@@ -210,10 +210,19 @@ WCF.User.Profile.TabMenu.prototype = {
 	_proxy: null,
 
 	/**
-	 * Initializes the tab menu loader.
+	 * target user id
+	 * @var	integer
 	 */
-	init: function() {
+	_userID: 0,
+
+	/**
+	 * Initializes the tab menu loader.
+	 * 
+	 * @param	integer		userID
+	 */
+	init: function(userID) {
 		this._profileContent = $('#profileContent');
+		this._userID = userID;
 
 		var $activeMenuItem = this._profileContent.data('active');
 		var $enableProxy = false;
@@ -258,7 +267,8 @@ WCF.User.Profile.TabMenu.prototype = {
 				parameters: {
 					data: {
 						containerID: $containerID,
-						menuItem: $panel.data('menuItem')
+						menuItem: $panel.data('menuItem'),
+						userID: this._userID
 					}
 				}
 			});

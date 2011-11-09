@@ -17,7 +17,7 @@
 
 			new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 			new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
-			new WCF.User.Profile.TabMenu();
+			new WCF.User.Profile.TabMenu({@$user->userID});
 
 			WCF.TabMenu.init();
 		});

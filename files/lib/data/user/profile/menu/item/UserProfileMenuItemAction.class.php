@@ -51,7 +51,7 @@ class UserProfileMenuItemAction extends AbstractDatabaseObjectAction {
 		
 		return array(
 			'containerID' => $this->parameters['data']['containerID'],
-			'template' => $contentManager->getContent()
+			'template' => $contentManager->getContent($this->parameters['data']['userID'])
 		);
 	}
 }
