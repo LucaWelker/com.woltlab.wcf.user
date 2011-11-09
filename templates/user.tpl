@@ -54,7 +54,10 @@
 <section id="profileContent" class="tabMenuContainer">
 	<nav class="tabMenu">
 		<ul>
-			{event name='contentListItems'}
+			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems('') item=menuItem}
+				<li><a href="#{$menuItem->getIdentifier()}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
+			{/foreach}
+			{*event name='contentListItems'*}
 		</ul>
 	</nav>
 

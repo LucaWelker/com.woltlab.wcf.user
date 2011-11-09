@@ -14,7 +14,7 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category 	Community Framework
  */
-class PageMenuCacheBuilder implements ICacheBuilder {
+class UserProfileMenuCacheBuilder implements ICacheBuilder {
 	/**
 	 * @see wcf\system\cache\ICacheBuilder::getData()
 	 */
@@ -42,7 +42,7 @@ class PageMenuCacheBuilder implements ICacheBuilder {
 			$conditions->add("menu_item.menuItemID IN (?)", array($itemIDs));
 			
 			$sql = "SELECT		menuItemID, menuItem, parentMenuItem,
-						permissions, options, packageDir,
+						permissions, options, packageDir, className
 						CASE WHEN parentPackageID <> 0 THEN parentPackageID ELSE menu_item.packageID END AS packageID
 				FROM		wcf".WCF_N."_user_profile_menu_item menu_item
 				LEFT JOIN	wcf".WCF_N."_package package

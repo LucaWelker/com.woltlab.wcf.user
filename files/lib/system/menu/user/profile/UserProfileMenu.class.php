@@ -28,4 +28,15 @@ class UserProfileMenu extends TreeMenu {
 		);
 		$this->menuItems = CacheHandler::getInstance()->get($cacheName);
 	}
+	
+	/**
+	 * This methods do nothing, because no user profile menu item can
+	 * ever be empty. Neither do they support links nor are parent menu
+	 * items allowed, thus we can safely skip this method.
+	 * 
+	 * @see	wcf\system\menu\TreeMenu::removeEmptyItems()
+	 */
+	protected function removeEmptyItems($parentMenuItem = '') {
+		return;
+	}
 }

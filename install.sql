@@ -63,11 +63,12 @@ DROP TABLE IF EXISTS wcf1_user_profile_menu_item;
 CREATE TABLE wcf1_user_profile_menu_item (
 	menuItemID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	packageID INT(10) NOT NULL,
-	menuItem VARCHAR(255) NOT NULL DEFAULT '',
+	menuItem VARCHAR(255) NOT NULL,
 	parentMenuItem VARCHAR(255) NOT NULL DEFAULT '',
 	showOrder INT(10) NOT NULL DEFAULT 0,
 	permissions TEXT NULL,
 	options TEXT NULL,
+	className VARCHAT(255) NOT NULL,
 	UNIQUE KEY (packageID, menuItem)
 );
 

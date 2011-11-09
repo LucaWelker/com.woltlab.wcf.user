@@ -43,6 +43,9 @@ class UserProfileMenuPackageInstallationPlugin extends AbstractMenuPackageInstal
 		// force empty parent menu item
 		$result['parentMenuItem'] = '';
 		
+		// append class name
+		$result['className'] = $data['elements']['classname'];
+		
 		return $result;
 	}
 }
