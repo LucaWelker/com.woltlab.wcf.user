@@ -276,12 +276,12 @@ WCF.User.Profile.TabMenu.prototype = {
 	_success: function(data, textStatus, jqXHR) {
 		var $containerID = data.returnValues.containerID;
 		this._hasContent[$containerID] = true;
-
+		
 		// insert content
-		var $template = $(data.returnValues.template).hide();
-		this._profileContent.find('#' + $containerID).html($template);
-
+		var $content = this._profileContent.find('#' + $containerID);
+		var $template = $('<div>' + data.returnValues.template + '</div>').hide().appendTo($content);
+		
 		// slide in content
-		$template.wcfBlindIn();
+		$content.children('div').wcfBlindIn();
 	}
 };

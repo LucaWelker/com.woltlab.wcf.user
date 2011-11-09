@@ -17,6 +17,7 @@
 
 			new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 			new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
+			new WCF.User.Profile.TabMenu();
 
 			WCF.TabMenu.init();
 		});
@@ -61,8 +62,10 @@
 	</nav>
 
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-		<div id="{$menuItem->getIdentifier()}" class="border tabMenuContent">
-			{$menuItem->menuItem}
+		<div id="{$menuItem->getIdentifier()}" class="border tabMenuContent" data-menuItem="{$menuItem->menuItem}">
+			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
+				{@$profileContent}
+			{/if}
 		</div>
 	{/foreach}
 </section>
