@@ -1,6 +1,8 @@
 <?php
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\DatabaseObject;
+use wcf\system\exception\SystemException;
+use wcf\util\ClassUtil;
 
 /**
  * Represents an user profile menu item.

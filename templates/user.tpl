@@ -51,17 +51,20 @@
 
 <button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
 
-<section id="profileContent" class="tabMenuContainer">
+<section id="profileContent" class="tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">
 		<ul>
-			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems('') item=menuItem}
+			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
 				<li><a href="#{$menuItem->getIdentifier()}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
 			{/foreach}
-			{*event name='contentListItems'*}
 		</ul>
 	</nav>
 
-	{event name='content'}
+	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
+		<div id="{$menuItem->getIdentifier()}" class="border tabMenuContent">
+			{$menuItem->menuItem}
+		</div>
+	{/foreach}
 </section>
 
 {include file='footer' sandbox=false}

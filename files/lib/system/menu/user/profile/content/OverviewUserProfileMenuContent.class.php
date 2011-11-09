@@ -16,6 +16,6 @@ class OverviewUserProfileMenuContent implements IUserProfileMenuContent {
 	 * @see	wcf\system\menu\user\profile\content\IUserProfileMenuContent::getContent()
 	 */
 	public function getContent() {
-		die('IMPLEMENT ME!');
+		return 'IMPLEMENT ME: '.get_class($this);
 	}
 }

@@ -2,6 +2,7 @@
 namespace wcf\system\menu\user\profile;
 use wcf\data\user\profile\menu\item\UserProfileMenuItem;
 use wcf\system\cache\CacheHandler;
+use wcf\system\event\EventHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -139,7 +140,7 @@ class UserProfileMenu extends SingletonFactory {
 	 * 
 	 * @return	wcf\data\user\profile\menu\item\UserProfileMenuItem
 	 */
-	public function getFirstMenuItem() {
+	public function getActiveMenuItem() {
 		if (empty($this->menuItems)) {
 			return null;
 		}

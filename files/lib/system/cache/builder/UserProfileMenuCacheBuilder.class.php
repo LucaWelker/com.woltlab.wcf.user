@@ -41,7 +41,7 @@ class UserProfileMenuCacheBuilder implements ICacheBuilder {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("menu_item.menuItemID IN (?)", array($itemIDs));
 			
-			$sql = "SELECT		menuItemID, menuItem, permissions, options, packageDir, className
+			$sql = "SELECT		menuItemID, menuItem, permissions, options, packageDir, className,
 						CASE WHEN parentPackageID <> 0 THEN parentPackageID ELSE menu_item.packageID END AS packageID
 				FROM		wcf".WCF_N."_user_profile_menu_item menu_item
 				LEFT JOIN	wcf".WCF_N."_package package

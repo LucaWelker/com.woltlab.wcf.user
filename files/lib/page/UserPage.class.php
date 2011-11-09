@@ -2,6 +2,7 @@
 namespace wcf\page;
 use wcf\data\user\User;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\menu\user\profile\UserProfileMenu;
 use wcf\system\WCF;
 
 /**
@@ -15,6 +16,12 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class UserPage extends AbstractPage {
+	/**
+	 * profile content for active menu item
+	 * @var	string
+	 */
+	public $profileContent = '';
+	
 	/**
 	 * @see wcf\page\AbstractPage::$templateName
 	 */
@@ -45,6 +52,14 @@ class UserPage extends AbstractPage {
 		}
 	}
 	
+	public function readData() {
+		parent::readData();
+		
+		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
+		$contentManager = $activeMenuItem->getContentManager();
+		$this->profileContent = $contentManager->getContent();
+	}
+	
 	/**
 	 * @see wcf\page\IPage::assignVariables()
 	 */
@@ -52,6 +67,7 @@ class UserPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
+			'profileContent' => $this->profileContent,
 			'userID' => $this->userID,
 			'user' => $this->user
 		));
