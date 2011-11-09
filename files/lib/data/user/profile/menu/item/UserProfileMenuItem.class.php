@@ -12,7 +12,7 @@ use wcf\data\DatabaseObject;
  * @subpackage	data.user.profile.menu.item
  * @category 	Community Framework
  */
-class PageMenuItem extends DatabaseObject {
+class UserProfileMenuItem extends DatabaseObject {
 	/**
 	 * @see	wcf\data\DatabaseObject::$databaseTableName
 	 */
