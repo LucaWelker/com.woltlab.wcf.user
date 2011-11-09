@@ -152,4 +152,19 @@ class UserProfileMenu extends SingletonFactory {
 		
 		return $this->activeMenuItem;
 	}
+	
+	/**
+	 * Returns a specific menu item.
+	 * 
+	 * @return	wcf\data\user\profile\menu\item\UserProfileMenuItem
+	 */
+	public function getMenuItem($menuItem) {
+		foreach ($this->menuItems as $item) {
+			if ($item->menuItem == $menuItem) {
+				return $item;
+			}
+		}
+		
+		return null;
+	}
 }

@@ -185,3 +185,103 @@ WCF.User.Profile.IgnoreUser.prototype = {
 		this._ignoreButton.text(WCF.Language.get('wcf.user.profile.' + (this._isIgnoredUser ? 'un' : '') + 'ignoreUser'));
 	}
 };
+
+/**
+ * Provides methods to load tab menu content upon request.
+ */
+WCF.User.Profile.TabMenu = function() { this.init(); };
+WCF.User.Profile.TabMenu.prototype = {
+	/**
+	 * list of containers
+	 * @var	object
+	 */
+	_hasContent: { },
+
+	/**
+	 * profile content
+	 * @var	jQuery
+	 */
+	_profileContent: null,
+
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
+	 * Initializes the tab menu loader.
+	 */
+	init: function() {
+		this._profileContent = $('#profileContent');
+
+		var $activeMenuItem = this._profileContent.data('active');
+		var $enableProxy = false;
+
+		// fetch content state
+		this._profileContent.find('div.tabMenuContent').each($.proxy(function(index, container) {
+			var $containerID = $(container).wcfIdentify();
+
+			if ($activeMenuItem === $containerID) {
+				this._hasContent[$containerID] = true;
+			}
+			else {
+				this._hasContent[$containerID] = false;
+				$enableProxy = true;
+			}
+		}, this));
+
+		// enable loader if at least one container is empty
+		if ($enableProxy) {
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+
+			this._profileContent.bind('wcftabsselect', $.proxy(this._loadContent, this));
+		}
+	},
+
+	/**
+	 * Prepares to load content once tabs are being switched.
+	 * 
+	 * @param	object		event
+	 * @param	object		ui
+	 */
+	_loadContent: function(event, ui) {
+		var $panel = $(ui.panel);
+		var $containerID = $panel.attr('id');
+
+		if (!this._hasContent[$containerID]) {
+			this._proxy.setOption('data', {
+				actionName: 'getContent',
+				className: 'wcf\\data\\user\\profile\\menu\\item\\UserProfileMenuItemAction',
+				parameters: {
+					data: {
+						containerID: $containerID,
+						menuItem: $panel.data('menuItem')
+					}
+				}
+			});
+			this._proxy.sendRequest();
+		}
+	},
+
+	/**
+	 * Shows previously requested content.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		var $containerID = data.returnValues.containerID;
+		this._hasContent[$containerID] = true;
+
+		// insert content
+		var $template = $(data.returnValues.template).hide();
+		this._profileContent.find('#' + $containerID).html($template);
+
+		// slide in content
+		$template.wcfBlindIn();
+	}
+};

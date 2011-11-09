@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\menu\user\profile\UserProfileMenu;
 
 /**
  * Executes user profile menu item-related actions.
@@ -17,4 +18,40 @@ class UserProfileMenuItemAction extends AbstractDatabaseObjectAction {
 	 * @see wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\user\profile\menu\item\UserProfileMenuItemEditor';
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('getContent');
+	
+	/**
+	 * menu item
+	 * @var	wcf\data\user\profile\menu\item\UserProfileMenuItem
+	 */
+	protected $menuItem = null;
+	
+	/**
+	 * Validates menu item.
+	 */
+	public function validateGetContent() {
+		if (isset($this->parameters['data']['menuItem'])) {
+			$this->menuItem = UserProfileMenu::getInstance()->getMenuItem($this->parameters['data']['menuItem']);
+		}
+		
+		if ($this->menuItem === null) {
+			throw new ValidateActionException("user profile menu item '".$this->parameters['data']['menuItem']."' is unknown");
+		}
+	}
+	
+	/**
+	 * Returns content for given menu item.
+	 */
+	public function getContent() {
+		$contentManager = $this->menuItem->getContentManager();
+		
+		return array(
+			'containerID' => $this->parameters['data']['containerID'],
+			'template' => $contentManager->getContent()
+		);
+	}
 }
