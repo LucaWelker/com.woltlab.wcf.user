@@ -1,7 +1,6 @@
 <?php
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\DatabaseObject;
-use wcf\system\menu\ITreeMenuItem;
 
 /**
  * Represents an user profile menu item.
@@ -13,7 +12,7 @@ use wcf\system\menu\ITreeMenuItem;
  * @subpackage	data.user.profile.menu.item
  * @category 	Community Framework
  */
-class UserProfileMenuItem extends DatabaseObject implements ITreeMenuItem {
+class UserProfileMenuItem extends DatabaseObject {
 	/**
 	 * content manager
 	 * @var	wcf\system\menu\user\profile\content\IUserProfileContent
@@ -29,15 +28,6 @@ class UserProfileMenuItem extends DatabaseObject implements ITreeMenuItem {
 	 * @see	wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'menuItemID';
-	
-	/**
-	 * Not supported but required by TreeMenu.
-	 * 
-	 * @see	wcf\system\menu\ITreeMenuItem::getLink()
-	 */
-	public function getLink() {
-		return '';
-	}
 	
 	/**
 	 * Returns the item identifier, dots are replaced by underscores.
