@@ -18,9 +18,15 @@ use wcf\system\WCF;
 class UserProfileMenu extends SingletonFactory {
 	/**
 	 * list of all menu items
-	 * @var array<wcf\system\menu\ITreeMenuItem>
+	 * @var array<wcf\data\user\profile\menu\item\UserProfileMenuItem>
 	 */
 	public $menuItems = null;
+	
+	/**
+	 * active menu item
+	 * @var	wcf\data\user\profile\menu\item\UserProfileMenuItem
+	 */
+	public $activeMenuItem = null;
 	
 	/**
 	 * @see	wcf\system\SingletonFactory::init()
@@ -112,6 +118,23 @@ class UserProfileMenu extends SingletonFactory {
 	}
 	
 	/**
+	 * Sets active menu item.
+	 * 
+	 * @param	string		$menuItem
+	 * @return	boolean
+	 */
+	public function setActiveMenuItem($menuItem) {
+		foreach ($this->menuItems as $item) {
+			if ($item->menuItem == $menuItem) {
+				$this->activeMenuItem = $item;
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Returns the first menu item.
 	 * 
 	 * @return	wcf\data\user\profile\menu\item\UserProfileMenuItem
@@ -121,7 +144,11 @@ class UserProfileMenu extends SingletonFactory {
 			return null;
 		}
 		
-		reset($this->menuItems);
-		return current($this->menuItems);
+		if ($this->activeMenuItem === null) {
+			reset($this->menuItems);
+			$this->activeMenuItem = current($this->menuItems);
+		}
+		
+		return $this->activeMenuItem;
 	}
 }
