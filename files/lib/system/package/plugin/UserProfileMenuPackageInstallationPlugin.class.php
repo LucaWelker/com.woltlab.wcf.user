@@ -40,6 +40,9 @@ class UserProfileMenuPackageInstallationPlugin extends AbstractMenuPackageInstal
 			unset($result['menuItemLink']);
 		}
 		
+		// force empty parent menu item
+		$result['parentMenuItem'] = '';
+		
 		return $result;
 	}
 }
