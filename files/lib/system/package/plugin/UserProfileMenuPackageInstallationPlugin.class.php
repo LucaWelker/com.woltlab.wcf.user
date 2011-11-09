@@ -56,8 +56,8 @@ class UserProfileMenuPackageInstallationPlugin extends AbstractXMLPackageInstall
 		// merge values and default values
 		return array(
 			'menuItem' => $data['attributes']['name'],
-			'options' => $data['elements']['options'],
-			'permissions' => $data['elements']['permissions'],
+			'options' => (isset($data['elements']['options'])) ? $data['elements']['options'] : '',
+			'permissions' => (isset($data['elements']['permissions'])) ? $data['elements']['permissions'] : '',
 			'showOrder' => $showOrder,
 			'className' => $data['elements']['classname']
 		);
