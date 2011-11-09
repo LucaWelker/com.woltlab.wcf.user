@@ -35,9 +35,9 @@ class UserProfileMenuPackageInstallationPlugin extends AbstractMenuPackageInstal
 	protected function prepareImport(array $data) {
 		$result = parent::prepareImport($data);
 		
-		// class name
-		if (!empty($data['elements']['classname'])) {
-			$result['className'] = $data['elements']['classname'];
+		// menu item link is not supported
+		if (isset($result['menuItemLink'])) {
+			unset($result['menuItemLink']);
 		}
 		
 		return $result;
