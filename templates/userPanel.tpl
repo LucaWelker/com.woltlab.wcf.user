@@ -17,7 +17,7 @@
 		<li>{@$__wcf->getUserProfileHandler()->getAvatar()}</li>
 	{/if}
 	
-	<!-- user Menu -->
+	<!-- user menu -->
 	<li id="userMenu" class="userMenu">
 		<span class="dropdownCaption">{lang}wcf.user.userNote{/lang}</span>
 		<ul class="dropdown">

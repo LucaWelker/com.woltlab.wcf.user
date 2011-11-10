@@ -54,7 +54,7 @@
 			<div class="formElement">
 				<div class="formField">
 					<ul class="formOptionsLong">
-						<li>{*<img src="{icon}email.svg{/icon}" alt="" />*} <a href="index.php?form=RegisterNewActivationCode{@SID_ARG_2ND}">{lang}wcf.user.register.newActivationCode{/lang}</a></li>
+						<li>{*<img src="{icon}eMail1.svg{/icon}" alt="" />*} <a href="index.php?form=RegisterNewActivationCode{@SID_ARG_2ND}">{lang}wcf.user.register.newActivationCode{/lang}</a></li>
 					</ul>
 				</div>
 			</div>
