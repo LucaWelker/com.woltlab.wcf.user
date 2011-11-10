@@ -12,7 +12,7 @@
 {* TODO: Re-enable icons once a style is available *}
 
 <header class="mainHeading">
-	{*<img src="{icon}register.svg{/icon}" alt="" />*}
+	{*<img src="{icon}register1.svg{/icon}" alt="" />*}
 	<hgroup>
 		<h1>{lang}wcf.user.register.activation{/lang}</h1>
 	</hgroup>

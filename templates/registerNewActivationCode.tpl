@@ -10,7 +10,7 @@
 {include file='header' sandbox=false}
 
 <header class="mainHeading">
-	{* <img src="{icon}register.svg{/icon}" alt="" /> *}
+	{* <img src="{icon}register1.svg{/icon}" alt="" /> *}
 	<hgroup>
 		<h1>{lang}wcf.user.register.newActivationCode{/lang}</h1>
 	</hgroup>

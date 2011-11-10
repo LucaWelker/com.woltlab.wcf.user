@@ -10,7 +10,7 @@
 {include file='header' sandbox=false}
 
 <header class="mainHeading">
-	{*<img src="{icon}email.svg{/icon}" alt="" />*}
+	{*<img src="{icon}email1.svg{/icon}" alt="" />*}
 	<hgroup>
 		<h1>{lang}wcf.user.emailChange.reactivation.title{/lang}</h1>
 	</hgroup>

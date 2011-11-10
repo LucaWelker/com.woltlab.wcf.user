@@ -144,7 +144,7 @@
 						<div class="formElement">
 							<div class="formField">
 								<ul class="formOptionsLong">
-									<li><img src="{icon}email.svg{/icon}" alt="" /> <a href="index.php?page=Register&amp;action=reenable{@SID_ARG_2ND}">{lang}wcf.user.emailChange.reactivation.title{/lang}</a></li>
+									<li><img src="{icon}email1.svg{/icon}" alt="" /> <a href="index.php?page=Register&amp;action=reenable{@SID_ARG_2ND}">{lang}wcf.user.emailChange.reactivation.title{/lang}</a></li>
 								</ul>
 							</div>
 						</div>

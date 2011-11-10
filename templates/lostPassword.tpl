@@ -19,7 +19,7 @@
 {include file='header' sandbox=false}
 
 <header class="mainHeading">
-	{*<img src="{icon}lostPassword.svg{/icon}" alt="" />*}
+	{*<img src="{icon}lostPassword1.svg{/icon}" alt="" />*}
 	<hgroup>
 		<h1>{lang}wcf.user.lostPassword.title{/lang}</h1>
 	</hgroup>
