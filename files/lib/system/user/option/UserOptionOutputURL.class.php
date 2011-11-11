@@ -52,7 +52,7 @@ class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContact
 		$value = StringUtil::encodeHTML($value);
 		
 		return array(
-			'icon' => StyleManager::getStyle()->getIconPath('website', 'M'),
+			'icon' => StyleHandler::getInstance()->getStyle()->getIconPath('website', 'M'),
 			'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
 			'value' => $value,
 			'url' => $value
@@ -69,7 +69,7 @@ class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContact
 		
 		$value = self::getURL($value);
 		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.homepage.title', array('$usernam' => StringUtil::encodeHTML($user->username)));
-		return '<a href="'.StringUtil::encodeHTML($value).'"><img src="'.StyleManager::getInstance()->getStyle()->getIconPath('website', $imageSize).'" alt="" title="'.$title.'" /></a>';
+		return '<a href="'.StringUtil::encodeHTML($value).'"><img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('website', $imageSize).'" alt="" title="'.$title.'" /></a>';
 	}
 	
 	/**

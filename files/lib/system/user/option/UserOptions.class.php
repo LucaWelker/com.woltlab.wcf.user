@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\user\option;
+use wcf\data\option\Option;
 use wcf\data\user\User;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\SystemException;
@@ -7,6 +8,7 @@ use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\ClassUtil;
 use wcf\util\FileUtil;
+use wcf\util\StringUtil;
 
 /**
  * Shows a list of user options.
@@ -77,29 +79,39 @@ class UserOptions extends SingletonFactory {
 	}
 	
 	/**
-	 * Applies an option filter and caches the result.
+	 * Applies an option _or_ category filter and caches the result.
 	 * 
-	 * @param	string		$optionFilter
+	 * @param	array		$categoryFilter
+	 * @param	array		$optionFilter
 	 */
-	public function applyFilter($optionFilter) {
+	public function applyFilter(array $categoryFilter, array $optionFilter = array()) {
 		// use raw data for empty filter (default)
-		if (empty($optionFilter)) {
+		if (empty($categoryFilter) && empty($categoryFilter)) {
 			$this->optionFilter = '';
 			return;
 		}
 		
-		$this->optionFilter = sha1($optionFilter);
+		$this->optionFilter = sha1(serialize($categoryFilter).serialize($optionFilter));
 		
 		// apply filter and cache result
-		if (!isset($this->filteredOptions[$hash])) {
-			$this->filteredOptions[$hash] = array();
+		if (!isset($this->filteredOptions[$this->optionFilter])) {
+			$this->filteredOptions[$this->optionFilter] = array();
 			
 			foreach ($this->optionToCategories as $categoryName => $options) {
-				$this->filteredOptions[$hash][$categoryName] = array();
-				
-				foreach ($options as $key => $optionName) {
-					if (in_array($optionName, $optionFilter)) {
-						$this->filteredOptions[$hash][$categoryName][$key] = $optionName;
+				// filter by category
+				if (empty($optionFilter)) {
+					if (in_array($categoryName, $categoryFilter)) {
+						$this->filteredOptions[$this->optionFilter][$categoryName] = $options;
+					}
+				}
+				else {
+					// filter by option
+					$this->filteredOptions[$this->optionFilter][$categoryName] = array();
+					
+					foreach ($options as $key => $optionName) {
+						if (in_array($optionName, $optionFilter)) {
+							$this->filteredOptions[$this->optionFilter][$categoryName][$key] = $optionName;
+						}
 					}
 				}
 			}
@@ -139,22 +151,22 @@ class UserOptions extends SingletonFactory {
 				$superCategory = $this->categories[$superCategoryName];
 				
 				// add icon path
-				if (!empty($superCategory['categoryIconM'])) {
+				if (!empty($superCategory->categoryIconM)) {
 					// get relative path
 					$path = '';
-					if (empty($superCategory['packageDir'])) {
+					if (empty($superCategory->packageDir)) {
 						$path = RELATIVE_WCF_DIR;
 					}
 					else {						
-						$path = FileUtil::getRealPath(RELATIVE_WCF_DIR.$superCategory['packageDir']);
+						$path = FileUtil::getRealPath(RELATIVE_WCF_DIR.$superCategory->packageDir);
 					}
 					
-					$superCategory['categoryIconM'] = $path . $superCategory['categoryIconM'];
+					$superCategory->setIconPath($path . $superCategory->categoryIconM, 'M');
 				}
 				
-				$superCategory['options'] = $this->getCategoryOptions($superCategoryName, $user);
+				$superCategory->setOptions($this->getCategoryOptions($user, $superCategoryName));
 				
-				if (count($superCategory['options']) > 0) {
+				if (count($superCategory->options) > 0) {
 					$options[$superCategoryName] = $superCategory;
 				}
 			}
@@ -182,10 +194,10 @@ class UserOptions extends SingletonFactory {
 		
 		// get options
 		if (empty($this->optionFilter)) {
-			$options &= $this->optionToCategories;
+			$options =& $this->optionToCategories;
 		}
 		else {
-			$options &= $this->filteredOptions[$this->optionFilter];
+			$options =& $this->filteredOptions[$this->optionFilter];
 		}
 		
 		if (isset($options[$categoryName])) {
@@ -193,7 +205,7 @@ class UserOptions extends SingletonFactory {
 				$option = $this->getOptionValue($optionName, $user);
 				
 				// add option to list
-				if ($option) {
+				if ($option !== null) {
 					$children[] = $option;
 				}
 			}
@@ -219,16 +231,45 @@ class UserOptions extends SingletonFactory {
 	 * 
 	 * @param	string			$optionName
 	 * @param	wcf\data\user\User	$user
-	 * @return	array
+	 * @return	wcf\data\option\Option
 	 */
 	public function getOptionValue($optionName, User $user) {
-		if (!isset($this->options[$optionName])) return false;
+		if (!isset($this->options[$optionName])) return null;
 		
-		$visible = ($this->options[$optionName]['visible'] == 0
-			|| ($this->options[$optionName]['visible'] == 1 && ($user->userID == WCF::getUser()->userID || WCF::getSession()->getPermission('admin.general.canViewPrivateUserOptions')))
-			|| ($this->options[$optionName]['visible'] == 2 && $user->userID == WCF::getUser()->userID)
-			|| ($this->options[$optionName]['visible'] == 3 && WCF::getSession()->getPermission('admin.general.canViewPrivateUserOptions')));
-		if (!isset($this->options[$optionName]) || !$visible || $this->options[$optionName]['disabled']) return false;
+		$bitmask = $this->options[$optionName]->visible;
+		// check if option is hidden
+		if ($bitmask & Option::VISIBILITY_NONE) {
+			$visible = false;
+		}
+		// proceed if option is visible for all
+		else if ($bitmask & Option::VISIBILITY_OTHER) {
+			$visible = true;
+		}
+		else {
+			$isAdmin = $isOwner = $visible = false;
+			// check admin permissions
+			if ($bitmask & Option::VISIBILITY_ADMINISTRATOR) {
+				if (WCF::getSession()->getPermission('admin.general.canViewPrivateUserOptions')) {
+					$isAdmin = true;
+				}
+			}
+			
+			// check owner state
+			if ($bitmask & Option::VISIBILITY_OWNER) {
+				if ($user->userID == WCF::getUser()->userID) {
+					$isOwner = true;
+				}
+			}
+			
+			if ($isAdmin) {
+				$visible = true;
+			}
+			else if ($isOwner) {
+				$visible = true;
+			}
+		}
+		
+		if (!isset($this->options[$optionName]) || !$visible || $this->options[$optionName]->disabled) return null;
 
 		// get option data
 		$option = $this->options[$optionName];
@@ -252,7 +293,7 @@ class UserOptions extends SingletonFactory {
 			$option->optionValue = StringUtil::encodeHTML($optionValue);
 		}
 		
-		if (empty($option->optionValue) && empty($option->outputData)) return false;
+		if (empty($option->optionValue) && empty($option->outputData)) return null;
 		return $option;
 	}
 		
