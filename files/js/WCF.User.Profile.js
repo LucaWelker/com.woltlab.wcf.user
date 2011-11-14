@@ -259,7 +259,7 @@ WCF.User.Profile.TabMenu.prototype = {
 	_loadContent: function(event, ui) {
 		var $panel = $(ui.panel);
 		var $containerID = $panel.attr('id');
-
+		console.debug($panel.data('menuItem'));
 		if (!this._hasContent[$containerID]) {
 			this._proxy.setOption('data', {
 				actionName: 'getContent',
@@ -295,3 +295,63 @@ WCF.User.Profile.TabMenu.prototype = {
 		$content.children('div').wcfBlindIn();
 	}
 };
+
+WCF.User.Profile.Editor = Class.extend({
+	_buttons: { },
+
+	_className: '',
+
+	_originalTab: 0,
+
+	_tabMenu: null,
+
+	init: function() {
+		// create buttons
+		this._buttons = {
+			beginEdit: $('<button id="beginEdit">edit profile</button>').appendTo($('#profileButtonContainer')),
+			finalizeEdit: $('<button id="finalizeEdit">end edit</button>').hide().appendTo($('#profileButtonContainer'))
+		};
+
+		// get tab menu
+		this._tabMenu = $('#profileContent').data('wcfTabs');
+
+		// bind event listener
+		this._buttons.beginEdit.click($.proxy(this._click, this));
+		this._buttons.finalizeEdit.click($.proxy(this._click, this));
+	},
+
+	_click: function(event) {
+		var $buttonID = $(event.currentTarget).wcfIdentify();
+
+		switch ($buttonID) {
+			case 'beginEdit':
+				this.beginEdit();
+			break;
+
+			case 'finalizeEdit':
+				this.finalizeEdit();
+			break;
+		}
+	},
+
+	beginEdit: function() {
+		// toggle buttons
+		this._toggleButtons();
+		
+		// store original tab
+		this._originalTab = this._tabMenu.getCurrentIndex();
+		
+		// select overview tab
+		this._tabMenu.select('wcf_user_profile_menu_overview');
+	},
+
+	finalizeEdit: function() {
+		// restore original tab
+		this._tabMenu.select(this._originalTab);
+	},
+
+	_toggleButtons: function() {
+		this._buttons.beginEdit.toggle();
+		this._buttons.finalizeEdit.toggle();
+	}
+});

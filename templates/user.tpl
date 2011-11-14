@@ -20,6 +20,8 @@
 			new WCF.User.Profile.TabMenu({@$user->userID});
 
 			WCF.TabMenu.init();
+
+			new WCF.User.Profile.Editor();
 		});
 		//]]>
 	</script>

@@ -51,7 +51,7 @@ class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputConta
 		if (!$user->hideEmailAddress || WCF::getSession()->getPermission('admin.user.canMailUser')) {
 			$email = StringUtil::encodeAllChars($user->email);
 			return array(
-				'icon' => StyleManager::getInstance()->getStyle()->getIconPath('email', 'M'),
+				'icon' => StyleHandler::getInstance()->getStyle()->getIconPath('email', 'M'),
 				'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
 				'value' => $email,
 				'url' => 'mailto:'.$email
@@ -59,7 +59,7 @@ class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputConta
 		}
 		else if ($user->userCanMail && WCF::getSession()->getPermission('user.mail.canMail')) {
 			return array(
-				'icon' => StyleManager::getInstance()->getStyle()->getIconPath('email', 'M'),
+				'icon' => StyleHandler::getInstance()->getStyle()->getIconPath('email', 'M'),
 				'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
 				'value' => WCF::getLanguage()->getDynamicVariable('wcf.user.profile.email.title', array('username' => StringUtil::encodeHTML($user->username))),
 				'url' => StringUtil::encodeHTML(LinkHandler::getInstance()->getLink('Mail', array('id' => $user->userID)))
@@ -88,7 +88,7 @@ class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputConta
 		}
 		
 		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.email.title', array('username' => StringUtil::encodeHTML($user->username)));
-		return '<a href="'.$url.'"><img src="'.StyleManager::getInstance()->getStyle()->getIconPath('email', $imageSize).'" alt="" title="'.$title.'" /></a>';
+		return '<a href="'.$url.'"><img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('email', $imageSize).'" alt="" title="'.$title.'" /></a>';
 	}
 }
 ?>

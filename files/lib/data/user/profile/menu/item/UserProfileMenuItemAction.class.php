@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\ValidateActionException;
 use wcf\system\menu\user\profile\UserProfileMenu;
 
 /**
