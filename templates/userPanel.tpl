@@ -12,21 +12,19 @@
 *}
 
 {if $__wcf->user->userID}
-	{if $__wcf->getUserProfileHandler()->getAvatar()}
-		{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(24, 24)}
-		<li>{@$__wcf->getUserProfileHandler()->getAvatar()}</li>
-	{/if}
 	
 	<!-- user menu -->
 	<li id="userMenu" class="userMenu">
-		<span class="dropdownCaption">{lang}wcf.user.userNote{/lang}</span>
+		<span class="dropdownCaption">{if $__wcf->getUserProfileHandler()->getAvatar()}{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(16, 16)}{@$__wcf->getUserProfileHandler()->getAvatar()}{/if} {lang}wcf.user.userNote{/lang}</span>
 		<ul class="dropdown">
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
 	
 	<!-- user notifications -->
-	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">{lang}wcf.user.notification.title{/lang} <span class="badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></li>
+	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
+		<span class="dropdownCaption">{lang}wcf.user.notification.title{/lang} <span class="badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></span>
+	</li>
 		
 	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
