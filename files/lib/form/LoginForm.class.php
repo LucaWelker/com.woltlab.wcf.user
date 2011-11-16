@@ -58,12 +58,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		$this->saved();
 		
 		// redirect to url
-		WCF::getTPL()->assign(array(
-			'url' => $this->url,
-			'message' => WCF::getLanguage()->get('wcf.user.login.redirect'),
-			'wait' => 5
-		));
-		WCF::getTPL()->display('redirect');
+		HeaderUtil::delayedRedirect($this->url, WCF::getLanguage()->get('wcf.user.login.redirect'));
 		exit;
 	}
 	
