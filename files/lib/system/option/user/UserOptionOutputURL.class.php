@@ -68,7 +68,7 @@ class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContact
 		if (empty($value) || $value == 'http://') return '';
 		
 		$value = self::getURL($value);
-		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.homepage.title', array('$usernam' => StringUtil::encodeHTML($user->username)));
+		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.homepage.title', array('username' => StringUtil::encodeHTML($user->username)));
 		return '<a href="'.StringUtil::encodeHTML($value).'"><img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('website', $imageSize).'" alt="" title="'.$title.'" /></a>';
 	}
 	
