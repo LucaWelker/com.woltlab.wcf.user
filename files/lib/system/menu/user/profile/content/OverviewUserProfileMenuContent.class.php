@@ -2,7 +2,7 @@
 namespace wcf\system\menu\user\profile\content;
 use wcf\data\user\User;
 use wcf\system\event\EventHandler;
-use wcf\system\user\option\UserOptions;
+use wcf\system\option\user\UserOptionHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -17,11 +17,25 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class OverviewUserProfileMenuContent extends SingletonFactory implements IUserProfileMenuContent {
+	/**
+	 * cache name
+	 * @var string
+	 */
+	public $cacheName = 'user-option';
+	
+	/**
+	 * cache class name
+	 * @var string
+	 */
+	public $cacheClass = 'wcf\system\cache\builder\OptionCacheBuilder';
+	
 	public $categoryFilter = array(
 		'profile.aboutMe',
 		'profile.personal',
 		'profile.contact'
 	);
+	
+	public $optionHandler = null;
 	
 	/**
 	 * @see	wcf\system\SingletonFactory::init()
@@ -29,22 +43,21 @@ class OverviewUserProfileMenuContent extends SingletonFactory implements IUserPr
 	protected function init() {
 		EventHandler::getInstance()->fireAction($this, 'init');
 		
-		// build cached selection
-		UserOptions::getInstance()->applyFilter($this->categoryFilter);
+		$this->optionHandler = new UserOptionHandler($this->cacheName, $this->cacheClass, false, '', 'profile', false);
 	}
 	
 	/**
 	 * @see	wcf\system\menu\user\profile\content\IUserProfileMenuContent::getContent()
 	 */
 	public function getContent($userID) {
-		// filter by category
-		UserOptions::getInstance()->applyFilter($this->categoryFilter);
-		
 		// get options
 		$user = new User($userID);
+		
+		$this->optionHandler->setUser($user);
+		
 		$options = array();
 		foreach ($this->categoryFilter as $categoryName) {
-			$userOptions = UserOptions::getInstance()->getCategoryOptions($user, $categoryName);
+			$userOptions = $this->optionHandler->getCategoryOptions($categoryName);
 			if (!empty($userOptions)) {
 				$options[$categoryName] = $userOptions;
 			}
