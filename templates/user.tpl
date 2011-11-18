@@ -21,7 +21,8 @@
 
 			WCF.TabMenu.init();
 
-			new WCF.User.Profile.Editor();
+			WCF.User.Profile.Editor.Handler.init({$user->userID});
+			new WCF.User.Profile.Editor.Overview(9/* TODO: DEBUG ONLY! */);
 		});
 		//]]>
 	</script>

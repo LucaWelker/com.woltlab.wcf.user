@@ -25,6 +25,7 @@
 		<instruction type="file">files.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
+		<instruction type="objectTypeDefinition">objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
 		<instruction type="coreObject">coreObject.xml</instruction>

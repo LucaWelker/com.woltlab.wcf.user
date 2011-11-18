@@ -1,3 +1,9 @@
+// DEBUG ONLY - REMOVE LATER
+if (!WCF) {
+	var WCF = {};
+	WCF.User = {};
+}
+
 /**
  * UserProfile namespace
  */
@@ -296,62 +302,129 @@ WCF.User.Profile.TabMenu.prototype = {
 	}
 };
 
-WCF.User.Profile.Editor = Class.extend({
-	_buttons: { },
+WCF.User.Profile.Editor = {};
 
-	_className: '',
+WCF.User.Profile.Editor.Handler = {
+	_callbacks: [ ],
+	_didInit: false,
+	_loading: 0,
+	_pendingAction: '',
+	_proxy: null,
+	_ui: {},
+	_userID: 0,
 
-	_originalTab: 0,
+	init: function(userID) {
+		if (this._didInit) return;
 
-	_tabMenu: null,
+		this._userID = userID;
 
-	init: function() {
-		// create buttons
-		this._buttons = {
-			beginEdit: $('<button id="beginEdit">edit profile</button>').appendTo($('#profileButtonContainer')),
-			finalizeEdit: $('<button id="finalizeEdit">end edit</button>').hide().appendTo($('#profileButtonContainer'))
+		this._prepareUI();
+		this._didInit = true;
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this),
+			url: 'index.php/UserProfileEditableContent/?t=' + SECURITY_TOKEN + SID_ARG_2ND
+		});
+	},
+
+	_prepareUI: function() {
+		var $buttonContainer = $('#profileButtonContainer');
+
+		this._ui = {
+			buttons: {
+				beginEdit: $('<button id="beginEdit">beginEdit</button>').data('action', 'beginEdit').appendTo($buttonContainer),
+				restore: $('<button id="restore">restore</button').data('action', 'restore').hide().appendTo($buttonContainer),
+				save: $('<button id="save">save</button>').data('action', 'restore').hide().appendTo($buttonContainer)
+			}
 		};
 
-		// get tab menu
-		this._tabMenu = $('#profileContent').data('wcfTabs');
-
 		// bind event listener
-		this._buttons.beginEdit.click($.proxy(this._click, this));
-		this._buttons.finalizeEdit.click($.proxy(this._click, this));
+		this._ui.buttons.beginEdit.click($.proxy(this._click, this));
+		this._ui.buttons.restore.click($.proxy(this._click, this));
+		this._ui.buttons.save.click($.proxy(this._click, this));
 	},
 
 	_click: function(event) {
-		var $buttonID = $(event.currentTarget).wcfIdentify();
+		this._pendingAction = $(event.currentTarget).data('action');
 
-		switch ($buttonID) {
+		switch (this._pendingAction) {
 			case 'beginEdit':
-				this.beginEdit();
+				this._beginEdit();
 			break;
 
-			case 'finalizeEdit':
-				this.finalizeEdit();
+			case 'restore':
+				
+			break;
+
+			case 'save':
+				
 			break;
 		}
 	},
 
-	beginEdit: function() {
-		// toggle buttons
-		this._toggleButtons();
-		
-		// store original tab
-		this._originalTab = this._tabMenu.getCurrentIndex();
-		
-		// select overview tab
-		this._tabMenu.select('wcf_user_profile_menu_overview');
+	_beginEdit: function() {
+		var $objectTypeIDs = [];
+
+		for (var $i = 0, $length = this._callbacks.length; $i < $length; $i++) {
+			$objectTypeIDs.push(this._callbacks[$i].beginEdit());
+		}
+
+		this._proxy.setOption('data', {
+			actionName: 'beginEdit',
+			objectTypeIDs: $objectTypeIDs,
+			userID: this._userID
+		});
+		this._proxy.sendRequest();
 	},
 
-	finalizeEdit: function() {
-		// restore original tab
-		this._tabMenu.select(this._originalTab);
+	addCallback: function(identifier, callback) {
+		if (!(callback instanceof WCF.User.Profile.Editor.Base)) {
+			console.debug("[WCF.User.Profile.Editor.Handler] Given callback identified by '" + identifier + "' is not a valid callback, aborting.");
+			return;
+		}
+
+		this._callbacks.push(callback);
 	},
 
-	_toggleButtons: function() {
-		this._buttons.beginEdit.toggle();
-		this._buttons.finalizeEdit.toggle();
+	didLoad: function() {
+		this._loading--;
+	},
+
+	_success: function(data, textStatus, jqXHR) {
+		switch (this._pendingAction) {
+			case 'beginEdit':
+			break;
+		}
 	}
+};
+
+WCF.User.Profile.Editor.Base = Class.extend({
+	_name: '',
+	_objectTypeID: 0,
+	
+	init: function(objectTypeID) {
+		this._objectTypeID = objectTypeID;
+		
+		if (this._name !== '') {
+			WCF.User.Profile.Editor.Handler.addCallback(this._name, this);
+		}
+	},
+
+	beginEdit: function() {
+		return this._objectTypeID;
+	},
+
+	_prepareEdit: function() {
+		WCF.User.Profile.Editor.Handler.didLoad();
+	},
+
+	restore: function(reload) {
+		WCF.User.Profile.Editor.Handler.didLoad();
+	},
+
+	save: function() { }
+});
+
+WCF.User.Profile.Editor.Overview = WCF.User.Profile.Editor.Base.extend({
+	_name: 'WCF.User.Profile.Editor.Overview'
 });

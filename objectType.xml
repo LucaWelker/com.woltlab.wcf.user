@@ -6,5 +6,11 @@
 			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
 			<classname>wcf\system\user\notification\object\type\UserFollowUserNotificationObjectType</classname>
 		</type>
+
+		<type>
+			<name>com.woltlab.wcf.user.profileOverview</name>
+			<definitionname>com.woltlab.wcf.user.profileEditableContent</definitionname>
+			<classname>wcf\system\user\profile\editable\content\OverviewUserProfileEditableContent</classname>
+		</type>
 	</import>
 </data>
