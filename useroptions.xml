@@ -94,7 +94,7 @@
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\UserOptionOutputEmail</outputclass>
 				<editable>4</editable>
-				<visible>3</visible>
+				<visible>0</visible>
 			</option>
 		</options>
 	</import>
