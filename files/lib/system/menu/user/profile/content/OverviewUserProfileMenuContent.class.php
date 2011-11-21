@@ -41,9 +41,12 @@ class OverviewUserProfileMenuContent extends SingletonFactory implements IUserPr
 	 * @see	wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		EventHandler::getInstance()->fireAction($this, 'init');
+		EventHandler::getInstance()->fireAction($this, 'shouldInit');
 		
 		$this->optionHandler = new UserOptionHandler($this->cacheName, $this->cacheClass, false, '', 'profile', false);
+		$this->optionHandler->hideEmptyOptions();
+		
+		EventHandler::getInstance()->fireAction($this, 'didInit');
 	}
 	
 	/**
@@ -52,16 +55,9 @@ class OverviewUserProfileMenuContent extends SingletonFactory implements IUserPr
 	public function getContent($userID) {
 		// get options
 		$user = new User($userID);
-		
 		$this->optionHandler->setUser($user);
 		
-		$options = array();
-		foreach ($this->categoryFilter as $categoryName) {
-			$userOptions = $this->optionHandler->getCategoryOptions($categoryName);
-			if (!empty($userOptions)) {
-				$options[$categoryName] = $userOptions;
-			}
-		}
+		$options = $this->optionHandler->getOptionTree();
 		
 		WCF::getTPL()->assign(array(
 			'options' => $options
