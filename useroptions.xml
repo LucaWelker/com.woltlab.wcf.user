@@ -29,8 +29,8 @@
 					<optiontype>message</optiontype>
 				-->
 				<optiontype>text</optiontype>
-				<outputclass>wcf\system\user\option\UserOptionOutputMessage</outputclass>
-				<visible>7</visible>
+				<outputclass>wcf\system\option\user\UserOptionOutputMessage</outputclass>
+				<visible>15</visible>
 			</option>
 			<!--
 				TODO:	Disabled until DateOptionType is fixed.
@@ -38,13 +38,13 @@
 				<option name="birthday">
 					<categoryname>profile.personal</categoryname>
 					<optiontype>birthday</optiontype>
-					<outputclass>wcf\system\user\option\UserOptionOutputDate</outputclass>
+					<outputclass>wcf\system\option\user\UserOptionOutputDate</outputclass>
 				</option>
 			-->
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>radiobuttons</optiontype>
-				<outputclass>wcf\system\user\option\UserOptionOutputGender</outputclass>
+				<outputclass>wcf\system\option\user\UserOptionOutputGender</outputclass>
 				<selectoptions>
 					<![CDATA[0:wcf.user.profile.noDeclaration
 1:wcf.user.gender.male
@@ -52,19 +52,19 @@
 				</selectoptions>
 				<defaultvalue>0</defaultvalue>
 				<searchable>1</searchable>
-				<visible>7</visible>
+				<visible>15</visible>
 			</option>
 			<option name="location">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
-				<visible>7</visible>
+				<visible>15</visible>
 			</option>
 			<option name="occupation">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
-				<visible>7</visible>
+				<visible>15</visible>
 			</option>
 			<option name="hobbies">
 				<categoryname>profile.personal</categoryname>
@@ -77,22 +77,22 @@
 				<optiontype>textarea</optiontype>
 				<visible>3</visible>
 				<editable>3</editable>
-				<outputclass>wcf\system\user\option\UserOptionOutputNewlineToBreak</outputclass>
+				<outputclass>wcf\system\option\user\UserOptionOutputNewlineToBreak</outputclass>
 				<visible>2</visible>
 			</option>
 			<option name="homepage">
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
-				<outputclass>wcf\system\user\option\UserOptionOutputURL</outputclass>
+				<outputclass>wcf\system\option\user\UserOptionOutputURL</outputclass>
 				<searchable>1</searchable>
 				<validationpattern>^$|^https?://</validationpattern>
 				<defaultvalue>http://</defaultvalue>
-				<visible>7</visible>
+				<visible>15</visible>
 			</option>
 			<option name="email">
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
-				<outputclass>wcf\system\user\option\UserOptionOutputEmail</outputclass>
+				<outputclass>wcf\system\option\user\UserOptionOutputEmail</outputclass>
 				<editable>4</editable>
 				<visible>3</visible>
 			</option>
