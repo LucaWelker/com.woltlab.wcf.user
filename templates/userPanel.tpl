@@ -17,7 +17,7 @@
 	<li id="userMenu" class="userMenu">
 		<span class="dropdownCaption">{if $__wcf->getUserProfileHandler()->getAvatar()}{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(16, 16)}{@$__wcf->getUserProfileHandler()->getAvatar()}{/if} {lang}wcf.user.userNote{/lang}</span>
 		<ul class="dropdown">
-			<li><a href="{link controller='User' id=$__wcf->user->userID}{/link}">My Profile</a></li>
+			<li><a href="{link controller='User' object=$__wcf->user}{/link}">My Profile</a></li>
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
