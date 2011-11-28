@@ -1,18 +1,4 @@
-{*
-	TODO: This css should be part of com.woltlab.wcf.notification (w/o parts related to userMenu of course!)
-	
-	A quick note on element nesting:
-	 - [.userNotificationContainer] Container which holds all elements (must be positioned absolute, values
-	   for top and left are determined during runtime using JavaScript)
-	 - [#userNotificationContainer] This is a pretty nasty pitfall, as #userNotificationContainer (equal to
-	   .scrollableContainer references to the direct descendant of .userNotificationContainer (same name to
-	   preserve logic within JavaScript)
-
-	-- Alexander (2011-08-11)
-*}
-
 {if $__wcf->user->userID}
-	
 	<!-- user menu -->
 	<li id="userMenu" class="userMenu">
 		<span class="dropdownCaption">{if $__wcf->getUserProfileHandler()->getAvatar()}{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(16, 16)}{@$__wcf->getUserProfileHandler()->getAvatar()}{/if} {lang}wcf.user.userNote{/lang}</span>
@@ -21,29 +7,6 @@
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
-	
-	<!-- user notifications -->
-	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<span class="dropdownCaption">{lang}wcf.user.notification.title{/lang} <span class="badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></span>
-	</li>
-		
-	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
-	{* The W3C validator doesn't like the implementation of these scripts at this place! There are errors shown because of that *}
-	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			WCF.Language.addObject({
-				'wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}',
-				'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}'
-			});
-			new WCF.Notification.Handler();
-		});
-		//]]>
-	</script>
-	
-	{* TODO: The "pre"-tag is not allowed as child of "ul"! The W3C validator doesn't like that too much. *}
-	<pre id="log"></pre>
 {else}
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
@@ -111,3 +74,5 @@
 		</li>
 	{/if}
 {/if}
+
+{event name='menuItems'}
