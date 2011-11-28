@@ -28,6 +28,7 @@
 	</li>
 		
 	{* TODO: This should be part of com.woltlab.wcf.notification instead! *}
+	{* The W3C validator doesn't like the implementation of these scripts at this place! There are errors shown because of that *}
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.Notification.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
@@ -41,6 +42,7 @@
 		//]]>
 	</script>
 	
+	{* TODO: The "pre"-tag is not allowed as child of "ul"! The W3C validator doesn't like that too much. *}
 	<pre id="log"></pre>
 {else}
 	{if !$__disableLoginLink|isset}
