@@ -47,14 +47,15 @@
 	</style>
 </head>
 
-<body>
-
+<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {include file='header' sandbox=false}
 
-<div id="profileButtonContainer"></div>
-
-<button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
-
+<div class="contentHeader">
+	<nav id="profileButtonContainer" class="">
+		<button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
+	</nav>
+</div>
+	
 <section id="profileContent" class="tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">
 		<ul>
@@ -72,6 +73,10 @@
 		</div>
 	{/foreach}
 </section>
+
+<div class="contentFooter">
+	<!-- ToDo -->
+</div>
 
 {include file='footer' sandbox=false}
 
