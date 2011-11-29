@@ -26,31 +26,13 @@
 		});
 		//]]>
 	</script>
-	<style type="text/css">
-		div#profileButtonContainer {
-			margin: 7px;
-		}
-
-		div#profileButtonContainer button {
-			background-image: -o-linear-gradient(top, rgb(192, 192, 192), rgb(224, 224, 224));
-			border: 1px solid rgb(192, 192, 192);
-			border-radius: 3px;
-			cursor: pointer;
-			margin-right: 3px;
-			height: 60px;
-			padding: 3px;
-		}
-
-		div#profileButtonContainer button:hover {
-			background-image: -o-linear-gradient(top, rgb(224, 224, 224), rgb(192, 192, 192));
-		}
-	</style>
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {include file='header' sandbox=false}
 
 <div class="contentHeader">
+	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
 	<nav id="profileButtonContainer" class="">
 		<button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
 	</nav>
@@ -60,7 +42,7 @@
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-				<li><a href="#{$menuItem->getIdentifier()}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
+				<li><a href="#{$menuItem->getIdentifier()}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
 			{/foreach}
 		</ul>
 	</nav>
