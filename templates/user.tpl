@@ -22,7 +22,7 @@
 			WCF.TabMenu.init();
 
 			WCF.User.Profile.Editor.Handler.init({$user->userID});
-			new WCF.User.Profile.Editor.Overview(9/* TODO: DEBUG ONLY! */);
+			new WCF.User.Profile.Editor.Overview({@$overviewObjectType->objectTypeID});
 		});
 		//]]>
 	</script>

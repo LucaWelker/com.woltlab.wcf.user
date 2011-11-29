@@ -13,6 +13,7 @@ class UserProfileEditableContentAction extends AbstractSecureAction {
 	public $objectTypeIDs = array();
 	public $userID = 0;
 	public $user = null;
+	public $values = array();
 	
 	protected $cache = null;
 	
@@ -45,6 +46,7 @@ class UserProfileEditableContentAction extends AbstractSecureAction {
 			$this->userID = intval($_POST['userID']);
 			$this->user = new User($this->userID);
 		}
+		if (isset($_POST['values']) && is_array($_POST['values'])) $this->values = $_POST['values'];
 	}
 	
 	/**
@@ -64,6 +66,11 @@ class UserProfileEditableContentAction extends AbstractSecureAction {
 			switch ($this->actionName) {
 				case 'beginEdit':
 					$returnValues[$objectTypeID] = $object->beginEdit();
+				break;
+				
+				case 'save':
+					$object->save($this->values[$objectTypeID]);
+					$returnValues[$objectTypeID] = $object->restore();
 				break;
 				
 				default:

@@ -1,15 +1,22 @@
 <?php
 namespace wcf\system\user\profile\editable\content;
 use wcf\data\user\User;
-use wcf\system\user\option\UserOptions;
+use wcf\data\user\UserAction;
+use wcf\system\option\user\UserOptionHandler;
 use wcf\system\WCF;
 
 class OverviewUserProfileEditableContent implements IUserProfileEditableContent {
+	public $cacheName = 'user-profile';
+	
+	public $cacheClass = 'wcf\system\cache\builder\OptionCacheBuilder';
+	
 	public $categoryFilter = array(
 		'profile.aboutMe',
 		'profile.personal',
 		'profile.contact'
 	);
+	
+	public $optionHandler = null;
 	
 	/**
 	 * target user object
@@ -28,21 +35,47 @@ class OverviewUserProfileEditableContent implements IUserProfileEditableContent 
 	 * @see	wcf\system\user\editable\content\IUserProfileEditableContent::prepareEdit()
 	 */
 	public function beginEdit() {
-		// build cached selection
-		UserOptions::getInstance()->applyFilter($this->categoryFilter);
+		$this->initOptionHandler();
+		$this->optionHandler->showEmptyOptions();
 		
-		// filter by category
-		UserOptions::getInstance()->applyFilter($this->categoryFilter);
+		$optionTree = $this->optionHandler->getOptionTree();
+		WCF::getTPL()->assign(array(
+			'optionTree' => $optionTree
+		));
 		
-		// get options
-		$options = array();
-		foreach ($this->categoryFilter as $categoryName) {
-			$userOptions = UserOptions::getInstance()->getCategoryOptions($this->user, $categoryName);
-			if (!empty($userOptions)) {
-				$options[$categoryName] = $userOptions;
-			}
-		}
-		die('<pre>'.print_r($options, true));
+		return WCF::getTPL()->fetch('userProfileOverviewEditable');
+	}
+	
+	/**
+	 * @see	wcf\system\user\editable\content\IUserProfileEditableContent::save()
+	 */
+	public function save(array $data) {
+		$data = array('values' => $data);
+		
+		$this->initOptionHandler();
+		$this->optionHandler->readUserInput($data);
+		
+		$this->optionHandler->validate();
+		$saveOptions = $this->optionHandler->save();
+		
+		$userAction = new UserAction(array($this->user->userID), 'update', array(
+			'options' => $saveOptions
+		));
+		$userAction->executeAction();
+	}
+	
+	/**
+	 * @see	wcf\system\user\editable\content\IUserProfileEditableContent::restore()
+	 */
+	public function restore() {
+		// reload user
+		$this->user = new User($this->user->userID);
+		
+		// reload option handler
+		$this->initOptionHandler();
+		$this->optionHandler->hideEmptyOptions();
+		
+		$options = $this->optionHandler->getOptionTree();
 		WCF::getTPL()->assign(array(
 			'options' => $options
 		));
@@ -51,14 +84,10 @@ class OverviewUserProfileEditableContent implements IUserProfileEditableContent 
 	}
 	
 	/**
-	 * @see	wcf\system\user\editable\content\IUserProfileEditableContent::save()
+	 * Initializes the user option handler
 	 */
-	public function save(array $data) {
-	}
-	
-	/**
-	 * @see	wcf\system\user\editable\content\IUserProfileEditableContent::restore()
-	 */
-	public function restore() {
+	protected function initOptionHandler() {
+		$this->optionHandler = new UserOptionHandler($this->cacheName, $this->cacheClass, false, '', 'profile', false);
+		$this->optionHandler->setUser($this->user);
 	}
 }
