@@ -189,8 +189,12 @@ WCF.User.Profile.IgnoreUser.prototype = {
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		this._isIgnoredUser = data.returnValues.isIgnoredUser;
+		this._updateButton();
 	},
 
+	/**
+	 * Updates button label and inserts it if not exists.
+	 */
 	_updateButton: function() {
 		if (this._button === null) {
 			this._button = $('<button id="ignoreUser"></button>').appendTo($('#profileButtonContainer'));
