@@ -697,7 +697,7 @@ WCF.User.Profile.Editor.Overview = WCF.User.Profile.Editor.Base.extend({
 			var $element = $(element);
 			var $type = $element.attr('type');
 
-			if (($type == 'radio' || $type === 'checkbox') && $element.val() === '') {
+			if (($type == 'radio' || $type === 'checkbox') && !$element.prop('checked')) {
 				return;
 			}
 
