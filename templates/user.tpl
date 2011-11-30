@@ -39,9 +39,7 @@
 
 <div class="contentHeader">
 	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
-	<nav id="profileButtonContainer" class="">
-		{* TODO: button should be inserted by WCF.User.Profile.IgnoreUser() itself! *}
-		<button id="ignoreUser">{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}un{/if}ignore user</button>
+	<nav id="profileButtonContainer">
 	</nav>
 </div>
 	

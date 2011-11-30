@@ -121,7 +121,7 @@ WCF.User.Profile.IgnoreUser.prototype = {
 	 * ignore button
 	 * @var	jQuery
 	 */
-	_ignoreButton: null,
+	_button: null,
 	
 	/**
 	 * ignore state
@@ -156,8 +156,9 @@ WCF.User.Profile.IgnoreUser.prototype = {
 			success: $.proxy(this._success, this)
 		});
 		
-		// bind event
-		this._ignoreButton = $('#ignoreUser').click($.proxy(this._click, this));
+		// handle button
+		this._updateButton();
+		this._button.click($.proxy(this._click, this));
 	},
 	
 	/**
@@ -188,7 +189,14 @@ WCF.User.Profile.IgnoreUser.prototype = {
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		this._isIgnoredUser = data.returnValues.isIgnoredUser;
-		this._ignoreButton.text(WCF.Language.get('wcf.user.profile.' + (this._isIgnoredUser ? 'un' : '') + 'ignoreUser'));
+	},
+
+	_updateButton: function() {
+		if (this._button === null) {
+			this._button = $('<button id="ignoreUser"></button>').appendTo($('#profileButtonContainer'));
+		}
+
+		this._button.text(WCF.Language.get('wcf.user.profile.' + (this._isIgnoredUser ? 'un' : '') + 'ignoreUser'));
 	}
 };
 
