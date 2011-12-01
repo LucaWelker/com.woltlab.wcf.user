@@ -1,5 +1,6 @@
 <?php
 namespace wcf\page;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\User;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\menu\user\profile\UserProfileMenu;
@@ -16,6 +17,12 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class UserPage extends AbstractPage {
+	/**
+	 * overview editable content object type
+	 * @var	wcf\data\object\type\ObjectType
+	 */
+	public $objectType = null;
+	
 	/**
 	 * profile content for active menu item
 	 * @var	string
@@ -58,6 +65,8 @@ class UserPage extends AbstractPage {
 		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
 		$contentManager = $activeMenuItem->getContentManager();
 		$this->profileContent = $contentManager->getContent($this->user->userID);
+		
+		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.profileEditableContent', 'com.woltlab.wcf.user.profileOverview');
 	}
 	
 	/**
@@ -67,6 +76,7 @@ class UserPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
+			'overviewObjectType' => $this->objectType,
 			'profileContent' => $this->profileContent,
 			'userID' => $this->userID,
 			'user' => $this->user
