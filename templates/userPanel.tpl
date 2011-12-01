@@ -67,12 +67,13 @@
 					
 					<dl>
 						<dt class="reversed"><label for="useCookies">{lang}wcf.user.useCookies{/lang}</label></dt>
-						<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" /></dd>
+						<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /></dd>
 					</dl>
 					
 					<div class="formSubmit">
 						<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 						<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
+						<input type="hidden" name="url" value="{$__wcf->session->requestURI}" />
 					</div>
 				</form>
 			</div>
@@ -102,6 +103,13 @@
 							$('#useCookies').parents('dl').removeClass('disabled');
 							$('#loginSubmitButton').val('{lang}wcf.user.button.login{/lang}');
 						}
+					});
+					$('#loginBox input[type=reset]').live('click', function(event) {
+						$('#password').enable();
+						$('#password').parents('dl').removeClass('disabled');
+						$('#useCookies').enable();
+						$('#useCookies').parents('dl').removeClass('disabled');
+						$('#loginSubmitButton').val('{lang}wcf.user.button.login{/lang}');
 					});
 				});
 				//]]>

@@ -91,6 +91,12 @@
 				$('#useCookies').parents('dl').removeClass('disabled');
 			}
 		});
+		$('#loginForm input[type=reset]').click(function(event) {
+			$('#password').enable();
+			$('#password').parents('dl').removeClass('disabled');
+			$('#useCookies').enable();
+			$('#useCookies').parents('dl').removeClass('disabled');
+		});
 	});
 	//]]>
 </script>
