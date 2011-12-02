@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\user\activity\event;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\activity\event\UserActivityEventAction;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\system\SingletonFactory;
@@ -108,14 +109,16 @@ class UserActivityEventHandler extends SingletonFactory {
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
 		$eventAction = new UserActivityEventAction(array(), 'create', array(
-			'objectTypeID' => $objectTypeID,
-			'packageID' => $packageID,
-			'objectID' => $objectID,
-			'userID' => $userID,
-			'time' => $time,
-			'additionalData' => serialize($additonalData)
+			'data' => array(
+				'objectTypeID' => $objectTypeID,
+				'packageID' => $packageID,
+				'objectID' => $objectID,
+				'userID' => $userID,
+				'time' => $time,
+				'additionalData' => serialize($additonalData)
+			)
 		));
-		$returnValues = $eventAction->execute();
+		$returnValues = $eventAction->executeAction();
 		
 		return $returnValues['returnValues'];
 	}
