@@ -17,7 +17,7 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	/**
 	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	public static $baseClass = 'wcf\data\comment\Comment';
+	public static $baseClass = 'wcf\data\user\activity\event\UserActivityEvent';
 	
 	/**
 	 * event text

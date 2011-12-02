@@ -9,5 +9,6 @@
 		<item name="wcf.user.useCookies"><![CDATA[Dauerhaft angemeldet bleiben]]></item>
 		<item name="wcf.user.button.login"><![CDATA[Anmelden]]></item>
 		<item name="wcf.user.button.register"><![CDATA[Registrieren]]></item>
+		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 	</category>
 </language>

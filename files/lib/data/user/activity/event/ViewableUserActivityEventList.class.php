@@ -1,6 +1,8 @@
 <?php
 namespace wcf\data\user\activity\event;
+use wcf\data\user\UserProfile;
 use wcf\system\package\PackageDependencyHandler;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 
 class ViewableUserActivityEventList extends UserActivityEventList {
 	/**
@@ -40,7 +42,7 @@ class ViewableUserActivityEventList extends UserActivityEventList {
 			if (!isset($eventGroups[$event->objectTypeID])) {
 				$objectType = UserActivityEventHandler::getInstance()->getObjectType($event->objectTypeID);
 				$eventGroups[$event->objectTypeID] = array(
-					'className' => $objectType->objectTypeID,
+					'className' => $objectType->className,
 					'objects' => array()
 				);
 			}

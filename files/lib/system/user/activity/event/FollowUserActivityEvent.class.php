@@ -1,5 +1,7 @@
 <?php
 namespace wcf\system\user\activity\event;
+use wcf\data\user\UserList;
+use wcf\system\WCF;
 
 /**
  * User activity event implementation for follows.
@@ -12,4 +14,28 @@ namespace wcf\system\user\activity\event;
  * @category 	Community Framework
  */
 class FollowUserActivityEvent extends AbstractUserActivityEvent {
+	/**
+	 * @see	wcf\system\user\activity\event\IUserActivityEvent::prepare()
+	 */
+	public function prepare(array $events) {
+		$objectIDs = array();
+		foreach ($events as $event) {
+			$objectIDs[] = $event->objectID;
+		}
+		
+		// fetch user id and username
+		$userList = new UserList();
+		$userList->getConditionBuilder()->add("user_table.userID IN (?)", array($objectIDs));
+		$userList->sqlLimit = 0;
+		$userList->readObjects();
+		$users = $userList->getObjects();
+		
+		// set message
+		foreach ($events as $event) {
+			if (isset($users[$event->objectID])) {
+				$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.follow', array('user' => $users[$event->objectID]));
+				$event->setText($text);
+			}
+		}
+	}
 }
