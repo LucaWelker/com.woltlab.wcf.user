@@ -95,6 +95,18 @@ INSERT INTO wcf1_user_rank (groupID, neededPoints, rankTitle, rankImage, repeatI
 	(3, 9000, 'wcf.user.rank.user4', 'icon/userRank4S.png', 1),
 	(3, 15000, 'wcf.user.rank.user5', 'icon/userRank5S.png', 1);
 
+-- recent activity
+DROP TABLE IF EXISTS wcf1_user_activity_event;
+CREATE TABLE wcf1_user_activity_event (
+	eventID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	objectID INT(10) NOT NULL,
+	userID INT(10) NOT NULL,
+	time INT(10) NOT NULL,
+	additionalData TEXT,
+	KEY (packageID, userID)
+);
+
 ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (avatarCategoryID) REFERENCES wcf1_user_avatar_category (avatarCategoryID) ON DELETE SET NULL;
@@ -112,3 +124,6 @@ ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (ignoreUserID) REFERENCES wcf1_user
 ALTER TABLE wcf1_user_profile_menu_item ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 
 ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
+
+ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;

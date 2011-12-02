@@ -5,5 +5,10 @@
 			<classname>wcf\system\menu\user\profile\content\OverviewUserProfileMenuContent</classname>
 			<showorder>1</showorder>
 		</userprofilemenuitem>
+
+		<userprofilemenuitem name="wcf.user.profile.menu.recentActivity">
+			<classname>wcf\system\menu\user\profile\content\RecentActivityUserProfileMenuContent</classname>
+			<showorder>2</showorder>
+		</userprofilemenuitem>
 	</import>
 </data>

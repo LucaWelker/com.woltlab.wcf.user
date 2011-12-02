@@ -5,5 +5,10 @@
 			<name>com.woltlab.wcf.user.profileEditableContent</name>
 			<interfacename>wcf\system\user\profile\editable\content\IUserProfileEditableContent</interfacename>
 		</definition>
+
+		<definition>
+			<name>com.woltlab.wcf.user.recentActivityEvent</name>
+			<interfacename>wcf\system\user\activity\event\IUserActivityEvent</interfacename>
+		</definition>
 	</import>
 </data>

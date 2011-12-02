@@ -12,5 +12,11 @@
 			<definitionname>com.woltlab.wcf.user.profileEditableContent</definitionname>
 			<classname>wcf\system\user\profile\editable\content\OverviewUserProfileEditableContent</classname>
 		</type>
+
+		<type>
+			<name>com.woltlab.wcf.user.recentActivityEvent.follow</name>
+			<definitionname>com.woltlab.wcf.user.com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>wcf\system\user\activity\event\FollowUserActivityEvent</classname>
+		</type>
 	</import>
 </data>
