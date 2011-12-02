@@ -14,20 +14,7 @@ use wcf\system\SingletonFactory;
  */
 abstract class AbstractUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 	/**
-	 * event data
-	 * @var	array<wcf\data\user\activity\event\UserActivityEvent>
+	 * @see	wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
-	public $eventData = array();
-	
-	/**
-	 * @see	wcf\system\user\activity\event\IUserActivityEvent::setEventData()
-	 */
-	public function setEventData(array $eventData) {
-		$this->eventData = $eventData;
-	}
-	
-	/**
-	 * @see	wcf\system\user\activity\event\IUserActivityEvent::getOutput()
-	 */
-	abstract public function getOutput($eventID);
+	abstract public function prepare(array $events);
 }

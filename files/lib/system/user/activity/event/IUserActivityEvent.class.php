@@ -13,17 +13,9 @@ namespace wcf\system\user\activity\event;
  */
 interface IUserActivityEvent {
 	/**
-	 * Sets event data.
+	 * Prepares a list of events for output.
 	 * 
-	 * @param	array<wcf\data\user\activity\event\UserActivityEvent>
+	 * @param	array		$events
 	 */
-	public function setEventData(array $eventData);
-	
-	/**
-	 * Returns output data.
-	 * 
-	 * @param	integer		$eventID
-	 * @return	string
-	 */
-	public function getOutput($eventID);
+	public function prepare(array $events);
 }

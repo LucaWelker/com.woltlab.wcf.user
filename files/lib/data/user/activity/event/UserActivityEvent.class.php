@@ -23,4 +23,20 @@ class UserActivityEvent extends DatabaseObject {
 	 * @see	wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'eventID';
+	
+	/**
+	 * @see	wcf\data\IStorableObject::__get()
+	 */
+	public function __get($name) {
+		$value = parent::__get($name);
+		
+		// treat additional data as data variables if it is an array
+		if ($value === null) {
+			if (is_array($this->data['additionalData']) && isset($this->data['additionalData'][$name])) {
+				$value = $this->data['additionalData'][$name];
+			}
+		}
+		
+		return $value;
+	}
 }
