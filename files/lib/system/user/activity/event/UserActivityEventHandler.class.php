@@ -1,7 +1,9 @@
 <?php
 namespace wcf\system\user\activity\event;
+use wcf\data\user\activity\event\UserActivityEventAction;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\system\SingletonFactory;
+use wcf\system\WCF;
 
 /**
  * User activity event handler.
@@ -27,7 +29,8 @@ class UserActivityEventHandler extends SingletonFactory {
 		// load object types
 		$cache = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.recentActivityEvent');
 		foreach ($cache as $objectType) {
-			$this->objectTypes[$objectType->objectTypeID] = $objectType;
+			$this->objectTypes['names'][$objectType->objectType] = $objectType->objectTypeID;
+			$this->objectTypes['objects'][$objectType->objectTypeID] = $objectType;
 		}
 	}
 	
@@ -38,8 +41,22 @@ class UserActivityEventHandler extends SingletonFactory {
 	 * @return	wcf\data\object\type\ObjectType
 	 */
 	public function getObjectType($objectTypeID) {
-		if (isset($this->objectTypes[$objectTypeID])) {
-			return $this->objectTypes[$objectTypeID];
+		if (isset($this->objectTypes['objects'][$objectTypeID])) {
+			return $this->objectTypes['objects'][$objectTypeID];
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Returns an object type id by object type name.
+	 * 
+	 * @param	string		$objectType
+	 * @return	integer
+	 */
+	public function getObjectTypeID($objectType) {
+		if (isset($this->objectTypes['names'][$objectType])) {
+			return $this->objectTypes['names'][$objectType];
 		}
 		
 		return null;
@@ -73,5 +90,33 @@ class UserActivityEventHandler extends SingletonFactory {
 		$eventList->readObjects();
 		
 		return $eventList;
+	}
+	
+	/**
+	 * Fires a new activity event.
+	 * 
+	 * @param	string		$objectType
+	 * @param	integer		$packageID
+	 * @param	integer		$objectID
+	 * @param	integer		$userID
+	 * @param	integer		$time
+	 * @param	array		$additonalData
+	 * @return	wcf\data\user\activity\event\UserActivityEvent
+	 */
+	public function fireEvent($objectType, $packageID, $objectID, $userID = null, $time = TIME_NOW, $additonalData = array()) {
+		$objectTypeID = $this->getObjectTypeID($objectType);
+		if ($userID === null) $userID = WCF::getUser()->userID;
+		
+		$eventAction = new UserActivityEventAction(array(), 'create', array(
+			'objectTypeID' => $objectTypeID,
+			'packageID' => $packageID,
+			'objectID' => $objectID,
+			'userID' => $userID,
+			'time' => $time,
+			'additionalData' => serialize($additonalData)
+		));
+		$returnValues = $eventAction->execute();
+		
+		return $returnValues['returnValues'];
 	}
 }

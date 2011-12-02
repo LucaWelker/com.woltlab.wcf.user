@@ -2,8 +2,10 @@
 namespace wcf\data\user\follow;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\ValidateActionException;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\notification\object\UserFollowUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
+use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
@@ -50,6 +52,10 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 			
 			// send notification
 			UserNotificationHandler::getInstance()->fireEvent('following', 'com.woltlab.wcf.user.follow', new UserFollowUserNotificationObject($follow), array($follow->followUserID));
+			
+			// fire activity event
+			$packageID = PackageDependencyHandler::getPackageID('com.woltlab.wcf.user');
+			UserActivityEventHandler::getInstance()->fireEvent('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, $this->parameters['data']['userID']);
 			
 			// reset storage
 			UserStorageHandler::getInstance()->reset(array($this->parameters['data']['userID']), 'followerUserIDs', 1);
