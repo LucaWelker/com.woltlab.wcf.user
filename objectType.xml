@@ -15,7 +15,7 @@
 
 		<type>
 			<name>com.woltlab.wcf.user.recentActivityEvent.follow</name>
-			<definitionname>com.woltlab.wcf.user.com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>wcf\system\user\activity\event\FollowUserActivityEvent</classname>
 		</type>
 	</import>

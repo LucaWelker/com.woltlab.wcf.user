@@ -100,6 +100,7 @@ DROP TABLE IF EXISTS wcf1_user_activity_event;
 CREATE TABLE wcf1_user_activity_event (
 	eventID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	packageID INT(10) NOT NULL,
+	objectTypeID INT(10) NOT NULL,
 	objectID INT(10) NOT NULL,
 	userID INT(10) NOT NULL,
 	time INT(10) NOT NULL,
@@ -126,4 +127,5 @@ ALTER TABLE wcf1_user_profile_menu_item ADD FOREIGN KEY (packageID) REFERENCES w
 ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
