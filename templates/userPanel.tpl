@@ -1,8 +1,8 @@
 {if $__wcf->user->userID}
 	<!-- user menu -->
 	<li id="userMenu" class="userMenu">
-		<span class="dropdownCaption">{if $__wcf->getUserProfileHandler()->getAvatar()}{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(16, 16)}{@$__wcf->getUserProfileHandler()->getAvatar()}{/if} {lang}wcf.user.userNote{/lang}</span>
-		<ul class="dropdown">
+		<span class="dropDownCaption">{if $__wcf->getUserProfileHandler()->getAvatar()}{assign var=__dummy value=$__wcf->getUserProfileHandler()->getAvatar()->setMaxSize(16, 16)}{@$__wcf->getUserProfileHandler()->getAvatar()}{/if} {lang}wcf.user.userNote{/lang}</span>
+		<ul class="dropDown">
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}">My Profile</a></li>
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
@@ -11,7 +11,7 @@
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
+			<span class="loginBox dropDownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
 			<div id="loginBox" class="" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
