@@ -5,6 +5,8 @@ use wcf\system\SingletonFactory;
 /**
  * Default implementation for user activity events.
  * 
+ * @todo	This class is almost pointless right now, maybe remove it?
+ * 
  * @author	Alexander Ebert
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -16,5 +18,5 @@ abstract class AbstractUserActivityEvent extends SingletonFactory implements IUs
 	/**
 	 * @see	wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
-	abstract public function prepare(array $events);
+	/*abstract public function prepare(array $events);*/
 }
