@@ -16,75 +16,51 @@
 /* Globals */
 
 .recentActivity {
-	width: 100%;
+	line-height: 1.5;
 }
 
 .recentActivity li {
-	border-bottom: 1px solid rgb(192, 192, 192);
-	display: table;
-	width: 100%;
+	border-bottom: 1px solid rgba(204, 204, 204, 1);
+	background-color: rgba(0, 0, 0, .015);
+	padding: 7px;
 }
 
-.recentActivity li > div {
-	background-color: rgba(0, 0, 0, .3);
-	background-image: -webkit-linear-gradient(transparent, rgba(224, 224, 224, 1));
-	background-image: -moz-linear-gradient(transparent, rgba(224, 224, 224, 1));
-	background-image: -o-linear-gradient(transparent, rgba(224, 224, 224, 1));
-	background-image: -ms-linear-gradient(transparent, rgba(224, 224, 224, 1));
-	background-image: linear-gradient(transparent, rgba(224, 224, 224, 1));
-	
-	display: table-row;
-}
-
-.recentActivity li > div > p {
-	padding: 3px;
-	display: table-cell;
-}
-
-.recentActivity li > div > p:first-child {
-	width: 48px;
-}
-
-.recentActivity li > div > p > span {
+.recentActivity li:after {
+	content: '';
 	display: block;
+	clear: both;
 }
 
-.recentActivity li > div > p > span:last-child {
-	font-size: 85%;
-	color: rgb(153, 153, 153);
-	margin-top: 3px;
-
-	-webkit-transition: color .2s linear;
-	-moz-transition: color .2s linear;
-	-ms-transition: color .2s linear;
-	-o-transition: color .2s linear;
-	transition: color .2s linear;
+.recentActivity > li:nth-child(2n+1) {
+	/* auto-colorer for every 2nd row */
+	background-color: rgba(0, 0, 0, .0);
 }
 
-.recentActivity li:hover > div > p > span:last-child {
-	color: rgb(102, 102, 102);
+.recentActivity > li:hover {
+	background-color: rgba(0, 0, 0, .05);
 }
 
-/* Avatar */
-
-.recentActivity li p:first-child img {
+.recentActivity li img {
 	border: 1px solid #ddd;
 	background-color: #fff;
 	padding: 1px;
+	float: left;
+	width: 32px;
+	height: 32px;
 }
 
-.recentActivity li p:first-child img {
-	opacity: .5;
-	
-	-webkit-transition: opacity .2s linear;
-	-moz-transition: opacity .2s linear;
-	-ms-transition: opacity .2s linear;
-	-o-transition: opacity .2s linear;
-	transition: opacity .2s linear;
+.recentActivity li > .recentActivityContent {
+	padding-left: 65px;
+	position: relative;
 }
 
-.recentActivity li:hover p:first-child img {
-	opacity: 1;
+.recentActivity li > .recentActivityContent .userName time {
+	font-size: 85%;
+	color: rgb(153, 153, 153);
+}
+
+.recentActivity li > .recentActivityContent .userActivity {
+	margin-top: 7px;
 }
 
 /* EOF */
