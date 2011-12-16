@@ -11,6 +11,32 @@
 
 
 
+/* ############## User Avatar ############## */
+
+/* Globals */
+
+.userAvatar {
+	/* none */
+}
+
+.userAvatar img {
+	border: 1px solid rgba(204, 204, 204, 1);
+	background-color: rgba(255, 255, 255, 1);
+	padding: 1px;
+}
+
+/* Special */
+
+.recentActivity .userAvatar img  {
+	float: left;
+}
+
+.commentList .userAvatar img  {
+	float: left;
+}
+
+
+
 /* ############## Recent Activity ############## */
 
 /* Globals */
@@ -44,15 +70,6 @@
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.recentActivity > li img {
-	border: 1px solid #ddd;
-	background-color: #fff;
-	padding: 1px;
-	float: left;
-	width: 32px;
-	height: 32px;
-}
-
 .recentActivity > li > .recentActivityContent {
 	padding-left: 65px;
 	position: relative;
@@ -63,9 +80,24 @@
 	color: rgb(153, 153, 153);
 }
 
+
+
 /* ############## Profile Comments ############## */
 
 /* ToDo: Simplify this mess and make it similar to the recent activities */
+
+/* Globals */
+
+.commentList .userName {
+	display: block;
+}
+
+.commentList .userName time {
+	font-size: 85%;
+	color: rgb(153, 153, 153);
+}
+
+/* Comment List */
 
 .commentList {
 	line-height: 1.5;
@@ -73,124 +105,92 @@
 
 .commentList > li {
 	border-top: 1px solid rgb(204, 204, 204);
+	padding: 7px;
+}
+
+.commentList > li:after {
+	content: '';
+	display: block;
+	clear: both;
 }
 
 .commentList > li:first-child {
 	border-top-width: 0;
 }
 
-.commentList > li > div {
-	padding: 7px;
-	position: relative;
-}
+/* Comment Add */
 
-.commentList > li > div:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-
-.commentList > li > div .userAvatar {
-	margin-right: 10px;
+.commentList > li.commentAdd > div img {
+	margin-left: 25px;
 	float: left;
 }
 
-.commentList > li:first-child:not([data-type="comment"]) > div .userAvatar {
-	margin-right: 0;
-	margin-left: 15px;
+.commentList > li.commentAdd > div > div {
+	margin-left: 65px;
 }
 
-.commentList > li > div .userAvatar img {
-	background-color: #fff;
-	padding: 1px;
-	border: 1px solid #ddd;
-}
-
-.commentList > li > div .userAvatar img:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-
-.commentList > li > div > div {
-	display: block;
+.commentList > li > .commentContent {
 	margin-left: 65px;
 	position: relative;
 }
 
-.commentList > li > div > div small {
-	margin-top: 3px;
-	color: rgb(192, 192, 192);
+/* Description Texts */
+.commentList > li > .commentContent small {
 	font-size: 85%;
+	color: rgb(192, 192, 192);
+	margin-top: 3px;
 }
 
-
-
-/* ToDo: User Comment Content */
-
-.commentContent {
-	margin-left: 50px;
-}
-
-.commentContent > div {
-	padding-top: 7px;
-	position: relative;
-}
-
-.commentContent > div > .commentResponseAdd {
+.commentList > li > .commentContent .commentResponseAdd {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
+	margin-top: 7px;
 	padding: 7px;
 }
 
-.commentContent > div > .commentResponseAdd:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-
-.commentContent > div > .commentResponseAdd > div .userAvatar {
+.commentList > li > .commentContent .commentResponseAdd > div img {
+	margin-left: 10px;
 	float: left;
-	margin-right: 10px;
 }
 
-.commentContent > div > .commentResponseAdd > div .userAvatar img {
+.commentList > li > .commentContent .commentResponseAdd > div .userAvatar img {
+	border: 1px solid #ddd;
 	background-color: #fff;
 	padding: 1px;
-	border: 1px solid #ddd;
 }
 
-.commentContent > div > .commentResponseAdd > div > div {
+.commentList > li > .commentContent .commentResponseAdd > div > div {
 	margin-left: 50px;
 	display: block;
-}
-
-.commentContent > .userName {
-	display: block;
-}
-
-.commentContent > .userName time {
-	font-size: 85%;
-	color: rgb(153, 153, 153);
 }
 
 
 
 /* Comment Response List */
 
-.commentResponseList > li {
-	border-top: 1px solid rgb(204, 204, 204);
-	background-color: rgba(0, 0, 0, .015);
+.commentList > li .commentResponseList {
+	margin-top: 7px;
 }
 
-.commentResponseList > li > div {
+.commentList > li .commentResponseAdd ~ .commentResponseList {
+	margin-top: 0;
+}
+
+.commentList > li .commentResponseList > li {
+	border-top: 1px solid rgb(204, 204, 204);
+	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
 	position: relative;
 }
 
-.commentResponseList > li:nth-child(2n+1) {
+.commentList > li .commentResponseList > li:nth-child(2n+1) {
 	/* auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
+}
+
+.commentList > li .commentResponseList > li > .commentContent {
+	margin-left: 50px;
+	position: relative;
 }
 
 
@@ -199,8 +199,8 @@
 
 .commentContent > .commentOptions,
 .commentResponseList > li .commentOptions {
-	display: block;
 	font-size: 85%;
+	display: block;
 	position: absolute;
 	top: 2px;
 	right: 2px;
