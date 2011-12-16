@@ -19,16 +19,20 @@
 	line-height: 1.5;
 }
 
-.recentActivity li {
-	border-bottom: 1px solid rgba(204, 204, 204, 1);
+.recentActivity > li {
+	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
 }
 
-.recentActivity li:after {
+.recentActivity > li:after {
 	content: '';
 	display: block;
 	clear: both;
+}
+
+.recentActivity > li:first-child {
+	border-top-width: 0;
 }
 
 .recentActivity > li:nth-child(2n+1) {
@@ -40,7 +44,7 @@
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.recentActivity li img {
+.recentActivity > li img {
 	border: 1px solid #ddd;
 	background-color: #fff;
 	padding: 1px;
@@ -49,12 +53,12 @@
 	height: 32px;
 }
 
-.recentActivity li > .recentActivityContent {
+.recentActivity > li > .recentActivityContent {
 	padding-left: 65px;
 	position: relative;
 }
 
-.recentActivity li > .recentActivityContent .userName time {
+.recentActivity > li > .recentActivityContent .userName time {
 	font-size: 85%;
 	color: rgb(153, 153, 153);
 }
