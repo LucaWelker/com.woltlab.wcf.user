@@ -37,7 +37,14 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
 {capture assign='sidebar'}
-<div class="userAvatar">{if $user->getAvatar()}{assign var=__dummy value=$user->getAvatar()->setMaxSize(150, 150)}{@$user->getAvatar()}{/if}</div>
+{if $user->getAvatar()}
+	<div class="userAvatar">{@$user->getAvatar()}</div>
+{/if}
+
+{* follower *}
+{* following *}
+{* profile visitors *}
+{* placeholder *}
 {/capture}
 
 {include file='header' sandbox=false sidebarDirection='left'}
