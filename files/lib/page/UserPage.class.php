@@ -1,7 +1,7 @@
 <?php
 namespace wcf\page;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\user\User;
+use wcf\data\user\UserProfile;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\menu\user\profile\UserProfileMenu;
 use wcf\system\WCF;
@@ -42,7 +42,7 @@ class UserPage extends AbstractPage {
 	
 	/**
 	 * user object
-	 * @var wcf\data\user\User
+	 * @var wcf\data\user\UserProfile
 	 */
 	public $user = null;
 	
@@ -53,8 +53,8 @@ class UserPage extends AbstractPage {
 		parent::readParameters();
 		
 		if (isset($_REQUEST['id'])) $this->userID = intval($_REQUEST['id']);
-		$this->user = new User($this->userID);
-		if (!$this->user->userID) {
+		$this->user = UserProfile::getUserProfile($this->userID);
+		if ($this->user === null) {
 			throw new IllegalLinkException();
 		}
 	}

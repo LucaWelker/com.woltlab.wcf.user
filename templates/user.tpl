@@ -35,7 +35,12 @@
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
-{include file='header' sandbox=false}
+
+{capture assign='sidebar'}
+<div class="userAvatar">{if $user->getAvatar()}{assign var=__dummy value=$user->getAvatar()->setMaxSize(150, 150)}{@$user->getAvatar()}{/if}</div>
+{/capture}
+
+{include file='header' sandbox=false sidebarDirection='left'}
 
 <div class="contentHeader">
 	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
