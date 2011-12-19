@@ -41,8 +41,40 @@
 	<div class="userAvatar">{@$user->getAvatar()}</div>
 {/if}
 
-{* follower *}
 {* following *}
+{if $followingCount}
+	<div>
+		following ({#$followingCount})
+		<ul>
+			{foreach from=$following item=followingUser}
+				{assign var=__dummy value=$followingUser->getAvatar()->setMaxSize(32, 32)}
+				<li class="balloonTooltip userAvatar" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	
+	{if $followingCount > 1}
+		<a class="javascriptOnly" id="followingAll">all</a>
+	{/if}
+{/if}
+
+{* follower *}
+{if $followerCount}
+	<div>
+		follower ({#$followerCount})
+		<ul>
+			{foreach from=$followers item=follower}
+				{assign var=__dummy value=$follower->getAvatar()->setMaxSize(32, 32)}
+				<li class="balloonTooltip userAvatar" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	
+	{if $followerCount > 1}
+		<a class="javascriptOnly" id="followerAll">all</a>
+	{/if}
+{/if}
+
 {* profile visitors *}
 {* placeholder *}
 {/capture}

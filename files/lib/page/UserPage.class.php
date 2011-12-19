@@ -1,5 +1,7 @@
 <?php
 namespace wcf\page;
+use wcf\data\user\follow\UserFollowerList;
+use wcf\data\user\follow\UserFollowingList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\UserProfile;
 use wcf\system\exception\IllegalLinkException;
@@ -47,6 +49,18 @@ class UserPage extends AbstractPage {
 	public $user = null;
 	
 	/**
+	 * follower list
+	 * @var wcf\data\user\follow\UserFollowerList
+	 */
+	public $followerList = null;
+	
+	/**
+	 * following list
+	 * @var wcf\data\user\follow\UserFollowingList
+	 */
+	public $followingList = null;
+		
+	/**
 	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -59,14 +73,31 @@ class UserPage extends AbstractPage {
 		}
 	}
 	
+	/**
+	 * @see wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
 		
 		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
 		$contentManager = $activeMenuItem->getContentManager();
 		$this->profileContent = $contentManager->getContent($this->user->userID);
-		
 		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.profileEditableContent', 'com.woltlab.wcf.user.profileOverview');
+		
+		// get followers
+		$this->followerList = new UserFollowerList();
+		$this->followerList->getConditionBuilder()->add('user_follow.followUserID = ?', array($this->userID));
+		$this->followerList->sqlLimit = 9;
+		$this->followerList->readObjects();
+		
+		// get following
+		$this->followingList = new UserFollowingList();
+		$this->followingList->getConditionBuilder()->add('user_follow.userID = ?', array($this->userID));
+		$this->followingList->sqlLimit = 9;
+		$this->followingList->readObjects();
+		
+		// get visitors
+		
 	}
 	
 	/**
@@ -79,7 +110,11 @@ class UserPage extends AbstractPage {
 			'overviewObjectType' => $this->objectType,
 			'profileContent' => $this->profileContent,
 			'userID' => $this->userID,
-			'user' => $this->user
+			'user' => $this->user,
+			'followers' => $this->followerList->getObjects(),
+			'followerCount' => $this->followerList->countObjects(),
+			'following' => $this->followingList->getObjects(),
+			'followingCount' => $this->followingList->countObjects(),
 		));
 	}
 }

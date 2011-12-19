@@ -84,7 +84,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					UserStorageHandler::getInstance()->update($this->userID, 'followingUserIDs', serialize($this->followingUserIDs), 1);
 				}
 				else {
-					$this->followingUserIDs = unserialize($data[$user->userID]);
+					$this->followingUserIDs = unserialize($data[$this->userID]);
 				}
 			}
 		}
@@ -123,7 +123,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					UserStorageHandler::getInstance()->update($this->userID, 'followerUserIDs', serialize($this->followerUserIDs), 1);
 				}
 				else {
-					$this->followerUserIDs = unserialize($data[$user->userID]);
+					$this->followerUserIDs = unserialize($data[$this->userID]);
 				}
 			}
 		}
@@ -162,7 +162,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					UserStorageHandler::getInstance()->update($this->userID, 'ignoredUserIDs', serialize($this->ignoredUserIDs), 1);
 				}
 				else {
-					$this->ignoredUserIDs = unserialize($data[$user->userID]);
+					$this->ignoredUserIDs = unserialize($data[$this->userID]);
 				}
 			}
 		}
