@@ -43,8 +43,8 @@
 
 {* following *}
 {if $followingCount}
-	<div>
-		following ({#$followingCount})
+	<div class="userFollowing">
+		<h1>Following <span class="badge">{#$followingCount}</span></h1>
 		<ul>
 			{foreach from=$following item=followingUser}
 				{assign var=__dummy value=$followingUser->getAvatar()->setMaxSize(32, 32)}
@@ -58,10 +58,10 @@
 	{/if}
 {/if}
 
-{* follower *}
+{* followers *}
 {if $followerCount}
-	<div>
-		follower ({#$followerCount})
+	<div class="userFollowers">
+		<h1>Followers <span class="badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
 				{assign var=__dummy value=$follower->getAvatar()->setMaxSize(32, 32)}
