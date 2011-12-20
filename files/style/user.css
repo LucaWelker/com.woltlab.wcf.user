@@ -35,6 +35,13 @@
 	float: left;
 }
 
+/* Sidebar */
+
+.sidebar .userAvatar  {
+	text-align: center;
+	margin: 15px auto;
+}
+
 
 
 /* ############## Recent Activity ############## */
