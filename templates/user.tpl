@@ -92,7 +92,7 @@
 	{* placeholder *}
 	
 	{* collapse sidebar *}			
-	<span class="collapsibleSidebarButton" title="Auf- und Zuklappen"><span></span></span>
+	<span class="collapsibleSidebarButton" title="{lang}wcf.global.button.collapsible{/lang}"><span></span></span>
 </nav>
 
 {/capture}
