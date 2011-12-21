@@ -65,7 +65,7 @@
 				{/foreach}
 			</ul>
 			{if $followingCount > 1}
-				<p><a id="followingAll" class="javascriptOnly">Show all following</a></p>
+				<p><a id="followingAll" class="badge badgeButton javascriptOnly">Show all following</a></p>
 			{/if}
 		</div>
 	</div>
@@ -82,7 +82,7 @@
 			{/foreach}
 		</ul>
 		{if $followerCount > 1}
-			<p class=""><a id="followerAll" class="badge badgeButton javascriptOnly">Show all followers</a></p>
+			<p><a id="followerAll" class="badge badgeButton javascriptOnly">Show all followers</a></p>
 		{/if}
 	</div>
 	{/if}
