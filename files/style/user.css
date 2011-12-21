@@ -39,30 +39,31 @@
 
 /* ############## User Avatar ############## */
 
-.sidebar > .userAvatar {
+.sidebar .userAvatarOriginal {
 	text-align: center;
-	margin: 15px auto;
+	padding-left: 25px;
 }
 
-.sidebar > .userFollowing,
-.sidebar > .userFollowers {
-	display: block;
-	padding: 10px;
+.sidebar .userFollowing ul,
+.sidebar .userFollowers ul {
+	margin: 0 25px;
 }
 
-.sidebar h1 {
-	font-size: 150%;
-	text-align: center;
-	text-shadow: 0 1px 0 #fff;
-	color: #369;
-	margin: 10px auto;
-	display: block;
+.sidebar .userFollowing .userAvatar,
+.sidebar .userFollowers .userAvatar {
+	display: inline-block !important;
 }
 
-.sidebar > .userFollowing li,
-.sidebar > .userFollowers li {
-	display: inline-block;
-	padding: 5px 5px 0;
+.sidebar .userFollowing .userAvatar a,
+.sidebar .userFollowers .userAvatar a {
+	display: inline-block !important;
+	padding: 5px 1px 0;
+}
+
+.sidebar .userFollowing .badgeButton,
+.sidebar .userFollowers .badgeButton {
+	margin: 15px 15px 0;
+	float: right;
 }
 
 
@@ -136,6 +137,8 @@
 .commentList > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	padding: 7px;
+	display: inline-block;
+	width: 100%;
 }
 
 .commentList > li:after {

@@ -37,30 +37,43 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
 {capture assign='sidebar'}
-{if $user->getAvatar()}
-	<div class="userAvatar">{@$user->getAvatar()}</div>
-{/if}
 
-{* following *}
-{if $followingCount}
-	<div class="userFollowing">
-		<h1>Following <span class="badge">{#$followingCount}</span></h1>
-		<ul>
-			{foreach from=$following item=followingUser}
-				{assign var=__dummy value=$followingUser->getAvatar()->setMaxSize(32, 32)}
-				<li class="userAvatar balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()}</a></li>
-			{/foreach}
-		</ul>
+<nav id="sidebarMenu" class="sidebarMenu">
+	{* user *}
+	<div class="menuContainer">
+		<h1 class="menuHeader">{$user->username}</h1>
+		<div class="sidebarMenuGroup">
+			<ul>
+				<li>
+					{if $user->getAvatar()}
+						<div class="userAvatarOriginal" title="{$user->username}">{@$user->getAvatar()}</div>
+					{/if}
+				</li>
+			</ul>
+		</div>
 	</div>
 	
-	{if $followingCount > 1}
-		<a id="followingAll" class="javascriptOnly">all</a>
+	{* following *}
+	{if $followingCount}
+	<div class="menuContainer userFollowing collapsible">
+		<h1>Following <span class="badge">{#$followingCount}</span></h1>
+		<div class="sidebarMenuGroup">
+			<ul>
+				{foreach from=$following item=followingUser}
+					{assign var=__dummy value=$followingUser->getAvatar()->setMaxSize(32, 32)}
+					<li class="userAvatar balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()}</a></li>
+				{/foreach}
+			</ul>
+			{if $followingCount > 1}
+				<p><a id="followingAll" class="javascriptOnly">Show all following</a></p>
+			{/if}
+		</div>
+	</div>
 	{/if}
-{/if}
-
-{* followers *}
-{if $followerCount}
-	<div class="userFollowers">
+	
+	{* followers *}
+	{if $followerCount}
+	<div class="menuContainer userFollowers collapsible">
 		<h1>Followers <span class="badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
@@ -68,15 +81,20 @@
 				<li class="userAvatar balloonTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()}</a></li>
 			{/foreach}
 		</ul>
+		{if $followerCount > 1}
+			<p class=""><a id="followerAll" class="badge badgeButton javascriptOnly">Show all followers</a></p>
+		{/if}
 	</div>
-	
-	{if $followerCount > 1}
-		<a id="followerAll" class="javascriptOnly">all</a>
 	{/if}
-{/if}
+				
+	{* profile visitors *}
+	
+	{* placeholder *}
+	
+	{* collapse sidebar *}			
+	<span class="collapsibleSidebarButton" title="Auf- und Zuklappen"><span></span></span>
+</nav>
 
-{* profile visitors *}
-{* placeholder *}
 {/capture}
 
 {include file='header' sandbox=false sidebarDirection='left'}
