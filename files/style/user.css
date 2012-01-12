@@ -144,7 +144,7 @@
 
 .commentList > li:after {
 	content: '';
-	display: block;
+	display: inline-block;
 	clear: inline-both;
 }
 
@@ -189,7 +189,7 @@
 
 .commentList > li > .commentContent .commentResponseAdd > div .userAvatar img {
 	border: 1px solid #ddd;
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 1);
 	padding: 1px;
 }
 
