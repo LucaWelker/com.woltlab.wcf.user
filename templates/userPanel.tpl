@@ -16,7 +16,7 @@
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
 						<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
-						<dd><input type="text" id="username" name="username" value="" required="required" class="medium" /></dd>
+						<dd><input type="text" id="username" name="username" value="" required="required" autofocus="autofocus" class="medium" /></dd>
 					</dl>
 					
 					<dl>
