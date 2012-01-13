@@ -64,10 +64,10 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			if ($this->userID) {
 				// load storage data
-				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID));
 				
 				// get ids
-				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'followingUserIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'followingUserIDs');
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
@@ -103,10 +103,10 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			if ($this->userID) {
 				// load storage data
-				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID));
 				
 				// get ids
-				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'followerUserIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'followerUserIDs');
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
@@ -142,10 +142,10 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			if ($this->userID) {
 				// load storage data
-				UserStorageHandler::getInstance()->loadStorage(array($this->userID), 1);
+				UserStorageHandler::getInstance()->loadStorage(array($this->userID));
 				
 				// get ids
-				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'ignoredUserIDs', 1);
+				$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'ignoredUserIDs');
 				
 				// cache does not exist or is outdated
 				if ($data[$this->userID] === null) {
