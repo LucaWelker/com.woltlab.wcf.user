@@ -38,11 +38,11 @@
 
 {capture assign='sidebar'}
 
-<nav id="sidebarMenu" class="sidebarMenu">
+<nav id="sidebarContent" class="sidebarContent">
 	{* user *}
 	<div class="menuContainer">
 		<h1 class="menuHeader">{$user->username}</h1>
-		<div class="sidebarMenuGroup">
+		<div class="sidebarContentGroup">
 			<ul>
 				<li>
 					{if $user->getAvatar()}
@@ -57,7 +57,7 @@
 	{if $followingCount}
 	<div class="menuContainer userFollowing collapsible">
 		<h1>Following <span class="badge">{#$followingCount}</span></h1>
-		<div class="sidebarMenuGroup">
+		<div class="sidebarContentGroup">
 			<ul>
 				{foreach from=$following item=followingUser}
 					{assign var=__dummy value=$followingUser->getAvatar()->setMaxSize(32, 32)}
@@ -97,7 +97,7 @@
 
 {/capture}
 
-{include file='header' sandbox=false sidebarDirection='left'}
+{include file='header' sandbox=false sidebarOrientation='left'}
 
 <div class="contentHeader">
 	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
