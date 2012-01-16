@@ -121,7 +121,7 @@
 			</option>
 			<option name="register_activation_method">
 				<categoryname>user.register</categoryname>
-				<optiontype>radiobuttons</optiontype>
+				<optiontype>radioButton</optiontype>
 				<defaultvalue><![CDATA[1]]></defaultvalue>
 				<selectoptions><![CDATA[0:wcf.acp.option.register_activation_method.disabled
 1:wcf.acp.option.register_activation_method.byUser
