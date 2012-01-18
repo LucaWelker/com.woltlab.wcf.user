@@ -43,7 +43,7 @@
 			-->
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
-				<optiontype>radiobuttons</optiontype>
+				<optiontype>radioButton</optiontype>
 				<outputclass>wcf\system\option\user\UserOptionOutputGender</outputclass>
 				<selectoptions>
 					<![CDATA[0:wcf.user.profile.noDeclaration
