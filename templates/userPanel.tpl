@@ -11,8 +11,8 @@
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<span class="loginForm dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
-			<div id="loginBox" class="" style="display: none;">
+			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
+			<div id="loginForm" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
 						<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
@@ -47,6 +47,11 @@
 			<script type="text/javascript">
 				//<![CDATA[
 				$(function() {
+					WCF.Language.addObject({
+						'wcf.user.button.login': '{lang}wcf.user.button.login{/lang}',
+						'wcf.user.button.register': '{lang}wcf.user.button.register{/lang}',
+						'wcf.user.login': '{lang}wcf.user.login{/lang}'
+					});
 					new WCF.User.Login(true);
 				});
 				//]]>

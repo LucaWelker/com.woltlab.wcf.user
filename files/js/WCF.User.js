@@ -1,8 +1,3 @@
-if (!WCF) {
-	var WCF = {};
-	WCF.User = {};
-}
-
 /**
  * Quick login box
  * 
@@ -57,7 +52,7 @@ WCF.User.Login = Class.extend({
 		
 		if (isQuickLogin) {
 			$('#loginLink').click(function() {
-				WCF.showDialog('loginForm', true, {
+				WCF.showDialog('loginForm', {
 					title: WCF.Language.get('wcf.user.login')
 				});
 				return false;
@@ -72,10 +67,10 @@ WCF.User.Login = Class.extend({
 	 */
 	_change: function(event) {
 		if ($(event.currentTarget).val() === 'register') {
-			this._setState(false, false, WCF.Language.get('wcf.user.button.register'));
+			this._setState(false, WCF.Language.get('wcf.user.button.register'));
 		}
 		else {
-			this._setState(true, true, WCF.Language.get('wcf.user.button.login'));
+			this._setState(true, WCF.Language.get('wcf.user.button.login'));
 		}
 	},
 	
