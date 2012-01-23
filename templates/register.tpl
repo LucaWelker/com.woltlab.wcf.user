@@ -4,7 +4,7 @@
 	<title>Register form</title>
 	{include file='headInclude' sandbox=false}
 	
-	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.Registration.js"></script>
+	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
@@ -18,6 +18,13 @@
 				'wcf.user.error.password.notSecure' : '{lang}wcf.user.error.password.notSecure{/lang}',
 				'wcf.user.error.confirmPassword.notEqual' : '{lang}wcf.user.error.confirmPassword.notEqual{/lang}'
 			});
+			
+			new WCF.User.Registration.Validation.Email($('#email'), $('#confirmEmail'), null);
+			new WCF.User.Registration.Validation.Password($('#password'), $('#confirmPassword'), null);
+			new WCF.User.Registration.Validation.Username($('#username', null, {
+				minlength: {@REGISTER_USERNAME_MIN_LENGTH},
+				maxlength: {@REGISTER_USERNAME_MAX_LENGTH}
+			}));
 		});
 		//]]>
 	</script>
@@ -54,16 +61,6 @@
 			<small>{lang}wcf.user.username.description{/lang}</small>
 		</dd>
 	</dl>
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			new WCF.User.Registration.ValidateUsername($('#username'), {
-				minlength: {@REGISTER_USERNAME_MIN_LENGTH},
-				maxlength: {@REGISTER_USERNAME_MAX_LENGTH}
-			});
-		});
-		//]]>
-	</script>
 	
 	<fieldset>
 		<legend>{lang}wcf.user.email{/lang}</legend>
@@ -94,13 +91,6 @@
 			</dd>
 		</dl>
 	</fieldset>
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			new WCF.User.Registration.ValidateEmailAddress($('#email'), $('#confirmEmail'));
-		});
-		//]]>
-	</script>
 	
 	<fieldset>
 		<legend>{lang}wcf.user.password{/lang}</legend>
@@ -130,13 +120,6 @@
 			</dd>
 		</dl>
 	</fieldset>
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			new WCF.User.Registration.ValidatePassword($('#password'), $('#confirmPassword'));
-		});
-		//]]>
-	</script>
 
 	{if $useCaptcha}{include file='recaptcha'}{/if}
 

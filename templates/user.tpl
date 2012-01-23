@@ -4,7 +4,7 @@
 	<title>User profile page</title>
 	{include file='headInclude' sandbox=false}
 
-	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.Profile.js"></script>
+	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {

@@ -4,6 +4,15 @@
 	<title>{lang}wcf.user.login{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' sandbox=false}
+	
+	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			new WCF.User.Login(false);
+		})
+		//]]>
+	</script>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -73,33 +82,6 @@
 		{@SID_INPUT_TAG}
  	</div>
 </form>
-
-<script type="text/javascript">
-	//<![CDATA[
-	$(function() {
-		$('#loginForm input[name=action]').change(function(event) {
-			if ($(event.target).val() == 'register') {
-				$('#password').disable();
-				$('#password').parents('dl').addClass('disabled');
-				$('#useCookies').disable();
-				$('#useCookies').parents('dl').addClass('disabled');
-			}
-			else {
-				$('#password').enable();
-				$('#password').parents('dl').removeClass('disabled');
-				$('#useCookies').enable();
-				$('#useCookies').parents('dl').removeClass('disabled');
-			}
-		});
-		$('#loginForm input[type=reset]').click(function(event) {
-			$('#password').enable();
-			$('#password').parents('dl').removeClass('disabled');
-			$('#useCookies').enable();
-			$('#useCookies').parents('dl').removeClass('disabled');
-		});
-	});
-	//]]>
-</script>
 
 {include file='footer' sandbox=false}
 

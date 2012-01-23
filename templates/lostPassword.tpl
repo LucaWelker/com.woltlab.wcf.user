@@ -4,7 +4,7 @@
 	<title>{lang}wcf.user.lostPassword.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 	{include file='headInclude' sandbox=false}
 	
-	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.Registration.js"></script>
+	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {

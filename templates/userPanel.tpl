@@ -11,7 +11,7 @@
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
+			<span class="loginForm dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
 			<div id="loginBox" class="" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
@@ -42,40 +42,12 @@
 					</div>
 				</form>
 			</div>
-		
+			
+			<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.User.js"></script>
 			<script type="text/javascript">
 				//<![CDATA[
 				$(function() {
-					$('#loginLink').click(function() {
-						WCF.showDialog('loginBox', true, {
-							title: '{lang}wcf.user.login{/lang}'
-						});
-						return false;
-					});
-
-					$('#loginBox input[name=action]').live('change', function(event) {
-						if ($(event.target).val() == 'register') {
-							$('#password').disable();
-							$('#password').parents('dl').addClass('disabled');
-							$('#useCookies').disable();
-							$('#useCookies').parents('dl').addClass('disabled');
-							$('#loginSubmitButton').val('{lang}wcf.user.button.register{/lang}');
-						}
-						else {
-							$('#password').enable();
-							$('#password').parents('dl').removeClass('disabled');
-							$('#useCookies').enable();
-							$('#useCookies').parents('dl').removeClass('disabled');
-							$('#loginSubmitButton').val('{lang}wcf.user.button.login{/lang}');
-						}
-					});
-					$('#loginBox input[type=reset]').live('click', function(event) {
-						$('#password').enable();
-						$('#password').parents('dl').removeClass('disabled');
-						$('#useCookies').enable();
-						$('#useCookies').parents('dl').removeClass('disabled');
-						$('#loginSubmitButton').val('{lang}wcf.user.button.login{/lang}');
-					});
+					new WCF.User.Login(true);
 				});
 				//]]>
 			</script>
