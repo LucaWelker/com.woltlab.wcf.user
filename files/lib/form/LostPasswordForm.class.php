@@ -5,6 +5,7 @@ use wcf\data\user\UserEditor;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
+use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
