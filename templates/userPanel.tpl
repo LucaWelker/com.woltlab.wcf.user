@@ -1,7 +1,7 @@
 {if $__wcf->user->userID}
 	<!-- user menu -->
 	<li id="userMenu" class="userMenu">
-		<span class="dropdownCaption userAvatar">{lang}wcf.user.userNote{/lang}</span>
+		<span class="dropdownCaption userAvatar">{if $__wcf->getUserProfileHandler()->getAvatar()}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(16)}{/if} {lang}wcf.user.userNote{/lang}</span>
 		<ul class="dropdown">
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}">My Profile</a></li>
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>

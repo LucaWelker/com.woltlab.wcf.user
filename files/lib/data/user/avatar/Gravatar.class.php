@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
  * Represents a gravatar.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.avatar
@@ -47,10 +47,10 @@ class Gravatar implements IUserAvatar {
 	public $size = 150;
 	
 	/**
-	 * url of this gravatar
-	 * @var string
+	 * urls of this gravatar
+	 * @var array<string>
 	 */
-	protected $url = null;
+	protected $url = array();
 	
 	/**
 	 * Creates a new Gravatar object.
@@ -64,61 +64,40 @@ class Gravatar implements IUserAvatar {
 	/**
 	 * @see	wcf\data\user\avatar\IUserAvatar::getURL()
 	 */
-	public function getURL() {
-		if ($this->url === null) {
+	public function getURL($size = null) {
+		if ($size === null) $size = $this->size;
+		
+		if (!isset($this->url[$size])) {
 			// try to use cached gravatar
-			$cachedFilename = sprintf(self::GRAVATAR_CACHE_LOCATION, md5(StringUtil::toLowerCase($this->gravatar)), $this->size);
+			$cachedFilename = sprintf(self::GRAVATAR_CACHE_LOCATION, md5(StringUtil::toLowerCase($this->gravatar)), $size);
 			if (file_exists(WCF_DIR.$cachedFilename) && filemtime(WCF_DIR.$cachedFilename) > (TIME_NOW - (self::GRAVATAR_CACHE_EXPIRE * 86400))) {
-				$this->url = RELATIVE_WCF_DIR.$cachedFilename;
+				$this->url[$size] = RELATIVE_WCF_DIR.$cachedFilename;
 			}
 			else {
-				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($this->gravatar)), $this->size, 'mm');
+				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($this->gravatar)), $size, 'mm');
 				try {
 					$tmpFile = FileUtil::downloadFileFromHttp($gravatarURL, 'gravatar');
 					copy($tmpFile, WCF_DIR.$cachedFilename);
 					@unlink($tmpFile);
 					@chmod(WCF_DIR.$cachedFilename, 0777);
-					$this->url = RELATIVE_WCF_DIR.$cachedFilename;
+					$this->url[$size] = RELATIVE_WCF_DIR.$cachedFilename;
 				}
 				catch (SystemException $e) {
-					$this->url = RELATIVE_WCF_DIR . 'images/avatars/avatar-default.png';
+					$this->url[$size] = RELATIVE_WCF_DIR . 'images/avatars/avatar-default.png';
 				}
 			}
 		}
 		
-		return $this->url;
+		return $this->url[$size];
 	}
 	
 	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::__toString()
+	 * @see	wcf\data\user\avatar\IUserAvatar::getImageTag()
 	 */
-	public function __toString() {
-		return '<img src="'.$this->getURL().'" style="width: '.$this->getWidth().'px; height: '.$this->getHeight().'px" alt="" />';
-	}
-	
-	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::setMaxHeight()
-	 */
-	public function setMaxHeight($maxHeight) {
-		if ($maxHeight < $this->size) {
-			$this->size = $maxHeight;
-			return true;
-		}
+	public function getImageTag($size = null) {
+		if ($size === null) $size = $this->size;
 		
-		return false;
-	}
-	
-	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::setMaxSize()
-	 */
-	public function setMaxSize($maxWidth, $maxHeight) {
-		$max = max($maxWidth, $maxHeight);
-		if ($max < $this->size) {
-			$this->size = $max;
-			return true;
-		}
-		
-		return false;
+		return '<img src="'.$this->getURL($size).'" style="width: '.$size.'px; height: '.$size.'px" alt="" />';
 	}
 	
 	/**

@@ -46,7 +46,7 @@
 			<ul>
 				<li>
 					{if $user->getAvatar()}
-						<div class="userAvatarOriginal" title="{$user->username}">{@$user->getAvatar()}</div>
+						<div class="userAvatarOriginal" title="{$user->username}">{@$user->getAvatar()->getImageTag()}</div>
 					{/if}
 				</li>
 			</ul>
@@ -60,8 +60,7 @@
 		<div class="sidebarContentGroup">
 			<ul>
 				{foreach from=$following item=followingUser}
-					{assign var=__dummy value=$followingUser->getAvatar()->setMaxSize(32, 32)}
-					<li class="userAvatar balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()}</a></li>
+					<li class="userAvatar balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
 				{/foreach}
 			</ul>
 			{if $followingCount > 1}
@@ -77,8 +76,7 @@
 		<h1>Followers <span class="badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
-				{assign var=__dummy value=$follower->getAvatar()->setMaxSize(32, 32)}
-				<li class="userAvatar balloonTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()}</a></li>
+				<li class="userAvatar balloonTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()->getImageTag(32)}</a></li>
 			{/foreach}
 		</ul>
 		{if $followerCount > 1}
