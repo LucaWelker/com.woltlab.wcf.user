@@ -97,7 +97,7 @@ class Gravatar implements IUserAvatar {
 	public function getImageTag($size = null) {
 		if ($size === null) $size = $this->size;
 		
-		return '<img src="'.$this->getURL($size).'" style="width: '.$size.'px; height: '.$size.'px" alt="" />';
+		return '<img src="'.$this->getURL($size).'" style="width: '.$size.'px; height: '.$size.'px" alt=".WCF::getLanguage()->get('wcf.user.avatar.alt')." />';
 	}
 	
 	/**
