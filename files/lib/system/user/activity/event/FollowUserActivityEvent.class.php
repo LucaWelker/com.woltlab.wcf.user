@@ -13,7 +13,7 @@ use wcf\system\WCF;
  * @subpackage	system.user.activity.event
  * @category 	Community Framework
  */
-class FollowUserActivityEvent extends AbstractUserActivityEvent {
+class FollowUserActivityEvent implements IUserActivityEvent {
 	/**
 	 * @see	wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */

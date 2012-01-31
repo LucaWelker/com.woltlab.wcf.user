@@ -23,11 +23,11 @@ class UserOptionOutputGender extends UserOptionOutputSelectOptions {
 	public function getShortOutput(User $user, UserOption $option, $value) {
 		if ($value == UserProfile::GENDER_MALE) {
 			$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.gender.male', array('username' => $user->username));
-			return '<img src="'.StyleManager::getInstance()->getStyle()->getIconPath('genderMale', 'S').'" alt="'.$title.'" title="'.$title.'" />';
+			return '<img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('genderMale', 'S').'" alt="'.$title.'" title="'.$title.'" />';
 		}
 		else if ($value == UserProfile::GENDER_FEMALE) {
 			$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.gender.female', array('username' => $user->username));
-			return '<img src="'.StyleManager::getInstance()->getStyle()->getIconPath('genderFemale', 'S').'" alt="'.$title.'" title="'.$title.'" />';
+			return '<img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('genderFemale', 'S').'" alt="'.$title.'" title="'.$title.'" />';
 		}
 		else {
 			return '';

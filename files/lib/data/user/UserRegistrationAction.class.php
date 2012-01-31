@@ -21,7 +21,7 @@ class UserRegistrationAction extends UserAction {
 	 */
 	public function validateValidateUsername() {
 		if (empty($this->parameters['username'])) {
-			return ValidateActionException("missing parameter 'username'");
+			throw new ValidateActionException("missing parameter 'username'");
 		}
 	}
 	
@@ -30,7 +30,7 @@ class UserRegistrationAction extends UserAction {
 	 */
 	public function validateValidateEmailAddress() {
 		if (empty($this->parameters['email'])) {
-			return ValidateActionException("missing parameter 'email'");
+			throw new ValidateActionException("missing parameter 'email'");
 		}
 	}
 	
@@ -39,7 +39,7 @@ class UserRegistrationAction extends UserAction {
 	 */
 	public function validateValidatePassword() {
 		if (empty($this->parameters['password'])) {
-			return ValidateActionException("missing parameter 'password'");
+			throw new ValidateActionException("missing parameter 'password'");
 		}
 	}
 	
