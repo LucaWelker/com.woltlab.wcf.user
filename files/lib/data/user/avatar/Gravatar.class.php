@@ -3,6 +3,7 @@ namespace wcf\data\user\avatar;
 use wcf\system\exception\SystemException;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
+use wcf\system\WCF;
 
 /**
  * Represents a gravatar.
@@ -97,7 +98,7 @@ class Gravatar implements IUserAvatar {
 	public function getImageTag($size = null) {
 		if ($size === null) $size = $this->size;
 		
-		return '<img src="'.$this->getURL($size).'" style="width: '.$size.'px; height: '.$size.'px" alt=".WCF::getLanguage()->get('wcf.user.avatar.alt')." />';
+		return '<img src="'.$this->getURL($size).'" style="width: '.$size.'px; height: '.$size.'px" alt="'.WCF::getLanguage()->get('wcf.user.avatar.alt').'" />';
 	}
 	
 	/**

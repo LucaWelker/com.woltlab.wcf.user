@@ -2,6 +2,7 @@
 namespace wcf\data\user\avatar;
 use wcf\data\DatabaseObject;
 use wcf\util\StringUtil;
+use wcf\system\WCF;
 
 /**
  * Represents a user's avatar.
@@ -53,7 +54,7 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 			}
 		}
 		
-		return '<img src="'.$this->getURL($size).'" style="width: '.$width.'px; height: '.$height.'px" alt=".WCF::getLanguage()->get('wcf.user.avatar.alt')." />';
+		return '<img src="'.$this->getURL($size).'" style="width: '.$width.'px; height: '.$height.'px" alt="'.WCF::getLanguage()->get('wcf.user.avatar.alt').'" />';
 	}
 	
 	/**
