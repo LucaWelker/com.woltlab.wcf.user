@@ -127,7 +127,7 @@
 .commentList > li:after {
 	content: '';
 	display: inline-block;
-	clear: inline-both;
+	clear: both;
 }
 
 .commentList > li:first-child {
@@ -252,14 +252,19 @@
 
 .commentResponsePrevious,
 .commentResponseRecent {
-	text-align: right;
-	color: rgb(153, 153, 153);
-	cursor: pointer;
-	margin-top: 7px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-
-
+.commentResponsePrevious a,
+.commentResponseRecent a {
+	white-space: nowrap;
+	cursor: pointer;
+	border-radius: 3px;
+	padding: 0 13px;
+	display: inline-block;
+}
 
 
 
