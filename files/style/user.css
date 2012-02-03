@@ -13,7 +13,7 @@
 	float: left;
 }
 
-.commentList .userAvatar img  {
+.wcf-commentList .userAvatar img  {
 	float: left;
 }
 
@@ -102,80 +102,80 @@
 
 /* Globals */
 
-.commentList .userName {
+.wcf-commentList .userName {
 	display: block;
 }
 
-.commentList .userName time {
+.wcf-commentList .userName time {
 	font-size: 85%;
 	color: rgb(153, 153, 153);
 }
 
 /* Comment List */
 
-.commentList {
+.wcf-commentList {
 	line-height: 1.5;
 }
 
-.commentList > li {
+.wcf-commentList > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	padding: 7px;
 	display: inline-block;
 	width: 100%;
 }
 
-.commentList > li:after {
+.wcf-commentList > li:after {
 	content: '';
 	display: inline-block;
 	clear: both;
 }
 
-.commentList > li:first-child {
+.wcf-commentList > li:first-child {
 	border-top-width: 0;
 }
 
 /* Comment Add */
 
-.commentList > li.commentAdd > div img {
+.wcf-commentList > li.wcf-commentAdd > div img {
 	margin-left: 25px;
 	float: left;
 }
 
-.commentList > li.commentAdd > div > div {
+.wcf-commentList > li.wcf-commentAdd > div > div {
 	margin-left: 65px;
 }
 
-.commentList > li > .commentContent {
+.wcf-commentList > li > .wcf-commentContent {
 	margin-left: 65px;
 	position: relative;
 }
 
 /* Description Texts */
-.commentList > li > .commentContent small {
+.wcf-commentList > li > .wcf-commentContent small {
 	font-size: 85%;
 	color: rgb(192, 192, 192);
 	margin-top: 3px;
 }
 
-.commentList > li > .commentContent .commentResponseAdd {
+.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
 	margin-top: 7px;
 	padding: 7px;
 }
 
-.commentList > li > .commentContent .commentResponseAdd > div img {
+.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div img {
 	margin-left: 10px;
 	float: left;
 }
 
-.commentList > li > .commentContent .commentResponseAdd > div .userAvatar img {
+.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div .userAvatar img {
 	border: 1px solid #ddd;
 	background-color: rgba(255, 255, 255, 1);
 	padding: 1px;
 }
 
-.commentList > li > .commentContent .commentResponseAdd > div > div {
+.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div > div {
 	margin-left: 50px;
 	display: block;
 }
@@ -184,27 +184,27 @@
 
 /* Comment Response List */
 
-.commentList > li .commentResponseList {
+.wcf-commentList > li .wcf-commentResponseList {
 	margin-top: 7px;
 }
 
-.commentList > li .commentResponseAdd ~ .commentResponseList {
+.wcf-commentList > li .wcf-commentResponseAdd ~ .wcf-commentResponseList {
 	margin-top: 0;
 }
 
-.commentList > li .commentResponseList > li {
+.wcf-commentList > li .wcf-commentResponseList > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
 	position: relative;
 }
 
-.commentList > li .commentResponseList > li:nth-child(2n+1) {
+.wcf-commentList > li .wcf-commentResponseList > li:nth-child(2n+1) {
 	/* auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
 }
 
-.commentList > li .commentResponseList > li > .commentContent {
+.wcf-commentList > li .wcf-commentResponseList > li > .wcf-commentContent {
 	margin-left: 50px;
 	position: relative;
 }
@@ -213,8 +213,8 @@
 
 /* Comment Options */
 
-.commentContent > .commentOptions,
-.commentResponseList > li .commentOptions {
+.wcf-commentContent > .wcf-commentOptions,
+.wcf-commentResponseList > li .wcf-commentOptions {
 	font-size: 85%;
 	display: block;
 	position: absolute;
@@ -222,8 +222,8 @@
 	right: 2px;
 }
 
-.commentContent > .commentOptions > li,
-.commentResponseList > li .commentOptions > li {
+.wcf-commentContent > .wcf-commentOptions > li,
+.wcf-commentResponseList > li .wcf-commentOptions > li {
 	opacity: 0;
 	
 	-webkit-transition: opacity .1s linear;
@@ -233,13 +233,13 @@
 	transition: opacity .1s linear;
 }
 
-.commentContent:hover > .commentOptions > li,
-.commentResponseList > li:hover .commentOptions > li {
+.wcf-commentContent:hover > .wcf-commentOptions > li,
+.wcf-commentResponseList > li:hover .wcf-commentOptions > li {
 	opacity: 1; 
 }
 
-.commentContent > .commentOptions > li a,
-.commentResponseList > li .commentOptions li a {
+.wcf-commentContent > .wcf-commentOptions > li a,
+.wcf-commentResponseList > li .wcf-commentOptions li a {
 	color: rgb(153, 153, 153);
 	cursor: pointer;
 	display: inline-block;
@@ -250,15 +250,15 @@
 
 /* Toggle Comments Links */
 
-.commentResponsePrevious,
-.commentResponseRecent {
+.wcf-commentResponsePrevious,
+.wcf-commentResponseRecent {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.commentResponsePrevious a,
-.commentResponseRecent a {
+.wcf-commentResponsePrevious a,
+.wcf-commentResponseRecent a {
 	white-space: nowrap;
 	cursor: pointer;
 	border-radius: 3px;
