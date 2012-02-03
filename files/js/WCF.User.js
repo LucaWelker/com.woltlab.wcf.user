@@ -344,7 +344,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 		var $enableProxy = false;
 
 		// fetch content state
-		this._profileContent.find('div.tabMenuContent').each($.proxy(function(index, container) {
+		this._profileContent.find('div.wcf-tabMenuContent').each($.proxy(function(index, container) {
 			var $containerID = $(container).wcfIdentify();
 
 			if ($activeMenuItem === $containerID) {
@@ -1030,9 +1030,9 @@ WCF.User.Registration.Validation = Class.extend({
 	_showError: function(element, message) {
 		element.parent().prev().addClass('formError').removeClass('formSuccess');
 		
-		var $innerError = element.parent().find('small.innerError');
+		var $innerError = element.parent().find('small.wcf-innerError');
 		if (!$innerError.length) {
-			$innerError = $('<small />').addClass('innerError').insertAfter(element);
+			$innerError = $('<small />').addClass('wcf-innerError').insertAfter(element);
 		}
 		
 		$innerError.text(message);
@@ -1045,7 +1045,7 @@ WCF.User.Registration.Validation = Class.extend({
 	 */
 	_showSuccess: function(element) {
 		element.parent().prev().addClass('formSuccess').removeClass('formError');
-		element.next('small.innerError').remove();
+		element.next('small.wcf-innerError').remove();
 	}
 });
 
