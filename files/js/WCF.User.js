@@ -1028,7 +1028,7 @@ WCF.User.Registration.Validation = Class.extend({
 	 * @param	string		message
 	 */
 	_showError: function(element, message) {
-		element.parent().prev().addClass('formError').removeClass('formSuccess');
+		element.parent().prev().addClass('wcf-formError').removeClass('wcf-formSuccess');
 		
 		var $innerError = element.parent().find('small.wcf-innerError');
 		if (!$innerError.length) {
@@ -1044,7 +1044,7 @@ WCF.User.Registration.Validation = Class.extend({
 	 * @param	jQuery		element
 	 */
 	_showSuccess: function(element) {
-		element.parent().prev().addClass('formSuccess').removeClass('formError');
+		element.parent().prev().addClass('wcf-formSuccess').removeClass('wcf-formError');
 		element.next('small.wcf-innerError').remove();
 	}
 });
