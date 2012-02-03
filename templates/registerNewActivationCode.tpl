@@ -5,11 +5,11 @@
 	{include file='headInclude' sandbox=false}
 </head>
 
-<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+<body id="tpl{$templateName|ucfirst}">
 
 {include file='header' sandbox=false}
 
-<header class="mainHeading">
+<header class="wcf-mainHeading">
 	{* <img src="{icon}register1.svg{/icon}" alt="" /> *}
 	<hgroup>
 		<h1>{lang}wcf.user.register.newActivationCode{/lang}</h1>
@@ -19,18 +19,18 @@
 {if $userMessages|isset}{@$userMessages}{/if}
 	
 {if $errorField}
-	<p class="error">{lang}wcf.global.form.error{/lang}</p>
+	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 	
 <form method="post" action="index.php?form=RegisterNewActivationCode">
-	<div class="border content">
-		<div class="container-1">
-			<dl{if $errorField == 'username'} class="formError"{/if}>
+	<div class="wcf-border wcf-content">
+		<div>
+			<dl{if $errorField == 'username'} class="wcf-formError"{/if}>
 				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
 				<dd>
 					<input type="text" id="username" name="username" value="{@$username}" class="medium" />
 					{if $errorField == 'username'}
-						<small class="innerError">
+						<small class="wcf-innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
 							{if $errorType == 'alreadyEnabled'}{lang}wcf.user.register.error.userAlreadyEnabled{/lang}{/if}
@@ -39,12 +39,12 @@
 				</dd>
 			</dl>
 	
-			<dl{if $errorField == 'password'} class="formError"{/if}>
+			<dl{if $errorField == 'password'} class="wcf-formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 				<dd>
 					<input type="password" id="password" name="password" value="{@$password}" class="medium" />
 					{if $errorField == 'password'}
-						<small class="innerError">
+						<small class="wcf-innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
 						</small>
@@ -52,12 +52,12 @@
 				</dd>
 			</dl>
 				
-			<dl{if $errorField == 'email'} class="formError"{/if}>
+			<dl{if $errorField == 'email'} class="wcf-formError"{/if}>
 				<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
 				<dd>
 					<input type="text" id="email" name="email" value="{@$email}" class="medium" />
 					{if $errorField == 'email'}
-						<small class="innerError">
+						<small class="wcf-innerError">
 							{if $errorType == 'notValid'}{lang}wcf.user.error.email.notValid{/lang}{/if}
 							{if $errorType == 'notUnique'}{lang}wcf.user.error.email.notUnique{/lang}{/if}
 						</small>
@@ -71,7 +71,7 @@
 		</div>
 	</div>
 	
-	<div class="formSubmit">
+	<div class="wcf-formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SID_INPUT_TAG}
