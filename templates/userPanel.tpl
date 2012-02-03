@@ -1,8 +1,8 @@
 {if $__wcf->user->userID}
 	<!-- user menu -->
-	<li id="userMenu" class="userMenu">
-		<span class="dropdownCaption userAvatar">{if $__wcf->getUserProfileHandler()->getAvatar()}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(16)}{/if} {lang}wcf.user.userNote{/lang}</span>
-		<ul class="dropdown">
+	<li id="userMenu" class="wcf-userMenu">
+		<span class="wcf-dropdownCaption userAvatar">{if $__wcf->getUserProfileHandler()->getAvatar()}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(16)}{/if} {lang}wcf.user.userNote{/lang}</span>
+		<ul class="wcf-dropdown">
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}">My Profile</a></li>
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
@@ -11,7 +11,7 @@
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<span class="loginBox dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
+			<span class="loginBox wcf-dropdownCaption"><a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a></span>
 			<div id="loginForm" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
@@ -35,7 +35,7 @@
 						<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /></dd>
 					</dl>
 					
-					<div class="formSubmit">
+					<div class="wcf-formSubmit">
 						<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 						<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
 						<input type="hidden" name="url" value="{$__wcf->session->requestURI}" />
