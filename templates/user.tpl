@@ -38,11 +38,11 @@
 
 {capture assign='sidebar'}
 
-<nav id="sidebarContent" class="sidebarContent">
+<nav id="sidebarContent" class="wcf-sidebarContent">
 	{* user *}
-	<div class="menuContainer">
-		<h1 class="menuHeader">{$user->username}</h1>
-		<div class="sidebarContentGroup">
+	<div class="wcf-menuContainer">
+		<h1 class="wcf-menuHeader">{$user->username}</h1>
+		<div class="wcf-sidebarContentGroup">
 			<ul>
 				<li>
 					{if $user->getAvatar()}
@@ -55,16 +55,16 @@
 	
 	{* following *}
 	{if $followingCount}
-	<div class="menuContainer userFollowing collapsible">
-		<h1>Following <span class="badge">{#$followingCount}</span></h1>
-		<div class="sidebarContentGroup">
+	<div class="wcf-menuContainer userFollowing collapsible">
+		<h1>Following <span class="wcf-badge">{#$followingCount}</span></h1>
+		<div class="wcf-sidebarContentGroup">
 			<ul>
 				{foreach from=$following item=followingUser}
-					<li class="userAvatar balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
+					<li class="userAvatar wcf-balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
 				{/foreach}
 			</ul>
 			{if $followingCount > 1}
-				<p><a id="followingAll" class="badge badgeButton javascriptOnly">Show all following</a></p>
+				<p><a id="followingAll" class="wcf-badge wcf-badgeButton javascriptOnly">Show all following</a></p>
 			{/if}
 		</div>
 	</div>
@@ -72,15 +72,15 @@
 	
 	{* followers *}
 	{if $followerCount}
-	<div class="menuContainer userFollowers collapsible">
-		<h1>Followers <span class="badge">{#$followerCount}</span></h1>
+	<div class="wcf-menuContainer userFollowers collapsible">
+		<h1>Followers <span class="wcf-badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
-				<li class="userAvatar balloonTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()->getImageTag(32)}</a></li>
+				<li class="userAvatar wcf-balloonTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()->getImageTag(32)}</a></li>
 			{/foreach}
 		</ul>
 		{if $followerCount > 1}
-			<p><a id="followerAll" class="badge badgeButton javascriptOnly">Show all followers</a></p>
+			<p><a id="followerAll" class="wcf-badge wcf-badgeButton javascriptOnly">Show all followers</a></p>
 		{/if}
 	</div>
 	{/if}
@@ -90,21 +90,21 @@
 	{* placeholder *}
 	
 	{* collapse sidebar *}			
-	<span class="collapsibleSidebarButton" title="{lang}wcf.global.button.collapsible{/lang}"><span></span></span>
+	<span class="wcf-collapsibleSidebarButton" title="{lang}wcf.global.button.collapsible{/lang}"><span></span></span>
 </nav>
 
 {/capture}
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<div class="contentHeader">
+<div class="wcf-contentHeader">
 	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
 	<nav id="profileButtonContainer">
 	</nav>
 </div>
 	
-<section id="profileContent" class="tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
-	<nav class="tabMenu">
+<section id="profileContent" class="wcf-tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
+	<nav class="wcf-tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
 				<li><a href="#{$menuItem->getIdentifier()}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
@@ -113,7 +113,7 @@
 	</nav>
 
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-		<div id="{$menuItem->getIdentifier()}" class="border tabMenuContent" data-menu-item="{$menuItem->menuItem}">
+		<div id="{$menuItem->getIdentifier()}" class="wcf-border wcf-tabMenuContent" data-menu-item="{$menuItem->menuItem}">
 			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
 				{@$profileContent}
 			{/if}
@@ -121,7 +121,7 @@
 	{/foreach}
 </section>
 
-<div class="contentFooter">
+<div class="wcf-contentFooter">
 	<!-- ToDo -->
 </div>
 
