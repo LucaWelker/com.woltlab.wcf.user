@@ -60,7 +60,7 @@
 		<div class="wcf-sidebarContentGroup">
 			<ul>
 				{foreach from=$following item=followingUser}
-					<li class="userAvatar wcf-balloonTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
+					<li class="userAvatar jsTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
 				{/foreach}
 			</ul>
 			{if $followingCount > 1}
@@ -76,7 +76,7 @@
 		<h1>Followers <span class="wcf-badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
-				<li class="userAvatar wcf-balloonTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()->getImageTag(32)}</a></li>
+				<li class="userAvatar jsTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()->getImageTag(32)}</a></li>
 			{/foreach}
 		</ul>
 		{if $followerCount > 1}
