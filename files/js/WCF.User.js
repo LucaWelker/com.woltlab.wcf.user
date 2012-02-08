@@ -48,7 +48,7 @@ WCF.User.Login = Class.extend({
 		
 		var $loginForm = $('#loginForm');
 		$loginForm.find('input[name=action]').change($.proxy(this._change, this));
-		$loginForm.find('input[type=reset]').click($.proxy(this._click, this));
+		$loginForm.find('input[type=reset]').click($.proxy(this._reset, this));
 		
 		if (isQuickLogin) {
 			$('#loginLink').click(function() {
@@ -77,8 +77,8 @@ WCF.User.Login = Class.extend({
 	/**
 	 * Handles clicks on the reset button.
 	 */
-	_click: function() {
-		this._setState(true, true, WCF.Language.get('wcf.user.button.login'));
+	_reset: function() {
+		this._setState(true, WCF.Language.get('wcf.user.button.login'));
 	},
 	
 	/**
