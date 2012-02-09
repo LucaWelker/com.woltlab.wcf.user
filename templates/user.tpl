@@ -55,7 +55,7 @@
 	
 	{* following *}
 	{if $followingCount}
-	<div class="wcf-menuContainer userFollowing collapsible">
+	<div class="wcf-menuContainer userFollowing collapsibleMenus">
 		<h1>Following <span class="wcf-badge">{#$followingCount}</span></h1>
 		<div class="wcf-sidebarContentGroup">
 			<ul>
@@ -72,7 +72,7 @@
 	
 	{* followers *}
 	{if $followerCount}
-	<div class="wcf-menuContainer userFollowers collapsible">
+	<div class="wcf-menuContainer userFollowers collapsibleMenus">
 		<h1>Followers <span class="wcf-badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
