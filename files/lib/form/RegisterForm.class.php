@@ -248,8 +248,8 @@ class RegisterForm extends UserAddForm {
 			'options' => $saveOptions,
 			'addDefaultGroups' => $addDefaultGroups
 		);
-		$userAction = new UserAction(array(), 'create', $data);
-		$result = $userAction->executeAction();
+		$this->objectAction = new UserAction(array(), 'create', $data);
+		$result = $this->objectAction->executeAction();
 		$user = $result['returnValues'];
 		
 		// update session

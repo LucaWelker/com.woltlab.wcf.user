@@ -92,7 +92,7 @@ class RegisterActivationForm extends AbstractForm {
 
 		// enable user
 		// update activation code
-		$userAction = new UserAction(array($this->user->userID), 'update', array(
+		$this->objectAction = new UserAction(array($this->user->userID), 'update', array(
 			'data' => array(
 				'activationCode' => 0
 			),
@@ -103,7 +103,7 @@ class RegisterActivationForm extends AbstractForm {
 				UserGroup::GUESTS
 			)
 		));
-		$userAction->executeAction();
+		$this->objectAction->executeAction();
 		
 		$this->saved();
 		
