@@ -58,6 +58,20 @@ CREATE TABLE wcf1_user_ignore (
 	UNIQUE KEY (userID, ignoreUserID)
 );
 
+-- user menu
+DROP TABLE IF EXISTS wcf1_user_menu_item;
+CREATE TABLE wcf1_user_menu_item (
+	menuItemID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	menuItem VARCHAR(255) NOT NULL DEFAULT '',
+	parentMenuItem VARCHAR(255) NOT NULL DEFAULT '',
+	menuItemLink VARCHAR(255) NOT NULL DEFAULT '',
+	showOrder INT(10) NOT NULL DEFAULT 0,
+	permissions TEXT,
+	options TEXT,
+	UNIQUE KEY menuItem (menuItem, packageID)
+);
+
 -- user profile menu
 DROP TABLE IF EXISTS wcf1_user_profile_menu_item;
 CREATE TABLE wcf1_user_profile_menu_item (
@@ -121,6 +135,8 @@ ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (followUserID) REFERENCES wcf1_user
 
 ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_ignore ADD FOREIGN KEY (ignoreUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_user_menu_item ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 
 ALTER TABLE wcf1_user_profile_menu_item ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 
