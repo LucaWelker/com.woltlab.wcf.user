@@ -89,7 +89,7 @@
 	position: relative;
 }
 
-.recentActivity > li > .recentActivityContent .userName time {
+.recentActivity > li > .recentActivityContent .username time {
 	font-size: 85%;
 	color: rgb(153, 153, 153);
 }
@@ -102,11 +102,11 @@
 
 /* Globals */
 
-.wcf-commentList .userName {
+.wcf-commentList .username {
 	display: block;
 }
 
-.wcf-commentList .userName time {
+.wcf-commentList .username time {
 	font-size: 85%;
 	color: rgb(153, 153, 153);
 }
