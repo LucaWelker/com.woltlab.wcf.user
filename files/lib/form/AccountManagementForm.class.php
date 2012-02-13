@@ -4,6 +4,7 @@ use wcf\data\user\UserEditor;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
+use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
@@ -216,9 +217,9 @@ class AccountManagementForm extends AbstractSecureForm {
 		if (!WCF::getUser()->userID) {
 			throw new PermissionDeniedException();
 		}
-				
+		
 		// set active tab
-		/* UserCPMenu::getInstance()->setActiveMenuItem('wcf.user.usercp.menu.link.profile.account'); */
+		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.profile.accountManagement');
 		
 		parent::show();
 	}
