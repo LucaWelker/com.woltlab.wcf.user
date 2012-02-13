@@ -34,5 +34,6 @@
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="userOption">userOption.xml</instruction>
 		<instruction type="userProfileMenu">userProfileMenu.xml</instruction>
+		<instruction type="userMenu">userMenu.xml</instruction>
 	</instructions>
 </package>

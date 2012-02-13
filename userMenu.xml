@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/userMenu.xsd">
+	<import>
+		<!-- profile -->
+		<usermenuitem name="wcf.user.menu.profile">
+			<showorder>1</showorder>
+		</usermenuitem>
+		
+		<usermenuitem name="wcf.user.menu.profile.accountManagement">
+			<link>index.php/AccountManagement/</link>
+			<parent>wcf.user.menu.profile</parent>
+			<showorder>1</showorder>
+		</usermenuitem>
+		<usermenuitem name="wcf.user.menu.profile.avatar">
+			<link>index.php/AvatarEdit/</link>
+			<parent>wcf.user.menu.profile</parent>
+			<showorder>2</showorder>
+		</usermenuitem>
+		<usermenuitem name="wcf.user.menu.profile.signature">
+			<link>index.php/SignatureEdit/</link>
+			<parent>wcf.user.menu.profile</parent>
+			<showorder>3</showorder>
+		</usermenuitem>
+		<!-- /profile -->
+		
+		<!-- settings -->
+		<usermenuitem name="wcf.user.menu.settings">
+			<showorder>2</showorder>
+		</usermenuitem>
+		
+		<usermenuitem name="wcf.user.menu.settings.dynamicOptions">
+			<link>index.php/DynamicOptions/</link>
+			<parent>wcf.user.menu.settings</parent>
+			<showorder>1</showorder>
+		</usermenuitem>
+		<usermenuitem name="wcf.user.menu.settings.staticOptions">
+			<link>index.php/StaticOptions/</link>
+			<parent>wcf.user.menu.settings</parent>
+			<showorder>2</showorder>
+		</usermenuitem>
+		<!-- /settings -->
+		
+		<!-- community -->
+		<usermenuitem name="wcf.user.menu.community">
+			<showorder>3</showorder>
+		</usermenuitem>
+		
+		<usermenuitem name="wcf.user.menu.community.followedUsers">
+			<link>index.php/FollowedUsers/</link>
+			<parent>wcf.user.menu.community</parent>
+			<showorder>2</showorder>
+		</usermenuitem>
+		<usermenuitem name="wcf.user.menu.community.ignoredUsers">
+			<link>index.php/IgnoredUsers/</link>
+			<parent>wcf.user.menu.community</parent>
+			<showorder>3</showorder>
+		</usermenuitem>
+		<!-- /community -->
+	</import>
+</data>
