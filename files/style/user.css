@@ -9,7 +9,7 @@
 
 /* Special */
 
-.recentActivity .userAvatar img  {
+.wcf-recentActivity .userAvatar img  {
 	float: left;
 }
 
@@ -55,41 +55,41 @@
 
 /* Globals */
 
-.recentActivity {
+.wcf-recentActivity {
 	line-height: 1.5;
 }
 
-.recentActivity > li {
+.wcf-recentActivity > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
 }
 
-.recentActivity > li:after {
+.wcf-recentActivity > li:after {
 	content: '';
 	display: inline-block;
 	clear: both;
 }
 
-.recentActivity > li:first-child {
+.wcf-recentActivity > li:first-child {
 	border-top-width: 0;
 }
 
-.recentActivity > li:nth-child(2n+1) {
+.wcf-recentActivity > li:nth-child(2n+1) {
 	/* auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
 }
 
-.recentActivity > li:hover {
+.wcf-recentActivity > li:hover {
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.recentActivity > li > .recentActivityContent {
+.wcf-recentActivity > li > .wcf-recentActivityContent {
 	padding-left: 65px;
 	position: relative;
 }
 
-.recentActivity > li > .recentActivityContent .username time {
+.wcf-recentActivity > li > .wcf-recentActivityContent .username time {
 	font-size: 85%;
 	color: rgb(153, 153, 153);
 }
