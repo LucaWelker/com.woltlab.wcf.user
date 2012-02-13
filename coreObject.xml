@@ -8,5 +8,9 @@
 		<coreobject>
 			<objectname><![CDATA[wcf\system\menu\user\profile\UserProfileMenu]]></objectname>
 		</coreobject>
+		
+		<coreobject>
+			<objectname><![CDATA[wcf\system\menu\user\UserMenu]]></objectname>
+		</coreobject>
 	</import>
 </data>
