@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\user\activity\event;
 use wcf\data\user\UserList;
+use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
@@ -13,7 +14,7 @@ use wcf\system\WCF;
  * @subpackage	system.user.activity.event
  * @category 	Community Framework
  */
-class FollowUserActivityEvent implements IUserActivityEvent {
+class FollowUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 	/**
 	 * @see	wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
