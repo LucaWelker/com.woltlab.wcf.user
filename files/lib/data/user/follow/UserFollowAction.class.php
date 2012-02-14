@@ -93,4 +93,25 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 			'following' => 0
 		);
 	}
+	
+	/**
+	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
+	 */
+	public function validateDelete() {
+		if (empty($this->objectIDs)) {
+			throw new ValidateActionException("missing parameter 'objectID'");
+		}
+		
+		// disguise as unfollow
+		$this->parameters['data']['userID'] = array_shift($this->objectIDs);
+		$this->validateUnfollow();
+	}
+	
+	/**
+	 * @see wcf\data\AbstractDatabaseObjectAction::delete()
+	 */
+	public function delete() {
+		// disguise as unfollow
+		$this->unfollow();
+	}
 }
