@@ -38,6 +38,12 @@
 			<parent>wcf.user.menu.settings</parent>
 			<showorder>2</showorder>
 		</usermenuitem>
+		
+		<usermenuitem name="wcf.user.menu.settings.notification">
+			<link>index.php/NotificationSettings/</link>
+			<parent>wcf.user.menu.settings</parent>
+			<showorder>3</showorder>
+		</usermenuitem>
 		<!-- /settings -->
 		
 		<!-- community -->
@@ -45,6 +51,11 @@
 			<showorder>3</showorder>
 		</usermenuitem>
 		
+		<usermenuitem name="wcf.user.menu.community.notifications">
+			<link>index.php/NotificationList/</link>
+			<parent>wcf.user.menu.community</parent>
+			<showorder>1</showorder>
+		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.community.followedUsers">
 			<link>index.php/FollowedUsers/</link>
 			<parent>wcf.user.menu.community</parent>
