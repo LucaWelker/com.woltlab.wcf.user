@@ -28,16 +28,5 @@
 			<eventname>javascriptInit</eventname>
 			<templatecode><![CDATA[new WCF.Notification.Handler();]]></templatecode>
 		</templatelistener>
-
-		<templatelistener name="menuItems">
-			<environment>user</environment>
-			<templatename>userPanel</templatename>
-			<eventname>menuItems</eventname>
-			<templatecode>
-				<![CDATA[{if $__wcf->user->userID}<!-- user notifications -->
-<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-	<span class="wcf-dropdownCaption">{lang}wcf.user.notification.title{/lang} <span class="wcf-badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></span>
-</li>{/if}]]></templatecode>
-		</templatelistener>
 	</import>
 </data>

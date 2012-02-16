@@ -8,6 +8,11 @@
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
+	
+	<!-- user notifications -->
+	<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
+		<span class="wcf-dropdownCaption">{lang}wcf.user.notification.notifications{/lang}{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="wcf-badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</span>
+	</li>
 {else}
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->

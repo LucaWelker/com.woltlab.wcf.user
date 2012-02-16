@@ -781,20 +781,20 @@ WCF.User.Profile.Editor.Base = Class.extend({
 });
 
 /**
- * User profile editor implementation for overview contents.
+ * User profile editor implementation for information contents.
  * 
  * @see	WCF.User.Profile.Editor.Base
  */
-WCF.User.Profile.Editor.Overview = WCF.User.Profile.Editor.Base.extend({
+WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 	/**
 	 * @see	WCF.User.Profile.Editor.Base._containerID
 	 */
-	_containerID: 'wcf_user_profile_menu_overview',
+	_containerID: 'wcf_user_profile_menu_information',
 
 	/**
 	 * @see	WCF.User.Profile.Editor.Base._name
 	 */
-	_name: 'WCF.User.Profile.Editor.Overview',
+	_name: 'WCF.User.Profile.Editor.Information',
 
 	/**
 	 * @see	WCF.User.Profile.Editor.Base.save()

@@ -27,7 +27,7 @@
 			{* TODO: Handle admin permissions *}
 			{if $__wcf->getUser()->userID == $user->userID}
 				WCF.User.Profile.Editor.Handler.init({$user->userID});
-				new WCF.User.Profile.Editor.Overview({@$overviewObjectType->objectTypeID});
+				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
 		});
 		//]]>
@@ -95,7 +95,7 @@
 
 {/capture}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sandbox=false sidebarOrientation='left' skipBreadcrumbs=true}
 
 <div class="wcf-contentHeader">
 	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
@@ -125,7 +125,7 @@
 	<!-- ToDo -->
 </div>
 
-{include file='footer' sandbox=false}
+{include file='footer' sandbox=false skipBreadcrumbs=true}
 
 </body>
 </html>

@@ -11,10 +11,13 @@
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[now follows <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.useCookies"><![CDATA[Stay logged in]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
+		<item name="wcf.user.profile.menu.information"><![CDATA[About]]></item>
+		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "No notifications" } else if (data.returnValues.count == 1) { "One notification" } else { data.returnValues.count + " notifications" }]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[No new notifications]]></item>
+		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
 	</category>
 </language>
