@@ -12,4 +12,9 @@
 		<item name="wcf.user.useCookies"><![CDATA[Stay logged in]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
 	</category>
+	
+	<category name="wcf.user.notification">
+		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "No notifications" } else if (data.returnValues.count == 1) { "One notification" } else { data.returnValues.count + " notifications" }]]></item>
+		<item name="wcf.user.notification.noNotifications"><![CDATA[No new notifications]]></item>
+	</category>
 </language>

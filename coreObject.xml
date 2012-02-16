@@ -12,5 +12,9 @@
 		<coreobject>
 			<objectname><![CDATA[wcf\system\menu\user\UserMenu]]></objectname>
 		</coreobject>
+		
+		<coreobject>
+			<objectname><![CDATA[wcf\system\user\notification\UserNotificationHandler]]></objectname>
+		</coreobject>
 	</import>
 </data>

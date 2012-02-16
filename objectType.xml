@@ -18,5 +18,11 @@
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>wcf\system\user\activity\event\FollowUserActivityEvent</classname>
 		</type>
+		
+		<type>
+			<name>mail</name>
+			<definitionname>com.woltlab.wcf.user.notification.notificationType</definitionname>
+			<classname>wcf\system\user\notification\type\MailUserNotificationType</classname>
+		</type>
 	</import>
 </data>

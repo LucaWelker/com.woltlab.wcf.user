@@ -7,5 +7,37 @@
 			<eventname>topMenu</eventname>
 			<templatecode><![CDATA[{include file='userPanel'}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="javascriptInclude">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="javascriptLanguageImport">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptLanguageImport</eventname>
+			<templatecode><![CDATA[,'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}','wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}']]></templatecode>
+		</templatelistener>
+
+		<templatelistener name="javascriptInit">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInit</eventname>
+			<templatecode><![CDATA[new WCF.Notification.Handler();]]></templatecode>
+		</templatelistener>
+
+		<templatelistener name="menuItems">
+			<environment>user</environment>
+			<templatename>userPanel</templatename>
+			<eventname>menuItems</eventname>
+			<templatecode>
+				<![CDATA[{if $__wcf->user->userID}<!-- user notifications -->
+<li id="userNotifications" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
+	<span class="wcf-dropdownCaption">{lang}wcf.user.notification.title{/lang} <span class="wcf-badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></span>
+</li>{/if}]]></templatecode>
+		</templatelistener>
 	</import>
 </data>

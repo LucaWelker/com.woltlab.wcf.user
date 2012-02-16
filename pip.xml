@@ -3,5 +3,6 @@
 	<import>
 		<pip name="userProfileMenu">wcf\system\package\plugin\UserProfileMenuPackageInstallationPlugin</pip>
 		<pip name="userMenu">wcf\system\package\plugin\UserMenuPackageInstallationPlugin</pip>
+		<pip name="userNotificationEvent">wcf\system\package\plugin\UserNotificationEventPackageInstallationPlugin</pip>
 	</import>
 </data>

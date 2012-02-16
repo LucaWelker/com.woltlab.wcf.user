@@ -10,5 +10,15 @@
 			<name>com.woltlab.wcf.user.recentActivityEvent</name>
 			<interfacename>wcf\system\user\activity\event\IUserActivityEvent</interfacename>
 		</definition>
+		
+		<definition>
+			<name>com.woltlab.wcf.user.notification.notificationType</name>
+			<interfacename>wcf\system\user\notification\type\IUserNotificationType</interfacename>
+		</definition>
+		
+		<definition>
+			<name>com.woltlab.wcf.user.notification.objectType</name>
+			<interfacename>wcf\system\user\notification\object\type\IUserNotificationObjectType</interfacename>
+		</definition>
 	</import>
 </data>
