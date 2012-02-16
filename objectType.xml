@@ -21,7 +21,7 @@
 		
 		<type>
 			<name>mail</name>
-			<definitionname>com.woltlab.wcf.user.notification.notificationType</definitionname>
+			<definitionname>com.woltlab.wcf.notification.notificationType</definitionname>
 			<classname>wcf\system\user\notification\type\MailUserNotificationType</classname>
 		</type>
 	</import>

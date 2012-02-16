@@ -12,12 +12,12 @@
 		</definition>
 		
 		<definition>
-			<name>com.woltlab.wcf.user.notification.notificationType</name>
+			<name>com.woltlab.wcf.notification.notificationType</name>
 			<interfacename>wcf\system\user\notification\type\IUserNotificationType</interfacename>
 		</definition>
 		
 		<definition>
-			<name>com.woltlab.wcf.user.notification.objectType</name>
+			<name>com.woltlab.wcf.notification.objectType</name>
 			<interfacename>wcf\system\user\notification\object\type\IUserNotificationObjectType</interfacename>
 		</definition>
 	</import>
