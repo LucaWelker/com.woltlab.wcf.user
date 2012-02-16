@@ -20,7 +20,7 @@
 		</type>
 		
 		<type>
-			<name>mail</name>
+			<name>com.woltlab.wcf.notification.notificationType.mail</name>
 			<definitionname>com.woltlab.wcf.notification.notificationType</definitionname>
 			<classname>wcf\system\user\notification\type\MailUserNotificationType</classname>
 		</type>

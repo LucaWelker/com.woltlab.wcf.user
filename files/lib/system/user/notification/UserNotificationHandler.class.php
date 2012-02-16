@@ -48,6 +48,12 @@ class UserNotificationHandler extends SingletonFactory {
 	protected $notificationCount = null;
 	
 	/**
+	 * list of notification types
+	 * @var	array
+	 */
+	protected $notificationTypes = null;
+	
+	/**
 	 * @see wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
@@ -448,5 +454,36 @@ class UserNotificationHandler extends SingletonFactory {
 		$row = $statement->fetchArray();
 		
 		return ($row === false) ? null : $row['notificationID'];
+	}
+	
+	/**
+	 * Returns a list of available object types.
+	 * 
+	 * @return	array<wcf\system\user\notification\object\type\IUserNotificationObjectType>
+	 */
+	public function getAvailableObjectTypes() {
+		return $this->availableObjectTypes;
+	}
+	
+	/**
+	 * Returns a list of notification types.
+	 * 
+	 * @return	array<wcf\data\object\type\ObjectType>
+	 */
+	public function getNotificationTypes() {
+		if ($this->notificationTypes === null) {
+			$this->notificationTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.notification.notificationType');
+		}
+		
+		return $this->notificationTypes;
+	}
+	
+	/**
+	 * Returns a list of available events.
+	 * 
+	 * @return	array<wcf\system\user\notification\event\IUserNotificationEvent>
+	 */
+	public function getAvailableEvents() {
+		return $this->availableEvents;
 	}
 }
