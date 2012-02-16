@@ -230,7 +230,7 @@ Be careful with the following classes!
 
 .wcf-recentActivity > li > .wcf-recentActivityContent .username time {
 	font-size: 85%;
-	color: rgb(153, 153, 153);
+	color: rgba(153, 153, 153., 1);
 }
 
 
@@ -247,7 +247,7 @@ Be careful with the following classes!
 
 .wcf-commentList .username time {
 	font-size: 85%;
-	color: rgb(153, 153, 153);
+	color: rgba(153, 153, 153, 1);
 }
 
 /* Comment List */
@@ -257,16 +257,10 @@ Be careful with the following classes!
 }
 
 .wcf-commentList > li {
-	border-top: 1px solid rgb(204, 204, 204);
+	border-top: 1px solid rgba(204, 204, 204, 1);
 	padding: 7px;
 	display: inline-block;
 	width: 100%;
-}
-
-.wcf-commentList > li:after {
-	content: '';
-	display: inline-block;
-	clear: both;
 }
 
 .wcf-commentList > li:first-child {
@@ -292,12 +286,12 @@ Be careful with the following classes!
 /* Description Texts */
 .wcf-commentList > li > .wcf-commentContent small {
 	font-size: 85%;
-	color: rgb(192, 192, 192);
+	color: rgba(192, 192, 192, 1);
 	margin-top: 3px;
 }
 
 .wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd {
-	border-top: 1px solid rgb(204, 204, 204);
+	border-top: 1px solid rgba(204, 204, 204, 1);
 	background-color: rgba(0, 0, 0, .015);
 	margin-top: 7px;
 	padding: 7px;
@@ -331,8 +325,9 @@ Be careful with the following classes!
 	margin-top: 0;
 }
 
-.wcf-commentList > li .wcf-commentResponseList > li {
-	border-top: 1px solid rgb(204, 204, 204);
+.wcf-commentList > li .wcf-commentResponseList > li,
+.wcf-commentList > li .wcf-commentResponseList > div > li {
+	border-top: 1px solid rgba(204, 204, 204, 1);
 	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
 	position: relative;
@@ -343,7 +338,8 @@ Be careful with the following classes!
 	background-color: rgba(0, 0, 0, .0);
 }
 
-.wcf-commentList > li .wcf-commentResponseList > li > .wcf-commentContent {
+.wcf-commentList > li .wcf-commentResponseList > li > .wcf-commentContent,
+.wcf-commentList > li .wcf-commentResponseList > div > li > .wcf-commentContent {
 	margin-left: 50px;
 	position: relative;
 }
@@ -379,7 +375,7 @@ Be careful with the following classes!
 
 .wcf-commentContent > .wcf-commentOptions > li a,
 .wcf-commentResponseList > li .wcf-commentOptions li a {
-	color: rgb(153, 153, 153);
+	color: rgba(153, 153, 153, 1);
 	cursor: pointer;
 	display: inline-block;
 	padding: 5px 10px;
@@ -391,7 +387,8 @@ Be careful with the following classes!
 
 .wcf-commentResponsePrevious,
 .wcf-commentResponseRecent {
-	display: block;
+	width: 100%;
+	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -403,6 +400,8 @@ Be careful with the following classes!
 	border-radius: 3px;
 	padding: 0 13px;
 	display: inline-block;
+	width: 15%;
+	min-width: 150px;
 }
 
 
