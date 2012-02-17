@@ -91,7 +91,7 @@ WCF.User.Login = Class.extend({
 		if (enable) {
 			this._password.enable();
 			this._passwordContainer.removeClass('disabled');
-			this._useCookies.enable()
+			this._useCookies.enable();
 			this._useCookiesContainer.removeClass('disabled');
 		}
 		else {
@@ -375,7 +375,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 	_loadContent: function(event, ui) {
 		var $panel = $(ui.panel);
 		var $containerID = $panel.attr('id');
-		console.debug($panel.data('menuItem'));
+		
 		if (!this._hasContent[$containerID]) {
 			this._proxy.setOption('data', {
 				actionName: 'getContent',
@@ -405,7 +405,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 		
 		// insert content
 		var $content = this._profileContent.find('#' + $containerID);
-		var $template = $('<div>' + data.returnValues.template + '</div>').hide().appendTo($content);
+		$('<div>' + data.returnValues.template + '</div>').hide().appendTo($content);
 		
 		// slide in content
 		$content.children('div').wcfBlindIn();
@@ -1280,11 +1280,6 @@ WCF.Notification.Handler.prototype = {
 		if (this._overlay === null) {
 			this._overlay = new WCF.Notification.Overlay();
 		}
-		/*
-		else if (!this._overlay.isOpen()) {
-			this._overlay.show();
-		}
-		*/
 	}
 };
 
@@ -1350,7 +1345,7 @@ WCF.Notification.Overlay.prototype = {
 		
 		// initialize scrollable API
 		this._container.scrollable({
-			mousewheel: true,
+			mousewheel: false,
 			speed: 200
 		});
 		this._api = this._container.data('scrollable');
