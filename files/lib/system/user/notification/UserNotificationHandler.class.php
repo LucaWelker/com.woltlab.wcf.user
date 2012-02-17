@@ -9,6 +9,7 @@ use wcf\data\user\notification\UserNotification;
 use wcf\data\user\notification\UserNotificationAction;
 use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\user\notification\UserNotificationList;
+use wcf\data\user\UserProfile;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
@@ -87,7 +88,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$objectTypeObject = $this->availableObjectTypes[$objectType];
 		$event = $this->availableEvents[$objectType][$eventName];
 		// set object data
-		$event->setObject(new UserNotification(null, array()), $notificationObject, $additionalData);
+		$event->setObject(new UserNotification(null, array()), $notificationObject, new UserProfile(WCF::getUser()), $additionalData);
 		
 		// get recipients
 		$recipientList = new UserNotificationEventRecipientList();
@@ -278,9 +279,10 @@ class UserNotificationHandler extends SingletonFactory {
 	 * 
 	 * @param	integer		$limit
 	 * @param	integer		$offset
+	 * @param	boolean		$detailedView
 	 * @return	array<array>
 	 */	
-	public function getNotifications($limit = 10, $offset = 0) {
+	public function getNotifications($limit = 10, $offset = 0, $detailedView = false) {
 		// build enormous query
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("notification_to_user.userID = ?", array(WCF::getUser()->userID));
@@ -290,7 +292,8 @@ class UserNotificationHandler extends SingletonFactory {
 		
 		$sql = "SELECT		notification_to_user.notificationID, notification_event.eventID,
 					object_type.objectType, notification.objectID,
-					notification.additionalData
+					notification.additionalData, notification.authorID,
+					notification.time
 			FROM		wcf".WCF_N."_user_notification_to_user notification_to_user,
 					wcf".WCF_N."_user_notification notification
 			LEFT JOIN	wcf".WCF_N."_user_notification_event notification_event
@@ -301,7 +304,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$statement = WCF::getDB()->prepareStatement($sql, $limit, $offset);
 		$statement->execute($conditions->getParameters());
 		
-		$events = $objectTypes = $eventIDs = $notificationIDs = array();
+		$authorIDs = $events = $objectTypes = $eventIDs = $notificationIDs = array();
 		while ($row = $statement->fetchArray()) {
 			$events[] = $row;
 			
@@ -317,6 +320,7 @@ class UserNotificationHandler extends SingletonFactory {
 			$objectTypes[$row['objectType']]['objectIDs'][] = $row['objectID'];
 			$eventIDs[] = $row['eventID'];
 			$notificationIDs[] = $row['notificationID'];
+			$authorIDs[] = $row['authorID'];
 		}
 		
 		// return an empty set if no notifications exist
@@ -326,6 +330,9 @@ class UserNotificationHandler extends SingletonFactory {
 				'notifications' => array()
 			);
 		}
+		
+		// load authors
+		$authors = UserProfile::getUserProfiles($authorIDs);
 		
 		// load objects associated with each object type
 		foreach ($objectTypes as $objectType => $objectData) {
@@ -356,17 +363,32 @@ class UserNotificationHandler extends SingletonFactory {
 		foreach ($events as $event) {
 			$className = $eventObjects[$event['eventID']]->className;
 			$class = new $className($eventObjects[$event['eventID']]);
+			
 			$class->setObject(
 				$notificationObjects[$event['notificationID']],
 				$objectTypes[$event['objectType']]['objects'][$event['objectID']],
+				$authors[$event['authorID']],
 				unserialize($event['additionalData'])
 			);
 			
-			$notifications[] = array(
-				'notificationID' => $event['notificationID'],
-				'label' => $class->getShortOutput(),
-				'message' => $class->getRenderedOutput()
-			);
+			if ($detailedView) {
+				$data = array(
+					'author' => $class->getAuthor(),
+					'buttons' => $class->getActions(),
+					'notificationID' => $event['notificationID'],
+					'message' => $class->getOutput(),
+					'time' => $event['time']
+				);
+			}
+			else {
+				$data = array(
+					'notificationID' => $event['notificationID'],
+					'label' => $class->getShortOutput(),
+					'message' => $class->getRenderedOutput()
+				);
+			}
+			
+			$notifications[] = $data;
 		}
 		
 		return array(

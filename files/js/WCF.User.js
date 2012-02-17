@@ -1665,3 +1665,81 @@ WCF.Notification.Loader.prototype = {
 		this._callback($notificationList);
 	}
 };
+
+/**
+ * Handles notification list actions.
+ */
+WCF.Notification.List = Class.extend({
+	/**
+	 * notification count
+	 * @var	jQuery
+	 */
+	_badge: null,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * Initializes the notification list.
+	 */
+	init: function() {
+		var $containers = $('.jsNotificationAction');
+		if (!$containers.length) {
+			return;
+		}
+		
+		$containers.each($.proxy(function(index, container) {
+			$(container).children('li').click($.proxy(this._click, this));
+		}, this));
+		
+		this._badge = $('.jsNotificationsBadge:eq(0)');
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+	},
+	
+	/**
+	 * Handles button actions.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var $button = $(event.currentTarget);
+		
+		this._proxy.setOption('data', {
+			actionName: $button.data('actionName'),
+			className: $button.data('className'),
+			objectIDs: [ $button.data('objectID') ],
+			parameters: {
+				notificationID: $button.parent().data('notificationID')
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Handles successful button actions.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		var $notificationID = data.returnValues.notificationID;
+		var self = this;
+		$('.jsNotificationItem').each(function(index, item) {
+			var $item = $(item);
+			if ($item.data('notificationID') == $notificationID) {
+				$item.remove();
+				
+				// reduce badge count
+				self._badge.html((self._badge.html() - 1));
+				
+				return false;
+			}
+		});
+	}
+});

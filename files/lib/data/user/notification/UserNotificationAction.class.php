@@ -62,8 +62,14 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Marks a notification as confirmed.
+	 * 
+	 * @return	array
 	 */
 	public function markAsConfirmed() {
 		UserNotificationHandler::getInstance()->markAsConfirmed($this->parameters['notificationID']);
+		
+		return array(
+			'notificationID' => $this->parameters['notificationID']
+		);
 	}
 }
