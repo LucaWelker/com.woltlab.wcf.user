@@ -18,7 +18,7 @@
 <body id="tpl{$templateName|ucfirst}">
 {include file='header' sandbox=false __disableLoginLink=true}
 
-<header class="mainHeading">
+<header class="wcf-mainHeading">
 	<img src="{icon size='L'}logIn1{/icon}" alt="" />
 	<hgroup>
 		<h1>{lang}wcf.user.login{/lang}</h1>
@@ -26,11 +26,11 @@
 </header>
 
 {if $errorField}
-	<p class="error">{lang}wcf.global.form.error{/lang}</p>
+	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
 <form method="post" action="{link controller='Login'}{/link}" id="loginForm">
-	<div class="border content">
+	<div class="wcf-border wcf-content">
 		<fieldset>
 			<legend>{lang}wcf.user.login.data{/lang}</legend>
 	
@@ -39,7 +39,7 @@
 				<dd>
 					<input type="text" id="username" name="username" value="{$username}" required="required" class="medium" />
 					{if $errorField == 'username'}
-						<small class="innerError">
+						<small class="wcf-innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
 							{if $errorType == 'notEnabled'}{lang}wcf.user.login.error.username.notEnabled{/lang}{/if}
@@ -59,7 +59,7 @@
 				<dd>
 					<input type="password" id="password" name="password" value="{$password}" class="medium" />
 					{if $errorField == 'password'}
-						<small class="innerError">
+						<small class="wcf-innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
 						</small>
