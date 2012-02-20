@@ -5,7 +5,7 @@
 		<ul class="wcf-dropdown">
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}">My Profile</a></li>
 			<li><a href="{link controller='ProfileEdit'}{/link}">Edit Profile</a></li>
-			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
+			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="WCF.System.Confirmation.show('{lang}wcf.user.logout.sure{/lang}', $.proxy(function (action) { if (action == 'confirm') window.location.href = $(this).attr('href'); }, this)); return false;">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
 	
