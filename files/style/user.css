@@ -7,16 +7,7 @@
 
 /* ############## User ############## */
 
-/* Special */
-
-.wcf-recentActivity .userAvatar img  {
-	float: left;
-}
-
-.wcf-commentList .userAvatar img  {
-	float: left;
-}
-
+/* none */
 
 
 /* ############## User Avatar ############## */
@@ -201,13 +192,8 @@ Be careful with the following classes!
 .wcf-recentActivity > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
+	margin-top: 0;
 	padding: 7px;
-}
-
-.wcf-recentActivity > li:after {
-	content: '';
-	display: inline-block;
-	clear: both;
 }
 
 .wcf-recentActivity > li:first-child {
@@ -223,12 +209,7 @@ Be careful with the following classes!
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.wcf-recentActivity > li > .wcf-recentActivityContent {
-	padding-left: 65px;
-	position: relative;
-}
-
-.wcf-recentActivity > li > .wcf-recentActivityContent .username time {
+.wcf-recentActivity > li .username time {
 	font-size: 85%;
 	color: rgba(153, 153, 153, 1);
 }

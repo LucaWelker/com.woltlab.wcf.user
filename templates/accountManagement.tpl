@@ -12,9 +12,9 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-mainHeading">
-	<img src="{icon size='L'}accountManagement1{/icon}" alt="" />
-	<hgroup>
+<header class="wcf-container wcf-mainHeading">
+	<img src="{icon size='L'}accountManagement1{/icon}" alt="" class="wcf-containerIcon" />
+	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.user.accountManagement.title{/lang}</h1>
 	</hgroup>
 </header>
