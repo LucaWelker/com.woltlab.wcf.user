@@ -51,7 +51,7 @@ class NotificationListPage extends AbstractPage {
 		}
 		
 		// set active tab
-		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.notifications');
+		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.notification');
 		
 		parent::show();
 	}

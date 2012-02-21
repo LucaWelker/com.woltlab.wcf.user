@@ -51,13 +51,13 @@
 			<showorder>3</showorder>
 		</usermenuitem>
 		
-		<usermenuitem name="wcf.user.menu.community.notifications">
+		<usermenuitem name="wcf.user.menu.community.notification">
 			<link>index.php/NotificationList/</link>
 			<parent>wcf.user.menu.community</parent>
 			<showorder>1</showorder>
 		</usermenuitem>
-		<usermenuitem name="wcf.user.menu.community.followedUsers">
-			<link>index.php/FollowedUsers/</link>
+		<usermenuitem name="wcf.user.menu.community.following">
+			<link>index.php/Following/</link>
 			<parent>wcf.user.menu.community</parent>
 			<showorder>2</showorder>
 		</usermenuitem>
