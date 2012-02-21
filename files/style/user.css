@@ -222,8 +222,8 @@ Be careful with the following classes!
 
 /* Globals */
 
-.wcf-commentList .username {
-	display: block;
+.wcf-commentList {
+	line-height: 1.5;
 }
 
 .wcf-commentList .username time {
@@ -231,98 +231,62 @@ Be careful with the following classes!
 	color: rgba(153, 153, 153, 1);
 }
 
-/* Comment List */
-
-.wcf-commentList {
-	line-height: 1.5;
-}
-
-.wcf-commentList > li {
-	border-top: 1px solid rgba(204, 204, 204, 1);
-	padding: 7px;
-	display: inline-block;
-	width: 100%;
-}
-
-.wcf-commentList > li:first-child {
-	border-top-width: 0;
-}
-
-/* Comment Add */
-
-.wcf-commentList > li.wcf-commentAdd > div img {
-	margin-left: 25px;
-	float: left;
-}
-
-.wcf-commentList > li.wcf-commentAdd > div > div {
-	margin-left: 65px;
-}
-
-.wcf-commentList > li > .wcf-commentContent {
-	margin-left: 65px;
-	position: relative;
-}
-
-/* Description Texts */
-.wcf-commentList > li > .wcf-commentContent small {
+.wcf-commentList .wcf-containerContent small {
 	font-size: 85%;
 	color: rgba(192, 192, 192, 1);
 	margin-top: 3px;
 }
 
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd {
+/* Comment List */
+
+.wcf-commentList > .wcf-container {
+	border-top: 1px solid rgba(204, 204, 204, 1);
+	padding: 7px;
+}
+
+.wcf-commentList > li.wcf-container:first-child {
+	border-top-width: 0;
+}
+
+/* Comment Add */
+
+.wcf-commentAdd .wcf-containerIcon {
+	margin-left: 2em;
+}
+
+.wcf-commentResponseAdd {
 	border-top: 1px solid rgba(204, 204, 204, 1);
 	background-color: rgba(0, 0, 0, .015);
 	margin-top: 7px;
 	padding: 7px;
 }
 
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div img {
+.wcf-commentResponseAdd .wcf-containerIcon {
 	margin-left: 10px;
-	float: left;
-}
-
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div .userAvatar img {
-	border: 1px solid #ddd;
-	background-color: rgba(255, 255, 255, 1);
-	padding: 1px;
-}
-
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div > div {
-	margin-left: 50px;
-	display: block;
 }
 
 
 
 /* Comment Response List */
 
-.wcf-commentList > li .wcf-commentResponseList {
+.wcf-commentResponseList {
 	margin-top: 7px;
 }
 
-.wcf-commentList > li .wcf-commentResponseAdd ~ .wcf-commentResponseList {
+.wcf-commentResponseAdd ~ .wcf-commentResponseList {
 	margin-top: 0;
 }
 
-.wcf-commentList > li .wcf-commentResponseList > li,
-.wcf-commentList > li .wcf-commentResponseList > div > li {
+.wcf-commentResponseList > .wcf-container,
+.wcf-commentResponseList > div > .wcf-container {
 	border-top: 1px solid rgba(204, 204, 204, 1);
 	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
-	position: relative;
 }
 
-.wcf-commentList > li .wcf-commentResponseList > li:nth-child(2n+1) {
+.wcf-commentResponseList > .wcf-container:nth-child(2n+1) {
 	/* auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
-}
-
-.wcf-commentList > li .wcf-commentResponseList > li > .wcf-commentContent,
-.wcf-commentList > li .wcf-commentResponseList > div > li > .wcf-commentContent {
-	margin-left: 50px;
-	position: relative;
 }
 
 
