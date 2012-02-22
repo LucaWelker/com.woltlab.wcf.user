@@ -56,7 +56,7 @@
 		<ul>
 			{content}
 				{foreach from=$following item=followingUser}
-					<li class="userAvatar jsFollowing">
+					<li class="wcf-userAvatarFramed jsFollowing">
 						<div title="{$followingUser->username}" class="jsTooltip">
 							<span><img src="{icon size='S'}delete1{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$followingUser->followUserID}" /></span>
 							<a href="{link controller='User' id=$followingUser->followUserID}{/link}">

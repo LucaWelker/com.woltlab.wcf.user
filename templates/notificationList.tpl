@@ -93,7 +93,7 @@
 		<ul>
 			{content}
 				{foreach from=$notifications[notifications] item=$notification}
-					<li class="userAvatar jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
+					<li class="wcf-userAvatarFramed jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
 						<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="jsTooltip">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
 						<p>
 							{@$notification[message]}

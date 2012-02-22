@@ -7,12 +7,37 @@
 
 /* ############## User ############## */
 
-/* none */
+/* User Avatar */
+
+.wcf-userAvatar  {
+	/* none */
+}
+
+/* User Avatar Boxed */
+
+.wcf-userAvatarFramed  {
+	/* none */
+}
+
+.wcf-userAvatarFramed img  {
+	border: 1px solid rgba(221, 221, 221, 1);
+	background-color: rgba(255, 255, 255, 1);
+	padding: 1px;
+}
+
+/* User Name */
+
+.wcf-username  {
+	/* none */
+}
 
 
-/* ############## User Avatar ############## */
 
-.wcf-sidebar .userAvatarOriginal {
+/* ############## ToDo: Sidebar User Avatars ############## */
+
+/* I've changed the layout, so the classes may not match any more! */
+
+.wcf-sidebar .wcf-userAvatar {
 	text-align: center;
 	padding: 5px 25px;
 }
@@ -23,13 +48,13 @@
 	white-space: normal;
 }
 
-.wcf-sidebar .userFollowing .userAvatar,
-.wcf-sidebar .userFollowers .userAvatar {
+.wcf-sidebar .userFollowing .wcf-userAvatar,
+.wcf-sidebar .userFollowers .wcf-userAvatar {
 	display: inline-block !important;
 }
 
-.wcf-sidebar .userFollowing .userAvatar a,
-.wcf-sidebar .userFollowers .userAvatar a {
+.wcf-sidebar .userFollowing .wcf-userAvatar a,
+.wcf-sidebar .userFollowers .wcf-userAvatar a {
 	display: inline-block !important;
 	padding: 3px 0 0;
 }

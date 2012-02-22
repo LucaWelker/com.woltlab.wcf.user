@@ -56,7 +56,7 @@
 		<ul>
 			{content}
 				{foreach from=$ignoredUsers item=ignoredUser}
-					<li class="userAvatar jsIgnoredUser">
+					<li class="wcf-userAvatarFramed jsIgnoredUser">
 						<div title="{$ignoredUser->username}" class="jsTooltip">
 							<span><img src="{icon size='S'}delete1{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$ignoredUser->ignoreUserID}" /></span>
 							<a href="{link controller='User' id=$ignoredUser->ignoreUserID}{/link}">
