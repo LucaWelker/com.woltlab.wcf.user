@@ -218,8 +218,6 @@ Be careful with the following classes!
 
 /* ############## Profile Comments ############## */
 
-/* ToDo: Simplify this mess and make it similar to the recent activities */
-
 /* Globals */
 
 .wcf-commentList {
@@ -244,7 +242,7 @@ Be careful with the following classes!
 	padding: 7px;
 }
 
-.wcf-commentList > li.wcf-container:first-child {
+.wcf-commentList > .wcf-container:first-child {
 	border-top-width: 0;
 }
 
@@ -285,7 +283,7 @@ Be careful with the following classes!
 }
 
 .wcf-commentResponseList > .wcf-container:nth-child(2n+1) {
-	/* auto-colorer for every 2nd row */
+	/* Auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
 }
 
