@@ -27,6 +27,8 @@
 	
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>
+		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' id=$author->userID}{/link}">{$author->username}</a> folgt dir.]]></item>
+		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[Neuer Follower]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[Keine neuen Benachrichtigungen]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
 	</category>

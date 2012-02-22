@@ -14,18 +14,16 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getShortOutput()
-	 * @todo	use language variables
 	 */
 	public function getShortOutput() {
-		return 'Neuer Follower';
+		return WCF::getLanguage()->get('wcf.user.notification.follow.shortOutput');
 	}
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getOutput()
-	 * @todo	use language variables
 	 */
 	public function getOutput() {
-		return '<strong>dtdesign</strong> folgt dir nun.';
+		return WCF::getLanguage()->getDynamicVariable('wcf.user.notification.follow.output', array('author' => $this->author));
 	}
 	
 	/**
