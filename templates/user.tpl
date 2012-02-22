@@ -41,12 +41,12 @@
 <nav id="sidebarContent" class="wcf-sidebarContent">
 	{* user *}
 	<div class="wcf-menuContainer">
-		<h1 class="wcf-menuHeader">{$user->username}</h1>
+		<h1 class="wcf-menuHeader wcf-username">{$user->username}</h1>
 		<div class="wcf-sidebarContentGroup">
 			<ul>
 				<li>
 					{if $user->getAvatar()}
-						<div class="userAvatarOriginal" title="{$user->username}">{@$user->getAvatar()->getImageTag()}</div>
+						<div class="wcf-userAvatar" title="{$user->username}">{@$user->getAvatar()->getImageTag()}</div>
 					{/if}
 				</li>
 			</ul>
@@ -60,7 +60,7 @@
 		<div class="wcf-sidebarContentGroup">
 			<ul>
 				{foreach from=$following item=followingUser}
-					<li class="userAvatar jsTooltip" title="{$followingUser->username}"><a href="{link controller='User' object=$followingUser}{/link}">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
+					<li><a href="{link controller='User' object=$followingUser}{/link}" title="{$followingUser->username}" class="wcf-userAvatarFramed jsTooltip">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
 				{/foreach}
 			</ul>
 			{if $followingCount > 1}
@@ -76,7 +76,7 @@
 		<h1>Followers <span class="wcf-badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
-				<li class="userAvatar jsTooltip" title="{$follower->username}"><a href="{link controller='User' object=$follower}{/link}">{@$follower->getAvatar()->getImageTag(32)}</a></li>
+				<li><a href="{link controller='User' object=$follower}{/link}" title="{$follower->username}" class="wcf-userAvatarFramed jsTooltip">{@$follower->getAvatar()->getImageTag(32)}</a></li>
 			{/foreach}
 		</ul>
 		{if $followerCount > 1}

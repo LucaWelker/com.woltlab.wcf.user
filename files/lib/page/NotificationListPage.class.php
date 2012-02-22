@@ -1,22 +1,26 @@
 <?php
 namespace wcf\page;
-use wcf\data\user\follow\UserFollowingList;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
+use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
 
 /**
- * Shows the followed users form.
+ * Shows the notification list page.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	form
+ * @subpackage	page
  * @category	Community Framework
  */
-class FollowedUsersPage extends AbstractPage {
-	public $followedUsers = array();
+class NotificationListPage extends AbstractPage {
+	/**
+	 * list of outstanding notifications
+	 * @var	array<array>
+	 */
+	public $notifications = array();
 	
 	/**
 	 * @see wcf\page\AbstractPage::readData()
@@ -24,11 +28,7 @@ class FollowedUsersPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		
-		$this->followedUsers = new UserFollowingList();
-		$this->followedUsers->sqlLimit = 100;
-		$this->followedUsers->sqlOrderBy = "user_table.username ASC";
-		$this->followedUsers->getConditionBuilder()->add("user_follow.userID = ?", array(WCF::getUser()->userID));
-		$this->followedUsers->readObjects();
+		$this->notifications = UserNotificationHandler::getInstance()->getNotifications(0, 0, true);
 	}
 	
 	/**
@@ -38,8 +38,7 @@ class FollowedUsersPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'count' => $this->followedUsers->countObjects(),
-			'followedUsers' => $this->followedUsers
+			'notifications' => $this->notifications
 		));
 	}
 	
@@ -52,7 +51,7 @@ class FollowedUsersPage extends AbstractPage {
 		}
 		
 		// set active tab
-		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.followedUsers');
+		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.notification');
 		
 		parent::show();
 	}

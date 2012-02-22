@@ -8,15 +8,27 @@
 		<item name="wcf.user.login.action.login"><![CDATA[Ja, mein Kennwort lautet:]]></item>
 		<item name="wcf.user.login.action.register"><![CDATA[Nein, ich möchte mich jetzt registrieren.]]></item>
 		<item name="wcf.user.loginOrRegister"><![CDATA[Anmelden oder registrieren]]></item>
+		<item name="wcf.user.menu.community"><![CDATA[Community]]></item>
+		<item name="wcf.user.menu.community.notification"><![CDATA[Benachrichtigungen]]></item>
+		<item name="wcf.user.menu.community.followedUsers"><![CDATA[Following]]></item>
+		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Ignorierte Benutzer]]></item>
+		<item name="wcf.user.menu.profile"><![CDATA[Benutzerkonto]]></item>
+		<item name="wcf.user.menu.profile.accountManagement"><![CDATA[Verwaltung]]></item>
+		<item name="wcf.user.menu.profile.avatar"><![CDATA[Avatar]]></item>
+		<item name="wcf.user.menu.profile.signature"><![CDATA[Signatur]]></item>
+		<item name="wcf.user.menu.settings"><![CDATA[Einstellungen]]></item>
+		<item name="wcf.user.menu.settings.notification"><![CDATA[Benachrichtigungen]]></item>
+		<item name="wcf.user.profile.menu.information"><![CDATA[Über mich]]></item>
+		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.useCookies"><![CDATA[Dauerhaft angemeldet bleiben]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Benutzername oder E-Mail-Adresse]]></item>
-		<item name="wcf.user.profile.menu.information"><![CDATA[Über mich]]></item>
-		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>
+		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' id=$author->userID}{/link}">{$author->username}</a> folgt dir.]]></item>
+		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[Neuer Follower]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[Keine neuen Benachrichtigungen]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
 	</category>

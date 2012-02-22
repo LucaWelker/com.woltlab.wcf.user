@@ -17,9 +17,50 @@
 				<parent>profile</parent>
 			</category>
 			<!-- /profile -->
+			
+			<category name="settings">
+				<showorder>2</showorder>
+			</category>
+			
+			<!-- settings -->
+			<category name="settings.general">
+				<showorder>1</showorder>
+				<parent>settings</parent>
+			</category>
+			<category name="settings.privacy">
+				<showorder>2</showorder>
+				<parent>settings</parent>
+			</category>
+			<category name="settings.communication">
+				<showorder>3</showorder>
+				<parent>settings</parent>
+			</category>
+			<category name="settings.display">
+				<parent>settings</parent>
+			</category>
+			
+			<category name="settings.general.date">
+				<showorder>1</showorder>
+				<parent>settings.general</parent>
+			</category>
+			
+			<category name="settings.privacy.userOnline">
+				<parent>settings.privacy</parent>
+			</category>
+			<category name="settings.privacy.profile">
+				<parent>settings.privacy</parent>
+			</category>
+			<category name="settings.communication.mail">
+				<parent>settings.communication</parent>
+			</category>
+			<category name="settings.display.content">
+				<parent>settings.display</parent>
+			</category>
+			<!-- /settings -->
 		</categories>
 
 		<options>
+			<!-- profile -->
 			<option name="aboutMe">
 				<categoryname>profile.aboutMe</categoryname>
 				<!--
@@ -96,6 +137,65 @@
 				<editable>4</editable>
 				<visible>0</visible>
 			</option>
+			<!-- /profile -->
+			
+			<!-- settings -->
+			<option name="timezone">
+				<categoryname>settings.general.date</categoryname>
+				<optiontype>timezone</optiontype>
+				<defaultvalue>Europe/London</defaultvalue>
+			</option>
+			
+			<option name="invisible">
+				<categoryname>settings.privacy.userOnline</categoryname>
+				<optiontype>select</optiontype>
+				<visible>1</visible>
+				<selectoptions><![CDATA[0:wcf.user.option.invisible.visibleForAll
+1:wcf.user.option.invisible.visibleForPeopleIFollow
+2:wcf.user.option.invisible.visibleForNobody]]></selectoptions>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<option name="hideEmailAddress">
+				<categoryname>settings.privacy.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<visible>1</visible>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="protectedProfile">
+				<categoryname>settings.privacy.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<visible>1</visible>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			
+			<option name="userCanMail">
+				<categoryname>settings.communication.mail</categoryname>
+				<optiontype>boolean</optiontype>
+				<showorder>2</showorder>
+				<visible>1</visible>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="onlyFollowedPeopleCanMail">
+				<categoryname>settings.communication.mail</categoryname>
+				<optiontype>boolean</optiontype>
+				<visible>1</visible>
+				<enableoptions>!userCanMail</enableoptions>
+			</option>
+			<option name="adminCanMail">
+				<categoryname>settings.communication.mail</categoryname>
+				<optiontype>boolean</optiontype>
+				<visible>1</visible>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			
+			<option name="showAvatar">
+				<categoryname>settings.display.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<visible>1</visible>
+				<defaultvalue>1</defaultvalue>
+				<options>module_avatar</options>
+			</option>
+			<!-- /settings -->
 		</options>
 	</import>
 </data>

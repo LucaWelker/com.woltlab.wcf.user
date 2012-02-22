@@ -91,7 +91,7 @@ WCF.User.Login = Class.extend({
 		if (enable) {
 			this._password.enable();
 			this._passwordContainer.removeClass('disabled');
-			this._useCookies.enable()
+			this._useCookies.enable();
 			this._useCookiesContainer.removeClass('disabled');
 		}
 		else {
@@ -375,7 +375,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 	_loadContent: function(event, ui) {
 		var $panel = $(ui.panel);
 		var $containerID = $panel.attr('id');
-		console.debug($panel.data('menuItem'));
+		
 		if (!this._hasContent[$containerID]) {
 			this._proxy.setOption('data', {
 				actionName: 'getContent',
@@ -405,7 +405,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 		
 		// insert content
 		var $content = this._profileContent.find('#' + $containerID);
-		var $template = $('<div>' + data.returnValues.template + '</div>').hide().appendTo($content);
+		$('<div>' + data.returnValues.template + '</div>').hide().appendTo($content);
 		
 		// slide in content
 		$content.children('div').wcfBlindIn();
@@ -1280,11 +1280,6 @@ WCF.Notification.Handler.prototype = {
 		if (this._overlay === null) {
 			this._overlay = new WCF.Notification.Overlay();
 		}
-		/*
-		else if (!this._overlay.isOpen()) {
-			this._overlay.show();
-		}
-		*/
 	}
 };
 
@@ -1350,7 +1345,7 @@ WCF.Notification.Overlay.prototype = {
 		
 		// initialize scrollable API
 		this._container.scrollable({
-			mousewheel: true,
+			mousewheel: false,
 			speed: 200
 		});
 		this._api = this._container.data('scrollable');
@@ -1670,3 +1665,81 @@ WCF.Notification.Loader.prototype = {
 		this._callback($notificationList);
 	}
 };
+
+/**
+ * Handles notification list actions.
+ */
+WCF.Notification.List = Class.extend({
+	/**
+	 * notification count
+	 * @var	jQuery
+	 */
+	_badge: null,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * Initializes the notification list.
+	 */
+	init: function() {
+		var $containers = $('.jsNotificationAction');
+		if (!$containers.length) {
+			return;
+		}
+		
+		$containers.each($.proxy(function(index, container) {
+			$(container).children('li').click($.proxy(this._click, this));
+		}, this));
+		
+		this._badge = $('.jsNotificationsBadge:eq(0)');
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+	},
+	
+	/**
+	 * Handles button actions.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var $button = $(event.currentTarget);
+		
+		this._proxy.setOption('data', {
+			actionName: $button.data('actionName'),
+			className: $button.data('className'),
+			objectIDs: [ $button.data('objectID') ],
+			parameters: {
+				notificationID: $button.parent().data('notificationID')
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Handles successful button actions.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		var $notificationID = data.returnValues.notificationID;
+		var self = this;
+		$('.jsNotificationItem').each(function(index, item) {
+			var $item = $(item);
+			if ($item.data('notificationID') == $notificationID) {
+				$item.remove();
+				
+				// reduce badge count
+				self._badge.html((self._badge.html() - 1));
+				
+				return false;
+			}
+		});
+	}
+});

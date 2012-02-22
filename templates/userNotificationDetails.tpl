@@ -1,11 +1,11 @@
 <div class="userNotificationDetails"><!-- ToDo: Style-prefixes! -->
 	<header>
 		<div class="row">
-			<a href="{link controller='User' id=$response->userID}{/link}" title="{$response->getUserProfile()->username}" class="userAvatar">
-				<img src="https://www.woltlab.com/forum/wcf/images/avatars/avatar-8615.png" alt="" />
+			<a href="{link controller='User' object=$author}{/link}" title="{$author->username}" class="wcf-userAvatarFramed">
+				{@$author->getAvatar()->getImageTag(128)}
 			</a>
 			<hgroup>
-				<h1>{$username}</h1>
+				<h1>{$author->username}</h1>
 				<h2>{@$time|time}</h2>
 			</hgroup>
 		</div>
@@ -17,7 +17,7 @@
 		<nav>
 			<ul class="small-buttons"><!-- ToDo: Class-name written wrongly to prevent inheritance -->
 				{foreach from=$buttons item=button}
-					<li data-action="{$button['actionName']}" data-class-name="{$button['className']}" data-object-id="{@$button['objectID']}">{$button['label']}</li>
+					<li data-action="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
 				{/foreach}
 			</ul>
 		</nav>

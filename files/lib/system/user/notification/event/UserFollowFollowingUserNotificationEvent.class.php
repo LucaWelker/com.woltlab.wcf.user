@@ -14,18 +14,16 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getShortOutput()
-	 * @todo	use language variables
 	 */
 	public function getShortOutput() {
-		return 'Neuer Follower';
+		return WCF::getLanguage()->get('wcf.user.notification.follow.shortOutput');
 	}
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getOutput()
-	 * @todo	use language variables
 	 */
 	public function getOutput() {
-		return '<strong>dtdesign</strong> folgt dir nun.';
+		return WCF::getLanguage()->getDynamicVariable('wcf.user.notification.follow.output', array('author' => $this->author));
 	}
 	
 	/**
@@ -33,10 +31,10 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	 */
 	public function getRenderedOutput() {
 		WCF::getTPL()->assign(array(
+			'author' => $this->author,
 			'buttons' => $this->getActions(),
 			'message' => $this->getOutput(),
-			'time' => $this->userNotificationObject->time,
-			'username' => 'dtdesign'	// fetch with left join?
+			'time' => $this->userNotificationObject->time
 		));
 		
 		return WCF::getTPL()->fetch('userNotificationDetails');
@@ -54,12 +52,5 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	 */
 	public function getDescription() {
 		return '';
-	}
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getAuthorID()
-	 */
-	public function getAuthorID() {
-		return WCF::getUser()->userID;
 	}
 }

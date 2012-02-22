@@ -9,9 +9,9 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {include file='header' sandbox=false}
 
-<header class="wcf-mainHeading">
-	{*<img src="{icon}email1.svg{/icon}" alt="" />*}
-	<hgroup>
+<header class="wcf-container wcf-mainHeading">
+	<img src="{icon}email1.svg{/icon}" alt="" class="wcf-containerIcon" />
+	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.user.emailChange.reactivation.title{/lang}</h1>
 	</hgroup>
 </header>
