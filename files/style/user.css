@@ -234,7 +234,7 @@ Be careful with the following classes!
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.wcf-recentActivity > li .username time {
+.wcf-recentActivity > li .wcf-username time {
 	font-size: 85%;
 	color: rgba(153, 153, 153, 1);
 }
@@ -249,7 +249,7 @@ Be careful with the following classes!
 	line-height: 1.5;
 }
 
-.wcf-commentList .username time {
+.wcf-commentList .wcf-username time {
 	font-size: 85%;
 	color: rgba(153, 153, 153, 1);
 }

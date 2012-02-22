@@ -5,7 +5,7 @@
 				{@$author->getAvatar()->getImageTag(128)}
 			</a>
 			<hgroup>
-				<h1>{$author->username}</h1>
+				<h1 class="wcf-username">{$author->username}</h1>
 				<h2>{@$time|time}</h2>
 			</hgroup>
 		</div>
