@@ -23,13 +23,13 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	 * event text
 	 * @var	string
 	 */
-	protected $output = '';
+	protected $description = '';
 	
 	/**
-	 * event text (short version)
+	 * event title
 	 * @var	string
 	 */
-	protected $shortOutput = '';
+	protected $title = '';
 	
 	/**
 	 * event icon
@@ -64,10 +64,10 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	/**
 	 * Sets event text.
 	 * 
-	 * @param	string		$output
+	 * @param	string		$description
 	 */
-	public function setOutput($output) {
-		$this->output = $output;
+	public function setDescription($description) {
+		$this->description = $description;
 	}
 	
 	/**
@@ -75,26 +75,26 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	 * 
 	 * @return	string
 	 */
-	public function getOutput() {
-		return $this->output;
+	public function getDescription() {
+		return $this->description;
 	}
 	
 	/**
-	 * Sets event text.
+	 * Sets event title.
 	 * 
-	 * @param	string		$output
+	 * @param	string		$title
 	 */
-	public function setShortOutput($output) {
-		$this->shortOutput = $output;
+	public function setTitle($title) {
+		$this->title = $title;
 	}
 	
 	/**
-	 * Returns event text.
+	 * Returns event title.
 	 * 
 	 * @return	string
 	 */
-	public function getShortOutput() {
-		return $this->shortOutput;
+	public function getTitle() {
+		return $this->title;
 	}
 	
 	/**
