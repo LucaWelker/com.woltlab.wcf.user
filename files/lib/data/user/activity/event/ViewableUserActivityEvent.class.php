@@ -23,13 +23,25 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	 * event text
 	 * @var	string
 	 */
-	public $text = '';
+	protected $description = '';
+	
+	/**
+	 * event title
+	 * @var	string
+	 */
+	protected $title = '';
+	
+	/**
+	 * event icon
+	 * @var string
+	 */
+	protected $icon = '';
 	
 	/**
 	 * user profile
 	 * @var wcf\data\user\UserProfile
 	 */
-	public $userProfile = null;
+	protected $userProfile = null;
 	
 	/**
 	 * Sets user profile.
@@ -52,10 +64,10 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	/**
 	 * Sets event text.
 	 * 
-	 * @param	string		$text
+	 * @param	string		$description
 	 */
-	public function setText($text) {
-		$this->text = $text;
+	public function setDescription($description) {
+		$this->description = $description;
 	}
 	
 	/**
@@ -63,7 +75,43 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	 * 
 	 * @return	string
 	 */
-	public function getText() {
-		return $this->text;
+	public function getDescription() {
+		return $this->description;
+	}
+	
+	/**
+	 * Sets event title.
+	 * 
+	 * @param	string		$title
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+	
+	/**
+	 * Returns event title.
+	 * 
+	 * @return	string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+	
+	/**
+	 * Sets event icon.
+	 * 
+	 * @param	string		$icon
+	 */
+	public function setIcon($icon) {
+		$this->icon = $icon;
+	}
+	
+	/**
+	 * Returns event icon.
+	 * 
+	 * @return	string
+	 */
+	public function getIcon() {
+		return $this->icon;
 	}
 }

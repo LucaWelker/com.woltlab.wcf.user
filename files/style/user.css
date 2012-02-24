@@ -7,21 +7,37 @@
 
 /* ############## User ############## */
 
-/* Special */
+/* User Avatar */
 
-.wcf-recentActivity .userAvatar img  {
-	float: left;
+.wcf-userAvatar  {
+	/* none */
 }
 
-.wcf-commentList .userAvatar img  {
-	float: left;
+/* User Avatar Boxed */
+
+.wcf-userAvatarFramed  {
+	/* none */
+}
+
+.wcf-userAvatarFramed img  {
+	border: 1px solid rgba(221, 221, 221, 1);
+	background-color: rgba(255, 255, 255, 1);
+	padding: 1px;
+}
+
+/* User Name */
+
+.wcf-username  {
+	/* none */
 }
 
 
 
-/* ############## User Avatar ############## */
+/* ############## ToDo: Sidebar User Avatars ############## */
 
-.wcf-sidebar .userAvatarOriginal {
+/* I've changed the layout, so the classes may not match any more! */
+
+.wcf-sidebar .wcf-userAvatar {
 	text-align: center;
 	padding: 5px 25px;
 }
@@ -32,13 +48,13 @@
 	white-space: normal;
 }
 
-.wcf-sidebar .userFollowing .userAvatar,
-.wcf-sidebar .userFollowers .userAvatar {
+.wcf-sidebar .userFollowing .wcf-userAvatar,
+.wcf-sidebar .userFollowers .wcf-userAvatar {
 	display: inline-block !important;
 }
 
-.wcf-sidebar .userFollowing .userAvatar a,
-.wcf-sidebar .userFollowers .userAvatar a {
+.wcf-sidebar .userFollowing .wcf-userAvatar a,
+.wcf-sidebar .userFollowers .wcf-userAvatar a {
 	display: inline-block !important;
 	padding: 3px 0 0;
 }
@@ -201,13 +217,8 @@ Be careful with the following classes!
 .wcf-recentActivity > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
+	margin-top: 0;
 	padding: 7px;
-}
-
-.wcf-recentActivity > li:after {
-	content: '';
-	display: inline-block;
-	clear: both;
 }
 
 .wcf-recentActivity > li:first-child {
@@ -223,132 +234,89 @@ Be careful with the following classes!
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.wcf-recentActivity > li > .wcf-recentActivityContent {
-	padding-left: 65px;
-	position: relative;
-}
-
-.wcf-recentActivity > li > .wcf-recentActivityContent .username time {
+.wcf-recentActivity > li .wcf-username time {
 	font-size: 85%;
-	color: rgba(153, 153, 153., 1);
+	color: rgba(153, 153, 153, 1);
 }
 
 
 
 /* ############## Profile Comments ############## */
 
-/* ToDo: Simplify this mess and make it similar to the recent activities */
-
 /* Globals */
-
-.wcf-commentList .username {
-	display: block;
-}
-
-.wcf-commentList .username time {
-	font-size: 85%;
-	color: rgba(153, 153, 153, 1);
-}
-
-/* Comment List */
 
 .wcf-commentList {
 	line-height: 1.5;
 }
 
-.wcf-commentList > li {
-	border-top: 1px solid rgba(204, 204, 204, 1);
-	padding: 7px;
-	display: inline-block;
-	width: 100%;
+.wcf-commentList .wcf-username time {
+	font-size: 85%;
+	color: rgba(153, 153, 153, 1);
 }
 
-.wcf-commentList > li:first-child {
-	border-top-width: 0;
-}
-
-/* Comment Add */
-
-.wcf-commentList > li.wcf-commentAdd > div img {
-	margin-left: 25px;
-	float: left;
-}
-
-.wcf-commentList > li.wcf-commentAdd > div > div {
-	margin-left: 65px;
-}
-
-.wcf-commentList > li > .wcf-commentContent {
-	margin-left: 65px;
-	position: relative;
-}
-
-/* Description Texts */
-.wcf-commentList > li > .wcf-commentContent small {
+.wcf-commentList .wcf-containerContent small {
 	font-size: 85%;
 	color: rgba(192, 192, 192, 1);
 	margin-top: 3px;
 }
 
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd {
+/* Comment List */
+
+.wcf-commentList > .wcf-container {
+	border-top: 1px solid rgba(204, 204, 204, 1);
+	padding: 7px;
+}
+
+.wcf-commentList > .wcf-container:first-child {
+	border-top-width: 0;
+}
+
+/* Comment Add */
+
+.wcf-commentAdd .wcf-containerIcon {
+	margin-left: 2em;
+}
+
+.wcf-commentResponseAdd {
 	border-top: 1px solid rgba(204, 204, 204, 1);
 	background-color: rgba(0, 0, 0, .015);
 	margin-top: 7px;
 	padding: 7px;
 }
 
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div img {
+.wcf-commentResponseAdd .wcf-containerIcon {
 	margin-left: 10px;
-	float: left;
-}
-
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div .userAvatar img {
-	border: 1px solid #ddd;
-	background-color: rgba(255, 255, 255, 1);
-	padding: 1px;
-}
-
-.wcf-commentList > li > .wcf-commentContent .wcf-commentResponseAdd > div > div {
-	margin-left: 50px;
-	display: block;
 }
 
 
 
 /* Comment Response List */
 
-.wcf-commentList > li .wcf-commentResponseList {
+.wcf-commentResponseList {
 	margin-top: 7px;
 }
 
-.wcf-commentList > li .wcf-commentResponseAdd ~ .wcf-commentResponseList {
+.wcf-commentResponseAdd ~ .wcf-commentResponseList {
 	margin-top: 0;
 }
 
-.wcf-commentList > li .wcf-commentResponseList > li,
-.wcf-commentList > li .wcf-commentResponseList > div > li {
+.wcf-commentResponseList > .wcf-container,
+.wcf-commentResponseList > div > .wcf-container {
 	border-top: 1px solid rgba(204, 204, 204, 1);
 	background-color: rgba(0, 0, 0, .015);
 	padding: 7px;
-	position: relative;
 }
 
-.wcf-commentList > li .wcf-commentResponseList > li:nth-child(2n+1) {
-	/* auto-colorer for every 2nd row */
+.wcf-commentResponseList > .wcf-container:nth-child(2n+1) {
+	/* Auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
-}
-
-.wcf-commentList > li .wcf-commentResponseList > li > .wcf-commentContent,
-.wcf-commentList > li .wcf-commentResponseList > div > li > .wcf-commentContent {
-	margin-left: 50px;
-	position: relative;
 }
 
 
 
 /* Comment Options */
 
-.wcf-commentContent > .wcf-commentOptions,
+.wcf-commentContent > div > .wcf-commentOptions,
 .wcf-commentResponseList > li .wcf-commentOptions {
 	font-size: 85%;
 	display: block;
@@ -357,8 +325,9 @@ Be careful with the following classes!
 	right: 2px;
 }
 
-.wcf-commentContent > .wcf-commentOptions > li,
+.wcf-commentContent > div > .wcf-commentOptions > li,
 .wcf-commentResponseList > li .wcf-commentOptions > li {
+	float: left;
 	opacity: 0;
 	
 	-webkit-transition: opacity .1s linear;
@@ -368,12 +337,12 @@ Be careful with the following classes!
 	transition: opacity .1s linear;
 }
 
-.wcf-commentContent:hover > .wcf-commentOptions > li,
+.wcf-commentContent > div:hover > .wcf-commentOptions > li,
 .wcf-commentResponseList > li:hover .wcf-commentOptions > li {
-	opacity: 1; 
+	opacity: 1;
 }
 
-.wcf-commentContent > .wcf-commentOptions > li a,
+.wcf-commentContent > div > .wcf-commentOptions > li a,
 .wcf-commentResponseList > li .wcf-commentOptions li a {
 	color: rgba(153, 153, 153, 1);
 	cursor: pointer;

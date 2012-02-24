@@ -1,11 +1,11 @@
 <div class="userNotificationDetails"><!-- ToDo: Style-prefixes! -->
 	<header>
 		<div class="row">
-			<a href="{link controller='User' object=$author}{/link}" title="{$author->username}" class="userAvatar">
+			<a href="{link controller='User' object=$author}{/link}" title="{$author->username}" class="wcf-userAvatarFramed">
 				{@$author->getAvatar()->getImageTag(128)}
 			</a>
 			<hgroup>
-				<h1>{$author->username}</h1>
+				<h1 class="wcf-username">{$author->username}</h1>
 				<h2>{@$time|time}</h2>
 			</hgroup>
 		</div>

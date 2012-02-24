@@ -6,7 +6,7 @@ use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
 /**
- * Shows the followed users page.
+ * Shows the following page.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
@@ -15,8 +15,12 @@ use wcf\system\WCF;
  * @subpackage	page
  * @category	Community Framework
  */
-class FollowedUsersPage extends AbstractPage {
-	public $followedUsers = array();
+class FollowingPage extends AbstractPage {
+	/**
+	 * list of following users
+	 * @var	wcf\data\user\follow\UserFollowingList
+	 */
+	public $following = array();
 	
 	/**
 	 * @see wcf\page\AbstractPage::readData()
@@ -24,11 +28,11 @@ class FollowedUsersPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		
-		$this->followedUsers = new UserFollowingList();
-		$this->followedUsers->sqlLimit = 100;
-		$this->followedUsers->sqlOrderBy = "user_table.username ASC";
-		$this->followedUsers->getConditionBuilder()->add("user_follow.userID = ?", array(WCF::getUser()->userID));
-		$this->followedUsers->readObjects();
+		$this->following = new UserFollowingList();
+		$this->following->sqlLimit = 100;
+		$this->following->sqlOrderBy = "user_table.username ASC";
+		$this->following->getConditionBuilder()->add("user_follow.userID = ?", array(WCF::getUser()->userID));
+		$this->following->readObjects();
 	}
 	
 	/**
@@ -38,8 +42,8 @@ class FollowedUsersPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'count' => $this->followedUsers->countObjects(),
-			'followedUsers' => $this->followedUsers
+			'count' => $this->following->countObjects(),
+			'following' => $this->following
 		));
 	}
 	
@@ -52,7 +56,7 @@ class FollowedUsersPage extends AbstractPage {
 		}
 		
 		// set active tab
-		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.followedUsers');
+		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.following');
 		
 		parent::show();
 	}

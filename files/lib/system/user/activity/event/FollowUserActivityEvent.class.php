@@ -35,7 +35,7 @@ class FollowUserActivityEvent extends SingletonFactory implements IUserActivityE
 		foreach ($events as $event) {
 			if (isset($users[$event->objectID])) {
 				$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.follow', array('user' => $users[$event->objectID]));
-				$event->setText($text);
+				$event->setTitle($text);
 			}
 		}
 	}
