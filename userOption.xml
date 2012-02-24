@@ -31,7 +31,7 @@
 				<showorder>2</showorder>
 				<parent>settings</parent>
 			</category>
-			<category name="settings.communication">
+			<category name="settings.community">
 				<showorder>3</showorder>
 				<parent>settings</parent>
 			</category>
@@ -50,8 +50,8 @@
 			<category name="settings.privacy.profile">
 				<parent>settings.privacy</parent>
 			</category>
-			<category name="settings.communication.mail">
-				<parent>settings.communication</parent>
+			<category name="settings.community.mail">
+				<parent>settings.community</parent>
 			</category>
 			<category name="settings.display.content">
 				<parent>settings.display</parent>
@@ -169,20 +169,20 @@
 			</option>
 			
 			<option name="userCanMail">
-				<categoryname>settings.communication.mail</categoryname>
+				<categoryname>settings.community.mail</categoryname>
 				<optiontype>boolean</optiontype>
 				<showorder>2</showorder>
 				<visible>1</visible>
 				<defaultvalue>1</defaultvalue>
 			</option>
 			<option name="onlyFollowedPeopleCanMail">
-				<categoryname>settings.communication.mail</categoryname>
+				<categoryname>settings.community.mail</categoryname>
 				<optiontype>boolean</optiontype>
 				<visible>1</visible>
 				<enableoptions>!userCanMail</enableoptions>
 			</option>
 			<option name="adminCanMail">
-				<categoryname>settings.communication.mail</categoryname>
+				<categoryname>settings.community.mail</categoryname>
 				<optiontype>boolean</optiontype>
 				<visible>1</visible>
 				<defaultvalue>1</defaultvalue>
