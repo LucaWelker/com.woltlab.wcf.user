@@ -316,7 +316,7 @@ Be careful with the following classes!
 
 /* Comment Options */
 
-.wcf-commentContent > .wcf-commentOptions,
+.wcf-commentContent > div > .wcf-commentOptions,
 .wcf-commentResponseList > li .wcf-commentOptions {
 	font-size: 85%;
 	display: block;
@@ -325,8 +325,9 @@ Be careful with the following classes!
 	right: 2px;
 }
 
-.wcf-commentContent > .wcf-commentOptions > li,
+.wcf-commentContent > div > .wcf-commentOptions > li,
 .wcf-commentResponseList > li .wcf-commentOptions > li {
+	float: left;
 	opacity: 0;
 	
 	-webkit-transition: opacity .1s linear;
@@ -336,12 +337,12 @@ Be careful with the following classes!
 	transition: opacity .1s linear;
 }
 
-.wcf-commentContent:hover > .wcf-commentOptions > li,
+.wcf-commentContent > div:hover > .wcf-commentOptions > li,
 .wcf-commentResponseList > li:hover .wcf-commentOptions > li {
-	opacity: 1; 
+	opacity: 1;
 }
 
-.wcf-commentContent > .wcf-commentOptions > li a,
+.wcf-commentContent > div > .wcf-commentOptions > li a,
 .wcf-commentResponseList > li .wcf-commentOptions li a {
 	color: rgba(153, 153, 153, 1);
 	cursor: pointer;
