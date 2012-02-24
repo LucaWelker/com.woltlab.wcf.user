@@ -27,6 +27,12 @@ class UserProfile extends DatabaseObjectDecorator {
 	protected static $baseClass = 'wcf\data\user\User';
 	
 	/**
+	 * cached list of user profiles
+	 * @var	array<wcf\data\user\UserProfile>
+	 */
+	protected static $userProfiles = array();
+	
+	/**
 	 * list of ignored user ids
 	 * @var	array<integer>
 	 */
@@ -251,16 +257,27 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * @return	array<wcf\data\user\UserProfile>
 	 */
 	public static function getUserProfiles(array $userIDs) {
-		$userList = new UserList();
-		$userList->getConditionBuilder()->add("user_table.userID IN (?)", array($userIDs));
-		$userList->sqlSelects .= "user_avatar.*";
-		$userList->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
-		$userList->sqlLimit = 0;
-		$userList->readObjects();
-		
 		$users = array();
-		foreach ($userList as $user) {
-			$users[$user->userID] = new UserProfile($user);
+		
+		// check cache
+		foreach ($userIDs as $index => $userID) {
+			if (isset(self::$userProfiles[$userID])) {
+				$users[$userID] = self::$userProfiles[$userID];
+				unset($userIDs[$index]);
+			}
+		}
+		
+		if (!empty($userIDs)) {
+			$userList = new UserList();
+			$userList->getConditionBuilder()->add("user_table.userID IN (?)", array($userIDs));
+			$userList->sqlSelects .= "user_avatar.*";
+			$userList->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
+			$userList->sqlLimit = 0;
+			$userList->readObjects();
+			
+			foreach ($userList as $user) {
+				$users[$user->userID] = new UserProfile($user);
+			}
 		}
 		
 		return $users;
