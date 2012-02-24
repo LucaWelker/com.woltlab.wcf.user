@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="wcf.user">
+		<item name="wcf.user.access.everyone"><![CDATA[Everyone]]></item>
+		<item name="wcf.user.access.following"><![CDATA[Users I follow]]></item>
+		<item name="wcf.user.access.nobody"><![CDATA[Nobody]]></item>
+		<item name="wcf.user.access.registered"><![CDATA[Registered users]]></item>
 		<item name="wcf.user.avatar.alt"><![CDATA[User-Avatar image]]></item>
 		<item name="wcf.user.button.login"><![CDATA[Login]]></item>
 		<item name="wcf.user.button.register"><![CDATA[Register]]></item>
