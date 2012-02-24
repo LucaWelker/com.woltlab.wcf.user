@@ -50,6 +50,9 @@
 			<category name="settings.privacy.profile">
 				<parent>settings.privacy</parent>
 			</category>
+			<category name="settings.community.profile">
+				<parent>settings.community</parent>
+			</category>
 			<category name="settings.community.mail">
 				<parent>settings.community</parent>
 			</category>
@@ -150,9 +153,10 @@
 				<categoryname>settings.privacy.userOnline</categoryname>
 				<optiontype>select</optiontype>
 				<visible>1</visible>
-				<selectoptions><![CDATA[0:wcf.user.option.invisible.visibleForAll
-1:wcf.user.option.invisible.visibleForPeopleIFollow
-2:wcf.user.option.invisible.visibleForNobody]]></selectoptions>
+				<selectoptions><![CDATA[0:wcf.user.access.everyone
+1:wcf.user.access.registered
+2:wcf.user.access.following
+3:wcf.user.access.nobody]]></selectoptions>
 				<defaultvalue>0</defaultvalue>
 			</option>
 			<option name="hideEmailAddress">
@@ -163,8 +167,12 @@
 			</option>
 			<option name="protectedProfile">
 				<categoryname>settings.privacy.profile</categoryname>
-				<optiontype>boolean</optiontype>
+				<optiontype>select</optiontype>
 				<visible>1</visible>
+				<selectoptions><![CDATA[0:wcf.user.access.everyone
+1:wcf.user.access.registered
+2:wcf.user.access.following
+3:wcf.user.access.nobody]]></selectoptions>
 				<defaultvalue>0</defaultvalue>
 			</option>
 			
