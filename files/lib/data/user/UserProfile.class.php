@@ -53,6 +53,11 @@ class UserProfile extends DatabaseObjectDecorator {
 	const GENDER_MALE = 1;
 	const GENDER_FEMALE = 2;
 	
+	const ACCESS_EVERYONE = 0;
+	const ACCESS_REGISTERED = 1;
+	const ACCESS_FOLLOWING = 2;
+	const ACCESS_NOBODY = 3;
+	
 	/**
 	 * Returns a list of all user ids being followed by current user.
 	 * 
@@ -264,5 +269,42 @@ class UserProfile extends DatabaseObjectDecorator {
 		}
 		
 		return $users;
+	}
+	
+	/**
+	 * Returns true, if current user fulfills the required permissions.
+	 * 
+	 * @param	string		$name
+	 * @return	boolean
+	 */
+	public function isAccessible($name) {
+		switch ($this->$name) {
+			case self::ACCESS_EVERYONE:
+				return true;
+			break;
+			
+			case self::ACCESS_REGISTERED:
+				return (WCF::getUser()->userID ? true : false);
+			break;
+			
+			case self::ACCESS_FOLLOWING:
+				return ($this->isFollowing(WCF::getUser()->userID) ? true : false);
+			break;
+			
+			case self::ACCESS_NOBODY:
+				return false;
+			break;
+		}
+	}
+	
+	/**
+	 * Returns true, if current user profile is protected.
+	 * 
+	 * @return	boolean
+	 */
+	public function isProtected() {
+		// TODO: include override for admins here
+		
+		return !$this->isAccessible('protectedProfile');
 	}
 }
