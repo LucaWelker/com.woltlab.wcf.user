@@ -34,5 +34,6 @@
 		<instruction type="userOption">userOption.xml</instruction>
 		<instruction type="userProfileMenu">userProfileMenu.xml</instruction>
 		<instruction type="userMenu">userMenu.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 	</instructions>
 </package>
