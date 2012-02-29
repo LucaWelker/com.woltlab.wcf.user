@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.userList{/lang}</title>
+	<title>{lang}wcf.user.membersList{/lang}</title>
 	{include file='headInclude' sandbox=false}
 </head>
 
@@ -13,7 +13,7 @@
 		<fieldset>
 			<legend>sort</legend>
 			
-			<form method="get" action="{link controller='UserList'}{/link}">
+			<form method="get" action="{link controller='MembersList'}{/link}">
 				<input type="hidden" name="pageNo" value="{@$pageNo}" />
 				
 				<dl>
@@ -45,12 +45,12 @@
 <header class="wcf-container wcf-mainHeading">
 	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.userList{/lang} <span class="wcf-badge">{#$items}</span></h1>
+		<h1>{lang}wcf.user.membersList{/lang} <span class="wcf-badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
 <div class="wcf-contentHeader">
-	{pages print=true assign=pagesLinks controller='UserList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
 <div class="wcf-userList">
@@ -63,7 +63,7 @@
 					<div class="wcf-containerContent">
 						<p class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a> <span class="wcf-badge wcf-badgeSuccess">Administrator</span></p>
 						
-						<p>{lang}wcf.user.userList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}, 21{if $user->location}, {lang}wcf.user.userList.location{/lang}{/if}</p>
+						<p>{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}, 21{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
 						<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
 						{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
 					<div>

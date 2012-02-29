@@ -123,7 +123,7 @@ class UserPage extends AbstractPage {
 	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.user');
+		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.members');
 		
 		parent::show();
 	}

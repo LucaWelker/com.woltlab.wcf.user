@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/pageMenu.xsd">
 	<import>
-		<pagemenuitem name="wcf.header.menu.user">
-			<link>index.php/UserList/</link>
+		<pagemenuitem name="wcf.header.menu.members">
+			<link>index.php/MembersList/</link>
 			<position>header</position>
+		</pagemenuitem>
+		
+		<pagemenuitem name="wcf.header.menu.members.recentActivity">
+			<link>index.php/RecentActivityList/</link>
+			<position>header</position>
+			<parent>wcf.header.menu.members</parent>
+		</pagemenuitem>
+		
+		<pagemenuitem name="wcf.header.menu.members.usersOnline">
+			<link>index.php/UsersOnlineList/</link>
+			<position>header</position>
+			<parent>wcf.header.menu.members</parent>
 		</pagemenuitem>
 	</import>
 </data>

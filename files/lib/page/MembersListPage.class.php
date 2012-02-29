@@ -2,7 +2,7 @@
 namespace wcf\page;
 use wcf\system\menu\page\PageMenu;
 
-class UserListPage extends SortablePage {
+class MembersListPage extends SortablePage {
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
@@ -27,7 +27,7 @@ class UserListPage extends SortablePage {
 	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.user');
+		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.members');
 		
 		parent::show();
 	}

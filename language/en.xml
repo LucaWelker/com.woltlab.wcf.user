@@ -29,9 +29,9 @@
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
 		<item name="wcf.user.gender.male"><![CDATA[Male]]></item>
 		<item name="wcf.user.gender.female"><![CDATA[Female]]></item>
-		<item name="wcf.user.userList"><![CDATA[Members]]></item>
-		<item name="wcf.user.userList.registrationDate"><![CDATA[Joined {@$user->registrationDate|date}]]></item>
-		<item name="wcf.user.userList.location"><![CDATA[from {$user->location}]]></item>
+		<item name="wcf.user.membersList"><![CDATA[Members]]></item>
+		<item name="wcf.user.membersList.registrationDate"><![CDATA[Joined {@$user->registrationDate|date}]]></item>
+		<item name="wcf.user.membersList.location"><![CDATA[from {$user->location}]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
@@ -43,6 +43,8 @@
 	</category>
 	
 	<category name="wcf.header">
-		<item name="wcf.header.menu.user"><![CDATA[Members]]></item>
+		<item name="wcf.header.menu.members"><![CDATA[Members]]></item>
+		<item name="wcf.header.menu.members.recentActivity"><![CDATA[Recent Activity]]></item>
+		<item name="wcf.header.menu.members.usersOnline"><![CDATA[Users Online]]></item>
 	</category>
 </language>
