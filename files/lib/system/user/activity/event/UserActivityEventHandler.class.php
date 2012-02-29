@@ -71,6 +71,7 @@ class UserActivityEventHandler extends SingletonFactory {
 	 */
 	public function countEvents(array $userIDs) {
 		$eventList = new ViewableUserActivityEventList($userIDs);
+		$eventList->getConditionBuilder()->add("user_activity_event.userID IN (?)", array($userIDs));
 		return $eventList->countObjects();
 	}
 	
@@ -85,6 +86,7 @@ class UserActivityEventHandler extends SingletonFactory {
 	 */
 	public function getEvents(array $userIDs, $sqlLimit = 20, $sqlOffset = 0, $sqlOrderBy = 'user_activity_event.time DESC') {
 		$eventList = new ViewableUserActivityEventList($userIDs);
+		$eventList->getConditionBuilder()->add("user_activity_event.userID IN (?)", array($userIDs));
 		$eventList->sqlLimit = $sqlLimit;
 		$eventList->sqlOffset = $sqlOffset;
 		$eventList->sqlOrderBy = $sqlOrderBy;

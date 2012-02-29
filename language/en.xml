@@ -29,7 +29,9 @@
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
 		<item name="wcf.user.gender.male"><![CDATA[Male]]></item>
 		<item name="wcf.user.gender.female"><![CDATA[Female]]></item>
-		<item name="wcf.user.membersList"><![CDATA[Members]]></item>
+		<item name="wcf.user.members"><![CDATA[Members]]></item>
+		<item name="wcf.user.recentActivity"><![CDATA[Recent Activity]]></item>
+		<item name="wcf.user.usersOnline"><![CDATA[Users Online]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Joined {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[from {$user->location}]]></item>
 	</category>
@@ -40,11 +42,5 @@
 		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[New follower]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[No new notifications]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
-	</category>
-	
-	<category name="wcf.header">
-		<item name="wcf.header.menu.members"><![CDATA[Members]]></item>
-		<item name="wcf.header.menu.members.recentActivity"><![CDATA[Recent Activity]]></item>
-		<item name="wcf.header.menu.members.usersOnline"><![CDATA[Users Online]]></item>
 	</category>
 </language>

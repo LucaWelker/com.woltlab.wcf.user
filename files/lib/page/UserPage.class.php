@@ -4,8 +4,10 @@ use wcf\data\user\follow\UserFollowerList;
 use wcf\data\user\follow\UserFollowingList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\UserProfile;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\request\LinkHandler;
 use wcf\system\menu\user\profile\UserProfileMenu;
 use wcf\system\WCF;
 
@@ -80,6 +82,10 @@ class UserPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		
+		// add breadcrumbs
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.user.members'), LinkHandler::getInstance()->getLink('MembersList')));
+		
+		// get profile content
 		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
 		$contentManager = $activeMenuItem->getContentManager();
 		$this->profileContent = $contentManager->getContent($this->user->userID);
@@ -123,7 +129,7 @@ class UserPage extends AbstractPage {
 	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.members');
+		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
 		
 		parent::show();
 	}

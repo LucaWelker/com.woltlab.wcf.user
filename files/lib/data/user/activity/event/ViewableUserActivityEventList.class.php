@@ -17,13 +17,10 @@ class ViewableUserActivityEventList extends UserActivityEventList {
 	
 	/**
 	 * Creates a new viewable user activity event list.
-	 * 
-	 * @param	array		$userIDs
 	 */
-	public function __construct(array $userIDs) {
+	public function __construct() {
 		parent::__construct();
 		
-		$this->getConditionBuilder()->add("user_activity_event.userID IN (?)", array($userIDs));
 		$this->getConditionBuilder()->add("user_activity_event.packageID IN (?)", array(PackageDependencyHandler::getDependencies()));
 	}
 	

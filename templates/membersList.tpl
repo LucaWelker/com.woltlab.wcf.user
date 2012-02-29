@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.membersList{/lang}</title>
+	<title>{lang}wcf.user.members{/lang} {if $pageNo > 1}- {lang}wcf.page.pageNo{/lang} {/if}- {PAGE_TITLE|language}</title>
 	{include file='headInclude' sandbox=false}
 </head>
 
@@ -45,7 +45,7 @@
 <header class="wcf-container wcf-mainHeading">
 	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.membersList{/lang} <span class="wcf-badge">{#$items}</span></h1>
+		<h1>{lang}wcf.user.members{/lang} <span class="wcf-badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 

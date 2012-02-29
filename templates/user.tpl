@@ -95,7 +95,7 @@
 
 {/capture}
 
-{include file='header' sandbox=false sidebarOrientation='left' skipBreadcrumbs=true}
+{include file='header' sandbox=false sidebarOrientation='left'}
 
 <div class="wcf-contentHeader">
 	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
@@ -125,7 +125,7 @@
 	<!-- ToDo -->
 </div>
 
-{include file='footer' sandbox=false skipBreadcrumbs=true}
+{include file='footer' sandbox=false}
 
 </body>
 </html>

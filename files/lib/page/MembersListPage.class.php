@@ -27,7 +27,7 @@ class MembersListPage extends SortablePage {
 	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.members');
+		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
 		
 		parent::show();
 	}
