@@ -80,7 +80,7 @@
 {include file='header' sandbox=false sidebarOrientation='left'}
 
 <header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}notificationList1{/icon}" alt="" class="wcf-containerIcon" />
+	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.user.notificationList.title{/lang} <span class="wcf-badge jsNotificationsBadge">{#$notifications[count]}</span></h1>
 	</hgroup>
