@@ -12,6 +12,8 @@
 		//]]>
 	</script>
 	<style type="text/css">
+		/* ToDo */
+		
 		#notificationList > ul > li {
 			background-image: -o-linear-gradient(rgba(192, 192, 192, .3), rgba(224, 224, 224, .3));
 			padding: 7px;
