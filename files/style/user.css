@@ -385,5 +385,50 @@ Be careful with the following classes!
 	text-align: center;
 }
 
+/* ############## Members ############## */
+.wcf-userList > ol > li {
+	float: left;
+	width: 50%;
+}
+
+.wcf-userList > ol > li:nth-of-type(2n) {
+	float: right;
+}
+
+.wcf-userList > ol > li > div {
+	height: 80px;
+	padding: 7px;
+}
+
+.wcf-userList > ol > li:nth-of-type(2n) > div{
+	margin-left: 7px;
+	background-color: rgba(0, 0, 0, .015);
+}
+
+
+.wcf-userList > ol > li > div:hover {
+	background-color: rgba(0, 0, 0, .05);
+}
+
+.wcf-userList:after {
+	content: "";
+	height: 0;
+	display: block;
+	clear: both;
+}
+
+.wcf-userList .wcf-containerContent {
+	line-height: 1.5;
+}
+
+.wcf-userList .wcf-containerContent p:not(.wcf-username) {
+	font-size: 85%; 
+}
+
+.wcf-userList .wcf-username > a{
+	font-size: 150%;
+}
+
+
 
 /* -- -- -- -- -- EOF -- -- -- -- -- */

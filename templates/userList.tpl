@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>User list page</title>
+	<title>{lang}wcf.user.userList{/lang}</title>
 	{include file='headInclude' sandbox=false}
 </head>
 
@@ -45,8 +45,7 @@
 <header class="wcf-container wcf-mainHeading">
 	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
-		<h1>User list page</h1>
-		<h2>Total: {#$items}</h2>
+		<h1>{lang}wcf.user.userList{/lang} <span class="wcf-badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
@@ -54,22 +53,25 @@
 	{pages print=true assign=pagesLinks controller='UserList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
-<ol>
-	{foreach from=$objects item=user}
-		<li class="wcf-container wcf-border" style="float: left; padding: 7px; width: 48%; margin-right: 5px">
-			<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
-			
-			<div class="wcf-containerContent" style="line-height: 1.5">
-				<p class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a></p>
-				
-				<p style="font-size: .85em;">Placeholder 1</p>
-				<p style="font-size: .85em;">Placeholder 1</p>
-				<p></p>
-			<div>
-		</li>
-	{/foreach}
-</ol>
-<br style="clear: both" />
+<div class="wcf-userList">
+	<ol>
+		{foreach from=$objects item=user}
+			<li>
+				<div class="wcf-container wcf-border">
+					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
+					
+					<div class="wcf-containerContent">
+						<p class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a> <span class="wcf-badge wcf-badgeSuccess">Administrator</span></p>
+						
+						<p>{lang}wcf.user.userList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}, 21{if $user->location}, {lang}wcf.user.userList.location{/lang}{/if}</p>
+						<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
+						{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
+					<div>
+				</div>
+			</li>
+		{/foreach}
+	</ol>
+</div>
 
 <div class="wcf-contentFooter">
 	{@$pagesLinks}

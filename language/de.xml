@@ -27,6 +27,11 @@
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.useCookies"><![CDATA[Dauerhaft angemeldet bleiben]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Benutzername oder E-Mail-Adresse]]></item>
+		<item name="wcf.user.gender.male"><![CDATA[Männlich]]></item>
+		<item name="wcf.user.gender.female"><![CDATA[Weiblich]]></item>
+		<item name="wcf.user.userList"><![CDATA[Mitglieder]]></item>
+		<item name="wcf.user.userList.registrationDate"><![CDATA[Dabei seit {@$user->registrationDate|date}]]></item>
+		<item name="wcf.user.userList.location"><![CDATA[aus {$user->location}]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
