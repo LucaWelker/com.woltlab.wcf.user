@@ -55,7 +55,7 @@
 	
 	{* following *}
 	{if $followingCount}
-	<div class="wcf-menuContainer userFollowing collapsibleMenus">
+	<div class="wcf-menuContainer userFollowing">
 		<h1>Following <span class="wcf-badge">{#$followingCount}</span></h1>
 		<div class="wcf-sidebarContentGroup">
 			<ul>
@@ -63,7 +63,7 @@
 					<li><a href="{link controller='User' object=$followingUser}{/link}" title="{$followingUser->username}" class="wcf-userAvatarFramed jsTooltip">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
 				{/foreach}
 			</ul>
-			{if $followingCount > 1}
+			{if $followingCount > 0}
 				<p><a id="followingAll" class="wcf-badge wcf-badgeButton javascriptOnly">Show all following</a></p>
 			{/if}
 		</div>
@@ -72,14 +72,14 @@
 	
 	{* followers *}
 	{if $followerCount}
-	<div class="wcf-menuContainer userFollowers collapsibleMenus">
+	<div class="wcf-menuContainer userFollowers">
 		<h1>Followers <span class="wcf-badge">{#$followerCount}</span></h1>
 		<ul>
 			{foreach from=$followers item=follower}
 				<li><a href="{link controller='User' object=$follower}{/link}" title="{$follower->username}" class="wcf-userAvatarFramed jsTooltip">{@$follower->getAvatar()->getImageTag(32)}</a></li>
 			{/foreach}
 		</ul>
-		{if $followerCount > 1}
+		{if $followerCount > 0}
 			<p><a id="followerAll" class="wcf-badge wcf-badgeButton javascriptOnly">Show all followers</a></p>
 		{/if}
 	</div>
@@ -98,8 +98,10 @@
 {include file='header' sandbox=false sidebarOrientation='left'}
 
 <div class="wcf-contentHeader">
-	<!-- ToDo: Wouldn't it be better to generate a Large Button List out of all that here? -->
-	<nav id="profileButtonContainer">
+	<nav>
+		<ul class="wcf-largeButtons" id="profileButtonContainer">
+		
+		</ul>
 	</nav>
 </div>
 	

@@ -24,7 +24,7 @@
 		<item name="wcf.user.menu.settings.notification"><![CDATA[Notifications]]></item>
 		<item name="wcf.user.profile.menu.information"><![CDATA[About]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
-		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[now follows <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
+		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Now follows <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.useCookies"><![CDATA[Stay logged in]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
 		<item name="wcf.user.gender.male"><![CDATA[Male]]></item>

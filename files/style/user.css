@@ -48,14 +48,23 @@
 	white-space: normal;
 }
 
-.wcf-sidebar .userFollowing .wcf-userAvatar,
-.wcf-sidebar .userFollowers .wcf-userAvatar {
-	display: inline-block !important;
+.wcf-sidebar .userFollowing ul:after,
+.wcf-sidebar .userFollowers ul:after {
+	content: "";
+	height: 0;
+	display: block;
+	clear: both;
 }
 
-.wcf-sidebar .userFollowing .wcf-userAvatar a,
-.wcf-sidebar .userFollowers .wcf-userAvatar a {
-	display: inline-block !important;
+.wcf-sidebar .userFollowing li,
+.wcf-sidebar .userFollowers li {
+	float: left;
+	margin-right: 3px;
+}
+
+.wcf-sidebar .userFollowing .wcf-userAvatarFramed,
+.wcf-sidebar .userFollowers .wcf-userAvatarFramed {
+	display: inline-block;
 	padding: 3px 0 0;
 }
 
@@ -375,14 +384,6 @@ Be careful with the following classes!
 	display: inline-block;
 	width: 15%;
 	min-width: 150px;
-}
-
-
-
-/* ToDo: Profile Button */
-
-#profileButtonContainer {
-	text-align: center;
 }
 
 /* ############## Members ############## */
