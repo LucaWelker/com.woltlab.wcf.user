@@ -273,15 +273,13 @@ class UserProfile extends DatabaseObjectDecorator {
 		}
 		
 		if (!empty($userIDs)) {
-			$userList = new UserList();
+			$userList = new UserProfileList();
 			$userList->getConditionBuilder()->add("user_table.userID IN (?)", array($userIDs));
-			$userList->sqlSelects .= "user_avatar.*";
-			$userList->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
 			$userList->sqlLimit = 0;
 			$userList->readObjects();
 			
 			foreach ($userList as $user) {
-				$users[$user->userID] = new UserProfile($user);
+				$users[$user->userID] = $user;
 			}
 		}
 		

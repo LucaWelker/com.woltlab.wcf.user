@@ -36,4 +36,8 @@
 		<item name="wcf.user.notification.noNotifications"><![CDATA[Keine neuen Benachrichtigungen]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
 	</category>
+	
+	<category name="wcf.header">
+		<item name="wcf.header.menu.user"><![CDATA[Mitglieder]]></item>
+	</category>
 </language>

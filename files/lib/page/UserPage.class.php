@@ -5,6 +5,7 @@ use wcf\data\user\follow\UserFollowingList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\UserProfile;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\menu\page\PageMenu;
 use wcf\system\menu\user\profile\UserProfileMenu;
 use wcf\system\WCF;
 
@@ -116,5 +117,14 @@ class UserPage extends AbstractPage {
 			'following' => $this->followingList->getObjects(),
 			'followingCount' => $this->followingList->countObjects(),
 		));
+	}
+	
+	/**
+	 * @see	wcf\page\IPage::show()
+	 */
+	public function show() {
+		PageMenu::getInstance()->setActiveMenuItem('wcf.header.menu.user');
+		
+		parent::show();
 	}
 }
