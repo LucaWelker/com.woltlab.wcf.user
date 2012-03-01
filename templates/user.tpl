@@ -56,7 +56,7 @@
 	{* following *}
 	{if $followingCount}
 	<div class="wcf-menuContainer userFollowing">
-		<h1>Following <span class="wcf-badge">{#$followingCount}</span></h1>
+		<h1>{lang}wcf.user.profile.following{/lang} <span class="wcf-badge">{#$followingCount}</span></h1>
 		<div class="wcf-sidebarContentGroup">
 			<ul>
 				{foreach from=$following item=followingUser}
@@ -64,7 +64,7 @@
 				{/foreach}
 			</ul>
 			{if $followingCount > 0}
-				<p><a id="followingAll" class="wcf-badge wcf-badgeButton javascriptOnly">Show all following</a></p>
+				<p><a id="followingAll" class="wcf-badge wcf-badgeButton javascriptOnly">{lang}wcf.user.profile.following.all{/lang}</a></p>
 			{/if}
 		</div>
 	</div>
@@ -73,15 +73,17 @@
 	{* followers *}
 	{if $followerCount}
 	<div class="wcf-menuContainer userFollowers">
-		<h1>Followers <span class="wcf-badge">{#$followerCount}</span></h1>
-		<ul>
-			{foreach from=$followers item=follower}
-				<li><a href="{link controller='User' object=$follower}{/link}" title="{$follower->username}" class="wcf-userAvatarFramed jsTooltip">{@$follower->getAvatar()->getImageTag(32)}</a></li>
-			{/foreach}
-		</ul>
-		{if $followerCount > 0}
-			<p><a id="followerAll" class="wcf-badge wcf-badgeButton javascriptOnly">Show all followers</a></p>
-		{/if}
+		<h1>{lang}wcf.user.profile.followers{/lang} <span class="wcf-badge">{#$followerCount}</span></h1>
+		<div class="wcf-sidebarContentGroup">
+			<ul>
+				{foreach from=$followers item=follower}
+					<li><a href="{link controller='User' object=$follower}{/link}" title="{$follower->username}" class="wcf-userAvatarFramed jsTooltip">{@$follower->getAvatar()->getImageTag(32)}</a></li>
+				{/foreach}
+			</ul>
+			{if $followerCount > 0}
+				<p><a id="followerAll" class="wcf-badge wcf-badgeButton javascriptOnly">{lang}wcf.user.profile.followers.all{/lang}</a></p>
+			{/if}
+		</div>
 	</div>
 	{/if}
 				

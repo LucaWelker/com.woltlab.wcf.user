@@ -3,7 +3,7 @@
 	<li id="userMenu" class="wcf-userMenu">
 		<span class="wcf-dropdownCaption wcf-userAvatarFramed">{if $__wcf->getUserProfileHandler()->getAvatar()}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(16)}{/if} {lang}wcf.user.userNote{/lang}</span>
 		<ul class="wcf-dropdown">
-			<li><a href="{link controller='User' object=$__wcf->user}{/link}">My Profile</a></li>
+			<li><a href="{link controller='User' object=$__wcf->user}{/link}">{lang}wcf.user.myProfile{/lang}</a></li>
 			<li><a href="{link controller='ProfileEdit'}{/link}">Edit Profile</a></li>
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="WCF.System.Confirmation.show('{lang}wcf.user.logout.sure{/lang}', $.proxy(function (action) { if (action == 'confirm') window.location.href = $(this).attr('href'); }, this)); return false;">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>

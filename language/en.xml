@@ -22,9 +22,6 @@
 		<item name="wcf.user.menu.profile.signature"><![CDATA[Signature]]></item>
 		<item name="wcf.user.menu.settings"><![CDATA[Settings]]></item>
 		<item name="wcf.user.menu.settings.notification"><![CDATA[Notifications]]></item>
-		<item name="wcf.user.profile.menu.information"><![CDATA[About]]></item>
-		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
-		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Now follows <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.useCookies"><![CDATA[Stay logged in]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or email address]]></item>
 		<item name="wcf.user.gender.male"><![CDATA[Male]]></item>
@@ -34,6 +31,7 @@
 		<item name="wcf.user.usersOnline"><![CDATA[Users Online]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Joined {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[from {$user->location}]]></item>
+		<item name="wcf.user.myProfile"><![CDATA[My Profile]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
@@ -42,6 +40,16 @@
 		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[New follower]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[No new notifications]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
+	</category>
+	
+	<category name="wcf.user.profile">
+		<item name="wcf.user.profile.menu.information"><![CDATA[About]]></item>
+		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
+		<item name="wcf.user.profile.following"><![CDATA[Following]]></item>
+		<item name="wcf.user.profile.following.all"><![CDATA[Show all following]]></item>
+		<item name="wcf.user.profile.followers"><![CDATA[Followers]]></item>
+		<item name="wcf.user.profile.followers.all"><![CDATA[Show all followers]]></item>
+		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Now follows <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
