@@ -342,7 +342,7 @@ class UserProfile extends DatabaseObjectDecorator {
 				$this->__age = DateUtil::getAge($this->birthday);
 			}
 			else {
-				$thi8s->__age = 0;
+				$this->__age = 0;
 			}
 		}
 		
