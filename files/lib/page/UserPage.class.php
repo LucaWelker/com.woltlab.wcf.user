@@ -94,13 +94,13 @@ class UserPage extends AbstractPage {
 		// get followers
 		$this->followerList = new UserFollowerList();
 		$this->followerList->getConditionBuilder()->add('user_follow.followUserID = ?', array($this->userID));
-		$this->followerList->sqlLimit = 9;
+		$this->followerList->sqlLimit = 10;
 		$this->followerList->readObjects();
 		
 		// get following
 		$this->followingList = new UserFollowingList();
 		$this->followingList->getConditionBuilder()->add('user_follow.userID = ?', array($this->userID));
-		$this->followingList->sqlLimit = 9;
+		$this->followingList->sqlLimit = 10;
 		$this->followingList->readObjects();
 		
 		// get visitors
