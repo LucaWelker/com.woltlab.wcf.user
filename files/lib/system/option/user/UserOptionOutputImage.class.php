@@ -40,4 +40,3 @@ class UserOptionOutputImage implements IUserOptionOutput {
 		return '<img src="'.StringUtil::encodeHTML($value).'" alt="" />';
 	}
 }
-?>

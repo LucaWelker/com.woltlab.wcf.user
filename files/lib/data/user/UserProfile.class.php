@@ -6,6 +6,7 @@ use wcf\data\DatabaseObjectDecorator;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
+use wcf\util\DateUtil;
 
 define('MODULE_AVATAR', 1);
 define('MODULE_GRAVATAR', 1);
@@ -55,6 +56,12 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * @var wcf\data\user\avatar\IUserAvatar
 	 */
 	protected $avatar = null;
+	
+	/**
+	 * age of this user
+	 * @var integer
+	 */
+	protected $__age = null; 
 	
 	const GENDER_MALE = 1;
 	const GENDER_FEMALE = 2;
@@ -321,5 +328,24 @@ class UserProfile extends DatabaseObjectDecorator {
 		// TODO: include override for admins here
 		
 		return !$this->isAccessible('protectedProfile');
+	}
+	
+	/**
+	 * Returns the age of this user.
+	 *
+	 * @return	integer
+	 */
+	public function getAge() {
+		if ($this->__age === null) {
+			// TODO: add option to hide year/age
+			if ($this->birthday) {
+				$this->__age = DateUtil::getAge($this->birthday);
+			}
+			else {
+				$thi8s->__age = 0;
+			}
+		}
+		
+		return $this->__age;
 	}
 }

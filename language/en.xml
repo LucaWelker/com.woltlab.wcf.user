@@ -43,4 +43,17 @@
 		<item name="wcf.user.notification.noNotifications"><![CDATA[No new notifications]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
 	</category>
+	
+	<category name="wcf.user.option">
+		<item name="wcf.user.option.aboutMe"><![CDATA[About me]]></item>
+		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[About me]]></item>
+		<item name="wcf.user.option.category.profile.contact"><![CDATA[Contact options]]></item>
+		<item name="wcf.user.option.category.profile.personal"><![CDATA[Personal information]]></item>
+		<item name="wcf.user.option.gender"><![CDATA[Gender]]></item>
+		<item name="wcf.user.option.hobbies"><![CDATA[Hobbies]]></item>
+		<item name="wcf.user.option.homepage"><![CDATA[Personal website]]></item>
+		<item name="wcf.user.option.location"><![CDATA[Location]]></item>
+		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
+		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
+	</category>
 </language>

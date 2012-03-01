@@ -34,4 +34,3 @@ class UserOptionOutputGender extends UserOptionOutputSelectOptions {
 		}
 	}
 }
-?>

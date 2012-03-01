@@ -36,4 +36,3 @@ class UserOptionOutputNewlineToBreak implements IUserOptionOutput {
 		return nl2br(StringUtil::encodeHTML($value));
 	}
 }
-?>

@@ -91,4 +91,4 @@ class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputConta
 		return '<a href="'.$url.'"><img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('email', $imageSize).'" alt="" title="'.$title.'" /></a>';
 	}
 }
-?>
+

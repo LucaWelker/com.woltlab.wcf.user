@@ -37,4 +37,3 @@ class UserOptionOutputMessage implements IUserOptionOutput {
 		return MessageParser::getInstance()->parse($value);
 	}
 }
-?>

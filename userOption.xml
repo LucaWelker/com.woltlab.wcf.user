@@ -76,15 +76,12 @@
 				<outputclass>wcf\system\option\user\UserOptionOutputMessage</outputclass>
 				<visible>15</visible>
 			</option>
-			<!--
-				TODO:	Disabled until DateOptionType is fixed.
-				
-				<option name="birthday">
-					<categoryname>profile.personal</categoryname>
-					<optiontype>birthday</optiontype>
-					<outputclass>wcf\system\option\user\UserOptionOutputDate</outputclass>
-				</option>
-			-->
+			<option name="birthday">
+				<categoryname>profile.personal</categoryname>
+				<optiontype>date</optiontype>
+				<outputclass>wcf\system\option\user\UserOptionOutputBirthday</outputclass>
+				<visible>15</visible>
+			</option>
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>radioButton</optiontype>
@@ -119,7 +116,6 @@
 			<option name="adminComment">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>textarea</optiontype>
-				<visible>3</visible>
 				<editable>3</editable>
 				<outputclass>wcf\system\option\user\UserOptionOutputNewlineToBreak</outputclass>
 				<visible>2</visible>

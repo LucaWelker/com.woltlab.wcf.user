@@ -40,4 +40,3 @@ class UserOptionOutputFloat implements IUserOptionOutput {
 		return StringUtil::formatDouble($value, 2);
 	}
 }
-?>

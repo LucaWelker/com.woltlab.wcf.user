@@ -86,4 +86,3 @@ class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContact
 		return $url;
 	}
 }
-?>

@@ -74,4 +74,3 @@ class UserOptionOutputSelectOptions implements IUserOptionOutput {
 		}
 	}
 }
-?>
