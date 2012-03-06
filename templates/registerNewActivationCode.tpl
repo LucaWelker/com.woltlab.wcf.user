@@ -23,7 +23,7 @@
 {/if}
 	
 <form method="post" action="index.php?form=RegisterNewActivationCode">
-	<div class="wcf-border wcf-content">
+	<div class="wcf-box wcf-marginTop wcf-boxPadding wcf-shadow1">
 		<div>
 			<dl{if $errorField == 'username'} class="wcf-formError"{/if}>
 				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>

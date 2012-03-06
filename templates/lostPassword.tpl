@@ -34,7 +34,7 @@
 {/if}
 
 <form method="post" action="index.php?form=LostPassword">
-	<div class="wcf-border wcf-content">
+	<div class="wcf-box wcf-marginTop wcf-boxPadding wcf-shadow1">
 		<div>
 			<dl id="usernameDiv"{if $errorField == 'username'} class="wcf-formError{"/if}>
 				<dt>

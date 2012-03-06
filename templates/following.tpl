@@ -69,7 +69,7 @@
 		</ul>
 	{hascontentelse}
 		<!-- TODO: What should we display here? -->
-		<p>Y U NO HAZ FRIENDS?</p>
+		<p class="wcf-info">You are not yet following anyone</p>
 	{/hascontent}
 </section>
 

@@ -24,7 +24,7 @@
 	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
 </div>
 
-<ol id="recentActivity" class="wcf-recentActivity">
+<ol id="recentActivity" class="wcf-recentActivityList">
 	{foreach from=$objects item=event}
 		<li class="wcf-container">
 			<a href="{link controller='User' object=$event->getUserProfile()}{/link}" title="{$event->getUserProfile()->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$event->getUserProfile()->getAvatar()->getImageTag(48)}</a>

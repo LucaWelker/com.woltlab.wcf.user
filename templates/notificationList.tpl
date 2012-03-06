@@ -113,7 +113,7 @@
 		</ul>
 	{hascontentelse}
 		<!-- TODO: What should we display here? -->
-		<p>Y U NO HAZ NOTIFICATIONS?</p>
+		<p class="wcf-info">There are no notifications for you yet</p>
 	{/hascontent}
 </section>
 

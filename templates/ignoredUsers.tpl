@@ -69,7 +69,7 @@
 		</ul>
 	{hascontentelse}
 		<!-- TODO: What should we display here? -->
-		<p>Y U NO HAZ IGNORED RETARDS?</p>
+		<p class="wcf-info">You do not ignore any users yet</p>
 	{/hascontent}
 </section>
 

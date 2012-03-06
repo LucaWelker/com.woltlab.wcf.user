@@ -10,7 +10,7 @@
 {include file='header' sandbox=false}
 
 <header class="wcf-container wcf-mainHeading">
-	<img src="{icon}email1.svg{/icon}" alt="" class="wcf-containerIcon" />
+	<img src="{icon}eMail1.svg{/icon}" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.user.emailChange.reactivation.title{/lang}</h1>
 	</hgroup>
@@ -23,7 +23,7 @@
 {/if}
 	
 <form method="post" action="index.php?form=EmailActivation">
-	<div class="wcf-border wcf-content">
+	<div class="wcf-box wcf-boxPadding wcf-shadow1">
 		<div>
 			<dl{if $errorField == 'u'} class="wcf-formError"{/if}>
 				<dt><label for="userID">{lang}wcf.user.register.activation.userID{/lang}</label></dt>
@@ -53,7 +53,7 @@
 				
 			<div class="formElement"><!-- ToDo: Def. List! -->
 				<div class="formField">
-					<ul class="formOptionsLong">
+					<ul>
 						<li>{*<img src="{icon}eMail1.svg{/icon}" alt="" />*} <a href="index.php?form=RegisterNewActivationCode{@SID_ARG_2ND}">{lang}wcf.user.register.newActivationCode{/lang}</a></li>
 					</ul>
 				</div>

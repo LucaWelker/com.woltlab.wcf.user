@@ -219,31 +219,31 @@ Be careful with the following classes!
 
 /* Globals */
 
-.wcf-recentActivity {
+.wcf-recentActivityList {
 	line-height: 1.5;
 }
 
-.wcf-recentActivity > li {
+.wcf-recentActivityList > li {
 	border-top: 1px solid rgb(204, 204, 204);
 	background-color: rgba(0, 0, 0, .015);
 	margin-top: 0;
 	padding: 7px;
 }
 
-.wcf-recentActivity > li:first-child {
+.wcf-recentActivityList > li:first-child {
 	border-top-width: 0;
 }
 
-.wcf-recentActivity > li:nth-child(2n+1) {
+.wcf-recentActivityList > li:nth-child(2n+1) {
 	/* auto-colorer for every 2nd row */
 	background-color: rgba(0, 0, 0, .0);
 }
 
-.wcf-recentActivity > li:hover {
+.wcf-recentActivityList > li:hover {
 	background-color: rgba(0, 0, 0, .05);
 }
 
-.wcf-recentActivity > li .wcf-username time {
+.wcf-recentActivityList > li .wcf-username time {
 	font-size: 85%;
 	color: rgba(153, 153, 153, 1);
 }
@@ -387,6 +387,7 @@ Be careful with the following classes!
 }
 
 /* ############## Members ############## */
+
 .wcf-userList > ol > li {
 	float: left;
 	width: 50%;
@@ -405,7 +406,6 @@ Be careful with the following classes!
 	margin-left: 7px;
 	background-color: rgba(0, 0, 0, .015);
 }
-
 
 .wcf-userList > ol > li > div:hover {
 	background-color: rgba(0, 0, 0, .05);

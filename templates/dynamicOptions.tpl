@@ -20,7 +20,7 @@
 {include file='header' sandbox=false sidebarOrientation='left'}
 
 <header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}ignoredUsers1{/icon}" alt="" class="wcf-containerIcon" />
+	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.user.dynamicOptions.title{/lang}</h1>
 	</hgroup>
@@ -43,7 +43,7 @@
 		</nav>
 		
 		{foreach from=$optionTree item=categoryLevel1}
-			<div id="{@$categoryLevel1[object]->categoryName}" class="wcf-border wcf-tabMenuContainer wcf-tabMenuContent" data-active="" data-store="activeMenuItem">
+			<div id="{@$categoryLevel1[object]->categoryName}" class="wcf-tabMenuContainer wcf-box wcf-boxPadding wcf-shadow1 wcf-tabMenuContent" data-active="" data-store="activeMenuItem">
 				<nav class="wcf-menu">
 					<ul>
 						{foreach from=$categoryLevel1[categories] item=$categoryLevel2}
