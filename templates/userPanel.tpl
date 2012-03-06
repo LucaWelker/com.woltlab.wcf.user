@@ -22,23 +22,32 @@
 				<form method="post" action="{link controller='Login'}{/link}">
 					<dl>
 						<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
-						<dd><input type="text" id="username" name="username" value="" required="required" autofocus="autofocus" class="medium" /></dd>
+						<dd>
+							<input type="text" id="username" name="username" value="" required="required" autofocus="autofocus" class="medium" />
+						</dd>
 					</dl>
 					
 					<dl>
 						<dt>{lang}wcf.user.login.action{/lang}</dt>
-						<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
-						<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
+						<dd>
+							<label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label>
+						</dd>
+						<dd>
+							<label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label>
+						</dd>
 					</dl>
 					
 					<dl>
 						<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
-						<dd><input type="password" id="password" name="password" value="" class="medium" /></dd>
+						<dd>
+							<input type="password" id="password" name="password" value="" class="medium" />
+						</dd>
 					</dl>
 					
 					<dl>
-						<dt class="reversed"><label for="useCookies">{lang}wcf.user.useCookies{/lang}</label></dt>
-						<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /></dd>
+						<dd>
+							<label for="useCookies"><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label>
+						</dd>
 					</dl>
 					
 					<div class="wcf-formSubmit">

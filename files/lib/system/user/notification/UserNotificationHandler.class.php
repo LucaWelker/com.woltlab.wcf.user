@@ -251,7 +251,7 @@ class UserNotificationHandler extends SingletonFactory {
 					$conditionBuilder->add('notification.notificationID = notification_to_user.notificationID');
 					$conditionBuilder->add('notification_to_user.userID = ?', array(WCF::getUser()->userID));
 					$conditionBuilder->add('notification_to_user.confirmed = 0');
-					$conditionBuilder->add('notification.packageID IN (?)', array(PackageDependencyHandler::getDependencies()));
+					$conditionBuilder->add('notification.packageID IN (?)', array(PackageDependencyHandler::getInstance()->getDependencies()));
 					
 					$sql = "SELECT	COUNT(*) AS count
 						FROM	wcf".WCF_N."_user_notification_to_user notification_to_user,
@@ -288,7 +288,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$conditions->add("notification_to_user.userID = ?", array(WCF::getUser()->userID));
 		$conditions->add("notification_to_user.confirmed = ?", array(0));
 		$conditions->add("notification.notificationID = notification_to_user.notificationID");
-		$conditions->add("notification.packageID IN (?)", array(PackageDependencyHandler::getDependencies()));
+		$conditions->add("notification.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		
 		$sql = "SELECT		notification_to_user.notificationID, notification_event.eventID,
 					object_type.objectType, notification.objectID,
@@ -430,7 +430,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$conditions->add("object_type.objectTypeID = event.objectTypeID", array());
 		$conditions->add("object_type.objectType = ?", array($objectType));
 		$conditions->add("event.eventName = ?", array($eventName));
-		$conditions->add("event.packageID IN (?)", array(PackageDependencyHandler::getDependencies()));
+		$conditions->add("event.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		
 		$sql = "SELECT	event.eventID
 			FROM	wcf".WCF_N."_user_notification_event event,
@@ -462,7 +462,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("eventID = ?", array($eventID));
 		$conditions->add("objectID = ?", array($objectID));
-		$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getDependencies()));
+		$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		if ($authorID !== null) $conditions->add("authorID = ?", array($authorID));
 		if ($time !== null) $conditions->add("time = ?", array($time));
 		

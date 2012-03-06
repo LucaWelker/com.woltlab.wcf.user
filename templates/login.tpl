@@ -69,8 +69,9 @@
 			
 			{if $supportsPersistentLogins}
 				<dl>
-					<dt class="reversed"><label for="useCookies">{lang}wcf.user.useCookies{/lang}</label></dt>
-					<dd><input type="checkbox" id="useCookies" name="useCookies" value="1" {if $useCookies}checked="checked" {/if}/></dd>
+					<dd>
+						<label for="useCookies"><input type="checkbox" id="useCookies" name="useCookies" value="1" {if $useCookies}checked="checked" {/if}/> {lang}wcf.user.useCookies{/lang}</label>
+					</dd>
 				</dl>
 			{/if}
 		</fieldset>
