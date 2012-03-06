@@ -56,7 +56,7 @@
 	<ol>
 		{foreach from=$objects item=user}
 			<li>
-				<div class="wcf-container wcf-border">
+				<div class="wcf-container wcf-box wcf-shadow3">
 					{if $user->userID}
 						<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
 						
