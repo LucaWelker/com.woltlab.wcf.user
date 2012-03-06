@@ -117,7 +117,7 @@
 	</nav>
 
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-		<div id="{$menuItem->getIdentifier()}" class="wcf-border wcf-tabMenuContent" data-menu-item="{$menuItem->menuItem}">
+		<div id="{$menuItem->getIdentifier()}" class="wcf-box wcf-boxPadding wcf-tabMenuContent wcf-shadow1" data-menu-item="{$menuItem->menuItem}">
 			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
 				{@$profileContent}
 			{/if}
