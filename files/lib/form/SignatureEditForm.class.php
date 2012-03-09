@@ -1,0 +1,156 @@
+<?php
+namespace wcf\form;
+use wcf\data\user\UserAction;
+use wcf\system\bbcode\MessageParser;
+use wcf\system\event\EventHandler;
+use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\UserInputException;
+use wcf\system\menu\user\UserMenu;
+use wcf\system\WCF;
+
+/**
+ * Shows the signature edit form.
+ * 
+ * @author	Alexander Ebert
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	form
+ * @category	Community Framework
+ */
+class SignatureEditForm extends MessageForm {
+	/**
+	 * preview signature
+	 * @var	boolean
+	 */
+	public $showPreview = false;
+	
+	/**
+	 * parsed signature cache
+	 * @var	string
+	 */
+	public $signatureCache = null;
+	
+	/**
+	 * rendered signature preview
+	 * @var	string
+	 */
+	public $signaturePreview = '';
+	
+	/**
+	 * @see	wcf\form\RecaptchaForm::$useCaptcha
+	 */
+	public $useCaptacha = false;
+	
+	/**
+	 * @see wcf\form\IForm::readFormParameters()
+	 */
+	public function readFormParameters() {
+		parent::readFormParameters();
+		
+		if (isset($_POST['showPreview'])) $this->showPreview = true;
+	}
+	
+	/**
+	 * @see wcf\form\IForm::submit()
+	 */
+	public function submit() {
+		// call submit event
+		EventHandler::getInstance()->fireAction($this, 'submit');
+		
+		$this->readFormParameters();
+		
+		if ($this->showPreview) {
+			$this->signaturePreview = MessageParser::getInstance()->parse($this->text, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes, false);
+		}
+		else {
+			try {
+				$this->validate();
+				// no errors
+				$this->save();
+			}
+			catch (UserInputException $e) {
+				$this->errorField = $e->getField();
+				$this->errorType = $e->getType();
+			}
+		}
+	}
+	
+	/**
+	 * @see wcf\form\IForm::validate()
+	 */
+	public function validate() {
+		AbstractForm::validate();
+		
+		$this->validateText();
+	}
+	
+	/**
+	 * @see wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		
+		// default values
+		if (empty($_POST)) {
+			$this->enableBBCodes = WCF::getUser()->signatureEnableBBCodes;
+			$this->enableHtml = WCF::getUser()->signatureEnableHtml;
+			$this->enableSmilies = WCF::getUser()->signatureEnableSmilies;
+			$this->parseURL = true;
+		}
+	}
+	
+	/**
+	 * @see wcf\page\IPage::assignVariables()
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'signatureCache' => $this->signatureCache,
+			'signaturePreview' => $this->signaturePreview
+		));
+	}
+	
+	/**
+	 * @see wcf\page\IPage::show()
+	 */
+	public function show() {
+		if (!WCF::getUser()->userID) {
+			throw new PermissionDeniedException();
+		}
+		
+		// set active tab
+		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.profile.signature');
+		
+		// get signature
+		if ($this->signatureCache == null) $this->signatureCache = WCF::getUser()->signatureCache;
+		$this->text = WCF::getUser()->signature;
+		
+		parent::show();
+	}
+	
+	/**
+	 * @see wcf\form\IForm::save()
+	 */
+	public function save() {
+		parent::save();
+		
+		$this->signatureCache = MessageParser::getInstance()->parse($this->text, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes, false);
+		$this->objectAction = new UserAction(array(WCF::getUser()), 'update', array(
+			'data' => array(
+				'signature' => $this->text,
+				'signatureCache' => $this->signatureCache,
+				'signatureEnableBBCodes' => $this->enableBBCodes,
+				'signatureEnableHtml' => $this->enableHtml,
+				'signatureEnableSmilies' => $this->enableSmilies
+			)
+		));
+		$this->objectAction->executeAction();
+		
+		$this->saved();
+		
+		// show success message
+		WCF::getTPL()->assign('success', true);
+	}
+}

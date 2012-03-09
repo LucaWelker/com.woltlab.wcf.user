@@ -10,6 +10,11 @@ ALTER TABLE wcf1_user ADD registrationIpAddress VARCHAR(39) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD avatarID INT(10);
 ALTER TABLE wcf1_user ADD disableAvatar TINYINT(1) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD disableAvatarReason TEXT;
+ALTER TABLE wcf1_user ADD signature TEXT;
+ALTER TABLE wcf1_user ADD signatureCache TEXT;
+ALTER TABLE wcf1_user ADD signatureEnableBBCodes TINYINT(1) NOT NULL DEFAULT 1;
+ALTER TABLE wcf1_user ADD signatureEnableHtml TINYINT(1) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_user ADD signatureEnableSmilies TINYINT(1) NOT NULL DEFAULT 1;
 
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
