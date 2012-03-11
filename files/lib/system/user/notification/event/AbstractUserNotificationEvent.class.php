@@ -94,10 +94,18 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	public function getAuthorID() {
 		return $this->author->userID;
 	}
+	
 	/**
 	 * @see wcf\system\user\notification\event\IUserNotificationEvent::getAuthor()
 	 */
 	public function getAuthor() {
 		return $this->author;
+	}
+	
+	/**
+	 * @see wcf\system\user\notification\event\IUserNotificationEvent::isVisible()
+	 */
+	public function isVisible() {
+		return true;
 	}
 }

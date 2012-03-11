@@ -79,6 +79,13 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	 * @return	wcf\data\user\UserProfile
 	 */
 	public function getAuthor();
+	
+	/**
+	 * Returns true if this notification event is visible for the active user.
+	 * 
+	 * @return	boolean
+	 */
+	public function isVisible();
 
 	/**
 	 * Returns true if this event supports the given notification type.
