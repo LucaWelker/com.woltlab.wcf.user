@@ -638,18 +638,18 @@ WCF.User.Profile.Editor.Handler = {
 		this._execute($.proxy(function(callback) {
 			var $objectTypeID = callback.getObjectTypeID();
 			
+			if (typeof data[$objectTypeID] === undefined) {
+				return;
+			}
+			
 			switch (this._pendingAction) {
 				case 'beginEdit':
-					if (data[$objectTypeID]) {
-						callback.prepareEdit(data[$objectTypeID]);
-					}
+					callback.prepareEdit(data[$objectTypeID]);
 				break;
 
 				case 'save':
-					if (data[$objectTypeID]) {
-						callback.updateCache(data[$objectTypeID]);
-						callback.restore();
-					}
+					callback.updateCache(data[$objectTypeID]);
+					callback.restore();
 				break;
 			}
 		}, this));
@@ -795,6 +795,16 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 	 * @see	WCF.User.Profile.Editor.Base._name
 	 */
 	_name: 'WCF.User.Profile.Editor.Information',
+	
+	/**
+	 * @see	WCF.User.Profile.Editor.Base.beginEdit()
+	 */
+	beginEdit: function() {
+		// show tab
+		$('#profileContent').wcfTabs('select', 'wcf_user_profile_menu_information');
+		
+		return this._super();
+	},
 
 	/**
 	 * @see	WCF.User.Profile.Editor.Base.save()
