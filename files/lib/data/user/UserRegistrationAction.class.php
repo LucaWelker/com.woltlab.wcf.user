@@ -17,6 +17,11 @@ use wcf\util\UserRegistrationUtil;
  */
 class UserRegistrationAction extends UserAction {
 	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('validateEmailAddress', 'validatePassword', 'validateUsername');
+	
+	/**
 	 * Validates the validate username function.
 	 */
 	public function validateValidateUsername() {

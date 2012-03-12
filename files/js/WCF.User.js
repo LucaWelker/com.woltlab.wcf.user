@@ -908,15 +908,14 @@ WCF.User.Registration.Validation = Class.extend({
 	init: function(element, confirmElement, options) {
 		this._element = element;
 		this._element.blur($.proxy(this._blur, this));
+		this._confirmElement = confirmElement || null;
 		
-		if (confirmElement !== null) {
-			this._confirmElement = confirmElement;
+		if (this._confirmElement !== null) {
 			this._confirmElement.blur($.proxy(this._blurConfirm, this));
 		}
 		
-		if (options) {
-			this._setOptions(options);
-		}
+		options = options || { };
+		this._setOptions(options);
 		
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)

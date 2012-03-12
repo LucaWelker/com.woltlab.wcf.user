@@ -4,7 +4,7 @@
 	<title>Register form</title>
 	{include file='headInclude' sandbox=false}
 	
-	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
@@ -19,7 +19,7 @@
 				'wcf.user.error.confirmPassword.notEqual' : '{lang}wcf.user.error.confirmPassword.notEqual{/lang}'
 			});
 			
-			new WCF.User.Registration.Validation.Email($('#email'), $('#confirmEmail'), null);
+			new WCF.User.Registration.Validation.EmailAddress($('#email'), $('#confirmEmail'), null);
 			new WCF.User.Registration.Validation.Password($('#password'), $('#confirmPassword'), null);
 			new WCF.User.Registration.Validation.Username($('#username', null, {
 				minlength: {@REGISTER_USERNAME_MIN_LENGTH},
@@ -46,7 +46,7 @@
 	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
-<form method="post" action="{link}index.php?form=Register{/link}">
+<form method="post" action="{link controller='Register'}{/link}">
 	<dl>
 		<dt{if $errorType.username|isset} class="wcf-formError"{/if}><label for="username">{lang}wcf.user.username{/lang}</label></dt>
 		<dd>
@@ -120,13 +120,12 @@
 			</dd>
 		</dl>
 	</fieldset>
-
+	
 	{if $useCaptcha}{include file='recaptcha'}{/if}
-
+	
 	<div class="wcf-formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{@SID_INPUT_TAG}
  	</div>
 </form>
 

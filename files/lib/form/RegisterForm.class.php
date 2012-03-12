@@ -34,6 +34,11 @@ class RegisterForm extends UserAddForm {
 	public $templateName = 'register';
 	
 	/**
+	 * @see	wcf\lib\acp\form\AbstractOptionListForm::$loadActiveOptions
+	 */
+	//public $loadActiveOptions = false;
+	
+	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array();
@@ -82,6 +87,8 @@ class RegisterForm extends UserAddForm {
 		if (!REGISTER_USE_CAPTCHA || WCF::getSession()->getVar('recaptchaDone')) {
 			$this->useCaptcha = false;
 		}
+		
+		if (isset($_GET['username'])) $this->username = StringUtil::trim($_GET['username']);
 	}
 	
 	/**
@@ -116,8 +123,14 @@ class RegisterForm extends UserAddForm {
 		if (!count($_POST)) {
 			$this->languageID = WCF::getLanguage()->languageID;
 		}
-		
-		$this->options = $this->getOptionTree('profile');
+	}
+	
+	/**
+	 * Reads option tree on page init.
+	 */
+	protected function readOptionTree() {
+		$this->optionHandler->setInRegistration(true);
+		$this->optionTree = $this->optionHandler->getOptionTree('profile');
 	}
 	
 	/**
@@ -128,16 +141,6 @@ class RegisterForm extends UserAddForm {
 		
 		RecaptchaHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
-			'username' => $this->username,
-			'email'	=> $this->email,
-			'confirmEmail' => $this->confirmEmail,
-			'password' => $this->password,
-			'confirmPassword' => $this->confirmPassword,
-			'optionCategories' => $this->options,
-			'availableLanguages' => $this->getAvailableLanguages(),
-			'languageID' => $this->languageID,
-			'visibleLanguages' => $this->visibleLanguages,
-			'availableContentLanguages' => $this->getAvailableContentLanguages(),
 			'useCaptcha' => $this->useCaptcha
 		));
 	}
@@ -146,21 +149,7 @@ class RegisterForm extends UserAddForm {
 	 * @see Form::show()
 	 */
 	public function show() {
-		// get user options and categories from cache
-		$this->readCache();
-		
 		AbstractForm::show();
-	}
-
-	/**
-	 * @see wcf\acp\form\AbstractOptionListForm::checkOption()
-	 */
-	protected static function checkOption(Option $option) {
-		// show only enabled and required options
-		if ($option->disabled || (!$option->required && !$option->askDuringRegistration && $option->editable != 2)) return false;
-
-		// show options editable by user 
-		return ($option->editable <= 2);
 	}
 	
 	/**
@@ -220,10 +209,8 @@ class RegisterForm extends UserAddForm {
 		AbstractForm::save();
 		
 		// get options
-		$saveOptions = array();
-		foreach ($this->options as $option) {
-			$saveOptions[$option->optionID] = $this->optionValues[$option->optionName];
-		}
+		$this->optionHandler->setInRegistration(true);
+		$saveOptions = $this->optionHandler->save();
 		$this->additionalFields['languageID'] = $this->languageID;
 		$this->additionalFields['registrationIpAddress'] = WCF::getSession()->ipAddress;
 		
