@@ -1461,7 +1461,7 @@ WCF.Notification.Overlay.prototype = {
 	/**
 	 * Displays the overlay.
 	 */
-	show: function() {
+	open: function() {
 		if (this.isOpen()) {
 			return;
 		}
