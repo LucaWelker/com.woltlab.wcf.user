@@ -26,6 +26,6 @@ class RecentActivityUserProfileMenuContent extends SingletonFactory implements I
 			'userID' => $userID
 		));
 		
-		return WCF::getTPL()->fetch('userProfileRecentActivity');
+		return WCF::getTPL()->fetch('recentActivities');
 	}
 }
