@@ -44,6 +44,19 @@ class NotificationSettingsForm extends AbstractForm {
 		
 		$this->events = UserNotificationHandler::getInstance()->getAvailableEvents();
 		$this->types = UserNotificationHandler::getInstance()->getNotificationTypes();
+		
+		// filter events
+		foreach ($this->events as $objectTypeID => $events) {
+			foreach ($events as $eventName => $event) {
+				if (!$event->isVisible()) {
+					unset($this->events[$objectTypeID][$eventName]);
+				}
+			}
+			
+			if (empty($this->events[$objectTypeID])) {
+				unset($this->events[$objectTypeID]);
+			}
+		}
 	}
 	
 	/**
