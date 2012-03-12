@@ -64,6 +64,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 			
 			// reset storage
 			UserStorageHandler::getInstance()->reset(array($this->parameters['data']['userID']), 'followerUserIDs', 1);
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'followingUserIDs', 1);
 		}
 		
 		return array(
@@ -93,6 +94,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 		
 		// reset storage
 		UserStorageHandler::getInstance()->reset(array($this->parameters['data']['userID']), 'followerUserIDs', 1);
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'followingUserIDs', 1);
 		
 		return array(
 			'following' => 0
