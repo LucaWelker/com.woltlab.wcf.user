@@ -32,6 +32,11 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 		if (!isset($this->parameters['data']['userID'])) {
 			throw new ValidateActionException("missing parameter 'userID'");
 		}
+		
+		// validate if you're retarded
+		if ($this->parameters['data']['userID'] == WCF::getUser()->userID) {
+			throw new ValidateActionException('Insufficient permissions');
+		}
 	}
 	
 	/**
