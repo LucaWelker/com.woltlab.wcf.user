@@ -20,61 +20,15 @@ use wcf\system\WCF;
  */
 class SignatureEditForm extends MessageForm {
 	/**
-	 * preview signature
-	 * @var	boolean
-	 */
-	public $showPreview = false;
-	
-	/**
 	 * parsed signature cache
 	 * @var	string
 	 */
 	public $signatureCache = null;
 	
 	/**
-	 * rendered signature preview
-	 * @var	string
-	 */
-	public $signaturePreview = '';
-	
-	/**
 	 * @see	wcf\form\RecaptchaForm::$useCaptcha
 	 */
 	public $useCaptacha = false;
-	
-	/**
-	 * @see wcf\form\IForm::readFormParameters()
-	 */
-	public function readFormParameters() {
-		parent::readFormParameters();
-		
-		if (isset($_POST['showPreview'])) $this->showPreview = true;
-	}
-	
-	/**
-	 * @see wcf\form\IForm::submit()
-	 */
-	public function submit() {
-		// call submit event
-		EventHandler::getInstance()->fireAction($this, 'submit');
-		
-		$this->readFormParameters();
-		
-		if ($this->showPreview) {
-			$this->signaturePreview = MessageParser::getInstance()->parse($this->text, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes, false);
-		}
-		else {
-			try {
-				$this->validate();
-				// no errors
-				$this->save();
-			}
-			catch (UserInputException $e) {
-				$this->errorField = $e->getField();
-				$this->errorType = $e->getType();
-			}
-		}
-	}
 	
 	/**
 	 * @see wcf\form\IForm::validate()
@@ -107,8 +61,7 @@ class SignatureEditForm extends MessageForm {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'signatureCache' => $this->signatureCache,
-			'signaturePreview' => $this->signaturePreview
+			'signatureCache' => $this->signatureCache
 		));
 	}
 	

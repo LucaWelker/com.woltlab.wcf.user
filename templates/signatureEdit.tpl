@@ -4,6 +4,18 @@
 	<title>{lang}wcf.user.signature.title{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' sandbox=false}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			WCF.Language.addObject({
+				'wcf.user.signature.preview': '{lang}wcf.user.signature.preview{/lang}'
+			});
+			
+			new WCF.User.SignaturePreview('wcf\\data\\user\\UserProfileAction', 'text', 'previewButton');
+		});
+		//]]>
+	</script>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -33,15 +45,7 @@
 			</fieldset>
 		{/if}
 		
-		{if $signaturePreview}
-			<fieldset>
-				<legend>{lang}wcf.user.signature.preview{/lang}</legend>
-				
-				{@$signaturePreview}
-			</fieldset>
-		{/if}
-		
-		<fieldset>
+		<fieldset id="signatureContainer">
 			<legend>{lang}wcf.user.signature.text{/lang}</legend>
 				
 			<dl class="wcf-wideEditor{if $errorField == 'text'} wcf-formError{/if}">
@@ -68,7 +72,7 @@
 	
 	<div class="wcf-formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-		<input type="submit" name="showPreview" value="{lang}wcf.global.button.preview{/lang}" accesskey="p" />
+		<button id="previewButton" accesskey="p">{lang}wcf.global.button.preview{/lang}</button>
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		<input type="hidden" name="tmpHash" value="{$tmpHash}" />
 		{@SID_INPUT_TAG}

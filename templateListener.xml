@@ -12,7 +12,8 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>]]></templatecode>
+			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User.js"></script>]]></templatecode>
 		</templatelistener>
 		
 		<templatelistener name="javascriptLanguageImport">

@@ -1752,3 +1752,23 @@ WCF.Notification.List = Class.extend({
 		});
 	}
 });
+
+/**
+ * Signature preview.
+ * 
+ * @see	WCF.Message.Preview
+ */
+WCF.User.SignaturePreview = WCF.Message.Preview.extend({
+	/**
+	 * @see	WCF.Message.Preview._handleResponse()
+	 */
+	_handleResponse: function(data) {
+		// get preview container
+		var $preview = $('#previewContainer');
+		if (!$preview.length) {
+			$preview = $('<fieldset id="previewContainer"><legend>' + WCF.Language.get('wcf.user.signature.preview') + '</legend><div></div></fieldset>').insertBefore($('#signatureContainer')).wcfFadeIn();
+		}
+		
+		$preview.children('div').first().html(data.returnValues.message);
+	}
+});
