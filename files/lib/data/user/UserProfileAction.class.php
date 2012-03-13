@@ -19,7 +19,7 @@ class UserProfileAction extends UserAction {
 	/**
 	 * Validates parameters for signature preview.
 	 */
-	public function validatePreview() {
+	public function validateGetMessagePreview() {
 		if (!isset($this->parameters['data']['message'])) {
 			throw new ValidateActionException("Missing parameter 'message'");
 		}
@@ -30,11 +30,11 @@ class UserProfileAction extends UserAction {
 	}
 	
 	/**
-	 * Creates a signature preview.
+	 * Returns a rendered signature preview.
 	 * 
 	 * @return	array
 	 */
-	public function preview() {
+	public function getMessagePreview() {
 		// get options
 		$enableBBCodes = (isset($this->parameters['options']['enableBBCodes'])) ? 1 : 0;
 		$enableHtml = (isset($this->parameters['options']['enableHtml'])) ? 1 : 0;
