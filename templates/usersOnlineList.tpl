@@ -52,11 +52,11 @@
 <div class="wcf-contentHeader">
 </div>
 
-<div class="wcf-userList">
-	<ol>
+<div>
+	<ol class="wcf-userList">
 		{foreach from=$objects item=user}
-			<li>
-				<div class="wcf-container wcf-box wcf-shadow3">
+			<li class="wcf-listBox">
+				<div class="wcf-container">
 					{if $user->userID}
 						<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
 						

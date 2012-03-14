@@ -53,17 +53,16 @@
 	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
-<div class="wcf-userList">
-	<ol>
+<div>
+	<ol class="wcf-userList">
 		{foreach from=$objects item=user}
-			<li>
-				<div class="wcf-container wcf-box wcf-marginTop wcf-shadow3">
+			<li class="wcf-listBox">
+				<div class="wcf-container">
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
 					
 					<div class="wcf-containerContent">
-						<p class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a> <span class="wcf-badge wcf-badgeGreen">Administrator</span></p>
-						
-						<p>{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
+						<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a></h1> <span class="wcf-badge wcf-badgeGreen">Administrator</span>
+						<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
 						<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
 						{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
 					</div>
