@@ -13,7 +13,7 @@
 		<fieldset>
 			<legend>sort</legend>
 			
-			<form method="get" action="{link controller='UsersOnlistList'}{/link}">
+			<form method="get" action="{link controller='UsersOnlineList'}{/link}">
 				<input type="hidden" name="pageNo" value="{@$pageNo}" />
 				
 				<dl>
