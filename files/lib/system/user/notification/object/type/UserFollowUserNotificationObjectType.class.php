@@ -36,7 +36,7 @@ class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor i
 	public function getObjectsByIDs(array $objectIDs) {
 		$followList = new UserFollowList();
 		$followList->getConditionBuilder()->add("user_follow.followID IN (?)", array($objectIDs));
-		$followList->readObjets();
+		$followList->readObjects();
 		
 		$follows = array();
 		foreach ($followList as $follow) {
