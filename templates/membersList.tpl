@@ -61,7 +61,7 @@
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
 					
 					<div class="wcf-containerContent">
-						<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a></h1> <span class="wcf-badge wcf-badgeGreen">Administrator</span>
+						<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a></h1> <span class="wcf-badge wcf-label">Administrator</span>
 						<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
 						<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
 						{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
