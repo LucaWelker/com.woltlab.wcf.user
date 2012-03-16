@@ -52,7 +52,7 @@
 <div class="wcf-contentHeader">
 </div>
 
-<div>
+<div class="wcf-marginTop">
 	<ol class="wcf-userList">
 		{foreach from=$objects item=user}
 			<li class="wcf-listBox">

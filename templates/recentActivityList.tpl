@@ -24,7 +24,7 @@
 	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
 </div>
 
-{include file='recentActivities' eventList=$objects}
+<div>{include file='recentActivities' eventList=$objects}</div>
 
 <div class="wcf-contentFooter">
 	{@$pagesLinks}

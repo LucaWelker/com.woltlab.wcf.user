@@ -53,7 +53,7 @@
 	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
-<div>
+<div class="wcf-marginTop">
 	<ol class="wcf-userList">
 		{foreach from=$objects item=user}
 			<li class="wcf-listBox">
