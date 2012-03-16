@@ -300,7 +300,8 @@ class UserNotificationHandler extends SingletonFactory {
 			ON		(notification_event.eventID = notification.eventID)
 			LEFT JOIN	wcf".WCF_N."_object_type object_type
 			ON		(object_type.objectTypeID = notification_event.objectTypeID)
-			".$conditions;
+			".$conditions.
+			"ORDER BY	notification.time DESC";
 		$statement = WCF::getDB()->prepareStatement($sql, $limit, $offset);
 		$statement->execute($conditions->getParameters());
 		
