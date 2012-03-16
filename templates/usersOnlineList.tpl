@@ -62,13 +62,16 @@
 						
 						<div class="wcf-containerContent">
 							<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a></h1> <span class="wcf-badge wcf-label">Administrator</span>
-							
-							<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
-							<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
+							{* ToDo *}<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
+							{* ToDo *}<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
 							{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
 						</div>
 					{else}
-					guest
+						<img src="" alt="" width="48" height="48" class="wcf-containerIcon wcf-userAvatarFramed" />
+						<div class="wcf-containerContent">
+							<h1 class="wcf-username">Guest</h1>
+							{* ToDo *}
+						</div>
 					{/if}
 				</div>
 			</li>
