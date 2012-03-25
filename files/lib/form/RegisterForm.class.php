@@ -280,7 +280,7 @@ class RegisterForm extends UserAddForm {
 		
 		// forward to index page
 		WCF::getTPL()->assign(array(
-			'url' => LinkHandler::getInstance()->getLink('index.php'),
+			'url' => LinkHandler::getInstance()->getLink('Index'),
 			'message' => $this->message,
 			'user' => $user
 		));
