@@ -13,7 +13,7 @@
 		<fieldset>
 			<legend>sort</legend>
 			
-			<form method="get" action="{link controller='UsersOnlistList'}{/link}">
+			<form method="get" action="{link controller='UsersOnlineList'}{/link}">
 				<input type="hidden" name="pageNo" value="{@$pageNo}" />
 				
 				<dl>
@@ -52,23 +52,26 @@
 <div class="wcf-contentHeader">
 </div>
 
-<div class="wcf-userList">
-	<ol>
+<div class="wcf-marginTop">
+	<ol class="wcf-userList">
 		{foreach from=$objects item=user}
-			<li>
-				<div class="wcf-container wcf-box wcf-shadow3">
+			<li class="wcf-listBox">
+				<div class="wcf-container">
 					{if $user->userID}
 						<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
 						
 						<div class="wcf-containerContent">
-							<p class="wcf-username"><a href="{link controller='User' object=$user}{/link}">{$user->username}</a> <span class="wcf-badge wcf-badgeGreen">Administrator</span></p>
-							
-							<p>{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
-							<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
+							<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a></h1> <span class="wcf-badge wcf-label">Administrator</span>
+							{* ToDo *}<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
+							{* ToDo *}<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
 							{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
 						</div>
 					{else}
-					guest
+						<img src="" alt="" width="48" height="48" class="wcf-containerIcon wcf-userAvatarFramed" />
+						<div class="wcf-containerContent">
+							<h1 class="wcf-username">Guest</h1>
+							{* ToDo *}
+						</div>
 					{/if}
 				</div>
 			</li>

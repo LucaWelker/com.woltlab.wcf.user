@@ -18,28 +18,28 @@
 <body id="tpl{$templateName|ucfirst}">
 {include file='header' sandbox=false __disableLoginLink=true}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}logIn1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}logIn1{/icon}" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.user.login{/lang}</h1>
 	</hgroup>
 </header>
 
 {if $errorField}
-	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
+	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
 <form method="post" action="{link controller='Login'}{/link}" id="loginForm">
-	<div class="wcf-box wcf-marginTop wcf-boxPadding wcf-shadow1">
+	<div class="container marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.user.login.data{/lang}</legend>
 	
-			<dl>
+			<dl{if $errorField == 'username'} class="formError"{/if}>
 				<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
 				<dd>
-					<input type="text" id="username" name="username" value="{$username}" required="required" class="medium" />
+					<input type="text" id="username" name="username" value="{$username}" required="required" class="long" />
 					{if $errorField == 'username'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
 							{if $errorType == 'notEnabled'}{lang}wcf.user.login.error.username.notEnabled{/lang}{/if}
@@ -54,12 +54,12 @@
 				<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
 			</dl>
 			
-			<dl>
+			<dl{if $errorField == 'password'} class="formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 				<dd>
-					<input type="password" id="password" name="password" value="{$password}" class="medium" />
+					<input type="password" id="password" name="password" value="{$password}" class="long" />
 					{if $errorField == 'password'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
 							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
 						</small>
@@ -77,8 +77,7 @@
 		</fieldset>
 	</div>
 	
-	<div class="wcf-formSubmit">
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SID_INPUT_TAG}
  	</div>

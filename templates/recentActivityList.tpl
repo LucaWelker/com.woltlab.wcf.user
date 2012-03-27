@@ -13,20 +13,22 @@
 
 {include file='header' sandbox=false sidebarOrientation='right'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.recentActivity{/lang} <span class="wcf-badge">{#$items}</span></h1>
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
+		<h1>{lang}wcf.user.recentActivity{/lang} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
-<div class="wcf-contentHeader">
+<div class="contentHeader">
 	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
 </div>
 
-{include file='recentActivities' eventList=$objects}
+<div class="container marginTop shadow">
+	{include file='recentActivities' eventList=$objects}
+</div>
 
-<div class="wcf-contentFooter">
+<div class="contentFooter">
 	{@$pagesLinks}
 </div>
 

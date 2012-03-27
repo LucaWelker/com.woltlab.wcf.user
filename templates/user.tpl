@@ -38,7 +38,7 @@
 
 {capture assign='sidebar'}
 
-<nav id="sidebarContent" class="wcf-sidebarContent">
+<nav id="sidebarContent" class="sidebarContent">
 	{* user *}
 	<div class="wcf-menuContainer">
 		<h1 class="wcf-menuHeader wcf-username">{$user->username}</h1>
@@ -90,16 +90,13 @@
 	{* profile visitors *}
 	
 	{* placeholder *}
-	
-	{* collapse sidebar *}			
-	<span class="wcf-collapsibleSidebarButton" title="{lang}wcf.global.button.collapsible{/lang}"><span></span></span>
 </nav>
 
 {/capture}
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<div class="wcf-contentHeader">
+<div class="contentHeader">
 	<nav>
 		<ul class="wcf-largeButtons" id="profileButtonContainer">
 		
@@ -107,8 +104,8 @@
 	</nav>
 </div>
 	
-<section id="profileContent" class="wcf-tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
-	<nav class="wcf-tabMenu">
+<section id="profileContent" class="tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
+	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
 				<li><a href="#{$menuItem->getIdentifier()}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
@@ -117,7 +114,7 @@
 	</nav>
 
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-		<div id="{$menuItem->getIdentifier()}" class="wcf-box wcf-boxPadding wcf-tabMenuContent wcf-shadow1" data-menu-item="{$menuItem->menuItem}">
+		<div id="{$menuItem->getIdentifier()}" class="container tabMenuContent shadow" data-menu-item="{$menuItem->menuItem}">
 			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
 				{@$profileContent}
 			{/if}
@@ -125,9 +122,7 @@
 	{/foreach}
 </section>
 
-<div class="wcf-contentFooter">
-	<!-- ToDo -->
-</div>
+<div class="contentFooter"></div>
 
 {include file='footer' sandbox=false}
 

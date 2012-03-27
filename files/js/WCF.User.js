@@ -48,7 +48,7 @@ WCF.User.Login = Class.extend({
 		
 		var $loginForm = $('#loginForm');
 		$loginForm.find('input[name=action]').change($.proxy(this._change, this));
-		$loginForm.find('input[type=reset]').click($.proxy(this._reset, this));
+		//$loginForm.find('input[type=reset]').click($.proxy(this._reset, this));
 		
 		if (isQuickLogin) {
 			$('#loginLink').click(function() {
@@ -77,9 +77,9 @@ WCF.User.Login = Class.extend({
 	/**
 	 * Handles clicks on the reset button.
 	 */
-	_reset: function() {
+	/*_reset: function() {
 		this._setState(true, WCF.Language.get('wcf.user.button.login'));
-	},
+	},*/
 	
 	/**
 	 * Sets form states.
@@ -344,7 +344,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 		var $enableProxy = false;
 
 		// fetch content state
-		this._profileContent.find('div.wcf-tabMenuContent').each($.proxy(function(index, container) {
+		this._profileContent.find('div.tabMenuContent').each($.proxy(function(index, container) {
 			var $containerID = $(container).wcfIdentify();
 
 			if ($activeMenuItem === $containerID) {
@@ -1037,11 +1037,11 @@ WCF.User.Registration.Validation = Class.extend({
 	 * @param	string		message
 	 */
 	_showError: function(element, message) {
-		element.parent().prev().addClass('wcf-formError').removeClass('wcf-formSuccess');
+		element.parent().prev().addClass('formError').removeClass('formSuccess');
 		
-		var $innerError = element.parent().find('small.wcf-innerError');
+		var $innerError = element.parent().find('small.innerError');
 		if (!$innerError.length) {
-			$innerError = $('<small />').addClass('wcf-innerError').insertAfter(element);
+			$innerError = $('<small />').addClass('innerError').insertAfter(element);
 		}
 		
 		$innerError.text(message);
@@ -1053,8 +1053,8 @@ WCF.User.Registration.Validation = Class.extend({
 	 * @param	jQuery		element
 	 */
 	_showSuccess: function(element) {
-		element.parent().prev().addClass('wcf-formSuccess').removeClass('wcf-formError');
-		element.next('small.wcf-innerError').remove();
+		element.parent().prev().addClass('formSuccess').removeClass('formError');
+		element.next('small.innerError').remove();
 	}
 });
 
@@ -1407,7 +1407,8 @@ WCF.Notification.Overlay.prototype = {
 		this._messageContainer.find('nav li').each($.proxy(function(index, button) {
 			var $button = $(button);
 			$button.click($.proxy(function(event) {
-				new WCF.Notification.Action(this, this._api, this._container, this._notificationID, $button);
+				new WCF.Notification.Action(this, this._api, this._listContainer.children('ul:eq(0)'), this._notificationID, $button);
+				this.showList();
 				
 				return false;
 			}, this));
@@ -1476,11 +1477,11 @@ WCF.Notification.Overlay.prototype = {
  * 
  * @param	WCF.Notification.Overlay	overlay
  * @param	jQuery.fn.scrollable		api
- * @param	jQuery				container
+ * @param	jQuery				list
  * @param	integer				notificationID
  * @param	jQuery				targetElement
  */
-WCF.Notification.Action = function(overlay, api, container, notificationID, targetElement) { this.init(overlay, api, container, notificationID, targetElement); };
+WCF.Notification.Action = function(overlay, api, list, notificationID, targetElement) { this.init(overlay, api, list, notificationID, targetElement); };
 WCF.Notification.Action.prototype = {
 	/**
 	 * scrollable API
@@ -1527,9 +1528,9 @@ WCF.Notification.Action.prototype = {
  	 * @param	integer				notificationID
  	 * @param	jQuery				targetElement
 	 */
-	init: function(overlay, api, container, notificationID, targetElement) {
+	init: function(overlay, api, list, notificationID, targetElement) {
 		this._api = api;
-		this._container = container;
+		this._list = list;
 		this._notificationID = notificationID;
 		this._overlay = overlay;
 		this._targetElement = targetElement;
@@ -1554,16 +1555,16 @@ WCF.Notification.Action.prototype = {
 	 * Removes an item from list. An empty list will result in a notice displayed to user.
 	 */
 	_removeItem: function() {
-		this._container._listContainer.children('li').each($.proxy(function(index, item) {
+		this._list.children('li').each($.proxy(function(index, item) {
 			var $item = $(item);
 			if ($item.data('notificationID') == this._notificationID) {
 				// remove item itself
 				$item.remove();
 				
 				// remove complete list
-				var $listItems = this._container._listContainer.children('li');
+				var $listItems = this._list.children('li');
 				if (!$listItems.length) {
-					this._container._listContainer.html('<p>' + WCF.Language.get('wcf.user.notification.noNotifications') + '</p>');
+					this._list.html('<p>' + WCF.Language.get('wcf.user.notification.noNotifications') + '</p>');
 				}
 				
 				// show list
@@ -1579,7 +1580,7 @@ WCF.Notification.Action.prototype = {
 		if (this._loading == null) {
 			this._loading = $('<div id="userNotificationDetailsLoading"></div>').appendTo($('body')[0]);
 			
-			var $parentContainer = this._container.parent();
+			var $parentContainer = this._list.parent();
 			var $dimensions = $parentContainer.getDimensions('outer');
 			this._loading.css({
 				height: $dimensions.height + 'px',
