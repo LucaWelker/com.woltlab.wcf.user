@@ -26,8 +26,7 @@
 <p class="warning">{lang}wcf.user.accountManagement.edit.warning{/lang}</p>
 		
 <form method="post" action="{link controller='AccountManagement'}{/link}">
-	<div class="container marginTop shadow">
-			
+	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend><label for="password">{lang}wcf.user.accountManagement.password{/lang}</label></legend>
 				

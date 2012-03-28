@@ -30,7 +30,7 @@
 {/if}
 
 <form method="post" action="{link controller='Login'}{/link}" id="loginForm">
-	<div class="container marginTop shadow">
+	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.user.login.data{/lang}</legend>
 	
@@ -74,13 +74,14 @@
 					</dd>
 				</dl>
 			{/if}
+			
+			{*TODO: add lost password link*}
 		</fieldset>
 	</div>
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{@SID_INPUT_TAG}
- 	</div>
+	</div>
 </form>
 
 {include file='footer' sandbox=false}

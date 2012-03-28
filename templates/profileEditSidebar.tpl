@@ -1,6 +1,7 @@
 {capture assign='sidebar'}
 
-<nav id="sidebarContent" class="wcf-sidebarContent">
+{*TODO: css classes*}
+<nav id="sidebarContent" class="sidebarContent">
 	{assign var=__userMenuActiveItems value=$__wcf->getUserMenu()->getActiveMenuItems()}
 	{foreach from=$__wcf->getUserMenu()->getMenuItems('') item=menuCategory}
 		<div class="wcf-menuContainer" id="{'.'|str_replace:'_':$menuCategory->menuItem}Content">
@@ -14,9 +15,6 @@
 			</div>
 		</div>
 	{/foreach}
-	
-	{* collapse sidebar *}			
-	<span class="wcf-collapsibleSidebarButton" title="{lang}wcf.global.button.collapsible{/lang}"><span></span></span>
 </nav>
 
 {/capture}

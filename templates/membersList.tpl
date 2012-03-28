@@ -8,7 +8,8 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
 {capture assign='sidebar'}
-<nav id="sidebarContent" class="wcf-sidebarContent">
+{*TODO: sidebar content*}
+<nav id="sidebarContent" class="sidebarContent">
 	<div>
 		<fieldset>
 			<legend>sort</legend>
@@ -30,9 +31,8 @@
 					</dd>
 				</dl>
 				
-				<div class="wcf-formSubmit">
+				<div class="formSubmit">
 					<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-					{@SID_INPUT_TAG}
 				</div>
 			</form>
 		</fieldset>
@@ -42,28 +42,40 @@
 
 {include file='header' sandbox=false sidebarOrientation='right'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.members{/lang} <span class="wcf-badge">{#$items}</span></h1>
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
+		<h1>{lang}wcf.user.members{/lang} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
-<div class="wcf-contentHeader">
+<div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
-<div class="wcf-marginTop">
-	<ol class="wcf-userList">
+<div class="container marginTop shadow">
+	<ol class="containerList userList simpleUserList">
 		{foreach from=$objects item=user}
-			<li class="wcf-listBox">
-				<div class="wcf-container">
-					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
-					
-					<div class="wcf-containerContent">
-						<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a></h1> <span class="wcf-badge wcf-label">Administrator</span>
-						{* ToDo *}<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
-						{* ToDo *}<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
+			<li>
+				<div class="box48">
+					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
+						
+					<div>
+						{*TODO: use snippet template for general user information*}
+						{*TODO: show action buttons (follow, ignore etc.)*}
+						<hgroup class="containerHeadline">
+							<h1><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a> <span class="badge wcf-label">Administrator</span></h1> 
+							<h2>{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</h2>
+						</hgroup>
+						
+						<dl class="dataList">
+							<dt>Posts</dt>
+							<dd><a href="">12.324</a></dd>
+							<dt>Likes received</dt>
+							<dd><a href="">27.300</a></dd>
+						</dl>
+						
+						{*TODO: show additional user information*}
 						{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
 					</div>
 				</div>
@@ -72,7 +84,7 @@
 	</ol>
 </div>
 
-<div class="wcf-contentFooter">
+<div class="contentNavigation">
 	{@$pagesLinks}
 </div>
 

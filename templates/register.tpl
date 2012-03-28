@@ -45,7 +45,7 @@
 </header>
 
 <form method="post" action="{link controller='Register'}{/link}">
-	<div class="container marginTop shadow">
+	<div class="container containerPadding marginTop shadow">
 		<dl>
 			<dt{if $errorType.username|isset} class="formError"{/if}>
 				<label for="username">{lang}wcf.user.username{/lang}</label>

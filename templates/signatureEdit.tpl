@@ -24,19 +24,19 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}add1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}add1{/icon}" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.user.signature.title{/lang}</h1>
 	</hgroup>
 </header>
 
 {if $errorField}
-	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
+	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
 <form method="post" action="{link controller='SignatureEdit'}{/link}">
-	<div class="wcf-box wcf-marginTop wcf-boxPadding wcf-shadow1">
+	<div class="container containerPadding marginTop shadow">
 		{if $signatureCache}
 			<fieldset>
 				<legend>{lang}wcf.user.signature.current{/lang}</legend>
@@ -48,12 +48,12 @@
 		<fieldset id="signatureContainer">
 			<legend>{lang}wcf.user.signature.text{/lang}</legend>
 				
-			<dl class="wcf-wideEditor{if $errorField == 'text'} wcf-formError{/if}">
+			<dl class="wide{if $errorField == 'text'} formError{/if}">
 				<dt><label for="text">{lang}wcf.user.signature.text{/lang}</label></dt>
 				<dd>
 					<textarea id="text" name="text" rows="20" cols="40">{$text}</textarea>
 					{if $errorField == 'text'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{elseif $errorType == 'tooLong'}
@@ -70,12 +70,10 @@
 		{include file='messageFormTabs'}
 	</div>
 	
-	<div class="wcf-formSubmit">
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-		<button id="previewButton" accesskey="p">{lang}wcf.global.button.preview{/lang}</button>
+	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		<button id="previewButton" accesskey="p">{lang}wcf.global.button.preview{/lang}</button>
 		<input type="hidden" name="tmpHash" value="{$tmpHash}" />
-		{@SID_INPUT_TAG}
  	</div>
 </form>
 

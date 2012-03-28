@@ -11,6 +11,7 @@
 		});
 		//]]>
 	</script>
+	{*TODO: css*}
 	<style type="text/css">
 		#ignoredUsersList li {
 			display: inline-block;
@@ -42,21 +43,19 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.ignoredUsers.title{/lang} <span class="wcf-badge jsIgnoredUsersBadge">{#$count}</span></h1>
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
+		<h1>{lang}wcf.user.ignoredUsers.title{/lang} <span class="badge jsIgnoredUsersBadge">{#$count}</span></h1>
 	</hgroup>
 </header>
-
-<div class="wcf-contentHeader"> </div>
 
 <section id="ignoredUsersList">
 	{hascontent}
 		<ul>
 			{content}
 				{foreach from=$ignoredUsers item=ignoredUser}
-					<li class="wcf-userAvatarFramed jsIgnoredUser">
+					<li class="framed jsIgnoredUser">
 						<div title="{$ignoredUser->username}" class="jsTooltip">
 							<span><img src="{icon size='S'}delete1{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$ignoredUser->ignoreUserID}" /></span>
 							<a href="{link controller='User' id=$ignoredUser->ignoreUserID}{/link}">
@@ -69,11 +68,9 @@
 		</ul>
 	{hascontentelse}
 		<!-- TODO: What should we display here? -->
-		<p class="wcf-info">You do not ignore any users yet</p>
+		<p class="info">You do not ignore any users yet</p>
 	{/hascontent}
 </section>
-
-<div class="wcf-contentFooter"> </div>
 
 {include file='footer' sandbox=false}
 

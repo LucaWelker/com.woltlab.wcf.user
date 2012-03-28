@@ -19,30 +19,28 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.user.staticOptions.title{/lang}</h1>
 	</hgroup>
 </header>
 
 {if $success|isset}
-	<p class="wcf-success">{lang}wcf.global.form.success{/lang}</p>	
+	<p class="success">{lang}wcf.global.form.success{/lang}</p>	
 {/if}
 
-<div class="wcf-contentHeader"> </div>
-
 <form method="post" action="{link controller='StaticOptions'}{/link}">
-	<div class="wcf-tabMenuContainer" data-active="" data-store="activeTabMenuItem">
-		<nav class="wcf-tabMenu">
+	<div class="tabMenuContainer" data-active="" data-store="activeTabMenuItem">
+		<nav class="tabMenu">
 			<ul>
 				<li><a href="#general">{lang}wcf.user.staticOptions.category.general{/lang}</a></li>
 				<li><a href="#display">{lang}wcf.user.staticOptions.category.display{/lang}</a></li>
 			</ul>
 		</nav>
 		
-		<div id="general" class="wcf-tabMenuContainer wcf-box wcf-boxPadding wcf-shadow1 wcf-tabMenuContent">
-			<hgroup class="wcf-subHeading">
+		<div id="general" class="tabMenuContainer container containerPadding shadow tabMenuContent">
+			<hgroup class="boxSubHeadline">
 				<h1>{lang}wcf.user.staticOptions.category.general{/lang}</h1>
 			</hgroup>
 			
@@ -75,8 +73,8 @@
 			</fieldset>
 		</div>
 		
-		<div id="display" class="wcf-tabMenuContainer wcf-box wcf-boxPadding wcf-shadow1 wcf-tabMenuContent">
-			<hgroup class="wcf-subHeading">
+		<div id="display" class="tabMenuContainer container containerPadding shadow tabMenuContent">
+			<hgroup class="boxSubHeadline">
 				<h1>{lang}wcf.user.staticOptions.category.display{/lang}</h1>
 			</hgroup>
 			
@@ -99,14 +97,10 @@
 		</div>
 	</div>
 	
-	<div class="wcf-formSubmit">
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{@SID_INPUT_TAG}
- 	</div>
+	</div>
 </form>
-
-<div class="wcf-contentFooter"> </div>
 
 {include file='footer' sandbox=false}
 

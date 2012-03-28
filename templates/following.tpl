@@ -11,6 +11,7 @@
 		});
 		//]]>
 	</script>
+	{*TODO: css*}
 	<style type="text/css">
 		#followingList li {
 			display: inline-block;
@@ -42,21 +43,19 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.following.title{/lang} <span class="wcf-badge jsFollowingBadge">{#$count}</span></h1>
+<header class="box48 boxHeadline"> 
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup >
+		<h1>{lang}wcf.user.following.title{/lang} <span class="badge jsFollowingBadge">{#$count}</span></h1>
 	</hgroup>
 </header>
-
-<div class="wcf-contentHeader"> </div>
 
 <section id="followingList">
 	{hascontent}
 		<ul>
 			{content}
 				{foreach from=$following item=followingUser}
-					<li class="wcf-userAvatarFramed jsFollowing">
+					<li class="framed jsFollowing">
 						<div title="{$followingUser->username}" class="jsTooltip">
 							<span><img src="{icon size='S'}delete1{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$followingUser->followUserID}" /></span>
 							<a href="{link controller='User' id=$followingUser->followUserID}{/link}">
@@ -69,11 +68,9 @@
 		</ul>
 	{hascontentelse}
 		<!-- TODO: What should we display here? -->
-		<p class="wcf-info">You are not yet following anyone</p>
+		<p class="info">You are not yet following anyone</p>
 	{/hascontent}
 </section>
-
-<div class="wcf-contentFooter"> </div>
 
 {include file='footer' sandbox=false}
 

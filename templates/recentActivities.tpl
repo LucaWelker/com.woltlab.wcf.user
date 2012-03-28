@@ -1,6 +1,6 @@
 <ul id="recentActivity" class="containerList">
 	{foreach from=$eventList item=event}
-		<li class="wcf-listBox">
+		<li>
 			<div class="box48">
 				<a href="{link controller='User' object=$event->getUserProfile()}{/link}" title="{$event->getUserProfile()->username}" class="framed">{@$event->getUserProfile()->getAvatar()->getImageTag(48)}</a>
 				

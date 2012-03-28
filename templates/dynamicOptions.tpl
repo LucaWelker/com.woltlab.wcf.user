@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.ignoredUsers.title{/lang}</title>
+	<title>dynamic options</title>
 	{include file='headInclude' sandbox=false}
 	
 	<script type="text/javascript">
@@ -19,22 +19,20 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.user.dynamicOptions.title{/lang}</h1>
 	</hgroup>
 </header>
 
 {if $success|isset}
-	<p class="wcf-success">{lang}wcf.global.form.success{/lang}</p>	
+	<p class="success">{lang}wcf.global.form.success{/lang}</p>	
 {/if}
 
-<div class="wcf-contentHeader"> </div>
-
 <form method="post" action="{link controller='DynamicOptions'}{/link}">
-	<div class="wcf-tabMenuContainer" data-active="" data-store="activeTabMenuItem">
-		<nav class="wcf-tabMenu">
+	<div class="tabMenuContainer" data-active="" data-store="activeTabMenuItem">
+		<nav class="tabMenu">
 			<ul>
 				{foreach from=$optionTree item=categoryLevel1}
 					<li><a href="#{@$categoryLevel1[object]->categoryName}">{lang}wcf.user.option.category.{@$categoryLevel1[object]->categoryName}{/lang}</a></li>
@@ -43,7 +41,8 @@
 		</nav>
 		
 		{foreach from=$optionTree item=categoryLevel1}
-			<div id="{@$categoryLevel1[object]->categoryName}" class="wcf-tabMenuContainer wcf-box wcf-boxPadding wcf-shadow1 wcf-tabMenuContent" data-active="" data-store="activeMenuItem">
+			<div id="{@$categoryLevel1[object]->categoryName}" class="tabMenuContent container shadow" data-active="" data-store="activeMenuItem">
+				{*TODO: submenu*}
 				<nav class="wcf-menu">
 					<ul>
 						{foreach from=$categoryLevel1[categories] item=$categoryLevel2}
@@ -53,8 +52,8 @@
 				</nav>
 				
 				{foreach from=$categoryLevel1[categories] item=categoryLevel2}
-					<div id="{@$categoryLevel1[object]->categoryName}-{@$categoryLevel2[object]->categoryName}" class="hidden">
-						<hgroup class="wcf-subHeading">
+					<div id="{@$categoryLevel1[object]->categoryName}-{@$categoryLevel2[object]->categoryName}" class="hidden containerPadding">
+						<hgroup class="boxSubHeadline">
 							<h1>{lang}wcf.user.option.category.{@$categoryLevel2[object]->categoryName}{/lang}</h1>
 						</hgroup>
 						
@@ -71,14 +70,10 @@
 		{/foreach}
 	</div>
 	
-	<div class="wcf-formSubmit">
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{@SID_INPUT_TAG}
- 	</div>
+	</div>
 </form>
-
-<div class="wcf-contentFooter"> </div>
 
 {include file='footer' sandbox=false}
 

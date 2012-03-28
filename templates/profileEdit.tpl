@@ -11,14 +11,6 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<div class="wcf-contentHeader"> </div>
-	
-<section>
-	
-</section>
-
-<div class="wcf-contentFooter"> </div>
-
 {include file='footer' sandbox=false}
 
 </body>

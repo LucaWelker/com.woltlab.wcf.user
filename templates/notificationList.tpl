@@ -12,7 +12,7 @@
 		//]]>
 	</script>
 	<style type="text/css">
-		/* ToDo */
+		{*TODO: css*}
 		
 		#notificationList > ul > li {
 			background-image: -o-linear-gradient(rgba(192, 192, 192, .3), rgba(224, 224, 224, .3));
@@ -81,21 +81,21 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.notificationList.title{/lang} <span class="wcf-badge jsNotificationsBadge">{#$notifications[count]}</span></h1>
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
+		<h1>{lang}wcf.user.notificationList.title{/lang} <span class="badge jsNotificationsBadge">{#$notifications[count]}</span></h1>
 	</hgroup>
 </header>
 
-<div class="wcf-contentHeader"> </div>
+{*TODO: pagination?*}
 
 <section id="notificationList">
 	{hascontent}
 		<ul>
 			{content}
 				{foreach from=$notifications[notifications] item=$notification}
-					<li class="wcf-userAvatarFramed jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
+					<li class="framed jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
 						<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="jsTooltip">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
 						<p>
 							{@$notification[message]}
@@ -113,11 +113,9 @@
 		</ul>
 	{hascontentelse}
 		<!-- TODO: What should we display here? -->
-		<p class="wcf-info">There are no notifications for you yet</p>
+		<p class="info">There are no notifications for you yet</p>
 	{/hascontent}
 </section>
-
-<div class="wcf-contentFooter"> </div>
 
 {include file='footer' sandbox=false}
 

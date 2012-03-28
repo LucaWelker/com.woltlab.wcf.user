@@ -8,7 +8,8 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
 {capture assign='sidebar'}
-<nav id="sidebarContent" class="wcf-sidebarContent">
+{*TODO: sidebar content*}
+<nav id="sidebarContent" class="sidebarContent">
 	<div>
 		<fieldset>
 			<legend>sort</legend>
@@ -30,9 +31,8 @@
 					</dd>
 				</dl>
 				
-				<div class="wcf-formSubmit">
+				<div class="formSubmit">
 					<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-					{@SID_INPUT_TAG}
 				</div>
 			</form>
 		</fieldset>
@@ -42,44 +42,54 @@
 
 {include file='header' sandbox=false sidebarOrientation='right'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
-		<h1>{lang}wcf.user.usersOnline{/lang} <span class="wcf-badge">{#$items}</span></h1>
+<header class="box48 boxHeadline">
+	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+	<hgroup>
+		<h1>{lang}wcf.user.usersOnline{/lang} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
-<div class="wcf-contentHeader">
-</div>
-
-<div class="wcf-marginTop">
-	<ol class="wcf-userList">
+{*TODO: group users*}
+<div class="container marginTop shadow">
+	<ol class="containerList userList simpleUserList">
 		{foreach from=$objects item=user}
-			<li class="wcf-listBox">
-				<div class="wcf-container">
+			<li>
+				<div class="box48">
 					{if $user->userID}
-						<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="wcf-containerIcon wcf-userAvatarFramed">{@$user->getAvatar()->getImageTag(48)}</a>
+						<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 						
-						<div class="wcf-containerContent">
-							<h1 class="wcf-username"><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a></h1> <span class="wcf-badge wcf-label">Administrator</span>
-							{* ToDo *}<p class="wcf-userJoinDate">{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</p>
-							{* ToDo *}<p><a href="">Posts: 12.324</a>, <a href="">Likes received: 27.300</a></p>
-							{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
+						<div>
+							<hgroup class="containerHeadline">
+								<h1><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a> <span class="badge wcf-label">Administrator</span></h1> 
+								<h2>{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</h2>
+							</hgroup>
+							
+							{* ToDo *}
+							<dl class="dataList">
+								<dt>Posts</dt>
+								<dd><a href="">12.324</a></dd>
+								<dt>Likes received</dt>
+								<dd><a href="">27.300</a></dd>
+							</dl>
+							
+							{*TODO: current location, browser, ip address*}
+							{if $user->requestURI}<p>request uri: {$user->requestURI}</p>{/if}
 						</div>
 					{else}
-						<img src="" alt="" width="48" height="48" class="wcf-containerIcon wcf-userAvatarFramed" />
-						<div class="wcf-containerContent">
-							<h1 class="wcf-username">Guest</h1>
-							{* ToDo *}
+						{*TODO: guests / search robots*}
+						<img src="" alt="" width="48" height="48" class="framed" />
+						<div>
+							<hgroup class="containerHeadline">
+								<h1>Gast</h1> 
+							</hgroup>
+							
+							{if $user->requestURI}<p>request uri: {$user->requestURI}</p>{/if}
 						</div>
 					{/if}
 				</div>
 			</li>
 		{/foreach}
 	</ol>
-</div>
-
-<div class="wcf-contentFooter">
 </div>
 
 {include file='footer' sandbox=false}

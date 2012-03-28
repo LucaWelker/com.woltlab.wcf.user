@@ -8,7 +8,7 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
 {capture assign='sidebar'}
-
+	{*TODO: sidebar content*}
 {/capture}
 
 {include file='header' sandbox=false sidebarOrientation='right'}
@@ -20,7 +20,7 @@
 	</hgroup>
 </header>
 
-<div class="contentHeader">
+<div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
 </div>
 
@@ -28,7 +28,7 @@
 	{include file='recentActivities' eventList=$objects}
 </div>
 
-<div class="contentFooter">
+<div class="contentNavigation">
 	{@$pagesLinks}
 </div>
 

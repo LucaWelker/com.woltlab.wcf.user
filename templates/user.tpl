@@ -39,6 +39,7 @@
 {capture assign='sidebar'}
 
 <nav id="sidebarContent" class="sidebarContent">
+	{*TODO: css classes*}
 	{* user *}
 	<div class="wcf-menuContainer">
 		<h1 class="wcf-menuHeader wcf-username">{$user->username}</h1>
@@ -96,9 +97,9 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<div class="contentHeader">
+<div class="contentNavigation">
 	<nav>
-		<ul class="wcf-largeButtons" id="profileButtonContainer">
+		<ul id="profileButtonContainer">
 		
 		</ul>
 	</nav>
@@ -121,8 +122,6 @@
 		</div>
 	{/foreach}
 </section>
-
-<div class="contentFooter"></div>
 
 {include file='footer' sandbox=false}
 
