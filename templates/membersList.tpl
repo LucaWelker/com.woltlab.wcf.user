@@ -61,19 +61,7 @@
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 						
 					<div>
-						{*TODO: use snippet template for general user information*}
-						{*TODO: show action buttons (follow, ignore etc.)*}
-						<hgroup class="containerHeadline">
-							<h1><a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{$user->username}</a> <span class="badge wcf-label">Administrator</span></h1> 
-							<h2>{lang}wcf.user.membersList.registrationDate{/lang}{if $user->gender}, {lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}{/if}{if $user->getAge()}, {@$user->getAge()}{/if}{if $user->location}, {lang}wcf.user.membersList.location{/lang}{/if}</h2>
-						</hgroup>
-						
-						<dl class="dataList">
-							<dt>Posts</dt>
-							<dd><a href="">12.324</a></dd>
-							<dt>Likes received</dt>
-							<dd><a href="">27.300</a></dd>
-						</dl>
+						{include file='userInformation' sandbox=false}
 						
 						{*TODO: show additional user information*}
 						{if $user->hobbies}<p>{lang}wcf.user.option.hobbies{/lang}: {$user->hobbies}</p>{/if}
