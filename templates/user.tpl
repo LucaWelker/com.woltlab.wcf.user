@@ -39,63 +39,91 @@
 {capture assign='sidebar'}
 
 <nav id="sidebarContent" class="sidebarContent">
-	{*TODO: css classes*}
-	{* user *}
-	<div class="wcf-menuContainer">
-		<h1 class="wcf-menuHeader wcf-username">{$user->username}</h1>
-		<div class="wcf-sidebarContentGroup">
-			<ul>
-				<li>
-					{if $user->getAvatar()}
-						<div class="wcf-userAvatar" title="{$user->username}">{@$user->getAvatar()->getImageTag()}</div>
-					{/if}
-				</li>
-			</ul>
-		</div>
-	</div>
+	<ul>
+		{if $user->getAvatar()}
+			<li class="sidebarContainer">
+				<div class="userAvatar">{@$user->getAvatar()->getImageTag()}</div>
+			</li>
+		{/if}
 	
-	{* following *}
-	{if $followingCount}
-	<div class="wcf-menuContainer userFollowing">
-		<h1>{lang}wcf.user.profile.following{/lang} <span class="wcf-badge">{#$followingCount}</span></h1>
-		<div class="wcf-sidebarContentGroup">
-			<ul>
-				{foreach from=$following item=followingUser}
-					<li><a href="{link controller='User' object=$followingUser}{/link}" title="{$followingUser->username}" class="wcf-userAvatarFramed jsTooltip">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
-				{/foreach}
-			</ul>
-			{if $followingCount > 0}
-				<p><a id="followingAll" class="wcf-badge wcf-badgeButton javascriptOnly">{lang}wcf.user.profile.following.all{/lang}</a></p>
-			{/if}
-		</div>
-	</div>
-	{/if}
-	
-	{* followers *}
-	{if $followerCount}
-	<div class="wcf-menuContainer userFollowers">
-		<h1>{lang}wcf.user.profile.followers{/lang} <span class="wcf-badge">{#$followerCount}</span></h1>
-		<div class="wcf-sidebarContentGroup">
-			<ul>
-				{foreach from=$followers item=follower}
-					<li><a href="{link controller='User' object=$follower}{/link}" title="{$follower->username}" class="wcf-userAvatarFramed jsTooltip">{@$follower->getAvatar()->getImageTag(32)}</a></li>
-				{/foreach}
-			</ul>
-			{if $followerCount > 0}
-				<p><a id="followerAll" class="wcf-badge wcf-badgeButton javascriptOnly">{lang}wcf.user.profile.followers.all{/lang}</a></p>
-			{/if}
-		</div>
-	</div>
-	{/if}
+		<li class="sidebarContainer">
+			<dl class="dataList">
+				<dt>Beitraege</dt>
+				<dd>12.800</dd>
 				
-	{* profile visitors *}
-	
-	{* placeholder *}
+				<dt>Likes received</dt>
+				<dd>800</dd>
+				
+				<dt>Achievements</dt>
+				<dd>76</dd>
+				
+				<dt>Profilaufrufe</dt>
+				<dd>80.000 (400 pro Tag)</dd>
+			</dl>
+		</li>
+		
+		{if $followingCount}
+			<li class="sidebarContainer">
+				<hgroup class="sidebarContainerHeadline">
+					<h1>{lang}wcf.user.profile.following{/lang} <span class="badge">{#$followingCount}</span></h1>
+				</hgroup>
+				
+				<div>
+					<ul class="framedIconList">
+						{foreach from=$following item=followingUser}
+							<li><a href="{link controller='User' object=$followingUser}{/link}" title="{$followingUser->username}" class="framed jsTooltip">{@$followingUser->getAvatar()->getImageTag(32)}</a></li>
+						{/foreach}
+					</ul>
+					
+					{if $followingCount > 0}
+						<a id="followingAll" class="button more javascriptOnly">{lang}wcf.user.profile.following.all{/lang}</a>
+					{/if}
+				</div>
+			</li>
+		{/if}
+		
+		{if $followerCount}
+			<li class="sidebarContainer">
+				<hgroup class="sidebarContainerHeadline">
+					<h1>{lang}wcf.user.profile.followers{/lang} <span class="badge">{#$followerCount}</span></h1>
+				</hgroup>
+				
+				<div>
+					<ul class="framedIconList">
+						{foreach from=$followers item=follower}
+							<li><a href="{link controller='User' object=$follower}{/link}" title="{$follower->username}" class="framed jsTooltip">{@$follower->getAvatar()->getImageTag(32)}</a></li>
+						{/foreach}
+					</ul>
+						
+					{if $followerCount > 0}
+						<a id="followerAll" class="button more javascriptOnly">{lang}wcf.user.profile.followers.all{/lang}</a>
+					{/if}
+				</div>
+			</li>
+		{/if}
+					
+		{* profile visitors *}
+		
+		{* placeholder *}
+	</ul>
 </nav>
 
 {/capture}
 
 {include file='header' sandbox=false sidebarOrientation='left'}
+
+<header class="boxHeadline">
+	<hgroup>
+		<h1>{$user->username} <span class="badge">Administratorlusche</span></h1>
+		<h2><ul class="dataList">
+			{if $user->gender}<li>{lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}</li>{/if}
+			{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}
+			{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
+			<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
+		</ul></h2>
+		<h3><small>Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</small></h3>
+	</hgroup>
+</header>
 
 <div class="contentNavigation">
 	<nav>
@@ -104,8 +132,8 @@
 		</ul>
 	</nav>
 </div>
-	
-<section id="profileContent" class="tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
+
+<section id="profileContent" class="marginTop tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}

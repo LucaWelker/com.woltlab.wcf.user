@@ -33,7 +33,7 @@
 		<item name="wcf.user.members"><![CDATA[Members]]></item>
 		<item name="wcf.user.recentActivity"><![CDATA[Recent Activity]]></item>
 		<item name="wcf.user.usersOnline"><![CDATA[Users Online]]></item>
-		<item name="wcf.user.membersList.registrationDate"><![CDATA[Joined {@$user->registrationDate|date}]]></item>
+		<item name="wcf.user.membersList.registrationDate"><![CDATA[Member since {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[from {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[My Profile]]></item>
 	</category>
