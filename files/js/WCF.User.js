@@ -1773,3 +1773,99 @@ WCF.User.SignaturePreview = WCF.Message.Preview.extend({
 		$preview.children('div').first().html(data.returnValues.message);
 	}
 });
+
+/**
+ * Loads recent activity events once the user scrolls to the very bottom.
+ * 
+ * @param	integer		userID
+ */
+WCF.User.RecentActivityLoader = Class.extend({
+	/**
+	 * pagination offset
+	 * @var	integer
+	 */
+	_pageNo: 0,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * API reference
+	 * @var	WCF.Action.Scroll
+	 */
+	_scrollAPI: null,
+	
+	/**
+	 * user id
+	 * @var	integer
+	 */
+	_userID: 0,
+	
+	/**
+	 * Initializes a new RecentActivityLoader object.
+	 * 
+	 * @param	integer		userID
+	 */
+	init: function(userID) {
+		this._pageNo = 0;
+		this._userID = userID;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		new WCF.Action.Scroll(300, $.proxy(this._scroll, this));
+	},
+	
+	/**
+	 * Loads next entries once users hits the very bottom.
+	 * 
+	 * @param	WCF.Action.Scroll	api
+	 */
+	_scroll: function(api) {
+		// bind API reference
+		this._scrollAPI = api;
+		
+		// stop event until request was sucessful
+		this._scrollAPI.stop();
+		
+		this._pageNo++;
+		this._proxy.setOption('data', {
+			actionName: 'load',
+			className: 'wcf\\data\\user\\activity\\event\\UserActivityEventAction',
+			parameters: {
+				data: {
+					userID: this._userID,
+					pageNo: this._pageNo
+				}
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		if (data.returnValues.template) {
+			var $listItems = $('' + data.returnValues.template).find('.containerList > li');
+			if ($listItems.length) {
+				var $recentActivities = $('#recentActivities');
+				$listItems.each(function(index, item) {
+					item.appendTo($recentActivities);
+				});
+			}
+		}
+		
+		// resume scroll event handler
+		if (data.returnValues.hasMoreElements) {
+			this._scrollAPI.start();
+		}
+	}
+});
