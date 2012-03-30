@@ -112,7 +112,7 @@
 				<div>
 					<ul class="framedIconList">
 						{foreach from=$visitors item=visitor}
-							<li><a href="{link controller='User' object=$visitor}{/link}" title="{$visitor->username} ({@$visitor->time|plaintime})" class="framed jsTooltip">{@$visitor->getAvatar()->getImageTag(32)}</a></li>
+							<li><a href="{link controller='User' object=$visitor}{/link}" title="{$visitor->username} ({@$visitor->time|plainTime})" class="framed jsTooltip">{@$visitor->getAvatar()->getImageTag(32)}</a></li>
 						{/foreach}
 					</ul>
 						
