@@ -2,8 +2,12 @@
 namespace wcf\page;
 use wcf\data\user\follow\UserFollowerList;
 use wcf\data\user\follow\UserFollowingList;
-use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\user\profile\visitor\UserProfileVisitor;
+use wcf\data\user\profile\visitor\UserProfileVisitorEditor;
+use wcf\data\user\profile\visitor\UserProfileVisitorList;
+use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfile;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\menu\page\PageMenu;
@@ -62,6 +66,12 @@ class UserPage extends AbstractPage {
 	 * @var wcf\data\user\follow\UserFollowingList
 	 */
 	public $followingList = null;
+	
+	/**
+	 * visitor list
+	 * @var wcf\data\user\profile\visitor\UserProfileVisitorList
+	 */
+	public $visitorList = null;
 		
 	/**
 	 * @see wcf\page\IPage::readParameters()
@@ -104,7 +114,10 @@ class UserPage extends AbstractPage {
 		$this->followingList->readObjects();
 		
 		// get visitors
-		
+		$this->visitorList = new UserProfileVisitorList();
+		$this->visitorList->getConditionBuilder()->add('user_profile_visitor.ownerID = ?', array($this->userID));
+		$this->visitorList->sqlLimit = 10;
+		$this->visitorList->readObjects();
 	}
 	
 	/**
@@ -122,6 +135,8 @@ class UserPage extends AbstractPage {
 			'followerCount' => $this->followerList->countObjects(),
 			'following' => $this->followingList->getObjects(),
 			'followingCount' => $this->followingList->countObjects(),
+			'visitors' => $this->visitorList->getObjects(),
+			'visitorCount' => $this->visitorList->countObjects()
 		));
 	}
 	
@@ -130,6 +145,29 @@ class UserPage extends AbstractPage {
 	 */
 	public function show() {
 		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
+		
+		// update profile hits
+		if ($this->user->userID != WCF::getUser()->userID && !WCF::getSession()->spiderID) {
+			$editor = new UserEditor($this->user->getDecoratedObject());
+			$editor->updateCounters(array('profileHits' => 1));
+			
+			// save visitor
+			if (WCF::getUser()->userID && !WCF::getUser()->invisible) {
+				if (($visitor = UserProfileVisitor::getObject($this->user->userID, WCF::getUser()->userID)) !== null) {
+					$editor = new UserProfileVisitorEditor($visitor);
+					$editor->update(array(
+						'time' => TIME_NOW
+					));
+				}
+				else {
+					UserProfileVisitorEditor::create(array(
+						'ownerID' => $this->user->userID,
+						'userID' => WCF::getUser()->userID,
+						'time' => TIME_NOW
+					));
+				}
+			}
+		}
 		
 		parent::show();
 	}

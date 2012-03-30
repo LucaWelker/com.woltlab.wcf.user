@@ -15,6 +15,7 @@ ALTER TABLE wcf1_user ADD signatureCache TEXT;
 ALTER TABLE wcf1_user ADD signatureEnableBBCodes TINYINT(1) NOT NULL DEFAULT 1;
 ALTER TABLE wcf1_user ADD signatureEnableHtml TINYINT(1) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD signatureEnableSmilies TINYINT(1) NOT NULL DEFAULT 1;
+ALTER TABLE wcf1_user ADD profileHits INT(10) NOT NULL DEFAULT 0;
 
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
@@ -184,6 +185,17 @@ CREATE TABLE wcf1_user_activity_event (
 	KEY (packageID, userID)
 );
 
+-- profile visitors
+DROP TABLE IF EXISTS wcf1_user_profile_visitor;
+CREATE TABLE wcf1_user_profile_visitor (
+	visitorID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	ownerID INT(10),
+	userID INT(10),
+	time INT(10) NOT NULL DEFAULT 0,
+	UNIQUE KEY (ownerID, userID),
+	KEY (time)
+);
+
 ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (avatarCategoryID) REFERENCES wcf1_user_avatar_category (avatarCategoryID) ON DELETE SET NULL;
@@ -225,3 +237,6 @@ ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group 
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_user_profile_visitor ADD FOREIGN KEY (ownerID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_profile_visitor ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
