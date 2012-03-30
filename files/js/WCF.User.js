@@ -1265,38 +1265,10 @@ WCF.User.Registration.LostPassword = Class.extend({
 WCF.Notification = {};
 
 /**
- * Notification handler, delegates business logic.
+ * Notification Overlay.
  */
 WCF.Notification.Handler = function() { this.init(); };
 WCF.Notification.Handler.prototype = {
-	/**
-	 * overlay object
-	 * @var	WCF.Notification.Overlay
-	 */
-	_overlay: null,
-	
-	/**
-	 * Initializes notification handler.
-	 */
-	init: function() {
-		$('#userNotifications').click($.proxy(this._showOverlay, this));
-	},
-	
-	/**
-	 * Displays notification overlay.
-	 */
-	_showOverlay: function() {
-		if (this._overlay === null) {
-			this._overlay = new WCF.Notification.Overlay();
-		}
-	}
-};
-
-/**
- * Notification overlay, created at runtime.
- */
-WCF.Notification.Overlay = function() { this.init(); };
-WCF.Notification.Overlay.prototype = {
 	/**
 	 * scrollable API
 	 * @var	jquery.fn.scrollable
@@ -1308,6 +1280,12 @@ WCF.Notification.Overlay.prototype = {
 	 * @var	jQuery
 	 */
 	_container: null,
+	
+	/**
+	 * initialization state
+	 * @var	boolean
+	 */
+	_didInit: false,
 
 	/**
 	 * notification list
@@ -1328,29 +1306,25 @@ WCF.Notification.Overlay.prototype = {
 	_notificationID: 0,
 	
 	/**
-	 * overlay state
-	 * @var	boolean
-	 */
-	_isOpen: false,
-	
-	/**
 	 * Creates a new overlay on init.
 	 */
 	init: function() {
-		this._createOverlay();
+		WCF.Dropdown.registerCallback('userNotifications', $.proxy(this._createOverlay, this));
 	},
 	
 	/**
 	 * Creates the notification overlay.
 	 */
 	_createOverlay: function() {
-		$('<div class="wcf-dropdown userNotificationContainer"><div id="userNotificationContainer" class="scrollableContainer"><div class="scrollableItems"><div><p>' + WCF.Language.get('wcf.global.loading') + '</p></div><div><p>' + WCF.Language.get('wcf.global.loading') + '</p></div></div></div></div>').appendTo($('#userNotifications'));
+		if (this._didInit) {
+			return;
+		}
+		
+		this._didInit = true;
 		this._container = $('#userNotificationContainer');
 		var $itemsContainer = this._container.find('div.scrollableItems').click(function(event) { event.stopPropagation(); });
 		this._listContainer = $itemsContainer.children('div:eq(0)');
 		this._messageContainer = $itemsContainer.children('div:eq(1)');
-
-		WCF.CloseOverlayHandler.addCallback('userNotificationContainer', $.proxy(this.close, this));
 		
 		// initialize scrollable API
 		this._container.scrollable({
@@ -1429,46 +1403,12 @@ WCF.Notification.Overlay.prototype = {
 	 * Displays list of notification items.
 	 */
 	showList: function() {
-		this.open();
 		this._api.prev();
 		
 		var $listHeight = this._listContainer.getDimensions();
 		this._container.animate({
 			height: $listHeight.height + 'px'
 		}, 200);
-	},
-	
-	/**
-	 * Returns true if overlay is active and visible.
-	 * 
-	 * @return	boolean
-	 */
-	isOpen: function() {
-		return this._isOpen;
-	},
-	
-	/**
-	 * Closes the overlay.
-	 */
-	close: function() {
-		if (!this.isOpen()) {
-			return;
-		}
-
-		this._container.parent().hide();
-		this._isOpen = false;
-	},
-	
-	/**
-	 * Displays the overlay.
-	 */
-	open: function() {
-		if (this.isOpen()) {
-			return;
-		}
-
-		this._container.parent().show();
-		this._isOpen = true;
 	}
 };
 

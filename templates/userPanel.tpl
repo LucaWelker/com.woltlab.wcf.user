@@ -19,7 +19,19 @@
 	
 	<!-- user notifications -->
 	<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<a>{lang}wcf.user.notification.notifications{/lang}{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="wcf-badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+		<a class="dropdownToggle" data-toggle="userNotifications">{lang}wcf.user.notification.notifications{/lang}{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+		<div class="dropdownMenu userNotificationContainer">
+			<div id="userNotificationContainer" class="scrollableContainer">
+				<div class="scrollableItems cleafix">
+					<div>
+						<p>{lang}wcf.global.loading{/lang}</p>
+					</div>
+					<div>
+						<p>{lang}wcf.global.loading{/lang}</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</li>
 {else}
 	{if !$__disableLoginLink|isset}
