@@ -1854,11 +1854,12 @@ WCF.User.RecentActivityLoader = Class.extend({
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (data.returnValues.template) {
-			var $listItems = $('' + data.returnValues.template).find('.containerList > li');
+			var $listItems = $('<div>' + data.returnValues.template + '</div>').find('.containerList > li');
 			if ($listItems.length) {
 				var $recentActivities = $('#recentActivities');
+				console.debug($recentActivities.find('li'));
 				$listItems.each(function(index, item) {
-					item.appendTo($recentActivities);
+					$(item).appendTo($recentActivities);
 				});
 			}
 		}

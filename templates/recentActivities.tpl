@@ -2,7 +2,7 @@
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
-			new WCF.User.RecentActivityLoader({@$user->userID});
+			new WCF.User.RecentActivityLoader({@$userID});
 		});
 		//]]>
 	</script>
