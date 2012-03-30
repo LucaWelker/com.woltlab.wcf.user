@@ -348,4 +348,13 @@ class UserProfile extends DatabaseObjectDecorator {
 		
 		return $this->__age;
 	}
+	
+	/**
+	 * Returns the age of user account in days.
+	 * 
+	 * @return	integer
+	 */
+	public function getProfileAge() {
+		return (TIME_NOW - $this->registrationDate) / 86400;
+	}
 }

@@ -1,7 +1,7 @@
 {include file="documentHeader"}
 
 <head>
-	<title>{lang}wcf.user.register.newActivationCode{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+	<title>{lang}wcf.user.register.newActivationCode{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude' sandbox=false}
 </head>
 

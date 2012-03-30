@@ -1,7 +1,7 @@
 {include file="documentHeader"}
 
 <head>
-	<title>{lang}wcf.user.lostPassword.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+	<title>{lang}wcf.user.lostPassword.title{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude' sandbox=false}
 	
 	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
