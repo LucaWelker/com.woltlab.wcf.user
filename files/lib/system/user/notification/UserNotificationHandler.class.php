@@ -55,12 +55,18 @@ class UserNotificationHandler extends SingletonFactory {
 	protected $notificationTypes = null;
 	
 	/**
+	 * list of object types
+	 * @var	array<wcf\data\object\type\ObjectType>
+	 */
+	protected $objectTypes = array();
+	
+	/**
 	 * @see wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
 		// get available object types
-		$this->availableObjectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.notification.objectType');
-		foreach ($this->availableObjectTypes as $typeName => $object) {
+		$this->objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.notification.objectType');
+		foreach ($this->objectTypes as $typeName => $object) {
 			$this->availableObjectTypes[$typeName] = $object->getProcessor();
 		}
 		
@@ -508,5 +514,33 @@ class UserNotificationHandler extends SingletonFactory {
 	 */
 	public function getAvailableEvents() {
 		return $this->availableEvents;
+	}
+	
+	/**
+	 * Returns object type id by name.
+	 * 
+	 * @param	string		$objectType
+	 * @return	integer
+	 */
+	public function getObjectTypeID($objectType) {
+		if (isset($this->objectTypes[$objectType])) {
+			return $this->objectTypes[$objectType]->objectTypeID;
+		}
+		
+		return 0;
+	}
+	
+	/**
+	 * Returns object type by name.
+	 * 
+	 * @param	string		$objectType
+	 * @return	object
+	 */
+	public function getObjectTypeProcessor($objectType) {
+		if (isset($this->availableObjectTypes[$objectType])) {
+			return $this->availableObjectTypes[$objectType];
+		}
+		
+		return null;
 	}
 }

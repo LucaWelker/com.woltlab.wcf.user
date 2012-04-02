@@ -6,5 +6,10 @@
 			<objecttype>com.woltlab.wcf.user.follow</objecttype>
 			<classname>wcf\system\user\notification\event\UserFollowFollowingUserNotificationEvent</classname>
 		</event>
+		
+		<event>
+			<name>userProfileComment</name>
+			<objecttype>com.woltlab.wcf.user.comment</objecttype>
+		</event>
 	</import>
 </data>
