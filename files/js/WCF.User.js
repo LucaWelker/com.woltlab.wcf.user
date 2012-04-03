@@ -1363,8 +1363,8 @@ WCF.Notification.Handler.prototype = {
 	_showMessage: function(event) {
 		// consume event and discard it
 		event.stopPropagation();
-
-		var $item = $(event.target);
+		
+		var $item = $(event.currentTarget);
 		
 		// set notification id
 		this._notificationID = $item.data('notificationID');
@@ -1607,7 +1607,7 @@ WCF.Notification.Loader.prototype = {
 		for (var i in data.returnValues.notifications) {
 			var $notification = data.returnValues.notifications[i];
 			
-			var $item = $('<li>' + $notification.label + '</li>').data('notificationID', $notification.notificationID).data('message', $notification.message);
+			var $item = $('' + $notification.template).data('notificationID', $notification.notificationID).data('message', $notification.message);
 			$item.appendTo($notificationList);
 		}
 		

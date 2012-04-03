@@ -291,7 +291,7 @@ class UserNotificationHandler extends SingletonFactory {
 	 * @param	boolean		$detailedView
 	 * @return	array<array>
 	 */	
-	public function getNotifications($limit = 10, $offset = 0, $detailedView = false) {
+	public function getNotifications($limit = 5, $offset = 0, $detailedView = false) {
 		// build enormous query
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("notification_to_user.userID = ?", array(WCF::getUser()->userID));
@@ -391,10 +391,16 @@ class UserNotificationHandler extends SingletonFactory {
 				);
 			}
 			else {
-				$data = array(
-					'notificationID' => $event['notificationID'],
+				WCF::getTPL()->assign(array(
+					'author' => $class->getAuthor(),
 					'label' => $class->getShortOutput(),
-					'message' => $class->getRenderedOutput()
+					'time' => $event['time']
+				));
+				
+				$data = array(
+					'message' => $class->getRenderedOutput(),
+					'notificationID' => $event['notificationID'],
+					'template' => WCF::getTPL()->fetch('userNotificationItem')
 				);
 			}
 			
