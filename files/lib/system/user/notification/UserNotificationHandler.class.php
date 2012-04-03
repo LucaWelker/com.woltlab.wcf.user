@@ -432,6 +432,9 @@ class UserNotificationHandler extends SingletonFactory {
 			$notificationID,
 			WCF::getUser()->userID
 		));
+		
+		// reset notification count
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
 	}
 	
 	/**
