@@ -20,7 +20,7 @@ class UserNotificationEditor extends DatabaseObjectEditor {
 	protected static $baseClass = 'wcf\data\user\notification\UserNotification';
 	
 	/**
-	 * @see EditableObject::create()
+	 * @see	wcf\system\IEditableObject::create()
 	 */
 	public static function create(array $parameters = array()) {
 		$recipientIDs = array();
@@ -32,7 +32,7 @@ class UserNotificationEditor extends DatabaseObjectEditor {
 		$notification = parent::create($parameters);
 		
 		// save recpients
-		if (count($recipientIDs)) {
+		if (!empty($recipientIDs)) {
 			$sql = "INSERT INTO	wcf".WCF_N."_user_notification_to_user
 						(notificationID, userID)
 				VALUES		(?, ?)";

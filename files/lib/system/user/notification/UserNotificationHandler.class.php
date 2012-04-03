@@ -116,20 +116,16 @@ class UserNotificationHandler extends SingletonFactory {
 			$notification = $result['returnValues'];
 			
 			// sends notifications
-			$userIDs = array();
-			foreach ($recipientList as $recipient) {
+			foreach ($recipientList->getObjects() as $recipient) {
 				foreach ($recipient->getNotificationTypes($event->eventID) as $notificationType) {
 					if ($event->supportsNotificationType($notificationType)) {
 						$notificationType->send($notification, $recipient, $event);
-						$userIDs[] = $recipient->userID;
 					}
 				}
 			}
 			
 			// reset notification count
-			if (!empty($userIDs)) {
-				UserStorageHandler::getInstance()->reset($userIDs, 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
-			}
+			UserStorageHandler::getInstance()->reset($recipientList->getObjectIDs(), 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
 		}
 	}
 	
