@@ -22,7 +22,7 @@
 	
 	<!-- user notifications -->
 	<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<a class="dropdownToggle" data-toggle="userNotifications">{lang}wcf.user.notification.notifications{/lang} <span class="badge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></a>
+		<a class="dropdownToggle" data-toggle="userNotifications">{lang}wcf.user.notification.notifications{/lang} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></a>
 		<div class="dropdownMenu userNotificationContainer">
 			<div id="userNotificationContainer" class="scrollableContainer">
 				<div class="scrollableItems cleafix">
