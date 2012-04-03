@@ -23,9 +23,9 @@ use wcf\system\WCF;
  * Handles user notifications.
  *
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2011 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf.notification
+ * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification
  * @category 	Community Framework
  */
@@ -101,7 +101,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$recipientList->getConditionBuilder()->add('event_to_user.eventID = ?', array($event->eventID));
 		$recipientList->getConditionBuilder()->add('user_table.userID IN (?)', array($recipientIDs));
 		$recipientList->readObjects();
-		if (count($recipientList->getObjectIDs())) {
+		if (count($recipientList)) {
 			// save notification
 			$action = new UserNotificationAction(array(), 'create', array('data' => array(
 				'packageID' => $objectTypeObject->packageID,
@@ -116,12 +116,19 @@ class UserNotificationHandler extends SingletonFactory {
 			$notification = $result['returnValues'];
 			
 			// sends notifications
-			foreach ($recipientList->getObjects() as $recipient) {
+			$userIDs = array();
+			foreach ($recipientList as $recipient) {
 				foreach ($recipient->getNotificationTypes($event->eventID) as $notificationType) {
 					if ($event->supportsNotificationType($notificationType)) {
 						$notificationType->send($notification, $recipient, $event);
+						$userIDs[] = $recipient->userID;
 					}
 				}
+			}
+			
+			// reset notification count
+			if (!empty($userIDs)) {
+				UserStorageHandler::getInstance()->reset($userIDs, 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
 			}
 		}
 	}
@@ -269,7 +276,7 @@ class UserNotificationHandler extends SingletonFactory {
 					$this->notificationCount = $row['count'];
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'userNotificationCount', serialize($this->notificationCount), 1);
+					UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'userNotificationCount', serialize($this->notificationCount), PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
 				}
 				else {
 					$this->notificationCount = unserialize($data[WCF::getUser()->userID]);
