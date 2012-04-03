@@ -1,7 +1,7 @@
 <div class="userNotificationDetails">
-	<header class="box128 boxHeadline">
+	<header class="box64 boxHeadline">
 		<a href="{link controller='User' object=$author}{/link}" title="{$author->username}" class="framed">
-			{@$author->getAvatar()->getImageTag(128)}
+			{@$author->getAvatar()->getImageTag(64)}
 		</a>
 		<hgroup>
 			<h1 class="wcf-username">{$author->username}</h1>
