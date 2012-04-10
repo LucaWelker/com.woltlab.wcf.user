@@ -27,9 +27,8 @@
 </header>
 
 {*TODO: pagination?*}
-
-<div class="container marginTop shadow">
-	{hascontent}
+{hascontent}
+	<div class="container marginTop shadow">
 		<ul class="containerList">
 			{content}
 				{foreach from=$notifications[notifications] item=$notification}
@@ -52,11 +51,11 @@
 				{/foreach}
 			{/content}
 		</ul>
-	{hascontentelse}
-		<!-- TODO: What should we display here? -->
-		<p class="info">There are no notifications for you yet</p>
-	{/hascontent}
-</section>
+	</div>
+{hascontentelse}
+	<!-- TODO: What should we display here? -->
+	<p class="info">There are no notifications for you yet</p>
+{/hascontent}
 
 {include file='footer' sandbox=false}
 
