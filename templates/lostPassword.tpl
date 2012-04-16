@@ -18,8 +18,7 @@
 
 {include file='header' sandbox=false}
 
-<header class="box48 boxHeadline">
-	<img src="{icon}logIn1{/icon}" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.lostPassword.title{/lang}</h1>
 	</hgroup>

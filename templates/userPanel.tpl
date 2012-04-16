@@ -43,40 +43,43 @@
 			<a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a>
 			<div id="loginForm" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
-					<dl>
-						<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
-						<dd>
-							<input type="text" id="username" name="username" value="" required="required" autofocus="autofocus" class="long" />
-						</dd>
-					</dl>
-					
-					<dl>
-						<dt>{lang}wcf.user.login.action{/lang}</dt>
-						<dd>
-							<label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label>
-						</dd>
-						<dd>
-							<label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label>
-						</dd>
-					</dl>
-					
-					<dl>
-						<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
-						<dd>
-							<input type="password" id="password" name="password" value="" class="long" />
-						</dd>
-					</dl>
-					
-					<dl>
-						<dd>
-							<label for="useCookies"><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label>
-						</dd>
-					</dl>
-					
-					<div class="formSubmit">
-						<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
-						<input type="hidden" name="url" value="{$__wcf->session->requestURI}" />
-					</div>
+					<fieldset>
+						<dl>
+							<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
+							<dd>
+								<input type="text" id="username" name="username" value="" required="required" autofocus="autofocus" class="long" />
+							</dd>
+						</dl>
+						
+						<dl>
+							<dt>{lang}wcf.user.login.action{/lang}</dt>
+							<dd>
+								<fieldset>
+									<dl>
+										<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
+										<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
+								</fieldset>
+							</dd>
+						</dl>
+						
+						<dl>
+							<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
+							<dd>
+								<input type="password" id="password" name="password" value="" class="long" />
+							</dd>
+						</dl>
+						
+						<dl>
+							<dd>
+								<label for="useCookies"><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label>
+							</dd>
+						</dl>
+						
+						<div class="formSubmit">
+							<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
+							<input type="hidden" name="url" value="{$__wcf->session->requestURI}" />
+						</div>
+					</fieldset>
 				</form>
 			</div>
 			

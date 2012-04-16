@@ -9,8 +9,7 @@
 
 {include file='header' sandbox=false}
 
-<header class="box48 boxHeadline">
-	<img src="{icon}register1.svg{/icon}" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.register.newActivationCode{/lang}</h1>
 	</hgroup>

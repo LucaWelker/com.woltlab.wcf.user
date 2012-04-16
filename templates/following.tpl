@@ -43,8 +43,7 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="box48 boxHeadline"> 
-	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+<header class="boxHeadline"> 
 	<hgroup >
 		<h1>{lang}wcf.user.following.title{/lang} <span class="badge jsFollowingBadge">{#$count}</span></h1>
 	</hgroup>

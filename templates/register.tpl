@@ -37,8 +37,7 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
-<header class="box48 boxHeadline">
-	<img src="{icon size='L'}logIn1{/icon}" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.register{/lang}</h1>
 	</hgroup>

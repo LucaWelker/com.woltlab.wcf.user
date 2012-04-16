@@ -19,8 +19,7 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="box48 boxHeadline">
-	<img src="{icon size='L'}users1{/icon}" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.staticOptions.title{/lang}</h1>
 	</hgroup>
@@ -40,10 +39,6 @@
 		</nav>
 		
 		<div id="general" class="tabMenuContainer container containerPadding shadow tabMenuContent">
-			<hgroup class="boxSubHeadline">
-				<h1>{lang}wcf.user.staticOptions.category.general{/lang}</h1>
-			</hgroup>
-			
 			<fieldset>
 				<legend>{lang}wcf.user.staticOptions.language{/lang}</legend>
 				
@@ -74,10 +69,6 @@
 		</div>
 		
 		<div id="display" class="tabMenuContainer container containerPadding shadow tabMenuContent">
-			<hgroup class="boxSubHeadline">
-				<h1>{lang}wcf.user.staticOptions.category.display{/lang}</h1>
-			</hgroup>
-			
 			<fieldset>
 				<legend>{lang}wcf.user.staticOptions.style{/lang}</legend>
 				

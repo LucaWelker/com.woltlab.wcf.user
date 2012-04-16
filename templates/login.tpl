@@ -18,8 +18,7 @@
 <body id="tpl{$templateName|ucfirst}">
 {include file='header' sandbox=false __disableLoginLink=true}
 
-<header class="box48 boxHeadline">
-	<img src="{icon size='L'}logIn1{/icon}" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.login{/lang}</h1>
 	</hgroup>

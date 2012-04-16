@@ -53,10 +53,6 @@
 				
 				{foreach from=$categoryLevel1[categories] item=categoryLevel2}
 					<div id="{@$categoryLevel1[object]->categoryName}-{@$categoryLevel2[object]->categoryName}" class="hidden containerPadding">
-						<hgroup class="boxSubHeadline">
-							<h1>{lang}wcf.user.option.category.{@$categoryLevel2[object]->categoryName}{/lang}</h1>
-						</hgroup>
-						
 						{foreach from=$categoryLevel2[categories] item=categoryLevel3}
 							<fieldset>
 								<legend>{lang}wcf.user.option.category.{@$categoryLevel3[object]->categoryName}{/lang}</legend>

@@ -140,7 +140,7 @@
 			{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
 			<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
 		</ul></h2>
-		<h3><small>{*TODO: last activity*}Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</small></h3>
+		<h3>{*TODO: last activity*}Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</h3>
 	</hgroup>
 </header>
 

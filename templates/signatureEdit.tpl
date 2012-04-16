@@ -24,8 +24,7 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="box48 boxHeadline">
-	<img src="{icon size='L'}add1{/icon}" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.signature.title{/lang}</h1>
 	</hgroup>
