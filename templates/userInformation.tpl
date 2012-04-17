@@ -10,6 +10,6 @@
 	</ul></h2>
 </hgroup>
 
-<dl class="dataList">
+<dl class="inlineDataList">
 	{event name='statistics'}
 </dl>

@@ -59,7 +59,7 @@
 				<dd>76</dd>
 				
 				<dt>{lang}wcf.user.profileHits{/lang}</dt>
-				<dd>{#$user->profileHits}{if $user->getProfileAge() > 1} ({lang}wcf.user.profileHits.hitsPerDay{/lang}){/if}</dd>
+				<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
 			</dl>
 		</li>
 		
