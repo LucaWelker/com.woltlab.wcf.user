@@ -48,7 +48,7 @@
 	
 		<li class="sidebarContainer">
 			{*TODO: stats*}
-			<dl class="dataList">
+			<dl class="statsDataList">
 				<dt>Beitraege</dt>
 				<dd>12.800</dd>
 				
