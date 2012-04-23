@@ -36,6 +36,8 @@
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Mitglied seit {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[aus {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[Mein Profil]]></item>
+		<item name="wcf.user.profileHits"><![CDATA[Profil-Aufrufe]]></item>
+		<item name="wcf.user.profileHits.hitsPerDay"><![CDATA[{#$user->profileHits/$user->getProfileAge()} Aufrufe pro Tag]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

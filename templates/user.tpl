@@ -47,16 +47,8 @@
 		{/if}
 	
 		<li class="sidebarContainer">
-			{*TODO: stats*}
 			<dl class="statsDataList">
-				<dt>Beitraege</dt>
-				<dd>12.800</dd>
-				
-				<dt>Likes received</dt>
-				<dd>800</dd>
-				
-				<dt>Achievements</dt>
-				<dd>76</dd>
+				{event name='statistics'}
 				
 				<dt>{lang}wcf.user.profileHits{/lang}</dt>
 				<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
