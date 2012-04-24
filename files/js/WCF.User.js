@@ -1810,3 +1810,64 @@ WCF.User.RecentActivityLoader = Class.extend({
 		}
 	}
 });
+
+/**
+ * Loads user profile previews.
+ * 
+ * @see	WCF.Popover
+ */
+WCF.User.ProfilePreview = WCF.Popover.extend({
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * list of user profiles
+	 * @var	object
+	 */
+	_userProfiles: { },
+	
+	/**
+	 * @see	WCF.Popover.init()
+	 */
+	init: function() {
+		this._super('.userLink');
+		
+		this._proxy = new WCF.Action.Proxy({
+			showLoadingOverlay: false,
+		});
+	},
+	
+	/**
+	 * @see	WCF.Popover._loadContent()
+	 */
+	_loadContent: function() {
+		var $element = $('#' + this._activeElementID);
+		var $userID = $element.data('userID');
+		
+		if (this._userProfiles[$userID]) {
+			// use cached user profile
+			this._insertContent(this._activeElementID, this._userProfiles[$userID], true);
+		}
+		else {
+			this._proxy.setOption('data', {
+				actionName: 'getUserProfile',
+				className: 'wcf\\data\\user\\UserProfileAction',
+				objectIDs: [ $userID ]
+			});
+			
+			var $elementID = this._activeElementID;
+			var self = this;
+			this._proxy.setOption('success', function(data, textStatus, jqXHR) {
+				// cache user profile
+				self._userProfiles[$userID] = data.returnValues.template;
+				
+				// show user profile
+				self._insertContent($elementID, data.returnValues.template, true);
+			});
+			this._proxy.sendRequest();
+		}
+	}
+});

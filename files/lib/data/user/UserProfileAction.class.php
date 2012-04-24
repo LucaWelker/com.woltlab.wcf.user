@@ -17,6 +17,11 @@ use wcf\util\StringUtil;
  */
 class UserProfileAction extends UserAction {
 	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('getUserProfile');
+	
+	/**
 	 * Validates parameters for signature preview.
 	 */
 	public function validateGetMessagePreview() {
@@ -51,6 +56,48 @@ class UserProfileAction extends UserAction {
 		
 		return array(
 			'message' => $preview
+		);
+	}
+	
+	/**
+	 * Validates user profile preview.
+	 */
+	public function validateGetUserProfile() {
+		switch (count($this->objectIDs)) {
+			case 0:
+				throw new ValidateActionException("Missing user id");
+			break;
+			
+			case 1:
+				// we're fine
+			break;
+			
+			default:
+				// more than one user id is pointless
+				throw new ValidateActionException("Invalid parameter for user id given");
+			break;
+		}
+	}
+	
+	/**
+	 * Returns user profile preview.
+	 * 
+	 * @return	array
+	 */
+	public function getUserProfile() {
+		$userID = reset($this->objectIDs);
+		
+		$userProfileList = new UserProfileList();
+		$userProfileList->getConditionBuilder()->add("user_table.userID = ?", array($userID));
+		$userProfileList->readObjects();
+		$userProfiles = $userProfileList->getObjects();
+		
+		WCF::getTPL()->assign(array(
+			'user' => reset($userProfiles)
+		));
+		
+		return array(
+			'template' => WCF::getTPL()->fetch('userProfilePreview')
 		);
 	}
 }
