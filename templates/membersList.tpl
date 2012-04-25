@@ -59,7 +59,7 @@
 				<div class="box48">
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 						
-					<div>
+					<div class="userInformation">
 						{include file='userInformation' sandbox=false}
 						
 						{*TODO: show additional user information*}
