@@ -74,6 +74,7 @@
 				</dl>
 			{/if}
 			
+			{event name='additionalFields'}
 			{*TODO: add lost password link*}
 		</fieldset>
 	</div>

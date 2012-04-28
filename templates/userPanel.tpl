@@ -75,6 +75,8 @@
 							</dd>
 						</dl>
 						
+						{event name='additionalLoginFields'}
+						
 						<div class="formSubmit">
 							<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
 							<input type="hidden" name="url" value="{$__wcf->session->requestURI}" />
