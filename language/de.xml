@@ -38,6 +38,8 @@
 		<item name="wcf.user.myProfile"><![CDATA[Mein Profil]]></item>
 		<item name="wcf.user.profileHits"><![CDATA[Profil-Aufrufe]]></item>
 		<item name="wcf.user.profileHits.hitsPerDay"><![CDATA[{#$user->profileHits/$user->getProfileAge()} Aufrufe pro Tag]]></item>
+		<item name="wcf.user.online"><![CDATA[Online]]></item>
+		<item name="wcf.user.online.title"><![CDATA[&raquo;{$username}&laquo; ist online]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
