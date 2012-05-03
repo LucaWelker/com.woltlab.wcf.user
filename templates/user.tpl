@@ -10,10 +10,10 @@
 		$(function() {
 			{if $__wcf->getUser()->userID && $__wcf->getUser()->userID != $user->userID}
 				WCF.Language.addObject({
-					'wcf.user.profile.followUser': 'follow',
-					'wcf.user.profile.unfollowUser': 'unfollow',
-					'wcf.user.profile.ignoreUser': 'ignore user',
-					'wcf.user.profile.unignoreUser': 'unignore user'
+					'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
+					'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
+					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
+					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
 				});
 
 				new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
@@ -123,7 +123,7 @@
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
-<header class="boxHeadline">
+<header class="boxHeadline userHeadline">
 	<hgroup>
 		<h1>{$user->username} {*TODO: user rank*}<span class="badge">Administratorlusche</span></h1>
 		<h2><ul class="dataList">
@@ -134,22 +134,16 @@
 		</ul></h2>
 		<h3>{*TODO: last activity*}Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</h3>
 	</hgroup>
+	
+	<ul id="profileButtonContainer" class="buttonList">
+	</ul>
 </header>
-
-{*TODO: buttons*}
-<div class="contentNavigation">
-	<nav>
-		<ul id="profileButtonContainer">
-		
-		</ul>
-	</nav>
-</div>
 
 <section id="profileContent" class="marginTop tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-				<li><a href="#{$menuItem->getIdentifier()}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}{@$menuItem->menuItem}{/lang}</a></li>
+				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
 			{/foreach}
 		</ul>
 	</nav>

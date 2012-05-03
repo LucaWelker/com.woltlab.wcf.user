@@ -162,7 +162,7 @@ WCF.User.Profile.Follow = Class.extend({
 	 * Creates the (un-)follow button
 	 */
 	_createButton: function () {
-		this._button = $('<button id="followUser">follow</button>').appendTo($('#profileButtonContainer'));
+		this._button = $('<li id="followUser"><a class="button">'+WCF.Language.get('wcf.user.button.follow')+'</a></li>').appendTo($('#profileButtonContainer'));
 		this._button.click($.proxy(this._execute, this));
 	},
 	
@@ -187,13 +187,16 @@ WCF.User.Profile.Follow = Class.extend({
 	 * Displays current follow state.
 	 */
 	_showButton: function () {
-		var $label = 'follow';
-		if(this._following) {
-			$label = 'unfollow';
+		var $label = WCF.Language.get('wcf.user.button.follow');
+		if (this._following) {
+			$label = WCF.Language.get('wcf.user.button.unfollow');
 		}
 
 		// update label
-		this._button.text($label);
+		this._button.find('.button').text($label);
+		
+		if (this._following) this._button.find('.button').addClass('active');
+		else this._button.find('.button').removeClass('active');
 	},
 	
 	/**
@@ -296,10 +299,12 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 	 */
 	_updateButton: function() {
 		if (this._button === null) {
-			this._button = $('<button id="ignoreUser"></button>').appendTo($('#profileButtonContainer'));
+			this._button = $('<li id="ignoreUser"><a class="button"></a></li>').appendTo($('#profileButtonContainer'));
 		}
 
-		this._button.text(WCF.Language.get('wcf.user.profile.' + (this._isIgnoredUser ? 'un' : '') + 'ignoreUser'));
+		this._button.find('.button').text(WCF.Language.get('wcf.user.button.' + (this._isIgnoredUser ? 'un' : '') + 'ignore'));
+		if (this._isIgnoredUser) this._button.find('.button').addClass('active');
+		else this._button.find('.button').removeClass('active');
 	}
 });
 
@@ -491,9 +496,10 @@ WCF.User.Profile.Editor.Handler = {
 		// create interface elements
 		this._ui = {
 			buttons: {
-				beginEdit: $('<button id="beginEdit">beginEdit</button>').data('action', 'beginEdit').appendTo($buttonContainer),
-				restore: $('<button id="restore">restore</button>').data('action', 'restore').appendTo($buttonContainer),
-				save: $('<button id="save">save</button>').data('action', 'save').appendTo($buttonContainer)
+				beginEdit: $('<li id="beginEdit"><a class="button">'+WCF.Language.get('wcf.user.editProfile')+'</a></li>').data('action', 'beginEdit').appendTo($buttonContainer),
+				// todo: move buttons to the end of the form
+				restore: $('<button id="restore">'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').appendTo($buttonContainer),
+				save: $('<button id="save">'+WCF.Language.get('wcf.global.button.submit')+'</button>').data('action', 'save').appendTo($buttonContainer)
 			}
 		};
 
@@ -789,7 +795,7 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 	/**
 	 * @see	WCF.User.Profile.Editor.Base._containerID
 	 */
-	_containerID: 'wcf_user_profile_menu_information',
+	_containerID: 'about',
 
 	/**
 	 * @see	WCF.User.Profile.Editor.Base._name
@@ -801,7 +807,7 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 	 */
 	beginEdit: function() {
 		// show tab
-		$('#profileContent').wcfTabs('select', 'wcf_user_profile_menu_information');
+		$('#profileContent').wcfTabs('select', 'about');
 		
 		return this._super();
 	},

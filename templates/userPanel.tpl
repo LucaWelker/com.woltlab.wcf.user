@@ -11,8 +11,10 @@
 					<h2>{lang}wcf.user.myProfile{/lang}</h2>
 				</hgroup>
 			</a></li>
-			<li><a href="{link controller='ProfileEdit'}{/link}">Edit Profile</a></li>
+			<li><a href="{link controller='User' object=$__wcf->user}{/link}#about">{lang}wcf.user.editProfile{/lang}</a></li>
+			<li><a href="{link controller='StaticOptions'}{/link}">{lang}wcf.user.menu.settings{/lang}</a></li>
 			{if $__wcf->session->getPermission('admin.general.canUseAcp')}
+				<li class="dropdownDivider"></li>
 				<li><a href="acp/index.php">ACP</a></li>
 			{/if}
 			<li class="dropdownDivider"></li>
@@ -54,11 +56,8 @@
 						<dl>
 							<dt>{lang}wcf.user.login.action{/lang}</dt>
 							<dd>
-								<fieldset>
-									<dl>
-										<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
-										<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
-								</fieldset>
+								<label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label>
+								<label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label>
 							</dd>
 						</dl>
 						
@@ -70,9 +69,7 @@
 						</dl>
 						
 						<dl>
-							<dd>
-								<label for="useCookies"><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label>
-							</dd>
+							<dd><label><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label></dd>
 						</dl>
 						
 						<div class="formSubmit">

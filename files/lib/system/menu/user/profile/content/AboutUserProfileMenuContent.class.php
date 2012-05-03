@@ -16,7 +16,7 @@ use wcf\system\WCF;
  * @subpackage	system.menu.user.profile.content
  * @category 	Community Framework
  */
-class InformationUserProfileMenuContent extends SingletonFactory implements IUserProfileMenuContent {
+class AboutUserProfileMenuContent extends SingletonFactory implements IUserProfileMenuContent {
 	/**
 	 * cache name
 	 * @var string

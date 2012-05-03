@@ -36,10 +36,15 @@
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Mitglied seit {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[aus {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[Mein Profil]]></item>
+		<item name="wcf.user.editProfile"><![CDATA[Profil bearbeiten]]></item>
 		<item name="wcf.user.profileHits"><![CDATA[Profil-Aufrufe]]></item>
 		<item name="wcf.user.profileHits.hitsPerDay"><![CDATA[{#$user->profileHits/$user->getProfileAge()} Aufrufe pro Tag]]></item>
 		<item name="wcf.user.online"><![CDATA[Online]]></item>
 		<item name="wcf.user.online.title"><![CDATA[&raquo;{$username}&laquo; ist online]]></item>
+		<item name="wcf.user.button.follow"><![CDATA[Folgen]]></item>
+		<item name="wcf.user.button.unfollow"><![CDATA[Entfolgen]]></item>
+		<item name="wcf.user.button.ignore"><![CDATA[Blockieren]]></item>
+		<item name="wcf.user.button.unignore"><![CDATA[Nicht mehr blockieren]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
@@ -54,7 +59,7 @@
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.menu.information"><![CDATA[Über mich]]></item>
+		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.profile.following"><![CDATA[{$user->username} folgt]]></item>
 		<item name="wcf.user.profile.following.all"><![CDATA[Alle anzeigen]]></item>
