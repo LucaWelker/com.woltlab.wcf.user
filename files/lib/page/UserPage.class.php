@@ -27,6 +27,12 @@ use wcf\system\WCF;
  */
 class UserPage extends AbstractPage {
 	/**
+	 * edit profile on page load
+	 * @var	boolean
+	 */
+	public $editOnInit = false;
+	
+	/**
 	 * overview editable content object type
 	 * @var	wcf\data\object\type\ObjectType
 	 */
@@ -84,6 +90,8 @@ class UserPage extends AbstractPage {
 		if ($this->user === null) {
 			throw new IllegalLinkException();
 		}
+		
+		if (isset($_REQUEST['editOnInit'])) $this->editOnInit = true;
 	}
 	
 	/**
@@ -127,6 +135,7 @@ class UserPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
+			'editOnInit' => $this->editOnInit,
 			'overviewObjectType' => $this->objectType,
 			'profileContent' => $this->profileContent,
 			'userID' => $this->userID,

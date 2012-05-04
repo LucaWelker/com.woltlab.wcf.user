@@ -11,7 +11,7 @@
 					<h2>{lang}wcf.user.myProfile{/lang}</h2>
 				</hgroup>
 			</a></li>
-			<li><a href="{link controller='User' object=$__wcf->user}{/link}#about">{lang}wcf.user.editProfile{/lang}</a></li>
+			<li><a href="{link controller='User' object=$__wcf->user}editOnInit=true#about{/link}">{lang}wcf.user.editProfile{/lang}</a></li>
 			<li><a href="{link controller='Settings'}{/link}">{lang}wcf.user.menu.settings{/lang}</a></li>
 			{if $__wcf->session->getPermission('admin.general.canUseAcp')}
 				<li class="dropdownDivider"></li>

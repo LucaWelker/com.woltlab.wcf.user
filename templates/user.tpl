@@ -26,7 +26,7 @@
 
 			{* TODO: Handle admin permissions *}
 			{if $__wcf->getUser()->userID == $user->userID}
-				WCF.User.Profile.Editor.Handler.init({$user->userID});
+				WCF.User.Profile.Editor.Handler.init({$user->userID}, {if $editOnInit}true{else}false{/if});
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
 		});

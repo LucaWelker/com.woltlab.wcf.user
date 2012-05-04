@@ -472,19 +472,24 @@ WCF.User.Profile.Editor.Handler = {
 	 * Initializes the user profile editor handler.
 	 * 
 	 * @param	integer		userID
+	 * @param	boolean		editOnInit
 	 */
-	init: function(userID) {
+	init: function(userID, editOnInit) {
 		if (this._didInit) return;
-
+		
 		this._userID = userID;
-
+		
 		this._prepareUI();
 		this._didInit = true;
-
+		
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this),
 			url: 'index.php/UserProfileEditableContent/?t=' + SECURITY_TOKEN + SID_ARG_2ND
 		});
+		
+		if (editOnInit) {
+			this._beginEdit();
+		}
 	},
 
 	/**
@@ -516,9 +521,6 @@ WCF.User.Profile.Editor.Handler = {
 		switch (this._pendingAction) {
 			case 'beginEdit':
 				this._beginEdit();
-
-				// toggle button
-				this._ui.buttons.beginEdit.hide();
 			break;
 
 			case 'restore':
@@ -553,12 +555,15 @@ WCF.User.Profile.Editor.Handler = {
 	 * Begins editing mode by sending all active object type ids.
 	 */
 	_beginEdit: function() {
+		// toggle button
+		this._ui.buttons.beginEdit.hide();
+		
 		var $objectTypeIDs = [ ];
-
+		
 		for (var $i = 0, $length = this._callbacks.length; $i < $length; $i++) {
 			$objectTypeIDs.push(this._callbacks[$i].beginEdit());
 		}
-
+		
 		this._proxy.setOption('data', {
 			actionName: 'beginEdit',
 			objectTypeIDs: $objectTypeIDs,
