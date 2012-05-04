@@ -8,13 +8,13 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='profileEditSidebar' sandbox=false}
+{include file='userMenuSidebar' sandbox=false}
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.notification.settings.title{/lang}</h1>
+		<h1>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.notification.settings.title{/lang}</h1>
 	</hgroup>
 </header>
 

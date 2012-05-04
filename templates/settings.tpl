@@ -1,27 +1,19 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.staticOptions.title{/lang}</title>
-	{include file='headInclude' sandbox=false}
-	
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			WCF.TabMenu.init();
-		});
-		//]]>
-	</script>
+	<title>{lang}wcf.user.option.category.settings.{$category}{/lang} - {lang}wcf.user.menu.settings{/lang} - {PAGE_TITLE|language}</title>
+	{include file='headInclude'}
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='profileEditSidebar' sandbox=false}
+{include file='userMenuSidebar'}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.staticOptions.title{/lang}</h1>
+		<h1>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.option.category.settings.{$category}{/lang}</h1>
 	</hgroup>
 </header>
 
@@ -29,19 +21,10 @@
 	<p class="success">{lang}wcf.global.form.success{/lang}</p>	
 {/if}
 
-<form method="post" action="{link controller='StaticOptions'}{/link}">
-	<div class="tabMenuContainer" data-active="" data-store="activeTabMenuItem">
-		<nav class="tabMenu">
-			<ul>
-				<li><a href="#general">{lang}wcf.user.staticOptions.category.general{/lang}</a></li>
-				<li><a href="#display">{lang}wcf.user.staticOptions.category.display{/lang}</a></li>
-			</ul>
-		</nav>
-		
-		<div id="general" class="tabMenuContainer container containerPadding shadow tabMenuContent">
+<form method="post" action="{link controller='Settings'}{/link}">
+	<div class="container containerPadding marginTop shadow">
+		{if $category == 'general'}
 			<fieldset>
-				<legend>{lang}wcf.user.staticOptions.language{/lang}</legend>
-				
 				<dl>
 					<dt><label for="languageID">{lang}wcf.user.staticOptions.language{/lang}</label></dt>
 					<dd>
@@ -65,12 +48,6 @@
 						{/content}
 					</dl>
 				{/hascontent}
-			</fieldset>
-		</div>
-		
-		<div id="display" class="tabMenuContainer container containerPadding shadow tabMenuContent">
-			<fieldset>
-				<legend>{lang}wcf.user.staticOptions.style{/lang}</legend>
 				
 				<dl>
 					<dt><label for="styleID">{lang}wcf.user.staticOptions.style{/lang}</label></dt>
@@ -85,15 +62,24 @@
 					</dd>
 				</dl>
 			</fieldset>
-		</div>
+		{/if}
+		
+		{foreach from=$optionTree[0][categories][0][categories] item=optionCategory}
+			<fieldset>
+				<legend>{lang}wcf.user.option.category.{@$optionCategory[object]->categoryName}{/lang}</legend>
+			
+				{include file='userProfileOptionFieldList' options=$optionCategory[options] langPrefix='wcf.user.option.'}
+			</fieldset>
+		{/foreach}
 	</div>
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		{if $category != 'general'}<input type="hidden" name="category" value="{$category}" />{/if}
 	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

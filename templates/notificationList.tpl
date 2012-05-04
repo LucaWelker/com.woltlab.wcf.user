@@ -15,7 +15,7 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='profileEditSidebar' sandbox=false}
+{include file='userMenuSidebar' sandbox=false}
 
 {include file='header' sandbox=false sidebarOrientation='left'}
 

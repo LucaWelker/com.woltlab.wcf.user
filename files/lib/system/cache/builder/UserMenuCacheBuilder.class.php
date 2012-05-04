@@ -24,6 +24,50 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 		list($cache, $packageID) = explode('-', $cacheResource['cache']); 
 		$data = array();
 
+		// get all option categories and filter categories with low priority
+		$sql = "SELECT		categoryName, categoryID
+			FROM		wcf".WCF_N."_user_option_category option_category
+			LEFT JOIN	wcf".WCF_N."_package_dependency package_dependency
+			ON 		(option_category.packageID = package_dependency.dependency)
+			WHERE		package_dependency.packageID = ?
+			ORDER BY	package_dependency.priority";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($packageID));
+		$categoryIDs = array();
+		while ($row = $statement->fetchArray()) {
+			$categoryIDs[$row['categoryName']] = $row['categoryID'];
+		}
+		
+		if (count($categoryIDs) > 0) {
+			if (!isset($data['wcf.user.menu.settings'])) {
+				$data['wcf.user.menu.settings'] = array();
+			}
+			
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("categoryID IN (?)", array($categoryIDs));
+			$conditions->add("parentCategoryName = 'settings'");
+			
+			// get needed option categories
+			$sql = "SELECT		*
+				FROM		wcf".WCF_N."_user_option_category
+				".$conditions."
+				ORDER BY	showOrder";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
+			while ($row = $statement->fetchArray()) {
+				$categoryShortName = str_replace('settings.', '', $row['categoryName']);
+				
+				$data['wcf.user.menu.settings'][] = new UserMenuItem(null, array(
+					'packageID' => $row['packageID'],
+					'menuItem' => 'wcf.user.option.category.'.$row['categoryName'],
+					'parentMenuItem' => 'wcf.user.menu.settings',
+					'menuItemLink' => 'index.php/Settings/'.($categoryShortName != 'general' ? '?category='.$categoryShortName : ''),
+					'permissions' => $row['permissions'],
+					'options' => $row['options']
+				));
+			}
+		}
+		
 		// get all menu items and filter menu items with low priority
 		$sql = "SELECT		menuItem, menuItemID
 			FROM		wcf".WCF_N."_user_menu_item menu_item
@@ -43,11 +87,9 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 			$conditions->add("menuItemID IN (?)", array($itemIDs));
 			
 			// get needed menu items and build item tree
-			$sql = "SELECT		menu_item.packageID, menuItem, parentMenuItem,
-						menuItemLink, permissions, options, packageDir
-				FROM		wcf".WCF_N."_user_menu_item menu_item
-				LEFT JOIN	wcf".WCF_N."_package package
-				ON		(package.packageID = menu_item.packageID)
+			$sql = "SELECT		packageID, menuItem, parentMenuItem,
+						menuItemLink, permissions, options
+				FROM		wcf".WCF_N."_user_menu_item
 				".$conditions."
 				ORDER BY	showOrder ASC";
 			$statement = WCF::getDB()->prepareStatement($sql);

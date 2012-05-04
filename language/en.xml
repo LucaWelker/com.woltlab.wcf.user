@@ -79,5 +79,7 @@
 		<item name="wcf.user.option.location"><![CDATA[Location]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
 		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
+		<item name="wcf.user.option.category.settings.general"><![CDATA[General]]></item>
+		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privacy]]></item>
 	</category>
 </language>

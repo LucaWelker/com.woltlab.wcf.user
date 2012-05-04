@@ -28,21 +28,9 @@
 			<showorder>2</showorder>
 		</usermenuitem>
 		
-		<usermenuitem name="wcf.user.menu.settings.dynamicOptions">
-			<link>index.php/DynamicOptions/</link>
-			<parent>wcf.user.menu.settings</parent>
-			<showorder>1</showorder>
-		</usermenuitem>
-		<usermenuitem name="wcf.user.menu.settings.staticOptions">
-			<link>index.php/StaticOptions/</link>
-			<parent>wcf.user.menu.settings</parent>
-			<showorder>2</showorder>
-		</usermenuitem>
-		
 		<usermenuitem name="wcf.user.menu.settings.notification">
 			<link>index.php/NotificationSettings/</link>
 			<parent>wcf.user.menu.settings</parent>
-			<showorder>3</showorder>
 		</usermenuitem>
 		<!-- /settings -->
 		

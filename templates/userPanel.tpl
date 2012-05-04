@@ -12,7 +12,7 @@
 				</hgroup>
 			</a></li>
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}#about">{lang}wcf.user.editProfile{/lang}</a></li>
-			<li><a href="{link controller='StaticOptions'}{/link}">{lang}wcf.user.menu.settings{/lang}</a></li>
+			<li><a href="{link controller='Settings'}{/link}">{lang}wcf.user.menu.settings{/lang}</a></li>
 			{if $__wcf->session->getPermission('admin.general.canUseAcp')}
 				<li class="dropdownDivider"></li>
 				<li><a href="acp/index.php">ACP</a></li>
