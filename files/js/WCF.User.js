@@ -496,20 +496,13 @@ WCF.User.Profile.Editor.Handler = {
 		// create interface elements
 		this._ui = {
 			buttons: {
-				beginEdit: $('<li id="beginEdit"><a class="button">'+WCF.Language.get('wcf.user.editProfile')+'</a></li>').data('action', 'beginEdit').appendTo($buttonContainer),
-				// todo: move buttons to the end of the form
-				restore: $('<button id="restore">'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').appendTo($buttonContainer),
-				save: $('<button id="save">'+WCF.Language.get('wcf.global.button.submit')+'</button>').data('action', 'save').appendTo($buttonContainer)
+				beginEdit: $('<li class="button">'+WCF.Language.get('wcf.user.editProfile')+'</li>').data('action', 'beginEdit').appendTo($buttonContainer)
 			}
 		};
 
 		// bind event listener
 		this._ui.buttons.beginEdit.click($.proxy(this._click, this));
-		this._ui.buttons.restore.click($.proxy(this._click, this));
-		this._ui.buttons.save.click($.proxy(this._click, this));
-
 		// toggle buttons
-		this._showButtons(true, false, false);
 	},
 
 	/**
@@ -524,24 +517,36 @@ WCF.User.Profile.Editor.Handler = {
 			case 'beginEdit':
 				this._beginEdit();
 
-				// toggle buttons
-				this._showButtons(false, true, true);
+				// toggle button
+				this._ui.buttons.beginEdit.hide();
 			break;
 
 			case 'restore':
 				this._restore();
 				
-				// toggle buttons
-				this._showButtons(true, false, false);
+				// toggle button
+				this._ui.buttons.beginEdit.show();
 			break;
 
 			case 'save':
 				this._save();
 
-				// toggle buttons
-				this._showButtons(true, false, false);
+				// toggle button
+				this._ui.buttons.beginEdit.show();
 			break;
 		}
+	},
+	
+	/**
+	 * Returns action buttons.
+	 * 
+	 * @return	object
+	 */
+	getButtons: function() {
+		return {
+			save: $('<button>'+WCF.Language.get('wcf.global.button.save')+'</button>').data('action', 'save').click($.proxy(this._click, this)),
+			restore: $('<button>'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').click($.proxy(this._click, this))
+		};
 	},
 
 	/**
@@ -741,7 +746,7 @@ WCF.User.Profile.Editor.Base = Class.extend({
 	 */
 	prepareEdit: function(returnValues) {
 		WCF.User.Profile.Editor.Handler.didLoad();
-
+		
 		var self = this;
 		this._container.html(function(index, oldHTML) {
 			self._cache = oldHTML;
@@ -810,6 +815,18 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 		$('#profileContent').wcfTabs('select', 'about');
 		
 		return this._super();
+	},
+	
+	/**
+	 * @see	WCF.User.Profile.Editor.Base.prepareEdit()
+	 */
+	prepareEdit: function(returnValues) {
+		this._super(returnValues);
+		
+		var $formSubmit = $('<div class="formSubmit" />').appendTo($('#' + this._containerID).children('.containerPadding'));
+		var $buttons = WCF.User.Profile.Editor.Handler.getButtons();
+		$buttons.save.appendTo($formSubmit);
+		$buttons.restore.appendTo($formSubmit);
 	},
 
 	/**
