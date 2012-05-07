@@ -45,6 +45,8 @@
 		<item name="wcf.user.button.unfollow"><![CDATA[Unfollow]]></item>
 		<item name="wcf.user.button.ignore"><![CDATA[Block]]></item>
 		<item name="wcf.user.button.unignore"><![CDATA[Unblock]]></item>
+		<item name="wcf.user.style"><![CDATA[Style]]></item>
+		<item name="wcf.user.style.description"><![CDATA[User interface style]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
@@ -79,7 +81,11 @@
 		<item name="wcf.user.option.location"><![CDATA[Location]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
 		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
+		<item name="wcf.user.option.timezone"><![CDATA[Timezone]]></item>
+		<item name="wcf.user.option.showSignature"><![CDATA[Show other members' signatures]]></item>
 		<item name="wcf.user.option.category.settings.general"><![CDATA[General]]></item>
+		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Interface]]></item>
 		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privacy]]></item>
+		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Date &amp; Time]]></item>
 	</category>
 </language>

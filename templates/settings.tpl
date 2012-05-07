@@ -18,39 +18,46 @@
 </header>
 
 {if $success|isset}
-	<p class="success">{lang}wcf.global.form.success{/lang}</p>	
+	<p class="success">{lang}wcf.global.form.edit.success{/lang}</p>	
 {/if}
 
 <form method="post" action="{link controller='Settings'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		{if $category == 'general'}
 			<fieldset>
+				<legend>{lang}wcf.user.language{/lang}</legend>
+				
 				<dl>
-					<dt><label for="languageID">{lang}wcf.user.staticOptions.language{/lang}</label></dt>
+					<dt><label for="languageID">{lang}wcf.user.language{/lang}</label></dt>
 					<dd>
 						<select id="languageID" name="languageID">
 							{foreach from=$availableLanguages item=language}
 								<option value="{@$language->languageID}"{if $language->languageID == $languageID} selected="selected"{/if}>{$language}</option>
 							{/foreach}
 						</select>
+						<small>{lang}wcf.user.language.description{/lang}</small>
 					</dd>
 				</dl>
 				
 				{hascontent}
 					<dl>
-						<dt><label>{lang}wcf.user.staticOptions.contentLanguages{/lang}</label></dt>
+						<dt><label>{lang}wcf.user.visibleLanguages{/lang}</label></dt>
+						<dd class="floated">
 						{content}
 							{foreach from=$availableContentLanguages item=language}
-								<dd>
-									<label><input name="contentLanguageID[]" type="checkbox" value="{@$language->languageID}"{if $language->languageID|in_array:$contentLanguageIDs} checked="checked"{/if} /> {$language}</label>
-								</dd>
+								<label><input name="contentLanguageID[]" type="checkbox" value="{@$language->languageID}"{if $language->languageID|in_array:$contentLanguageIDs} checked="checked"{/if} /> {$language}</label>
 							{/foreach}
 						{/content}
+						<small>{lang}wcf.user.visibleLanguages.description{/lang}</small></dd>
 					</dl>
 				{/hascontent}
-				
+			</fieldset>
+			
+			<fieldset>
+				<legend>{lang}wcf.user.style{/lang}</legend>
+			
 				<dl>
-					<dt><label for="styleID">{lang}wcf.user.staticOptions.style{/lang}</label></dt>
+					<dt><label for="styleID">{lang}wcf.user.style{/lang}</label></dt>
 					<dd>
 						<!-- TODO: Add some fancy JavaScript to display preview images, this should be common enough to use it in boardAdd.tpl too! -->
 						<select id="styleID" name="styleID">
@@ -59,6 +66,7 @@
 								<option value="{@$style->styleID}"{if $style->styleID == $styleID} selected="selected"{/if}>{$style->styleName}</option>
 							{/foreach}
 						</select>
+						<small>{lang}wcf.user.style.description{/lang}</small>
 					</dd>
 				</dl>
 			</fieldset>

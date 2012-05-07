@@ -1,16 +1,16 @@
-{include file="documentHeader"}
+{include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.notification.settings.title{/lang} - {lang}wcf.user.usercp{/lang} - {PAGE_TITLE|language}</title>
+	<title>{lang}wcf.user.notification.settings.title{/lang} - {lang}wcf.user.menu.settings{/lang} - {PAGE_TITLE|language}</title>
 	
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='userMenuSidebar' sandbox=false}
+{include file='userMenuSidebar'}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<hgroup>
@@ -20,6 +20,10 @@
 
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
+{/if}
+
+{if $success|isset}
+	<p class="success">{lang}wcf.global.form.edit.success{/lang}</p>	
 {/if}
 
 <form method="post" action="{link controller='NotificationSettings'}{/link}">
@@ -51,7 +55,7 @@
 	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>
