@@ -10,10 +10,10 @@
 
 {*TODO: show action buttons (follow, ignore etc.)*}
 <ul class="buttonList">
-	<li><a class="jsTooltip" title="Homepage"><img src="{icon}home1{/icon}" alt="" /></a></li>
-	<li><a class="jsTooltip" title="Follow"><img src="{icon}add1{/icon}" alt="" /></a></li>
-	<li><a class="jsTooltip" title="Start conversation"><img src="{icon}message1{/icon}" alt="" /></a></li>
-	<li><a class="jsTooltip" title="Search"><img src="{icon}search1{/icon}" alt="" /></a></li>
+	<li><a class="jsTooltip" title="Homepage"><img src="{icon}home{/icon}" alt="" /></a></li>
+	<li><a class="jsTooltip" title="Follow"><img src="{icon}add{/icon}" alt="" /></a></li>
+	<li><a class="jsTooltip" title="Start conversation"><img src="{icon}comment{/icon}" alt="" /></a></li>
+	<li><a class="jsTooltip" title="Search"><img src="{icon}search{/icon}" alt="" /></a></li>
 </ul>
 
 <dl class="inlineDataList">

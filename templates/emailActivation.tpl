@@ -50,7 +50,7 @@
 		<div class="formElement"><!-- ToDo: Def. List! -->
 			<div class="formField">
 				<ul>
-					<li>{*<img src="{icon}eMail1.svg{/icon}" alt="" />*} <a href="index.php?form=RegisterNewActivationCode{@SID_ARG_2ND}">{lang}wcf.user.register.newActivationCode{/lang}</a></li>
+					<li>{*<img src="{icon}eMail.svg{/icon}" alt="" />*} <a href="index.php?form=RegisterNewActivationCode{@SID_ARG_2ND}">{lang}wcf.user.register.newActivationCode{/lang}</a></li>
 				</ul>
 			</div>
 		</div>
