@@ -2,7 +2,7 @@
 
 <head>
 	<title>{lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 
 	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
 	<script type="text/javascript">
@@ -26,6 +26,10 @@
 
 			{* TODO: Handle admin permissions *}
 			{if $__wcf->getUser()->userID == $user->userID}
+				WCF.Language.addObject({
+					'wcf.user.editProfile': '{lang}wcf.user.editProfile{/lang}',
+				});
+
 				WCF.User.Profile.Editor.Handler.init({$user->userID}, {if $editOnInit}true{else}false{/if});
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
@@ -121,7 +125,7 @@
 
 {/capture}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline userHeadline">
 	<hgroup>
@@ -157,7 +161,7 @@
 	{/foreach}
 </section>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

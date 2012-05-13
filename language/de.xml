@@ -50,7 +50,7 @@
 	</category>
 	
 	<category name="wcf.user.notification">
-		<item name="wcf.user.notification.comment.output"><![CDATA[Hat einen Kommentar an <a href="{link controller='User' object=$__wcf->getUser()}#wcf_user_profile_menu_comment{/link}">Ihrer Pinnwand</a> verfasst.</p>]]></item>
+		<item name="wcf.user.notification.comment.output"><![CDATA[Hat einen Kommentar an <a href="{link controller='User' object=$__wcf->getUser()}#wall{/link}">Ihrer Pinnwand</a> verfasst.</p>]]></item>
 		<item name="wcf.user.notification.comment.shortOutput"><![CDATA[Neuer Kommentar (Pinnwand)]]></item>
 		<item name="wcf.user.notification.com.woltlab.wcf.notification.notificationType.mail"><![CDATA[E-Mail]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>
@@ -61,6 +61,7 @@
 	</category>
 	
 	<category name="wcf.user.profile">
+		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von &bdquo;{$user->username}&ldquo;]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.profile.following"><![CDATA[{$user->username} folgt]]></item>

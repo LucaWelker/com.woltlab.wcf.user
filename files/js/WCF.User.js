@@ -546,7 +546,7 @@ WCF.User.Profile.Editor.Handler = {
 	 */
 	getButtons: function() {
 		return {
-			save: $('<button>'+WCF.Language.get('wcf.global.button.save')+'</button>').data('action', 'save').click($.proxy(this._click, this)),
+			save: $('<button class="buttonPrimary">'+WCF.Language.get('wcf.global.button.save')+'</button>').data('action', 'save').click($.proxy(this._click, this)),
 			restore: $('<button>'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').click($.proxy(this._click, this))
 		};
 	},
