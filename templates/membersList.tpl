@@ -8,6 +8,7 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
 {capture assign='sidebar'}
+{assign var=encodedLetter value=$letter|rawurlencode}
 {*TODO: sidebar content*}
 <nav id="sidebarContent" class="sidebarContent">
 	<ul>
@@ -16,7 +17,7 @@
 				<h1>Letters</h1>
 			</hgroup>
 			
-			<ul class="buttonList">
+			<ul class="buttonList letters">
 				{foreach from=$letters item=__letter}
 					<li><a href="{link controller='MembersList'}letter={$__letter|rawurlencode}{/link}" class="button{if $letter == $__letter} active{/if}">{$__letter}</a></li>
 				{/foreach}
@@ -45,6 +46,7 @@
 					<div class="formSubmit">
 						<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 						<input type="hidden" name="pageNo" value="{@$pageNo}" />
+						<input type="hidden" name="letter" value="{$letter}" />
 					</div>
 				</fieldset>
 			</form>
@@ -62,7 +64,7 @@
 </header>
 
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
 </div>
 
 <div class="container marginTop shadow">
