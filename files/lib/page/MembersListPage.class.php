@@ -73,7 +73,7 @@ class MembersListPage extends SortablePage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'letters' => preg_split('//', self::$availableLetters, -1, PREG_SPLIT_NO_EMPTY),
+			'letters' => str_split(self::$availableLetters),
 			'letter' => $this->letter
 		));
 	}
