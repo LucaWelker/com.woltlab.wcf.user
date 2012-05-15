@@ -488,8 +488,14 @@ WCF.User.Profile.Editor.Handler = {
 		});
 		
 		if (editOnInit) {
-			this._pendingAction = 'beginEdit';
-			this._beginEdit();
+			// delay execution by 250 ms to allow handlers to register themselves
+			var self = this;
+			new WCF.PeriodicalExecuter(function(pe) {
+				pe.stop();
+				
+				self._pendingAction = 'beginEdit';
+				self._beginEdit();
+			}, 250);
 		}
 	},
 
