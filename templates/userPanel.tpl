@@ -72,6 +72,8 @@
 							<dd><label><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label></dd>
 						</dl>
 						
+						{event name='additionalLoginFields'}
+						
 						<div class="formSubmit">
 							<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />
 							<input type="hidden" name="url" value="{$__wcf->session->requestURI}" />
