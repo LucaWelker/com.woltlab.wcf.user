@@ -488,6 +488,7 @@ WCF.User.Profile.Editor.Handler = {
 		});
 		
 		if (editOnInit) {
+			this._pendingAction = 'beginEdit';
 			this._beginEdit();
 		}
 	},
