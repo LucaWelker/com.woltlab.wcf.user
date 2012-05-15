@@ -30,7 +30,9 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		parent::readFormParameters();
 		
 		if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'register') {
-			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Register', array('isRaw' => true), '?username='.rawurlencode($this->username)));
+			WCF::getSession()->register('__username', $this->username);
+			WCF::getSession()->update();
+			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Register'));
 			exit;
 		}
 		

@@ -986,7 +986,7 @@ WCF.User.Registration.Validation = Class.extend({
 	_blur: function(event) {
 		var $value = this._element.val();
 		if (!$value) {
-			return this._showError(this._element, WCF.Language.get('wcf.global.error.empty'));
+			return this._showError(this._element, WCF.Language.get('wcf.global.form.error.empty'));
 		}
 		
 		if (this._confirmElement !== null) {
@@ -1034,7 +1034,7 @@ WCF.User.Registration.Validation = Class.extend({
 	_blurConfirm: function(event) {
 		var $value = this._confirmElement.val();
 		if (!$value) {
-			return this._showError(this._confirmElement, WCF.Language.get('wcf.global.error.empty'));
+			return this._showError(this._confirmElement, WCF.Language.get('wcf.global.form.error.empty'));
 		}
 		
 		this._blur(event);

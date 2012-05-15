@@ -122,6 +122,11 @@ class RegisterForm extends UserAddForm {
 		
 		if (!count($_POST)) {
 			$this->languageID = WCF::getLanguage()->languageID;
+			
+			if (WCF::getSession()->getVar('__username')) {
+				$this->username = WCF::getSession()->getVar('__username');
+				WCF::getSession()->unregister('__username');
+			}
 		}
 	}
 	

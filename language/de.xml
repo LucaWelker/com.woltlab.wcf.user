@@ -47,6 +47,9 @@
 		<item name="wcf.user.button.unignore"><![CDATA[Nicht mehr blockieren]]></item>
 		<item name="wcf.user.style"><![CDATA[Stile]]></item>
 		<item name="wcf.user.style.description"><![CDATA[Stile der Benutzeroberfläche]]></item>
+		<item name="wcf.user.register"><![CDATA[Registierung]]></item>
+		<item name="wcf.user.username.description"><![CDATA[Der Benutzername muss mindestens {REGISTER_USERNAME_MIN_LENGTH} und darf maximal {REGISTER_USERNAME_MAX_LENGTH} Zeichen lang sein.]]></item>
+		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Das Kennwort muss mindestens {REGISTER_PASSWORD_MIN_LENGTH} Zeichen lang sein.{else}Ein sicheres Kennwort sollte mindestens 8 Zeichen lang sein.{/if}]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
