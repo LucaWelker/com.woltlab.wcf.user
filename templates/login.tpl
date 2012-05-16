@@ -74,8 +74,13 @@
 				</dl>
 			{/if}
 			
+			<dl>
+				<dd>
+					<label for="lostPassword"><a id="lostPassword" href="{link controller='LostPassword'}{/link}">{lang}wcf.user.lostPassword.title{/lang}</a></label>
+				</dd>
+			</dl>
+			
 			{event name='additionalFields'}
-			{*TODO: add lost password link*}
 		</fieldset>
 	</div>
 	

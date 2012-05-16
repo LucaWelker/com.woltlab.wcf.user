@@ -18,7 +18,7 @@ use wcf\util\StringUtil;
  * @subpackage	form
  * @category 	Community Framework
  */
-class LostPasswordForm extends ReCaptchaForm {
+class LostPasswordForm extends RecaptchaForm {
 	// system
 	public $username = '';
 	public $email = '';
