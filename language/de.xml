@@ -50,6 +50,39 @@
 		<item name="wcf.user.register"><![CDATA[Registierung]]></item>
 		<item name="wcf.user.username.description"><![CDATA[Der Benutzername muss mindestens {REGISTER_USERNAME_MIN_LENGTH} und darf maximal {REGISTER_USERNAME_MAX_LENGTH} Zeichen lang sein.]]></item>
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Das Kennwort muss mindestens {REGISTER_PASSWORD_MIN_LENGTH} Zeichen lang sein.{else}Ein sicheres Kennwort sollte mindestens 8 Zeichen lang sein.{/if}]]></item>
+		<item name="wcf.user.lostPassword"><![CDATA[Kennwort vergessen]]></item>
+		<item name="wcf.user.lostPassword.description"><![CDATA[Wenn Sie Ihr Kennwort vergessen haben, müssen Sie entweder den Benutzernamen oder die E-Mail-Adresse angeben, die Sie in Ihrem Profil hinterlegt haben. Sie können dabei nur eines der beiden Felder ausfüllen. Wenn Sie beide Daten nicht mehr wissen, wenden Sie sich bitte an den Administrator.]]></item>
+		<item name="wcf.user.lostPassword.error.email.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: &bdquo;{$email}&ldquo; gefunden.]]></item>
+		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[Das Kennwort für dieses Benutzerkonto wurde in den letzten 24 Stunden bereits einmal angefordert. Aus Sicherheitsgründen kann das Kennwort eines Benutzers nur einmal pro Tag angefordert werden. Sie können das Kennwort für dieses Benutzerkonto in {#$hours} Stunde{if $hours != 1}n{/if} erneut anfordern.]]></item>
+		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Kennwort vergessen auf der Website: {@PAGE_TITLE|language}]]></item>
+		<item name="wcf.user.lostPassword.mail"><![CDATA[Hallo {@$username},
+
+wenn Sie Ihr Kennwort vergessen haben, können Sie über folgenden Link ein neues Kennwort anfordern.
+Klicken Sie hier, um ein neues Kennwort anzufordern: {@PAGE_URL}/index.php/NewPassword/?u={@$userID}&k={@$key}
+
+Falls Sie Ihr Kennwort nicht vergessen haben, können Sie diese E-Mail ignorieren.
+
+
+Vielen Dank,
+Ihr {@PAGE_TITLE|language} Team]]></item>
+		<item name="wcf.user.lostPassword.mail.sent"><![CDATA[Sie erhalten in Kürze eine E-Mail mit weiteren Informationen.]]></item>
+		<item name="wcf.user.newPassword"><![CDATA[Neues Kennwort anfordern]]></item>
+		<item name="wcf.user.lostPasswordKey"><![CDATA[Sicherheitsschlüssel]]></item>
+		<item name="wcf.user.error.lostPasswordKey.invalid"><![CDATA[Sie haben einen ungültigen Sicherheitsschlüssel angegeben.]]></item>
+		<item name="wcf.user.error.userID.invalid"><![CDATA[Sie haben eine ungültige Benutzer-ID angegeben.]]></item>
+		<item name="wcf.user.newPassword.mail"><![CDATA[Hallo {@$username},
+
+Ihr neues Kennwort für die Website "{@PAGE_TITLE|language}" lautet:
+{@$newPassword}
+
+Sie können Ihr Kennwort unter folgender Adresse jederzeit ändern: 
+{@PAGE_URL}/index.php/AccountManagement/
+
+
+Vielen Dank,
+Ihr {@PAGE_TITLE|language} Team]]></item>
+		<item name="wcf.user.newPassword.mail.subject"><![CDATA[Neues Kennwort auf der Website: {@PAGE_TITLE|language}]]></item>
+		<item name="wcf.user.newPassword.success"><![CDATA[Sie erhalten in Kürze eine E-Mail mit Ihrem neuen Kennwort.]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

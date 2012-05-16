@@ -1,8 +1,8 @@
 {include file="documentHeader"}
 
 <head>
-	<title>{lang}wcf.user.lostPassword.title{/lang} - {PAGE_TITLE|language}</title>
-	{include file='headInclude' sandbox=false}
+	<title>{lang}wcf.user.lostPassword{/lang} - {PAGE_TITLE|language}</title>
+	{include file='headInclude'}
 	
 	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
 	<script type="text/javascript">
@@ -16,11 +16,11 @@
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
-{include file='header' sandbox=false}
+{include file='header'}
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.lostPassword.title{/lang}</h1>
+		<h1>{lang}wcf.user.lostPassword{/lang}</h1>
 	</hgroup>
 </header>
 
@@ -33,7 +33,7 @@
 <form method="post" action="{link controller='LostPassword'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
-			<legend>{lang}wcf.user.lostPassword.title{/lang}</legend>
+			<legend>{lang}wcf.user.lostPassword{/lang}</legend>
 			
 			<dl id="usernameDiv"{if $errorField == 'username'} class="formError"{/if}>
 				<dt>
@@ -43,7 +43,7 @@
 					<input type="text" id="usernameInput" name="username" value="{$username}" class="medium" />
 					{if $errorField == 'username'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
 						</small>
 					{/if}
@@ -58,7 +58,7 @@
 					<input type="email" id="emailInput" name="email" value="{$email}" class="medium" />
 					{if $errorField == 'email'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.lostPassword.error.email.notFound{/lang}{/if}
 						</small>
 					{/if}
@@ -66,7 +66,7 @@
 			</dl>
 		</fieldset>
 			
-		{include file='recaptcha'}
+		{if $useCaptcha}{include file='recaptcha'}{/if}
 	</div>
 		
 	<div class="formSubmit">
@@ -74,7 +74,7 @@
 	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

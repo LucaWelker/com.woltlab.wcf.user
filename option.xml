@@ -142,6 +142,7 @@
 			<option name="lost_password_use_captcha">
 				<categoryname>security.antispam</categoryname>
 				<optiontype>boolean</optiontype>
+				<defaultvalue><![CDATA[1]]></defaultvalue>
 			</option>
 			<!-- /user.security -->
 		</options>

@@ -2,7 +2,7 @@
 
 <head>
 	<title>{lang}wcf.user.register{/lang} - {PAGE_TITLE|language}</title>
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 	
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User.js"></script>
 	<script type="text/javascript">
@@ -31,7 +31,7 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
-{include file='header' sandbox=false __disableLoginLink=true}
+{include file='header' __disableLoginLink=true}
 
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
@@ -138,7 +138,7 @@
  	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

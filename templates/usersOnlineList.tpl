@@ -2,7 +2,7 @@
 
 <head>
 	<title>{lang}wcf.user.usersOnline{/lang} - {PAGE_TITLE|language}</title>
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
@@ -40,7 +40,7 @@
 </nav>
 {/capture}
 
-{include file='header' sandbox=false sidebarOrientation='right'}
+{include file='header' sidebarOrientation='right'}
 
 {assign var=usersOnlineList value=''}
 {assign var=usersOnline value=0}
@@ -162,7 +162,7 @@
 	</div>
 {/if}
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

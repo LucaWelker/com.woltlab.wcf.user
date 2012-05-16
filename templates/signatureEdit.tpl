@@ -3,7 +3,7 @@
 <head>
 	<title>{lang}wcf.user.signature.title{/lang} - {PAGE_TITLE|language}</title>
 	
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 	
 	<script type="text/javascript">
 		//<![CDATA[
@@ -20,9 +20,9 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='userMenuSidebar' sandbox=false}
+{include file='userMenuSidebar'}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<hgroup>
@@ -76,7 +76,7 @@
  	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 {include file='wysiwyg'}
 
 </body>

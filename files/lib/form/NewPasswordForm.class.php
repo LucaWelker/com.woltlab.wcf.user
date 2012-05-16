@@ -6,6 +6,7 @@ use wcf\page\AbstractPage;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserRegistrationUtil;
 
@@ -13,16 +14,13 @@ use wcf\util\UserRegistrationUtil;
  * Shows the new password form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
  * @category 	Community Framework
  */
 class NewPasswordForm extends AbstractForm {
-	// system
-	public $templateName = 'newPassword';
-	
 	/**
 	 * user id
 	 * @var	integer
@@ -47,9 +45,8 @@ class NewPasswordForm extends AbstractForm {
 	 */	
 	public $newPassword = '';
 	
-	
 	/**
-	 * @see wcf\page\Page::readParameters()
+	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -59,7 +56,7 @@ class NewPasswordForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::validate()
+	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -80,7 +77,7 @@ class NewPasswordForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -97,30 +94,21 @@ class NewPasswordForm extends AbstractForm {
 		));
 		
 		// send mail
-		$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
-		$messageData = array(
-			'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
+		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->getDynamicVariable('wcf.user.newPassword.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.newPassword.mail', array(
 			'username' => $this->user->username,
 			'userID' => $this->user->userID,
-			'newPassword' => $this->newPassword,
-			'PAGE_URL' => PAGE_URL,
-			'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS
-		);
-		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.newPassword.mail.subject', $subjectData), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.newPassword.mail', $messageData));
+			'newPassword' => $this->newPassword
+		)));
 		$mail->send();
 		$this->saved();
 		
-		// show result page
-		WCF::getTPL()->assign(array(
-			'url' => 'index.php'.SID_ARG_1ST,
-			'message' => WCF::getLanguage()->get('wcf.user.lostPassword.success')
-		));
-		WCF::getTPL()->display('redirect');
+		// forward to index page
+		HeaderUtil::delayedRedirect('index.php'.SID_ARG_1ST, WCF::getLanguage()->get('wcf.user.newPassword.success'));
 		exit;
 	}
 	
 	/**
-	 * @see wcf\page\Page::assignVariables()
+	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -132,7 +120,7 @@ class NewPasswordForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::readData()
+	 * @see wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		AbstractPage::readData();

@@ -19,7 +19,7 @@
 			
 			<ul class="buttonList letters">
 				{foreach from=$letters item=__letter}
-					<li><a href="{link controller='MembersList'}letter={$__letter|rawurlencode}{/link}" class="button{if $letter == $__letter} active{/if}">{$__letter}</a></li>
+					<li><a href="{link controller='MembersList'}letter={$__letter|rawurlencode}{/link}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
 				{/foreach}
 			</ul>
 		</li>

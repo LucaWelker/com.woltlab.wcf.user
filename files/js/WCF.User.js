@@ -1250,7 +1250,6 @@ WCF.User.Registration.LostPassword = Class.extend({
 		// bind event listener
 		this._email.keyup($.proxy(this._checkEmail, this));
 		this._username.keyup($.proxy(this._checkUsername, this));
-		$('#resetButton').click($.proxy(this._reset, this));
 		
 		// toggle fields on init
 		this._checkEmail();
@@ -1263,9 +1262,11 @@ WCF.User.Registration.LostPassword = Class.extend({
 	_checkEmail: function() {
 		if (this._email.val() == '') {
 			this._username.enable();
+			this._username.parents('dl:eq(0)').removeClass('disabled');
 		}
 		else {
 			this._username.disable();
+			this._username.parents('dl:eq(0)').addClass('disabled');
 		}
 	},
 	
@@ -1275,18 +1276,12 @@ WCF.User.Registration.LostPassword = Class.extend({
 	_checkUsername: function() {
 		if (this._username.val() == '') {
 			this._email.enable();
+			this._email.parents('dl:eq(0)').removeClass('disabled');
 		}
 		else {
 			this._email.disable();
+			this._email.parents('dl:eq(0)').addClass('disabled');
 		}
-	},
-	
-	/**
-	 * Restores field state.
-	 */
-	_reset: function() {
-		this._email.enable();
-		this._username.enable();
 	}
 });
 

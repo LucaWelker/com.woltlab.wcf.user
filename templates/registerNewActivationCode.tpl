@@ -2,12 +2,12 @@
 
 <head>
 	<title>{lang}wcf.user.register.newActivationCode{/lang} - {PAGE_TITLE|language}</title>
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='header' sandbox=false}
+{include file='header'}
 
 <header class="boxHeadline">
 	<hgroup>
@@ -27,7 +27,7 @@
 				<input type="text" id="username" name="username" value="{@$username}" class="medium" />
 				{if $errorField == 'username'}
 					<small class="innerError">
-						{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+						{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 						{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
 						{if $errorType == 'alreadyEnabled'}{lang}wcf.user.register.error.userAlreadyEnabled{/lang}{/if}
 					</small>
@@ -41,7 +41,7 @@
 				<input type="password" id="password" name="password" value="{@$password}" class="medium" />
 				{if $errorField == 'password'}
 					<small class="innerError">
-						{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+						{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 						{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
 					</small>
 				{/if}
@@ -69,7 +69,7 @@
 	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

@@ -6,28 +6,45 @@ use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
  * Shows the lost password form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
  * @category 	Community Framework
  */
 class LostPasswordForm extends RecaptchaForm {
-	// system
+	/**
+	 * username
+	 * @var string
+	 */
 	public $username = '';
-	public $email = '';
-	public $user;
-	public $useCaptcha = LOST_PASSWORD_USE_CAPTCHA;
-	public $templateName = 'lostPassword';
 	
 	/**
-	 * @see wcf\form\Form::readFormParameters()
+	 * email address
+	 * @var string
+	 */
+	public $email = '';
+	
+	/**
+	 * user object
+	 * @var wcf\data\user\User
+	 */
+	public $user;
+	
+	/**
+	 * @see wcf\form\RecaptchaForm::$useCaptcha
+	 */
+	public $useCaptcha = LOST_PASSWORD_USE_CAPTCHA;
+	
+	/**
+	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -37,7 +54,7 @@ class LostPasswordForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::validate()
+	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -66,7 +83,7 @@ class LostPasswordForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -82,30 +99,21 @@ class LostPasswordForm extends RecaptchaForm {
 		));
 			
 		// send mail
-		$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
-		$messageData = array(
-			'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
-			'$username' => $this->user->username,
-			'$userID' => $this->user->userID,
-			'$key' => $lostPasswordKey,
-			'PAGE_URL' => PAGE_URL,
-			'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS
-		);
-		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->get('wcf.user.lostPassword.mail.subject', $subjectData), WCF::getLanguage()->get('wcf.user.lostPassword.mail', $messageData));
+		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.mail', array(
+			'username' => $this->user->username,
+			'userID' => $this->user->userID,
+			'key' => $lostPasswordKey
+		)));
 		$mail->send();
-		$this->saved();		
+		$this->saved();
 		
 		// forward to index page
-		WCF::getTPL()->assign(array(
-			'url' => 'index.php'.SID_ARG_1ST,
-			'message' => WCF::getLanguage()->get('wcf.user.lostPassword.mail.sent')
-		));
-		WCF::getTPL()->display('redirect');
+		HeaderUtil::delayedRedirect('index.php'.SID_ARG_1ST, WCF::getLanguage()->get('wcf.user.lostPassword.mail.sent'));
 		exit;
 	}
 	
 	/**
-	 * @see wcf\page\Page::assignVariables()
+	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

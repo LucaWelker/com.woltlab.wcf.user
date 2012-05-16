@@ -2,7 +2,7 @@
 
 <head>
 	<title>{lang}wcf.user.notificationList.title{/lang}</title>
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 	
 	<script type="text/javascript">
 		//<![CDATA[
@@ -15,9 +15,9 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='userMenuSidebar' sandbox=false}
+{include file='userMenuSidebar'}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<hgroup>
@@ -56,7 +56,7 @@
 	<p class="info">There are no notifications for you yet</p>
 {/hascontent}
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

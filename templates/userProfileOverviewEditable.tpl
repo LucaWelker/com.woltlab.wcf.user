@@ -33,7 +33,7 @@
 					{/if}
 				{/if}
 								
-				{include file='userProfileOptionFieldList' options=$categoryLevel2[options] langPrefix='wcf.user.option.' sandbox=false}
+				{include file='userProfileOptionFieldList' options=$categoryLevel2[options] langPrefix='wcf.user.option.'}
 			</fieldset>
 		{/foreach}
 	{/foreach}

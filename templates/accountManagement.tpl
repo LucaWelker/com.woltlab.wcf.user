@@ -3,14 +3,14 @@
 <head>
 	<title>{lang}wcf.user.accountManagement.title{/lang} - {lang}wcf.user.usercp{/lang} - {PAGE_TITLE|language}</title>
 	
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='userMenuSidebar' sandbox=false}
+{include file='userMenuSidebar'}
 
-{include file='header' sandbox=false sidebarOrientation='left'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<hgroup>
@@ -35,7 +35,7 @@
 					<input type="password" id="password" name="password" value="" required="true" class="medium" />
 					{if $errorField == 'password'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
 						</small>
 					{/if}
@@ -55,7 +55,7 @@
 							
 						{if $errorField == 'username'}
 							<small class="innerError">
-								{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 								{if $errorType == 'notValid'}{lang}wcf.user.error.username.notValid{/lang}{/if}
 								{if $errorType == 'notUnique'}{lang}wcf.user.error.username.notUnique{/lang}{/if}
 								{if $errorType == 'notChanged'}{lang}wcf.user.rename.error.username.notChanged{/lang}{/if}
@@ -79,7 +79,7 @@
 						
 					{if $errorField == 'newPassword'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 							{if $errorType == 'notSecure'}{lang}wcf.user.error.password.notSecure{/lang}{/if}
 						</small>
 					{/if}
@@ -93,7 +93,7 @@
 						
 					{if $errorField == 'confirmNewPassword'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 							{if $errorType == 'notEqual'}{lang}wcf.user.error.confirmPassword.notEqual{/lang}{/if}
 						</small>
 					{/if}
@@ -113,7 +113,7 @@
 							
 						{if $errorField == 'email'}
 							<small class="innerError">
-								{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 								{if $errorType == 'notValid'}{lang}wcf.user.error.email.notValid{/lang}{/if}
 								{if $errorType == 'notUnique'}{lang}wcf.user.error.email.notUnique{/lang}{/if}
 								{if $errorType == 'notChanged'}{lang}wcf.user.emailChange.error.email.notChanged{/lang}{/if}
@@ -177,7 +177,7 @@
 	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>

@@ -6,30 +6,58 @@
 				<parent>user</parent>
 			</category>
 			
-			<category name="user.community.signature">
+			<category name="user.profile">
+				<parent>user</parent>
+			</category>
+			
+			<category name="user.signature">
 				<parent>user.community</parent>
 			</category>
 		</categories>
 		
 		<options>
-			<!-- user.community.signature -->
-			<option name="canUseSmilies">
-				<categoryname>user.community.signature</categoryname>
+			<!-- user.signature -->
+			<option name="user.signature.canUseSmilies">
+				<categoryname>user.signature</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="canUseHtml">
-				<categoryname>user.community.signature</categoryname>
+			<option name="user.signature.canUseHtml">
+				<categoryname>user.signature</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="canUseBBCodes">
-				<categoryname>user.community.signature</categoryname>
+			<option name="user.signature.canUseBBCodes">
+				<categoryname>user.signature</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<!-- /user.community.signature -->
+			<!-- /user.signature -->
+			
+			<!-- user.profile -->
+			<option name="user.profile.canChangeEmail">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="user.profile.canQuit">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<option name="user.profile.canRename">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			 	<enableoptions>user.profile.renamePeriod</enableoptions>
+			</option>
+			<option name="user.profile.renamePeriod">
+				<categoryname>user.profile</categoryname>
+				<optiontype>inverseInteger</optiontype>
+				<defaultvalue>182</defaultvalue>
+			</option>
+			<!-- /user.profile -->
 		</options>
 	</import>
 </data>

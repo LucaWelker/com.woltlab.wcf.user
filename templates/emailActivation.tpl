@@ -3,11 +3,11 @@
 <head>
 	<title>{lang}wcf.user.emailChange.reactivation.title{/lang} - {PAGE_TITLE|language}</title>
 	
-	{include file='headInclude' sandbox=false}
+	{include file='headInclude'}
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
-{include file='header' sandbox=false}
+{include file='header'}
 
 <header class="boxHeadline">
 	<hgroup>
@@ -62,7 +62,7 @@
 	</div>
 </form>
 
-{include file='footer' sandbox=false}
+{include file='footer'}
 
 </body>
 </html>
