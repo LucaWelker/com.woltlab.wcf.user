@@ -127,6 +127,10 @@ class RegisterForm extends UserAddForm {
 				$this->username = WCF::getSession()->getVar('__username');
 				WCF::getSession()->unregister('__username');
 			}
+			if (WCF::getSession()->getVar('__email')) {
+				$this->email = $this->confirmEmail = WCF::getSession()->getVar('__email');
+				WCF::getSession()->unregister('__email');
+			}
 		}
 	}
 	
