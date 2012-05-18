@@ -74,14 +74,14 @@
 				</dl>
 			{/if}
 			
-			{event name='additionalFields'}
+			{event name='fields'}
 			
 			<dl>
 				<dd>
 					<ul class="buttonList">
 						<li><a class="button small" href="{link controller='LostPassword'}{/link}"><img src="{icon size='S'}key{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.lostPassword{/lang}</span></a></li>
 						{if !REGISTER_DISABLED && REGISTER_ACTIVATION_METHOD == 1}<li><a class="button small" href="{link controller='EmailActivation'}{/link}"><img src="{icon size='S'}check{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.emailActivation{/lang}</span></a></li>{/if}
-						{event name='additionalButtons'}
+						{event name='buttons'}
 					</ul>
 				</dd>
 			</dl>
