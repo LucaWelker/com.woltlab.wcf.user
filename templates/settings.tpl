@@ -45,7 +45,7 @@
 						<dd class="floated">
 						{content}
 							{foreach from=$availableContentLanguages item=language}
-								<label><input name="contentLanguageID[]" type="checkbox" value="{@$language->languageID}"{if $language->languageID|in_array:$contentLanguageIDs} checked="checked"{/if} /> {$language}</label>
+								<label><input name="contentLanguageIDs[]" type="checkbox" value="{@$language->languageID}"{if $language->languageID|in_array:$contentLanguageIDs} checked="checked"{/if} /> {$language}</label>
 							{/foreach}
 						{/content}
 						<small>{lang}wcf.user.visibleLanguages.description{/lang}</small></dd>

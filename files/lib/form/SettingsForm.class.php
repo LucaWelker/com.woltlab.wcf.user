@@ -8,6 +8,7 @@ use wcf\system\option\user\UserOptionHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 
 /**
  * Shows the dynamic options edit form.
@@ -124,6 +125,7 @@ class SettingsForm extends AbstractForm {
 					unset($this->contentLanguageIDs[$key]);
 				}
 			}
+			
 			if (empty($this->contentLanguageIDs) && isset($this->availableContentLanguages[$this->languageID])) {
 				$this->contentLanguageIDs[] = $this->languageID;
 			}
@@ -166,7 +168,7 @@ class SettingsForm extends AbstractForm {
 				'languageID' => $this->languageID,
 				'styleID' => $this->styleID
 			);
-			$parameters['languages'] = $this->contentLanguageIDs;
+			$parameters['languageIDs'] = $this->contentLanguageIDs;
 		}
 		
 		$this->objectAction = new UserAction(array(WCF::getUser()), 'update', $parameters);
