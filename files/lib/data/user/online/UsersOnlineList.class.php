@@ -2,6 +2,7 @@
 namespace wcf\data\user\online;
 use wcf\data\session\SessionList;
 use wcf\data\user\UserProfile;
+use wcf\data\user\User;
 use wcf\system\WCF;
 
 /**
@@ -21,6 +22,17 @@ class UsersOnlineList extends SessionList {
 	public $objectClassName = 'wcf\data\user\User';
 	
 	/**
+	 * users online stats
+	 * @var array
+	 */
+	public $stats = array(
+		'total' => 0,
+		'invisible' => 0,
+		'members' => 0,
+		'guests' => 0
+	);
+	
+	/**
 	 * Creates a new UserFollowingList object.
 	 */
 	public function __construct() {
@@ -31,6 +43,9 @@ class UsersOnlineList extends SessionList {
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = session.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_option_value user_option_value ON (user_option_value.userID = user_table.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
+		
+		$this->getConditionBuilder()->add('session.packageID = ?', array(PACKAGE_ID));
+		$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
 	}
 	
 	/**
@@ -42,5 +57,56 @@ class UsersOnlineList extends SessionList {
 		foreach ($this->objects as &$object) {
 			$object = new UserProfile($object);
 		}
+	}
+	
+	/**
+	 * Gets users online stats.
+	 */
+	public function readStats() {
+		$sql = "SELECT		user_option_value.userOption".User::getUserOptionID('canViewOnlineStatus')." AS canViewOnlineStatus, session.userID
+			FROM		wcf".WCF_N."_session session
+			LEFT JOIN	wcf".WCF_N."_user_option_value user_option_value
+			ON		(user_option_value.userID = session.userID)
+			".$this->getConditionBuilder();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($this->getConditionBuilder()->getParameters());
+		while ($row = $statement->fetchArray()) {
+			$this->stats['total']++;
+			if ($row['userID']) {
+				$this->stats['members']++;
+				
+				if ($row['canViewOnlineStatus'] && !self::isVisible($row['userID'], $row['canViewOnlineStatus'])) {
+					$this->stats['invisible']++;
+				}
+			}
+			else {
+				$this->stats['guests']++;
+			}
+		}
+	}
+	
+	/**
+	 * Checks the 'canViewOnlineStatus' setting.
+	 * 
+	 * @param	integer		$userID
+	 * @param	integer		$canViewOnlineStatus
+	 * @return	boolean
+	 */
+	public static function isVisible($userID, $canViewOnlineStatus) {
+		// TODO: add permission
+		// if (WCF::getSession()->getPermission('admin.user.canViewInvisible')) return true;
+		
+		switch ($canViewOnlineStatus) {
+			case 0: // everyone
+				return true;
+			case 1: // registered
+				if (WCF::getUser()->userID) return true;
+				break;
+			case 2: // following
+				if (WCF::getUserProfileHandler()->isFollower($userID)) return true;
+				break;
+		}
+		
+		return false;
 	}
 }
