@@ -1,11 +1,14 @@
 {hascontent}
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			new WCF.User.RecentActivityLoader({@$userID});
-		});
-		//]]>
-	</script>
+	{if $userID|isset}
+		<script type="text/javascript">
+			//<![CDATA[
+			$(function() {
+				new WCF.User.RecentActivityLoader({@$userID});
+			});
+			//]]>
+		</script>
+	{/if}
+	
 	<ul id="recentActivities" class="containerList">
 		{content}
 			{foreach from=$eventList item=event}
