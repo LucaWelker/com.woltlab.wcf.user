@@ -1,5 +1,7 @@
 <?php
 namespace wcf\system\user\activity\event;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\activity\event\UserActivityEventAction;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
@@ -123,5 +125,25 @@ class UserActivityEventHandler extends SingletonFactory {
 		$returnValues = $eventAction->executeAction();
 		
 		return $returnValues['returnValues'];
+	}
+	
+	/**
+	 * Removes activity events.
+	 * 
+	 * @param	string		$objectType
+	 * @param	integer		$packageID
+	 * @param	array<integer>	$objectIDs
+	 */
+	public function removeEvents($objectType, $packageID, array $objectIDs) {
+		$objectTypeID = $this->getObjectTypeID($objectType);
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("objectTypeID = ?", array($objectTypeID));
+		$conditions->add("packageID = ?", array($packageID));
+		$conditions->add("objectID IN (?)", array($objectIDs));
+		
+		$sql = "DELETE FROM	wcf".WCF_N."_user_activity_event
+			".$conditions;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditions->getParameters());
 	}
 }
