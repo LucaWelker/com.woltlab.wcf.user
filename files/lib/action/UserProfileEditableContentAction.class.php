@@ -18,11 +18,11 @@ class UserProfileEditableContentAction extends AbstractSecureAction {
 	protected $cache = null;
 	
 	/**
-	 * @see	wcf\action\AbstractAction::_construct()
+	 * @see	wcf\action\AbstractAction::__run()
 	 */
-	public function __construct() {
+	public function __run() {
 		try {
-			parent::__construct();
+			parent::__run();
 		}
 		catch (\Exception $e) {
 			if ($e instanceof AJAXException) {
