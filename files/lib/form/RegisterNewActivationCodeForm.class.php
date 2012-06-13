@@ -2,9 +2,12 @@
 namespace wcf\form;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserRegistrationUtil;
 use wcf\util\UserUtil;
@@ -20,9 +23,6 @@ use wcf\util\UserUtil;
  * @category 	Community Framework
  */
 class RegisterNewActivationCodeForm extends AbstractForm {
-	// system
-	public $templateName = 'registerNewActivationCode';
-	
 	/**
 	 * username
 	 * @var	string
@@ -48,7 +48,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	public $user = null;
 	
 	/**
-	 * @see wcf\form\Form::readFormParameters()
+	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -59,7 +59,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::validate()
+	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -124,7 +124,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -139,32 +139,17 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 		$userEditor->update($parameters);
 		
 		// send activation mail
-		$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
-		$messageData = array(
-			'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
-			'PAGE_URL' => PAGE_URL,
-			'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS,
-			'username' => $this->user->username,
-			'userID' => $this->user->userID,
-			'activationCode' => $activationCode
-		);
-		$mail = new Mail(	array($this->user->username => (!empty($this->email) ? $this->email : $this->user->email)),
-					WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail.subject', $subjectData),
-					WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail', $messageData));
+		$mail = new Mail(array($this->user->username => (!empty($this->email) ? $this->email : $this->user->email)), WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail', array('user' => $this->user)));
 		$mail->send();
 		$this->saved();
 		
 		// forward to index page
-		WCF::getTPL()->assign(array(
-			'url' => 'index.php'.SID_ARG_1ST,
-			'message' => WCF::getLanguage()->get('wcf.user.register.newActivationCode.success', array('$email' => (!empty($this->email) ? $this->email : $this->user->email)))
-		));
-		WCF::getTPL()->display('redirect');
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->getDynamicVariable('wcf.user.newActivationCode.success', array('email' => (!empty($this->email) ? $this->email : $this->user->email))), 10);
 		exit;
 	}
 	
 	/**
-	 * @see wcf\page\Page::readData()
+	 * @see wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -175,7 +160,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::assignVariables()
+	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -186,5 +171,15 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 			'email' => $this->email
 		));
 	}
+	
+	/**
+	 * @see wcf\page\IPage::show()
+	 */
+	public function show() {
+		if (REGISTER_ACTIVATION_METHOD != 1) {
+			throw new IllegalLinkException();
+		}
+		
+		parent::show();
+	}
 }
-?>

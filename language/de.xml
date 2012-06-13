@@ -52,13 +52,13 @@
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Das Kennwort muss mindestens {REGISTER_PASSWORD_MIN_LENGTH} Zeichen lang sein.{else}Ein sicheres Kennwort sollte mindestens 8 Zeichen lang sein.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Kennwort vergessen]]></item>
 		<item name="wcf.user.lostPassword.description"><![CDATA[Wenn Sie Ihr Kennwort vergessen haben, müssen Sie entweder den Benutzernamen oder die E-Mail-Adresse angeben, die Sie in Ihrem Profil hinterlegt haben. Sie können dabei nur eines der beiden Felder ausfüllen. Wenn Sie beide Daten nicht mehr wissen, wenden Sie sich bitte an den Administrator.]]></item>
-		<item name="wcf.user.lostPassword.error.email.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: &bdquo;{$email}&ldquo; gefunden.]]></item>
+		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: &bdquo;{$email}&ldquo; gefunden.]]></item>
 		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[Das Kennwort für dieses Benutzerkonto wurde in den letzten 24 Stunden bereits einmal angefordert. Aus Sicherheitsgründen kann das Kennwort eines Benutzers nur einmal pro Tag angefordert werden. Sie können das Kennwort für dieses Benutzerkonto in {#$hours} Stunde{if $hours != 1}n{/if} erneut anfordern.]]></item>
 		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Kennwort vergessen auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Hallo {@$username},
 
 wenn Sie Ihr Kennwort vergessen haben, können Sie über folgenden Link ein neues Kennwort anfordern.
-Klicken Sie hier, um ein neues Kennwort anzufordern: {@PAGE_URL}/index.php/NewPassword/?u={@$userID}&k={@$key}
+Klicken Sie hier, um ein neues Kennwort anzufordern: {@PAGE_URL}/index.php/NewPassword/?u={@$userID}&k={@$key}  
 
 Falls Sie Ihr Kennwort nicht vergessen haben, können Sie diese E-Mail ignorieren.
 
@@ -68,12 +68,12 @@ Ihr {@PAGE_TITLE|language} Team]]></item>
 		<item name="wcf.user.lostPassword.mail.sent"><![CDATA[Sie erhalten in Kürze eine E-Mail mit weiteren Informationen.]]></item>
 		<item name="wcf.user.newPassword"><![CDATA[Neues Kennwort anfordern]]></item>
 		<item name="wcf.user.lostPasswordKey"><![CDATA[Sicherheitsschlüssel]]></item>
-		<item name="wcf.user.error.lostPasswordKey.invalid"><![CDATA[Sie haben einen ungültigen Sicherheitsschlüssel angegeben.]]></item>
-		<item name="wcf.user.error.userID.invalid"><![CDATA[Sie haben eine ungültige Benutzer-ID angegeben.]]></item>
+		<item name="wcf.user.lostPasswordKey.error.invalid"><![CDATA[Sie haben einen ungültigen Sicherheitsschlüssel angegeben.]]></item>
+		<item name="wcf.user.userID.error.invalid"><![CDATA[Sie haben eine ungültige Benutzer-ID angegeben.]]></item>
 		<item name="wcf.user.newPassword.mail"><![CDATA[Hallo {@$username},
 
 Ihr neues Kennwort für die Website "{@PAGE_TITLE|language}" lautet:
-{@$newPassword}
+{@$newPassword} 
 
 Sie können Ihr Kennwort unter folgender Adresse jederzeit ändern: 
 {@PAGE_URL}/index.php/AccountManagement/
@@ -83,6 +83,101 @@ Vielen Dank,
 Ihr {@PAGE_TITLE|language} Team]]></item>
 		<item name="wcf.user.newPassword.mail.subject"><![CDATA[Neues Kennwort auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.newPassword.success"><![CDATA[Sie erhalten in Kürze eine E-Mail mit Ihrem neuen Kennwort.]]></item>
+		<item name="wcf.user.accountManagement"><![CDATA[Benutzerkonto-Verwaltung]]></item>
+		<item name="wcf.user.accountManagement.warning"><![CDATA[Sie bearbeiten Ihr eigenes Benutzerkonto. Unbedachte Änderungen können dazu führen, dass Sie sich nicht mehr anmelden können. Bitte seien Sie entsprechend vorsichtig!]]></item>
+		<item name="wcf.user.accountManagement.password.description"><![CDATA[Bitte geben Sie zur Bestätigung Ihr Kennwort ein!]]></item>
+		<item name="wcf.user.newPassword"><![CDATA[Neues Kennwort]]></item>
+		<item name="wcf.user.changeUsername"><![CDATA[Benutzernamen ändern]]></item>
+		<item name="wcf.user.changeUsername.description"><![CDATA[Sie können Ihren Benutzernamen nur einmal alle {$renamePeriod} Tage ändern. Änderungen von Groß- auf Kleinschreibung und umgekehrt sind jederzeit möglich.]]></item>
+		<item name="wcf.user.changePassword"><![CDATA[Kennwort ändern]]></item>
+		<item name="wcf.user.changeEmail"><![CDATA[E-Mail-Adresse ändern]]></item>
+		<item name="wcf.user.newEmail"><![CDATA[Neue E-Mail-Adresse]]></item>
+		<item name="wcf.user.newUsername"><![CDATA[Neuer Benutzername]]></item>
+		<item name="wcf.user.quit"><![CDATA[Benutzerkonto kündigen]]></item>
+		<item name="wcf.user.quit.sure"><![CDATA[Wollen Sie Ihr Benutzerkonto mitsamt Ihrer persönlichen Daten dauerhaft löschen?]]></item>
+		<item name="wcf.user.quit.cancel"><![CDATA[Ihr Benutzerkonto wird am {$quitStarted+7*86400|date} gelöscht. Bitte aktivieren Sie diese Option, wenn Sie die Löschung abbrechen möchten.]]></item>
+		<item name="wcf.user.quit.description"><![CDATA[Hinweis: Beiträge, Anhänge und ähnliches werden nicht gelöscht.]]></item>
+		<item name="wcf.user.quit.success"><![CDATA[Ihr Benutzerkonto wird am {TIME_NOW+7*86400|date} gelöscht. Bis dahin können Sie die Löschung auf dieser Seite abbrechen.]]></item>
+		<item name="wcf.user.quit.cancel.success"><![CDATA[Die Löschung Ihres Benutzerkonto wurde erfolgreich abgebrochen.]]></item>
+		<item name="wcf.user.emailActivation"><![CDATA[Neue E-Mail-Adresse aktivieren]]></item>
+		<item name="wcf.user.password.error.notSecure"><![CDATA[Das Kennwort muss aus Sicherheitsgründen mindestens {REGISTER_PASSWORD_MIN_LENGTH} Zeichen lang sein{if REGISTER_PASSWORD_MUST_CONTAIN_LOWER_CASE || REGISTER_PASSWORD_MUST_CONTAIN_UPPER_CASE || REGISTER_PASSWORD_MUST_CONTAIN_DIGIT || REGISTER_PASSWORD_MUST_CONTAIN_SPECIAL_CHAR}{*
+		*}und {*
+		*}{if REGISTER_PASSWORD_MUST_CONTAIN_LOWER_CASE}kleine Buchstaben{/if}{*
+		*}{if REGISTER_PASSWORD_MUST_CONTAIN_UPPER_CASE}{if REGISTER_PASSWORD_MUST_CONTAIN_LOWER_CASE}{if REGISTER_PASSWORD_MUST_CONTAIN_DIGIT || REGISTER_PASSWORD_MUST_CONTAIN_SPECIAL_CHAR},{else} und{/if} {/if}große Buchstaben{/if}{*
+		*}{if REGISTER_PASSWORD_MUST_CONTAIN_DIGIT}{if REGISTER_PASSWORD_MUST_CONTAIN_LOWER_CASE || REGISTER_PASSWORD_MUST_CONTAIN_UPPER_CASE}{if REGISTER_PASSWORD_MUST_CONTAIN_SPECIAL_CHAR},{else} und{/if} {/if}Zahlen{/if}{*
+		*}{if REGISTER_PASSWORD_MUST_CONTAIN_SPECIAL_CHAR}{if REGISTER_PASSWORD_MUST_CONTAIN_LOWER_CASE || REGISTER_PASSWORD_MUST_CONTAIN_UPPER_CASE || REGISTER_PASSWORD_MUST_CONTAIN_DIGIT} und {/if}Sonderzeichen{/if} {*
+		*}enthalten{/if}.]]></item>
+		<item name="wcf.user.changeUsername.success"><![CDATA[Ihr Benutzername wurde erfolgreich geändert.]]></item>
+		<item name="wcf.user.changeEmail.success"><![CDATA[Ihre E-Mail-Adresse wurde erfolgreich geändert.]]></item>
+		<item name="wcf.user.changeEmail.needReactivation"><![CDATA[Ihre neue E-Mail-Adresse muss noch aktiviert werden. Dazu wurde eine E-Mail mit einem Aktivierungslink an die neue Adresse gesandt. Sie müssen diesen Aktivierungslink aufrufen, um die neue E-Mail-Adresse zu aktivieren.]]></item>
+		<item name="wcf.user.changeEmail.needReactivation.mail"><![CDATA[Hallo {@$username}:
+
+Sie haben Ihre E-Mail-Adresse auf der Website: {@PAGE_TITLE|language} geändert. Zum Abschließen dieser Änderung müssen Sie einmalig die Gültigkeit Ihrer neuen E-Mail-Adresse bestätigen.
+
+Bitte bestätigen Sie die Gültigkeit Ihrer neuen E-Mail-Adresse, indem Sie folgenden Link aufrufen:
+{@PAGE_URL}/index.php/EmailActivation/?u={@$userID}&a={@$activationCode} 
+
+**** Funktioniert der Link oben nicht? ****
+Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
+{@PAGE_URL}/index.php/EmailActivation/
+
+Bitte achten Sie darauf, dass keine Leerzeichen in der Adresse sind.
+Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
+
+Ihre Benutzernummer lautet: 	{@$userID} 
+Ihr Aktivierungscode lautet: 	{@$activationCode} 
+
+Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} 
+
+Vielen Dank,
+Ihr {@PAGE_TITLE|language} Team]]></item>
+		<item name="wcf.user.changeEmail.needReactivation.mail.subject"><![CDATA[Aktivierung der neuen E-Mail-Adresse auf der Website: {@PAGE_TITLE|language}]]></item>
+		<item name="wcf.user.changePassword.success"><![CDATA[Ihr Kennwort wurde erfolgreich geändert.]]></item>
+		<item name="wcf.user.activationCode"><![CDATA[9-stelliger Aktivierungscode]]></item>
+		<item name="wcf.user.newActivationCode"><![CDATA[Neuen Aktivierungscode anfordern]]></item>
+		<item name="wcf.user.register.error.disabled"><![CDATA[Die Registrierung ist momentan deaktiviert.]]></item>
+		<item name="wcf.user.register.success"><![CDATA[Vielen Dank für die Registrierung, {$user->username}. Ihre Registrierung ist hiermit vollständig abgeschlossen.]]></item>
+		<item name="wcf.user.register.needActivation.mail"><![CDATA[Hallo {@$user->username}!
+
+Vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}. 
+Bevor wir Ihre Registrierung aktivieren können, müssen Sie einmalig die Gültigkeit Ihrer E-Mail-Adresse bestätigen.
+
+Bitte bestätigen Sie die Gültigkeit Ihrer E-Mail-Adresse, indem Sie folgenden Link aufrufen:
+{@PAGE_URL}/index.php/RegisterActivation/?u={@$user->userID}&a={@$user->activationCode} 
+
+**** Funktioniert der Link oben nicht? ****
+Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
+{@PAGE_URL}/index.php/RegisterActivation/
+
+Bitte achten Sie darauf, dass sich keine Leerzeichen in der Adresse befinden.
+Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
+
+Ihre Benutzernummer lautet: 	{@$user->userID} 
+Ihr Aktivierungscode lautet: 	{@$user->activationCode} 
+
+Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} 
+
+Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben, können Sie diese E-Mail ignorieren.
+
+Vielen Dank,
+Ihr {@PAGE_TITLE|language} Team]]></item>
+		<item name="wcf.user.register.needActivation.mail.subject"><![CDATA[Aktivierung der Registrierung auf der Website: {@PAGE_TITLE|language}]]></item>
+		<item name="wcf.user.register.needActivation"><![CDATA[Vielen Dank für die Registrierung, {$user->username}.<br />
+Wir haben Ihnen eine E-Mail an {$user->email} geschickt. Die E-Mail enthält einen Link, den Sie einmalig aufrufen müssen, um die Gültigkeit Ihrer E-Mail-Adresse zu bestätigen und damit Ihre Registrierung abzuschließen.]]></item>
+		<item name="wcf.user.register.awaitActivation"><![CDATA[Vielen Dank für die Registrierung, {$user->username}. Ihre Benutzerdaten werden in Kürze von einem Administrator geprüft.<br />
+Sobald Ihr Benutzerkonto freigeschaltet ist, werden Sie per E-Mail darüber in Kenntnis gesetzt.]]></item>
+		<item name="wcf.user.register.notification.mail"><![CDATA[Hallo Administrator,
+auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung durch: {@$user->username}]]></item>
+		<item name="wcf.user.register.notification.mail.subject"><![CDATA[Neue Benutzeranmeldung auf der Website: {@PAGE_TITLE|language}]]></item>
+		<item name="wcf.user.registerActivation"><![CDATA[Registrierung abschließen]]></item>
+		<item name="wcf.user.registerActivation.error.userAlreadyEnabled"><![CDATA[Dieser Benutzer ist bereits freigeschaltet.]]></item>
+		<item name="wcf.user.registerActivation.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich freigeschaltet.]]></item>
+		<item name="wcf.user.activationCode.error.notValid"><![CDATA[Sie haben einen ungültigen Aktivierungscode eingegeben. Klicken Sie auf den unten stehenden Button, falls Sie einen neuen Aktivierungscode anfordern möchten.]]></item>
+		<item name="wcf.user.registerNewActivationCode.email.description"><![CDATA[Optional können Sie hier eine neue E-Mail-Adresse eintragen, an die der neue Aktivierungscode gesendet werden soll. Lassen Sie dieses Feld frei, wenn der Aktivierungscode an die bestehende Adresse geschickt werden soll.]]></item>
+		<item name="wcf.user.newActivationCode.success"><![CDATA[Eine E-Mail mit dem neuen Aktivierungscode wurde an {$email} versendet.]]></item>
+		<item name="wcf.user.emailActivation.error.emailAlreadyEnabled"><![CDATA[Die neue E-Mail-Adresse ist bereits aktiviert.]]></item>
+		<item name="wcf.user.emailActivation.success"><![CDATA[Ihre neue E-Mail-Adresse wurde erfolgreich aktiviert.]]></item>
+		
 	</category>
 	
 	<category name="wcf.user.notification">

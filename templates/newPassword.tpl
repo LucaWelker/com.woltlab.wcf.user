@@ -29,10 +29,10 @@
 					<label for="userID">{lang}wcf.user.userID{/lang}</label>
 				</dt>
 				<dd>
-					<input type="text" id="userID" name="u" value="{@$userID}" class="medium" />
+					<input type="text" id="userID" name="u" value="{@$userID}" required="true" class="medium" />
 					{if $errorField == 'userID'}
 						<small class="innerError">
-							{if $errorType == 'invalid'}{lang}wcf.user.error.userID.invalid{/lang}{/if}
+							{if $errorType == 'invalid'}{lang}wcf.user.userID.error.invalid{/lang}{/if}
 						</small>
 					{/if}
 				</dd>
@@ -43,11 +43,11 @@
 					<label for="lostPasswordKey">{lang}wcf.user.lostPasswordKey{/lang}</label>
 				</dt>
 				<dd>
-					<input type="text" id="lostPasswordKey" name="k" value="{$lostPasswordKey}" class="medium" />
+					<input type="text" id="lostPasswordKey" name="k" value="{$lostPasswordKey}" required="true" class="medium" />
 					{if $errorField == 'lostPasswordKey'}
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'invalid'}{lang}wcf.user.error.lostPasswordKey.invalid{/lang}{/if}
+							{if $errorType == 'invalid'}{lang}wcf.user.lostPasswordKey.error.invalid{/lang}{/if}
 						</small>
 					{/if}
 				</dd>

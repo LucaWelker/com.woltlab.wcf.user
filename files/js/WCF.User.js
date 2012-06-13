@@ -963,7 +963,8 @@ WCF.User.Registration.Validation = Class.extend({
 		this._setOptions(options);
 		
 		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
+			success: $.proxy(this._success, this),
+			showLoadingOverlay: false
 		});
 		
 		this._setErrorMessages();
@@ -1072,7 +1073,7 @@ WCF.User.Registration.Validation = Class.extend({
 	 * @param	string		message
 	 */
 	_showError: function(element, message) {
-		element.parent().prev().addClass('formError').removeClass('formSuccess');
+		element.parent().parent().addClass('formError').removeClass('formSuccess');
 		
 		var $innerError = element.parent().find('small.innerError');
 		if (!$innerError.length) {
@@ -1088,7 +1089,7 @@ WCF.User.Registration.Validation = Class.extend({
 	 * @param	jQuery		element
 	 */
 	_showSuccess: function(element) {
-		element.parent().prev().addClass('formSuccess').removeClass('formError');
+		element.parent().parent().addClass('formSuccess').removeClass('formError');
 		element.next('small.innerError').remove();
 	}
 });
@@ -1124,7 +1125,7 @@ WCF.User.Registration.Validation.Username = WCF.User.Registration.Validation.ext
 	 */
 	_setErrorMessages: function() {
 		this._errorMessages = {
-			ajaxError: 'wcf.user.error.username.'
+			ajaxError: 'wcf.user.username.error.'
 		};
 	},
 	
@@ -1134,7 +1135,7 @@ WCF.User.Registration.Validation.Username = WCF.User.Registration.Validation.ext
 	_validateOptions: function() {
 		var $value = this._element.val();
 		if ($value.length < this._options.minlength || $value.length > this._options.maxlength) {
-			this._showError(this._element, WCF.Language.get('wcf.user.error.username.notValid'));
+			this._showError(this._element, WCF.Language.get('wcf.user.username.error.notValid'));
 			return false;
 		}
 		
@@ -1181,8 +1182,8 @@ WCF.User.Registration.Validation.EmailAddress = WCF.User.Registration.Validation
 	 */
 	_setErrorMessages: function() {
 		this._errorMessages = {
-			ajaxError: 'wcf.user.error.email.',
-			notEqual: WCF.Language.get('wcf.user.error.confirmEmail.notEqual')
+			ajaxError: 'wcf.user.email.error.',
+			notEqual: WCF.Language.get('wcf.user.confirmEmail.error.notEqual')
 		};
 	}
 });
@@ -1217,8 +1218,8 @@ WCF.User.Registration.Validation.Password = WCF.User.Registration.Validation.ext
 	 */
 	_setErrorMessages: function() {
 		this._errorMessages = {
-			ajaxError: 'wcf.user.error.password.',
-			notEqual: WCF.Language.get('wcf.user.error.confirmPassword.notEqual')
+			ajaxError: 'wcf.user.password.error.',
+			notEqual: WCF.Language.get('wcf.user.confirmPassword.error.notEqual')
 		};
 	}
 });

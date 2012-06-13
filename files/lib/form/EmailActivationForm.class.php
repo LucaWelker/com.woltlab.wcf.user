@@ -5,7 +5,9 @@ use wcf\data\user\UserEditor;
 use wcf\form\AbstractForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\UserUtil;
 
 /**
@@ -19,11 +21,8 @@ use wcf\util\UserUtil;
  * @category 	Community Framework
  */
 class EmailActivationForm extends RegisterActivationForm {
-	// system
-	public $templateName = 'emailActivation';
-	
 	/**
-	 * @see wcf\form\Form::validate()
+	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		AbstractForm::validate();
@@ -36,12 +35,12 @@ class EmailActivationForm extends RegisterActivationForm {
 		
 		// user is already enabled
 		if ($this->user->reactivationCode == 0) {
-			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.emailChange.error.emailAlreadyEnabled'));
+			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.emailActivation.error.emailAlreadyEnabled'));
 		}
 		
 		// check whether the new email isn't unique anymore
 		if (!UserUtil::isAvailableEmail($this->user->newEmail)) {
-			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.emailChange.error.email.notUnique'));
+			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.email.error.notUnique'));
 		}
 		
 		// check given activation code
@@ -51,7 +50,7 @@ class EmailActivationForm extends RegisterActivationForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -62,16 +61,10 @@ class EmailActivationForm extends RegisterActivationForm {
 			'newEmail' => '',
 			'reactivationCode' => 0
 		));
-		
-		// reset session
 		$this->saved();
 		
 		// forward to index page
-		WCF::getTPL()->assign(array(
-			'url' => 'index.php'.SID_ARG_1ST,
-			'message' => WCF::getLanguage()->get('wcf.user.emailChange.reactivation.success')
-		));
-		WCF::getTPL()->display('redirect');
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->get('wcf.user.emailActivation.success'));
 		exit;
 	}
 }

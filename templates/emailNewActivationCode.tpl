@@ -19,7 +19,7 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 	
-<form method="post" action="{link controller='RegisterNewActivationCode'}{/link}">
+<form method="post" action="{link controller='EmailNewActivationCode'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.user.newActivationCode{/lang}</legend>
@@ -58,19 +58,6 @@
 				</dd>
 			</dl>
 				
-			<dl{if $errorField == 'email'} class="formError"{/if}>
-				<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
-				<dd>
-					<input type="email" id="email" name="email" value="{@$email}" class="medium" />
-					{if $errorField == 'email'}
-						<small class="innerError">
-							{lang}wcf.user.email.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-					<small>{lang}wcf.user.registerNewActivationCode.email.description{/lang}</small>
-				</dd>
-			</dl>
-			
 			{event name='fields'}
 		</fieldset>
 		

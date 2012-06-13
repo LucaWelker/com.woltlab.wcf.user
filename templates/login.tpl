@@ -39,9 +39,11 @@
 					<input type="text" id="username" name="username" value="{$username}" required="required" class="long" />
 					{if $errorField == 'username'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
-							{if $errorType == 'notEnabled'}{lang}wcf.user.login.error.username.notEnabled{/lang}{/if}
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}wcf.user.username.error.{@$errorType}{/lang}
+							{/if}
 						</small>
 					{/if}
 				</dd>
@@ -59,8 +61,11 @@
 					<input type="password" id="password" name="password" value="{$password}" class="long" />
 					{if $errorField == 'password'}
 						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'false'}{lang}wcf.user.login.error.password.false{/lang}{/if}
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}wcf.user.password.error.{@$errorType}{/lang}
+							{/if}
 						</small>
 					{/if}
 				</dd>
@@ -78,7 +83,7 @@
 				<dd>
 					<ul class="buttonList">
 						<li><a class="button small" href="{link controller='LostPassword'}{/link}"><img src="{icon size='S'}key{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.lostPassword{/lang}</span></a></li>
-						{if !REGISTER_DISABLED && REGISTER_ACTIVATION_METHOD == 1}<li><a class="button small" href="{link controller='EmailActivation'}{/link}"><img src="{icon size='S'}check{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.emailActivation{/lang}</span></a></li>{/if}
+						{if !REGISTER_DISABLED && REGISTER_ACTIVATION_METHOD == 1}<li><a class="button small" href="{link controller='RegisterActivation'}{/link}"><img src="{icon size='S'}check{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.registerActivation{/lang}</span></a></li>{/if}
 					</ul>
 				</dd>
 			</dl>

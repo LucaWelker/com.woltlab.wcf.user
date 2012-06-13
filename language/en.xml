@@ -52,7 +52,7 @@
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}The password has to be {REGISTER_PASSWORD_MIN_LENGTH} letters long.{else}A safe password should be at least 8 characters long.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Lost password]]></item>
 		<item name="wcf.user.lostPassword.description"><![CDATA[You only have to fill in one of the fields.]]></item>
-		<item name="wcf.user.lostPassword.error.email.notFound"><![CDATA[No user with the e-mail address &ldquo;{$email}&rdquo; has been found.]]></item>
+		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[No user with the e-mail address &ldquo;{$email}&rdquo; has been found.]]></item>
 		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[At this user account the password was already requested in the last 24h. For security reasons the password can only be requested once a day. You can request the password for this account again in {#$hours} hour{if $hours != 1}s{/if}.]]></item>
 		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Lost password at {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Dear {@$username},
@@ -67,8 +67,8 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.lostPassword.mail.sent"><![CDATA[You will receive an e-mail with more information shortly.]]></item>
 		<item name="wcf.user.newPassword"><![CDATA[Request new password]]></item>
 		<item name="wcf.user.lostPasswordKey"><![CDATA[Recovery token]]></item>
-		<item name="wcf.user.error.lostPasswordKey.invalid"><![CDATA[You have entered an invalid recovery token.]]></item>
-		<item name="wcf.user.error.userID.invalid"><![CDATA[You have entered an invalid user ID.]]></item>
+		<item name="wcf.user.lostPasswordKey.error.invalid"><![CDATA[You have entered an invalid recovery token.]]></item>
+		<item name="wcf.user.userID.error.invalid"><![CDATA[You have entered an invalid user ID.]]></item>
 		<item name="wcf.user.newPassword.mail"><![CDATA[Dear {@$username},
 
 your new password for the web site "{@PAGE_TITLE|language}" is:
@@ -82,6 +82,21 @@ Have a nice day,
 Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.newPassword.mail.subject"><![CDATA[New password on the web site: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.newPassword.success"><![CDATA[You will receive an e-mail with your new password shortly.]]></item>
+		<item name="wcf.user.accountManagement"><![CDATA[Account Management]]></item>
+		<item name="wcf.user.accountManagement.warning"><![CDATA[You are editing your own user account. Unthought changes might lock you out of your account. Please be careful!]]></item>
+		<item name="wcf.user.accountManagement.password.description"><![CDATA[Please enter your password for confirmation!]]></item>
+		<item name="wcf.user.newPassword"><![CDATA[New password]]></item>
+		<item name="wcf.user.changeUsername"><![CDATA[Change username]]></item>
+		<item name="wcf.user.changeUsername.description"><![CDATA[You can change your username only once in {$renamePeriod} days. Changes from uppercase to lowercase are possible without a limit.]]></item>
+		<item name="wcf.user.changePassword"><![CDATA[Change password]]></item>
+		<item name="wcf.user.changeEmail"><![CDATA[Change e-mail address]]></item>
+		<item name="wcf.user.newEmail"><![CDATA[New e-mail address]]></item>
+		<item name="wcf.user.newUsername"><![CDATA[New username]]></item>
+		<item name="wcf.user.quit.sure"><![CDATA[Do you really want to permanently delete your user account and your personal data?]]></item>
+		<item name="wcf.user.quit.cancel"><![CDATA[Your user account will be deleted at {$quitStarted+7*86400|date}. Please enable this option if you want to cancel the deletion.]]></item>
+		<item name="wcf.user.quit.description"><![CDATA[Note: This action does not delete posts, attachments and other user generated content.]]></item>
+		<item name="wcf.user.quit"><![CDATA[Quit user account]]></item>
+		<item name="wcf.user.emailActivation"><![CDATA[Enable new e-mail address]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

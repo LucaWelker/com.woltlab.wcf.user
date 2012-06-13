@@ -23,11 +23,6 @@ use wcf\util\UserUtil;
  */
 class AccountManagementForm extends AbstractSecureForm {
 	/**
-	 * @see wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'accountManagement';
-	
-	/**
 	 * user password
 	 * @var string
 	 */
@@ -75,7 +70,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $canChangeUsername = true;
 	
 	/**
-	 * @see wcf\page\Page::readParameters()
+	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -88,7 +83,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::readFormParameters()
+	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -104,7 +99,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::validate()
+	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -177,7 +172,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::readData()
+	 * @see wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -190,7 +185,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::assignVariables()
+	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -211,7 +206,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::show()
+	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {
 		if (!WCF::getUser()->userID) {
@@ -225,13 +220,14 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
 		
 		$success = array();
 		$updateParameters = array();
+		$userEditor = new UserEditor(WCF::getUser());
 		
 		// quit
 		if (WCF::getSession()->getPermission('user.profile.canQuit')) {
@@ -250,16 +246,11 @@ class AccountManagementForm extends AbstractSecureForm {
 		// user name
 		if ($this->canChangeUsername && $this->username != WCF::getUser()->username) {
 			if (StringUtil::toLowerCase($this->username) != StringUtil::toLowerCase(WCF::getUser()->username)) {
-				if (!$this->canChangeUsername) {
-					$this->username = WCF::getUser()->username;
-					return;
-				}
-				
 				$updateParameters['lastUsernameChange'] = TIME_NOW;
 				$updateParameters['oldUsername'] = $userEditor->username;
 			}
 			$updateParameters['username'] = $this->username;
-			$success[] = 'wcf.user.rename.success';
+			$success[] = 'wcf.user.changeUsername.success';
 		}
 		
 		// email
@@ -267,7 +258,7 @@ class AccountManagementForm extends AbstractSecureForm {
 			if (REGISTER_ACTIVATION_METHOD == 0 || REGISTER_ACTIVATION_METHOD == 2 || StringUtil::toLowerCase($this->email) == StringUtil::toLowerCase(WCF::getUser()->email)) {
 				// update email
 				$updateParameters['email'] = $this->email;
-				$success[] = 'wcf.user.emailChange.success';
+				$success[] = 'wcf.user.changeEmail.success';
 			}
 			else if (REGISTER_ACTIVATION_METHOD == 1) {
 				// get reactivation code
@@ -277,23 +268,17 @@ class AccountManagementForm extends AbstractSecureForm {
 				$updateParameters['reactivationCode'] = $activationCode;
 				$updateParameters['newEmail'] = $this->email;
 				
-				$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
 				$messageData = array(
-					'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
 					'username' => WCF::getUser()->username,
 					'userID' => WCF::getUser()->userID,
-					'activationCode' => $activationCode,
-					'PAGE_URL' => PAGE_URL,
-					'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS
+					'activationCode' => $activationCode
 				);
 				
-				$mail = new Mail(array(WCF::getUser()->username => $this->email), WCF::getLanguage()->getDynamicVariable('wcf.user.emailChange.needReactivation.mail.subject', $subjectData), WCF::getLanguage()->getDynamicVariable('wcf.user.emailChange.needReactivation.mail', $messageData));
+				$mail = new Mail(array(WCF::getUser()->username => $this->email), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation.mail', $messageData));
 				$mail->send();
-				$success[] = 'wcf.user.emailChange.needReactivation';
+				$success[] = 'wcf.user.changeEmail.needReactivation';
 			}
 		}
-		
-		$userEditor = new UserEditor(WCF::getUser());
 		
 		// password
 		if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
@@ -306,7 +291,7 @@ class AccountManagementForm extends AbstractSecureForm {
 				HeaderUtil::setCookie('password', StringUtil::getSaltedHash($this->newPassword, $userEditor->salt), TIME_NOW + 365 * 24 * 3600);
 			}
 			
-			$success[] = 'wcf.user.passwordChange.success';
+			$success[] = 'wcf.user.changePassword.success';
 		}
 		
 		if (!empty($updateParameters)) {

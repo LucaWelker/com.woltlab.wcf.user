@@ -5,6 +5,7 @@ use wcf\data\user\UserEditor;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
@@ -108,7 +109,7 @@ class LostPasswordForm extends RecaptchaForm {
 		$this->saved();
 		
 		// forward to index page
-		HeaderUtil::delayedRedirect('index.php'.SID_ARG_1ST, WCF::getLanguage()->get('wcf.user.lostPassword.mail.sent'));
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->get('wcf.user.lostPassword.mail.sent'));
 		exit;
 	}
 	

@@ -3,9 +3,12 @@ namespace wcf\form;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserAction;
-use wcf\system\exception\UserInputException;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
+use wcf\system\exception\UserInputException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 
 /**
  * Shows the user activation form.
@@ -37,12 +40,7 @@ class RegisterActivationForm extends AbstractForm {
 	public $user = null;
 	
 	/**
-	 * @see wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'registerActivation';
-	
-	/**
-	 * @see wcf\page\Page::readParameters()
+	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -52,7 +50,7 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::readFormParameters()
+	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -62,7 +60,7 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::validate()
+	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -75,7 +73,7 @@ class RegisterActivationForm extends AbstractForm {
 		
 		// user is already enabled
 		if ($this->user->activationCode == 0) {
-			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.register.error.userAlreadyEnabled'));
+			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.registerActivation.error.userAlreadyEnabled'));
 		}
 		
 		// check given activation code
@@ -85,7 +83,7 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -104,20 +102,15 @@ class RegisterActivationForm extends AbstractForm {
 			)
 		));
 		$this->objectAction->executeAction();
-		
 		$this->saved();
 		
-		// forward to login page
-		WCF::getTPL()->assign(array(
-			'url' => 'index.php'.SID_ARG_1ST,
-			'message' => WCF::getLanguage()->get('wcf.user.register.activation.redirect')
-		));
-		WCF::getTPL()->display('redirect');
+		// forward to index page
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->get('wcf.user.registerActivation.success'), 10);
 		exit;
 	}
 	
 	/**
-	 * @see wcf\page\Page::assignVariables()
+	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -129,9 +122,13 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::show()
+	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {
+		if (REGISTER_ACTIVATION_METHOD != 1) {
+			throw new IllegalLinkException();
+		}
+		
 		if (!count($_POST) && $this->userID !== null && $this->activationCode != 0) {
 			$this->submit();
 		}

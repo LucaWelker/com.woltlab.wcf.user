@@ -14,6 +14,7 @@ use wcf\system\recaptcha\RecaptchaHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\authentication\UserAuthenticationFactory;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserRegistrationUtil;
 
@@ -28,11 +29,6 @@ use wcf\util\UserRegistrationUtil;
  * @category 	Community Framework
  */
 class RegisterForm extends UserAddForm {
-	/**
-	 * @see wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'register';
-	
 	/**
 	 * @see	wcf\lib\acp\form\AbstractOptionListForm::$loadActiveOptions
 	 */
@@ -155,7 +151,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see Form::show()
+	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {
 		AbstractForm::show();
@@ -272,7 +268,7 @@ class RegisterForm extends UserAddForm {
 		// notify admin
 		if (REGISTER_ADMIN_NOTIFICATION) {
 			// get default language
-			$language = LanguageFactory::getLanguage(LanguageFactory::getDefaultLanguageID());
+			$language = LanguageFactory::getInstance()->getLanguage(LanguageFactory::getInstance()->getDefaultLanguageID());
 			
 			// send mail
 			$mail = new Mail(MAIL_ADMIN_ADDRESS, 
@@ -288,12 +284,7 @@ class RegisterForm extends UserAddForm {
 		$this->saved();
 		
 		// forward to index page
-		WCF::getTPL()->assign(array(
-			'url' => LinkHandler::getInstance()->getLink('Index'),
-			'message' => $this->message,
-			'user' => $user
-		));
-		WCF::getTPL()->display('redirect');
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->getDynamicVariable($this->message, array('user' => $user)), 15);
 		exit;
 	}
 }

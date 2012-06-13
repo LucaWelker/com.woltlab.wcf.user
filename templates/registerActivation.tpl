@@ -1,7 +1,7 @@
-{include file="documentHeader"}
+{include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.register.activation{/lang} - {PAGE_TITLE|language}</title>
+	<title>{lang}wcf.user.registerActivation{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude'}
 </head>
 
@@ -11,10 +11,9 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.register.activation{/lang}</h1>
+		<h1>{lang}wcf.user.registerActivation{/lang}</h1>
 	</hgroup>
 </header>
-
 
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
@@ -22,42 +21,50 @@
 	
 <form method="post" action="{link controller='RegisterActivation'}{/link}">
 	<div class="container containerPadding marginTop shadow">
-		<dl{if $errorField == 'u'} class="formError"{/if}>
-			<dt><label for="userID">{lang}wcf.user.register.activation.userID{/lang}</label></dt>
-			<dd>
-				<input type="text" id="userID" name="u" value="{@$u}" class="medium" />
-				{if $errorField == 'u'}
-					<small class="innerError">
-						{if $errorType == 'notValid'}{lang}wcf.user.register.activation.error.userID.notValid{/lang}{/if}
-					</small>
-				{/if}
-			</dd>
-		</dl>
-
-		<dl{if $errorField == 'a'} class="formError"{/if}>
-			<dt><label for="activationCode">{lang}wcf.user.register.activation.code{/lang}</label></dt>
-			<dd>
-				<input type="text" id="activationCode" maxlength="9" name="a" value="{@$a}" class="medium" />
-				{if $errorField == 'a'}
-					<small class="innerError">
-						{if $errorType == 'notValid'}{lang}wcf.user.register.activation.error.code.notValid{/lang}{/if}
-					</small>
-				{/if}
-			</dd>
-		</dl>
-				
-		<div class="formElement"><!-- ToDo: Def. List! -->
-			<div class="formField">
-				<ul class="formOptionsLong">
-					<li>{*<img src="{icon}register.svg{/icon}" alt="" />*} <a href="index.php?page=Register&amp;action=newActivationCode{@SID_ARG_2ND}">{lang}wcf.user.register.newActivationCode{/lang}</a></li>
-				</ul>
-			</div>
-		</div>
+		<fieldset>
+			<legend><label for="userID">{lang}wcf.user.registerActivation{/lang}</label></legend>
+		
+			<dl{if $errorField == 'u'} class="formError"{/if}>
+				<dt><label for="userID">{lang}wcf.user.userID{/lang}</label></dt>
+				<dd>
+					<input type="text" id="userID" name="u" value="{@$u}" required="true" class="medium" />
+					{if $errorField == 'u'}
+						<small class="innerError">
+							{if $errorType == 'notValid'}{lang}wcf.user.userID.error.invalid{/lang}{/if}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+		
+			<dl{if $errorField == 'a'} class="formError"{/if}>
+				<dt><label for="activationCode">{lang}wcf.user.activationCode{/lang}</label></dt>
+				<dd>
+					<input type="text" id="activationCode" maxlength="9" name="a" value="{@$a}" required="true" class="medium" />
+					{if $errorField == 'a'}
+						<small class="innerError">
+							{if $errorType == 'notValid'}{lang}wcf.user.activationCode.error.notValid{/lang}{/if}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+			
+			{event name='fields'}
+			
+			<dl>
+				<dd>
+					<ul class="buttonList">
+						<li><a class="button small" href="{link controller='RegisterNewActivationCode'}{/link}"><img src="{icon size='S'}eMail{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.newActivationCode{/lang}</span></a></li>
+						{event name='buttons'}
+					</ul>
+				</dd>
+			</dl>
+		</fieldset>
+		
+		{event name='fieldsets'}
 	</div>	
 	
 	<div class="formSubmit">
-		<input type="submit" accesskey="s" value="{lang}wcf.global.button.submit{/lang}" />
-		<input type="hidden" name="action" value="enable" />
+		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 	</div>
 </form>
 

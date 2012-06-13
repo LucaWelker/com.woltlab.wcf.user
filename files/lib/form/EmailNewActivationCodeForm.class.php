@@ -4,7 +4,9 @@ use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\UserRegistrationUtil;
 
 /**
@@ -18,11 +20,8 @@ use wcf\util\UserRegistrationUtil;
  * @category 	Community Framework
  */
 class EmailNewActivationCodeForm extends RegisterNewActivationCodeForm {
-	// system
-	public $templateName = 'emailNewActivationCode';
-	
 	/**
-	 * @see wcf\page\Page::readParameters()
+	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -51,7 +50,7 @@ class EmailNewActivationCodeForm extends RegisterNewActivationCodeForm {
 	}
 	
 	/**
-	 * @see wcf\form\Form::save()
+	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -59,33 +58,22 @@ class EmailNewActivationCodeForm extends RegisterNewActivationCodeForm {
 		// generate activation code
 		$activationCode = UserRegistrationUtil::getActivationCode();
 		
-		$fields = array('reactivationCode' => $activationCode);
-		if (!empty($this->email)) $fields['newEmail'] = $this->email;
-		
 		// save user
 		$userEditor = new UserEditor($this->user);
-		$userEditor->update($fields);
+		$userEditor->update(array('reactivationCode' => $activationCode));
 		
 		// send activation mail
-		$subjectData = array('PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE));
 		$messageData = array(
-			'PAGE_TITLE' => WCF::getLanguage()->get(PAGE_TITLE),
-			'$username' => $this->user->username,
-			'$userID' => $this->user->userID,
-			'$activationCode' => $activationCode,
-			'PAGE_URL' => PAGE_URL,
-			'MAIL_ADMIN_ADDRESS' => MAIL_ADMIN_ADDRESS
+			'username' => $this->user->username,
+			'userID' => $this->user->userID,
+			'activationCode' => $activationCode
 		);
-		$mail = new Mail(array($this->user->username => !empty($this->email) ? $this->email : $this->user->email), WCF::getLanguage()->get('wcf.user.emailChange.needReactivation.mail.subject', $subjectData), WCF::getLanguage()->get('wcf.user.emailChange.needReactivation.mail', $messageData));
+		$mail = new Mail(array($this->user->username => !empty($this->email) ? $this->email : $this->user->email), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation.mail', $messageData));
 		$mail->send();
 		$this->saved();
 		
 		// forward to index page
-		WCF::getTPL()->assign(array(
-			'url' => 'index.php'.SID_ARG_1ST,
-			'message' => WCF::getLanguage()->get('wcf.user.emailChange.needReactivation')
-		));
-		WCF::getTPL()->display('redirect');
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation'), 10);
 		exit;
 	}
 }
