@@ -53,7 +53,7 @@
 					<label for="username">{lang}wcf.user.username{/lang}</label>
 				</dt>
 				<dd>
-					<input type="text" id="username" name="username" value="{$username}" required="true" class="medium" />
+					<input type="text" id="username" name="username" value="{$username}" required="required" class="medium" />
 					{if $errorType.username|isset}
 						<small class="innerError">
 							{if $errorType.username == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
@@ -74,7 +74,7 @@
 					<label for="email">{lang}wcf.user.email{/lang}</label>
 				</dt>
 				<dd>	
-					<input type="email" id="email" name="email" value="{$email}" required="true" class="medium" />
+					<input type="email" id="email" name="email" value="{$email}" required="required" class="medium" />
 					{if $errorType.email|isset}
 						<small class="innerError">
 							{if $errorType.email == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
@@ -90,7 +90,7 @@
 					<label for="confirmEmail">{lang}wcf.user.confirmEmail{/lang}</label>
 				</dt>
 				<dd>
-					<input type="email" id="confirmEmail" name="confirmEmail" value="{$confirmEmail}" required="true" class="medium" />
+					<input type="email" id="confirmEmail" name="confirmEmail" value="{$confirmEmail}" required="required" class="medium" />
 					{if $errorType.confirmEmail|isset}
 						<small class="innerError">
 							{if $errorType.confirmEmail == 'notEqual'}{lang}wcf.user.confirmEmail.error.notEqual{/lang}{/if}
@@ -108,7 +108,7 @@
 					<label for="password">{lang}wcf.user.password{/lang}</label>
 				</dt>
 				<dd>
-					<input type="password" id="password" name="password" value="{$password}" required="true" class="medium" />
+					<input type="password" id="password" name="password" value="{$password}" required="required" class="medium" />
 					{if $errorType.password|isset}
 						<small class="innerError">
 							{if $errorType.password == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
@@ -124,7 +124,7 @@
 					<label for="confirmPassword">{lang}wcf.user.confirmPassword{/lang}</label>
 				</dt>
 				<dd>
-					<input type="password" id="confirmPassword" name="confirmPassword" value="{$confirmPassword}" required="true" class="medium" />
+					<input type="password" id="confirmPassword" name="confirmPassword" value="{$confirmPassword}" required="required" class="medium" />
 					{if $errorType.confirmPassword|isset}
 						<small class="innerError">
 							{if $errorType.confirmPassword == 'notEqual'}{lang}wcf.user.confirmPassword.error.notEqual{/lang}{/if}

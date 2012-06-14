@@ -27,7 +27,7 @@
 			<dl{if $errorField == 'username'} class="formError"{/if}>
 				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
 				<dd>
-					<input type="text" id="username" name="username" value="{@$username}" required="true" class="medium" />
+					<input type="text" id="username" name="username" value="{@$username}" required="required" class="medium" />
 					{if $errorField == 'username'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -45,7 +45,7 @@
 			<dl{if $errorField == 'password'} class="formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 				<dd>
-					<input type="password" id="password" name="password" value="{@$password}" required="true" class="medium" />
+					<input type="password" id="password" name="password" value="{@$password}" required="required" class="medium" />
 					{if $errorField == 'password'}
 						<small class="innerError">
 							{if $errorType == 'empty'}

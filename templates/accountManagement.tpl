@@ -32,7 +32,7 @@
 			<dl{if $errorField == 'password'} class="formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 				<dd>
-					<input type="password" id="password" name="password" value="" required="true" class="medium" required="true" />
+					<input type="password" id="password" name="password" value="" required="required" class="medium" required="required" />
 					{if $errorField == 'password'}
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
