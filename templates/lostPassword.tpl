@@ -24,6 +24,8 @@
 	</hgroup>
 </header>
 
+{include file='userNotice'}
+
 <p class="info">{lang}wcf.user.lostPassword.description{/lang}</p>
 	
 {if $errorField}

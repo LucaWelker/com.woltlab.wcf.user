@@ -143,6 +143,8 @@
 	</ul>
 </header>
 
+{include file='userNotice'}
+
 <section id="profileContent" class="marginTop tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">
 		<ul>

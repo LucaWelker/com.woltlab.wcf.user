@@ -19,6 +19,8 @@
 	</hgroup>
 </header>
 
+{include file='userNotice'}
+
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
 </div>

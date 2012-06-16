@@ -42,6 +42,8 @@
 
 {include file='header' sidebarOrientation='right'}
 
+{include file='userNotice'}
+
 {assign var=usersOnlineList value=''}
 {assign var=usersOnline value=0}
 {assign var=robotsOnlineList value=''}

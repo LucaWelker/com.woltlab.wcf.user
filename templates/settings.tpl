@@ -17,6 +17,8 @@
 	</hgroup>
 </header>
 
+{include file='userNotice'}
+
 {if $success|isset}
 	<p class="success">{lang}wcf.global.form.edit.success{/lang}</p>	
 {/if}

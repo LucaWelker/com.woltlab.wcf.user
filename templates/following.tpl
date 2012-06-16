@@ -49,6 +49,8 @@
 	</hgroup>
 </header>
 
+{include file='userNotice'}
+
 <section id="followingList">
 	{hascontent}
 		<ul>

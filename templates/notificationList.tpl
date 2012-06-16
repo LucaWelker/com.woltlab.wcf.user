@@ -25,6 +25,8 @@
 	</hgroup>
 </header>
 
+{include file='userNotice'}
+
 {*TODO: pagination?*}
 {hascontent}
 	<div class="container marginTop shadow">

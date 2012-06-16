@@ -63,6 +63,8 @@
 	</hgroup>
 </header>
 
+{include file='userNotice'}
+
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
 </div>
