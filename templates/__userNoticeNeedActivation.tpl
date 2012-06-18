@@ -1,0 +1,1 @@
+{if $__wcf->user->activationCode && REGISTER_ACTIVATION_METHOD == 1}<p class="warning">{lang}wcf.user.register.needActivation{/lang}</p>{/if}

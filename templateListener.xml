@@ -40,6 +40,13 @@
 			<templatecode><![CDATA[new WCF.Notification.Handler();
 new WCF.User.ProfilePreview()]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userNoticeNeedActivation">
+			<environment>user</environment>
+			<templatename>userNotice</templatename>
+			<eventname>userNotice</eventname>
+			<templatecode><![CDATA[{include file='__userNoticeNeedActivation'}]]></templatecode>
+		</templatelistener>
 		<!-- /user -->
 	</import>
 </data>

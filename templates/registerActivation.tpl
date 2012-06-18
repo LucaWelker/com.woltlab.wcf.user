@@ -17,10 +17,12 @@
 
 {include file='userNotice'}
 
+{if $__wcf->user->userID && $__wcf->user->activationCode}<p class="info">{lang}wcf.user.registerActivation.info{/lang}</p>{/if}
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
-	
+
 <form method="post" action="{link controller='RegisterActivation'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>

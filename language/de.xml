@@ -177,7 +177,8 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.newActivationCode.success"><![CDATA[Eine E-Mail mit dem neuen Aktivierungscode wurde an {$email} versendet.]]></item>
 		<item name="wcf.user.emailActivation.error.emailAlreadyEnabled"><![CDATA[Die neue E-Mail-Adresse ist bereits aktiviert.]]></item>
 		<item name="wcf.user.emailActivation.success"><![CDATA[Ihre neue E-Mail-Adresse wurde erfolgreich aktiviert.]]></item>
-		
+		<item name="wcf.user.register.needActivation"><![CDATA[Ihr Benutzerkonto ist noch nicht aktiviert. Sie müssen den <a href="{link controller='RegisterActivation'}{/link}">Aktivierungsvorgang abschließen</a>, um den vollen Funktionsumfang dieser Seite nutzen zu können.]]></item>
+		<item name="wcf.user.registerActivation.info"><![CDATA[Eine E-Mail mit dem 9-stelligen Aktivierungscode wurde an Ihre E-Mail-Adresse {$__wcf->user->email} verschickt.]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
