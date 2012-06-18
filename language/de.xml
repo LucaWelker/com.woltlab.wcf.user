@@ -88,7 +88,8 @@ Ihr {@PAGE_TITLE|language} Team]]></item>
 		<item name="wcf.user.accountManagement.password.description"><![CDATA[Bitte geben Sie zur Bestätigung Ihr Kennwort ein!]]></item>
 		<item name="wcf.user.newPassword"><![CDATA[Neues Kennwort]]></item>
 		<item name="wcf.user.changeUsername"><![CDATA[Benutzernamen ändern]]></item>
-		<item name="wcf.user.changeUsername.description"><![CDATA[Sie können Ihren Benutzernamen nur einmal alle {$renamePeriod} Tage ändern. Änderungen von Groß- auf Kleinschreibung und umgekehrt sind jederzeit möglich.]]></item>
+		<item name="wcf.user.changeUsername.description"><![CDATA[Sie können Ihren Benutzernamen nur einmal alle {$renamePeriod} Tage ändern. Änderungen von Groß- auf Kleinschreibung und umgekehrt sind jederzeit möglich.
+		{if $__wcf->getUser()->lastUsernameChange}Die letzte Änderung erfolgte am {@$__wcf->getUser()->lastUsernameChange|date}.{/if}]]></item>
 		<item name="wcf.user.changePassword"><![CDATA[Kennwort ändern]]></item>
 		<item name="wcf.user.changeEmail"><![CDATA[E-Mail-Adresse ändern]]></item>
 		<item name="wcf.user.newEmail"><![CDATA[Neue E-Mail-Adresse]]></item>
@@ -179,6 +180,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.emailActivation.success"><![CDATA[Ihre neue E-Mail-Adresse wurde erfolgreich aktiviert.]]></item>
 		<item name="wcf.user.register.needActivation"><![CDATA[Ihr Benutzerkonto ist noch nicht aktiviert. Sie müssen den <a href="{link controller='RegisterActivation'}{/link}">Aktivierungsvorgang abschließen</a>, um den vollen Funktionsumfang dieser Seite nutzen zu können.]]></item>
 		<item name="wcf.user.registerActivation.info"><![CDATA[Eine E-Mail mit dem 9-stelligen Aktivierungscode wurde an Ihre E-Mail-Adresse {$__wcf->user->email} verschickt.]]></item>
+		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Der Benutzername wurde innerhalb der letzten {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} Tage bereits einmal verändert.]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

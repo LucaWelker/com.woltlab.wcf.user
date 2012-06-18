@@ -64,21 +64,11 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $quitStarted = 0;
 	
 	/**
-	 * indicates whether the user can change his user name.
-	 * @var	boolean
-	 */
-	public $canChangeUsername = true;
-	
-	/**
 	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
 		
-		// check permissions
-		if (!WCF::getSession()->getPermission('user.profile.canRename') || WCF::getUser()->lastUsernameChange + WCF::getSession()->getPermission('user.profile.renamePeriod') * 86400 > TIME_NOW) {
-			$this->canChangeUsername = false;
-		}
 		$this->quitStarted = WCF::getUser()->quitStarted;
 	}
 	
@@ -114,8 +104,12 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 		
 		// user name
-		if ($this->canChangeUsername && $this->username != WCF::getUser()->username) {
+		if (WCF::getSession()->getPermission('user.profile.canRename') && $this->username != WCF::getUser()->username) {
 			if (StringUtil::toLowerCase($this->username) != StringUtil::toLowerCase(WCF::getUser()->username)) {
+				if (WCF::getUser()->lastUsernameChange + WCF::getSession()->getPermission('user.profile.renamePeriod') * 86400 > TIME_NOW) {
+					throw new UserInputException('username', 'alreadyRenamed');
+				}
+				
 				// checks for forbidden chars (e.g. the ",")
 				if (!UserRegistrationUtil::isValidUsername($this->username)) {
 					throw new UserInputException('username', 'notValid');
@@ -198,7 +192,6 @@ class AccountManagementForm extends AbstractSecureForm {
 			'confirmNewPassword' => $this->confirmNewPassword,
 			'username' => $this->username,
 			'renamePeriod' => WCF::getSession()->getPermission('user.profile.renamePeriod'),
-			'canChangeUsername' => $this->canChangeUsername,
 			'quitStarted' => $this->quitStarted,
 			'quit' => $this->quit,
 			'cancelQuit' => $this->cancelQuit
@@ -244,7 +237,7 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 		
 		// user name
-		if ($this->canChangeUsername && $this->username != WCF::getUser()->username) {
+		if (WCF::getSession()->getPermission('user.profile.canRename') && $this->username != WCF::getUser()->username) {
 			if (StringUtil::toLowerCase($this->username) != StringUtil::toLowerCase(WCF::getUser()->username)) {
 				$updateParameters['lastUsernameChange'] = TIME_NOW;
 				$updateParameters['oldUsername'] = $userEditor->username;

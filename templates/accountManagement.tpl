@@ -25,7 +25,15 @@
 {/if}
 
 <p class="warning">{lang}wcf.user.accountManagement.warning{/lang}</p>
-		
+
+{if $success|isset && $success|count > 0}
+	<div class="success">
+		{foreach from=$success item=successMessage}
+			<p>{lang}{@$successMessage}{/lang}</p>
+		{/foreach}
+	</div>
+{/if}
+	
 <form method="post" action="{link controller='AccountManagement'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
@@ -54,7 +62,7 @@
 			</dl>
 		</fieldset>
 			
-		{if $canChangeUsername}
+		{if $__wcf->getSession()->getPermission('user.profile.canRename')}
 			<fieldset>
 				<legend><label for="username">{lang}wcf.user.changeUsername{/lang}</label></legend>
 					
@@ -68,6 +76,7 @@
 								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 								{if $errorType == 'notValid'}{lang}wcf.user.username.error.notValid{/lang}{/if}
 								{if $errorType == 'notUnique'}{lang}wcf.user.username.error.notUnique{/lang}{/if}
+								{if $errorType == 'alreadyRenamed'}{lang}wcf.user.username.error.alreadyRenamed{/lang}{/if}
 							</small>
 						{/if}
 						{if $renamePeriod > 0}
