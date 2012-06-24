@@ -58,8 +58,8 @@
 				{foreach from=$following item=followingUser}
 					<li class="framed jsFollowing">
 						<div title="{$followingUser->username}" class="jsTooltip">
-							<span><img src="{icon size='S'}delete{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$followingUser->followUserID}" /></span>
-							<a href="{link controller='User' id=$followingUser->followUserID}{/link}">
+							<span><img src="{icon size='S'}delete{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$followingUser->userID}" /></span>
+							<a href="{link controller='User' object=$followingUser}{/link}">
 								{@$followingUser->getAvatar()->getImageTag(64)}
 							</a>
 						</div>
