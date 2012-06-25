@@ -1,17 +1,19 @@
 <ul class="sitemapList">
 	{if $__wcf->getUser()->userID}
 		<!-- TODO: Dummy entries, make use of the original structure -->
-		<li class="sitemapCategory">
-			<hgroup>
-				<h1>{lang}wcf.sitemap.userAccount.profile{/lang}</h1>
-			</hgroup>
-			
-			<ul>
-				<li class="sitemapEntry">
-					<a href="{link controller='AccountManagement'}{/link}">{lang}wcf.sitemap.userAccount.profile.accountManagement{/lang}</a>
-				</li>
-			</ul>
-		</li>
+		{assign var=__userMenuActiveItems value=$__wcf->getUserMenu()->getActiveMenuItems()}
+		{foreach from=$__wcf->getUserMenu()->getMenuItems('') item=menuCategory}
+			<li class="sitemapCategory">
+				<hgroup>
+					<h1>{lang}{$menuCategory->menuItem}{/lang}</h1>
+				</hgroup>
+				<ul>
+					{foreach from=$__wcf->getUserMenu()->getMenuItems($menuCategory->menuItem) item=menuItem}
+						<li class="sitemapEntry"><a href="{$menuItem->getLink()}">{lang}{$menuItem->menuItem}{/lang}</a></li>
+					{/foreach}
+				</ul>
+			</li>
+		{/foreach}
 	{else}
 		<li class="sitemapEntry">
 			<hgroup>
