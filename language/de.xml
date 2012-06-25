@@ -4,6 +4,10 @@
 		<item name="wcf.acp.group.option.category.user.community"><![CDATA[Community]]></item>
 	</category>
 	
+	<category name="wcf.sitemap">
+		<item name="wcf.sitemap.userAccount"><![CDATA[Benutzerkonto]]></item>
+	</category>
+	
 	<category name="wcf.user">
 		<item name="wcf.user.access.everyone"><![CDATA[Jeder]]></item>
 		<item name="wcf.user.access.following"><![CDATA[Benutzer denen ich folge]]></item>
