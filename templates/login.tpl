@@ -92,9 +92,9 @@
 					</ul>
 				</dd>
 			</dl>
-			
-			{event name='fieldsets'}
 		</fieldset>
+		
+		{event name='fieldsets'}
 	</div>
 	
 	<div class="formSubmit">
