@@ -20,6 +20,24 @@ ALTER TABLE wcf1_user ADD profileHits INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
 
+-- dashboard
+DROP TABLE IF EXISTS wcf1_dashboard_box;
+CREATE TABLE wcf1_dashboard_box (
+	boxID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	boxName VARCHAR(255) NOT NULL DEFAULT '',
+	boxType VARCHAR(30) NOT NULL DEFAULT 'sidebar', -- can be 'content' or 'sidebar'
+	className VARCHAR(255) NOT NULL DEFAULT ''
+);
+
+DROP TABLE IF EXISTS wcf1_dashboard_option;
+CREATE TABLE wcf1_dashboard_option (
+	objectTypeID INT(10) NOT NULL,
+	boxID INT(10) NOT NULL,
+	enabled TINYINT(1) NOT NULL DEFAULT 1,
+	UNIQUE KEY dashboardOption (objectTypeID, boxID)
+);
+
 -- avatar table
 DROP TABLE IF EXISTS wcf1_user_avatar;
 CREATE TABLE wcf1_user_avatar (
@@ -195,6 +213,11 @@ CREATE TABLE wcf1_user_profile_visitor (
 	UNIQUE KEY (ownerID, userID),
 	KEY (time)
 );
+
+ALTER TABLE wcf1_dashboard_box ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_dashboard_option ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE wcf1_dashboard_option ADD FOREIGN KEY (boxID) REFERENCES wcf1_dashboard_box (boxID) ON DELETE CASCADE;
 
 ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
 

@@ -24,5 +24,19 @@
 			<definitionname>com.woltlab.wcf.notification.notificationType</definitionname>
 			<classname>wcf\system\user\notification\type\MailUserNotificationType</classname>
 		</type>
+		
+		<type>
+			<name>com.woltlab.wcf.user.DashboardPage</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		
+		<type>
+			<name>com.woltlab.wcf.user.MembersListPage</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 	</import>
 </data>

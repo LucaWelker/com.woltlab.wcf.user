@@ -20,5 +20,9 @@
 			<name>com.woltlab.wcf.notification.objectType</name>
 			<interfacename>wcf\system\user\notification\object\type\IUserNotificationObjectType</interfacename>
 		</definition>
+		
+		<definition>
+			<name>com.woltlab.wcf.user.dashboardContainer</name>
+		</definition>
 	</import>
 </data>
