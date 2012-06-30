@@ -38,5 +38,6 @@
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="sitemap">sitemap.xml</instruction>
+		<instruction type="dashboardBox">dashboardBox.xml</instruction>
 	</instructions>
 </package>
