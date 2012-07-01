@@ -110,7 +110,7 @@ class DashboardHandler extends SingletonFactory {
 		$objectTypeID = 0;
 		
 		// get object type id (cache might be outdated)
-		if (PACKAGE_ID && PACKAGE_ID != 1) {
+		if (false && PACKAGE_ID && PACKAGE_ID != 1) {
 			// reset object type cache
 			// TODO: Add a method to ObjectType in order to clear cache
 			CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.objectType-*.php');
@@ -122,6 +122,16 @@ class DashboardHandler extends SingletonFactory {
 			}
 			
 			$objectTypeID = $objectTypeObj->objectTypeID;
+			
+			// select available box ids
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
+			
+			$sql = "SELECT	boxID, boxName
+				FROM	wcf".WCF_N."_dashboard_box
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
 		}
 		else {
 			// work-around during WCFSetup
@@ -136,17 +146,21 @@ class DashboardHandler extends SingletonFactory {
 				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute($conditions->getParameters());
+			$row = $statement->fetchArray();
+			if ($row) {
+				$objectTypeID = $row['objectTypeID'];
+			}
+			
+			if (!$objectTypeID) {
+				throw new SystemException("Object type '".$objectType."' is not valid for definition 'com.woltlab.wcf.user.dashboardContainer'");
+			}
+			
+			// select available box ids
+			$sql = "SELECT	boxID, boxName
+				FROM	wcf".WCF_N."_dashboard_box";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute();
 		}
-		
-		// select available box ids
-		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
-		
-		$sql = "SELECT	boxID, boxName
-			FROM	wcf".WCF_N."_dashboard_box
-			".$conditions;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditions->getParameters());
 		
 		$boxes = array();
 		while ($row = $statement->fetchArray()) {
@@ -161,7 +175,7 @@ class DashboardHandler extends SingletonFactory {
 		if (!empty($boxes)) {
 			// remove previous settings
 			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("objectTypeID = ?", array($objectType->objectTypeID));
+			$conditions->add("objectTypeID = ?", array($objectTypeID));
 			$conditions->add("boxID IN (?)", array(array_keys($boxes)));
 			
 			$sql = "DELETE FROM	wcf".WCF_N."_dashboard_option
@@ -178,7 +192,7 @@ class DashboardHandler extends SingletonFactory {
 			WCF::getDB()->beginTransaction();
 			foreach ($boxes as $boxID => $enabled) {
 				$statement->execute(array(
-					$objectType->objectTypeID,
+					$objectTypeID,
 					$boxID,
 					$enabled
 				));
