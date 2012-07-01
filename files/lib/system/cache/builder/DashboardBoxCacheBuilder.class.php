@@ -1,5 +1,5 @@
 <?php
-namespace wcf\system\dashboard\box;
+namespace wcf\system\cache\builder;
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\cache\builder\ICacheBuilder;
@@ -29,9 +29,9 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 		
 		// load boxes
 		$boxList = new DashboardBoxList();
-		$boxList->getConditionBuilder()->add("box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
+		$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		$boxList->sqlLimit = 0;
-		$boxList->sqlOrderBy = "box.showOrder ASC";
+		$boxList->sqlOrderBy = "dashboard_box.showOrder ASC";
 		$boxList->readObjects();
 		
 		foreach ($boxList as $box) {
@@ -42,11 +42,11 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 		$objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.dashboardContainer');
 		$objectTypeIDs = array();
 		foreach ($objectTypes as $objectType) {
-			$objectTypeIDs[] = $objectTypes->objectTypeID;
+			$objectTypeIDs[] = $objectType->objectTypeID;
 		}
 		
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("objectTypeID (?)", array($objectTypeIDs));
+		$conditions->add("objectTypeID IN (?)", array($objectTypeIDs));
 		
 		$sql = "SELECT	*
 			FROM	wcf".WCF_N."_dashboard_option

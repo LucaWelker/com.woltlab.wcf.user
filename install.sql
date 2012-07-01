@@ -27,6 +27,7 @@ CREATE TABLE wcf1_dashboard_box (
 	packageID INT(10) NOT NULL,
 	boxName VARCHAR(255) NOT NULL DEFAULT '',
 	boxType VARCHAR(30) NOT NULL DEFAULT 'sidebar', -- can be 'content' or 'sidebar'
+	showOrder INT(10) NOT NULL,
 	className VARCHAR(255) NOT NULL DEFAULT ''
 );
 

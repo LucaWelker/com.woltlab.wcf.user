@@ -1,6 +1,8 @@
 <?php
 namespace wcf\system\dashboard\box;
+use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
+use wcf\page\IPage;
 use wcf\system\dashboard\box\AbstractDashboardBoxSidebar;
 use wcf\system\WCF;
 

@@ -61,7 +61,7 @@ class DashboardHandler extends SingletonFactory {
 		}
 		
 		$boxIDs = array();
-		foreach ($this->pageCache[$objectType] as $boxID => $enabled) {
+		foreach ($this->pageCache[$objectType->objectType] as $boxID => $enabled) {
 			if ($enabled) {
 				$boxIDs[] = $boxID;
 			}
@@ -80,9 +80,9 @@ class DashboardHandler extends SingletonFactory {
 			}
 			
 			$boxObject = new $className();
-			$boxObject->init($page);
+			$boxObject->init($this->boxCache[$boxID], $page);
 			
-			if ($boxObject->boxType == 'content') {
+			if ($this->boxCache[$boxID]->boxType == 'content') {
 				$contentTemplate .= $boxObject->getTemplate();
 			}
 			else {
