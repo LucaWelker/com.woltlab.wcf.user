@@ -4,7 +4,9 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
 use wcf\system\application\ApplicationHandler;
 use wcf\system\cache\CacheHandler;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
+use wcf\system\package\PackageDependencyHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\ClassUtil;
@@ -94,5 +96,68 @@ class DashboardHandler extends SingletonFactory {
 			'__boxContent' => $contentTemplate,
 			'__boxSidebar' => $sidebarTemplate
 		));
+	}
+	
+	/**
+	 * Sets default values upon installation, you should not call this method
+	 * under any other circumstances. If you do not specify a list of box names,
+	 * all boxes will be assigned as disabled for given object type.
+	 * 
+	 * @param	string		$objectType
+	 * @param	array<names>	$enableBoxNames
+	 */
+	public static function setDefaultValues($objectType, array $enableBoxNames = array()) {
+		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', $objectType);
+		if ($objectTypeObj === null) {
+			throw new SystemException("Object type '".$objectType."' is not valid for definition 'com.woltlab.wcf.user.dashboardContainer'");
+		}
+		
+		// select available box ids
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
+		
+		$sql = "SELECT	boxID, boxName
+			FROM	wcf".WCF_N."_dashboard_box
+			".$conditions;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditions->getParameters());
+		
+		$boxes = array();
+		while ($row = $statement->fetchArray()) {
+			if (in_array($row['boxName'], $enableBoxNames)) {
+				$boxes[$row['boxID']] = 1;
+			}
+			else {
+				$boxes[$row['boxID']] = 0;
+			}
+		}
+		
+		if (!empty($boxes)) {
+			// remove previous settings
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("objectTypeID = ?", array($objectType->objectTypeID));
+			$conditions->add("boxID IN (?)", array(array_keys($boxes)));
+			
+			$sql = "DELETE FROM	wcf".WCF_N."_dashboard_option
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
+			
+			// insert associations
+			$sql = "INSERT INTO	wcf".WCF_N."_dashboard_option
+						(objectTypeID, boxID, enabled)
+				VALUES		(?, ?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			
+			WCF::getDB()->beginTransaction();
+			foreach ($boxes as $boxID => $enabled) {
+				$statement->execute(array(
+					$objectType->objectTypeID,
+					$boxID,
+					$enabled
+				));
+			}
+			WCF::getDB()->commitTransaction();
+		}
 	}
 }

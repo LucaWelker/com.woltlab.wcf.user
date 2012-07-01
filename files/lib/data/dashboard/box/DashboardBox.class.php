@@ -14,6 +14,12 @@ use wcf\data\DatabaseObject;
  */
 class DashboardBox extends DatabaseObject {
 	/**
+	 * database table for this object
+	 * @var	string
+	 */
+	protected static $databaseTableName = 'dashboard_box';
+	
+	/**
 	 * @see	wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'boxID';

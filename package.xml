@@ -39,5 +39,6 @@
 		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="sitemap">sitemap.xml</instruction>
 		<instruction type="dashboardBox">dashboardBox.xml</instruction>
+		<instruction type="script">acp/install.php</instruction>
 	</instructions>
 </package>
