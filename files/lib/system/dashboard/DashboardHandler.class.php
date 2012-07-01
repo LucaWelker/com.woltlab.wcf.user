@@ -107,9 +107,35 @@ class DashboardHandler extends SingletonFactory {
 	 * @param	array<names>	$enableBoxNames
 	 */
 	public static function setDefaultValues($objectType, array $enableBoxNames = array()) {
-		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', $objectType);
-		if ($objectTypeObj === null) {
-			throw new SystemException("Object type '".$objectType."' is not valid for definition 'com.woltlab.wcf.user.dashboardContainer'");
+		$objectTypeID = 0;
+		
+		// get object type id (cache might be outdated)
+		if (PACKAGE_ID) {
+			// reset object type cache
+			// TODO: Add a method to ObjectType in order to clear cache
+			CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.objectType-*.php');
+			
+			// get object type
+			$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', $objectType);
+			if ($objectTypeObj === null) {
+				throw new SystemException("Object type '".$objectType."' is not valid for definition 'com.woltlab.wcf.user.dashboardContainer'");
+			}
+			
+			$objectTypeID = $objectTypeObj->objectTypeID;
+		}
+		else {
+			// work-around during WCFSetup
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("object_type.objectType = ?", array($objectType));
+			$conditions->add("object_type_definition.definitionName = ?", array('com.woltlab.wcf.user.dashboardContainer'));
+			
+			$sql = "SELECT		object_type.objectTypeID
+				FROM		wcf1_object_type object_type
+				LEFT JOIN	wcf1_object_type_definition object_type_definition
+				ON		(object_type_definition.definitionID = object_type.definitionID)
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
 		}
 		
 		// select available box ids
