@@ -110,7 +110,7 @@ class DashboardHandler extends SingletonFactory {
 		$objectTypeID = 0;
 		
 		// get object type id (cache might be outdated)
-		if (PACKAGE_ID) {
+		if (PACKAGE_ID && PACKAGE_ID != 1) {
 			// reset object type cache
 			// TODO: Add a method to ObjectType in order to clear cache
 			CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.objectType-*.php');
