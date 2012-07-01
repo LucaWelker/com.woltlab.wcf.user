@@ -44,7 +44,7 @@
 		<item name="wcf.user.profileHits"><![CDATA[Profil-Aufrufe]]></item>
 		<item name="wcf.user.profileHits.hitsPerDay"><![CDATA[{#$user->profileHits/$user->getProfileAge()} Aufrufe pro Tag]]></item>
 		<item name="wcf.user.online"><![CDATA[Online]]></item>
-		<item name="wcf.user.online.title"><![CDATA[&raquo;{$username}&laquo; ist online]]></item>
+		<item name="wcf.user.online.title"><![CDATA[&bdquo;{$username}&ldquo; ist online]]></item>
 		<item name="wcf.user.button.follow"><![CDATA[Folgen]]></item>
 		<item name="wcf.user.button.unfollow"><![CDATA[Entfolgen]]></item>
 		<item name="wcf.user.button.ignore"><![CDATA[Blockieren]]></item>
