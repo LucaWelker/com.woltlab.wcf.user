@@ -63,15 +63,12 @@ class DashboardHandler extends SingletonFactory {
 		}
 		
 		$boxIDs = array();
-		foreach ($this->pageCache[$objectType->objectType] as $boxID => $enabled) {
-			if ($enabled) {
-				$boxIDs[] = $boxID;
+		if (isset($this->pageCache[$objectType->objectType]) && is_array($this->pageCache[$objectType->objectType])) {
+			foreach ($this->pageCache[$objectType->objectType] as $boxID => $enabled) {
+				if ($enabled) {
+					$boxIDs[] = $boxID;
+				}
 			}
-		}
-		
-		// no active boxes found, abort
-		if (empty($boxIDs)) {
-			return;
 		}
 		
 		$contentTemplate = $sidebarTemplate = '';
