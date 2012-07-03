@@ -20,7 +20,7 @@ class DashboardListPage extends AbstractPage {
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.content.dashboard.canEditOption');
+	public $neededPermissions = array('admin.content.dashboard.canEditDashboard');
 	
 	/**
 	 * list of object types per package id

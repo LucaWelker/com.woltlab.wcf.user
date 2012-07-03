@@ -6,9 +6,9 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.dashboard.list">
-			<parent>wcf.acp.menu.link.language</parent>
+			<parent>wcf.acp.menu.link.dashboard</parent>
 			<link>index.php/DashboardList/</link>
-			<permissions>admin.content.dashboard.canEditOption</permissions>
+			<permissions>admin.content.dashboard.canEditDashboard</permissions>
 		</acpmenuitem>
 	</import>
 </data>

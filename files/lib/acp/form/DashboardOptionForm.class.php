@@ -6,6 +6,7 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 
 /**
  * Provides the dashboard option form.
@@ -26,31 +27,31 @@ class DashboardOptionForm extends ACPForm {
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.content.dashboard.canEditOption');
+	public $neededPermissions = array('admin.content.dashboard.canEditDashboard');
 	
 	/**
-	 * list of dashboard boxes
-	 * @var	wcf\data\dashboard\box\DashboardBoxList
+	 * list of available dashboard boxes
+	 * @var	array<wcf\data\dashboard\box\DashboardBox>
 	 */
 	public $boxes = array();
 	
 	/**
-	 * dashboard box options
-	 * @var	array<array>
-	 */
-	public $options = array();
-	
-	/**
-	 * list of object types
-	 * @var	array<wcf\data\object\type\ObjectType>
-	 */
-	public $objectTypes = array();
-	
-	/**
-	 * list of object type ids
+	 * list of enabled box ids
 	 * @var	array<integer>
 	 */
-	public $objectTypeIDs = array();
+	public $enabledBoxes = array();
+	
+	/**
+	 * object type object
+	 * @var	wcf\data\object\type\ObjectType
+	 */
+	public $objectType = null;
+	
+	/**
+	 * object type id
+	 * @var	integer
+	 */
+	public $objectTypeID = 0;
 	
 	/**
 	 * @see	wcf\page\IPage::readParameters()
@@ -58,18 +59,30 @@ class DashboardOptionForm extends ACPForm {
 	public function readParameters() {
 		parent::readParameters();
 		
+		if (isset($_REQUEST['id'])) $this->objectTypeID = intval($_REQUEST['id']);
+		
+		// load object type
+		$objectTypeDefinition = ObjectTypeCache::getInstance()->getDefinitionByName('com.woltlab.wcf.user.dashboardContainer');
+		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->objectTypeID);
+		if ($this->objectType === null || $this->objectType->definitionID != $objectTypeDefinition->definitionID) {
+			throw new IllegalLinkException();
+		}
+		
 		// load available boxes
+		$allowedBoxTypes = array();
+		if ($this->objectType->allowcontent) $allowedBoxTypes[] = 'content';
+		if ($this->objectType->allowsidebar) $allowedBoxTypes[] = 'sidebar';
+		if (empty($allowedBoxTypes)) {
+			// this should not happen unless you go full retard
+			throw new IllegalLinkException();
+		}
+		
 		$boxList = new DashboardBoxList();
 		$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
+		$boxList->getConditionBuilder()->add("dashboard_box.boxType IN (?)", array($allowedBoxTypes));
 		$boxList->sqlLimit = 0;
 		$boxList->readObjects();
 		$this->boxes = $boxList->getObjects();
-		
-		// load available object types
-		$this->objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.dashboardContainer');
-		foreach ($this->objectTypes as $objectType) {
-			$this->objectTypeIDs[] = $objectType->objectTypeID;
-		}
 	}
 	
 	/**
@@ -78,7 +91,7 @@ class DashboardOptionForm extends ACPForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
-		if (isset($_POST['options']) && is_array($_POST['options'])) $this->options = $_POST['options'];
+		if (isset($_POST['enabledBoxes']) && is_array($_POST['enabledBoxes'])) $this->enabledBoxes = ArrayUtil::toIntegerArray($_POST['enabledBoxes']);
 	}
 	
 	/**
@@ -87,22 +100,16 @@ class DashboardOptionForm extends ACPForm {
 	public function validate() {
 		parent::validate();
 		
-		$this->validateOptions();
+		$this->validateEnabledBoxes();
 	}
 	
 	/**
 	 * Validates dashboard options.
 	 */
-	protected function validateOptions() {
-		foreach ($this->options as $objectTypeID => $boxes) {
-			if (!in_array($objectTypeID, $this->objectTypeIDs)) {
+	protected function validateEnabledBoxes() {
+		foreach ($this->enabledBoxes as $boxID) {
+			if (!isset($this->boxes[$boxID])) {
 				throw new IllegalLinkException();
-			}
-			
-			foreach ($boxes as $boxID => $enabled) {
-				if (!isset($this->boxes[$boxID])) {
-					throw new IllegalLinkException();
-				}
 			}
 		}
 	}
@@ -114,31 +121,17 @@ class DashboardOptionForm extends ACPForm {
 		parent::readData();
 		
 		if (empty($_POST)) {
-			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("objectTypeID IN (?)", array($this->objectTypeIDs));
-			$sql = "SELECT		*
+			// load settings
+			$sql = "SELECT		boxID
 				FROM		wcf".WCF_N."_dashboard_option
-				".$conditions."
+				WHERE		objectTypeID = ?
 				ORDER BY	showOrder ASC";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute($conditions->getParameters());
-			$boxOptions = array();
+			$statement->execute(array(
+				$this->objectTypeID
+			));
 			while ($row = $statement->fetchArray()) {
-				if (!isset($boxOptions[$row['boxID']])) {
-					$boxOptions[$row['boxID']] = array();
-				}
-				
-				$boxOptions[$row['objectTypeID']][] = $row['boxID'];
-			}
-			
-			foreach ($this->objectTypeIDs as $objectTypeID) {
-				if (isset($boxOptions[$objectTypeID])) {
-					$this->options[$objectTypeID] = array();
-					
-					foreach ($boxOptions[$objectTypeID] as $boxID) {
-						$this->options[$objectTypeID][] = $this->boxes[$boxID];
-					}
-				}
+				$this->enabledBoxes[] = $row['boxID'];
 			}
 		}
 	}
@@ -150,35 +143,33 @@ class DashboardOptionForm extends ACPForm {
 		parent::save();
 		
 		// remove previous settings
-		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("objectTypeID IN (?)", array($this->objectTypeIDs));
 		$sql = "DELETE FROM	wcf".WCF_N."_dashboard_option
-			".$conditions;
+			WHERE		objectTypeID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditions->getParameters());
+		$statement->execute(array(
+			$this->objectTypeID
+		));
 		
 		// insert new settings
-		$sql = "INSERT INTO	wcf".WCF_N."_dashboard_option
-					(objectTypeID, boxID, enabled)
-			VALUES		(?, ?, ?)";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		
-		WCF::getDB()->beginTransaction();
-		foreach ($this->objectTypeIDs as $objectTypeID) {
-			foreach ($this->boxes as $box) {
-				$enabled = 0;
-				if (isset($this->options[$objectTypeID][$box->boxID])) {
-					$enabled = ($this->options['objectTypeID'][$box->boxID] ? 1 : 0);
-				}
-				
+		if (!empty($this->enabledBoxes)) {
+			$sql = "INSERT INTO	wcf".WCF_N."_dashboard_option
+						(objectTypeID, boxID, showOrder)
+				VALUES		(?, ?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			
+			WCF::getDB()->beginTransaction();
+			$showOrder = 1;
+			foreach ($this->enabledBoxes as $boxID) {
 				$statement->execute(array(
-					$objectTypeID,
-					$box->boxID,
-					$enabled
+					$this->objectTypeID,
+					$boxID,
+					$showOrder
 				));
+				
+				$showOrder++;
 			}
+			WCF::getDB()->commitTransaction();
 		}
-		WCF::getDB()->commitTransaction();
 		
 		$this->saved();
 		
@@ -193,8 +184,9 @@ class DashboardOptionForm extends ACPForm {
 		
 		WCF::getTPL()->assign(array(
 			'boxes' => $this->boxes,
-			'objectTypes' => $this->objectTypes,
-			'options' => $this->options
+			'enabledBoxes' => $this->enabledBoxes,
+			'objectType' => $this->objectType,
+			'objectTypeID' => $this->objectTypeID
 		));
 	}
 }
