@@ -4,6 +4,11 @@
 		<item name="wcf.acp.group.option.category.user.community"><![CDATA[Community]]></item>
 	</category>
 	
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="wcf.acp.menu.link.dashboard.option"><![CDATA[Konfiguration]]></item>
+	</category>
+	
 	<category name="wcf.sitemap">
 		<item name="wcf.sitemap.userAccount"><![CDATA[Benutzerkonto]]></item>
 	</category>

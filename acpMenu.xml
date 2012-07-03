@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/acpMenu.xsd">
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.dashboard">
+			<parent>wcf.acp.menu.link.content</parent>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.dashboard.option">
+			<parent>wcf.acp.menu.link.language</parent>
+			<link>index.php/DashboardOption/</link>
+			<permissions>admin.dashboard.canEditOption</permissions>
+		</acpmenuitem>
+	</import>
+</data>

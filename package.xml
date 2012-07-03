@@ -24,6 +24,7 @@
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="objectTypeDefinition">objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
@@ -39,6 +40,7 @@
 		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="sitemap">sitemap.xml</instruction>
 		<instruction type="dashboardBox">dashboardBox.xml</instruction>
+		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="script">acp/install.php</instruction>
 	</instructions>
 </package>
