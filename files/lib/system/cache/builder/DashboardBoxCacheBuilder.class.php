@@ -31,7 +31,6 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 		$boxList = new DashboardBoxList();
 		$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		$boxList->sqlLimit = 0;
-		$boxList->sqlOrderBy = "dashboard_box.showOrder ASC";
 		$boxList->readObjects();
 		
 		foreach ($boxList as $box) {
@@ -48,9 +47,10 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("objectTypeID IN (?)", array($objectTypeIDs));
 		
-		$sql = "SELECT	*
-			FROM	wcf".WCF_N."_dashboard_option
-			".$conditions;
+		$sql = "SELECT		*
+			FROM		wcf".WCF_N."_dashboard_option
+			".$conditions."
+			ORDER BY	showOrder ASC";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
 		while ($row = $statement->fetchArray()) {
@@ -58,7 +58,7 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 				$data['pages'][$row['objectTypeID']] = array();
 			}
 			
-			$data['pages'][$row['objectTypeID']][$row['boxID']] = $row['enabled'];
+			$data['pages'][$row['objectTypeID']][] = $row['boxID'];
 		}
 		
 		return $data;

@@ -27,7 +27,6 @@ CREATE TABLE wcf1_dashboard_box (
 	packageID INT(10) NOT NULL,
 	boxName VARCHAR(255) NOT NULL DEFAULT '',
 	boxType VARCHAR(30) NOT NULL DEFAULT 'sidebar', -- can be 'content' or 'sidebar'
-	showOrder INT(10) NOT NULL,
 	className VARCHAR(255) NOT NULL DEFAULT ''
 );
 
@@ -35,7 +34,7 @@ DROP TABLE IF EXISTS wcf1_dashboard_option;
 CREATE TABLE wcf1_dashboard_option (
 	objectTypeID INT(10) NOT NULL,
 	boxID INT(10) NOT NULL,
-	enabled TINYINT(1) NOT NULL DEFAULT 1,
+	showOrder INT(10) NOT NULL,
 	UNIQUE KEY dashboardOption (objectTypeID, boxID)
 );
 

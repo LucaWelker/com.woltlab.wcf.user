@@ -106,6 +106,11 @@ class DashboardHandler extends SingletonFactory {
 	public static function setDefaultValues($objectType, array $enableBoxNames = array()) {
 		$objectTypeID = 0;
 		
+		// no boxes given, aborting
+		if (empty($enableBoxNames)) {
+			return;
+		}
+		
 		// get object type id (cache might be outdated)
 		if (PACKAGE_ID && PACKAGE_ID != 1) {
 			// reset object type cache
@@ -123,6 +128,7 @@ class DashboardHandler extends SingletonFactory {
 			// select available box ids
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
+			$conditions->add("boxName IN (?)", array(array_keys($enableBoxNames)));
 			
 			$sql = "SELECT	boxID, boxName
 				FROM	wcf".WCF_N."_dashboard_box
@@ -153,45 +159,42 @@ class DashboardHandler extends SingletonFactory {
 			}
 			
 			// select available box ids
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("boxName IN (?)", array(array_keys($enableBoxNames)));
+			
 			$sql = "SELECT	boxID, boxName
-				FROM	wcf".WCF_N."_dashboard_box";
+				FROM	wcf".WCF_N."_dashboard_box
+				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute();
+			$statement->execute($conditions->getParameters());
 		}
 		
 		$boxes = array();
 		while ($row = $statement->fetchArray()) {
-			if (in_array($row['boxName'], $enableBoxNames)) {
-				$boxes[$row['boxID']] = 1;
-			}
-			else {
-				$boxes[$row['boxID']] = 0;
-			}
+			$boxes[$row['boxID']] = $enableBoxNames[$row['boxName']];
 		}
 		
 		if (!empty($boxes)) {
 			// remove previous settings
-			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("objectTypeID = ?", array($objectTypeID));
-			$conditions->add("boxID IN (?)", array(array_keys($boxes)));
-			
 			$sql = "DELETE FROM	wcf".WCF_N."_dashboard_option
-				".$conditions;
+				WHERE		objectTypeID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute($conditions->getParameters());
+			$statement->execute(array(
+				$objectTypeID
+			));
 			
 			// insert associations
 			$sql = "INSERT INTO	wcf".WCF_N."_dashboard_option
-						(objectTypeID, boxID, enabled)
+						(objectTypeID, boxID, showOrder)
 				VALUES		(?, ?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			
 			WCF::getDB()->beginTransaction();
-			foreach ($boxes as $boxID => $enabled) {
+			foreach ($boxes as $boxID => $showOrder) {
 				$statement->execute(array(
 					$objectTypeID,
 					$boxID,
-					$enabled
+					$showOrder
 				));
 			}
 			WCF::getDB()->commitTransaction();

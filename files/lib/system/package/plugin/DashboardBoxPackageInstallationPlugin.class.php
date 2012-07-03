@@ -50,14 +50,10 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::prepareImport()
 	 */
 	protected function prepareImport(array $data) {
-		$showOrder = (isset($data['elements']['showOrder'])) ? intval($data['elements']['showOrder']) : null;
-		$showOrder = $this->getShowOrder($showOrder, null, 'showOrder');
-		
 		return array(
 			'boxName' => $data['attributes']['name'],
 			'boxType' => ($data['elements']['boxtype'] == 'content') ? 'content' : 'sidebar',
-			'className' => $data['elements']['classname'],
-			'showOrder' => $showOrder
+			'className' => $data['elements']['classname']
 		);
 	}
 	

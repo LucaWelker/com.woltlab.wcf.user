@@ -59,7 +59,6 @@ class DashboardOptionForm extends ACPForm {
 		$boxList = new DashboardBoxList();
 		$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		$boxList->sqlLimit = 0;
-		$boxList->sqlOrderBy = "dashboard_box.showOrder ASC";
 		$boxList->readObjects();
 		$this->boxes = $boxList->getObjects();
 		
