@@ -6,7 +6,7 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="wcf.acp.menu.link.dashboard.option"><![CDATA[Konfiguration]]></item>
+		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Konfiguration]]></item>
 	</category>
 	
 	<category name="wcf.sitemap">

@@ -5,10 +5,10 @@
 			<parent>wcf.acp.menu.link.content</parent>
 		</acpmenuitem>
 		
-		<acpmenuitem name="wcf.acp.menu.link.dashboard.option">
+		<acpmenuitem name="wcf.acp.menu.link.dashboard.list">
 			<parent>wcf.acp.menu.link.language</parent>
-			<link>index.php/DashboardOption/</link>
-			<permissions>admin.dashboard.canEditOption</permissions>
+			<link>index.php/DashboardList/</link>
+			<permissions>admin.content.dashboard.canEditOption</permissions>
 		</acpmenuitem>
 	</import>
 </data>

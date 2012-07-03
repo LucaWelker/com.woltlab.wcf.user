@@ -16,14 +16,17 @@ use wcf\system\WCF;
  * @package	com.woltlab.wcf.user
  * @subpackage	acp.form
  * @category 	Community Framework
- * 
- * @todo	Add permissions
  */
 class DashboardOptionForm extends ACPForm {
 	/**
 	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.dashboard.option';
+	public $activeMenuItem = 'wcf.acp.menu.link.dashboard';
+	
+	/**
+	 * @see wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.content.dashboard.canEditOption');
 	
 	/**
 	 * list of dashboard boxes
@@ -113,9 +116,10 @@ class DashboardOptionForm extends ACPForm {
 		if (empty($_POST)) {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("objectTypeID IN (?)", array($this->objectTypeIDs));
-			$sql = "SELECT	*
-				FROM	wcf".WCF_N."_dashboard_option
-				".$conditions;
+			$sql = "SELECT		*
+				FROM		wcf".WCF_N."_dashboard_option
+				".$conditions."
+				ORDER BY	showOrder ASC";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute($conditions->getParameters());
 			$boxOptions = array();
@@ -124,21 +128,15 @@ class DashboardOptionForm extends ACPForm {
 					$boxOptions[$row['boxID']] = array();
 				}
 				
-				$boxOptions[$row['boxID']][$row['objectTypeID']] = $row['enabled'];
+				$boxOptions[$row['objectTypeID']][] = $row['boxID'];
 			}
 			
 			foreach ($this->objectTypeIDs as $objectTypeID) {
-				$this->options[$objectTypeID] = array();
-				
-				foreach ($this->boxes as $box) {
-					$boxID = $box->boxID;
+				if (isset($boxOptions[$objectTypeID])) {
+					$this->options[$objectTypeID] = array();
 					
-					if (isset($boxOptions[$boxID]) && isset($boxOptions[$boxID][$objectTypeID])) {
-						$this->options[$objectTypeID][$boxID] = $boxOptions[$boxID][$objectTypeID];
-					}
-					else {
-						// fallback if data is no available
-						$this->options[$objectTypeID][$boxID] = 0;
+					foreach ($boxOptions[$objectTypeID] as $boxID) {
+						$this->options[$objectTypeID][] = $this->boxes[$boxID];
 					}
 				}
 			}
