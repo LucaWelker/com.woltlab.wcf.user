@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="wcf.acp.dashboard">
+		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard-Boxen konfigurieren]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in &bdquo;Aktive Boxen&ldquo; bzw. &bdquo;Deaktivierte Boxen&ldquo; verschieben.]]></item>
+	</category>
+	
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.user.community"><![CDATA[Community]]></item>
 	</category>
@@ -7,6 +12,17 @@
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Konfiguration]]></item>
+	</category>
+	
+	<category name="wcf.dashboard">
+		<item name="wcf.dashboard.box.availableBoxes"><![CDATA[Deaktivierte Boxen]]></item>
+		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Aktive Boxen]]></item>
+		<item name="wcf.dashboard.box.recentActivity"><![CDATA[Letzte Aktivität]]></item>
+		<item name="wcf.dashboard.boxType.content"><![CDATA[Inhaltsbereich]]></item>
+		<item name="wcf.dashboard.boxType.sidebar"><![CDATA[Seitenleiste]]></item>
+		<item name="wcf.dashboard.objectType"><![CDATA[Seite]]></item>
+		<item name="wcf.dashboard.objectType.com.woltlab.wcf.user.DashboardPage"><![CDATA[Dashboard]]></item>
+		<item name="wcf.dashboard.objectType.com.woltlab.wcf.user.MembersListPage"><![CDATA[Mitgliederliste]]></item>
 	</category>
 	
 	<category name="wcf.sitemap">
