@@ -2,6 +2,7 @@
 namespace wcf\data\dashboard\box;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\package\PackageDependencyHandler;
@@ -122,5 +123,8 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction {
 			}
 			WCF::getDB()->commitTransaction();
 		}
+		
+		// reset cache
+		DashboardHandler::clearCache();
 	}
 }

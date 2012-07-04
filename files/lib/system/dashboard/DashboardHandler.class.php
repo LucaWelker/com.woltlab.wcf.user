@@ -200,4 +200,11 @@ class DashboardHandler extends SingletonFactory {
 			WCF::getDB()->commitTransaction();
 		}
 	}
+	
+	/**
+	 * Clears dashboard box cache.
+	 */
+	public static function clearCache() {
+		CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.dashboardBoxes-*.php');
+	}
 }
