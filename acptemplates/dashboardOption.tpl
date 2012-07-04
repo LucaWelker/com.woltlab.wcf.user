@@ -66,7 +66,7 @@
 							{foreach from=$boxes item=box}
 								{if $box->boxType == 'content' && !$box->boxID|in_array:$enabledBoxes}
 									<li class="sortableList">
-										<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$boxes[$boxID]->boxName}{/lang}</span>
+										<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$box->boxName}{/lang}</span>
 									</li>
 								{/if}
 							{/foreach}
@@ -86,7 +86,7 @@
 							{foreach from=$enabledBoxes item=boxID}
 								{if $boxes[$boxID]->boxType == 'sidebar'}
 									<li class="sortableList">
-										<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$box->boxName}{/lang}</span>
+										<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$boxes[$boxID]->boxName}{/lang}</span>
 									</li>
 								{/if}
 							{/foreach}
