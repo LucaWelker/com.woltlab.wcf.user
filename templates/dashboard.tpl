@@ -8,7 +8,13 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {if $__boxSidebar|isset && $__boxSidebar}
-	{capture assign='sidebar'}{@$__boxSidebar}{/capture}
+	{capture assign='sidebar'}
+		<nav id="sidebarContent" class="sidebarContent">
+			<ul>
+				{@$__boxSidebar}
+			</ul>
+		</nav>
+	{/capture}
 {/if}
 
 {include file='header' sidebarOrientation='right'}
