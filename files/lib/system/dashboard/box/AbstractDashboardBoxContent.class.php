@@ -45,9 +45,14 @@ abstract class AbstractDashboardBoxContent implements IDashboardBox {
 	 * @see	wcf\system\dashboard\box\IDashboardBox::getTemplate()
 	 */
 	public function getTemplate() {
+		$template = $this->render();
+		if (empty($template)) {
+			return '';
+		}
+		
 		WCF::getTPL()->assign(array(
 			'box' => $this->box,
-			'template' => $this->render()
+			'template' => $template
 		));
 		
 		return WCF::getTPL()->fetch($this->templateName);

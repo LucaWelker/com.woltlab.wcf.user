@@ -63,11 +63,9 @@ class DashboardHandler extends SingletonFactory {
 		}
 		
 		$boxIDs = array();
-		if (isset($this->pageCache[$objectType->objectType]) && is_array($this->pageCache[$objectType->objectType])) {
-			foreach ($this->pageCache[$objectType->objectType] as $boxID => $enabled) {
-				if ($enabled) {
-					$boxIDs[] = $boxID;
-				}
+		if (isset($this->pageCache[$objectType->objectTypeID]) && is_array($this->pageCache[$objectType->objectTypeID])) {
+			foreach ($this->pageCache[$objectType->objectTypeID] as $boxID) {
+				$boxIDs[] = $boxID;
 			}
 		}
 		
