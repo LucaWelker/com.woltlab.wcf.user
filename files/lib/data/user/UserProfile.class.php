@@ -294,6 +294,23 @@ class UserProfile extends DatabaseObjectDecorator {
 	}
 	
 	/**
+	 * Returns a new user profile object.
+	 * 
+	 * @param	string				$username
+	 * @return	wcf\data\user\UserProfile
+	 */
+	public static function getUserProfileByUsername($username) {
+		$userList = new UserProfileList();
+		$userList->getConditionBuilder()->add("user_table.username LIKE ?", array($username));
+		$userList->readObjects();
+		foreach ($userList->getObjects() as $user) {
+			return $user;
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Returns true, if current user fulfills the required permissions.
 	 * 
 	 * @param	string		$name
