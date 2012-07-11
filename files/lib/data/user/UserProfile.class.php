@@ -303,7 +303,7 @@ class UserProfile extends DatabaseObjectDecorator {
 		$userList = new UserProfileList();
 		$userList->getConditionBuilder()->add("user_table.username LIKE ?", array($username));
 		$userList->readObjects();
-		foreach ($userList->getObjects() as $user) {
+		foreach ($userList as $user) {
 			return $user;
 		}
 		
