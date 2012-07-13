@@ -3,6 +3,7 @@ namespace wcf\system\user\notification\event;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\UserProfile;
 use wcf\data\IDatabaseObjectProcessor;
+use wcf\data\ITitledDatabaseObject;
 use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\user\notification\object\IUserNotificationObject;
 
@@ -16,7 +17,7 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  * @subpackage	system.user.notification.event
  * @category 	Community Framework
  */
-interface IUserNotificationEvent extends IDatabaseObjectProcessor {
+interface IUserNotificationEvent extends IDatabaseObjectProcessor, ITitledDatabaseObject {
 	/**
 	 * Returns the message for this notification event.
 	 *
@@ -51,13 +52,6 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	 * @return	string
 	 */	
 	public function getRenderedOutput();
-
-	/**
-	 * Returns the human-readable title of this event.
-	 *
-	 * @return	string
-	 */
-	public function getTitle();
 
 	/**
 	 * Returns the human-readable description of this event.
