@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\user\notification\object;
 use wcf\data\IDatabaseObjectProcessor;
+use wcf\data\ITitledDatabaseObject;
 
 /**
  * This interface should be implemented by every object which is part of a notification.
@@ -12,20 +13,13 @@ use wcf\data\IDatabaseObjectProcessor;
  * @subpackage	system.user.notification.object
  * @category 	Community Framework
  */
-interface IUserNotificationObject extends IDatabaseObjectProcessor {
+interface IUserNotificationObject extends IDatabaseObjectProcessor, ITitledDatabaseObject {
 	/**
 	 * Returns the ID of this object.
 	 *
 	 * @return	integer
 	 */
 	public function getObjectID();
-
-	/**
-	 * Returns the title of this object.
-	 *
-	 * @return	string
-	 */
-	public function getTitle();
 
 	/**
 	 * Returns the url of this object.
