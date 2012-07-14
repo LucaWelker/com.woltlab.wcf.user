@@ -294,20 +294,52 @@ class UserProfile extends DatabaseObjectDecorator {
 	}
 	
 	/**
-	 * Returns a new user profile object.
+	 * Returns the user profile of the user with the given name.
 	 * 
 	 * @param	string				$username
 	 * @return	wcf\data\user\UserProfile
 	 */
 	public static function getUserProfileByUsername($username) {
-		$userList = new UserProfileList();
-		$userList->getConditionBuilder()->add("user_table.username LIKE ?", array($username));
-		$userList->readObjects();
-		foreach ($userList as $user) {
-			return $user;
+		$users = self::getUserProfilesByUsername(array($username));
+		
+		return $users[$username];
+	}
+	
+	/**
+	 * Returns the user profiles of the users with the given names.
+	 * 
+	 * @param	array<string>			$usernames
+	 * @return	array<wcf\data\user\UserProfile>
+	 */
+	public static function getUserProfilesByUsername(array $usernames) {
+		$users = array();
+		
+		// check cache
+		foreach ($usernames as $index => $username) {
+			foreach (self::$userProfiles as $user) {
+				if ($user->username === $username) {
+					$users[$username] = $user;
+					unset($usernames[$index]);
+				}
+			}
 		}
 		
-		return null;
+		if (!empty($usernames)) {
+			$userList = new UserProfileList();
+			$userList->getConditionBuilder()->add("user_table.username IN (?)", array($usernames));
+			$userList->readObjects();
+
+			foreach ($userList as $user) {
+				$users[$user->username] = $user;
+			}
+			foreach ($usernames as $username) {
+				if (!isset($users[$user->username])) {
+					$users[$username] = null;
+				}
+			}
+		}
+		
+		return $users;
 	}
 	
 	/**
