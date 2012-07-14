@@ -23,8 +23,8 @@ class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor i
 	public function getObjectByID($objectID) {
 		$follow = new UserFollow($objectID);
 		if (!$follow->followID) {
-			// create empty object for unknown request id
-			$request = new UserFollow(null, array('followID' => $objectID));
+			// create empty object for unknown follow id
+			$follow = new UserFollow(null, array('followID' => $objectID));
 		}
 		
 		return array($follow->followID => new UserFollowUserNotificationObject($follow));
