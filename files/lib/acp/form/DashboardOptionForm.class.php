@@ -2,7 +2,6 @@
 namespace wcf\acp\form;
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;

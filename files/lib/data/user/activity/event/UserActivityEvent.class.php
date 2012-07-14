@@ -1,7 +1,6 @@
 <?php
 namespace wcf\data\user\activity\event;
 use wcf\data\DatabaseObject;
-use wcf\system\WCF;
 
 /**
  * Represents a user's activity.

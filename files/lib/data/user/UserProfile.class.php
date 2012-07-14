@@ -3,7 +3,6 @@ namespace wcf\data\user;
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\DatabaseObjectDecorator;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;

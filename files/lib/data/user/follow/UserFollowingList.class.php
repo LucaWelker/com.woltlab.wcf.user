@@ -1,7 +1,5 @@
 <?php
 namespace wcf\data\user\follow;
-use wcf\system\WCF;
-use wcf\data\user\UserProfile;
 
 /**
  * Represents a list of following users.

@@ -1,10 +1,9 @@
 <?php
 namespace wcf\system\user\activity\event;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\activity\event\UserActivityEventAction;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
