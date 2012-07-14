@@ -1,8 +1,7 @@
 <?php
 namespace wcf\system\user\notification\event;
-use wcf\data\user\UserProfile;
-
 use wcf\data\user\notification\UserNotification;
+use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\user\notification\object\IUserNotificationObject;

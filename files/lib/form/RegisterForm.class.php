@@ -1,8 +1,6 @@
 <?php
 namespace wcf\form;
 use wcf\acp\form\UserAddForm;
-use wcf\data\option\Option;
-use wcf\data\language\Language;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\UserAction;
 use wcf\system\exception\NamedUserException;

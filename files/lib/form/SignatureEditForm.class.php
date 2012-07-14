@@ -2,9 +2,7 @@
 namespace wcf\form;
 use wcf\data\user\UserAction;
 use wcf\system\bbcode\MessageParser;
-use wcf\system\event\EventHandler;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\exception\UserInputException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 

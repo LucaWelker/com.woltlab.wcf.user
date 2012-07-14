@@ -1,7 +1,6 @@
 <?php
 namespace wcf\system\user\notification;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\user\notification\event\UserNotificationEvent;
 use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\event\recipient\UserNotificationEventRecipientList;
 use wcf\data\user\notification\recipient\UserNotificationRecipientList;

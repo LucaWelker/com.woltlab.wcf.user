@@ -3,7 +3,6 @@ namespace wcf\system\user\notification\object\type;
 use wcf\data\object\type\AbstractObjectTypeProcessor;
 use wcf\data\user\follow\UserFollow;
 use wcf\data\user\follow\UserFollowList;
-use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
 use wcf\system\user\notification\object\UserFollowUserNotificationObject;
 
 /**
