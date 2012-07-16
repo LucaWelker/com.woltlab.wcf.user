@@ -30,14 +30,32 @@
 				<legend>{lang}wcf.user.language{/lang}</legend>
 				
 				<dl>
-					<dt><label for="languageID">{lang}wcf.user.language{/lang}</label></dt>
-					<dd>
-						<select id="languageID" name="languageID">
-							{foreach from=$availableLanguages item=language}
-								<option value="{@$language->languageID}"{if $language->languageID == $languageID} selected="selected"{/if}>{$language}</option>
-							{/foreach}
-						</select>
-						<small>{lang}wcf.user.language.description{/lang}</small>
+					<dt><label>{lang}wcf.user.language{/lang}</label></dt>
+					<dd id="languageIDContainer">
+						<script type="text/javascript">
+							//<![CDATA[
+							$(function() {
+								var $languages = {
+									{implode from=$availableLanguages item=language}
+										'{@$language->languageID}': {
+											iconPath: '{@$language->getIconPath()}',
+											languageName: '{$language}'
+										}
+									{/implode}
+								};
+								
+								new WCF.Language.Chooser('languageIDContainer', 'languageID', {@$languageID}, $languages);
+							});
+							//]]>
+						</script>
+						<noscript>
+							<span><img src="{@$__wcf->getLanguage()->getIconPath}" alt="{$__wcf->getLanguage()}" /></span>
+							<select name="languageID" id="languageID">
+								{foreach from=$availableLanguages item=language}
+									<option value="{@$language->languageID}"{if $language->languageID == $languageID} selected="selected"{/if}>{$language}</option>
+								{/foreach}
+							</select>
+						</noscript>
 					</dd>
 				</dl>
 				

@@ -96,6 +96,30 @@
 			</script>
 		</li>
 	{/if}
+	<!-- language switcher -->
+	<li id="languageIDContainer">
+		<script type="text/javascript">
+			//<![CDATA[
+			$(function() {
+				var $languages = {
+					{implode from=$__wcf->getLanguage()->getLanguages() item=language}
+						'{@$language->languageID}': {
+							iconPath: '{@$language->getIconPath()}',
+							languageName: '{$language}'
+						}
+					{/implode}
+				};
+				
+				new WCF.Language.Chooser('languageIDContainer', 'languageID', {@$__wcf->getLanguage()->languageID}, $languages, function(item) {
+					var $location = window.location.toString().replace(/#.*/, '').replace(/(\?|&)l=[0-9]+/g, '');
+					var $delimiter = ($location.indexOf('?') == -1) ? '?' : '&';
+					
+					window.location = $location + $delimiter + 'l=' + item.data('languageID') + window.location.hash;
+				});
+			});
+			//]]>
+		</script>
+	</li>
 {/if}
 
 {event name='menuItems'}
