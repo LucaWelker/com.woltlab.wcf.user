@@ -56,6 +56,9 @@
 		<item name="wcf.user.gender.male"><![CDATA[Männlich]]></item>
 		<item name="wcf.user.gender.female"><![CDATA[Weiblich]]></item>
 		<item name="wcf.user.members"><![CDATA[Mitglieder]]></item>
+		<item name="wcf.user.members.sort"><![CDATA[Sortierung]]></item>
+		<item name="wcf.user.members.sort.letters"><![CDATA[Anfangsbuchstabe]]></item>
+		<item name="wcf.user.members.sort.letters.all"><![CDATA[Alle]]></item>
 		<item name="wcf.user.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.usersOnline"><![CDATA[Benutzer online]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Mitglied seit {@$user->registrationDate|date}]]></item>

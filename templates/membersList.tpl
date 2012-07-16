@@ -14,20 +14,21 @@
 	<ul>
 		<li class="sidebarContainer">
 			<hgroup class="sidebarContainerHeadline">
-				<h1>Letters</h1>
+				<h1>{lang}wcf.user.members.sort.letters{/lang}</h1>
 			</hgroup>
 			
 			<ul class="buttonList letters">
 				{foreach from=$letters item=__letter}
-					<li><a href="{link controller='MembersList'}letter={$__letter|rawurlencode}{/link}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
+					<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
 				{/foreach}
+				{if !$letter|empty}<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
 			</ul>
 		</li>
 		
 		<li class="sidebarContainer">
 			<form method="get" action="{link controller='MembersList'}{/link}">
 				<fieldset>
-					<legend>sort</legend>
+					<legend>{lang}wcf.user.members.sort{/lang}</legend>
 					
 					<dl>
 						<dt><label for="sortField">sortby</label></dt>

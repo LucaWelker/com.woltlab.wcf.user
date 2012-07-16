@@ -1,5 +1,6 @@
 <?php
 namespace wcf\page;
+use wcf\system\database\PostgreSQLDatabase;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -56,12 +57,18 @@ class MembersListPage extends SortablePage {
 		parent::initObjectList();
 		
 		if (!empty($this->letter)) {
-			// todo: we need a fallback for postgresql here
 			if ($this->letter == '#') {
-				$this->objectList->getConditionBuilder()->add("SUBSTRING(username,1,1) IN ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')");
+				// PostgreSQL
+				if (WCF::getDB() instanceof PostgreSQLDatabase) {
+					$this->objectList->getConditionBuilder()->add("SUBSTRING(username FROM 1 for 1) IN ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')");
+				}
+				else {
+					// MySQL
+					$this->objectList->getConditionBuilder()->add("SUBSTRING(username,1,1) IN ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')");
+				}
 			}
 			else {
-				$this->objectList->getConditionBuilder()->add("BINARY UPPER(SUBSTRING(username,1,1)) = ?", array($this->letter));
+				$this->objectList->getConditionBuilder()->add("LIKE username = ?", array($this->letter.'%'));
 			}
 		}
 	}
