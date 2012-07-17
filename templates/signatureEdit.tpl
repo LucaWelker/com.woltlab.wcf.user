@@ -74,8 +74,7 @@
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		<button id="previewButton" accesskey="p">{lang}wcf.global.button.preview{/lang}</button>
-		<input type="hidden" name="tmpHash" value="{$tmpHash}" />
- 	</div>
+	</div>
 </form>
 
 {include file='footer'}
