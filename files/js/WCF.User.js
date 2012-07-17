@@ -1902,3 +1902,218 @@ WCF.User.ProfilePreview = WCF.Popover.extend({
 		}
 	}
 });
+
+/**
+ * Initalizes WCF.User.Action namespace.
+ */
+WCF.User.Action = {};
+
+/**
+ * Handles user follow and unfollow links.
+ */
+WCF.User.Action.Follow = Class.extend({
+	/**
+	 * list with elements containing follow and unfollow buttons
+	 * @var	array
+	 */
+	_containerList: null,
+	
+	/**
+	 * CSS selector for follow buttons
+	 * @var	string
+	 */
+	_followButtonSelector: '.jsFollowButton',
+	
+	/**
+	 * id of the user that is currently being followed/unfollowed
+	 * @var	integer
+	 */
+	_userID: 0,
+	
+	/**
+	 * Initializes new WCF.User.Action.Follow object.
+	 * 
+	 * @param	array		containerList
+	 * @param	string		followButtonSelector
+	 */
+	init: function(containerList, followButtonSelector) {
+		if (!containerList.length) {
+			return;
+		}
+		this._containerList = containerList;
+		
+		if (followButtonSelector) {
+			this._followButtonSelector = followButtonSelector;
+		}
+		
+		// initialize proxy
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		// bind event listeners
+		this._containerList.each($.proxy(function(index, container) {
+			$(container).find(this._followButtonSelector).click($.proxy(this._click, this));
+		}, this));
+	},
+	
+	/**
+	 * Handles a click on a follow or unfollow button.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var link = $(event.target);
+		if (!link.is('a')) {
+			link = link.closest('a');
+		}
+		this._userID = link.data('objectID');
+		
+		this._proxy.setOption('data', {
+			'actionName': link.data('following') ? 'unfollow' : 'follow',
+			'className': 'wcf\\data\\user\\follow\\UserFollowAction',
+			'parameters': {
+				data: {
+					userID: this._userID
+				}
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Handles the successful (un)following of a user.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._containerList.each($.proxy(function(index, container) {
+			var button = $(container).find(this._followButtonSelector).get(0);
+			
+			if (button && $(button).data('objectID') == this._userID) {
+				button = $(button);
+				
+				// toogle icon title
+				if (data.returnValues.following) {
+					button.children('img').attr('src', WCF.Icon.get('wcf.icon.remove'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.unfollow'));
+				}
+				else {
+					button.children('img').attr('src', WCF.Icon.get('wcf.icon.add'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.follow'));
+				}
+				
+				button.data('following', data.returnValues.following);
+				
+				return false;
+			}
+		}, this));
+	}
+});
+
+/**
+ * Handles user ignore and unignore links.
+ */
+WCF.User.Action.Ignore = Class.extend({
+	/**
+	 * list with elements containing ignore and unignore buttons
+	 * @var	array
+	 */
+	_containerList: null,
+	
+	/**
+	 * CSS selector for ignore buttons
+	 * @var	string
+	 */
+	_ignoreButtonSelector: '.jsIgnoreButton',
+	
+	/**
+	 * id of the user that is currently being ignored/unignored
+	 * @var	integer
+	 */
+	_userID: 0,
+	
+	/**
+	 * Initializes new WCF.User.Action.Ignore object.
+	 * 
+	 * @param	array		containerList
+	 * @param	string		ignoreButtonSelector
+	 */
+	init: function(containerList, ignoreButtonSelector) {
+		if (!containerList.length) {
+			return;
+		}
+		this._containerList = containerList;
+		
+		if (ignoreButtonSelector) {
+			this._ignoreButtonSelector = ignoreButtonSelector;
+		}
+		
+		// initialize proxy
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		// bind event listeners
+		this._containerList.each($.proxy(function(index, container) {
+			$(container).find(this._ignoreButtonSelector).click($.proxy(this._click, this));
+		}, this));
+	},
+	
+	/**
+	 * Handles a click on a ignore or unignore button.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var link = $(event.target);
+		if (!link.is('a')) {
+			link = link.closest('a');
+		}
+		this._userID = link.data('objectID');
+		
+		this._proxy.setOption('data', {
+			'actionName': link.data('ignored') ? 'unignore' : 'ignore',
+			'className': 'wcf\\data\\user\\ignore\\UserIgnoreAction',
+			'parameters': {
+				data: {
+					ignoreUserID: this._userID
+				}
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Handles the successful (un)ignoring of a user.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._containerList.each($.proxy(function(index, container) {
+			var button = $(container).find(this._ignoreButtonSelector).get(0);
+			
+			if (button && $(button).data('objectID') == this._userID) {
+				button = $(button);
+				
+				// toogle icon title
+				if (data.returnValues.isIgnoredUser) {
+					button.children('img').attr('src', WCF.Icon.get('wcf.icon.enabled'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.unignore'));
+				}
+				else {
+					button.children('img').attr('src', WCF.Icon.get('wcf.icon.disabled'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.ignore'));
+				}
+				
+				button.data('ignored', data.returnValues.isIgnoredUser);
+				
+				return false;
+			}
+		}, this));
+	}
+});
