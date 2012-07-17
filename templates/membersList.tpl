@@ -2,7 +2,31 @@
 
 <head>
 	<title>{lang}wcf.user.members{/lang} {if $pageNo > 1}- {lang}wcf.page.pageNo{/lang} {/if}- {PAGE_TITLE|language}</title>
+	
 	{include file='headInclude'}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+			$(function() {
+				WCF.Icon.addObject({
+					'wcf.icon.add': '{icon size='S'}add{/icon}',
+					'wcf.icon.enabled': '{icon size='S'}enabled{/icon}',
+					'wcf.icon.disabled': '{icon size='S'}disabled{/icon}',
+					'wcf.icon.remove': '{icon size='S'}remove{/icon}'
+				})
+				
+				WCF.Language.addObject({
+					'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
+					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
+					'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
+					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
+				})
+				
+				new WCF.User.Action.Follow($('.simpleUserList > li'));
+				new WCF.User.Action.Ignore($('.simpleUserList > li'));
+			});
+		//]]>
+	</script>
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
