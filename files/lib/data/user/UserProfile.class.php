@@ -332,7 +332,7 @@ class UserProfile extends DatabaseObjectDecorator {
 				$users[$user->username] = $user;
 			}
 			foreach ($usernames as $username) {
-				if (!isset($users[$user->username])) {
+				if (!isset($users[$username])) {
 					$users[$username] = null;
 				}
 			}
