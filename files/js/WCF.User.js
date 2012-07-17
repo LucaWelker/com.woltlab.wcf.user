@@ -2006,6 +2006,8 @@ WCF.User.Action.Follow = Class.extend({
 				}
 				
 				button.data('following', data.returnValues.following);
+				
+				return false;
 			}
 		}, this));
 	}
@@ -2061,7 +2063,7 @@ WCF.User.Action.Ignore = Class.extend({
 	},
 	
 	/**
-	 * Handles a click on a follow or unfollow button.
+	 * Handles a click on a ignore or unignore button.
 	 * 
 	 * @param	object		event
 	 */
@@ -2085,7 +2087,7 @@ WCF.User.Action.Ignore = Class.extend({
 	},
 	
 	/**
-	 * Handles the successful (un)following of a user.
+	 * Handles the successful (un)ignoring of a user.
 	 * 
 	 * @param	object		data
 	 * @param	string		textStatus
@@ -2109,6 +2111,8 @@ WCF.User.Action.Ignore = Class.extend({
 				}
 				
 				button.data('ignored', data.returnValues.isIgnoredUser);
+				
+				return false;
 			}
 		}, this));
 	}
