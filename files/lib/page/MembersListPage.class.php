@@ -68,7 +68,7 @@ class MembersListPage extends SortablePage {
 				}
 			}
 			else {
-				$this->objectList->getConditionBuilder()->add("LIKE username = ?", array($this->letter.'%'));
+				$this->objectList->getConditionBuilder()->add("username LIKE ?", array($this->letter.'%'));
 			}
 		}
 	}
