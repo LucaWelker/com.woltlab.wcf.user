@@ -71,6 +71,13 @@ class UserProfile extends DatabaseObjectDecorator {
 	const ACCESS_NOBODY = 3;
 	
 	/**
+	 * @see	wcf\data\user\User::__toString()
+	 */	
+	public function __toString() {
+		return $this->getDecoratedObject()->__toString();
+	}
+	
+	/**
 	 * Returns a list of all user ids being followed by current user.
 	 * 
 	 * @return	array<integer>
