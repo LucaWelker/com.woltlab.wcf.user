@@ -293,6 +293,7 @@ class UserProfile extends DatabaseObjectDecorator {
 			
 			foreach ($userList as $user) {
 				$users[$user->userID] = $user;
+				self::$userProfiles[$user->userID] = $user;
 			}
 		}
 		
@@ -337,6 +338,7 @@ class UserProfile extends DatabaseObjectDecorator {
 
 			foreach ($userList as $user) {
 				$users[$user->username] = $user;
+				self::$userProfiles[$user->userID] = $user;
 			}
 			foreach ($usernames as $username) {
 				if (!isset($users[$username])) {
