@@ -1,5 +1,7 @@
 <?php
 namespace wcf\data\user;
+use wcf\util\StringUtil;
+
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\DatabaseObjectDecorator;
@@ -321,10 +323,19 @@ class UserProfile extends DatabaseObjectDecorator {
 	public static function getUserProfilesByUsername(array $usernames) {
 		$users = array();
 		
+		// save case sensitive usernames
+		$caseSensitiveUsernames = array();
+		foreach ($usernames as &$username) {
+			$tmp = StringUtil::toLowerCase($username);
+			$caseSensitiveUsernames[$tmp] = $username;
+			$username = $tmp;
+		}
+		unset($username);
+		
 		// check cache
 		foreach ($usernames as $index => $username) {
 			foreach (self::$userProfiles as $user) {
-				if ($user->username === $username) {
+				if (StringUtil::toLowerCase($user->username) === $username) {
 					$users[$username] = $user;
 					unset($usernames[$index]);
 				}
@@ -335,16 +346,23 @@ class UserProfile extends DatabaseObjectDecorator {
 			$userList = new UserProfileList();
 			$userList->getConditionBuilder()->add("user_table.username IN (?)", array($usernames));
 			$userList->readObjects();
-
+			
 			foreach ($userList as $user) {
-				$users[$user->username] = $user;
+				$users[StringUtil::toLowerCase($user->username)] = $user;
 				self::$userProfiles[$user->userID] = $user;
 			}
+			
 			foreach ($usernames as $username) {
 				if (!isset($users[$username])) {
 					$users[$username] = null;
 				}
 			}
+		}
+		
+		// revert usernames to original case
+		foreach ($users as $username => $user) {
+			unset($users[$username]);
+			$users[$caseSensitiveUsernames[$username]] = $user;
 		}
 		
 		return $users;
