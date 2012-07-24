@@ -24,7 +24,7 @@
 	
 	<!-- user notifications -->
 	<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<a class="dropdownToggle" data-toggle="userNotifications">{lang}wcf.user.notification.notifications{/lang} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></a>
+		<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span> <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></a>
 		<div class="dropdownMenu userNotificationContainer">
 			<div id="userNotificationContainer" class="scrollableContainer">
 				<div class="scrollableItems cleafix">
@@ -37,6 +37,11 @@
 				</div>
 			</div>
 		</div>
+	</li>
+	
+	<!-- testing: -->
+	<li>
+		<a class="jsTooltip" href="#" title="Watched Objects"><img src="{icon size='M'}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">Watched Objects</span> <span class="badge badgeInverse">43</span></a>
 	</li>
 {else}
 	{if !$__disableLoginLink|isset}
