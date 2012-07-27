@@ -1,13 +1,13 @@
 <?php
 namespace wcf\data\user;
-use wcf\util\StringUtil;
-
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\DatabaseObjectDecorator;
+use wcf\system\cache\CacheHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
+use wcf\util\StringUtil;
 
 define('MODULE_AVATAR', 1);
 define('MODULE_GRAVATAR', 1);
@@ -63,6 +63,12 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * @var integer
 	 */
 	protected $__age = null; 
+	
+	/**
+	 * group data and permissions
+	 * @var array<array>
+	 */
+	protected $groupData = null;
 	
 	const GENDER_MALE = 1;
 	const GENDER_FEMALE = 2;
@@ -431,5 +437,42 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	public function getProfileAge() {
 		return (TIME_NOW - $this->registrationDate) / 86400;
+	}
+	
+	/**
+	 * Returns the value of the permission with the given name.
+	 *
+	 * @param 	string		$permission
+	 * @return	mixed		permission value
+	 */
+	public function getPermission($permission) {
+		if ($this->groupData === null) $this->loadGroupData();
+		
+		if (!isset($this->groupData[$permission])) return false;
+		return $this->groupData[$permission];
+	}
+	
+	/**
+	 * Loads group data from cache.
+	 */
+	protected function loadGroupData() {
+		// get group ids
+		$groupIDs = $this->getGroupIDs();
+		$groups = implode(',', $groupIDs);
+		$groupsFileName = StringUtil::getHash($groups);
+		
+		// register cache resource
+		$cacheName = 'groups-'.PACKAGE_ID.'-'.$groups;
+		CacheHandler::getInstance()->addResource(
+			$cacheName,
+			WCF_DIR.'cache/cache.groups-'.PACKAGE_ID.'-'.$groupsFileName.'.php',
+			'wcf\system\cache\builder\UserGroupPermissionCacheBuilder'
+		);
+		
+		// get group data from cache
+		$this->groupData = CacheHandler::getInstance()->get($cacheName);
+		if (isset($this->groupData['groupIDs']) && $this->groupData['groupIDs'] != $groups) {
+			$this->groupData = array();
+		}
 	}
 }
