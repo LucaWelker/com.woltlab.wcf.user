@@ -1654,6 +1654,12 @@ WCF.Notification.Loader.prototype = {
 		
 		// execute callback
 		this._callback($notificationList);
+		
+		// if more than 5 notifications are available, display a "show all" link
+		if (data.returnValues.showAllLink) {
+			//$('<li class="dropdownDivider" />').appendTo($notificationList);
+			$('<li class="dropdownDivider"><a href="' + data.returnValues.showAllLink + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
+		}
 	}
 };
 

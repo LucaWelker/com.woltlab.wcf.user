@@ -30,7 +30,7 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptLanguageImport</eventname>
-			<templatecode><![CDATA[,'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}','wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}']]></templatecode>
+			<templatecode><![CDATA[,'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}','wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}', 'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}']]></templatecode>
 		</templatelistener>
 
 		<templatelistener name="javascriptInit">
