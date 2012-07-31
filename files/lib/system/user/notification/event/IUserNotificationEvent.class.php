@@ -3,7 +3,6 @@ namespace wcf\system\user\notification\event;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\UserProfile;
 use wcf\data\IDatabaseObjectProcessor;
-use wcf\data\ITitledDatabaseObject;
 use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\user\notification\object\IUserNotificationObject;
 
@@ -11,21 +10,13 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  * This interface should be implemented by every event which is fired by the notification system.
  *
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2011 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf.notification
+ * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.event
  * @category 	Community Framework
  */
-interface IUserNotificationEvent extends IDatabaseObjectProcessor, ITitledDatabaseObject {
-	/**
-	 * Returns the message for this notification event.
-	 *
-	 * @param	wcf\system\user\notification\type\IUserNotificationType	$notificationType
-	 * @return	string
-	 */
-	public function getMessage(IUserNotificationType $notificationType);
-	
+interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	/**
 	 * Returns a list of actions for this notification event.
 	 * @return	array<array>
@@ -33,32 +24,40 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor, ITitledDataba
 	public function getActions();
 
 	/**
-	 * Returns the short output for this notification event.
+	 * Returns a short title used for the notification overlay, e.g. "new follower".
 	 *
 	 * @return	string
 	 */
-	public function getShortOutput();
+	public function getTitle();
 	
 	/**
-	 * Returns the full output for this notification event.
-	 *
+	 * Returns the notification event message, e.g. "dtdesign is now following you".
+	 * 
 	 * @return	string
 	 */
-	public function getOutput();
+	public function getMessage();
 	
 	/**
-	 * Returns rendered HTML for this notification event.
+	 * Returns rendered HTML used within the notification overlay.
 	 * 
 	 * @return	string
 	 */	
 	public function getRenderedOutput();
-
+	
 	/**
-	 * Returns the human-readable description of this event.
-	 *
+	 * Returns the full title for this notification, e.g. for use with e-mails.
+	 * 
 	 * @return	string
 	 */
-	public function getDescription();
+	public function getEmailTitle();
+	
+	/**
+	 * Returns the message for this notification event.
+	 *
+	 * @param	wcf\system\user\notification\type\IUserNotificationType	$notificationType
+	 * @return	string
+	 */
+	public function getEmailMessage(IUserNotificationType $notificationType);
 	
 	/**
 	 * Returns the author id for this notification event.

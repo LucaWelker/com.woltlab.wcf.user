@@ -10,9 +10,9 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  * Provides default a implementation for user notification events.
  *
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2011 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf.notification
+ * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.event
  * @category 	Community Framework
  */
@@ -106,5 +106,19 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	 */
 	public function isVisible() {
 		return true;
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailTitle()
+	 */
+	public function getEmailTitle() {
+		return $this->getTitle();
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailMessage()
+	 */
+	public function getEmailMessage(IUserNotificationType $notificationType) {
+		return $this->getMessage();
 	}
 }

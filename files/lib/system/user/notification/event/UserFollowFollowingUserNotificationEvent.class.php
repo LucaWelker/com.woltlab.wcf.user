@@ -4,25 +4,28 @@ use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\WCF;
 
+/**
+ * Notification event for followers.
+ * 
+ * @author	Alexander Ebert
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	system.user.notification.event
+ * @category 	Community Framework
+ */
 class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationEvent {
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
 	 */
-	public function getMessage(IUserNotificationType $notificationType) {
-		return '';
-	}
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getShortOutput()
-	 */
-	public function getShortOutput() {
+	public function getTitle() {
 		return WCF::getLanguage()->get('wcf.user.notification.follow.shortOutput');
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getOutput()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
 	 */
-	public function getOutput() {
+	public function getMessage() {
 		return WCF::getLanguage()->getDynamicVariable('wcf.user.notification.follow.output', array('author' => $this->author));
 	}
 	
@@ -33,24 +36,10 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 		WCF::getTPL()->assign(array(
 			'author' => $this->author,
 			'buttons' => $this->getActions(),
-			'message' => $this->getOutput(),
+			'message' => $this->getMessage(),
 			'time' => $this->userNotificationObject->time
 		));
 		
 		return WCF::getTPL()->fetch('userNotificationDetails');
-	}
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
-	 */
-	public function getTitle() {
-		return '';
-	}
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getDescription()
-	 */
-	public function getDescription() {
-		return '';
 	}
 }

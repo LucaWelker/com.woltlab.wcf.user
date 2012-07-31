@@ -13,9 +13,9 @@ use wcf\util\StringUtil;
  * A notification type for sending mail notifications.
  *
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2011 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf.notification
+ * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.type
  * @category 	Community Framework
  */
@@ -25,11 +25,11 @@ class MailUserNotificationType extends AbstractObjectTypeProcessor implements IU
 	 */
         public function send(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
                 // get message
-		$message = $event->getMessage($this, array(
+		$message = $event->getEmailMessage($this, array(
 			'user' => $user,
 			'pageURL' => FileUtil::addTrailingSlash(PAGE_URL)
                 ));
-
+		
                 // append notification mail footer
 		$token = $user->notificationMailToken;
 		if (!$token) {
@@ -44,15 +44,15 @@ class MailUserNotificationType extends AbstractObjectTypeProcessor implements IU
 			'token' => $token,
 			'notification' => $notification
                 ));
-
-                // use short output as mail subject and strip its HTML
-		$shortMessage = StringUtil::stripHTML($notification->shortOutput);
-
+		
+                // use email title and strip its HTML
+		$subject = StringUtil::stripHTML($event->getEmailTitle());
+		
 		// build mail
-		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.subject', array('title' => $shortMessage)), $message);
+		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.subject', array('title' => $subject)), $message);
                 $mail->send();
         }
-
+	
 	/**
 	 * @see wcf\system\user\notification\type\IUserNotificationType::revoke()
 	 */
