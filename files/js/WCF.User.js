@@ -1632,13 +1632,20 @@ WCF.Notification.Loader.prototype = {
 	 * @param	jQuery		jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
-		$('#userNotifications span.wcf-badge').text(data.returnValues.count);
+		var $badge = $('#userNotifications > .dropdownToggle > .badge');
 		
 		if (!data.returnValues.count) {
 			this._container.find('div.scrollableItems div:eq(0)').html('<p>' + WCF.Language.get('wcf.user.notification.noNotifications') + '</p>');
+			$badge.remove();
 			
 			return;
 		}
+		
+		// update badge count
+		if (!$badge.length) {
+			$badge = $('<span class="badge badgeInverse" />').appendTo($('#userNotifications > .dropdownToggle'));
+		}
+		$badge.text(data.returnValues.totalCount);
 		
 		// create list container
 		this._container.find('div.scrollableItems div:eq(0)').html('<ul></ul>');

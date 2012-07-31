@@ -34,11 +34,11 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 */	
 	public function load() {
 		$returnValues = UserNotificationHandler::getInstance()->getNotifications();
+		$returnValues['totalCount'] = UserNotificationHandler::getInstance()->getNotificationCount();
+		
 		// check if additional notifications are available
-		if ($returnValues['count'] == 5) {
-			if ($returnValues['count'] < UserNotificationHandler::getInstance()->getNotificationCount()) {
-				$returnValues['showAllLink'] = LinkHandler::getInstance()->getLink('NotificationList');
-			}
+		if ($returnValues['count'] < $returnValues['totalCount']) {
+			$returnValues['showAllLink'] = LinkHandler::getInstance()->getLink('NotificationList');
 		}
 		
 		return $returnValues;

@@ -24,7 +24,7 @@
 	
 	<!-- user notifications -->
 	<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span> <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></a>
+		<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount() > 0} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
 		<div class="dropdownMenu userNotificationContainer">
 			<div id="userNotificationContainer" class="scrollableContainer">
 				<div class="scrollableItems cleafix">
