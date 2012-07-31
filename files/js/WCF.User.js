@@ -1432,8 +1432,18 @@ WCF.Notification.Handler.prototype = {
 	
 	/**
 	 * Displays list of notification items.
+	 * 
+	 * @param	object		event
 	 */
-	showList: function() {
+	showList: function(event) {
+		if (event) {
+			// do not trigger API if clicking on a link
+			if ($(event.target).getTagName() === 'a') {
+				return;
+			}
+		}
+		
+		this._container.stop();
 		this._api.prev();
 		
 		var $listHeight = this._listContainer.getDimensions();
