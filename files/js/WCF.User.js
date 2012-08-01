@@ -1632,18 +1632,25 @@ WCF.Notification.Loader.prototype = {
 	 * @param	jQuery		jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
-		var $badge = $('#userNotifications > .dropdownToggle > .badge');
+		var $userNotifications = $('#userNotifications');
+		var $dropdownToggle = $userNotifications.children('.dropdownToggle');
+		var $badge = $dropdownToggle.children('.badge');
 		
+		// revert to a simple link
 		if (!data.returnValues.count) {
-			this._container.find('div.scrollableItems div:eq(0)').html('<p>' + WCF.Language.get('wcf.user.notification.noNotifications') + '</p>');
+			// remove badge
 			$badge.remove();
+			
+			// create new link
+			$('<li><a href="' + $userNotifications.data('link') + '" title="' + $dropdownToggle.children('span').text() + '" class="jsTooltip">' + $dropdownToggle.html() + '</a></li>').insertBefore($userNotifications);
+			$userNotifications.remove();
 			
 			return;
 		}
 		
 		// update badge count
 		if (!$badge.length) {
-			$badge = $('<span class="badge badgeInverse" />').appendTo($('#userNotifications > .dropdownToggle'));
+			$badge = $('<span class="badge badgeInverse" />').appendTo($dropdownToggle);
 		}
 		$badge.text(data.returnValues.totalCount);
 		
@@ -1662,11 +1669,8 @@ WCF.Notification.Loader.prototype = {
 		// execute callback
 		this._callback($notificationList);
 		
-		// if more than 5 notifications are available, display a "show all" link
-		if (data.returnValues.showAllLink) {
-			//$('<li class="dropdownDivider" />').appendTo($notificationList);
-			$('<li class="dropdownDivider"><a href="' + data.returnValues.showAllLink + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
-		}
+		// display a "show all" link
+		$('<li class="dropdownDivider"><a href="' + $userNotifications.data('link') + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
 	}
 };
 
