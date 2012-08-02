@@ -57,14 +57,14 @@ class DashboardHandler extends SingletonFactory {
 	 * @param	wcf\page\IPage	$page
 	 */
 	public function loadBoxes($objectType, IPage $page) {
-		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', $objectType);
-		if ($objectType === null) {
+		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', $objectType);
+		if ($objectTypeObj === null) {
 			throw new SystemException("Unable to find object type '".$objectType."' for definition 'com.woltlab.wcf.user.dashboardContainer'");
 		}
 		
 		$boxIDs = array();
-		if (isset($this->pageCache[$objectType->objectTypeID]) && is_array($this->pageCache[$objectType->objectTypeID])) {
-			foreach ($this->pageCache[$objectType->objectTypeID] as $boxID) {
+		if (isset($this->pageCache[$objectTypeObj->objectTypeID]) && is_array($this->pageCache[$objectTypeObj->objectTypeID])) {
+			foreach ($this->pageCache[$objectTypeObj->objectTypeID] as $boxID) {
 				$boxIDs[] = $boxID;
 			}
 		}
