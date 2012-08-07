@@ -100,8 +100,6 @@ Your {@PAGE_TITLE|language} team]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
-		<item name="wcf.user.notification.comment.output"><![CDATA[Posted a new comment on <a href="{link controller='User' object=$__wcf->getUser()}#wall{/link}">your wall</a>.</p>]]></item>
-		<item name="wcf.user.notification.comment.shortOutput"><![CDATA[New comment (Wall)]]></item>
 		<item name="wcf.user.notification.com.woltlab.wcf.notification.notificationType.mail"><![CDATA[E-mail]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "No notifications" } else if (data.returnValues.count == 1) { "One notification" } else { data.returnValues.count + " notifications" }]]></item>
 		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> follows you.]]></item>

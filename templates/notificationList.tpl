@@ -35,16 +35,16 @@
 				{foreach from=$notifications[notifications] item=$notification}
 					<li class="jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
 						<div class="box48">
-							<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="framed jsTooltip">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
+							<a href="{link controller='User' object=$notification[author]}{/link}" class="framed">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
 							<hgroup>
-								<h1><a href="{link controller='User' object=$notification[author]}{/link}">{$notification[author]->username}</a><small> - {@$notification[time]|time}</small></h1>
+								<h1><a href="{link controller='User' object=$notification[author]}{/link}" class="userLink" data-user-id="{@$notification[author]->userID}">{$notification[author]->username}</a><small> - {@$notification[time]|time}</small></h1>
 							</hgroup>
 							
 							<p>{@$notification[message]}</p>
 							
 							<ul class="jsNotificationAction" data-notification-id="{@$notification[notificationID]}">
 								{foreach from=$notification[buttons] item=button}
-									<li class="button" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
+									<li class="button small" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
 								{/foreach}
 							</ul>
 						</div>
