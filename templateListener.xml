@@ -30,14 +30,14 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptLanguageImport</eventname>
-			<templatecode><![CDATA[,'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}','wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}']]></templatecode>
+			<templatecode><![CDATA[,'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}','wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}', 'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}']]></templatecode>
 		</templatelistener>
 
 		<templatelistener name="javascriptInit">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInit</eventname>
-			<templatecode><![CDATA[new WCF.Notification.Handler();
+			<templatecode><![CDATA[{if $__wcf->getUserNotificationHandler()->getNotificationCount()}new WCF.Notification.Handler();{/if}
 new WCF.User.ProfilePreview()]]></templatecode>
 		</templatelistener>
 		

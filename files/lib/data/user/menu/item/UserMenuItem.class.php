@@ -1,6 +1,8 @@
 <?php
 namespace wcf\data\user\menu\item;
-use wcf\data\DatabaseObject;
+use wcf\data\ProcessibleDatabaseObject;
+use wcf\system\application\ApplicationHandler;
+use wcf\system\menu\user\DefaultUserMenuItemProvider;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\request\LinkHandler;
 
@@ -14,7 +16,7 @@ use wcf\system\request\LinkHandler;
  * @subpackage	data.user.menu.item
  * @category 	Community Framework
  */
-class UserMenuItem extends DatabaseObject implements ITreeMenuItem {
+class UserMenuItem extends ProcessibleDatabaseObject implements ITreeMenuItem {
 	/**
 	 * @see	wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -26,9 +28,32 @@ class UserMenuItem extends DatabaseObject implements ITreeMenuItem {
 	protected static $databaseTableIndexName = 'menuItemID';
 	
 	/**
+	 * @see wcf\data\ProcessibleDatabaseObject::$processorInterface
+	 */
+	protected static $processorInterface = 'wcf\system\menu\user\IUserMenuItemProvider';
+	
+	/**
+	 * @see wcf\data\ProcessibleDatabaseObject::getProcessor()
+	 */
+	public function getProcessor() {
+		if (parent::getProcessor() === null) {
+			$this->processor = new DefaultUserMenuItemProvider($this);
+		}
+		
+		return $this->processor;
+	}
+	
+	/**
 	 * @see wcf\system\menu\ITreeMenuItem::getLink()
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink(null, array(), $this->menuItemLink);
+		$abbreviation = ApplicationHandler::getInstance()->getAbbreviation($this->packageID);
+		
+		$parameters = array();
+		if ($abbreviation) {
+			$parameters['application'] = $abbreviation;
+		}
+		
+		return LinkHandler::getInstance()->getLink(null, $parameters, $this->menuItemLink);
 	}
 }

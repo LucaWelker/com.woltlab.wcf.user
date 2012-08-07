@@ -385,14 +385,14 @@ class UserNotificationHandler extends SingletonFactory {
 					'author' => $class->getAuthor(),
 					'buttons' => $class->getActions(),
 					'notificationID' => $event['notificationID'],
-					'message' => $class->getOutput(),
+					'message' => $class->getMessage(),
 					'time' => $event['time']
 				);
 			}
 			else {
 				WCF::getTPL()->assign(array(
 					'author' => $class->getAuthor(),
-					'label' => $class->getShortOutput(),
+					'label' => $class->getTitle(),
 					'time' => $event['time']
 				));
 				

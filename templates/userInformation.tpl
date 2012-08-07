@@ -13,7 +13,7 @@
 	{if $user->homepage}
 		<li><a class="jsTooltip" href="{@$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}"><img src="{icon}home{/icon}" alt="" /></a></li>
 	{/if}
-	{if $user->userID != $__wcf->user->userID}
+	{if $__wcf->user->userID && $user->userID != $__wcf->user->userID}
 		{if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}
 			<li><a data-following="1" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.unfollow{/lang}"><img src="{icon size='S'}remove{/icon}" alt="" class="icon16" /></a></li>
 		{else}

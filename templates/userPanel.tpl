@@ -23,21 +23,27 @@
 	</li>
 	
 	<!-- user notifications -->
-	<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span> <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></a>
-		<div class="dropdownMenu userNotificationContainer">
-			<div id="userNotificationContainer" class="scrollableContainer">
-				<div class="scrollableItems cleafix">
-					<div>
-						<p>{lang}wcf.global.loading{/lang}</p>
-					</div>
-					<div>
-						<p>{lang}wcf.global.loading{/lang}</p>
+	{if $__wcf->getUserNotificationHandler()->getNotificationCount()}
+		<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
+			<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount() > 0} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+			<div class="dropdownMenu userNotificationContainer">
+				<div id="userNotificationContainer" class="scrollableContainer">
+					<div class="scrollableItems cleafix">
+						<div>
+							<p>{lang}wcf.global.loading{/lang}</p>
+						</div>
+						<div>
+							<p>{lang}wcf.global.loading{/lang}</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</li>
+		</li>
+	{else}
+		<li>
+			<a class="jsTooltip" href="{link controller='NotificationList'}{/link}" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span></a>
+		</li>
+	{/if}
 	
 	<!-- testing: -->
 	<li>

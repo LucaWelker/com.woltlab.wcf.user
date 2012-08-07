@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\menu\user;
 use wcf\system\cache\CacheHandler;
+use wcf\system\menu\ITreeMenuItem;
 use wcf\system\menu\TreeMenu;
 
 /**
@@ -27,5 +28,14 @@ class UserMenu extends TreeMenu {
 			'wcf\system\cache\builder\UserMenuCacheBuilder'
 		);
 		$this->menuItems = CacheHandler::getInstance()->get($cacheName);
+	}
+	
+	/**
+	 * @see wcf\system\menu\TreeMenu::checkMenuItem()
+	 */
+	protected function checkMenuItem(ITreeMenuItem $item) {
+		if (!parent::checkMenuItem($item)) return false;
+		
+		return $item->getProcessor()->isVisible();
 	}
 }

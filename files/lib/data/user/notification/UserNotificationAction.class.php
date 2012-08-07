@@ -2,6 +2,7 @@
 namespace wcf\data\user\notification;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\ValidateActionException;
+use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
 
@@ -32,7 +33,15 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 * @return	array<array>
 	 */	
 	public function load() {
-		return UserNotificationHandler::getInstance()->getNotifications();
+		$returnValues = UserNotificationHandler::getInstance()->getNotifications();
+		$returnValues['totalCount'] = UserNotificationHandler::getInstance()->getNotificationCount();
+		
+		// check if additional notifications are available
+		if ($returnValues['count'] < $returnValues['totalCount']) {
+			$returnValues['showAllLink'] = LinkHandler::getInstance()->getLink('NotificationList');
+		}
+		
+		return $returnValues;
 	}
 	
 	/**

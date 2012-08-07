@@ -1432,8 +1432,18 @@ WCF.Notification.Handler.prototype = {
 	
 	/**
 	 * Displays list of notification items.
+	 * 
+	 * @param	object		event
 	 */
-	showList: function() {
+	showList: function(event) {
+		if (event) {
+			// do not trigger API if clicking on a link
+			if ($(event.target).getTagName() === 'a') {
+				return;
+			}
+		}
+		
+		this._container.stop();
 		this._api.prev();
 		
 		var $listHeight = this._listContainer.getDimensions();
@@ -1622,13 +1632,27 @@ WCF.Notification.Loader.prototype = {
 	 * @param	jQuery		jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
-		$('#userNotifications span.wcf-badge').text(data.returnValues.count);
+		var $userNotifications = $('#userNotifications');
+		var $dropdownToggle = $userNotifications.children('.dropdownToggle');
+		var $badge = $dropdownToggle.children('.badge');
 		
+		// revert to a simple link
 		if (!data.returnValues.count) {
-			this._container.find('div.scrollableItems div:eq(0)').html('<p>' + WCF.Language.get('wcf.user.notification.noNotifications') + '</p>');
+			// remove badge
+			$badge.remove();
+			
+			// create new link
+			$('<li><a href="' + $userNotifications.data('link') + '" title="' + $dropdownToggle.children('span').text() + '" class="jsTooltip">' + $dropdownToggle.html() + '</a></li>').insertBefore($userNotifications);
+			$userNotifications.remove();
 			
 			return;
 		}
+		
+		// update badge count
+		if (!$badge.length) {
+			$badge = $('<span class="badge badgeInverse" />').appendTo($dropdownToggle);
+		}
+		$badge.text(data.returnValues.totalCount);
 		
 		// create list container
 		this._container.find('div.scrollableItems div:eq(0)').html('<ul></ul>');
@@ -1644,6 +1668,9 @@ WCF.Notification.Loader.prototype = {
 		
 		// execute callback
 		this._callback($notificationList);
+		
+		// display a "show all" link
+		$('<li class="dropdownDivider"><a href="' + $userNotifications.data('link') + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
 	}
 };
 
