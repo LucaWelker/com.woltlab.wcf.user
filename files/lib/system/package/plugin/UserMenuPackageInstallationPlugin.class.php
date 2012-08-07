@@ -26,4 +26,18 @@ class UserMenuPackageInstallationPlugin extends AbstractMenuPackageInstallationP
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::$tagName
 	 */	
 	public $tagName = 'usermenuitem';
+	
+	/**
+	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::prepareImport()
+	 */
+	protected function prepareImport(array $data) {
+		$result = parent::prepareImport($data);
+		
+		// class name
+		if (!empty($data['elements']['classname'])) {
+			$result['className'] = $data['elements']['classname'];
+		}
+		
+		return $result;
+	}
 }
