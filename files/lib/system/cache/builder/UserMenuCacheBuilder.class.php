@@ -88,7 +88,7 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 			
 			// get needed menu items and build item tree
 			$sql = "SELECT		packageID, menuItem, parentMenuItem,
-						menuItemLink, permissions, options
+						menuItemLink, permissions, options, className
 				FROM		wcf".WCF_N."_user_menu_item
 				".$conditions."
 				ORDER BY	showOrder ASC";
