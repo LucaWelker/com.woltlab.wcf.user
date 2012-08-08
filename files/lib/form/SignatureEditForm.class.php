@@ -22,6 +22,11 @@ class SignatureEditForm extends MessageForm {
 	public $loginRequired = true;
 	
 	/**
+	 * @see wcf\page\AbstractPage::$templateName
+	 */
+	public $templateName = 'signatureEdit';
+	
+	/**
 	 * parsed signature cache
 	 * @var	string
 	 */
