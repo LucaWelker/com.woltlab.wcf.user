@@ -1,7 +1,6 @@
 <?php
 namespace wcf\form;
 use wcf\data\user\UserEditor;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\menu\user\UserMenu;
@@ -22,6 +21,11 @@ use wcf\util\UserUtil;
  * @category	Community Framework
  */
 class AccountManagementForm extends AbstractSecureForm {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * user password
 	 * @var string
@@ -202,10 +206,6 @@ class AccountManagementForm extends AbstractSecureForm {
 	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-		
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.profile.accountManagement');
 		

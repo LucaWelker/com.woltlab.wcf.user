@@ -1,7 +1,6 @@
 <?php
 namespace wcf\form;
 use wcf\data\user\UserAction;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\option\user\UserOptionHandler;
@@ -21,6 +20,11 @@ use wcf\util\ArrayUtil;
  * @category 	Community Framework
  */
 class SettingsForm extends AbstractForm {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * user option handler
 	 * @var	wcf\system\option\user\UserOptionHandler
@@ -211,10 +215,6 @@ class SettingsForm extends AbstractForm {
 	 * @see wcf\page\Page::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-	
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.option.category.settings.'.$this->category);
 	

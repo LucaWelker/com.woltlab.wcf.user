@@ -5,12 +5,17 @@ use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
+/**
+ * Shows the global recent activity list page.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	page
+ * @category	Community Framework
+ */
 class RecentActivityListPage extends MultipleLinkPage {
-	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
-	 */
-	// public $neededPermissions = array('admin.user.canEditGroup', 'admin.user.canDeleteGroup');
-	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */	

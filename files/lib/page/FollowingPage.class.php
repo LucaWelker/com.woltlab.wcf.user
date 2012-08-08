@@ -1,12 +1,11 @@
 <?php
 namespace wcf\page;
 use wcf\data\user\follow\UserFollowingList;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
 /**
- * Shows the following page.
+ * Shows a list with all users the active user is following.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
@@ -16,6 +15,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class FollowingPage extends AbstractPage {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * list of following users
 	 * @var	wcf\data\user\follow\UserFollowingList
@@ -51,10 +55,6 @@ class FollowingPage extends AbstractPage {
 	 * @see wcf\page\Page::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-		
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.following');
 		
