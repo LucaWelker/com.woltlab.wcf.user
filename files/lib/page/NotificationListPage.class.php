@@ -1,12 +1,11 @@
 <?php
 namespace wcf\page;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
 
 /**
- * Shows the notification list page.
+ * Shows a list with outstanding notifications of the active user.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
@@ -16,6 +15,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class NotificationListPage extends AbstractPage {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * list of outstanding notifications
 	 * @var	array<array>
@@ -46,10 +50,6 @@ class NotificationListPage extends AbstractPage {
 	 * @see wcf\page\Page::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-		
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.notification');
 		

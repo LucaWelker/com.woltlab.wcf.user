@@ -1,12 +1,11 @@
 <?php
 namespace wcf\page;
 use wcf\data\user\ignore\UserIgnoreList;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
 /**
- * Shows the ignored users page.
+ * Shows a list with all users the active user ignores.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
@@ -16,6 +15,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class IgnoredUsersPage extends AbstractPage {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * list of ignored users
 	 * @var	wcf\data\user\ignore\UserIgnoreList
@@ -51,10 +55,6 @@ class IgnoredUsersPage extends AbstractPage {
 	 * @see wcf\page\Page::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-		
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.community.ignoredUsers');
 		
