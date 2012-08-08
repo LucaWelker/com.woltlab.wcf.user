@@ -18,6 +18,11 @@ use wcf\system\WCF;
  */
 class SignatureEditForm extends MessageForm {
 	/**
+	 * @see wcf\page\AbstractPage::$templateName
+	 */
+	public $templateName = 'signatureEdit';
+	
+	/**
 	 * parsed signature cache
 	 * @var	string
 	 */
