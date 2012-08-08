@@ -51,11 +51,13 @@
 				</dd>
 			</dl>
 			
-			<dl>
-				<dt>{lang}wcf.user.login.action{/lang}</dt>
-				<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
-				<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
-			</dl>
+			{if !REGISTER_DISABLED}
+				<dl>
+					<dt>{lang}wcf.user.login.action{/lang}</dt>
+					<dd><label><input type="radio" name="action" value="register" /> {lang}wcf.user.login.action.register{/lang}</label></dd>
+					<dd><label><input type="radio" name="action" value="login" checked="checked" /> {lang}wcf.user.login.action.login{/lang}</label></dd>
+				</dl>
+			{/if}
 			
 			<dl{if $errorField == 'password'} class="formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
