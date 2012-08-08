@@ -1,7 +1,6 @@
 <?php
 namespace wcf\form;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
@@ -17,6 +16,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class NotificationSettingsForm extends AbstractForm {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * list of notification events
 	 * @var	array<array>
@@ -165,10 +169,6 @@ class NotificationSettingsForm extends AbstractForm {
 	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-		
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.settings.notification');
 		

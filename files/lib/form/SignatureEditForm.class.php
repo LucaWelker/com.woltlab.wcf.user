@@ -2,7 +2,6 @@
 namespace wcf\form;
 use wcf\data\user\UserAction;
 use wcf\system\bbcode\MessageParser;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
@@ -17,6 +16,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class SignatureEditForm extends MessageForm {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * @see wcf\page\AbstractPage::$templateName
 	 */
@@ -87,10 +91,6 @@ class SignatureEditForm extends MessageForm {
 	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {
-		if (!WCF::getUser()->userID) {
-			throw new PermissionDeniedException();
-		}
-		
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.profile.signature');
 		
