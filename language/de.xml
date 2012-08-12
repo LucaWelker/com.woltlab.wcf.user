@@ -211,6 +211,15 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Der Benutzername wurde innerhalb der letzten {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} Tage bereits einmal verändert.]]></item>
 	</category>
 	
+	<category name="wcf.user.avatar">
+		<item name="wcf.user.avatar.type.custom"><![CDATA[Eigenen Avatar hochladen]]></item>
+		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen gif, jpg, jpeg und png und maximal eine Größe von {#$__wcf->session->getPermission('user.profile.avatar.maxWidth')}*{#$__wcf->session->getPermission('user.profile.avatar.maxHeight')} Pixel und {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Größere Avatare werden automatisch auf die Maximalgröße verkleinert.]]></item>
+		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
+		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
+		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
+		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse (&bdquo;{$__wcf->user->email}&ldquo;) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com">www.gravatar.com</a>]]></item>
+	</category>
+	
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.com.woltlab.wcf.notification.notificationType.mail"><![CDATA[E-Mail]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>

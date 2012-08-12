@@ -15,6 +15,8 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class UserAvatar extends DatabaseObject implements IUserAvatar {
+	public static $avatarThumbnailSizes = array(16, 24, 32, 48, 96, 128);
+	
 	/**
 	 * @see	wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -26,10 +28,34 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	protected static $databaseTableIndexName = 'avatarID';
 	
 	/**
+	 * Returns the physical location of this avatar.
+	 * 
+	 * @param	integer		$size
+	 * @return string
+	 */
+	public function getLocation($size = null) {
+		return WCF_DIR . 'images/avatars/' . $this->getFilename($size);
+	}
+	
+	/**
+	 * Returns the file name of this avatar.
+	 * 
+	 * @param	integer		$size
+	 * @return	string
+	 */
+	public function getFilename($size = null) {
+		return substr($this->fileHash, 0, 2) . '/' . ($this->avatarID) . '-' . $this->fileHash . ($size !== null ? ('-' . $size) : '') . '.' . $this->avatarExtension;
+	}
+	
+	/**
 	 * @see	wcf\data\user\avatar\IUserAvatar::getURL()
 	 */
 	public function getURL($size = null) {
-		return RELATIVE_WCF_DIR . 'images/avatars/avatar-' . $this->avatarID . '.' . StringUtil::encodeHTML($this->avatarExtension);
+		if ($size !== null) {
+			
+		}
+		
+		return WCF::getPath() . 'images/avatars/' . $this->getFilename($size);
 	}
 	
 	/**
@@ -54,7 +80,7 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 			}
 		}
 		
-		return '<img src="'.$this->getURL($size).'" style="width: '.$width.'px; height: '.$height.'px" alt="'.WCF::getLanguage()->get('wcf.user.avatar.alt').'" />';
+		return '<img src="'.StringUtil::encodeHTML($this->getURL($size)).'" style="width: '.$width.'px; height: '.$height.'px" alt="'.WCF::getLanguage()->get('wcf.user.avatar.alt').'" />';
 	}
 	
 	/**

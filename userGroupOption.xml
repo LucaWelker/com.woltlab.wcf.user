@@ -17,6 +17,10 @@
 			<category name="user.signature">
 				<parent>user.community</parent>
 			</category>
+			
+			<category name="user.profile.avatar">
+				<parent>user.profile</parent>
+			</category>
 		</categories>
 		
 		<options>
@@ -69,6 +73,26 @@
 				<categoryname>user.profile</categoryname>
 				<optiontype>inverseInteger</optiontype>
 				<defaultvalue>182</defaultvalue>
+			</option>
+			
+			<option name="user.profile.avatar.canUploadAvatar">
+				<categoryname>user.profile.avatar</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<enableoptions>user.profile.avatar.maxWidth,user.profile.avatar.maxHeight,user.profile.avatar.maxSize,user.profile.avatar.allowedFileExtensions</enableoptions>
+			</option>
+			<option name="user.profile.avatar.maxSize">
+				<categoryname>user.profile.avatar</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>40000</defaultvalue>
+			</option>
+			<option name="user.profile.avatar.allowedFileExtensions">
+				<categoryname>user.profile.avatar</categoryname>
+				<optiontype>textarea</optiontype>
+				<defaultvalue><![CDATA[gif
+jpg
+jpeg
+png]]></defaultvalue>
 			</option>
 			<!-- /user.profile -->
 		</options>

@@ -16,7 +16,7 @@ use wcf\system\WCF;
  * @category 	Community Framework
  * @see		http://www.gravatar.com
  */
-class Gravatar implements IUserAvatar {
+class Gravatar extends DefaultAvatar {
 	/**
 	 * gravatar base url
 	 * @var string
@@ -42,12 +42,6 @@ class Gravatar implements IUserAvatar {
 	public $gravatar = '';
 
 	/**
-	 * size of the gravatar
-	 * @var integer
-	 */
-	public $size = 150;
-	
-	/**
 	 * urls of this gravatar
 	 * @var array<string>
 	 */
@@ -72,19 +66,19 @@ class Gravatar implements IUserAvatar {
 			// try to use cached gravatar
 			$cachedFilename = sprintf(self::GRAVATAR_CACHE_LOCATION, md5(StringUtil::toLowerCase($this->gravatar)), $size);
 			if (file_exists(WCF_DIR.$cachedFilename) && filemtime(WCF_DIR.$cachedFilename) > (TIME_NOW - (self::GRAVATAR_CACHE_EXPIRE * 86400))) {
-				$this->url[$size] = RELATIVE_WCF_DIR.$cachedFilename;
+				$this->url[$size] = WCF::getPath().$cachedFilename;
 			}
 			else {
-				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($this->gravatar)), $size, 'mm');
+				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($this->gravatar)), $size, '404');
 				try {
 					$tmpFile = FileUtil::downloadFileFromHttp($gravatarURL, 'gravatar');
 					copy($tmpFile, WCF_DIR.$cachedFilename);
 					@unlink($tmpFile);
 					@chmod(WCF_DIR.$cachedFilename, 0777);
-					$this->url[$size] = RELATIVE_WCF_DIR.$cachedFilename;
+					$this->url[$size] = WCF::getPath().$cachedFilename;
 				}
 				catch (SystemException $e) {
-					$this->url[$size] = RELATIVE_WCF_DIR . 'images/avatars/avatar-default.png';
+					$this->url[$size] = parent::getURL();
 				}
 			}
 		}
@@ -93,25 +87,20 @@ class Gravatar implements IUserAvatar {
 	}
 	
 	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::getImageTag()
+	 * Checks a given email address for gravatar support.
+	 * 
+	 * @param	string		$email
+	 * @return	boolean
 	 */
-	public function getImageTag($size = null) {
-		if ($size === null) $size = $this->size;
-		
-		return '<img src="'.$this->getURL($size).'" style="width: '.$size.'px; height: '.$size.'px" alt="'.WCF::getLanguage()->get('wcf.user.avatar.alt').'" />';
-	}
-	
-	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::getWidth()
-	 */
-	public function getWidth() {
-		return $this->size;
-	}
-	
-	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::getHeight()
-	 */
-	public function getHeight() {
-		return $this->size;
+	public static function test($email) {
+		$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($email)), 80, '404');
+		try {
+			$tmpFile = FileUtil::downloadFileFromHttp($gravatarURL, 'gravatar');
+			@unlink($tmpFile);
+			return true;
+		}
+		catch (SystemException $e) {
+			return false;
+		}
 	}
 }

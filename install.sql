@@ -10,6 +10,7 @@ ALTER TABLE wcf1_user ADD registrationIpAddress VARCHAR(39) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD avatarID INT(10);
 ALTER TABLE wcf1_user ADD disableAvatar TINYINT(1) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD disableAvatarReason TEXT;
+ALTER TABLE wcf1_user ADD enableGravatar TINYINT(1) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD signature TEXT;
 ALTER TABLE wcf1_user ADD signatureCache TEXT;
 ALTER TABLE wcf1_user ADD signatureEnableBBCodes TINYINT(1) NOT NULL DEFAULT 1;
@@ -42,24 +43,12 @@ CREATE TABLE wcf1_dashboard_option (
 DROP TABLE IF EXISTS wcf1_user_avatar;
 CREATE TABLE wcf1_user_avatar (
 	avatarID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	avatarCategoryID INT(10),
 	avatarName VARCHAR(255) NOT NULL DEFAULT '',
 	avatarExtension VARCHAR(7) NOT NULL DEFAULT '',
 	width SMALLINT(5) NOT NULL DEFAULT 0,
 	height SMALLINT(5) NOT NULL DEFAULT 0,
-	groupID INT(10),
-	neededPoints INT(10) NOT NULL DEFAULT 0,
-	userID INT(10)
-);
-
--- avatar categories
-DROP TABLE IF EXISTS wcf1_user_avatar_category;
-CREATE TABLE wcf1_user_avatar_category (
-	avatarCategoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	title VARCHAR(255) NOT NULL DEFAULT '',
-	showOrder MEDIUMINT(5) NOT NULL DEFAULT 0,
-	groupID INT(10),
-	neededPoints INT(10) NOT NULL DEFAULT 0
+	userID INT(10),
+	fileHash VARCHAR(40) NOT NULL DEFAULT ''
 );
 
 -- follower list
@@ -222,11 +211,7 @@ ALTER TABLE wcf1_dashboard_option ADD FOREIGN KEY (boxID) REFERENCES wcf1_dashbo
 
 ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
 
-ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (avatarCategoryID) REFERENCES wcf1_user_avatar_category (avatarCategoryID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
 ALTER TABLE wcf1_user_avatar ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-
-ALTER TABLE wcf1_user_avatar_category ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_follow ADD FOREIGN KEY (followUserID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;

@@ -2144,3 +2144,27 @@ WCF.User.Action.Ignore = Class.extend({
 		}, this));
 	}
 });
+
+/**
+ * Namespace for avatar functions.
+ */
+WCF.User.Avatar = {};
+
+/**
+ * Avatar upload function
+ * 
+ * @see	WCF.Upload
+ */
+WCF.User.Avatar.Upload = WCF.Upload.extend({
+	init: function(buttonSelector) {
+		this._super($('#avatarUpload > dd > div'), undefined, 'wcf\\data\\user\\avatar\\UserAvatarAction');
+	},
+	
+	_initFile: function(file) {
+		return $('#avatarUpload > dt > image');
+	},
+	
+	_success: function(uploadID, data) {
+		console.debug(data);
+	}
+});

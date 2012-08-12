@@ -1,5 +1,6 @@
 <?php
 namespace wcf\data\user;
+use wcf\data\user\avatar\DefaultAvatar;
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\DatabaseObjectDecorator;
@@ -8,9 +9,6 @@ use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 use wcf\util\StringUtil;
-
-define('MODULE_AVATAR', 1);
-define('MODULE_GRAVATAR', 1);
 
 /**
  * Decorates the user object and provides functions to retrieve data for user profiles.
@@ -239,13 +237,33 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */ 
 	public function getAvatar() {
 		if ($this->avatar === null) {
-			if (MODULE_AVATAR && !$this->disableAvatar && (!WCF::getUser()->userID || true/*WCF::getUser()->showAvatar*/) && ($this->userID == WCF::getUser()->userID || true /*WCF::getUser()->getPermission('user.profile.avatar.canViewAvatar')*/)) {
+			if (!$this->disableAvatar) {
 				if ($this->avatarID) {
-					$this->avatar = new UserAvatar(null, $this->data);
+					if (!$this->fileHash) {
+						// load storage data
+						UserStorageHandler::getInstance()->loadStorage(array($this->userID));
+						$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'avatar');
+						
+						if ($data[$this->userID] === null) {
+							$this->avatar = new UserAvatar($this->avatarID);
+							UserStorageHandler::getInstance()->update($this->userID, 'avatar', serialize($this->avatar), 1);
+						}
+						else {
+							$this->avatar = unserialize($data[$this->userID]);
+						}
+					}
+					else {
+						$this->avatar = new UserAvatar(null, $this->getDecoratedObject()->data);
+					}
 				}
-				else if (MODULE_GRAVATAR) {
+				else if (MODULE_GRAVATAR && $this->enableGravatar) {
 					$this->avatar = new Gravatar($this->email);
 				}
+			}
+			
+			// use default avatar
+			if ($this->avatar === null) {
+				$this->avatar = new DefaultAvatar();
 			}
 		}
 		

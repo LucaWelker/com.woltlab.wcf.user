@@ -1,7 +1,7 @@
 {if $__wcf->user->userID}
 	<!-- user menu -->
 	<li id="userMenu" class="dropdown">
-		<a class="dropdownToggle framed" data-toggle="userMenu">{if $__wcf->getUserProfileHandler()->getAvatar()}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)}{/if} {lang}wcf.user.userNote{/lang}</a>
+		<a class="dropdownToggle framed" data-toggle="userMenu">{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)} {lang}wcf.user.userNote{/lang}</a>
 		<ul class="dropdownMenu">
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}" class="box32">
 				<div class="framed">{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(32)}</div>

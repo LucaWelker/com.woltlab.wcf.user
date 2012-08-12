@@ -44,12 +44,10 @@
 
 <nav id="sidebarContent" class="sidebarContent">
 	<ul>
-		{if $user->getAvatar()}
-			<li class="sidebarContainer">
-				<div class="userAvatar">{@$user->getAvatar()->getImageTag()}</div>
-			</li>
-		{/if}
-	
+		<li class="sidebarContainer">
+			<div class="userAvatar">{@$user->getAvatar()->getImageTag()}</div>
+		</li>
+		
 		<li class="sidebarContainer">
 			<dl class="statsDataList">
 				{event name='statistics'}
