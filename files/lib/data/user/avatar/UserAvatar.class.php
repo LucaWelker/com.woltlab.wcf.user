@@ -84,42 +84,6 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	}
 	
 	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::setMaxHeight()
-	 */
-	/*public function setMaxHeight($maxHeight) {
-		if ($this->height > $maxHeight) {
-			$this->data['width'] = round($this->width * $maxHeight / $this->height, 0);
-			$this->data['height'] = $maxHeight;
-			return true;
-		}
-		
-		return false;
-	}*/
-	
-	/**
-	 * @see	wcf\data\user\avatar\IUserAvatar::setMaxSize()
-	 */
-	/*public function setMaxSize($maxWidth, $maxHeight) {
-		if ($this->width > $maxWidth || $this->height > $maxHeight) {
-			$widthFactor = $maxWidth / $this->width;
-			$heightFactor = $maxHeight / $this->height;
-			
-			if ($widthFactor < $heightFactor) {
-				$this->data['width'] = $maxWidth;
-				$this->data['height'] = round($this->height * $widthFactor, 0);
-			}
-			else {
-				$this->data['width'] = round($this->width * $heightFactor, 0);
-				$this->data['height'] = $maxHeight;
-			}
-			
-			return true;
-		}
-		
-		return false;
-	}*/
-	
-	/**
 	 * @see	wcf\data\user\avatar\IUserAvatar::getWidth()
 	 */
 	public function getWidth() {

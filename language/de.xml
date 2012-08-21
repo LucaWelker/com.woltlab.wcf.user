@@ -213,7 +213,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 	
 	<category name="wcf.user.avatar">
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Eigenen Avatar hochladen]]></item>
-		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen gif, jpg, jpeg und png und maximal eine Größe von {#$__wcf->session->getPermission('user.profile.avatar.maxWidth')}*{#$__wcf->session->getPermission('user.profile.avatar.maxHeight')} Pixel und {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Größere Avatare werden automatisch auf die Maximalgröße verkleinert.]]></item>
+		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} und maximal eine Größe {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Die Mindestgröße für Avatare liegt bei 24x24 Pixel, die empfohlene Maximalgröße bei {@MAX_AVATAR_WIDTH}x{@MAX_AVATAR_HEIGHT} Pixel, größere Avatare werden - sofern möglich - automatisch auf die Maximalgröße verkleinert.]]></item>
 		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>

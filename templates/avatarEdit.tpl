@@ -85,9 +85,15 @@
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
-		{*WCF.Language.addObject({
-			
-		});*}
+		WCF.Language.addObject({
+			'wcf.user.avatar.upload.error.invalidExtension': '{lang}wcf.user.avatar.upload.error.invalidExtension{/lang}',
+			'wcf.user.avatar.upload.error.tooSmall': '{lang}wcf.user.avatar.upload.error.tooSmall{/lang}',
+			'wcf.user.avatar.upload.error.tooLarge': '{lang}wcf.user.avatar.upload.error.tooLarge{/lang}',
+			'wcf.user.avatar.upload.error.uploadFailed': '{lang}wcf.user.avatar.upload.error.uploadFailed{/lang}',
+			'wcf.user.avatar.upload.error.badImage': '{lang}wcf.user.avatar.upload.error.badImage{/lang}',
+			'wcf.user.avatar.upload.success': '{lang}wcf.user.avatar.upload.success{/lang}',
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		});
 
 		new WCF.User.Avatar.Upload();
 	});

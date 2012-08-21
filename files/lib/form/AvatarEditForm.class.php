@@ -1,6 +1,7 @@
 <?php
 namespace wcf\form;
 use wcf\data\user\avatar\Gravatar;
+use wcf\data\user\avatar\UserAvatarAction;
 use wcf\data\user\avatar\UserAvatarEditor;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\user\UserEditor;
@@ -76,8 +77,8 @@ class AvatarEditForm extends AbstractForm {
 		if ($this->avatarType != 'custom') {
 			// delete custom avatar
 			if (WCF::getUser()->avatarID) {
-				$avatarEditor = new UserAvatarEditor(new UserAvatar(WCF::getUser()->avatarID));
-				$avatarEditor->delete();
+				$action = new UserAvatarAction(array(WCF::getUser()->avatarID), 'delete');
+				$action->executeAction();
 			}
 		}
 		

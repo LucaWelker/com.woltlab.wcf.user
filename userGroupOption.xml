@@ -79,7 +79,7 @@
 				<categoryname>user.profile.avatar</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<enableoptions>user.profile.avatar.maxWidth,user.profile.avatar.maxHeight,user.profile.avatar.maxSize,user.profile.avatar.allowedFileExtensions</enableoptions>
+				<enableoptions>user.profile.avatar.allowedFileExtensions</enableoptions>
 			</option>
 			<option name="user.profile.avatar.maxSize">
 				<categoryname>user.profile.avatar</categoryname>
