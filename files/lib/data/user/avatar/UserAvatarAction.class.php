@@ -31,7 +31,7 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateUpload() {
 		// check upload permissions
-		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar')) {
+		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar') || WCF::getUser()->disableAvatar) {
 			throw new ValidateActionException('Insufficient permissions');
 		}
 		

@@ -2158,6 +2158,18 @@ WCF.User.Avatar = {};
 WCF.User.Avatar.Upload = WCF.Upload.extend({
 	init: function(buttonSelector) {
 		this._super($('#avatarUpload > dd > div'), undefined, 'wcf\\data\\user\\avatar\\UserAvatarAction');
+		
+		$('#avatarForm input[type=radio]').change(function() {
+			if ($(this).val() == 'custom') {
+				$('#avatarUpload > dd > div').show();
+			}
+			else {
+				$('#avatarUpload > dd > div').hide();
+			}
+		});
+		if (!$('#avatarForm input[type=radio][value=custom]:checked').length) {
+			$('#avatarUpload > dd > div').hide();
+		}
 	},
 	
 	_initFile: function(file) {
@@ -2167,7 +2179,10 @@ WCF.User.Avatar.Upload = WCF.Upload.extend({
 	_success: function(uploadID, data) {
 		if (data.returnValues['url']) {
 			// show avatar
-			$('#avatarUpload > dt > img').attr('src', data.returnValues['url']);
+			$('#avatarUpload > dt > img').attr('src', data.returnValues['url']).css({
+				width: 'auto',
+				height: 'auto'
+			});
 			
 			// hide error
 			$('#avatarUpload > dd > .innerError').remove();

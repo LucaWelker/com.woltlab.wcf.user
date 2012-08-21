@@ -5,6 +5,7 @@ use wcf\data\user\avatar\UserAvatarAction;
 use wcf\data\user\avatar\UserAvatarEditor;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\user\UserEditor;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
@@ -20,6 +21,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class AvatarEditForm extends AbstractForm {
+	/**
+	 * @see wcf\page\AbstractPage::$loginRequired
+	 */
+	public $loginRequired = true;
+	
 	/**
 	 * @see wcf\page\AbstractPage::$templateName
 	 */
@@ -45,6 +51,8 @@ class AvatarEditForm extends AbstractForm {
 	 */
 	public function validate() {
 		parent::validate();
+		
+		if (WCF::getUser()->disableAvatar) throw new PermissionDeniedException();
 		
 		if ($this->avatarType != 'custom' && $this->avatarType != 'gravatar') $this->avatarType = 'none';
 		
