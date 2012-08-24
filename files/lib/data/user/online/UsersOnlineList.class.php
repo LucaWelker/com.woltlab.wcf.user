@@ -22,6 +22,11 @@ class UsersOnlineList extends SessionList {
 	public $objectClassName = 'wcf\data\user\User';
 	
 	/**
+	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
+	 */
+	public $sqlOrderBy = 'user_table.username';
+	
+	/**
 	 * users online stats
 	 * @var array
 	 */
