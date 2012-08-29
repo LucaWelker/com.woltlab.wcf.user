@@ -59,9 +59,17 @@ class UsersOnlineList extends SessionList {
 	public function readObjects() {
 		parent::readObjects();
 		
-		foreach ($this->objects as &$object) {
-			$object = new UserProfile($object);
+		$objects = $this->objects;
+		$this->indexToObject = $this->objects = array();
+		foreach ($objects as $object) {
+			if (self::isVisible($object->userID, $object->canViewOnlineStatus)) {
+				$object = new UserProfile($object);
+				$this->objects[$object->userID] = $object;
+				$this->indexToObject[] = $object->userID;
+			}
 		}
+		$this->objectIDs = $this->indexToObject;
+		$this->rewind();
 	}
 	
 	/**
@@ -98,8 +106,7 @@ class UsersOnlineList extends SessionList {
 	 * @return	boolean
 	 */
 	public static function isVisible($userID, $canViewOnlineStatus) {
-		// TODO: add permission
-		// if (WCF::getSession()->getPermission('admin.user.canViewInvisible')) return true;
+		if (WCF::getSession()->getPermission('admin.user.canViewInvisible')) return true;
 		
 		switch ($canViewOnlineStatus) {
 			case 0: // everyone
