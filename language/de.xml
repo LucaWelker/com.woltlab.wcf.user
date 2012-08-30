@@ -72,6 +72,7 @@
 {if $usersOnlineList->stats[guests] > 0}
 	{#$usersOnlineList->stats[guests]} Besucher
 {/if}]]></item>
+		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Mitglied seit {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[aus {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[Mein Profil]]></item>
