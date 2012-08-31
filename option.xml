@@ -31,6 +31,11 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
+			<option name="module_users_rank">
+				<categoryname>module.user</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			
 			<!-- user.general -->
 			<option name="register_username_min_length">

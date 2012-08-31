@@ -3,6 +3,7 @@ namespace wcf\data\user;
 use wcf\data\user\avatar\DefaultAvatar;
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
+use wcf\data\user\rank\UserRank;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\cache\CacheHandler;
 use wcf\system\user\storage\UserStorageHandler;
@@ -55,6 +56,12 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * @var wcf\data\user\avatar\IUserAvatar
 	 */
 	protected $avatar = null;
+	
+	/**
+	 * user rank object
+	 * @var wcf\data\user\rank\UserRank
+	 */
+	protected $rank = null;
 	
 	/**
 	 * age of this user
@@ -468,6 +475,40 @@ class UserProfile extends DatabaseObjectDecorator {
 		
 		if (!isset($this->groupData[$permission])) return false;
 		return $this->groupData[$permission];
+	}
+	
+	/**
+	 * Returns the user title of this user.
+	 */
+	public function getUserTitle() {
+		if ($this->userTitle) return $this->userTitle;
+		if ($this->getRank()) return WCF::getLanguage()->get($this->getRank()->rankTitle);
+		
+		return '';
+	}
+	
+	/**
+	 * Returns the user rank.
+	 * 
+	 * @return	wcf\data\user\rank\UserRank
+	 */
+	public function getRank() {
+		if ($this->rank === null) {
+			if (MODULE_USER_RANK && $this->rankID) {
+				$this->rank = new UserRank(null, array(
+					'rankID' => $this->rankID,
+					'groupID' => $this->groupID,
+					'neededLikes' => $this->neededLikes,
+					'rankTitle' => $this->rankTitle,
+					'cssClassName' => $this->cssClassName,
+					'rankImage' => $this->rankImage,
+					'repeatImage' => $this->repeatImage,
+					'gender' => $this->gender
+				));
+			}
+		}
+	
+		return $this->rank;
 	}
 	
 	/**
