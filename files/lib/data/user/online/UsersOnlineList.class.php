@@ -1,8 +1,11 @@
 <?php
 namespace wcf\data\user\online;
 use wcf\data\session\SessionList;
+use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
+use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Represents a list of currently online users.
@@ -35,6 +38,12 @@ class UsersOnlineList extends SessionList {
 		'members' => 0,
 		'guests' => 0
 	);
+	
+	/**
+	 * users online markings
+	 * @var array
+	 */
+	public $usersOnlineMarkings = null;
 	
 	/**
 	 * Creates a new UserFollowingList object.
@@ -96,6 +105,30 @@ class UsersOnlineList extends SessionList {
 				$this->stats['guests']++;
 			}
 		}
+	}
+	
+	/**
+	 * Returns a list of the users online markings.
+	 * 
+	 * @return	array
+	 */
+	public function getUsersOnlineMarkings() {
+		if ($this->usersOnlineMarkings === null) {
+			$this->usersOnlineMarkings = $priorities = array();
+			
+			// get groups
+			foreach (UserGroup::getGroupsByType() as $group) {
+				if ($group->userOnlineMarking != '%s') {
+					$priorities[] = $group->priority;
+					$this->usersOnlineMarkings[] = sprintf($group->userOnlineMarking, StringUtil::encodeHTML(WCF::getLanguage()->get($group->groupName)));
+				}
+			}
+			
+			// sort list
+			array_multisort($priorities, SORT_DESC, $this->usersOnlineMarkings);
+		}
+		
+		return $this->usersOnlineMarkings;
 	}
 	
 	/**
