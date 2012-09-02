@@ -24,5 +24,10 @@
 		<definition>
 			<name>com.woltlab.wcf.user.dashboardContainer</name>
 		</definition>
+		
+		<definition>
+			<name>com.woltlab.wcf.user.online.location</name>
+			<interfacename>wcf\system\user\online\location\IUserOnlineLocation</interfacename>
+		</definition>
 	</import>
 </data>

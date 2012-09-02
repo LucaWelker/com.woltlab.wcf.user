@@ -71,10 +71,9 @@
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 					
 					<div class="userInformation">
-						<hgroup class="containerHeadline">
-							<h1><a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">{$user->username}</a> <span class="badge">Administrator{*TODO: show user title / rank*}</span></h1> 
-							<h2>{@$sessionData}</h2>
-						</hgroup>
+						{include file='userInformation'}
+						
+						<p>{@$sessionData}</p>
 					</div>
 				</div>
 			</li>
