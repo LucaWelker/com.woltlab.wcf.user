@@ -15,7 +15,7 @@ class MembersListPage extends SortablePage {
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
-	// public $neededPermissions = array('admin.user.canEditGroup', 'admin.user.canDeleteGroup');
+	public $neededPermissions = array('user.profile.canViewMembersList');
 	
 	/**
 	 * @see wcf\page\AbstractPage::$enableTracking

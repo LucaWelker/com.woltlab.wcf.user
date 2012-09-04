@@ -10,7 +10,8 @@ class UsersOnlineListPage extends SortablePage {
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
-	// public $neededPermissions = array('admin.user.canEditGroup', 'admin.user.canDeleteGroup');
+	public $neededPermissions = array('user.profile.canViewUsersOnlineList');
+	
 	/**
 	 * @see wcf\page\AbstractPage::$enableTracking
 	 */

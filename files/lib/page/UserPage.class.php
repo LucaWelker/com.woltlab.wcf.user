@@ -32,6 +32,11 @@ class UserPage extends AbstractPage {
 	public $enableTracking = true;
 	
 	/**
+	 * @see wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('user.profile.canViewUserProfile');
+	
+	/**
 	 * edit profile on page load
 	 * @var	boolean
 	 */

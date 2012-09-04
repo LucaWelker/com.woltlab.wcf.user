@@ -4,6 +4,7 @@
 		<pagemenuitem name="wcf.user.members">
 			<link>index.php/MembersList/</link>
 			<position>header</position>
+			<permissions>user.profile.canViewMembersList</permissions>
 		</pagemenuitem>
 		
 		<pagemenuitem name="wcf.user.recentActivity">
@@ -16,6 +17,8 @@
 			<link>index.php/UsersOnlineList/</link>
 			<position>header</position>
 			<parent>wcf.user.members</parent>
+			<permissions>user.profile.canViewUsersOnlineList</permissions>
+			<options>module_users_online</options>
 		</pagemenuitem>
 	</import>
 </data>
