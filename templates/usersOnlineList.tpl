@@ -14,14 +14,19 @@
 		<li class="sidebarContainer">
 			<form method="get" action="{link controller='UsersOnlineList'}{/link}">
 				<fieldset>
-					<legend>sort</legend>
+					<legend>{lang}wcf.user.members.sort{/lang}</legend>
 					
 					<dl>
-						<dt><label for="sortField">sortby</label></dt>
 						<dd>
 							<select id="sortField" name="sortField">
 								<option value="username"{if $sortField == 'username'} selected="selected"{/if}>{lang}wcf.user.username{/lang}</option>
-								<option value="registrationDate"{if $sortField == 'registrationDate'} selected="selected"{/if}>{lang}wcf.user.registrationDate{/lang}</option>
+								<option value="lastActivityTime"{if $sortField == 'lastActivityTime'} selected="selected"{/if}>{lang}wcf.user.usersOnline.lastActivity{/lang}</option>
+								<option value="requestURI"{if $sortField == 'requestURI'} selected="selected"{/if}>{lang}wcf.user.usersOnline.location{/lang}</option>
+								
+								{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
+									<option value="ipAddress"{if $sortField == 'ipAddress'} selected="selected"{/if}>{lang}wcf.user.usersOnline.ipAddress{/lang}</option>
+									<option value="userAgent"{if $sortField == 'requestURI'} selected="selected"{/if}>{lang}wcf.user.usersOnline.userAgent{/lang}</option>
+								{/if}
 							</select>
 							<select name="sortOrder">
 								<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
@@ -52,7 +57,6 @@
 {assign var=guestsOnline value=0}
 {foreach from=$objects item=user}
 	{capture assign=sessionData}
-		{*TODO: check permission for browser & ip address*}
 		{if $user->getLocation()}
 			<dl class="inlineDataList">
 				<dt>{lang}wcf.user.usersOnline.location{/lang}</dt>
@@ -60,13 +64,18 @@
 			</dl>
 		{/if}
 		<dl class="inlineDataList">
-			<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
-			<dd>{$user->getFormattedIPAddress()}</dd>
+			<dt>{lang}wcf.user.usersOnline.lastActivity{/lang}</dt>
+			<dd>{@$user->lastActivityTime|time}</dd>
 		</dl>
-		<dl class="inlineDataList">
-			<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
-			<dd title="{$user->userAgent}">{$user->getBrowser()}</dd>
-		</dl>
+		
+		{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
+			<dl class="inlineDataList">
+				<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
+				<dd>{$user->getFormattedIPAddress()}</dd>
+				<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
+				<dd title="{$user->userAgent}">{$user->getBrowser()}</dd>
+			</dl>
+		{/if}
 	{/capture}
 	
 	{if $user->userID}
@@ -79,13 +88,7 @@
 					<div class="userInformation">
 						<hgroup class="containerHeadline">
 							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1> 
-							<h2>{if false}<ul class="dataList">
-								{if $user->gender}<li>{lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}</li>{/if}
-								{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}
-								{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
-								<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
-							</ul>{/if}
-							{@$sessionData}</h2>
+							<h2>{@$sessionData}</h2>
 						</hgroup>
 						
 						{include file='userInformationButtons'}

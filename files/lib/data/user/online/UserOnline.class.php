@@ -55,6 +55,11 @@ class UserOnline extends UserProfile {
 	 * @return	string
 	 */
 	public function getBrowser() {
+		// opera
+		if (preg_match('~opera.*version/([\d\.]+)~i', $this->userAgent, $match)) {
+			return 'Opera '.$match[1];
+		}
+		
 		// firefox
 		if (preg_match('~firefox/([\d\.]+)~i', $this->userAgent, $match)) {
 			return 'Firefox '.$match[1];
@@ -73,11 +78,6 @@ class UserOnline extends UserProfile {
 		// safari
 		if (preg_match('~([\d\.]+) safari~i', $this->userAgent, $match)) {
 			return 'Safari '.$match[1];
-		}
-		
-		// opera
-		if (preg_match('~opera.*version/([\d\.]+)~i', $this->userAgent, $match)) {
-			return 'Opera '.$match[1];
 		}
 		
 		return $this->userAgent;

@@ -1,7 +1,6 @@
 <?php
 namespace wcf\page;
 use wcf\data\object\type\ObjectTypeCache;
-
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
@@ -12,11 +11,15 @@ class UsersOnlineListPage extends SortablePage {
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
 	// public $neededPermissions = array('admin.user.canEditGroup', 'admin.user.canDeleteGroup');
+	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
 	
 	/**
 	 * @see wcf\page\SortablePage::$defaultSortField
 	 */
-	public $defaultSortField = 'session.lastActivityTime';
+	public $defaultSortField = 'lastActivityTime';
 	
 	/**
 	 * @see wcf\page\SortablePage::$defaultSortOrder
@@ -26,15 +29,30 @@ class UsersOnlineListPage extends SortablePage {
 	/**
 	 * @see wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('session.lastActivityTime');
+	public $validSortFields = array('username', 'lastActivityTime', 'requestURI');
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */	
 	public $objectListClassName = 'wcf\data\user\online\UsersOnlineList';
 	
-	
+	/**
+	 * page locations
+	 * @var array
+	 */
 	public $locations = array();
+	
+	/**
+	 * @see wcf\page\IPage::readParameters()
+	 */
+	public function readParameters() {
+		parent::readParameters();
+		
+		if (WCF::getSession()->getPermission('admin.user.canViewIpAddress')) {
+			$this->validSortFields[] = 'ipAddress';
+			$this->validSortFields[] = 'requestURI';
+		}
+	}
 	
 	/**
 	 * @see wcf\page\IPage::readData()
@@ -64,7 +82,7 @@ class UsersOnlineListPage extends SortablePage {
 					$userOnline->setLocation($this->locations[$userOnline->controller]->getProcessor()->get($userOnline));
 				}
 				else {
-					$userOnline->setLocation(WCF::getLanguage()->get($this->locations[$userOnline->controller]->languageVariable));
+					$userOnline->setLocation(WCF::getLanguage()->get($this->locations[$userOnline->controller]->languagevariable));
 				}
 			}
 		}

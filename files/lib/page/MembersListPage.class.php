@@ -18,6 +18,11 @@ class MembersListPage extends SortablePage {
 	// public $neededPermissions = array('admin.user.canEditGroup', 'admin.user.canDeleteGroup');
 	
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
+	/**
 	 * @see wcf\page\SortablePage::$defaultSortField
 	 */
 	public $defaultSortField = 'username';

@@ -39,12 +39,30 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		
-		
+		<!-- user online locations -->
 		<type>
 			<name>com.woltlab.wcf.user.UserPage</name>
 			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
 			<classname>wcf\system\user\online\location\UserProfileLocation</classname>
 			<controller>wcf\page\UserPage</controller>
+		</type>
+		<type>
+			<name>com.woltlab.wcf.user.UsersOnlineListPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>wcf\page\UsersOnlineListPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.UsersOnlineListPage</languagevariable>
+		</type>
+		<type>
+			<name>com.woltlab.wcf.user.MembersListPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>wcf\page\MembersListPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.MembersListPage</languagevariable>
+		</type>
+		<type>
+			<name>com.woltlab.wcf.user.DashboardPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>wcf\page\DashboardPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.DashboardPage</languagevariable>
 		</type>
 	</import>
 </data>
