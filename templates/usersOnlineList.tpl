@@ -25,7 +25,7 @@
 								
 								{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
 									<option value="ipAddress"{if $sortField == 'ipAddress'} selected="selected"{/if}>{lang}wcf.user.usersOnline.ipAddress{/lang}</option>
-									<option value="userAgent"{if $sortField == 'requestURI'} selected="selected"{/if}>{lang}wcf.user.usersOnline.userAgent{/lang}</option>
+									<option value="userAgent"{if $sortField == 'userAgent'} selected="selected"{/if}>{lang}wcf.user.usersOnline.userAgent{/lang}</option>
 								{/if}
 							</select>
 							<select name="sortOrder">
