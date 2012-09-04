@@ -52,14 +52,20 @@
 {assign var=guestsOnline value=0}
 {foreach from=$objects item=user}
 	{capture assign=sessionData}
-		{*TODO: current location, browser, ip address*}
+		{*TODO: check permission for browser & ip address*}
+		{if $user->getLocation()}
+			<dl class="inlineDataList">
+				<dt>{lang}wcf.user.usersOnline.location{/lang}</dt>
+				<dd>{@$user->getLocation()}</dd>
+			</dl>
+		{/if}
 		<dl class="inlineDataList">
-			<dt>request uri</dt>
-			<dd>{$user->requestURI}</dd>
-			<dt>ip</dt>
-			<dd>{$user->ipAddress}</dd>
-			<dt>user agent</dt>
-			<dd>{$user->userAgent}</dd>
+			<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
+			<dd>{$user->getFormattedIPAddress()}</dd>
+		</dl>
+		<dl class="inlineDataList">
+			<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
+			<dd title="{$user->userAgent}">{$user->getBrowser()}</dd>
 		</dl>
 	{/capture}
 	
@@ -71,9 +77,18 @@
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 					
 					<div class="userInformation">
-						{include file='userInformation'}
+						<hgroup class="containerHeadline">
+							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1> 
+							<h2>{if false}<ul class="dataList">
+								{if $user->gender}<li>{lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}</li>{/if}
+								{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}
+								{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
+								<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
+							</ul>{/if}
+							{@$sessionData}</h2>
+						</hgroup>
 						
-						<p>{@$sessionData}</p>
+						{include file='userInformationButtons'}
 					</div>
 				</div>
 			</li>
@@ -86,11 +101,11 @@
 			<li>
 				<div class="box48">
 					{*todo: we need an avatar placeholder for search robots here*}
-					<p class="framed"><img src="" alt="" class="icon48" /></p>
+					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
 					
 					<div class="userInformation">
 						<hgroup class="containerHeadline">
-							<h1><a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Robot #1234</a></h1> 
+							<h1><a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Robot</a></h1> 
 							<h2>{@$sessionData}</h2>
 						</hgroup>
 					</div>
@@ -105,11 +120,11 @@
 			<li>
 				<div class="box48">
 					{*todo: we need an avatar placeholder for guests here*}
-					<p class="framed"><img src="" alt="" class="icon48" /></p>
+					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
 					
 					<div class="userInformation">
 						<hgroup class="containerHeadline">
-							<h1>Guest #1234</h1> 
+							<h1>{lang}wcf.user.guest{/lang}</h1> 
 							<h2>{@$sessionData}</h2>
 						</hgroup>
 					</div>

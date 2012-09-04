@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\user\online\location;
-use wcf\data\session\Session;
+use wcf\data\user\online\UserOnline;
 
 /**
  * Any page location class should implement this interface.
@@ -16,15 +16,15 @@ interface IUserOnlineLocation {
 	/**
 	 * Caches the information of a page location.
 	 * 
-	 * @param	wcf\data\session\Session	$session
+	 * @param	wcf\data\user\online\UserOnline		$user
 	 */
-	public function cache(Session $session);
+	public function cache(UserOnline $user);
 	
 	/**
 	 * Returns the information of a page location.
 	 * 
-	 * @param	wcf\data\session\Session	$session
+	 * @param	wcf\data\user\online\UserOnline		$user
 	 * @return	string
 	 */
-	public function get(Session $session);
+	public function get(UserOnline $user);
 }

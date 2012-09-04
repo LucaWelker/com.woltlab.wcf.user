@@ -74,6 +74,11 @@
 {/if}]]></item>
 		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
 		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legende]]></item>
+		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}">Benutzerprofil von &bdquo;{$user->username}&ldquo;</a>]]></item>
+		<item name="wcf.user.usersOnline.guests"><![CDATA[Gäste]]></item>
+		<item name="wcf.user.usersOnline.location"><![CDATA[Ort]]></item>
+		<item name="wcf.user.usersOnline.ipAddress"><![CDATA[IP-Adresse]]></item>
+		<item name="wcf.user.usersOnline.userAgent"><![CDATA[Browser-Kennung]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Mitglied seit {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[aus {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[Mein Profil]]></item>
@@ -222,6 +227,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.register.needActivation"><![CDATA[Ihr Benutzerkonto ist noch nicht aktiviert. Sie müssen den <a href="{link controller='RegisterActivation'}{/link}">Aktivierungsvorgang abschließen</a>, um den vollen Funktionsumfang dieser Seite nutzen zu können.]]></item>
 		<item name="wcf.user.registerActivation.info"><![CDATA[Eine E-Mail mit dem 9-stelligen Aktivierungscode wurde an Ihre E-Mail-Adresse {$__wcf->user->email} verschickt.]]></item>
 		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Der Benutzername wurde innerhalb der letzten {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} Tage bereits einmal verändert.]]></item>
+		<item name="wcf.user.guest"><![CDATA[Gast]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

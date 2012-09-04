@@ -41,10 +41,10 @@
 		
 		
 		<type>
-			<name>com.woltlab.wcf.user.UserProfilePage</name>
+			<name>com.woltlab.wcf.user.UserPage</name>
 			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
 			<classname>wcf\system\user\online\location\UserProfileLocation</classname>
-			<controller>wcf\page\UserProfilePage</controller>
+			<controller>wcf\page\UserPage</controller>
 		</type>
 	</import>
 </data>
