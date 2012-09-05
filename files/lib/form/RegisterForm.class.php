@@ -28,6 +28,11 @@ use wcf\util\UserRegistrationUtil;
  */
 class RegisterForm extends UserAddForm {
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
+	/**
 	 * @see	wcf\lib\acp\form\AbstractOptionListForm::$loadActiveOptions
 	 */
 	//public $loadActiveOptions = false;

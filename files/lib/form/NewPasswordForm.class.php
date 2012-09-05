@@ -23,6 +23,11 @@ use wcf\util\UserRegistrationUtil;
  */
 class NewPasswordForm extends AbstractForm {
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
+	/**
 	 * user id
 	 * @var	integer
 	 */	

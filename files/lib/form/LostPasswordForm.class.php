@@ -22,6 +22,11 @@ use wcf\util\StringUtil;
  */
 class LostPasswordForm extends RecaptchaForm {
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
+	/**
 	 * username
 	 * @var string
 	 */

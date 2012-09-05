@@ -18,6 +18,10 @@ use wcf\util\StringUtil;
  */
 class LoginForm extends \wcf\acp\form\LoginForm {
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	/**
 	 * true enables the usage of cookies 
 	 * @var boolean
 	 */

@@ -75,9 +75,16 @@
 		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
 		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legende]]></item>
 		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}">Benutzerprofil von &bdquo;{$user->username}&ldquo;</a>]]></item>
-		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer-online-Liste]]></item>
+		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer online-Liste]]></item>
 		<item name="wcf.user.usersOnline.location.MembersListPage"><![CDATA[Mitgliederliste]]></item>
 		<item name="wcf.user.usersOnline.location.DashboardPage"><![CDATA[Dashboard]]></item>
+		<item name="wcf.user.usersOnline.location.RegisterForm"><![CDATA[Registrierung]]></item>
+		<item name="wcf.user.usersOnline.location.LostPasswordForm"><![CDATA[Kennwort vergessen-Formular]]></item>
+		<item name="wcf.user.usersOnline.location.LoginForm"><![CDATA[Anmeldung]]></item>
+		<item name="wcf.user.usersOnline.location.AccountManagementForm"><![CDATA[Account-Verwaltung]]></item>
+		<item name="wcf.user.usersOnline.location.AvatarEditForm"><![CDATA[Avatar-Verwaltung]]></item>
+		<item name="wcf.user.usersOnline.location.SettingsForm"><![CDATA[Einstellungen]]></item>
+		<item name="wcf.user.usersOnline.location.SignatureEditForm"><![CDATA[Signatur-Verwaltung]]></item>
 		<item name="wcf.user.usersOnline.guests"><![CDATA[Gäste]]></item>
 		<item name="wcf.user.usersOnline.location"><![CDATA[Ort]]></item>
 		<item name="wcf.user.usersOnline.ipAddress"><![CDATA[IP-Adresse]]></item>
