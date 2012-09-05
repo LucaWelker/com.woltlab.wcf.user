@@ -80,7 +80,7 @@ class UsersOnlineListPage extends SortablePage {
 		foreach ($this->objectList as $userOnline) {
 			if (isset($this->locations[$userOnline->controller])) {
 				if ($this->locations[$userOnline->controller]->getProcessor()) {
-					$userOnline->setLocation($this->locations[$userOnline->controller]->getProcessor()->get($userOnline));
+					$userOnline->setLocation($this->locations[$userOnline->controller]->getProcessor()->get($userOnline, $this->locations[$userOnline->controller]->languagevariable));
 				}
 				else {
 					$userOnline->setLocation(WCF::getLanguage()->get($this->locations[$userOnline->controller]->languagevariable));

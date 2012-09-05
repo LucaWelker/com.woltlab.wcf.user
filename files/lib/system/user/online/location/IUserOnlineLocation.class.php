@@ -24,7 +24,8 @@ interface IUserOnlineLocation {
 	 * Returns the information of a page location.
 	 * 
 	 * @param	wcf\data\user\online\UserOnline		$user
+	 * @param	string					$languageVariable
 	 * @return	string
 	 */
-	public function get(UserOnline $user);
+	public function get(UserOnline $user, $languageVariable = '');
 }

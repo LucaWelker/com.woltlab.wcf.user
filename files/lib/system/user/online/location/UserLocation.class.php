@@ -4,8 +4,27 @@ use wcf\data\user\online\UserOnline;
 use wcf\data\user\UserList;
 use wcf\system\WCF;
 
-class UserProfileLocation implements IUserOnlineLocation {
+/**
+ * Implementation of IUserOnlineLocation for the user profile location.
+ *
+ * @author 	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	system.user.online.location
+ * @category 	Community Framework
+ */
+class UserLocation implements IUserOnlineLocation {
+	/**
+	 * user ids
+	 * @var array<integer>
+	 */
 	protected $userIDs = array();
+	
+	/**
+	 * list of users
+	 * @var array<wcf\data\user\User>
+	 */
 	protected $users = null;
 	
 	/**
@@ -18,7 +37,7 @@ class UserProfileLocation implements IUserOnlineLocation {
 	/**
 	 * @see wcf\system\user\online\location\IUserOnlineLocation::get()
 	 */
-	public function get(UserOnline $user) {
+	public function get(UserOnline $user, $languageVariable = '') {
 		if ($this->users === null) {
 			$this->readUsers();
 		}
@@ -27,9 +46,12 @@ class UserProfileLocation implements IUserOnlineLocation {
 			return '';
 		}
 		
-		return WCF::getLanguage()->getDynamicVariable('wcf.user.usersOnline.location.UserPage', array('user' => $this->users[$user->objectID]));
+		return WCF::getLanguage()->getDynamicVariable($languageVariable, array('user' => $this->users[$user->objectID]));
 	}
 	
+	/**
+	 * Loads the users.
+	 */
 	protected function readUsers() {
 		$this->users = array();
 		
