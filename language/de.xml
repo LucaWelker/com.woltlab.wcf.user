@@ -74,7 +74,7 @@
 {/if}]]></item>
 		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
 		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legende]]></item>
-		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}">Benutzerprofil von &bdquo;{$user->username}&ldquo;</a>]]></item>
+		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von &bdquo;{$user->username}&ldquo;</a>]]></item>
 		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer online-Liste]]></item>
 		<item name="wcf.user.usersOnline.location.MembersListPage"><![CDATA[Mitgliederliste]]></item>
 		<item name="wcf.user.usersOnline.location.DashboardPage"><![CDATA[Dashboard]]></item>
