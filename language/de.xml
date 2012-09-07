@@ -61,6 +61,35 @@
 		<item name="wcf.user.members.sort.letters.all"><![CDATA[Alle]]></item>
 		<item name="wcf.user.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.usersOnline"><![CDATA[Benutzer online]]></item>
+		<item name="wcf.user.usersOnline.detail"><![CDATA[
+{if $usersOnlineList->stats[members] > 0}
+	{#$usersOnlineList->stats[members]} Mitglied{if $usersOnlineList->stats[members] != 1}er{/if}
+{/if} 
+{if $usersOnlineList->stats[invisible] > 0}
+	(davon {#$usersOnlineList->stats[invisible]} unsichtbar)
+{/if}
+{if $usersOnlineList->stats[guests] > 0 && $usersOnlineList->stats[members] > 0}und{/if}
+{if $usersOnlineList->stats[guests] > 0}
+	{#$usersOnlineList->stats[guests]} Besucher
+{/if}]]></item>
+		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
+		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legende]]></item>
+		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von &bdquo;{$user->username}&ldquo;</a>]]></item>
+		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer online-Liste]]></item>
+		<item name="wcf.user.usersOnline.location.MembersListPage"><![CDATA[Mitgliederliste]]></item>
+		<item name="wcf.user.usersOnline.location.DashboardPage"><![CDATA[Dashboard]]></item>
+		<item name="wcf.user.usersOnline.location.RegisterForm"><![CDATA[Registrierung]]></item>
+		<item name="wcf.user.usersOnline.location.LostPasswordForm"><![CDATA[Kennwort vergessen-Formular]]></item>
+		<item name="wcf.user.usersOnline.location.LoginForm"><![CDATA[Anmeldung]]></item>
+		<item name="wcf.user.usersOnline.location.AccountManagementForm"><![CDATA[Account-Verwaltung]]></item>
+		<item name="wcf.user.usersOnline.location.AvatarEditForm"><![CDATA[Avatar-Verwaltung]]></item>
+		<item name="wcf.user.usersOnline.location.SettingsForm"><![CDATA[Einstellungen]]></item>
+		<item name="wcf.user.usersOnline.location.SignatureEditForm"><![CDATA[Signatur-Verwaltung]]></item>
+		<item name="wcf.user.usersOnline.guests"><![CDATA[Gäste]]></item>
+		<item name="wcf.user.usersOnline.location"><![CDATA[Ort]]></item>
+		<item name="wcf.user.usersOnline.ipAddress"><![CDATA[IP-Adresse]]></item>
+		<item name="wcf.user.usersOnline.userAgent"><![CDATA[Browser]]></item>
+		<item name="wcf.user.usersOnline.lastActivity"><![CDATA[Letzte Aktivität]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Mitglied seit {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[aus {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[Mein Profil]]></item>
@@ -209,15 +238,25 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.register.needActivation"><![CDATA[Ihr Benutzerkonto ist noch nicht aktiviert. Sie müssen den <a href="{link controller='RegisterActivation'}{/link}">Aktivierungsvorgang abschließen</a>, um den vollen Funktionsumfang dieser Seite nutzen zu können.]]></item>
 		<item name="wcf.user.registerActivation.info"><![CDATA[Eine E-Mail mit dem 9-stelligen Aktivierungscode wurde an Ihre E-Mail-Adresse {$__wcf->user->email} verschickt.]]></item>
 		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Der Benutzername wurde innerhalb der letzten {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} Tage bereits einmal verändert.]]></item>
+		<item name="wcf.user.guest"><![CDATA[Gast]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">
+		<item name="wcf.user.avatar"><![CDATA[Avatar]]></item>
+		<item name="wcf.user.avatar.edit"><![CDATA[Avatar verwalten]]></item>
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Eigenen Avatar hochladen]]></item>
-		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen gif, jpg, jpeg und png und maximal eine Größe von {#$__wcf->session->getPermission('user.profile.avatar.maxWidth')}*{#$__wcf->session->getPermission('user.profile.avatar.maxHeight')} Pixel und {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Größere Avatare werden automatisch auf die Maximalgröße verkleinert.]]></item>
+		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} und maximal eine Größe {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Die Mindestgröße für Avatare liegt bei 24x24 Pixel, die empfohlene Maximalgröße bei {@MAX_AVATAR_WIDTH}x{@MAX_AVATAR_HEIGHT} Pixel, größere Avatare werden - sofern möglich - automatisch auf die Maximalgröße verkleinert.]]></item>
 		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse (&bdquo;{$__wcf->user->email}&ldquo;) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com">www.gravatar.com</a>]]></item>
+		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
+		<item name="wcf.user.avatar.upload.success"><![CDATA[Der neue Avatar wurde erfolgreich gespeichert.]]></item>
+		<item name="wcf.user.avatar.upload.error.invalidExtension"><![CDATA[Die Datei hat eine ungültige Dateiendung.]]></item>
+		<item name="wcf.user.avatar.upload.error.tooLarge"><![CDATA[Die Datei ist zu groß.]]></item>
+		<item name="wcf.user.avatar.upload.error.uploadFailed"><![CDATA[Beim Hochladen der Datei ist ein unbekannter Fehler aufgetreten.]]></item>
+		<item name="wcf.user.avatar.upload.error.tooSmall"><![CDATA[Das Bild ist zu klein.]]></item>
+		<item name="wcf.user.avatar.upload.error.badImage"><![CDATA[Sie haben kein gültiges Bild hochgeladen.]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

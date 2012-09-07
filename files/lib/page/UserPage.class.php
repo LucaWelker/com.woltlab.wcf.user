@@ -27,6 +27,16 @@ use wcf\system\WCF;
  */
 class UserPage extends AbstractPage {
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
+	/**
+	 * @see wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('user.profile.canViewUserProfile');
+	
+	/**
 	 * edit profile on page load
 	 * @var	boolean
 	 */
@@ -179,5 +189,19 @@ class UserPage extends AbstractPage {
 		}
 		
 		parent::show();
+	}
+	
+	/**
+	 * @see wcf\page\ITrackablePage::getObjectType()
+	 */
+	public function getObjectType() {
+		return 'com.woltlab.wcf.user';
+	}
+	
+	/**
+	 * @see wcf\page\ITrackablePage::getObjectID()
+	 */
+	public function getObjectID() {
+		return $this->userID;
 	}
 }

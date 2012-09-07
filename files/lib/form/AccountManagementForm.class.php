@@ -22,6 +22,11 @@ use wcf\util\UserUtil;
  */
 class AccountManagementForm extends AbstractSecureForm {
 	/**
+	 * @see wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
+	/**
 	 * @see wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;

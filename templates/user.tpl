@@ -127,7 +127,7 @@
 
 <header class="boxHeadline userHeadline">
 	<hgroup>
-		<h1>{$user->username} {*TODO: user rank*}<span class="badge">Administratorlusche</span></h1>
+		<h1>{$user->username}{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1>
 		<h2><ul class="dataList">
 			{if $user->gender}<li>{lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}</li>{/if}
 			{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}

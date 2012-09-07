@@ -20,6 +20,10 @@
 
 {include file='userNotice'}
 
+{if $__wcf->user->disableAvatar}
+	<p class="error">{lang}wcf.user.avatar.error.disabled{/lang}</p>
+{/if}
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
@@ -28,7 +32,7 @@
 	<p class="success">{lang}wcf.global.form.edit.success{/lang}</p>	
 {/if}
 
-<form method="post" action="{link controller='AvatarEdit'}{/link}">
+<form method="post" action="{link controller='AvatarEdit'}{/link}" id="avatarForm">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend><label for="password">{lang}wcf.user.avatar{/lang}</label></legend>
@@ -74,10 +78,12 @@
 			{/if}
 		</fieldset>
 	</div>
-		
-	<div class="formSubmit">
-		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-	</div>
+	
+	{if !$__wcf->user->disableAvatar}
+		<div class="formSubmit">
+			<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		</div>
+	{/if}
 </form>
 
 {include file='footer'}
@@ -85,11 +91,19 @@
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
-		{*WCF.Language.addObject({
-			
-		});*}
+		WCF.Language.addObject({
+			'wcf.user.avatar.upload.error.invalidExtension': '{lang}wcf.user.avatar.upload.error.invalidExtension{/lang}',
+			'wcf.user.avatar.upload.error.tooSmall': '{lang}wcf.user.avatar.upload.error.tooSmall{/lang}',
+			'wcf.user.avatar.upload.error.tooLarge': '{lang}wcf.user.avatar.upload.error.tooLarge{/lang}',
+			'wcf.user.avatar.upload.error.uploadFailed': '{lang}wcf.user.avatar.upload.error.uploadFailed{/lang}',
+			'wcf.user.avatar.upload.error.badImage': '{lang}wcf.user.avatar.upload.error.badImage{/lang}',
+			'wcf.user.avatar.upload.success': '{lang}wcf.user.avatar.upload.success{/lang}',
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		});
 
-		new WCF.User.Avatar.Upload();
+		{if !$__wcf->user->disableAvatar}
+			new WCF.User.Avatar.Upload();
+		{/if}
 	});
 	//]]>
 </script>

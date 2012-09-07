@@ -1,9 +1,11 @@
 <?php
 namespace wcf\data\user\online;
 use wcf\data\session\SessionList;
-use wcf\data\user\UserProfile;
+use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
+use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Represents a list of currently online users.
@@ -22,6 +24,11 @@ class UsersOnlineList extends SessionList {
 	public $objectClassName = 'wcf\data\user\User';
 	
 	/**
+	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
+	 */
+	public $sqlOrderBy = 'user_table.username';
+	
+	/**
 	 * users online stats
 	 * @var array
 	 */
@@ -33,16 +40,23 @@ class UsersOnlineList extends SessionList {
 	);
 	
 	/**
+	 * users online markings
+	 * @var array
+	 */
+	public $usersOnlineMarkings = null;
+	
+	/**
 	 * Creates a new UserFollowingList object.
 	 */
 	public function __construct() {
 		parent::__construct();
 		
-		$this->sqlSelects .= "user_avatar.*, user_option_value.*, user_table.*";
+		$this->sqlSelects .= "user_avatar.*, user_option_value.*, user_group.userOnlineMarking, user_table.*";
 		
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = session.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_option_value user_option_value ON (user_option_value.userID = user_table.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
+		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_group user_group ON (user_group.groupID = user_table.userOnlineGroupID)";
 		
 		$this->getConditionBuilder()->add('session.packageID = ?', array(PACKAGE_ID));
 		$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
@@ -54,9 +68,17 @@ class UsersOnlineList extends SessionList {
 	public function readObjects() {
 		parent::readObjects();
 		
-		foreach ($this->objects as &$object) {
-			$object = new UserProfile($object);
+		$objects = $this->objects;
+		$this->indexToObject = $this->objects = array();
+		foreach ($objects as $object) {
+			if (self::isVisible($object->userID, $object->canViewOnlineStatus)) {
+				$object = new UserOnline($object);
+				$this->objects[$object->userID] = $object;
+				$this->indexToObject[] = $object->userID;
+			}
 		}
+		$this->objectIDs = $this->indexToObject;
+		$this->rewind();
 	}
 	
 	/**
@@ -86,6 +108,30 @@ class UsersOnlineList extends SessionList {
 	}
 	
 	/**
+	 * Returns a list of the users online markings.
+	 * 
+	 * @return	array
+	 */
+	public function getUsersOnlineMarkings() {
+		if ($this->usersOnlineMarkings === null) {
+			$this->usersOnlineMarkings = $priorities = array();
+			
+			// get groups
+			foreach (UserGroup::getGroupsByType() as $group) {
+				if ($group->userOnlineMarking != '%s') {
+					$priorities[] = $group->priority;
+					$this->usersOnlineMarkings[] = sprintf($group->userOnlineMarking, StringUtil::encodeHTML(WCF::getLanguage()->get($group->groupName)));
+				}
+			}
+			
+			// sort list
+			array_multisort($priorities, SORT_DESC, $this->usersOnlineMarkings);
+		}
+		
+		return $this->usersOnlineMarkings;
+	}
+	
+	/**
 	 * Checks the 'canViewOnlineStatus' setting.
 	 * 
 	 * @param	integer		$userID
@@ -93,8 +139,7 @@ class UsersOnlineList extends SessionList {
 	 * @return	boolean
 	 */
 	public static function isVisible($userID, $canViewOnlineStatus) {
-		// TODO: add permission
-		// if (WCF::getSession()->getPermission('admin.user.canViewInvisible')) return true;
+		if (WCF::getSession()->getPermission('admin.user.canViewInvisible') || $userID == WCF::getUser()->userID) return true;
 		
 		switch ($canViewOnlineStatus) {
 			case 0: // everyone

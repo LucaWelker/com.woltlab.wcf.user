@@ -33,6 +33,24 @@
 		<item name="wcf.user.members"><![CDATA[Members]]></item>
 		<item name="wcf.user.recentActivity"><![CDATA[Recent Activity]]></item>
 		<item name="wcf.user.usersOnline"><![CDATA[Users Online]]></item>
+		<item name="wcf.user.usersOnline.detail"><![CDATA[
+{if $usersOnlineList->stats[members] > 0}
+	{#$usersOnlineList->stats[members]} member{if $usersOnlineList->stats[members] != 1}s{/if}
+{/if}
+{if $usersOnlineList->stats[invisible] > 0}
+	({#$usersOnlineList->stats[invisible]} thereof are invisible)
+{/if}
+{if $usersOnlineList->stats[guests] > 0 && $usersOnlineList->stats[members] > 0} and {/if}
+{if $usersOnlineList->stats[guests] > 0}
+	{#$usersOnlineList->stats[guests]} guests
+{/if}]]></item>
+		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (Invisible)]]></item>
+		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legend]]></item>
+		<item name="wcf.user.usersOnline.guests"><![CDATA[Guests]]></item>
+		<item name="wcf.user.usersOnline.location"><![CDATA[Location]]></item>
+		<item name="wcf.user.usersOnline.ipAddress"><![CDATA[Ip Address]]></item>
+		<item name="wcf.user.usersOnline.userAgent"><![CDATA[User Agent]]></item>
+		<item name="wcf.user.usersOnline.lastActivity"><![CDATA[Last Activity]]></item>
 		<item name="wcf.user.membersList.registrationDate"><![CDATA[Member since {@$user->registrationDate|date}]]></item>
 		<item name="wcf.user.membersList.location"><![CDATA[from {$user->location}]]></item>
 		<item name="wcf.user.myProfile"><![CDATA[My Profile]]></item>
@@ -97,6 +115,7 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.quit.description"><![CDATA[Note: This action does not delete posts, attachments and other user generated content.]]></item>
 		<item name="wcf.user.quit"><![CDATA[Quit user account]]></item>
 		<item name="wcf.user.emailActivation"><![CDATA[Enable new e-mail address]]></item>
+		<item name="wcf.user.guest"><![CDATA[Guest]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

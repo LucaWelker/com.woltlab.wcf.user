@@ -2158,13 +2158,52 @@ WCF.User.Avatar = {};
 WCF.User.Avatar.Upload = WCF.Upload.extend({
 	init: function(buttonSelector) {
 		this._super($('#avatarUpload > dd > div'), undefined, 'wcf\\data\\user\\avatar\\UserAvatarAction');
+		
+		$('#avatarForm input[type=radio]').change(function() {
+			if ($(this).val() == 'custom') {
+				$('#avatarUpload > dd > div').show();
+			}
+			else {
+				$('#avatarUpload > dd > div').hide();
+			}
+		});
+		if (!$('#avatarForm input[type=radio][value=custom]:checked').length) {
+			$('#avatarUpload > dd > div').hide();
+		}
 	},
 	
 	_initFile: function(file) {
-		return $('#avatarUpload > dt > image');
+		return $('#avatarUpload > dt > img');
 	},
 	
 	_success: function(uploadID, data) {
-		console.debug(data);
+		if (data.returnValues['url']) {
+			// show avatar
+			$('#avatarUpload > dt > img').attr('src', data.returnValues['url']).css({
+				width: 'auto',
+				height: 'auto'
+			});
+			
+			// hide error
+			$('#avatarUpload > dd > .innerError').remove();
+			
+			// show success message
+			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.user.avatar.upload.success'));
+			$notification.show();
+		}
+		else if (data.returnValues['errorType']) {
+			// show error
+			this._getInnerErrorElement().text(WCF.Language.get('wcf.user.avatar.upload.error.'+data.returnValues['errorType']));
+		}
+	},
+	
+	_getInnerErrorElement: function() {
+		var $span = $('#avatarUpload > dd > .innerError');
+		if (!$span.length) {
+			$span = $('<small class="innerError"></span>');
+			$('#avatarUpload > dd').append($span);
+		}
+		
+		return $span;
 	}
 });

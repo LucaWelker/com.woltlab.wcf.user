@@ -24,6 +24,19 @@
 		</categories>
 		
 		<options>
+			<option name="admin.user.canViewInvisible">
+				<categoryname>admin.user</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.user.canViewIpAddress">
+				<categoryname>admin.user</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
 			<!-- admin.content.dashboard -->
 			<option name="admin.content.dashboard.canEditDashboard">
 				<categoryname>admin.content.dashboard</categoryname>
@@ -74,12 +87,28 @@
 				<optiontype>inverseInteger</optiontype>
 				<defaultvalue>182</defaultvalue>
 			</option>
+			<option name="user.profile.canViewMembersList">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="user.profile.canViewUsersOnlineList">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<options>module_users_online</options>
+			</option>
+			<option name="user.profile.canViewUserProfile">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			
 			<option name="user.profile.avatar.canUploadAvatar">
 				<categoryname>user.profile.avatar</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<enableoptions>user.profile.avatar.maxWidth,user.profile.avatar.maxHeight,user.profile.avatar.maxSize,user.profile.avatar.allowedFileExtensions</enableoptions>
+				<enableoptions>user.profile.avatar.allowedFileExtensions</enableoptions>
 			</option>
 			<option name="user.profile.avatar.maxSize">
 				<categoryname>user.profile.avatar</categoryname>

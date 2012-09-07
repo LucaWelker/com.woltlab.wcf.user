@@ -32,6 +32,11 @@ class UserProfileList extends UserList {
 		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
 		$this->sqlSelects .= "user_avatar.*";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
+		
+		if (MODULE_USER_RANK) {
+			$this->sqlSelects .= ",user_rank.*";
+			$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_rank user_rank ON (user_rank.rankID = user_table.rankID)";
+		}
 	}
 	
 	/**
