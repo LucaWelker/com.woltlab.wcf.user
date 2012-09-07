@@ -206,7 +206,7 @@ class UserNotificationHandler extends SingletonFactory {
 		// get recipients
 		$recipients = array();
 		$recipientList = new UserNotificationRecipientList();
-		$recipientList->getConditionBuilder()->add('user.userID IN (?)', array($uniqueRecipientIDs));
+		$recipientList->getConditionBuilder()->add('user_table.userID IN (?)', array($uniqueRecipientIDs));
 		$recipientList->readObjects();
 		foreach ($recipientList->getObjects() as $recipient) {
 			$recipients[$recipient->userID] = $recipient;
@@ -232,9 +232,7 @@ class UserNotificationHandler extends SingletonFactory {
 		UserNotificationEditor::deleteAll($notificationIDs);
 		
 		// reset recipient storage
-		foreach ($uniqueRecipientIDs as $recipientID) {
-			UserStorageHandler::getInstance()->reset($recipientID, 'userNotificationCount');
-		}
+		UserStorageHandler::getInstance()->reset($uniqueRecipientIDs, 'userNotificationCount');
 	}
 		
 	/**
