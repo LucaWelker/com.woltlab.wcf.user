@@ -7,7 +7,7 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * SelectOptions for the output of an url.
+ * User option output implementation for the output of an url.
  *
  * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH

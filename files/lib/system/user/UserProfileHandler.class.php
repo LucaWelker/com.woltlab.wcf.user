@@ -5,7 +5,7 @@ use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
- * Wrapper of the user profile of the active user to be used as a core object.
+ * Wrapper for the profile of the active user to be used as a core object.
  * 
  * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
