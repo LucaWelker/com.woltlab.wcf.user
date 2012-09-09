@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectType.xsd">
 	<import>
 		<type>
 			<name>com.woltlab.wcf.user.follow</name>
 			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
 			<classname>wcf\system\user\notification\object\type\UserFollowUserNotificationObjectType</classname>
 		</type>
-
+		
 		<type>
-			<name>com.woltlab.wcf.user.profileOverview</name>
+			<name>com.woltlab.wcf.user.profileAbout</name>
 			<definitionname>com.woltlab.wcf.user.profileEditableContent</definitionname>
-			<classname>wcf\system\user\profile\editable\content\OverviewUserProfileEditableContent</classname>
+			<classname>wcf\system\user\profile\editable\content\AboutUserProfileEditableContent</classname>
 		</type>
-
+		
 		<type>
 			<name>com.woltlab.wcf.user.recentActivityEvent.follow</name>
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>

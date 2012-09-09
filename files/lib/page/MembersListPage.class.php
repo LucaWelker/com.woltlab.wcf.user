@@ -5,30 +5,40 @@ use wcf\system\menu\page\PageMenu;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
+/**
+ * Shows members page.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	page
+ * @category 	Community Framework
+ */
 class MembersListPage extends SortablePage {
 	/**
 	 * available letters
-	 * @var string
+	 * @var	string
 	 */
 	public static $availableLetters = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('user.profile.canViewMembersList');
 	
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
 	/**
-	 * @see wcf\page\SortablePage::$defaultSortField
+	 * @see	wcf\page\SortablePage::$defaultSortField
 	 */
 	public $defaultSortField = 'username';
 	
 	/**
-	 * @see wcf\page\SortablePage::$validSortFields
+	 * @see	wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array('username', 'registrationDate');
 	
@@ -39,12 +49,12 @@ class MembersListPage extends SortablePage {
 	
 	/**
 	 * letter
-	 * @var string
+	 * @var	string
 	 */
 	public $letter = '';
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -56,7 +66,7 @@ class MembersListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see wcf\page\MultipleLinkPage::initObjectList()
+	 * @see	wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
@@ -79,7 +89,7 @@ class MembersListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -19,22 +19,20 @@ use wcf\system\WCF;
 class AboutUserProfileMenuContent extends SingletonFactory implements IUserProfileMenuContent {
 	/**
 	 * cache name
-	 * @var string
+	 * @var	string
 	 */
 	public $cacheName = 'user-option';
 	
 	/**
 	 * cache class name
-	 * @var string
+	 * @var	string
 	 */
 	public $cacheClass = 'wcf\system\cache\builder\OptionCacheBuilder';
 	
-	public $categoryFilter = array(
-		'profile.aboutMe',
-		'profile.personal',
-		'profile.contact'
-	);
-	
+	/**
+	 * user option handler object
+	 * @var	wcf\system\option\user\UserOptionHandler
+	 */
 	public $optionHandler = null;
 	
 	/**
@@ -63,6 +61,6 @@ class AboutUserProfileMenuContent extends SingletonFactory implements IUserProfi
 			'options' => $options
 		));
 		
-		return WCF::getTPL()->fetch('userProfileOverview');
+		return WCF::getTPL()->fetch('userProfileAbout');
 	}
 }

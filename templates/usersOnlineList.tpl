@@ -96,7 +96,7 @@
 				</div>
 			</li>
 		{/capture}
-	
+		
 		{assign var=usersOnline value=$usersOnline+1}
 	{elseif $user->spiderID}
 		{* search robot *}
@@ -115,7 +115,7 @@
 				</div>
 			</li>
 		{/capture}
-	
+		
 		{assign var=robotsOnline value=$robotsOnline+1}
 	{else}
 		{* unregistered *}
@@ -134,7 +134,7 @@
 				</div>
 			</li>
 		{/capture}
-	
+		
 		{assign var=guestsOnline value=$guestsOnline+1}
 	{/if}
 {/foreach}

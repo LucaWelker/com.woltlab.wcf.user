@@ -28,7 +28,7 @@ use wcf\util\UserRegistrationUtil;
  */
 class RegisterForm extends UserAddForm {
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
@@ -119,7 +119,7 @@ class RegisterForm extends UserAddForm {
 	public function readData() {
 		parent::readData();
 		
-		if (!count($_POST)) {
+		if (empty($_POST)) {
 			$this->languageID = WCF::getLanguage()->languageID;
 			
 			if (WCF::getSession()->getVar('__username')) {

@@ -3,7 +3,7 @@
 		{foreach from=$categoryLevel1[categories] item=categoryLevel2}
 			<fieldset>
 				<legend>{lang}wcf.user.option.category.{@$categoryLevel2[object]->categoryName}{/lang}</legend>
-								
+				
 				{if $categoryLevel2[object]->categoryName == 'settings.general' && $availableLanguages|count > 1}
 					<dl>
 						<dt><label for="languageID">{lang}wcf.user.language{/lang}</label></dt>
@@ -11,7 +11,7 @@
 							{htmlOptions options=$availableLanguages selected=$languageID name=languageID id=languageID disableEncoding=true}
 						</dd>
 					</dl>
-										
+					
 					{if $availableContentLanguages|count > 1}
 						<dl>
 							<dt>
@@ -32,7 +32,7 @@
 						</dl>
 					{/if}
 				{/if}
-								
+				
 				{include file='userProfileOptionFieldList' options=$categoryLevel2[options] langPrefix='wcf.user.option.'}
 			</fieldset>
 		{/foreach}

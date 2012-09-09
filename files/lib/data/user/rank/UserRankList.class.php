@@ -12,9 +12,4 @@ use wcf\data\DatabaseObjectList;
  * @subpackage	data.user.rank
  * @category 	Community Framework
  */
-class UserRankList extends DatabaseObjectList {
-	/**
-	 * @see	wcf\data\DatabaseObjectList::$className
-	 */
-	public $className = 'wcf\data\user\rank\UserRank';
-}
+class UserRankList extends DatabaseObjectList { }

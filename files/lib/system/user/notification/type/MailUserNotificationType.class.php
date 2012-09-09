@@ -21,16 +21,17 @@ use wcf\util\StringUtil;
  */
 class MailUserNotificationType extends AbstractObjectTypeProcessor implements IUserNotificationType {        
 	/**
-	 * @see wcf\system\user\notification\type\IUserNotificationType::send()
+	 * @see	wcf\system\user\notification\type\IUserNotificationType::send()
 	 */
-        public function send(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
-                // get message
+	public function send(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
+		// get message
 		$message = $event->getEmailMessage($this, array(
 			'user' => $user,
 			'pageURL' => FileUtil::addTrailingSlash(PAGE_URL)
-                ));
+		));
 		
-                // append notification mail footer
+		
+		// append notification mail footer
 		$token = $user->notificationMailToken;
 		if (!$token) {
 			// generate token if not present
@@ -38,26 +39,26 @@ class MailUserNotificationType extends AbstractObjectTypeProcessor implements IU
 			$editor = new UserEditor($user->getDecoratedObject());
 			$editor->updateUserOptions(array('notificationMailToken' => $token));
 		}
-                $message .= "\n".$user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.footer', array(
+		$message .= "\n".$user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.footer', array(
 			'user' => $user,
 			'pageURL' => FileUtil::addTrailingSlash(PAGE_URL),
 			'token' => $token,
 			'notification' => $notification
-                ));
+		));
 		
-                // use email title and strip its HTML
+		// use email title and strip its HTML
 		$subject = StringUtil::stripHTML($event->getEmailTitle());
 		
 		// build mail
 		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.subject', array('title' => $subject)), $message);
-                $mail->send();
-        }
+		$mail->send();
+	}
 	
 	/**
-	 * @see wcf\system\user\notification\type\IUserNotificationType::revoke()
+	 * @see	wcf\system\user\notification\type\IUserNotificationType::revoke()
 	 */
-        public function revoke(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
-        	// unsupported
-        	return;
-        }
+	public function revoke(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
+		// unsupported
+		return;
+	}
 }

@@ -33,13 +33,13 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	
 	/**
 	 * event icon
-	 * @var string
+	 * @var	string
 	 */
 	protected $icon = '';
 	
 	/**
 	 * user profile
-	 * @var wcf\data\user\UserProfile
+	 * @var	wcf\data\user\UserProfile
 	 */
 	protected $userProfile = null;
 	

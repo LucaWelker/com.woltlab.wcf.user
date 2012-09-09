@@ -8,32 +8,32 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputEmail is an implementation of IUserOptionOutput for the output of a user email.
- *
+ * User option outpur implementation for the output of a user's email address.
+ * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user
  * @category 	Community Framework
  */
-class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputContactInformation {
+class EmailUserOptionOutput implements IUserOptionOutput, IUserOptionOutputContactInformation {
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	public function getShortOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user, 'S');
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getMediumOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getMediumOutput()
 	 */
 	public function getMediumOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user);
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
 		if (!$user->email) return '';
@@ -73,7 +73,7 @@ class UserOptionOutputEmail implements IUserOptionOutput, IUserOptionOutputConta
 	/**
 	 * Generates an image button.
 	 * 
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	protected function getImage(User $user, $imageSize = 'M') {
 		if (!$user->email) return '';

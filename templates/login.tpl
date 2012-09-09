@@ -34,7 +34,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.user.login.data{/lang}</legend>
-	
+			
 			<dl{if $errorField == 'username'} class="formError"{/if}>
 				<dt><label for="username">{lang}wcf.user.usernameOrEmail{/lang}</label></dt>
 				<dd>

@@ -3,7 +3,6 @@ namespace wcf\data\user\online;
 use wcf\data\session\SessionList;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
-use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -46,7 +45,7 @@ class UsersOnlineList extends SessionList {
 	public $usersOnlineMarkings = null;
 	
 	/**
-	 * Creates a new UserFollowingList object.
+	 * @see	wcf\data\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
 		parent::__construct();

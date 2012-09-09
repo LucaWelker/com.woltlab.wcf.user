@@ -7,7 +7,7 @@ use wcf\system\user\notification\event\IUserNotificationEvent;
 
 /**
  * This interface should be implemented by every user notification type.
- *
+ * 
  * @author	Marcel Werk, Oliver Kliebisch
  * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -18,7 +18,7 @@ use wcf\system\user\notification\event\IUserNotificationEvent;
 interface IUserNotificationType extends IDatabaseObjectProcessor {
 	/**
 	 * Sends the notification using this notification transport type.
-	 *
+	 * 
 	 * @param	wcf\data\user\notification\UserNotification			$notification
 	 * @param	wcf\data\user\notification\recipient\UserNotificationRecipient	$user
 	 * @param	wcf\system\user\notification\event\IUserNotificationEvent	$event
@@ -27,7 +27,7 @@ interface IUserNotificationType extends IDatabaseObjectProcessor {
 
 	/**
 	 * Tries to revoke the notification. This might not be applicable for all notification types.
-	 *
+	 * 
 	 * @param	wcf\data\user\notification\UserNotification			$notification
 	 * @param	wcf\data\user\notification\recipient\UserNotificationRecipient	$user
 	 * @param	wcf\system\user\notification\event\IUserNotificationEvent		$event

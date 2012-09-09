@@ -12,9 +12,4 @@ use wcf\data\DatabaseObjectList;
  * @subpackage	data.user.menu.item
  * @category 	Community Framework
  */
-class UserMenuItemList extends DatabaseObjectList {
-	/**
-	 * @see	wcf\data\DatabaseObjectList::$className
-	 */
-	public $className = 'wcf\data\user\menu\item\UserMenuItem';
-}
+class UserMenuItemList extends DatabaseObjectList { }

@@ -6,7 +6,7 @@ use wcf\data\user\notification\recipient\UserNotificationRecipientList;
  * Extends the user list to provide special functions for handling recipients of user notifications.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.notification
  * @subpackage	data.user.notification.event.recipient
@@ -14,7 +14,7 @@ use wcf\data\user\notification\recipient\UserNotificationRecipientList;
  */
 class UserNotificationEventRecipientList extends UserNotificationRecipientList {
 	/**
-	 * Creates a new UserNotificationEventRecipientList object.
+	 * @see wcf\data\DatabaseObjectList\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
 		parent::__construct();

@@ -15,11 +15,6 @@ use wcf\data\DatabaseObjectList;
  */
 class UserProfileVisitorList extends DatabaseObjectList {
 	/**
-	 * @see	wcf\data\DatabaseObjectList::$className
-	 */
-	public $className = 'wcf\data\user\profile\visitor\UserProfileVisitor';
-	
-	/**
 	 * @see	wcf\data\DatabaseObjectList::$objectClassName
 	 */
 	public $objectClassName = 'wcf\data\user\User';
@@ -30,14 +25,14 @@ class UserProfileVisitorList extends DatabaseObjectList {
 	public $sqlOrderBy = 'user_profile_visitor.time DESC';
 	
 	/**
-	 * Creates a new UserProfileVisitorList object.
+	 * @see	wcf\data\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
 		parent::__construct();
-	
+		
 		$this->sqlSelects .= "user_table.username, user_table.email, user_table.disableAvatar";
 		$this->sqlSelects .= ", user_avatar.*";
-	
+		
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = user_profile_visitor.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
 	}
@@ -47,7 +42,7 @@ class UserProfileVisitorList extends DatabaseObjectList {
 	 */
 	public function readObjects() {
 		parent::readObjects();
-	
+		
 		foreach ($this->objects as &$object) {
 			$object = new UserProfile($object);
 		}

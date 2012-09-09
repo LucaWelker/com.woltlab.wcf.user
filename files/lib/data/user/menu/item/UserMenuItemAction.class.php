@@ -12,9 +12,4 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @subpackage	data.user.menu.item
  * @category 	Community Framework
  */
-class UserMenuItemAction extends AbstractDatabaseObjectAction {
-	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::$className
-	 */
-	protected $className = 'wcf\data\user\menu\item\UserMenuItemEditor';
-}
+class UserMenuItemAction extends AbstractDatabaseObjectAction { }

@@ -68,7 +68,7 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction {
 		if ($this->objectType === null) {
 			throw new UserInputException('objectTypeID');
 		}
-	
+		
 		// parse structure
 		if (isset($this->parameters['data']) & isset($this->parameters['data']['structure']) && isset($this->parameters['data']['structure'][0])) {
 			$this->boxStructure = ArrayUtil::toIntegerArray($this->parameters['data']['structure'][0]);

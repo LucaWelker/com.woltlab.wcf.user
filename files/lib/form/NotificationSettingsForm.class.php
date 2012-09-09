@@ -17,7 +17,7 @@ use wcf\system\WCF;
  */
 class NotificationSettingsForm extends AbstractForm {
 	/**
-	 * @see wcf\page\AbstractPage::$loginRequired
+	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
 	
@@ -40,7 +40,7 @@ class NotificationSettingsForm extends AbstractForm {
 	public $types = array();
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -63,7 +63,7 @@ class NotificationSettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -72,7 +72,7 @@ class NotificationSettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -111,13 +111,13 @@ class NotificationSettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
 		
 		// default values
-		if (!count($_POST)) {
+		if (empty($_POST)) {
 			// get user settings
 			$eventIDs = array();
 			foreach ($this->events as $events) {
@@ -153,7 +153,7 @@ class NotificationSettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -166,7 +166,7 @@ class NotificationSettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		// set active tab
@@ -176,7 +176,7 @@ class NotificationSettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();

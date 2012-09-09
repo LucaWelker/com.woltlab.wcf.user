@@ -25,7 +25,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.user.newActivationCode{/lang}</legend>
-		
+			
 			<dl{if $errorField == 'username'} class="formError"{/if}>
 				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
 				<dd>
@@ -43,7 +43,7 @@
 					{/if}
 				</dd>
 			</dl>
-	
+			
 			<dl{if $errorField == 'password'} class="formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 				<dd>
@@ -59,7 +59,7 @@
 					{/if}
 				</dd>
 			</dl>
-				
+			
 			<dl{if $errorField == 'email'} class="formError"{/if}>
 				<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
 				<dd>

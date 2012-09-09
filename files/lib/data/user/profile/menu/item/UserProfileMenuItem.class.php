@@ -8,7 +8,7 @@ use wcf\util\ClassUtil;
  * Represents an user profile menu item.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.profile.menu.item
@@ -52,11 +52,11 @@ class UserProfileMenuItem extends DatabaseObject {
 			}
 			
 			if (!ClassUtil::isInstanceOf($this->className, 'wcf\system\SingletonFactory')) {
-				throw new SystemException("'".$this->className."' should extend wcf\system\SingletonFactory");
+				throw new SystemException("'".$this->className."' has to extend 'wcf\system\SingletonFactory'");
 			}
 			
 			if (!ClassUtil::isInstanceOf($this->className, 'wcf\system\menu\user\profile\content\IUserProfileMenuContent')) {
-				throw new SystemException("'".$this->className."' should implement wcf\system\menu\user\profile\content\IUserProfileMenuContent");
+				throw new SystemException("'".$this->className."' has to implement 'wcf\system\menu\user\profile\content\IUserProfileMenuContent'");
 			}
 			
 			$this->contentManager = call_user_func(array($this->className, 'getInstance'));

@@ -12,9 +12,4 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @subpackage	data.user.profile.visitor
  * @category 	Community Framework
  */
-class UserProfileVisitorAction extends AbstractDatabaseObjectAction {
-	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
-	 */
-	public $className = 'wcf\data\user\profile\visotor\UserProfileVisitorEditor';
-}
+class UserProfileVisitorAction extends AbstractDatabaseObjectAction { }

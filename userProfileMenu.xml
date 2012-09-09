@@ -5,7 +5,7 @@
 			<classname>wcf\system\menu\user\profile\content\AboutUserProfileMenuContent</classname>
 			<showorder>2</showorder>
 		</userprofilemenuitem>
-
+		
 		<userprofilemenuitem name="recentActivity">
 			<classname>wcf\system\menu\user\profile\content\RecentActivityUserProfileMenuContent</classname>
 			<showorder>1</showorder>

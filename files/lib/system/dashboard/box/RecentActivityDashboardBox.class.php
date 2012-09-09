@@ -19,7 +19,7 @@ use wcf\system\WCF;
 class RecentActivityDashboardBox extends AbstractDashboardBoxSidebar {
 	/**
 	 * recent activity list
-	 * @var wcf\data\user\activity\event\ViewableUserActivityEventList
+	 * @var	wcf\data\user\activity\event\ViewableUserActivityEventList
 	 */
 	public $recentActivityList = null;
 	

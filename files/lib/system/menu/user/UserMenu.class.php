@@ -31,7 +31,7 @@ class UserMenu extends TreeMenu {
 	}
 	
 	/**
-	 * @see wcf\system\menu\TreeMenu::checkMenuItem()
+	 * @see	wcf\system\menu\TreeMenu::checkMenuItem()
 	 */
 	protected function checkMenuItem(ITreeMenuItem $item) {
 		if (!parent::checkMenuItem($item)) return false;

@@ -5,13 +5,18 @@ namespace wcf\util;
  * Contains user registration related functions.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	util
  * @category 	Community Framework
  */
-class UserRegistrationUtil {	
+final class UserRegistrationUtil {
+	/**
+	 * Disables creation of objects of this class.
+	 */
+	private function __construct() { }
+	
 	/**
 	 * Returns true, if the given name is a valid username.
 	 * 

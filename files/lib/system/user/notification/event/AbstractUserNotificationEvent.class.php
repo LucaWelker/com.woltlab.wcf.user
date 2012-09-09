@@ -8,7 +8,7 @@ use wcf\system\user\notification\object\IUserNotificationObject;
 
 /**
  * Provides default a implementation for user notification events.
- *
+ * 
  * @author	Marcel Werk, Oliver Kliebisch
  * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -18,7 +18,7 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  */
 abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator implements IUserNotificationEvent {
 	/**
-	 * @see wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\user\notification\event\UserNotificationEvent';
 	
@@ -36,13 +36,13 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	
 	/**
 	 * user notification object
-	 * @var wcf\system\user\notification\object\IUserNotificationObject
+	 * @var	wcf\system\user\notification\object\IUserNotificationObject
 	 */
 	protected $userNotificationObject = null;
 	
 	/**
 	 * additional data for this event
-	 * @var array<mixed>
+	 * @var	array<mixed>
 	 */
 	protected $additionalData = array();
 	
@@ -60,7 +60,7 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	}
 	
 	/**
-	 * @see wcf\system\user\notification\event\IUserNotificationEvent::setObject()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::setObject()
 	 */
 	public function setObject(UserNotification $notification, IUserNotificationObject $object, UserProfile $author, array $additionalData = array()) {
 		$this->notification = $notification;
@@ -71,6 +71,9 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 		$this->addDefaultAction();
 	}
 	
+	/**
+	 * Adds default event action to action list.
+	 */
 	protected function addDefaultAction() {
 		$this->actions[] = array(
 			'actionName' => 'markAsConfirmed',
@@ -81,7 +84,7 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	}
 	
 	/**
-	 * @see wcf\system\user\notification\event\IUserNotificationEvent::supportsNotificationType()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::supportsNotificationType()
 	 */
 	public function supportsNotificationType(IUserNotificationType $notificationType) {
 		return true;
@@ -95,14 +98,14 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	}
 	
 	/**
-	 * @see wcf\system\user\notification\event\IUserNotificationEvent::getAuthor()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getAuthor()
 	 */
 	public function getAuthor() {
 		return $this->author;
 	}
 	
 	/**
-	 * @see wcf\system\user\notification\event\IUserNotificationEvent::isVisible()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::isVisible()
 	 */
 	public function isVisible() {
 		return true;

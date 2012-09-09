@@ -38,7 +38,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend><label for="password">{lang}wcf.user.password{/lang}</label></legend>
-				
+			
 			<dl{if $errorField == 'password'} class="formError"{/if}>
 				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
 				<dd>
@@ -61,7 +61,7 @@
 				</dd>
 			</dl>
 		</fieldset>
-			
+		
 		{if $__wcf->getSession()->getPermission('user.profile.canRename')}
 			<fieldset>
 				<legend><label for="username">{lang}wcf.user.changeUsername{/lang}</label></legend>
@@ -86,10 +86,10 @@
 				</dl>
 			</fieldset>
 		{/if}
-			
+		
 		<fieldset>
 			<legend><label for="newPassword">{lang}wcf.user.changePassword{/lang}</label></legend>
-				
+			
 			<dl{if $errorField == 'newPassword'} class="formError"{/if}>
 				<dt><label for="newPassword">{lang}wcf.user.newPassword{/lang}</label></dt>
 				<dd>
@@ -103,7 +103,7 @@
 					{/if}
 				</dd>
 			</dl>
-				
+			
 			<dl{if $errorField == 'confirmNewPassword'} class="formError"{/if}>
 				<dt><label for="confirmNewPassword">{lang}wcf.user.confirmPassword{/lang}</label></dt>
 				<dd>
@@ -119,11 +119,11 @@
 			</dl>
 			
 		</fieldset>
-			
+		
 		{if $__wcf->getSession()->getPermission('user.profile.canChangeEmail')}
 			<fieldset>
 				<legend><label for="email">{lang}wcf.user.changeEmail{/lang}</label></legend>
-					
+				
 				<dl{if $errorField == 'email'} class="formError"{/if}>
 					<dt><label for="email">{lang}wcf.user.newEmail{/lang}</label></dt>
 					<dd>
@@ -138,7 +138,7 @@
 						{/if}
 					</dd>
 				</dl>
-					
+				
 				<dl{if $errorField == 'confirmEmail'} class="formError"{/if}>
 					<dt><label for="confirmEmail">{lang}wcf.user.confirmEmail{/lang}</label></dt>
 					<dd>
@@ -151,7 +151,7 @@
 						{/if}
 					</dd>
 				</dl>
-					
+				
 				{if REGISTER_ACTIVATION_METHOD == 1 && $__wcf->getUser()->reactivationCode != 0}
 					<dl>
 						<dd>

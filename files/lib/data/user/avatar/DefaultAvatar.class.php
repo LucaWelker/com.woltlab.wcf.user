@@ -15,7 +15,7 @@ use wcf\system\WCF;
 class DefaultAvatar implements IUserAvatar {
 	/**
 	 * image size
-	 * @var integer
+	 * @var	integer
 	 */
 	public $size = 150;
 	

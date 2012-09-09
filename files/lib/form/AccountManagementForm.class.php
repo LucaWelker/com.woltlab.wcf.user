@@ -22,58 +22,71 @@ use wcf\util\UserUtil;
  */
 class AccountManagementForm extends AbstractSecureForm {
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
 	/**
-	 * @see wcf\page\AbstractPage::$loginRequired
+	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
 	
 	/**
 	 * user password
-	 * @var string
+	 * @var	string
 	 */
 	public $password = '';
 	
 	/**
 	 * new email address
-	 * @var string
+	 * @var	string
 	 */
 	public $email = '';
 	
 	/**
 	 * confirmed new email address
-	 * @var string
+	 * @var	string
 	 */
 	public $confirmEmail = '';
 	
 	/**
 	 * new password
-	 * @var string
+	 * @var	string
 	 */
 	public $newPassword = '';
 	
 	/**
 	 * confirmed new password
-	 * @var string
+	 * @var	string
 	 */
 	public $confirmNewPassword = '';
 	
 	/**
 	 * new user name
-	 * @var string
+	 * @var	string
 	 */
 	public $username = '';
 	
-	// quit
+	/**
+	 * indicates if the user quit
+	 * @var	integer
+	 */
 	public $quit = 0;
+	
+	/**
+	 * indicates if the user canceled their quit
+	 * @var	integer
+	 */
 	public $cancelQuit = 0;
+	
+	/**
+	 * timestamp at which the user quit
+	 * @var	integer
+	 */
 	public $quitStarted = 0;
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -82,7 +95,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -98,7 +111,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -130,6 +143,7 @@ class AccountManagementForm extends AbstractSecureForm {
 				}
 			}
 		}
+		
 		// password
 		if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
 			if (empty($this->newPassword)) {
@@ -148,12 +162,13 @@ class AccountManagementForm extends AbstractSecureForm {
 				throw new UserInputException('confirmNewPassword', 'notEqual');
 			}
 		}
+		
 		// email
 		if (WCF::getSession()->getPermission('user.profile.canChangeEmail') && $this->email != WCF::getUser()->email && $this->email != WCF::getUser()->newEmail) {
 			if (empty($this->email)) {	
 				throw new UserInputException('email');
 			}
-		
+			
 			// checks if only letter case has changed
 			if (StringUtil::toLowerCase($this->email) != StringUtil::toLowerCase(WCF::getUser()->email)) {
 				// check for valid email (one @ etc.)
@@ -175,20 +190,20 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
 		
 		// default values
-		if (!count($_POST)) {
+		if (empty($_POST)) {
 			$this->username = WCF::getUser()->username;
 			$this->email = $this->confirmEmail = WCF::getUser()->email;
 		}
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -208,7 +223,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		// set active tab
@@ -218,7 +233,7 @@ class AccountManagementForm extends AbstractSecureForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();

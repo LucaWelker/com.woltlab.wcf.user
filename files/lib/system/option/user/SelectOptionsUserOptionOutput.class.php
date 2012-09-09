@@ -7,32 +7,32 @@ use wcf\util\OptionUtil;
 use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputSelectOptions is an implementation of IUserOptionOutput for the output of a date input.
+ * User option output implementation for the output of select options.
  *
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user
  * @category 	Community Framework
  */
-class UserOptionOutputSelectOptions implements IUserOptionOutput {
+class SelectOptionsUserOptionOutput implements IUserOptionOutput {
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	public function getShortOutput(User $user, UserOption $option, $value) {
 		return $this->getOutput($user, $option, $value);
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getMediumOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getMediumOutput()
 	 */
 	public function getMediumOutput(User $user, UserOption $option, $value) {
 		return $this->getOutput($user, $option, $value);
 	}
 
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
 		$result = self::getResult($option, $value);
@@ -53,6 +53,13 @@ class UserOptionOutputSelectOptions implements IUserOptionOutput {
 		}
 	}
 	
+	/**
+	 * Returns the selected option value(s) for output.
+	 * 
+	 * @param	wcf\data\user\option\UserOption		$option
+	 * @param	string					$value
+	 * @return	mixed
+	 */
 	protected static function getResult(UserOption $option, $value) {
 		$options = OptionUtil::parseSelectOptions($option->selectOptions);
 		

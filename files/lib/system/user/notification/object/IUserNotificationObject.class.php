@@ -5,7 +5,7 @@ use wcf\data\ITitledDatabaseObject;
 
 /**
  * This interface should be implemented by every object which is part of a notification.
- *
+ * 
  * @author	Marcel Werk, Oliver Kliebisch
  * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -16,21 +16,21 @@ use wcf\data\ITitledDatabaseObject;
 interface IUserNotificationObject extends IDatabaseObjectProcessor, ITitledDatabaseObject {
 	/**
 	 * Returns the ID of this object.
-	 *
+	 * 
 	 * @return	integer
 	 */
 	public function getObjectID();
 
 	/**
 	 * Returns the url of this object.
-	 *
+	 * 
 	 * @return	string
 	 */
 	public function getURL();
 	
 	/**
 	 * Returns the user id of the author of this object.
-	 *
+	 * 
 	 * @return	integer
 	 */
 	public function getAuthorID();

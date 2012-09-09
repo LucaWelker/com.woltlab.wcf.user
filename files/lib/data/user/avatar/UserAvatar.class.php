@@ -15,6 +15,10 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class UserAvatar extends DatabaseObject implements IUserAvatar {
+	/**
+	 * needed avatar thumbnail sizes
+	 * @var	array<integer>
+	 */
 	public static $avatarThumbnailSizes = array(16, 24, 32, 48, 96, 128);
 	
 	/**
@@ -31,7 +35,7 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	 * Returns the physical location of this avatar.
 	 * 
 	 * @param	integer		$size
-	 * @return string
+	 * @return	string
 	 */
 	public function getLocation($size = null) {
 		return WCF_DIR . 'images/avatars/' . $this->getFilename($size);

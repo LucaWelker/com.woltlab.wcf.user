@@ -19,7 +19,7 @@
 				<parent>user.general</parent>
 			</category>
 		</categories>
-
+		
 		<options>
 			<option name="module_gravatar">
 				<categoryname>module.user</categoryname>

@@ -8,7 +8,7 @@ use wcf\system\WCF;
  * Caches the user profile menu items.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	system.cache.builder
@@ -16,12 +16,12 @@ use wcf\system\WCF;
  */
 class UserProfileMenuCacheBuilder implements ICacheBuilder {
 	/**
-	 * @see wcf\system\cache\ICacheBuilder::getData()
+	 * @see	wcf\system\cache\ICacheBuilder::getData()
 	 */
 	public function getData(array $cacheResource) {
-		list($cache, $packageID) = explode('-', $cacheResource['cache']); 
+		list(, $packageID) = explode('-', $cacheResource['cache']); 
 		$data = array();
-
+		
 		// get all menu items and filter menu items with low priority
 		$sql = "SELECT		menuItem, menuItemID 
 			FROM		wcf".WCF_N."_user_profile_menu_item menu_item

@@ -24,7 +24,7 @@ class DashboardOptionForm extends ACPForm {
 	public $activeMenuItem = 'wcf.acp.menu.link.dashboard';
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.content.dashboard.canEditDashboard');
 	

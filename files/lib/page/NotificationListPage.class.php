@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class NotificationListPage extends AbstractPage {
 	/**
-	 * @see wcf\page\AbstractPage::$loginRequired
+	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
 	
@@ -27,7 +27,7 @@ class NotificationListPage extends AbstractPage {
 	public $notifications = array();
 	
 	/**
-	 * @see wcf\page\AbstractPage::readData()
+	 * @see	wcf\page\AbstractPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -36,7 +36,7 @@ class NotificationListPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see wcf\page\AbstractPage::assignVariables()
+	 * @see	wcf\page\AbstractPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -47,7 +47,7 @@ class NotificationListPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see wcf\page\Page::show()
+	 * @see	wcf\page\Page::show()
 	 */
 	public function show() {
 		// set active tab

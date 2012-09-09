@@ -6,13 +6,18 @@ use wcf\data\user\UserProfile;
  * Represents a list of followers.
  * 
  * @author 	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.follow
  * @category 	Community Framework
  */
 class UserFollowerList extends UserFollowList {
+	/**
+	 * @see	wcf\data\DatabaseObjectList::$className
+	 */
+	public $className = 'wcf\data\user\follow\UserFollow';
+	
 	/**
 	 * @see	wcf\data\DatabaseObjectList::$objectClassName
 	 */
@@ -24,7 +29,7 @@ class UserFollowerList extends UserFollowList {
 	public $sqlOrderBy = 'user_follow.time DESC';
 	
 	/**
-	 * Creates a new UserFollowerList object.
+	 * @see	wcf\data\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
 		parent::__construct();

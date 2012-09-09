@@ -27,12 +27,12 @@ use wcf\system\WCF;
  */
 class UserPage extends AbstractPage {
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('user.profile.canViewUserProfile');
 	
@@ -55,42 +55,37 @@ class UserPage extends AbstractPage {
 	public $profileContent = '';
 	
 	/**
-	 * @see wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'user';
-	
-	/**
 	 * user id
-	 * @var integer
+	 * @var	integer
 	 */
 	public $userID = 0;
 	
 	/**
 	 * user object
-	 * @var wcf\data\user\UserProfile
+	 * @var	wcf\data\user\UserProfile
 	 */
 	public $user = null;
 	
 	/**
 	 * follower list
-	 * @var wcf\data\user\follow\UserFollowerList
+	 * @var	wcf\data\user\follow\UserFollowerList
 	 */
 	public $followerList = null;
 	
 	/**
 	 * following list
-	 * @var wcf\data\user\follow\UserFollowingList
+	 * @var	wcf\data\user\follow\UserFollowingList
 	 */
 	public $followingList = null;
 	
 	/**
 	 * visitor list
-	 * @var wcf\data\user\profile\visitor\UserProfileVisitorList
+	 * @var	wcf\data\user\profile\visitor\UserProfileVisitorList
 	 */
 	public $visitorList = null;
 		
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -105,7 +100,7 @@ class UserPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -117,7 +112,7 @@ class UserPage extends AbstractPage {
 		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
 		$contentManager = $activeMenuItem->getContentManager();
 		$this->profileContent = $contentManager->getContent($this->user->userID);
-		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.profileEditableContent', 'com.woltlab.wcf.user.profileOverview');
+		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.profileEditableContent', 'com.woltlab.wcf.user.profileAbout');
 		
 		// get followers
 		$this->followerList = new UserFollowerList();
@@ -139,7 +134,7 @@ class UserPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -192,14 +187,14 @@ class UserPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see wcf\page\ITrackablePage::getObjectType()
+	 * @see	wcf\page\ITrackablePage::getObjectType()
 	 */
 	public function getObjectType() {
 		return 'com.woltlab.wcf.user';
 	}
 	
 	/**
-	 * @see wcf\page\ITrackablePage::getObjectID()
+	 * @see	wcf\page\ITrackablePage::getObjectID()
 	 */
 	public function getObjectID() {
 		return $this->userID;
