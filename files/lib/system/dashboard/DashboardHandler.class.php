@@ -141,8 +141,8 @@ class DashboardHandler extends SingletonFactory {
 			$conditions->add("object_type_definition.definitionName = ?", array('com.woltlab.wcf.user.dashboardContainer'));
 			
 			$sql = "SELECT		object_type.objectTypeID
-				FROM		wcf1_object_type object_type
-				LEFT JOIN	wcf1_object_type_definition object_type_definition
+				FROM		wcf".WCF_N."_object_type object_type
+				LEFT JOIN	wcf".WCF_N."_object_type_definition object_type_definition
 				ON		(object_type_definition.definitionID = object_type.definitionID)
 				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
