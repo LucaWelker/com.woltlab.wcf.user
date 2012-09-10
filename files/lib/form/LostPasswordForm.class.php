@@ -22,35 +22,35 @@ use wcf\util\StringUtil;
  */
 class LostPasswordForm extends RecaptchaForm {
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
 	/**
 	 * username
-	 * @var string
+	 * @var	string
 	 */
 	public $username = '';
 	
 	/**
 	 * email address
-	 * @var string
+	 * @var	string
 	 */
 	public $email = '';
 	
 	/**
 	 * user object
-	 * @var wcf\data\user\User
+	 * @var	wcf\data\user\User
 	 */
 	public $user;
 	
 	/**
-	 * @see wcf\form\RecaptchaForm::$useCaptcha
+	 * @see	wcf\form\RecaptchaForm::$useCaptcha
 	 */
 	public $useCaptcha = LOST_PASSWORD_USE_CAPTCHA;
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -60,7 +60,7 @@ class LostPasswordForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -89,7 +89,7 @@ class LostPasswordForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -119,7 +119,7 @@ class LostPasswordForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

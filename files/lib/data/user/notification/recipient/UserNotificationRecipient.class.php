@@ -6,10 +6,11 @@ use wcf\data\DatabaseObjectDecorator;
 use wcf\system\WCF;
 
 /**
- * Decorates the user object to provide special functions for handling recipients of user notifications.
+ * Decorates the user object to provide special functions for handling recipients
+ * of user notifications.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.notification
  * @subpackage	data.user.notification.recipient
@@ -17,7 +18,7 @@ use wcf\system\WCF;
  */
 class UserNotificationRecipient extends DatabaseObjectDecorator {
 	/**
-	 * @see	DatabaseObjectDecorator::$baseClass
+	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\user\User';
 	
@@ -48,7 +49,7 @@ class UserNotificationRecipient extends DatabaseObjectDecorator {
 	}
 	
 	/**
-	 * Returns the enabled notification types for the given event.
+	 * Returns the enabled notification types for the event with the given id.
 	 * 
 	 * @param	integer		$eventID
 	 * @return	array<wcf\system\user\notification\type\IUserNotificationType>

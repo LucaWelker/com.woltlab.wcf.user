@@ -15,15 +15,13 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class UserMenuCacheBuilder implements ICacheBuilder {
-	protected $optionCategoryStructure = array();
-
 	/**
 	 * @see wcf\system\cache\ICacheBuilder::getData()
 	 */
 	public function getData(array $cacheResource) {
-		list($cache, $packageID) = explode('-', $cacheResource['cache']); 
+		list(, $packageID) = explode('-', $cacheResource['cache']); 
 		$data = array();
-
+		
 		// get all option categories and filter categories with low priority
 		$sql = "SELECT		categoryName, categoryID
 			FROM		wcf".WCF_N."_user_option_category option_category

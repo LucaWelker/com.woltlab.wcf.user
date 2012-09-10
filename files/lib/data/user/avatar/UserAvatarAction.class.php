@@ -22,11 +22,6 @@ use wcf\util\FileUtil;
  */
 class UserAvatarAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
-	 */
-	public $className = 'wcf\data\user\avatar\UserAvatarEditor';
-	
-	/**
 	 * Validates the upload action.
 	 */
 	public function validateUpload() {
@@ -50,7 +45,6 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 		// save files
 		$files = $this->parameters['__files']->getFiles();
 		$file = $files[0];
-		$result = array();
 		
 		try {
 			if (!$file->getValidationErrorType()) {
@@ -141,10 +135,10 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * Generates thumbnails.
+	 * Generates the thumbnails of the avatars in all needed sizes.
 	 */
 	public function generateThumbnails() {
-		if (!count($this->objects)) {
+		if (empty($this->objects)) {
 			$this->readObjects();
 		}
 		

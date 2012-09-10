@@ -293,7 +293,7 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 		this._isIgnoredUser = data.returnValues.isIgnoredUser;
 		this._updateButton();
 	},
-
+	
 	/**
 	 * Updates button label and inserts it if not exists.
 	 */
@@ -317,25 +317,25 @@ WCF.User.Profile.TabMenu = Class.extend({
 	 * @var	object
 	 */
 	_hasContent: { },
-
+	
 	/**
 	 * profile content
 	 * @var	jQuery
 	 */
 	_profileContent: null,
-
+	
 	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
 	 */
 	_proxy: null,
-
+	
 	/**
 	 * target user id
 	 * @var	integer
 	 */
 	_userID: 0,
-
+	
 	/**
 	 * Initializes the tab menu loader.
 	 * 
@@ -344,14 +344,14 @@ WCF.User.Profile.TabMenu = Class.extend({
 	init: function(userID) {
 		this._profileContent = $('#profileContent');
 		this._userID = userID;
-
+		
 		var $activeMenuItem = this._profileContent.data('active');
 		var $enableProxy = false;
-
+		
 		// fetch content state
 		this._profileContent.find('div.tabMenuContent').each($.proxy(function(index, container) {
 			var $containerID = $(container).wcfIdentify();
-
+			
 			if ($activeMenuItem === $containerID) {
 				this._hasContent[$containerID] = true;
 			}
@@ -360,17 +360,17 @@ WCF.User.Profile.TabMenu = Class.extend({
 				$enableProxy = true;
 			}
 		}, this));
-
+		
 		// enable loader if at least one container is empty
 		if ($enableProxy) {
 			this._proxy = new WCF.Action.Proxy({
 				success: $.proxy(this._success, this)
 			});
-
+			
 			this._profileContent.bind('wcftabsselect', $.proxy(this._loadContent, this));
 		}
 	},
-
+	
 	/**
 	 * Prepares to load content once tabs are being switched.
 	 * 
@@ -396,7 +396,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 			this._proxy.sendRequest();
 		}
 	},
-
+	
 	/**
 	 * Shows previously requested content.
 	 * 
@@ -431,43 +431,43 @@ WCF.User.Profile.Editor.Handler = {
 	 * @var	array<WCF.User.Profile.Editor.Base>
 	 */
 	_callbacks: [ ],
-
+	
 	/**
 	 * initialization state
 	 * @var	boolean
 	 */
 	_didInit: false,
-
+	
 	/**
 	 * number of active editors
 	 * @var	integer
 	 */
 	_loading: 0,
-
+	
 	/**
 	 * currently active action
 	 * @var	string
 	 */
 	_pendingAction: '',
-
+	
 	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
 	 */
 	_proxy: null,
-
+	
 	/**
 	 * user interface elements
 	 * @var	object
 	 */
 	_ui: {},
-
+	
 	/**
 	 * target user id
 	 * @var	integer
 	 */
 	_userID: 0,
-
+	
 	/**
 	 * Initializes the user profile editor handler.
 	 * 
@@ -498,25 +498,25 @@ WCF.User.Profile.Editor.Handler = {
 			}, 250);
 		}
 	},
-
+	
 	/**
 	 * Prepares user interface elements on init.
 	 */
 	_prepareUI: function() {
 		var $buttonContainer = $('#profileButtonContainer');
-
+		
 		// create interface elements
 		this._ui = {
 			buttons: {
 				beginEdit: $('<li class="button">'+WCF.Language.get('wcf.user.editProfile')+'</li>').data('action', 'beginEdit').appendTo($buttonContainer)
 			}
 		};
-
+		
 		// bind event listener
 		this._ui.buttons.beginEdit.click($.proxy(this._click, this));
 		// toggle buttons
 	},
-
+	
 	/**
 	 * Handles button clicks.
 	 * 
@@ -529,14 +529,14 @@ WCF.User.Profile.Editor.Handler = {
 			case 'beginEdit':
 				this._beginEdit();
 			break;
-
+			
 			case 'restore':
 				this._restore();
 				
 				// toggle button
 				this._ui.buttons.beginEdit.show();
 			break;
-
+			
 			case 'save':
 				this._save();
 
@@ -557,7 +557,7 @@ WCF.User.Profile.Editor.Handler = {
 			restore: $('<button>'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').click($.proxy(this._click, this))
 		};
 	},
-
+	
 	/**
 	 * Begins editing mode by sending all active object type ids.
 	 */
@@ -578,7 +578,7 @@ WCF.User.Profile.Editor.Handler = {
 		});
 		this._proxy.sendRequest();
 	},
-
+	
 	/**
 	 * Restores previous view.
 	 */
@@ -587,7 +587,7 @@ WCF.User.Profile.Editor.Handler = {
 			callback.restore();
 		}, this));
 	},
-
+	
 	/**
 	 * Saves changed values.
 	 */
@@ -596,11 +596,11 @@ WCF.User.Profile.Editor.Handler = {
 		var $values = {};
 		this._execute($.proxy(function(callback) {
 			var $objectTypeID = callback.getObjectTypeID();
-
+			
 			$objectTypeIDs.push($objectTypeID);
 			$values[$objectTypeID] = callback.save();
 		}, this));
-
+		
 		this._proxy.setOption('data', {
 			actionName: 'save',
 			objectTypeIDs: $objectTypeIDs,
@@ -609,7 +609,7 @@ WCF.User.Profile.Editor.Handler = {
 		});
 		this._proxy.sendRequest();
 	},
-
+	
 	/**
 	 * Displays the requested buttons.
 	 * 
@@ -620,14 +620,14 @@ WCF.User.Profile.Editor.Handler = {
 	_showButtons: function(beginEdit, restore, save) {
 		if (beginEdit) this._ui.buttons.beginEdit.show();
 		else this._ui.buttons.beginEdit.hide();
-
+		
 		if (restore) this._ui.buttons.restore.show();
 		else this._ui.buttons.restore.hide();
-
+		
 		if (save) this._ui.buttons.save.show();
 		else this._ui.buttons.save.hide();
 	},
-
+	
 	/**
 	 * Registers a new callback.
 	 * 
@@ -639,17 +639,17 @@ WCF.User.Profile.Editor.Handler = {
 			console.debug("[WCF.User.Profile.Editor.Handler] Given callback identified by '" + identifier + "' is not a valid callback, aborting.");
 			return;
 		}
-
+		
 		this._callbacks.push(callback);
 	},
-
+	
 	/**
 	 * Notifies that a callback is ready.
 	 */
 	didLoad: function() {
 		this._loading--;
 	},
-
+	
 	/**
 	 * Handles AJAX responses.
 	 * 
@@ -669,7 +669,7 @@ WCF.User.Profile.Editor.Handler = {
 				case 'beginEdit':
 					callback.prepareEdit(data[$objectTypeID]);
 				break;
-
+				
 				case 'save':
 					callback.updateCache(data[$objectTypeID]);
 					callback.restore();
@@ -677,7 +677,7 @@ WCF.User.Profile.Editor.Handler = {
 			}
 		}, this));
 	},
-
+	
 	/**
 	 * Executes a callback on all previously registered callbacks.
 	 * 
@@ -702,25 +702,25 @@ WCF.User.Profile.Editor.Base = Class.extend({
 	 * @var	string
 	 */
 	_cache: '',
-
+	
 	/**
 	 * target container id
 	 * @var	string
 	 */
 	_containerID: '',
-
+	
 	/**
 	 * target container
 	 * @var	jQuery
 	 */
 	_container: null,
-
+	
 	/**
 	 * editor identifier
 	 * @var	string
 	 */
 	_name: '',
-
+	
 	/**
 	 * object type id
 	 * @var	integer
@@ -738,10 +738,10 @@ WCF.User.Profile.Editor.Base = Class.extend({
 		if (this._name !== '') {
 			WCF.User.Profile.Editor.Handler.addCallback(this._name, this);
 		}
-
+		
 		this._container = $('#' + $.wcfEscapeID(this._containerID));
 	},
-
+	
 	/**
 	 * Begins editing mode.
 	 * 
@@ -750,7 +750,7 @@ WCF.User.Profile.Editor.Base = Class.extend({
 	beginEdit: function() {
 		return this._objectTypeID;
 	},
-
+	
 	/**
 	 * Prepares the editing mode by exchanging current view.
 	 * 
@@ -765,16 +765,16 @@ WCF.User.Profile.Editor.Base = Class.extend({
 			return returnValues;
 		});
 	},
-
+	
 	/**
 	 * Restores previous view.
 	 */
 	restore: function() {
 		WCF.User.Profile.Editor.Handler.didLoad();
-
+		
 		this._container.html(this._cache);
 	},
-
+	
 	/**
 	 * Returns edit input field values.
 	 * 
@@ -783,7 +783,7 @@ WCF.User.Profile.Editor.Base = Class.extend({
 	save: function() {
 		return { };
 	},
-
+	
 	/**
 	 * Returns editor's object type id.
 	 * 
@@ -792,7 +792,7 @@ WCF.User.Profile.Editor.Base = Class.extend({
 	getObjectTypeID: function() {
 		return this._objectTypeID;
 	},
-
+	
 	/**
 	 * Updates cached view.
 	 * 
@@ -813,7 +813,7 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 	 * @see	WCF.User.Profile.Editor.Base._containerID
 	 */
 	_containerID: 'about',
-
+	
 	/**
 	 * @see	WCF.User.Profile.Editor.Base._name
 	 */
@@ -840,33 +840,33 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 		$buttons.save.appendTo($formSubmit);
 		$buttons.restore.appendTo($formSubmit);
 	},
-
+	
 	/**
 	 * @see	WCF.User.Profile.Editor.Base.save()
 	 */
 	save: function() {
 		var $values = { };
-
+		
 		// collect values
 		this._container.find('input').each(function(index, element) {
 			var $element = $(element);
 			var $type = $element.attr('type');
-
+			
 			if (($type == 'radio' || $type === 'checkbox') && !$element.prop('checked')) {
 				return;
 			}
-
+			
 			$values[$element.attr('name')] = $element.val();
 		});
 		this._container.find('textarea').each(function(index, element) {
 			var $element = $(element);
-
+			
 			$values[$element.attr('name')] = $element.val();
 		});
-
+		
 		return this._parseValues($values);
 	},
-
+	
 	/**
 	 * Parses input names.
 	 * 
@@ -876,7 +876,7 @@ WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
 	_parseValues: function(values) {
 		var $parsedValues = { };
 		var $regEx = /values\[([a-zA-Z0-9._-]+)\]/;
-
+		
 		for (var $i in values) {
 			if ($regEx.test($i)) {
 				var $matches = $regEx.exec($i);
@@ -1317,13 +1317,13 @@ WCF.Notification.Handler.prototype = {
 	 * @var	boolean
 	 */
 	_didInit: false,
-
+	
 	/**
 	 * notification list
 	 * @var	jQuery
 	 */
 	_listContainer: null,
-
+	
 	/**
 	 * notification message container
 	 * @var	jQuery
@@ -1894,7 +1894,7 @@ WCF.User.ProfilePreview = WCF.Popover.extend({
 		this._super('.userLink');
 		
 		this._proxy = new WCF.Action.Proxy({
-			showLoadingOverlay: false,
+			showLoadingOverlay: false
 		});
 	},
 	

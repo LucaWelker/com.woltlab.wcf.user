@@ -9,7 +9,7 @@ use wcf\util\HeaderUtil;
  * Does the user logout.
  *
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	action
@@ -17,7 +17,7 @@ use wcf\util\HeaderUtil;
  */
 class LogoutAction extends \wcf\acp\action\LogoutAction {
 	/**
-	 * @see wcf\action\IAction::execute()
+	 * @see	wcf\action\IAction::execute()
 	 */
 	public function execute() {
 		AbstractSecureAction::execute();

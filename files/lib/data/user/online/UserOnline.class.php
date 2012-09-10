@@ -5,8 +5,21 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
 
-
+/**
+ * Represents a user who is online.
+ * 
+ * @author 	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	data.user.online
+ * @category 	Community Framework
+ */
 class UserOnline extends UserProfile {
+	/**
+	 * location of the user
+	 * @var	string
+	 */
 	protected $location = '';
 	
 	/**
@@ -28,10 +41,20 @@ class UserOnline extends UserProfile {
 		return $username;
 	}
 	
+	/**
+	 * Sets the location of the user.
+	 * 
+	 * @param	string		$location
+	 */
 	public function setLocation($location) {
 		$this->location = $location;
 	}
 	
+	/**
+	 * Returns the location of the user.
+	 * 
+	 * @return	string
+	 */
 	public function getLocation() {
 		return $this->location;
 	}

@@ -7,32 +7,32 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * UserOptionOutputURL is an implementation of IUserOptionOutput for the output of an url.
+ * User option output implementation for the output of an url.
  *
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user
  * @category 	Community Framework
  */
-class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContactInformation {
+class URLUserOptionOutput implements IUserOptionOutput, IUserOptionOutputContactInformation {
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	public function getShortOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user, $value, 'S');
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getMediumOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getMediumOutput()
 	 */
 	public function getMediumOutput(User $user, UserOption $option, $value) {
 		return $this->getImage($user, $value);
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == 'http://') return '';
@@ -43,7 +43,7 @@ class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContact
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutputContactInformation::getOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutputContactInformation::getOutput()
 	 */
 	public function getOutputData(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == 'http://') return null;
@@ -62,7 +62,7 @@ class UserOptionOutputURL implements IUserOptionOutput, IUserOptionOutputContact
 	/**
 	 * Generates an image button.
 	 * 
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	protected function getImage(User $user, $value, $imageSize = 'M') {
 		if (empty($value) || $value == 'http://') return '';

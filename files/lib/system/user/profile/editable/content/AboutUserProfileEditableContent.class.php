@@ -5,17 +5,34 @@ use wcf\data\user\UserAction;
 use wcf\system\option\user\UserOptionHandler;
 use wcf\system\WCF;
 
-class OverviewUserProfileEditableContent implements IUserProfileEditableContent {
-	public $cacheName = 'user-profile';
+/**
+ * User profile editable content implementation for the "about" information of the
+ * target user.
+ * 
+ * @author	Alexander Ebert
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	system.user.profile.editable.content
+ * @category 	Community Framework
+ */
+class AboutUserProfileEditableContent implements IUserProfileEditableContent {
+	/**
+	 * cache name
+	 * @var	string
+	 */
+	public $cacheName = 'user-option';
 	
+	/**
+	 * cache class name
+	 * @var	string
+	 */
 	public $cacheClass = 'wcf\system\cache\builder\OptionCacheBuilder';
 	
-	public $categoryFilter = array(
-		'profile.aboutMe',
-		'profile.personal',
-		'profile.contact'
-	);
-	
+	/**
+	 * user option handler object
+	 * @var	wcf\system\option\user\UserOptionHandler
+	 */
 	public $optionHandler = null;
 	
 	/**
@@ -43,7 +60,7 @@ class OverviewUserProfileEditableContent implements IUserProfileEditableContent 
 			'optionTree' => $optionTree
 		));
 		
-		return WCF::getTPL()->fetch('userProfileOverviewEditable');
+		return WCF::getTPL()->fetch('userProfileAboutEditable');
 	}
 	
 	/**
@@ -80,7 +97,7 @@ class OverviewUserProfileEditableContent implements IUserProfileEditableContent 
 			'options' => $options
 		));
 		
-		return WCF::getTPL()->fetch('userProfileOverview');
+		return WCF::getTPL()->fetch('userProfileAbout');
 	}
 	
 	/**

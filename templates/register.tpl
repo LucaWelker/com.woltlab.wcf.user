@@ -49,7 +49,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.user.username{/lang}</legend>
-		
+			
 			<dl{if $errorType.username|isset} class="formError"{/if}>
 				<dt>
 					<label for="username">{lang}wcf.user.username{/lang}</label>
@@ -121,7 +121,7 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorType.confirmPassword|isset} class="formError"{/if}>	
+			<dl{if $errorType.confirmPassword|isset} class="formError"{/if}>
 				<dt>
 					<label for="confirmPassword">{lang}wcf.user.confirmPassword{/lang}</label>
 				</dt>
@@ -139,7 +139,7 @@
 		{if $availableLanguages|count > 1}
 			<fieldset>
 				<legend>{lang}wcf.user.language{/lang}</legend>
-			
+				
 				<dl>
 					<dt><label for="languageID">{lang}wcf.user.language{/lang}</label></dt>
 					<dd>
@@ -176,7 +176,7 @@
 		{/foreach}
 		
 		{event name='fieldsets'}
-	
+		
 		{if $useCaptcha}
 			{if $errorType.recaptchaString|isset}
 				{assign var=errorField value='recaptchaString'}

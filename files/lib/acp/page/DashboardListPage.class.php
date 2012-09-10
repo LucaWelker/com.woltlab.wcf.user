@@ -49,7 +49,7 @@ class DashboardListPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		// enable menu item

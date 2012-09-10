@@ -14,7 +14,7 @@ use wcf\util\UserUtil;
  * Shows the email activation form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -22,7 +22,7 @@ use wcf\util\UserUtil;
  */
 class EmailActivationForm extends RegisterActivationForm {
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		AbstractForm::validate();
@@ -50,7 +50,7 @@ class EmailActivationForm extends RegisterActivationForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();

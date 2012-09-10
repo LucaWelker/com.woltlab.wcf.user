@@ -21,12 +21,12 @@ use wcf\util\ArrayUtil;
  */
 class SettingsForm extends AbstractForm {
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
 	/**
-	 * @see wcf\page\AbstractPage::$loginRequired
+	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
 	
@@ -38,7 +38,7 @@ class SettingsForm extends AbstractForm {
 	
 	/**
 	 * option category
-	 * @var string
+	 * @var	string
 	 */
 	public $category = 'general';
 	
@@ -79,7 +79,7 @@ class SettingsForm extends AbstractForm {
 	public $styleID = 0;
 	
 	/**
-	 * @see wcf\page\AbstractPage::readParameters()
+	 * @see	wcf\page\AbstractPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -98,7 +98,7 @@ class SettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\AbstractForm::readFormParameters()
+	 * @see	wcf\form\AbstractForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -114,7 +114,7 @@ class SettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\AbstractForm::validate()
+	 * @see	wcf\form\AbstractForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -147,7 +147,7 @@ class SettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -164,7 +164,7 @@ class SettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\AbstractForm::save()
+	 * @see	wcf\form\AbstractForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -194,7 +194,7 @@ class SettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::assignVariables()
+	 * @see	wcf\page\Page::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -217,12 +217,12 @@ class SettingsForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\Page::show()
+	 * @see	wcf\page\Page::show()
 	 */
 	public function show() {
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.option.category.settings.'.$this->category);
-	
+		
 		parent::show();
 	}
 }

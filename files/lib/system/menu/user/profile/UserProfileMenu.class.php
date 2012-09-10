@@ -8,9 +8,9 @@ use wcf\system\WCF;
 
 /**
  * Builds the user profile menu.
- *
+ * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.menu.user.profile
@@ -19,7 +19,7 @@ use wcf\system\WCF;
 class UserProfileMenu extends SingletonFactory {
 	/**
 	 * list of all menu items
-	 * @var array<wcf\data\user\profile\menu\item\UserProfileMenuItem>
+	 * @var	array<wcf\data\user\profile\menu\item\UserProfileMenuItem>
 	 */
 	public $menuItems = null;
 	

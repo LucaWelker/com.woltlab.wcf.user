@@ -22,7 +22,7 @@ class RecentActivityListPage extends MultipleLinkPage {
 	public $objectListClassName = 'wcf\data\user\activity\event\ViewableUserActivityEventList';
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();

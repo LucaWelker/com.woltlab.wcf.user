@@ -13,7 +13,7 @@ use wcf\util\UserRegistrationUtil;
  * Shows the new email activation code form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -21,7 +21,7 @@ use wcf\util\UserRegistrationUtil;
  */
 class EmailNewActivationCodeForm extends RegisterNewActivationCodeForm {
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -50,7 +50,7 @@ class EmailNewActivationCodeForm extends RegisterNewActivationCodeForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();

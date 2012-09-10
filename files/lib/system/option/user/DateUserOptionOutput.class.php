@@ -5,8 +5,8 @@ use wcf\data\user\User;
 use wcf\util\DateUtil;
 
 /**
- * UserOptionOutputDate is an implementation of IUserOptionOutput for the output of a date input.
- *
+ * User option output implementation for for the output of a date input.
+ * 
  * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -14,23 +14,23 @@ use wcf\util\DateUtil;
  * @subpackage	system.option.user
  * @category 	Community Framework
  */
-class UserOptionOutputDate implements IUserOptionOutput {
+class DateUserOptionOutput implements IUserOptionOutput {
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	public function getShortOutput(User $user, UserOption $option, $value) {
 		return $this->getOutput($user, $option, $value);
 	}
 	
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getMediumOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getMediumOutput()
 	 */
 	public function getMediumOutput(User $user, UserOption $option, $value) {
 		return $this->getOutput($user, $option, $value);
 	}
 
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == '0000-00-00') return '';
@@ -39,6 +39,12 @@ class UserOptionOutputDate implements IUserOptionOutput {
 		return DateUtil::format(DateUtil::getDateTimeByTimestamp(gmmktime(12, 1, 1, $date['month'], $date['day'], $date['year'])));
 	}
 	
+	/**
+	 * Splits the given dashed date into its components.
+	 * 
+	 * @param	string		$value
+	 * @return	array<integer>
+	 */
 	protected static function splitDate($value) {
 		$year = $month = $day = 0;
 		$optionValue = explode('-', $value);

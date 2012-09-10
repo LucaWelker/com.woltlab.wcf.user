@@ -19,19 +19,19 @@ use wcf\system\WCF;
 class Gravatar extends DefaultAvatar {
 	/**
 	 * gravatar base url
-	 * @var string
+	 * @var	string
 	 */
 	const GRAVATAR_BASE = 'http://gravatar.com/avatar/%s?s=%d&r=g&d=%s';
 	
 	/**
 	 * gravatar local cache location
-	 * @var string
+	 * @var	string
 	 */
 	const GRAVATAR_CACHE_LOCATION = 'images/avatars/gravatars/%s-%s.png';
 	
 	/**
 	 * gravatar expire time (days)
-	 * @var integer
+	 * @var	integer
 	 */
 	const GRAVATAR_CACHE_EXPIRE = 7;
 
@@ -43,7 +43,7 @@ class Gravatar extends DefaultAvatar {
 
 	/**
 	 * urls of this gravatar
-	 * @var array<string>
+	 * @var	array<string>
 	 */
 	protected $url = array();
 	

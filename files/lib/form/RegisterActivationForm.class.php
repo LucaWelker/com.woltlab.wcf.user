@@ -23,13 +23,13 @@ use wcf\util\HeaderUtil;
 class RegisterActivationForm extends AbstractForm {
 	/**
 	 * user id
-	 * @var integer
+	 * @var	integer
 	 */
 	public $userID = null;
 	
 	/**
 	 * activation code
-	 * @var integer
+	 * @var	integer
 	 */
 	public $activationCode = '';
 	
@@ -40,7 +40,7 @@ class RegisterActivationForm extends AbstractForm {
 	public $user = null;
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -50,7 +50,7 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -60,7 +60,7 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -83,11 +83,11 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
-
+		
 		// enable user
 		// update activation code
 		$this->objectAction = new UserAction(array($this->user->userID), 'update', array(
@@ -110,7 +110,7 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -122,14 +122,14 @@ class RegisterActivationForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		if (REGISTER_ACTIVATION_METHOD != 1) {
 			throw new IllegalLinkException();
 		}
 		
-		if (!count($_POST) && $this->userID !== null && $this->activationCode != 0) {
+		if (empty($_POST) && $this->userID !== null && $this->activationCode != 0) {
 			$this->submit();
 		}
 		

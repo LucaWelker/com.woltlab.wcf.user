@@ -7,7 +7,7 @@ use wcf\system\user\notification\object\UserFollowUserNotificationObject;
 
 /**
  * Represents a following user as a notification object type.
- *
+ * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -17,7 +17,7 @@ use wcf\system\user\notification\object\UserFollowUserNotificationObject;
  */
 class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor implements IUserNotificationObjectType {
 	/**
-	 * @see wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectByID()
+	 * @see	wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectByID()
 	 */
 	public function getObjectByID($objectID) {
 		$follow = new UserFollow($objectID);
@@ -28,9 +28,9 @@ class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor i
 		
 		return array($follow->followID => new UserFollowUserNotificationObject($follow));
 	}
-
+	
 	/**
-	 * @see wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectsByIDs()
+	 * @see	wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectsByIDs()
 	 */
 	public function getObjectsByIDs(array $objectIDs) {
 		$followList = new UserFollowList();

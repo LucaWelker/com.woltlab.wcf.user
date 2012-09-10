@@ -3,7 +3,7 @@
 		{foreach from=$category[categories] item=optionCategory}
 			<fieldset>
 				<legend>{lang}wcf.user.option.category.{@$optionCategory[object]->categoryName}{/lang}</legend>
-			
+				
 				<dl>
 					{foreach from=$optionCategory[options] item=userOption}
 						<dt>{lang}wcf.user.option.{@$userOption[object]->optionName}{/lang}</dt>

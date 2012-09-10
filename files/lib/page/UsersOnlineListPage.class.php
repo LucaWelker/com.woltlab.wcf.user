@@ -6,29 +6,39 @@ use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
+/**
+ * Shows page which lists all users who are online.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	page
+ * @category 	Community Framework
+ */
 class UsersOnlineListPage extends SortablePage {
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('user.profile.canViewUsersOnlineList');
 	
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	
 	/**
-	 * @see wcf\page\SortablePage::$defaultSortField
+	 * @see	wcf\page\SortablePage::$defaultSortField
 	 */
 	public $defaultSortField = 'lastActivityTime';
 	
 	/**
-	 * @see wcf\page\SortablePage::$defaultSortOrder
+	 * @see	wcf\page\SortablePage::$defaultSortOrder
 	 */
 	public $defaultSortOrder = 'DESC';
 	
 	/**
-	 * @see wcf\page\SortablePage::$validSortFields
+	 * @see	wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array('username', 'lastActivityTime', 'requestURI');
 	
@@ -39,12 +49,12 @@ class UsersOnlineListPage extends SortablePage {
 	
 	/**
 	 * page locations
-	 * @var array
+	 * @var	array
 	 */
 	public $locations = array();
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -56,7 +66,7 @@ class UsersOnlineListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();

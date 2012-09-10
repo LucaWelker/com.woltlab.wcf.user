@@ -24,7 +24,7 @@ class UserProfileList extends UserList {
 	public $decoratorClassName = 'wcf\data\user\UserProfile';
 	
 	/**
-	 * Creates a new UserProfileList object.
+	 * @see	wcf\data\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
 		parent::__construct();

@@ -25,7 +25,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend><label for="userID">{lang}wcf.user.emailActivation{/lang}</label></legend>
-		
+			
 			<dl{if $errorField == 'u'} class="formError"{/if}>
 				<dt><label for="userID">{lang}wcf.user.userID{/lang}</label></dt>
 				<dd>
@@ -37,7 +37,7 @@
 					{/if}
 				</dd>
 			</dl>
-		
+			
 			<dl{if $errorField == 'a'} class="formError"{/if}>
 				<dt><label for="activationCode">{lang}wcf.user.activationCode{/lang}</label></dt>
 				<dd>

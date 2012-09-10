@@ -20,7 +20,7 @@
 {include file='userNotice'}
 
 {if $success|isset}
-	<p class="success">{lang}wcf.global.form.edit.success{/lang}</p>	
+	<p class="success">{lang}wcf.global.form.edit.success{/lang}</p>
 {/if}
 
 <form method="post" action="{link controller='Settings'}{/link}">
@@ -75,7 +75,7 @@
 			
 			<fieldset>
 				<legend>{lang}wcf.user.style{/lang}</legend>
-			
+				
 				<dl>
 					<dt><label for="styleID">{lang}wcf.user.style{/lang}</label></dt>
 					<dd>
@@ -95,7 +95,7 @@
 		{foreach from=$optionTree[0][categories][0][categories] item=optionCategory}
 			<fieldset>
 				<legend>{lang}wcf.user.option.category.{@$optionCategory[object]->categoryName}{/lang}</legend>
-			
+				
 				{include file='userProfileOptionFieldList' options=$optionCategory[options] langPrefix='wcf.user.option.'}
 			</fieldset>
 		{/foreach}

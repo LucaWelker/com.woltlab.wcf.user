@@ -3,7 +3,7 @@
 <head>
 	<title>{lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude'}
-
+	
 	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[
@@ -96,7 +96,7 @@
 				</div>
 			</li>
 		{/if}
-					
+		
 		{if $visitorCount}
 			<li class="sidebarContainer">
 				<hgroup class="sidebarContainerHeadline">
@@ -151,7 +151,7 @@
 			{/foreach}
 		</ul>
 	</nav>
-
+	
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
 		<div id="{$menuItem->getIdentifier()}" class="container tabMenuContent shadow" data-menu-item="{$menuItem->menuItem}">
 			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}

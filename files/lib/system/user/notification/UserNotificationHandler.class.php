@@ -20,7 +20,7 @@ use wcf\system\WCF;
 
 /**
  * Handles user notifications.
- *
+ * 
  * @author	Marcel Werk, Oliver Kliebisch
  * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -31,19 +31,19 @@ use wcf\system\WCF;
 class UserNotificationHandler extends SingletonFactory {
 	/**
 	 * list of available object types
-	 * @var array
+	 * @var	array
 	 */
 	protected $availableObjectTypes = array();
 	
 	/**
 	 * list of available events
-	 * @var array
+	 * @var	array
 	 */
 	protected $availableEvents = array();
 	
 	/**
 	 * number of outstanding notifications
-	 * @var integer
+	 * @var	integer
 	 */
 	protected $notificationCount = null;
 	
@@ -60,7 +60,7 @@ class UserNotificationHandler extends SingletonFactory {
 	protected $objectTypes = array();
 	
 	/**
-	 * @see wcf\system\SingletonFactory::init()
+	 * @see	wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
 		// get available object types
@@ -184,7 +184,7 @@ class UserNotificationHandler extends SingletonFactory {
 		$notificationIDs = array_keys($notifications);
 		
 		// break if no notifications are available
-		if (!count($notificationIDs)) {
+		if (empty($notificationIDs)) {
 			return;
 		}
 		
@@ -331,7 +331,7 @@ class UserNotificationHandler extends SingletonFactory {
 		}
 		
 		// return an empty set if no notifications exist
-		if (!count($events)) {
+		if (empty($events)) {
 			return array(
 				'count' => 0,
 				'notifications' => array()
@@ -488,7 +488,6 @@ class UserNotificationHandler extends SingletonFactory {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
 		
-		$notifications = array();
 		$row = $statement->fetchArray();
 		
 		return ($row === false) ? null : $row['notificationID'];

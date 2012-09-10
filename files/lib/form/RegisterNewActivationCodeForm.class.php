@@ -48,7 +48,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	public $user = null;
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -59,7 +59,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -124,7 +124,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -149,18 +149,18 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
 		
-		if (!count($_POST) && WCF::getUser()->userID) {
+		if (empty($_POST) && WCF::getUser()->userID) {
 			$this->username = WCF::getUser()->username;
 		}
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -173,7 +173,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		if (REGISTER_ACTIVATION_METHOD != 1) {

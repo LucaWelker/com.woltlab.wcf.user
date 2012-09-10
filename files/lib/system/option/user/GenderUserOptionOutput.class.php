@@ -7,18 +7,18 @@ use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 
 /**
- * UserOptionOutputGender is an implementation of IUserOptionOutput for the output the gender option.
+ * User option output implementation for the output of the user's gender.
  *
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user
  * @category 	Community Framework
  */
-class UserOptionOutputGender extends UserOptionOutputSelectOptions {
+class GenderUserOptionOutput extends SelectOptionsUserOptionOutput {
 	/**
-	 * @see wcf\system\option\user\IUserOptionOutput::getShortOutput()
+	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
 	public function getShortOutput(User $user, UserOption $option, $value) {
 		if ($value == UserProfile::GENDER_MALE) {

@@ -60,19 +60,19 @@
 					<optiontype>message</optiontype>
 				-->
 				<optiontype>text</optiontype>
-				<outputclass>wcf\system\option\user\UserOptionOutputMessage</outputclass>
+				<outputclass>wcf\system\option\user\MessageUserOptionOutput</outputclass>
 				<visible>15</visible>
 			</option>
 			<option name="birthday">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>date</optiontype>
-				<outputclass>wcf\system\option\user\UserOptionOutputBirthday</outputclass>
+				<outputclass>wcf\system\option\user\BirthdayUserOptionOutput</outputclass>
 				<visible>15</visible>
 			</option>
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>radioButton</optiontype>
-				<outputclass>wcf\system\option\user\UserOptionOutputGender</outputclass>
+				<outputclass>wcf\system\option\user\GenderUserOptionOutput</outputclass>
 				<selectoptions>
 					<![CDATA[0:wcf.user.profile.noDeclaration
 1:wcf.user.gender.male
@@ -104,13 +104,13 @@
 				<categoryname>profile.personal</categoryname>
 				<optiontype>textarea</optiontype>
 				<editable>3</editable>
-				<outputclass>wcf\system\option\user\UserOptionOutputNewlineToBreak</outputclass>
+				<outputclass>wcf\system\option\user\NewlineToBreakUserOptionOutput</outputclass>
 				<visible>2</visible>
 			</option>
 			<option name="homepage">
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
-				<outputclass>wcf\system\option\user\UserOptionOutputURL</outputclass>
+				<outputclass>wcf\system\option\user\URLUserOptionOutput</outputclass>
 				<searchable>1</searchable>
 				<validationpattern>^$|^https?://</validationpattern>
 				<defaultvalue>http://</defaultvalue>
@@ -119,7 +119,7 @@
 			<option name="email">
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
-				<outputclass>wcf\system\option\user\UserOptionOutputEmail</outputclass>
+				<outputclass>wcf\system\option\user\EmailUserOptionOutput</outputclass>
 				<editable>4</editable>
 				<visible>0</visible>
 			</option>

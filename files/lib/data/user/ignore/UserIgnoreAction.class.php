@@ -11,18 +11,13 @@ use wcf\system\WCF;
  * Executes ignored user-related actions.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.ignore
  * @category 	Community Framework
  */
 class UserIgnoreAction extends AbstractDatabaseObjectAction {
-	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
-	 */
-	public $className = 'wcf\data\user\ignore\UserIgnoreEditor';
-	
 	/**
 	 * Does nothing.
 	 */
@@ -79,7 +74,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 		if (empty($this->objectIDs)) {
 			throw new ValidateActionException("missing parameter 'objectID'");
 		}
-	
+		
 		// disguise as unignore
 		$this->parameters['data']['ignoreUserID'] = array_shift($this->objectIDs);
 		$this->validateUnignore();

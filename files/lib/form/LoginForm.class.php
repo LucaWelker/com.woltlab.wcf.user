@@ -10,7 +10,7 @@ use wcf\util\StringUtil;
  * Shows the user login form.
  *
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -18,17 +18,17 @@ use wcf\util\StringUtil;
  */
 class LoginForm extends \wcf\acp\form\LoginForm {
 	/**
-	 * @see wcf\page\AbstractPage::$enableTracking
+	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
 	/**
 	 * true enables the usage of cookies 
-	 * @var boolean
+	 * @var	boolean
 	 */
 	public $useCookies = 1;
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -46,7 +46,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -69,7 +69,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

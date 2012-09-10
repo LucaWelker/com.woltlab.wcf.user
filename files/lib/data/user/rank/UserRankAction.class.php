@@ -12,9 +12,4 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @subpackage	data.user.rank
  * @category 	Community Framework
  */
-class UserRankAction extends AbstractDatabaseObjectAction {
-	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
-	 */
-	public $className = 'wcf\data\user\rank\UserRankEditor';
-}
+class UserRankAction extends AbstractDatabaseObjectAction { }
