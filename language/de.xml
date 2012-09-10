@@ -31,7 +31,7 @@
 	
 	<category name="wcf.user">
 		<item name="wcf.user.access.everyone"><![CDATA[Jeder]]></item>
-		<item name="wcf.user.access.following"><![CDATA[Benutzer denen ich folge]]></item>
+		<item name="wcf.user.access.following"><![CDATA[Benutzer, denen ich folge]]></item>
 		<item name="wcf.user.access.nobody"><![CDATA[Keiner]]></item>
 		<item name="wcf.user.access.registered"><![CDATA[Registrierte Benutzer]]></item>
 		<item name="wcf.user.avatar.alt"><![CDATA[Benutzer-Avatarbild]]></item>
