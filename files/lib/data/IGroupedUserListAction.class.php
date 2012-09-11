@@ -15,12 +15,12 @@ interface IGroupedUserListAction {
 	/**
 	 * Validates parameters to return a parsed list of users.
 	 */
-	public function validateGetUserList();
+	public function validateGetGroupedUserList();
 	
 	/**
 	 * Returns a parsed list of users.
 	 * 
 	 * @return	array
 	 */
-	public function getUserList();
+	public function getGroupedUserList();
 }

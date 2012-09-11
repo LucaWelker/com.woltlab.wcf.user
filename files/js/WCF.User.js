@@ -2345,7 +2345,7 @@ WCF.User.List = Class.extend({
 			
 			// load template via AJAX
 			this._proxy.setOption('data', {
-				actionName: 'getUserList',
+				actionName: 'getGroupedUserList',
 				className: this._className,
 				interfaceName: 'wcf\\data\\IGroupedUserListAction',
 				parameters: this._additionalParameters
