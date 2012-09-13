@@ -12,6 +12,10 @@
 		</definition>
 		
 		<definition>
+			<name>com.woltlab.wcf.user.activityPointEvent</name>
+		</definition>
+		
+		<definition>
 			<name>com.woltlab.wcf.notification.notificationType</name>
 			<interfacename>wcf\system\user\notification\type\IUserNotificationType</interfacename>
 		</definition>
