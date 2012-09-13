@@ -16,6 +16,11 @@ use wcf\system\user\activity\event\UserActivityEventHandler;
  */
 class ViewableUserActivityEventList extends UserActivityEventList {
 	/**
+	 * @see	wcf\data\DatabaseObjectList::$className
+	 */
+	public $className = 'wcf\data\user\activity\event\UserActivityEvent';
+	
+	/**
 	 * @see	wcf\data\DatabaseObjectList::$sqlLimit
 	 */
 	public $sqlLimit = 20;
