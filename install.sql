@@ -20,6 +20,7 @@ ALTER TABLE wcf1_user ADD profileHits INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD rankID INT(10);
 ALTER TABLE wcf1_user ADD userTitle VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD userOnlineGroupID INT(10);
+ALTER TABLE wcf1_user ADD activityPoints INT(10) NOT NULL DEFAULT 0; -- hopefully 2'147'483'647 is enough
 
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
@@ -167,7 +168,7 @@ DROP TABLE IF EXISTS wcf1_user_rank;
 CREATE TABLE wcf1_user_rank (
 	rankID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	groupID INT(10),
-	neededLikes INT(10) NOT NULL DEFAULT 0,
+	neededPoints INT(10) NOT NULL DEFAULT 0,
 	rankTitle VARCHAR(255) NOT NULL DEFAULT '',
 	cssClassName VARCHAR(255) NOT NULL DEFAULT '',
 	rankImage VARCHAR(255) NOT NULL DEFAULT '',
@@ -176,16 +177,16 @@ CREATE TABLE wcf1_user_rank (
 );
 
 -- default ranks
-INSERT INTO wcf1_user_rank (groupID, neededLikes, rankTitle) VALUES
+INSERT INTO wcf1_user_rank (groupID, neededPoints, rankTitle) VALUES
 	(4, 0, 'wcf.user.rank.administrator'),
 	(5, 0, 'wcf.user.rank.moderator'),
 	(6, 0, 'wcf.user.rank.superModerator'),
 	(3, 0, 'wcf.user.rank.user0'),
-	(3, 10, 'wcf.user.rank.user1'),
-	(3, 25, 'wcf.user.rank.user2'),
-	(3, 100, 'wcf.user.rank.user3'),
-	(3, 500, 'wcf.user.rank.user4'),
-	(3, 2500, 'wcf.user.rank.user5');
+	(3, 300, 'wcf.user.rank.user1'),
+	(3, 900, 'wcf.user.rank.user2'),
+	(3, 3000, 'wcf.user.rank.user3'),
+	(3, 9000, 'wcf.user.rank.user4'),
+	(3, 15000, 'wcf.user.rank.user5');
 
 -- recent activity
 DROP TABLE IF EXISTS wcf1_user_activity_event;
@@ -198,6 +199,25 @@ CREATE TABLE wcf1_user_activity_event (
 	time INT(10) NOT NULL,
 	additionalData TEXT,
 	KEY (packageID, userID)
+);
+
+DROP TABLE IF EXISTS wcf1_user_activity_points;
+CREATE TABLE wcf1_user_activity_points (
+	userID INT(10) NOT NULL,
+	objectTypeID INT(10) NOT NULL,
+	activityPoints INT(10) NOT NULL DEFAULT 0,
+	PRIMARY KEY (userID, objectTypeID),
+	KEY (objectTypeID)
+);
+
+DROP TABLE IF EXISTS wcf1_user_activity_point_event;
+CREATE TABLE wcf1_user_activity_point_event (
+	eventID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	objectTypeID INT(10) NOT NULL,
+	objectID INT(10) NOT NULL,
+	userID INT(10) NOT NULL,
+	additionalData TEXT,
+	UNIQUE KEY (objectTypeID, userID, objectID)
 );
 
 -- profile visitors
@@ -255,6 +275,12 @@ ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group 
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_user_activity_points ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_activity_points ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_user_activity_point_event ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_activity_point_event ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
 ALTER TABLE wcf1_user_profile_visitor ADD FOREIGN KEY (ownerID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_profile_visitor ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
