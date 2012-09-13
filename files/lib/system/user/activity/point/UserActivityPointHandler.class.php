@@ -123,6 +123,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		$conditionBuilder->add("objectTypeID IN (?)", array(array_keys($objectTypes)));
 		if (!empty($userIDs)) $conditionBuilder->add("userID IN (?)", array($userIDs));
 		
+		WCF::getDB()->beginTransaction();
 		// delete old data
 		$sql = "DELETE FROM	wcf".WCF_N."_user_activity_points
 			".$conditionBuilder;
@@ -134,8 +135,16 @@ class UserActivityPointHandler extends SingletonFactory {
 		else $conditionBuilder->add("1");
 		
 		// use INSERT … SELECT as this makes bulk updating easier
-		$sql = "INSERT INTO wcf".WCF_N."_user_activity_points (userID, objectTypeID, activityPoints)
-			SELECT userID, objectTypeID, (COUNT(*) * ?) AS activityPoints FROM wcf".WCF_N."_user_activity_point_event ".$conditionBuilder." AND objectTypeID = ? GROUP BY userID, objectTypeID";
+		$sql = "INSERT INTO 
+				wcf".WCF_N."_user_activity_points (userID, objectTypeID, activityPoints)
+				SELECT	userID, 
+					objectTypeID, 
+					(COUNT(*) * ?) AS activityPoints
+				FROM
+					wcf".WCF_N."_user_activity_point_event 
+				".$conditionBuilder." AND objectTypeID = ? 
+				GROUP BY
+					userID, objectTypeID";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($objectTypes as $objectTypeID => $points) {
 			$statement->execute(array_merge((array) $points, $conditionBuilder->getParameters(), (array) $objectTypeID));
@@ -144,9 +153,16 @@ class UserActivityPointHandler extends SingletonFactory {
 		// and reset general cache
 		$sql = "UPDATE wcf".WCF_N."_user user
 			SET user.activityPoints =
-				IFNULL((SELECT SUM(activityPoints) AS activityPoints FROM wcf".WCF_N."_user_activity_points points WHERE points.userID = user.userID GROUP BY user.userID), 0)
+				COALESCE((
+					SELECT	SUM(activityPoints) AS activityPoints 
+					FROM	wcf".WCF_N."_user_activity_points points 
+					WHERE	points.userID = user.userID 
+					GROUP BY user.userID
+				), 0)
 			".str_replace('userID', 'user.userID', $conditionBuilder);
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());
+		
+		WCF::getDB()->commitTransaction();
 	}
 }
