@@ -20,18 +20,6 @@
 		</type>
 		
 		<type>
-			<name>com.woltlab.wcf.user.activityPointEvent.debug</name>
-			<definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
-			<points>7</points>
-		</type>
-		
-		<type>
-			<name>com.woltlab.wcf.user.activityPointEvent.debug2</name>
-			<definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
-			<points>5</points>
-		</type>
-		
-		<type>
 			<name>com.woltlab.wcf.notification.notificationType.mail</name>
 			<definitionname>com.woltlab.wcf.notification.notificationType</definitionname>
 			<classname>wcf\system\user\notification\type\MailUserNotificationType</classname>

@@ -44,6 +44,57 @@ class UserActivityPointHandler extends SingletonFactory {
 	protected $userActivityEventObjectTypeIDs = array();
 	
 	/**
+	 * Adds a new user activity point event.
+	 * 
+	 * @param	string			$objectType
+	 * @param	integer			$objectID
+	 * @param	integer			$parentObjectID
+	 * @param	integer			$userID
+	 * @param	integer			$time
+	 * @param	array<mixed>		$additionalData
+	 */
+	public function fireEvent($objectType, $objectID, $userID = null, array $additionalData = array(), $skipCacheUpdate = false) {
+		$_objectType = $this->getObjectTypeByName($objectType);
+		if ($_objectType === null) {
+			throw new SystemException("Unknown user activity point object type '".$objectType."'");
+		}
+		
+		if ($userID === null) $userID = WCF::getUser()->userID;
+		if (!$userID) throw new SystemException("Cannot fire user activity point events for guests");
+		
+		$eventAction = new UserActivityPointEventAction(array(), 'create', array(
+			'data' => array(
+				'objectTypeID' => $_objectType->objectTypeID,
+				'objectID' => $objectID,
+				'userID' => $userID,
+				'additionalData' => serialize($additionalData)
+			)
+		));
+		$returnValues = $eventAction->executeAction();
+		
+		if (!$skipCacheUpdate) $this->updateCaches(array($userID));
+		
+		return $returnValues['returnValues'];
+	}
+	
+	/**
+	 * Fires a new user activity point event by the given user activity event.
+	 * 
+	 * @param	wcf\data\user\activity\event\UserActivityEvent	$userActivityEvent
+	 */
+	public function fireUserActivityEvent(UserActivityEvent $userActivityEvent) {
+		$userActivityEventObjectType = UserActivityEventHandler::getInstance()->getObjectType($userActivityEvent->objectTypeID);
+		$objectTypes = $this->getObjectTypesByUserActivityEvent($userActivityEventObjectType->objectType);
+		$userIDs = array();
+		
+		foreach ($objectTypes as $objectType) {
+			$userIDs[] = $userActivityEvent->userID;
+			$this->fireEvent($objectType, $userActivityEvent->objectID, $userActivityEvent->userID, $userActivityEvent->additionalData, true);
+		}
+		$this->updateCaches($userIDs);
+	}
+	
+	/**
 	 * Returns the user activity point event object type with the given id or
 	 * null if no such object tyoe exists.
 	 * 
@@ -109,12 +160,23 @@ class UserActivityPointHandler extends SingletonFactory {
 		}
 	}
 	
+	/**
+	 * Updates the caches for the given user. When no user is given the current user is used.
+	 * 
+	 * @param wcf\data\user\User $user
+	 */
 	public function updateCache(User $user = null) {
 		if ($user === null) $user = WCF::getUser();
 		
 		$this->updateCaches(array($user->userID));
 	}
 	
+	/**
+	 * Updates the caches for the given users. When an empty array is given the caches are recalculated for
+	 * EVERY SINGLE user in this installation.
+	 * 
+	 * @param array<integer> $userIDs
+	 */
 	public function updateCaches(array $userIDs) {
 		$objectTypes = array();
 		foreach ($this->objectTypes as $objectType) $objectTypes[$objectType->objectTypeID] = $objectType->points;
