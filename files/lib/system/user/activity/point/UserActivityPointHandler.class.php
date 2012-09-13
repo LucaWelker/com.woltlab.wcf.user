@@ -206,7 +206,13 @@ class UserActivityPointHandler extends SingletonFactory {
 	 */
 	public function updateCaches(array $userIDs) {
 		$objectTypes = array();
-		foreach ($this->objectTypes as $objectType) $objectTypes[$objectType->objectTypeID] = $objectType->points;
+		foreach ($this->objectTypes as $objectType) {
+			if ($objectType->points === null) {
+				throw new SystemException("'".$objectType->objectType."' is missing the points attribute");
+			}
+			
+			$objectTypes[$objectType->objectTypeID] = $objectType->points;
+		}
 		
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add("objectTypeID IN (?)", array(array_keys($objectTypes)));
