@@ -5,11 +5,9 @@ use wcf\data\user\activity\event\UserActivityEvent;
 use wcf\data\user\activity\point\event\UserActivityPointEventAction;
 use wcf\data\user\activity\point\event\UserActivityPointEventEditor;
 use wcf\data\user\activity\point\event\UserActivityPointEventList;
-use wcf\data\user\UserEditor;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\user\activity\event\UserActivityEventHandler;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -198,6 +196,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		// use INSERT … SELECT as this makes bulk updating easier
 		$sql = "INSERT INTO 
 				wcf".WCF_N."_user_activity_points (userID, objectTypeID, activityPoints)
+				
 				SELECT	userID, 
 					objectTypeID, 
 					(COUNT(*) * ?) AS activityPoints
@@ -212,8 +211,8 @@ class UserActivityPointHandler extends SingletonFactory {
 		}
 		
 		// and reset general cache
-		$sql = "UPDATE wcf".WCF_N."_user user
-			SET user.activityPoints =
+		$sql = "UPDATE	wcf".WCF_N."_user user
+			SET	user.activityPoints =
 				COALESCE((
 					SELECT	SUM(activityPoints) AS activityPoints 
 					FROM	wcf".WCF_N."_user_activity_points points 
