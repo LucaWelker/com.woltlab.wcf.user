@@ -151,11 +151,11 @@ class UserActivityPointHandler extends SingletonFactory {
 		foreach ($this->objectTypes as $objectType) {
 			$this->objectTypeNames[$objectType->objectTypeID] = $objectType->objectType;
 			if ($objectType->useractivityevent) {
-				if (!isset($this->userActivityEventObjectTypeIDs[$objectType->useractivitypointevent])) {
-					$this->userActivityEventObjectTypeIDs[$objectType->useractivitypointevent] = array();
+				if (!isset($this->userActivityEventObjectTypeIDs[$objectType->useractivityevent])) {
+					$this->userActivityEventObjectTypeIDs[$objectType->useractivityevent] = array();
 				}
 				
-				$this->userActivityEventObjectTypeIDs[$objectType->useractivitypointevent][] = $objectType->objectTypeID;
+				$this->userActivityEventObjectTypeIDs[$objectType->useractivityevent][] = $objectType->objectTypeID;
 			}
 		}
 	}
