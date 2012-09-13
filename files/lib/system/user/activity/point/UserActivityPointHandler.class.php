@@ -92,6 +92,36 @@ class UserActivityPointHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * Removes events for objects that no longer exist.
+	 * 
+	 * @param	string		$objectType
+	 * @param	array<integer>	$objectIDs
+	 */
+	public function removeEvents($objectType, array $objectIDs) {
+		if (empty($objectIDs)) return;
+		
+		// get and validate object type
+		$_objectType = $this->getObjectTypeByName($objectType);
+		if ($_objectType === null) {
+			throw new SystemException("Unknown user activity point object type '".$objectType."'");
+		}
+		
+		// read deleted events
+		$eventList = new UserActivityPointEventList();
+		$eventList->sqlLimit = 0;
+		$eventList->getConditionBuilder()->add("objectType = ?", array($objectType));
+		$eventList->getConditionBuilder()->add("objectID IN (?)", array($objectIDs));
+		$eventList->readObjects();
+		
+		// delete events
+		UserActivityPointEventEditor::deleteAll($eventList->getObjectIDs());
+		
+		$userIDs = array();
+		foreach ($eventList as $event) $userIDs[] = $event->userID;
+		$this->updateCaches($userIDs);
+	}
+	
+	/**
 	 * Returns the user activity point event object type with the given id or
 	 * null if no such object tyoe exists.
 	 * 
