@@ -48,10 +48,9 @@ class UserActivityPointHandler extends SingletonFactory {
 	 * 
 	 * @param	string			$objectType
 	 * @param	integer			$objectID
-	 * @param	integer			$parentObjectID
 	 * @param	integer			$userID
-	 * @param	integer			$time
 	 * @param	array<mixed>		$additionalData
+	 * @param	boolean			$skipCacheUpdate	should the cache update be skipped (you have to call updateCaches manually afterwards!)
 	 */
 	public function fireEvent($objectType, $objectID, $userID = null, array $additionalData = array(), $skipCacheUpdate = false) {
 		$_objectType = $this->getObjectTypeByName($objectType);
@@ -111,7 +110,7 @@ class UserActivityPointHandler extends SingletonFactory {
 	
 	/**
 	 * Returns the user activity point event object type with the given name
-	 * or null if no such object tyoe exists.
+	 * or null if no such object type exists.
 	 * 
 	 * @param	string		$objectType
 	 * @return	wcf\data\object\type\ObjectType
