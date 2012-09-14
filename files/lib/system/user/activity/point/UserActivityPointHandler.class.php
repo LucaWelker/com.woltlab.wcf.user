@@ -236,14 +236,11 @@ class UserActivityPointHandler extends SingletonFactory {
 				SELECT	userID, 
 					objectTypeID, 
 					(COUNT(*) * ?) AS activityPoints
-				FROM
-					wcf".WCF_N."_user_activity_point_event 
+				FROM	wcf".WCF_N."_user_activity_point_event 
 				".$conditionBuilder." AND objectTypeID = ? 
-				GROUP BY
-					userID, objectTypeID";
+				GROUP BY	userID, objectTypeID";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($objectTypes as $objectTypeID => $points) {
-			var_dump(array_merge((array) $points, $conditionBuilder->getParameters(), (array) $objectTypeID));
 			$statement->execute(array_merge((array) $points, $conditionBuilder->getParameters(), (array) $objectTypeID));
 		}
 		
