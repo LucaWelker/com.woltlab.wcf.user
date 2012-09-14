@@ -10,5 +10,11 @@
 			<link>index.php/DashboardList/</link>
 			<permissions>admin.content.dashboard.canEditDashboard</permissions>
 		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.activityPoint">
+			<parent>wcf.acp.menu.link.user.management</parent>
+			<link>index.php/UserActivityPointOption/</link>
+			<!-- TODO: permissions>admin.content.dashboard.canEditDashboard</permissions-->
+		</acpmenuitem>
 	</import>
 </data>
