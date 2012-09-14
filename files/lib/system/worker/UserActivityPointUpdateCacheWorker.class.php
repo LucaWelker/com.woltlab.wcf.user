@@ -36,7 +36,7 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 		$sql = "SELECT	COUNT(*) AS count
 			FROM	wcf".WCF_N."_user user";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($this->conditions->getParameters());
+		$statement->execute();
 		$row = $statement->fetchArray();
 		
 		$this->count = $row['count'];
@@ -51,7 +51,7 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 			FROM		wcf".WCF_N."_user user
 			ORDER BY	user.userID";
 		$statement = WCF::getDB()->prepareStatement($sql, $this->limit, ($this->limit * $this->loopCount));
-		$statement->execute($this->conditions->getParameters());
+		$statement->execute();
 		
 		$userIDs = array();
 		while ($row = $statement->fetchArray()) {
