@@ -92,9 +92,6 @@ class UserActivityPointOptionForm extends ACPForm {
 		
 		ObjectTypeEditor::resetCache();
 		
-		// update cache in an own request
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('UserActivityPointUpdateCache'));
-		
 		$this->saved();
 		
 		WCF::getTPL()->assign('success', true);
