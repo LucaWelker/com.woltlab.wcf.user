@@ -14,6 +14,15 @@
 	<p class="success">TODO</p>
 {/if}
 
+<div class="contentNavigation">
+	<nav>
+		<ul>
+			<li><a href="{link controller='UserActivityPointUpdateCache'}{/link}" title="{lang}wcf.acp.user.activityPoint.updateCache{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/update.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.activityPoint.updateCache{/lang}</span></a></li>
+			
+			{event name='largeButtons'}
+		</ul>
+	</nav>
+</div>
 
 <form method="post" action="{link controller='UserActivityPointOption'}{/link}">
 	<div class="container containerPadding marginTop shadow">

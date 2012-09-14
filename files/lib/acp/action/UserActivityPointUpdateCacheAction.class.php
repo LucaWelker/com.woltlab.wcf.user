@@ -15,7 +15,7 @@ use wcf\util\HeaderUtil;
  * @subpackage	acp.action
  * @category	Community Framework
  */
-class UserActivityUpdateCacheAction extends AbstractAction {
+class UserActivityPointUpdateCacheAction extends AbstractAction {
 	/**
 	 * @see wcf\action\AbstractAction::$neededPermissions
 	 */

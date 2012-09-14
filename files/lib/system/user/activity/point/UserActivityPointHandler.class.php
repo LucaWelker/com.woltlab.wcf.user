@@ -243,6 +243,7 @@ class UserActivityPointHandler extends SingletonFactory {
 					userID, objectTypeID";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($objectTypes as $objectTypeID => $points) {
+			var_dump(array_merge((array) $points, $conditionBuilder->getParameters(), (array) $objectTypeID));
 			$statement->execute(array_merge((array) $points, $conditionBuilder->getParameters(), (array) $objectTypeID));
 		}
 		
