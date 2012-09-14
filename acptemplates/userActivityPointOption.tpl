@@ -1,5 +1,16 @@
 {include file='header'}
 
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		$('#updateCache').click(function () {
+			$('#updateCache').unbind('click');
+			new WCF.ACP.Worker('worker', 'wcf\\system\\worker\\UserActivityPointUpdateCacheWorker');
+		});
+	});
+	//]]>
+</script>
+
 <header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.acp.user.activityPoint.option{/lang}</h1>
@@ -17,7 +28,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='UserActivityPointUpdateCache'}{/link}" title="{lang}wcf.acp.user.activityPoint.updateCache{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/update.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.activityPoint.updateCache{/lang}</span></a></li>
+			<li><a id="updateCache" href="javascript;" title="{lang}wcf.acp.user.activityPoint.updateCache{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/update.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.activityPoint.updateCache{/lang}</span></a></li>
 			
 			{event name='largeButtons'}
 		</ul>
