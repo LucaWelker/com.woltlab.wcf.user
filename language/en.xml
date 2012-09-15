@@ -15,6 +15,7 @@
 		<item name="wcf.user.login.action"><![CDATA[Do you have an account?]]></item>
 		<item name="wcf.user.login.action.login"><![CDATA[Yes, my password is:]]></item>
 		<item name="wcf.user.login.action.register"><![CDATA[No, I am a new user.]]></item>
+		<item name="wcf.user.login.redirect"><![CDATA[You have been successfully logged in.]]></item>
 		<item name="wcf.user.loginOrRegister"><![CDATA[Login{if !REGISTER_DISABLED} or Register{/if}]]></item>
 		<item name="wcf.user.menu.community"><![CDATA[Community]]></item>
 		<item name="wcf.user.menu.community.notification"><![CDATA[Notifications]]></item>
