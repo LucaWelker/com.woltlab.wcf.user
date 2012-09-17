@@ -45,9 +45,8 @@
 		</li>
 	{/if}
 	
-	<!-- testing: -->
 	<li>
-		<a class="jsTooltip" href="#" title="Watched Objects"><img src="{icon size='M'}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">Watched Objects</span> <span class="badge badgeInverse">43</span></a>
+		<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon size='M'}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">Watched Objects</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
 	</li>
 {else}
 	{if !$__disableLoginLink|isset}

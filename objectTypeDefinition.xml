@@ -29,5 +29,10 @@
 			<name>com.woltlab.wcf.user.online.location</name>
 			<interfacename>wcf\system\user\online\location\IUserOnlineLocation</interfacename>
 		</definition>
+		
+		<definition>
+			<name>com.woltlab.wcf.user.objectWatch</name>
+			<interfacename>wcf\system\user\object\watch\IUserObjectWatch</interfacename>
+		</definition>
 	</import>
 </data>
