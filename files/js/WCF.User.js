@@ -2209,6 +2209,169 @@ WCF.User.Avatar.Upload = WCF.Upload.extend({
 });
 
 /**
+ * Generic implementation for grouped user lists.
+ * 
+ * @param	string		className
+ * @param	string		dialogTitle
+ * @param	object		additionalParameters
+ */
+WCF.User.List = Class.extend({
+	/**
+	 * list of additional parameters
+	 * @var	object
+	 */
+	_additionalParameters: { },
+	
+	/**
+	 * list of cached pages
+	 * @var	object
+	 */
+	_cache: { },
+	
+	/**
+	 * action class name
+	 * @var	string
+	 */
+	_className: '',
+	
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
+	/**
+	 * dialog title
+	 * @var	string
+	 */
+	_dialogTitle: '',
+	
+	/**
+	 * page count
+	 * @var	integer
+	 */
+	_pageCount: 0,
+	
+	/**
+	 * current page no
+	 * @var	integer
+	 */
+	_pageNo: 1,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * Initializes a new grouped user list.
+	 * 
+	 * @param	string		className
+	 * @param	string		dialogTitle
+	 * @param	object		additionalParameters
+	 */
+	init: function(className, dialogTitle, additionalParameters) {
+		this._additionalParameters = additionalParameters || { };
+		this._cache = { };
+		this._className = className;
+		this._dialog = null;
+		this._dialogTitle = dialogTitle;
+		this._pageCount = 0;
+		this._pageNo = 1;
+		
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+	},
+	
+	/**
+	 * Opens the dialog overlay.
+	 */
+	open: function() {
+		this._pageNo = 1;
+		this._showPage();
+	},
+	
+	/**
+	 * Displays the specified page.
+	 * 
+	 * @param	object		event
+	 * @param	object		data
+	 */
+	_showPage: function(event, data) {
+		if (data && data.activePage) {
+			this._pageNo = data.activePage;
+		}
+		
+		if (this._pageNo != 1 && (this._pageNo > (this._pageCount - 1))) {
+			console.debug("[WCF.User.List] Cannot access page " + this._pageNo + " of " + this._pageCount);
+			return;
+		}
+		
+		if (this._cache[this._pageNo]) {
+			var $dialogCreated = false;
+			if (this._dialog === null) {
+				this._dialog = $('<div id="userList' + this._className.hashCode() + '" style="min-width: 600px;" />').hide().appendTo(document.body);
+				$dialogCreated = true;
+			}
+			
+			// remove current view
+			this._dialog.empty();
+			
+			// insert HTML
+			this._dialog.html(this._cache[this._pageNo]);
+			
+			// add pagination
+			if (this._pageCount > 1) {
+				this._dialog.find('.jsPagination').wcfPages({
+					activePage: this._pageNo,
+					maxPages: this._pageCount
+				}).bind('wcfpagesswitched', $.proxy(this._showPage, this));;
+			}
+			
+			// show dialog
+			if ($dialogCreated) {
+				this._dialog.wcfDialog({
+					title: this._dialogTitle
+				});
+			}
+			else {
+				this._dialog.wcfDialog('open').wcfDialog('render');
+			}
+		}
+		else {
+			this._additionalParameters.pageNo = this._pageNo;
+			
+			// load template via AJAX
+			this._proxy.setOption('data', {
+				actionName: 'getGroupedUserList',
+				className: this._className,
+				interfaceName: 'wcf\\data\\IGroupedUserListAction',
+				parameters: this._additionalParameters
+			});
+			this._proxy.sendRequest();
+		}
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		if (data.returnValues.pageCount) {
+			this._pageCount = data.returnValues.pageCount;
+		}
+		
+		this._cache[this._pageNo] = data.returnValues.template;
+		this._showPage();
+	}
+});
+
+/**
  * Namespace for object watch functions.
  */
 WCF.User.ObjectWatch = {};
