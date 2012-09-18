@@ -1,5 +1,7 @@
 <?php
 namespace wcf\data\user\object\watch;
+use wcf\system\user\storage\UserStorageHandler;
+
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\ValidateActionException;
@@ -29,6 +31,10 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 			'objectID' => intval($this->parameters['data']['objectID']),
 			'objectTypeID' => $objectType->objectTypeID
 		));
+		
+		// reset user storage
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userObjectWatchTypeIDs');
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'unreadUserObjectWatchCount');
 	}
 	
 	/**
@@ -43,6 +49,10 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		}
 		$editor = new UserObjectWatchEditor($userObjectWatch);
 		$editor->delete();
+		
+		// reset user storage
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userObjectWatchTypeIDs');
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'unreadUserObjectWatchCount');
 	}
 	
 	/**
