@@ -32,7 +32,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		
 		if (!isset($this->objectTypeIDs[$userID])) {
 			$this->objectTypeIDs[$userID] = 0;
-		
+			
 			// load storage data
 			UserStorageHandler::getInstance()->loadStorage(array($userID));
 				
@@ -46,17 +46,19 @@ class UserObjectWatchHandler extends SingletonFactory {
 					$objectTypeIDs[] = $objectType->objectTypeID;
 				}
 				
-				$conditionBuilder = new PreparedStatementConditionBuilder();
-				$conditionBuilder->add("objectTypeID IN (?)", array($objectTypeIDs));
-				$conditionBuilder->add("userID = ?", array($userID));
-				
-				$sql = "SELECT	DISTINCT objectTypeID
-					FROM	wcf".WCF_N."_user_object_watch
-					".$conditionBuilder->__toString();
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute($conditionBuilder->getParameters());
-				while ($row = $statement->fetchArray()) {
-					$this->objectTypeIDs[$userID][] = $row['objectTypeID'];
+				if (!empty($objectTypeIDs)) {
+					$conditionBuilder = new PreparedStatementConditionBuilder();
+					$conditionBuilder->add("objectTypeID IN (?)", array($objectTypeIDs));
+					$conditionBuilder->add("userID = ?", array($userID));
+					
+					$sql = "SELECT	DISTINCT objectTypeID
+						FROM	wcf".WCF_N."_user_object_watch
+						".$conditionBuilder->__toString();
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute($conditionBuilder->getParameters());
+					while ($row = $statement->fetchArray()) {
+						$this->objectTypeIDs[$userID][] = $row['objectTypeID'];
+					}
 				}
 				
 				// update storage data
@@ -81,7 +83,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		
 		if (!isset($this->unreadObjectCount[$userID])) {
 			$this->unreadObjectCount[$userID] = 0;
-		
+			
 			// load storage data
 			UserStorageHandler::getInstance()->loadStorage(array($userID));
 				
