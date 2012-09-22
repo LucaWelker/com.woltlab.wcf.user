@@ -16,5 +16,9 @@
 		<coreobject>
 			<objectname><![CDATA[wcf\system\user\notification\UserNotificationHandler]]></objectname>
 		</coreobject>
+		
+		<coreobject>
+			<objectname><![CDATA[wcf\system\user\object\watch\UserObjectWatchHandler]]></objectname>
+		</coreobject>
 	</import>
 </data>

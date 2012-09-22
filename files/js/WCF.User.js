@@ -2370,3 +2370,99 @@ WCF.User.List = Class.extend({
 		this._showPage();
 	}
 });
+
+/**
+ * Namespace for object watch functions.
+ */
+WCF.User.ObjectWatch = {};
+
+/**
+ * Handles subscribe/unsubscribe links.
+ */
+WCF.User.ObjectWatch.Subscribe = Class.extend({
+	/**
+	 * CSS selector for subscribe buttons
+	 * @var	string
+	 */
+	_buttonSelector: '.jsSubscribeButton',
+	
+	/**
+	 * id of the object that is currently being subscribed
+	 * @var	integer
+	 */
+	_objectID: 0,
+	
+	/**
+	 * object type of the object that is currently being subscribed
+	 * @var	string
+	 */
+	_objectType: '',
+	
+	/**
+	 * WCF.User.ObjectWatch.Subscribe object.
+	 */
+	init: function() {
+		// initialize proxy
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		// bind event listeners
+		$(this._buttonSelector).click($.proxy(this._click, this));
+	},
+	
+	/**
+	 * Handles a click on a subscribe button.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var link = $(event.target);
+		if (!link.is('a')) {
+			link = link.closest('a');
+		}
+		this._objectID = link.data('objectID');
+		this._objectType = link.data('objectType');
+		
+		this._proxy.setOption('data', {
+			'actionName': link.data('subscribed') ? 'unsubscribe' : 'subscribe',
+			'className': 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction',
+			'parameters': {
+				data: {
+					objectID: this._objectID,
+					objectType: this._objectType
+				}
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Handles the successful subscription.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		$(this._buttonSelector).each($.proxy(function(index, container) {
+			var button = $(container);
+			
+			if (button.data('objectID') == this._objectID && button.data('objectType') == this._objectType) {
+				// toogle icon title
+				if (button.data('subscribed')) {
+					button.children('img').attr('src', WCF.Icon.get('wcf.icon.bookmark'));
+					button.data('tooltip', WCF.Language.get('wcf.user.watchedObjects.subscribe'));
+				}
+				else {
+					button.children('img').attr('src', WCF.Icon.get('wcf.icon.bookmark.delete'));
+					button.data('tooltip', WCF.Language.get('wcf.user.watchedObjects.unsubscribe'));
+				}
+				
+				button.data('subscribed', !button.data('subscribed'));
+				
+				return false;
+			}
+		}, this));
+	}
+});
