@@ -213,6 +213,7 @@ class UserActivityPointHandler extends SingletonFactory {
 			
 			$objectTypes[$objectType->objectTypeID] = $objectType->points;
 		}
+		if (empty($objectTypes)) return; // nothing to to here
 		
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add("objectTypeID IN (?)", array(array_keys($objectTypes)));
