@@ -96,8 +96,9 @@ class UserActivityPointHandler extends SingletonFactory {
 	 * 
 	 * @param	string		$objectType
 	 * @param	array<integer>	$objectIDs
+	 * @param	boolean			$skipCacheUpdate	should the cache update be skipped (you have to call updateCaches manually afterwards!)
 	 */
-	public function removeEvents($objectType, array $objectIDs) {
+	public function removeEvents($objectType, array $objectIDs, $skipCacheUpdate = false) {
 		if (empty($objectIDs)) return;
 		
 		// get and validate object type
@@ -118,7 +119,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		
 		$userIDs = array();
 		foreach ($eventList as $event) $userIDs[] = $event->userID;
-		$this->updateCaches($userIDs);
+		if (!$skipCacheUpdate) $this->updateCaches($userIDs);
 	}
 	
 	/**
