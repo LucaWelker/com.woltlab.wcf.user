@@ -57,7 +57,7 @@
 			<dl>
 				<dd>
 					<ul class="buttonList">
-						<li><a class="button small" href="{link controller='RegisterNewActivationCode'}{/link}"><img src="{icon size='S'}eMail{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.newActivationCode{/lang}</span></a></li>
+						<li><a class="button small" href="{link controller='RegisterNewActivationCode'}{/link}"><img src="{icon}eMail{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.newActivationCode{/lang}</span></a></li>
 						{event name='buttons'}
 					</ul>
 				</dd>
