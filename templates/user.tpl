@@ -33,6 +33,14 @@
 				WCF.User.Profile.Editor.Handler.init({$user->userID}, {if $editOnInit}true{else}false{/if});
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
+			
+			$('.activityPointsDisplay').click(function (event) {
+				event.preventDefault();
+				var id = WCF.getRandomID();
+				$('body').append('<div id="' + id + '"></div>');
+				$('#' + id).load('{link controller="DetailedActivityPointList" object=$user ajax=true}{/link}');
+				WCF.showDialog(id, { title: 'ACTIVITY POINTZ' });
+			});
 		});
 		//]]>
 	</script>
@@ -54,6 +62,8 @@
 				
 				<dt>{lang}wcf.user.profileHits{/lang}</dt>
 				<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
+				<dt><a class="activityPointsDisplay" href="{link controller="DetailedActivityPointList" object=$user}{/link}">ACTIVITY POINTZ</a></dt>
+				<dd><a class="activityPointsDisplay" href="{link controller="DetailedActivityPointList" object=$user}{/link}">{#$user->activityPoints}</a></dd>
 			</dl>
 		</li>
 		

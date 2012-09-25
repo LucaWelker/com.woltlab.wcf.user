@@ -112,7 +112,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		$eventList->sqlLimit = 0;
 		$eventList->getConditionBuilder()->add("objectTypeID = ?", array($_objectType->objectTypeID));
 		$eventList->getConditionBuilder()->add("objectID IN (?)", array($objectIDs));
-		$eventList->readObjects();
+		$eventList->readObjectIDs();
 		
 		// delete events
 		UserActivityPointEventEditor::deleteAll($eventList->getObjectIDs());
