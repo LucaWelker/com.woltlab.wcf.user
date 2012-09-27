@@ -1,12 +1,12 @@
 <?php
 namespace wcf\system\worker;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * Worker implementation for updating user activity point caches.
+ * Worker implementation for updating user activity point events.
  * 
  * @author	Tim Düsterhus
  * @copyright	2001-2012 WoltLab GmbH
@@ -17,9 +17,24 @@ use wcf\util\StringUtil;
  */
 class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 	/**
+	 * Limiting is dependent on the actual processors.
 	 * @see	wcf\system\worker\AbstractWorker::$limit
 	 */
-	protected $limit = 50;
+	protected $limit = 1;
+	
+	/**
+	 * object types
+	 * @var array<wcf\data\object\type\ObjectType>
+	 */
+	public $objectTypes = array();
+	
+	public $requestMapping = array();
+	
+	public function __construct(array $parameters) {
+		parent::__construct($parameters);
+		
+		$this->objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.activityPointEvent');
+	}
 	
 	/**
 	 * @see	wcf\system\worker\IWorker::validate()
@@ -33,32 +48,27 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 	 * @see	wcf\system\worker\IWorker::countObjects()
 	 */
 	public function countObjects() {
-		$sql = "SELECT	COUNT(*) AS count
-			FROM	wcf".WCF_N."_user user";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-		$row = $statement->fetchArray();
+		$requests = 0;
+		foreach ($this->objectTypes as $objectType) {
+			$objectType->requests = $objectType->getProcessor()->countRequests();
+			$requests += $objectType->requests;
+		}
 		
-		$this->count = $row['count'];
+		return $requests;
 	}
 	
 	/**
 	 * @see	wcf\system\worker\IWorker::execute()
 	 */
 	public function execute() {
-		// get users
-		$sql = "SELECT		userID
-			FROM		wcf".WCF_N."_user user
-			ORDER BY	user.userID";
-		$statement = WCF::getDB()->prepareStatement($sql, $this->limit, ($this->limit * $this->loopCount));
-		$statement->execute();
-		
-		$userIDs = array();
-		while ($row = $statement->fetchArray()) {
-			$userIDs[] = $row['userID'];
+		$loopCount = $this->loopCount;
+		foreach ($this->objectTypes as $objectType) {
+			if ($loopCount < $objectType->requests) {
+				$objectType->getProcessor()->updateActivityPointEvents($loopCount);
+				return;
+			}
+			$loopCount -= $objectType->requests;
 		}
-		
-		UserActivityPointHandler::getInstance()->updateCaches($userIDs);
 	}
 	
 	/**

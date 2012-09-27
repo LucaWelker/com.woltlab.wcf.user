@@ -22,7 +22,7 @@ interface IUserActivityPointObjectProcessor {
 	
 	/**
 	 * This method updates the activityPointEvents. $request will be an integer
-	 * between 0 (first request) and the number returned by countRequests().
+	 * between 0 (first request) and the number returned by countRequests() minus 1.
 	 * 
 	 * @param	integer		$request
 	 */
