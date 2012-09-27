@@ -1,7 +1,9 @@
 {capture assign='activityPoints'}
 	{assign var='activityPointSum' value=0}
 	{foreach from=$activityPointObjectTypes item='objectType'}
-		{#$objectType->activityPoints/$objectType->points} × {$objectType->objectType} × {#$objectType->points} Points per {$objectType->objectType}  = {#$objectType->activityPoints}<br />
+		{if $objectType->activityPoints > 0}
+			{#$objectType->activityPoints/$objectType->points} × {$objectType->objectType} × {#$objectType->points} Points per {$objectType->objectType}  = {#$objectType->activityPoints}<br />
+		{/if}
 		
 		{assign var='activityPointSum' value=$activityPointSum + $objectType->activityPoints}
 	{/foreach}
