@@ -38,8 +38,10 @@
 				event.preventDefault();
 				var id = WCF.getRandomID();
 				$('body').append('<div id="' + id + '"></div>');
-				$('#' + id).load('{link controller="DetailedActivityPointList" object=$user ajax=true}{/link}');
 				WCF.showDialog(id, { title: 'ACTIVITY POINTZ' });
+				$('#' + id).load('{link controller="DetailedActivityPointList" object=$user ajax=true}{/link}', function () {
+					$('#' + id).wcfDialog('render');
+				});
 			});
 		});
 		//]]>
