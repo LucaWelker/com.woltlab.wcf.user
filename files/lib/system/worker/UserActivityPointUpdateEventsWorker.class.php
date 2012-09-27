@@ -15,7 +15,7 @@ use wcf\util\StringUtil;
  * @subpackage	system.worker
  * @category 	Community Framework
  */
-class UserActivityPointUpdateCacheWorker extends AbstractWorker {
+class UserActivityPointUpdateEventsWorker extends AbstractWorker {
 	/**
 	 * Limiting is dependent on the actual processors.
 	 * @see	wcf\system\worker\AbstractWorker::$limit
@@ -27,8 +27,6 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 	 * @var array<wcf\data\object\type\ObjectType>
 	 */
 	public $objectTypes = array();
-	
-	public $requestMapping = array();
 	
 	public function __construct(array $parameters) {
 		parent::__construct($parameters);
@@ -48,13 +46,11 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 	 * @see	wcf\system\worker\IWorker::countObjects()
 	 */
 	public function countObjects() {
-		$requests = 0;
+		$this->count = 0;
 		foreach ($this->objectTypes as $objectType) {
 			$objectType->requests = $objectType->getProcessor()->countRequests();
-			$requests += $objectType->requests;
+			$this->count += $objectType->requests;
 		}
-		
-		return $requests;
 	}
 	
 	/**
