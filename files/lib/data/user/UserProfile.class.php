@@ -498,7 +498,7 @@ class UserProfile extends DatabaseObjectDecorator {
 				$this->rank = new UserRank(null, array(
 					'rankID' => $this->rankID,
 					'groupID' => $this->groupID,
-					'neededLikes' => $this->neededLikes,
+					'neededPoints' => $this->neededPoints,
 					'rankTitle' => $this->rankTitle,
 					'cssClassName' => $this->cssClassName,
 					'rankImage' => $this->rankImage,
