@@ -6,7 +6,7 @@
 			<environment>admin</environment>
 			<templatename>header</templatename>
 			<eventname>userAvatar</eventname>
-			<templatecode><![CDATA[<span class="framed">{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)}</span>]]></templatecode>
+			<templatecode><![CDATA[{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)}]]></templatecode>
 		</templatelistener>
 		<!-- /admin -->
 		
