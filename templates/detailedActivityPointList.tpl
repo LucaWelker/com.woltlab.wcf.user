@@ -1,14 +1,45 @@
 {capture assign='activityPoints'}
 	{assign var='activityPointSum' value=0}
+	<div id="userTableContainer" class="tabularBox marginTop shadow">
+<table class="table jsClipboardContainer">
+	<thead>
+		<tr>
+			<th class="columnTitle">COUNT</th>
+			<th class="columnTitle">CONTENT</th>
+			<th class="columnTitle">POINTZ PER CONTENT</th>
+			<th class="columnTitle">SUMMARY</th>
+		</tr>
+	</thead>
+	<tbody>
 	{foreach from=$activityPointObjectTypes item='objectType'}
-		{if $objectType->activityPoints > 0}
-			{#$objectType->activityPoints/$objectType->points} × {$objectType->objectType} × {#$objectType->points} Points per {$objectType->objectType}  = {#$objectType->activityPoints}<br />
-		{/if}
-		
-		{assign var='activityPointSum' value=$activityPointSum + $objectType->activityPoints}
+		<tr>
+			{if $objectType->activityPoints > 0}
+			<td class="columnTitle">
+				{#$objectType->activityPoints/$objectType->points} ×
+			</td>
+			<td class="columnTitle">$objectType->objectType}
+			</td>
+			<td class="columnTitle">{#$objectType->points} POINTZ PER {$objectType->objectType}
+			</td>
+			<td class="columnTitle">{#$objectType->activityPoints}</td>
+			{/if}
+			
+			{assign var='activityPointSum' value=$activityPointSum + $objectType->activityPoints}
+		</tr>
 	{/foreach}
-	{if $user->activityPoints - $activityPointSum > 0} + {#$user->activityPoints - $activityPointSum} not in dependency list{/if}
-	Σ {#$user->activityPoints}
+	{if true || $user->activityPoints - $activityPointSum > 0}
+		<tr>
+			<td class="columnTitle right" colspan="3"> + not in dependency list</td>
+			<td class="columnTitle">{#$user->activityPoints - $activityPointSum}</td>
+		</tr>
+	{/if}
+	<tr>
+		<td class="columnTitle focus right" colspan="3">&#931;</td>
+		<td class="columnTitle focus"><span class="badge">{#$user->activityPoints}</span></td>
+	</tr>
+	</tbody>
+</table>
+</div>
 {/capture}
 {if $ajax}
 {@$activityPoints}
@@ -123,9 +154,7 @@
 	
 	{include file='userNotice'}
 	
-	<div class="container marginTop shadow containerPadding">
-		{@$activityPoints}
-	</div>
+	{@$activityPoints}
 	
 	{include file='footer'}
 	
