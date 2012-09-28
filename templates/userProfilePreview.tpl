@@ -5,10 +5,10 @@
 		//<![CDATA[
 			$(function() {
 				WCF.Icon.addObject({
-					'wcf.icon.add': '{icon size='S'}add{/icon}',
-					'wcf.icon.enabled': '{icon size='S'}enabled{/icon}',
-					'wcf.icon.disabled': '{icon size='S'}disabled{/icon}',
-					'wcf.icon.remove': '{icon size='S'}remove{/icon}'
+					'wcf.icon.add': '{icon}add{/icon}',
+					'wcf.icon.enabled': '{icon}enabled{/icon}',
+					'wcf.icon.disabled': '{icon}disabled{/icon}',
+					'wcf.icon.remove': '{icon}remove{/icon}'
 				})
 				
 				WCF.Language.addObject({

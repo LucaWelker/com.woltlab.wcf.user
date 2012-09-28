@@ -25,7 +25,7 @@
 	<!-- user notifications -->
 	{if $__wcf->getUserNotificationHandler()->getNotificationCount()}
 		<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
-			<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount() > 0} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+			<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount() > 0} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
 			<div class="dropdownMenu userNotificationContainer">
 				<div id="userNotificationContainer" class="scrollableContainer">
 					<div class="scrollableItems cleafix">
@@ -41,12 +41,12 @@
 		</li>
 	{else}
 		<li>
-			<a class="jsTooltip" href="{link controller='NotificationList'}{/link}" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon size='M'}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span></a>
+			<a class="jsTooltip" href="{link controller='NotificationList'}{/link}" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span></a>
 		</li>
 	{/if}
 	
 	<li>
-		<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon size='M'}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">Watched Objects</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
+		<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">Watched Objects</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
 	</li>
 {else}
 	{if !$__disableLoginLink|isset}

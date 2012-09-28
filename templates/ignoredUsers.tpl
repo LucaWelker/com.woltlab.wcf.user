@@ -58,7 +58,7 @@
 				{foreach from=$ignoredUsers item=ignoredUser}
 					<li class="framed jsIgnoredUser">
 						<div title="{$ignoredUser->username}" class="jsTooltip">
-							<span><img src="{icon size='S'}delete{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$ignoredUser->userID}" /></span>
+							<span><img src="{icon}delete{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$ignoredUser->userID}" /></span>
 							<a href="{link controller='User' object=$ignoredUser}{/link}">
 								{@$ignoredUser->getAvatar()->getImageTag(64)}
 							</a>
