@@ -16,7 +16,7 @@ class VoidUserActivityPointObjectProcessor implements IUserActivityPointObjectPr
 	 * @see wcf\system\user\activity\point\IUserActivityPointObject::countRequests();
 	 */
 	public function countRequests() {
-		return;
+		return 0;
 	}
 	
 	/**
