@@ -12,6 +12,13 @@
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Konfiguration]]></item>
+		<item name="wcf.acp.menu.link.activityPoint"><![CDATA[Aktivitätspunkte]]></item>
+	</category>
+	
+	<category name="wcf.acp.user">
+		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
+		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Punkte neu vergeben]]></item>
+		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Objekte neu einlesen]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">
@@ -248,12 +255,12 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 	</category>
 	
 	<category name="wcf.user.activity">
-		<item name="wcf.user.activity.points"><![CDATA[Aktivitätspunkte]]></item>
-		<item name="wcf.user.activity.points.objects"><![CDATA[Anzahl der Objekte]]></item>
-		<item name="wcf.user.activity.points.objectType"><![CDATA[Objekt-Art]]></item>
-		<item name="wcf.user.activity.points.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
-		<item name="wcf.user.activity.points.sum"><![CDATA[Summe]]></item>
-		<item name="wcf.user.activity.points.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
+		<item name="wcf.user.activity.point"><![CDATA[Aktivitätspunkte]]></item>
+		<item name="wcf.user.activity.point.objects"><![CDATA[Anzahl der Objekte]]></item>
+		<item name="wcf.user.activity.point.objectType"><![CDATA[Objekt-Art]]></item>
+		<item name="wcf.user.activity.point.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
+		<item name="wcf.user.activity.point.sum"><![CDATA[Summe]]></item>
+		<item name="wcf.user.activity.point.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

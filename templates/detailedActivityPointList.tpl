@@ -3,10 +3,10 @@
 		<table class="table jsClipboardContainer">
 			<thead>
 				<tr>
-					<th class="columnTitle">{lang}wcf.user.activity.points.objects{/lang}</th>
-					<th class="columnTitle">{lang}wcf.user.activity.points.objectType{/lang}</th>
-					<th class="columnTitle">{lang}wcf.user.activity.points.pointsPerObject{/lang}</th>
-					<th class="columnTitle">{lang}wcf.user.activity.points.sum{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.point.objects{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.point.objectType{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.point.pointsPerObject{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.point.sum{/lang}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -18,7 +18,7 @@
 								{#$objectType->activityPoints/$objectType->points} ×
 							</td>
 							<td class="columnTitle">
-								{$objectType->objectType}
+								{lang}wcf.user.activity.point.objectType.{$objectType->objectType}{/lang}
 							</td>
 							<td class="columnTitle">
 								{#$objectType->points}
@@ -33,7 +33,7 @@
 				{* TODO: remove the true *}
 				{if true || $user->activityPoints - $activityPointSum > 0}
 					<tr>
-						<td class="columnTitle right" colspan="3">{lang}wcf.user.activity.points.notInDependency{/lang}</td>
+						<td class="columnTitle right" colspan="3">{lang}wcf.user.activity.point.notInDependency{/lang}</td>
 						<td class="columnTitle">{#$user->activityPoints - $activityPointSum}</td>
 					</tr>
 				{/if}
@@ -51,7 +51,7 @@
 	{include file='documentHeader'}
 	
 	<head>
-		<title>{lang}wcf.user.activity.points{/lang} - {lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
+		<title>{lang}wcf.user.activity.point{/lang} - {lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
 		{include file='headInclude'}
 	</head>
 	<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
@@ -70,7 +70,7 @@
 					
 					<dt>{lang}wcf.user.profileHits{/lang}</dt>
 					<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
-					<dt><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{lang}wcf.user.activity.points{/lang}</a></dt>
+					<dt><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{lang}wcf.user.activity.point{/lang}</a></dt>
 					<dd><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{#$user->activityPoints}</a></dd>
 				</dl>
 			</li>
