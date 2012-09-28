@@ -1,45 +1,49 @@
 {capture assign='activityPoints'}
-	{assign var='activityPointSum' value=0}
 	<div id="userTableContainer" class="tabularBox marginTop shadow">
-<table class="table jsClipboardContainer">
-	<thead>
-		<tr>
-			<th class="columnTitle">COUNT</th>
-			<th class="columnTitle">CONTENT</th>
-			<th class="columnTitle">POINTZ PER CONTENT</th>
-			<th class="columnTitle">SUMMARY</th>
-		</tr>
-	</thead>
-	<tbody>
-	{foreach from=$activityPointObjectTypes item='objectType'}
-		<tr>
-			{if $objectType->activityPoints > 0}
-			<td class="columnTitle">
-				{#$objectType->activityPoints/$objectType->points} ×
-			</td>
-			<td class="columnTitle">$objectType->objectType}
-			</td>
-			<td class="columnTitle">{#$objectType->points} POINTZ PER {$objectType->objectType}
-			</td>
-			<td class="columnTitle">{#$objectType->activityPoints}</td>
-			{/if}
-			
-			{assign var='activityPointSum' value=$activityPointSum + $objectType->activityPoints}
-		</tr>
-	{/foreach}
-	{if true || $user->activityPoints - $activityPointSum > 0}
-		<tr>
-			<td class="columnTitle right" colspan="3"> + not in dependency list</td>
-			<td class="columnTitle">{#$user->activityPoints - $activityPointSum}</td>
-		</tr>
-	{/if}
-	<tr>
-		<td class="columnTitle focus right" colspan="3">&#931;</td>
-		<td class="columnTitle focus"><span class="badge">{#$user->activityPoints}</span></td>
-	</tr>
-	</tbody>
-</table>
-</div>
+		<table class="table jsClipboardContainer">
+			<thead>
+				<tr>
+					<th class="columnTitle">{lang}wcf.user.activity.points.objects{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.points.objectType{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.points.pointsPerObject{/lang}</th>
+					<th class="columnTitle">{lang}wcf.user.activity.points.sum{/lang}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{assign var='activityPointSum' value=0}
+				{foreach from=$activityPointObjectTypes item='objectType'}
+					{if $objectType->activityPoints > 0}
+						<tr>
+							<td class="columnTitle">
+								{#$objectType->activityPoints/$objectType->points} ×
+							</td>
+							<td class="columnTitle">
+								{$objectType->objectType}
+							</td>
+							<td class="columnTitle">
+								{#$objectType->points}
+							</td>
+							<td class="columnTitle">
+								{#$objectType->activityPoints}
+							</td>
+							{assign var='activityPointSum' value=$activityPointSum + $objectType->activityPoints}
+						</tr>
+					{/if}
+				{/foreach}
+				{* TODO: remove the true *}
+				{if true || $user->activityPoints - $activityPointSum > 0}
+					<tr>
+						<td class="columnTitle right" colspan="3">{lang}wcf.user.activity.points.notInDependency{/lang}</td>
+						<td class="columnTitle">{#$user->activityPoints - $activityPointSum}</td>
+					</tr>
+				{/if}
+				<tr>
+					<td class="columnTitle focus right" colspan="3">Σ</td>
+					<td class="columnTitle focus"><span class="badge">{#$user->activityPoints}</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 {/capture}
 {if $ajax}
 {@$activityPoints}
@@ -47,7 +51,7 @@
 	{include file='documentHeader'}
 	
 	<head>
-		<title>ACTIVITY POINTZ - {lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
+		<title>{lang}wcf.user.activity.points{/lang} - {lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
 		{include file='headInclude'}
 	</head>
 	<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
@@ -66,7 +70,7 @@
 					
 					<dt>{lang}wcf.user.profileHits{/lang}</dt>
 					<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
-					<dt><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">ACTIVITY POINTZ</a></dt>
+					<dt><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{lang}wcf.user.activity.points{/lang}</a></dt>
 					<dd><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{#$user->activityPoints}</a></dd>
 				</dl>
 			</li>

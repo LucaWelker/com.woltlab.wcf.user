@@ -38,7 +38,7 @@
 				event.preventDefault();
 				var id = WCF.getRandomID();
 				$('body').append('<div id="' + id + '"></div>');
-				WCF.showDialog(id, { title: 'ACTIVITY POINTZ' });
+				WCF.showDialog(id, { title: '{lang}wcf.user.activity.points{/lang}' });
 				$('#' + id).load('{link controller="DetailedActivityPointList" object=$user ajax=true}{/link}', function () {
 					$('#' + id).wcfDialog('render');
 				});
@@ -64,8 +64,8 @@
 				
 				<dt>{lang}wcf.user.profileHits{/lang}</dt>
 				<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
-				<dt><a class="activityPointsDisplay" href="{link controller="DetailedActivityPointList" object=$user}{/link}">ACTIVITY POINTZ</a></dt>
-				<dd><a class="activityPointsDisplay" href="{link controller="DetailedActivityPointList" object=$user}{/link}">{#$user->activityPoints}</a></dd>
+				<dt><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{lang}wcf.user.activity.points{/lang}</a></dt>
+				<dd><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{#$user->activityPoints}</a></dd>
 			</dl>
 		</li>
 		

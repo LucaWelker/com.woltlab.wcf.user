@@ -247,6 +247,15 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[Es wurden keine Abonnements gefunden.]]></item>
 	</category>
 	
+	<category name="wcf.user.activity">
+		<item name="wcf.user.activity.points"><![CDATA[Aktivitätspunkte]]></item>
+		<item name="wcf.user.activity.points.objects"><![CDATA[Anzahl der Objekte]]></item>
+		<item name="wcf.user.activity.points.objectType"><![CDATA[Objekt-Art]]></item>
+		<item name="wcf.user.activity.points.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
+		<item name="wcf.user.activity.points.sum"><![CDATA[Summe]]></item>
+		<item name="wcf.user.activity.points.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
+	</category>
+	
 	<category name="wcf.user.avatar">
 		<item name="wcf.user.avatar"><![CDATA[Avatar]]></item>
 		<item name="wcf.user.avatar.edit"><![CDATA[Avatar verwalten]]></item>
