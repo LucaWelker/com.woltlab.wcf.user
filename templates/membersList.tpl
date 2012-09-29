@@ -34,50 +34,44 @@
 {capture assign='sidebar'}
 {assign var=encodedLetter value=$letter|rawurlencode}
 {*TODO: sidebar content*}
-<nav id="sidebarContent" class="sidebarContent">
-	<ul>
-		<li class="sidebarContainer">
-			<hgroup class="sidebarContainerHeadline">
-				<h1>{lang}wcf.user.members.sort.letters{/lang}</h1>
-			</hgroup>
-			
-			<ul class="buttonList letters">
-				{foreach from=$letters item=__letter}
-					<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
-				{/foreach}
-				{if !$letter|empty}<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
-			</ul>
-		</li>
+	<fieldset>
+		<legend>{lang}wcf.user.members.sort.letters{/lang}</legend>
+				
+		<ul class="buttonList letters">
+			{foreach from=$letters item=__letter}
+				<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
+			{/foreach}
+			{if !$letter|empty}<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
+		</ul>
+	</fieldset>
 		
-		<li class="sidebarContainer">
-			<form method="get" action="{link controller='MembersList'}{/link}">
-				<fieldset>
-					<legend>{lang}wcf.user.members.sort{/lang}</legend>
-					
-					<dl>
-						<dd>
-							<select id="sortField" name="sortField">
-								<option value="username"{if $sortField == 'username'} selected="selected"{/if}>{lang}wcf.user.username{/lang}</option>
-								<option value="registrationDate"{if $sortField == 'registrationDate'} selected="selected"{/if}>{lang}wcf.user.registrationDate{/lang}</option>
-								{event name='sortField'}
-							</select>
-							<select name="sortOrder">
-								<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
-								<option value="DESC"{if $sortOrder == 'DESC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.descending{/lang}</option>
-							</select>
-						</dd>
-					</dl>
-					
-					<div class="formSubmit">
-						<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-						<input type="hidden" name="pageNo" value="{@$pageNo}" />
-						<input type="hidden" name="letter" value="{$letter}" />
-					</div>
-				</fieldset>
-			</form>
-		</li>
-	</ul>
-</nav>
+	<div>
+		<form method="get" action="{link controller='MembersList'}{/link}">
+			<fieldset>
+				<legend>{lang}wcf.user.members.sort{/lang}</legend>
+				
+				<dl>
+					<dd>
+						<select id="sortField" name="sortField">
+							<option value="username"{if $sortField == 'username'} selected="selected"{/if}>{lang}wcf.user.username{/lang}</option>
+							<option value="registrationDate"{if $sortField == 'registrationDate'} selected="selected"{/if}>{lang}wcf.user.registrationDate{/lang}</option>
+							{event name='sortField'}
+						</select>
+						<select name="sortOrder">
+							<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
+							<option value="DESC"{if $sortOrder == 'DESC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.descending{/lang}</option>
+						</select>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<div class="formSubmit">
+				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+				<input type="hidden" name="pageNo" value="{@$pageNo}" />
+				<input type="hidden" name="letter" value="{$letter}" />
+			</div>
+		</form>
+	</div>
 {/capture}
 
 {include file='header' sidebarOrientation='right'}

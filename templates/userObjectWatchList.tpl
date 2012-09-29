@@ -8,40 +8,35 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
-	<nav id="sidebarContent" class="sidebarContent">
-		<ul>
-			<li class="sidebarContainer">
-				<form id="sidebarContainer" method="get" action="{link controller='UserObjectWatchList'}{/link}">
-					<fieldset>
-						{*@todo: language variables*}
-						<legend>{lang}wbb.board.displayOptions{/lang}</legend>
-						
-						<dl>
-							<dt><label for="sortField">{lang}wbb.board.sortBy{/lang}</label></dt>
-							<dd>
-								<select id="sortField" name="sortField">
-									<option value="title"{if $sortField == 'title'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.title{/lang}</option>
-									<option value="username"{if $sortField == 'username'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.username{/lang}</option>
-									<option value="time"{if $sortField == 'time'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.time{/lang}</option>
-									<option value="lastChangeTime"{if $sortField == 'lastChangeTime'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.lastChangeTime{/lang}</option>
-								</select>
-								<select name="sortOrder">
-									<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
-									<option value="DESC"{if $sortOrder == 'DESC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.descending{/lang}</option>
-								</select>
-							</dd>
-						</dl>
-					</fieldset>
+	<div>
+		<form id="sidebarContainer" method="get" action="{link controller='UserObjectWatchList'}{/link}">
+			<fieldset>
+				{*@todo: language variables*}
+				<legend>{lang}wbb.board.displayOptions{/lang}</legend>
 				
-					<div class="formSubmit">
-						<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-						<input type="hidden" name="pageNo" value="{@$pageNo}" />
-					</div>
-				</form>
-			
-			</li>
-		</ul>
-	</nav>
+				<dl>
+					<dt><label for="sortField">{lang}wbb.board.sortBy{/lang}</label></dt>
+					<dd>
+						<select id="sortField" name="sortField">
+							<option value="title"{if $sortField == 'title'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.title{/lang}</option>
+							<option value="username"{if $sortField == 'username'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.username{/lang}</option>
+							<option value="time"{if $sortField == 'time'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.time{/lang}</option>
+							<option value="lastChangeTime"{if $sortField == 'lastChangeTime'} selected="selected"{/if}>{lang}wcf.user.watchedObjects.lastChangeTime{/lang}</option>
+						</select>
+						<select name="sortOrder">
+							<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
+							<option value="DESC"{if $sortOrder == 'DESC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.descending{/lang}</option>
+						</select>
+					</dd>
+				</dl>
+			</fieldset>
+		
+			<div class="formSubmit">
+				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+				<input type="hidden" name="pageNo" value="{@$pageNo}" />
+			</div>
+		</form>
+	</div>
 {/capture}
 
 {include file='header' sidebarOrientation='right'}

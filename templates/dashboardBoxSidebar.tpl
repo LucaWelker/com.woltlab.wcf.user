@@ -1,9 +1,7 @@
-<li class="sidebarContainer">
-	<hgroup class="sidebarContainerHeadline">
-		<h1>{lang}wcf.dashboard.box.{$box->boxName}{/lang}</h1>
-	</hgroup>
+<fieldset>
+	<legend>{lang}wcf.dashboard.box.{$box->boxName}{/lang}</legend>
 	
 	<div>
 		{@$template}
 	</div>
-</li>
+</fieldset>

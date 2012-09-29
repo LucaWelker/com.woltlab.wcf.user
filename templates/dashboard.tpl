@@ -9,11 +9,7 @@
 
 {if $__boxSidebar|isset && $__boxSidebar}
 	{capture assign='sidebar'}
-		<nav id="sidebarContent" class="sidebarContent">
-			<ul>
-				{@$__boxSidebar}
-			</ul>
-		</nav>
+		{@$__boxSidebar}
 	{/capture}
 {/if}
 

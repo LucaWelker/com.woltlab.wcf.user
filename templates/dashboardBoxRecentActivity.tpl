@@ -1,8 +1,8 @@
 {hascontent}
-	<ul>
+	<ul class="sidebarBoxList">
 		{content}
 			{foreach from=$recentActivityList item=recentActivityEvent}
-				<li class="sidebarBox box24">
+				<li class="box24">
 					<a href="{link controller='User' object=$recentActivityEvent->getUserProfile()}{/link}" title="{$recentActivityEvent->getUserProfile()->username}" class="framed">{@$recentActivityEvent->getUserProfile()->getAvatar()->getImageTag(24)}</a>
 					
 					<hgroup class="sidebarBoxHeadline">
