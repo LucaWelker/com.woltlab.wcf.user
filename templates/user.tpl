@@ -50,7 +50,7 @@
 	<fieldset>
 		<legend class="invisible">stats {* @todo: language variable*}</legend>
 		
-		<dl class="statsDataList">
+		<dl class="plain statsDataList">
 			{event name='statistics'}
 			
 			<dt>{lang}wcf.user.profileHits{/lang}</dt>

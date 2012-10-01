@@ -10,6 +10,6 @@
 
 {include file='userInformationButtons'}
 
-<dl class="inlineDataList">
+<dl class="plain inlineDataList">
 	{event name='statistics'}
 </dl>

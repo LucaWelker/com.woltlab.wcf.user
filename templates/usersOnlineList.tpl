@@ -54,18 +54,18 @@
 {foreach from=$objects item=user}
 	{capture assign=sessionData}
 		{if $user->getLocation()}
-			<dl class="inlineDataList">
+			<dl class="plain inlineDataList">
 				<dt>{lang}wcf.user.usersOnline.location{/lang}</dt>
 				<dd>{@$user->getLocation()}</dd>
 			</dl>
 		{/if}
-		<dl class="inlineDataList">
+		<dl class="plain inlineDataList">
 			<dt>{lang}wcf.user.usersOnline.lastActivity{/lang}</dt>
 			<dd>{@$user->lastActivityTime|time}</dd>
 		</dl>
 		
 		{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
-			<dl class="inlineDataList">
+			<dl class="plain inlineDataList">
 				<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
 				<dd>{$user->getFormattedIPAddress()}</dd>
 				<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
