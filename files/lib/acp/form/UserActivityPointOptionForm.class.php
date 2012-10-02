@@ -28,7 +28,7 @@ class UserActivityPointOptionForm extends ACPForm {
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array(); // TODO: Add permission
+	public $neededPermissions = array('admin.user.canEditActivityPoints'); // TODO: Add permission
 	
 	/**
 	 * points to objectType

@@ -14,7 +14,7 @@
 		<acpmenuitem name="wcf.acp.menu.link.activityPoint">
 			<parent>wcf.acp.menu.link.user.management</parent>
 			<link>index.php/UserActivityPointOption/</link>
-			<!-- TODO: permissions>admin.content.dashboard.canEditDashboard</permissions-->
+			<permissions>admin.user.canEditActivityPoints</permissions>
 		</acpmenuitem>
 	</import>
 </data>

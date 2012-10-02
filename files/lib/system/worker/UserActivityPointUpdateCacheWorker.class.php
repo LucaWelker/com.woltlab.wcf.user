@@ -25,8 +25,7 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 	 * @see	wcf\system\worker\IWorker::validate()
 	 */
 	public function validate() {
-		// TODO: check permissions
-		// WCF::getSession()->checkPermissions(array('admin.user.canMailUser'));
+		WCF::getSession()->checkPermissions(array('admin.user.canEditActivityPoints'));
 	}
 	
 	/**
