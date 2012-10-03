@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\user\activity\event;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\data\user\activity\event\UserActivityEventAction;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -122,6 +123,9 @@ class UserActivityEventHandler extends SingletonFactory {
 			)
 		));
 		$returnValues = $eventAction->executeAction();
+		
+		// fire user activity point event
+		UserActivityPointHandler::getInstance()->fireUserActivityEvent($returnValues['returnValues']);
 		
 		return $returnValues['returnValues'];
 	}
