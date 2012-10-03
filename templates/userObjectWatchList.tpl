@@ -55,7 +55,7 @@
 
 {hascontent}
 	<div class="container marginTop shadow">
-		<ul class="containerList">
+		<ul class="containerList userObjectWatchList">
 			{content}
 				{foreach from=$objects->getObjects() item=watchedObject}
 					<li>
