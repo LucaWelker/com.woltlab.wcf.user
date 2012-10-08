@@ -20,10 +20,10 @@
 							<td class="columnTitle">
 								{lang}wcf.user.activity.point.objectType.{$objectType->objectType}{/lang}
 							</td>
-							<td class="columnTitle">
+							<td class="columnTitle right">
 								{#$objectType->points}
 							</td>
-							<td class="columnTitle">
+							<td class="columnTitle right">
 								{#$objectType->activityPoints}
 							</td>
 							{assign var='activityPointSum' value=$activityPointSum + $objectType->activityPoints}
@@ -34,12 +34,12 @@
 				{if $user->activityPoints - $activityPointSum > 0}
 					<tr>
 						<td class="columnTitle right" colspan="3">{lang}wcf.user.activity.point.notInDependency{/lang}</td>
-						<td class="columnTitle">{#$user->activityPoints - $activityPointSum}</td>
+						<td class="columnTitle right">{#$user->activityPoints - $activityPointSum}</td>
 					</tr>
 				{/if}
 				<tr>
 					<td class="columnTitle focus right" colspan="3">Σ</td>
-					<td class="columnTitle focus"><span class="badge">{#$user->activityPoints}</span></td>
+					<td class="columnTitle focus right"><span class="badge">{#$user->activityPoints}</span></td>
 				</tr>
 			</tbody>
 		</table>
