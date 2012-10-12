@@ -12,7 +12,7 @@
 			<tbody>
 				{assign var='activityPointSum' value=0}
 				{foreach from=$activityPointObjectTypes item='objectType'}
-					{if $objectType->activityPoints > 0}
+					{if $objectType->activityPoints > 0 && $objectType->points > 0}
 						<tr>
 							<td class="columnTitle">
 								{#$objectType->activityPoints/$objectType->points} ×
