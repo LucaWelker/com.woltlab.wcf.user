@@ -169,7 +169,7 @@
 				position: relative;
 				
 				> hgroup {
-					padding-right: 180px + @wcfGapMedium;
+					padding-right: 196px + @wcfGapMedium;
 					
 					> h1 {
 						> .labelList {
@@ -184,14 +184,27 @@
 						}
 					}
 				}
+				
+				> .buttonList {
+					opacity: 0;
+					position: absolute;
+					right: 0;
+					top: 0;
+					
+					.transition(opacity, .1s);
+				}
 			}
+		}
+		
+		&:hover > .box48 > div > .buttonList {
+			opacity: 1;
 		}
 	}
 	
 	.lastPost {
-		right: 0;
 		position: absolute;
-		top: @wcfGapSmall;
+		right: 16px;
+		top: 0;
 		width: 180px;
 		
 		hgroup > h2 {
