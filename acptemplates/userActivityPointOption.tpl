@@ -1,4 +1,4 @@
-{include file='header'}
+{include file='header' pageTitle='wcf.acp.user.activityPoint.option'}
 
 <script type="text/javascript">
 	//<![CDATA[
@@ -62,7 +62,6 @@
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
- 		{if $cronjobID|isset}<input type="hidden" name="id" value="{@$cronjobID}" />{/if}
 	</div>
 </form>
 
