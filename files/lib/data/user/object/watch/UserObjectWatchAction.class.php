@@ -1,10 +1,9 @@
 <?php
 namespace wcf\data\user\object\watch;
-use wcf\system\user\storage\UserStorageHandler;
-
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\ValidateActionException;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
 /**
@@ -18,6 +17,10 @@ use wcf\system\WCF;
  * @category 	Community Framework
  */
 class UserObjectWatchAction extends AbstractDatabaseObjectAction {
+	/**
+	 * cached user object watch object
+	 * @var wcf\data\user\object\watch\UserObjectWatch
+	 */
 	protected $__userObjectWatch = null;
 	
 	/**
@@ -56,6 +59,37 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
+	 * Validates the delete action.
+	 */
+	public function validateDelete() {
+		// read objects
+		if (!count($this->objects)) {
+			$this->readObjects();
+		}
+		
+		if (!count($this->objects)) {
+			throw new ValidateActionException('Invalid object id');
+		}
+		
+		foreach ($this->objects as $object) {
+			if ($object->userID != WCF::getUser()->userID) {
+				throw new ValidateActionException('Invalid object id');
+			}
+		}
+	}
+	
+	/**
+	 * @see wcf\data\AbstractDatabaseObjectAction::delete()
+	 */
+	public function delete() {
+		parent::delete();
+		
+		// reset user storage
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userObjectWatchTypeIDs');
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'unreadUserObjectWatchCount');
+	}
+	
+	/**
 	 * Validates the subscribe action.
 	 */
 	public function validateSubscribe() {
@@ -77,6 +111,9 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		}
 	}
 	
+	/**
+	 * Validates the subscribe action.
+	 */
 	protected function __validateSubscribe() {
 		// check parameters
 		if (!isset($this->parameters['data']['objectType']) || !isset($this->parameters['data']['objectID'])) {

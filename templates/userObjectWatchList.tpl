@@ -3,6 +3,15 @@
 <head>
 	<title>{lang}wcf.user.watchedObjects{/lang}</title>
 	{include file='headInclude'}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			new WCF.Action.Delete('wcf\\data\\user\\object\\watch\\UserObjectWatchAction', $('.jsWatchedObject'));
+		});
+		//]]>
+	</script>
+		
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -55,10 +64,10 @@
 
 {hascontent}
 	<div class="container marginTop shadow">
-		<ul class="containerList">
+		<ul class="containerList userObjectWatchList">
 			{content}
 				{foreach from=$objects->getObjects() item=watchedObject}
-					<li>
+					<li class="jsWatchedObject">
 						{include file=$watchedObject->getTemplateName()}
 					</li>
 				{/foreach}
