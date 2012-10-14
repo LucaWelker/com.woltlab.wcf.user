@@ -15,21 +15,21 @@
 					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
 					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
 				});
-
+				
 				new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 				new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
 			{/if}
-
+			
 			new WCF.User.Profile.TabMenu({@$user->userID});
-
+			
 			WCF.TabMenu.init();
-
+			
 			{* TODO: Handle admin permissions *}
 			{if $__wcf->getUser()->userID == $user->userID}
 				WCF.Language.addObject({
 					'wcf.user.editProfile': '{lang}wcf.user.editProfile{/lang}',
 				});
-
+				
 				WCF.User.Profile.Editor.Handler.init({$user->userID}, {if $editOnInit}true{else}false{/if});
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
@@ -152,7 +152,7 @@
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
+				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}" title="{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
 			{/foreach}
 		</ul>
 	</nav>
