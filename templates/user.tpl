@@ -34,15 +34,17 @@
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
 			
-			$('.activityPointsDisplay').click(function (event) {
-				event.preventDefault();
-				var $id = WCF.getRandomID();
-				$('<div id="' + $id + '"></div>').appendTo(document.body);
-				WCF.showDialog($id, { title: '{lang}wcf.user.activity.point{/lang}' });
-				$('#' + $id).load('{link controller="DetailedActivityPointList" object=$user ajax=true}{/link}', function () {
-					$('#' + $id).wcfDialog('render');
+			{if $user->activityPoints}
+				$('.activityPointsDisplay').click(function (event) {
+					event.preventDefault();
+					var $id = WCF.getRandomID();
+					$('<div id="' + $id + '"></div>').appendTo(document.body);
+					WCF.showDialog($id, { title: '{lang}wcf.user.activity.point{/lang}' });
+					$('#' + $id).load('{link controller="DetailedActivityPointList" object=$user}{/link}', function () {
+						$('#' + $id).wcfDialog('render');
+					});
 				});
-			});
+			{/if}
 		});
 		//]]>
 	</script>
@@ -66,8 +68,10 @@
 			<dt>{lang}wcf.user.profileHits{/lang}</dt>
 			<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
 			
-			<dt><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{lang}wcf.user.activity.point{/lang}</a></dt>
-			<dd><a class="activityPointsDisplay" href="{link controller='DetailedActivityPointList' object=$user}{/link}">{#$user->activityPoints}</a></dd>
+			{if $user->activityPoints}
+				<dt class="javascriptOnly"><a class="activityPointsDisplay">{lang}wcf.user.activity.point{/lang}</a></dt>
+				<dd class="javascriptOnly"><a class="activityPointsDisplay">{#$user->activityPoints}</a></dd>
+			{/if}
 		</dl>
 	</fieldset>
 	

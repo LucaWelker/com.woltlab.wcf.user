@@ -1,28 +1,23 @@
 <?php
 namespace wcf\page;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\user\User;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\WCF;
 
 /**
- * Shows the user profile page.
+ * Shows the detailed activity point summary.
  * 
- * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @author	Tim Düsterhus
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	page
  * @category 	Community Framework
  */
-class DetailedActivityPointListPage extends UserPage {
-	/**
-	 * was the page requested via ajax
-	 * @var boolean
-	 */
-	public $ajax = false;
-	
+class DetailedActivityPointListPage extends AbstractPage {
 	/**
 	 * user activity point object types
 	 * @var array<wcf\data\object\type\ObjectType>
@@ -30,12 +25,25 @@ class DetailedActivityPointListPage extends UserPage {
 	public $activityPointObjectTypes = array();
 	
 	/**
+	 * userID
+	 * @var	integer
+	 */
+	public $userID = 0;
+	
+	/**
+	 * user
+	 * @var	wcf\data\user\User
+	 */
+	public $user = null;
+	
+	/**
 	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
 		
-		if (isset($_REQUEST['ajax'])) $this->ajax = true;
+		if (isset($_REQUEST['id'])) $this->userID = intval($_REQUEST['id']);
+		$this->user = new User($this->userID);
 	}
 	
 	/**
@@ -43,9 +51,6 @@ class DetailedActivityPointListPage extends UserPage {
 	 */
 	public function readData() {
 		parent::readData();
-		
-		// add breadcrumbs
-		WCF::getBreadcrumbs()->add(new Breadcrumb($this->user->username, LinkHandler::getInstance()->getLink('User', array('object' => $this->user))));
 		
 		$this->activityPointObjectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.activityPointEvent');
 		
@@ -69,8 +74,8 @@ class DetailedActivityPointListPage extends UserPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'ajax' => $this->ajax,
-			'activityPointObjectTypes' => $this->activityPointObjectTypes
+			'activityPointObjectTypes' => $this->activityPointObjectTypes,
+			'user' => $this->user
 		));
 	}
 }
