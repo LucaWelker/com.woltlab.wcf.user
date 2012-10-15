@@ -1,4 +1,4 @@
-{include file='header'}
+{include file='header' pageTitle='wcf.acp.dashboard.option'}
 
 <script type="text/javascript">
 	//<![CDATA[
