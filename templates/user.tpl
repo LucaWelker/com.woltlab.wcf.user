@@ -15,33 +15,34 @@
 					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
 					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
 				});
-				
+
 				new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 				new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
 			{/if}
-			
+
 			new WCF.User.Profile.TabMenu({@$user->userID});
-			
+
 			WCF.TabMenu.init();
-			
+
 			{* TODO: Handle admin permissions *}
 			{if $__wcf->getUser()->userID == $user->userID}
 				WCF.Language.addObject({
 					'wcf.user.editProfile': '{lang}wcf.user.editProfile{/lang}',
 				});
-				
+
 				WCF.User.Profile.Editor.Handler.init({$user->userID}, {if $editOnInit}true{else}false{/if});
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
 			
 			{if $user->activityPoints}
 				$('.activityPointsDisplay').click(function (event) {
-					event.preventDefault();
-					var $id = WCF.getRandomID();
-					$('<div id="' + $id + '"></div>').appendTo(document.body);
-					WCF.showDialog($id, { title: '{lang}wcf.user.activity.point{/lang}' });
-					$('#' + $id).load('{link controller="DetailedActivityPointList" object=$user}{/link}', function () {
-						$('#' + $id).wcfDialog('render');
+					WCF.showAJAXDialog('detailedActivityPointList', true, {
+						title: '{lang}wcf.user.activity.point{/lang}',
+						data: {
+							className: 'wcf\\data\\user\\UserProfileAction',
+							actionName: 'getDetailedActivityPointList',
+							objectIDs: [ {$user->userID} ]
+						}
 					});
 				});
 			{/if}
@@ -69,8 +70,8 @@
 			<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
 			
 			{if $user->activityPoints}
-				<dt class="javascriptOnly"><a class="activityPointsDisplay">{lang}wcf.user.activity.point{/lang}</a></dt>
-				<dd class="javascriptOnly"><a class="activityPointsDisplay">{#$user->activityPoints}</a></dd>
+				<dt class="jsOnly"><a class="activityPointsDisplay">{lang}wcf.user.activity.point{/lang}</a></dt>
+				<dd class="jsOnly"><a class="activityPointsDisplay">{#$user->activityPoints}</a></dd>
 			{/if}
 		</dl>
 	</fieldset>
@@ -156,7 +157,7 @@
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}" title="{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
+				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}" title="{lang}{@$menuItem->menuItem}{/lang}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
 			{/foreach}
 		</ul>
 	</nav>

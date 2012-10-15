@@ -1,5 +1,6 @@
 <?php
 namespace wcf\data\user;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\exception\ValidateActionException;
 use wcf\system\WCF;
@@ -19,7 +20,7 @@ class UserProfileAction extends UserAction {
 	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
 	 */
-	protected $allowGuestAccess = array('getUserProfile');
+	protected $allowGuestAccess = array('getUserProfile', 'getDetailedActivityPointList');
 	
 	/**
 	 * Validates parameters for signature preview.
@@ -98,6 +99,64 @@ class UserProfileAction extends UserAction {
 		
 		return array(
 			'template' => WCF::getTPL()->fetch('userProfilePreview')
+		);
+	}
+	
+	/**
+	 * Validates detailed activity point list
+	 */
+	public function validateGetDetailedActivityPointList() {
+		switch (count($this->objectIDs)) {
+			case 0:
+				throw new ValidateActionException("Missing user id");
+			break;
+			
+			case 1:
+				// we're fine
+			break;
+			
+			default:
+				// more than one user id is pointless
+				throw new ValidateActionException("Invalid parameter for user id given");
+			break;
+		}
+	}
+	
+	/**
+	 * Returns detailed activity point list.
+	 * 
+	 * @return	array
+	 */
+	public function getDetailedActivityPointList() {
+		$userID = reset($this->objectIDs);
+		
+		$userProfileList = new UserProfileList();
+		$userProfileList->getConditionBuilder()->add("user_table.userID = ?", array($userID));
+		$userProfileList->readObjects();
+		$userProfiles = $userProfileList->getObjects();
+		$user = reset($userProfiles);
+		
+		$activityPointObjectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.activityPointEvent');
+		
+		$sql = "SELECT	activityPoints
+			FROM	wcf".WCF_N."_user_activity_points
+			WHERE		userID = ?
+				AND	objectTypeID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		foreach ($activityPointObjectTypes as $objectType) {
+			$statement->execute(array($user->userID, $objectType->objectTypeID));
+			$row = $statement->fetchArray();
+			
+			$objectType->activityPoints = $row['activityPoints'];
+		}
+		
+		WCF::getTPL()->assign(array(
+			'activityPointObjectTypes' => $activityPointObjectTypes,
+			'user' => $user
+		));
+		
+		return array(
+			'template' => WCF::getTPL()->fetch('detailedActivityPointList')
 		);
 	}
 }
