@@ -69,7 +69,7 @@
 				<dl{if $errorField == 'username'} class="formError"{/if}>
 					<dt><label for="username">{lang}wcf.user.newUsername{/lang}</label></dt>
 					<dd>
-						<input type="text" id="username" name="username" value="{$username}" class="medium" />
+						<input type="text" id="username" name="username" value="{$username}" required="required" pattern="^[^,]{ldelim}{REGISTER_USERNAME_MIN_LENGTH},{REGISTER_USERNAME_MAX_LENGTH}}$" class="medium" />
 							
 						{if $errorField == 'username'}
 							<small class="innerError">
