@@ -22,6 +22,8 @@ use wcf\util\StringUtil;
 class MailUserNotificationType extends AbstractObjectTypeProcessor implements IUserNotificationType {        
 	/**
 	 * @see	wcf\system\user\notification\type\IUserNotificationType::send()
+	 * 
+	 * @todo	PAGE_URL is still used, but simply passing the primary application's URL might be wrong
 	 */
 	public function send(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
 		// get message

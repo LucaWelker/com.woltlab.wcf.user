@@ -123,7 +123,7 @@
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Hallo {@$username},
 
 wenn Sie Ihr Kennwort vergessen haben, können Sie über folgenden Link ein neues Kennwort anfordern.
-Klicken Sie hier, um ein neues Kennwort anzufordern: {@PAGE_URL}/index.php/NewPassword/?u={@$userID}&k={@$key}  
+Klicken Sie hier, um ein neues Kennwort anzufordern: {link controller='NewPassword'}u={@$userID}&k={@$key}{/link}  
 
 Falls Sie Ihr Kennwort nicht vergessen haben, können Sie diese E-Mail ignorieren.
 
@@ -140,8 +140,8 @@ Ihr {@PAGE_TITLE|language} Team]]></item>
 Ihr neues Kennwort für die Website "{@PAGE_TITLE|language}" lautet:
 {@$newPassword} 
 
-Sie können Ihr Kennwort unter folgender Adresse jederzeit ändern: 
-{@PAGE_URL}/index.php/AccountManagement/
+Sie können Ihr Kennwort unter folgender Adresse jederzeit ändern:
+{link controller='AccountManagement'}{/link}
 
 
 Vielen Dank,
@@ -181,11 +181,11 @@ Ihr {@PAGE_TITLE|language} Team]]></item>
 Sie haben Ihre E-Mail-Adresse auf der Website: {@PAGE_TITLE|language} geändert. Zum Abschließen dieser Änderung müssen Sie einmalig die Gültigkeit Ihrer neuen E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer neuen E-Mail-Adresse, indem Sie folgenden Link aufrufen:
-{@PAGE_URL}/index.php/EmailActivation/?u={@$userID}&a={@$activationCode} 
+{link controller='EmailActivation'}u={@$userID}&a={@$activationCode}{/link} 
 
 **** Funktioniert der Link oben nicht? ****
 Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
-{@PAGE_URL}/index.php/EmailActivation/
+{link controller='EmailActivation'}{/link}
 
 Bitte achten Sie darauf, dass keine Leerzeichen in der Adresse sind.
 Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
@@ -209,11 +209,11 @@ Vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}.
 Bevor wir Ihre Registrierung aktivieren können, müssen Sie einmalig die Gültigkeit Ihrer E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer E-Mail-Adresse, indem Sie folgenden Link aufrufen:
-{@PAGE_URL}/index.php/RegisterActivation/?u={@$user->userID}&a={@$user->activationCode} 
+{link controller='RegisterActivation'}u={@$user->userID}&a={@$user->activationCode}{/link} 
 
 **** Funktioniert der Link oben nicht? ****
 Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
-{@PAGE_URL}/index.php/RegisterActivation/
+{link controller='RegisterActivation'}{/link}
 
 Bitte achten Sie darauf, dass sich keine Leerzeichen in der Adresse befinden.
 Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
