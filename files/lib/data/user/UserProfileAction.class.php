@@ -46,9 +46,9 @@ class UserProfileAction extends UserAction {
 		$enableSmilies = (isset($this->parameters['options']['enableSmilies'])) ? 1 : 0;
 		
 		// validate permissions for options
-		if ($enableBBCodes && !WCF::getSession()->getPermission('user.community.signature.canUseBBCodes')) $enableBBCodes = 0;
-		if ($enableHtml && !WCF::getSession()->getPermission('user.community.signature.canUseHtml')) $enableHtml = 0;
-		if ($enableSmilies && !WCF::getSession()->getPermission('user.community.signature.canUseSmilies')) $enableSmilies = 0;
+		if ($enableBBCodes && !WCF::getSession()->getPermission('user.signature.canUseBBCodes')) $enableBBCodes = 0;
+		if ($enableHtml && !WCF::getSession()->getPermission('user.signature.canUseHtml')) $enableHtml = 0;
+		if ($enableSmilies && !WCF::getSession()->getPermission('user.signature.canUseSmilies')) $enableSmilies = 0;
 		
 		// parse message
 		$message = StringUtil::trim($this->parameters['data']['message']);

@@ -1765,7 +1765,7 @@ WCF.User.SignaturePreview = WCF.Message.Preview.extend({
 		// get preview container
 		var $preview = $('#previewContainer');
 		if (!$preview.length) {
-			$preview = $('<fieldset id="previewContainer"><legend>' + WCF.Language.get('wcf.user.signature.preview') + '</legend><div></div></fieldset>').insertBefore($('#signatureContainer')).wcfFadeIn();
+			$preview = $('<fieldset id="previewContainer"><legend>' + WCF.Language.get('wcf.global.preview') + '</legend><div></div></fieldset>').insertBefore($('#signatureContainer')).wcfFadeIn();
 		}
 		
 		$preview.children('div').first().html(data.returnValues.message);

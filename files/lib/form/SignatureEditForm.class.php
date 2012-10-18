@@ -45,17 +45,17 @@ class SignatureEditForm extends MessageForm {
 	/**
 	 * @see	wcf\form\MessageForm::$permissionCanUseSmilies
 	 */
-	public $permissionCanUseSmilies = 'user.community.signature.canUseSmilies';
+	public $permissionCanUseSmilies = 'user.signature.canUseSmilies';
 	
 	/**
 	 * @see	wcf\form\MessageForm::$permissionCanUseHtml
 	 */
-	public $permissionCanUseHtml = 'user.community.signature.canUseHtml';
+	public $permissionCanUseHtml = 'user.signature.canUseHtml';
 	
 	/**
 	 * @see	wcf\form\MessageForm::$permissionCanUseBBCodes
 	 */
-	public $permissionCanUseBBCodes = 'user.community.signature.canUseBBCodes';
+	public $permissionCanUseBBCodes = 'user.signature.canUseBBCodes';
 	
 	/**
 	 * @see	wcf\form\IForm::validate()

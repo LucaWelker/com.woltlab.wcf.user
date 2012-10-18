@@ -247,11 +247,14 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.registerActivation.info"><![CDATA[Eine E-Mail mit dem 9-stelligen Aktivierungscode wurde an Ihre E-Mail-Adresse {$__wcf->user->email} verschickt.]]></item>
 		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Der Benutzername wurde innerhalb der letzten {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} Tage bereits einmal verändert.]]></item>
 		<item name="wcf.user.guest"><![CDATA[Gast]]></item>
-		
 		<item name="wcf.user.watchedObjects"><![CDATA[Abonnements]]></item>
 		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Abonnieren]]></item>
 		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Abbestellen]]></item>
 		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[Es wurden keine Abonnements gefunden.]]></item>
+		
+		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
+		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
+		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>
 	</category>
 	
 	<category name="wcf.user.activity">
