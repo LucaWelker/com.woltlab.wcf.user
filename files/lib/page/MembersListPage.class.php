@@ -2,6 +2,7 @@
 namespace wcf\page;
 use wcf\system\database\PostgreSQLDatabase;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -96,7 +97,9 @@ class MembersListPage extends SortablePage {
 		
 		WCF::getTPL()->assign(array(
 			'letters' => str_split(self::$availableLetters),
-			'letter' => $this->letter
+			'letter' => $this->letter,
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersList'),
+			'sidebarName' => 'com.woltlab.wcf.user.MembersList',
 		));
 	}
 	
