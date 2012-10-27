@@ -1,7 +1,18 @@
 <?php
 namespace wcf\page;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
+/**
+ * Shows object watch list page.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	page
+ * @category 	Community Framework
+ */
 class UserObjectWatchListPage extends SortablePage {
 	/**
 	 * @see wcf\page\AbstractPage::$loginRequired
@@ -27,4 +38,16 @@ class UserObjectWatchListPage extends SortablePage {
 	 * @see wcf\page\MultipleLinkPage::$objectListClassName
 	 */	
 	public $objectListClassName = 'wcf\data\user\object\watch\ViewableUserObjectWatchList';
+	
+	/**
+	 * @see	wcf\page\IPage::assignVariables()
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.UserObjectWatchList'),
+			'sidebarName' => 'com.woltlab.wcf.user.UserObjectWatchList',
+		));
+	}
 }
