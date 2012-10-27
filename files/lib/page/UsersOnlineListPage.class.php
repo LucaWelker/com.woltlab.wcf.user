@@ -107,8 +107,8 @@ class UsersOnlineListPage extends SortablePage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.UserObjectWatchList'),
-			'sidebarName' => 'com.woltlab.wcf.user.UserObjectWatchList',
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.UsersOnlineList'),
+			'sidebarName' => 'com.woltlab.wcf.user.UsersOnlineList',
 		));
 	}
 	
