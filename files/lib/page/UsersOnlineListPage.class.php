@@ -1,6 +1,7 @@
 <?php
 namespace wcf\page;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
@@ -97,6 +98,18 @@ class UsersOnlineListPage extends SortablePage {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * @see	wcf\page\IPage::assignVariables()
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.UserObjectWatchList'),
+			'sidebarName' => 'com.woltlab.wcf.user.UserObjectWatchList',
+		));
 	}
 	
 	/**
