@@ -296,6 +296,8 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 	
 	<category name="wcf.user.profile">
 		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von &bdquo;{$user->username}&ldquo;]]></item>
+		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[Der Benutzer hat noch keine für Sie sichtbaren Informationen hinterlegt.]]></item>
+		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[Es sind keine anzeigbaren Aktivitäten vorhanden.]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.profile.following"><![CDATA[{$user->username} folgt]]></item>
