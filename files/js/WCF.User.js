@@ -1461,11 +1461,9 @@ WCF.Notification.Handler = Class.extend({
 		
 		// revert to a simple link
 		if (count > 0) {
-			console.debug("Updating count = " + count);
 			$badge.html(count);
 		}
 		else {
-			console.debug("BLARGH = " + count);
 			// remove badge
 			$badge.remove();
 			
