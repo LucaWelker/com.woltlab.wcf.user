@@ -20,6 +20,7 @@
 			<link>index.php/SignatureEdit/</link>
 			<parent>wcf.user.menu.profile</parent>
 			<showorder>3</showorder>
+			<options>module_user_signature</options>
 		</usermenuitem>
 		<!-- /profile -->
 		

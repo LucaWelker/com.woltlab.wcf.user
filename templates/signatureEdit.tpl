@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.signature.title{/lang} - {PAGE_TITLE|language}</title>
+	<title>{lang}wcf.user.signature.edit{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude'}
 	
@@ -9,7 +9,7 @@
 		//<![CDATA[
 		$(function() {
 			WCF.Language.addObject({
-				'wcf.user.signature.preview': '{lang}wcf.user.signature.preview{/lang}'
+				'wcf.global.preview': '{lang}wcf.global.preview{/lang}'
 			});
 			
 			new WCF.User.SignaturePreview('wcf\\data\\user\\UserProfileAction', 'text', 'previewButton');
@@ -26,7 +26,7 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.signature.title{/lang}</h1>
+		<h1>{lang}wcf.user.signature.edit{/lang}</h1>
 	</hgroup>
 </header>
 
@@ -47,10 +47,10 @@
 		{/if}
 		
 		<fieldset id="signatureContainer">
-			<legend>{lang}wcf.user.signature.text{/lang}</legend>
+			<legend>{lang}wcf.user.signature{/lang}</legend>
 				
 			<dl class="wide{if $errorField == 'text'} formError{/if}">
-				<dt><label for="text">{lang}wcf.user.signature.text{/lang}</label></dt>
+				<dt><label for="text">{lang}wcf.user.signature{/lang}</label></dt>
 				<dd>
 					<textarea id="text" name="text" rows="20" cols="40">{$text}</textarea>
 					{if $errorField == 'text'}

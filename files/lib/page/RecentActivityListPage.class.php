@@ -1,5 +1,6 @@
 <?php
 namespace wcf\page;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
@@ -29,6 +30,18 @@ class RecentActivityListPage extends MultipleLinkPage {
 		
 		// add breadcrumbs
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.user.members'), LinkHandler::getInstance()->getLink('MembersList')));
+	}
+	
+	/**
+	 * @see	wcf\page\IPage::assignVariables()
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.RecentActivityList'),
+			'sidebarName' => 'com.woltlab.wcf.user.RecentActivityList',
+		));
 	}
 	
 	/**

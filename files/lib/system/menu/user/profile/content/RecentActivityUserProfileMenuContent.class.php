@@ -23,6 +23,7 @@ class RecentActivityUserProfileMenuContent extends SingletonFactory implements I
 		
 		WCF::getTPL()->assign(array(
 			'eventList' => $eventList,
+			'placeholder' => WCF::getLanguage()->get('wcf.user.profile.content.recentActivity.noEntries'),
 			'userID' => $userID
 		));
 		

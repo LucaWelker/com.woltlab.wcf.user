@@ -85,6 +85,13 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 		if ($follow->followID) {
 			$followEditor = new UserFollowEditor($follow);
 			$followEditor->delete();
+			
+			// revoke notification
+			UserNotificationHandler::getInstance()->revokeEvent('following', 'com.woltlab.wcf.user.follow', new UserFollowUserNotificationObject($follow));
+			
+			// remove activity event
+			$packageID = PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user');
+			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, array($this->parameters['data']['userID']));
 		}
 		
 		// reset storage

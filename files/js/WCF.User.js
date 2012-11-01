@@ -1298,8 +1298,7 @@ WCF.Notification = {};
 /**
  * Notification Overlay.
  */
-WCF.Notification.Handler = function() { this.init(); };
-WCF.Notification.Handler.prototype = {
+WCF.Notification.Handler = Class.extend({
 	/**
 	 * scrollable API
 	 * @var	jquery.fn.scrollable
@@ -1450,20 +1449,43 @@ WCF.Notification.Handler.prototype = {
 		this._container.animate({
 			height: $listHeight.height + 'px'
 		}, 200);
+	},
+	
+	/**
+	 * Updates count of outstanding notifications
+	 */
+	updateCount: function(count) {
+		var $userNotifications = $('#userNotifications');
+		var $dropdownToggle = $userNotifications.children('.dropdownToggle');
+		var $badge = $dropdownToggle.children('.badge');
+		
+		// revert to a simple link
+		if (count > 0) {
+			$badge.html(count);
+		}
+		else {
+			// remove badge
+			$badge.remove();
+			
+			// create new link
+			$('<li><a href="' + $userNotifications.data('link') + '" title="' + $dropdownToggle.children('span').text() + '" class="jsTooltip">' + $dropdownToggle.html() + '</a></li>').insertBefore($userNotifications);
+			$userNotifications.remove();
+			
+			return;
+		}
 	}
-};
+});
 
 /**
  * Action fired upon button clicks within message.
  * 
- * @param	WCF.Notification.Overlay	overlay
+ * @param	WCF.Notification.Handler	overlay
  * @param	jQuery.fn.scrollable		api
  * @param	jQuery				list
  * @param	integer				notificationID
  * @param	jQuery				targetElement
  */
-WCF.Notification.Action = function(overlay, api, list, notificationID, targetElement) { this.init(overlay, api, list, notificationID, targetElement); };
-WCF.Notification.Action.prototype = {
+WCF.Notification.Action = Class.extend({
 	/**
 	 * scrollable API
 	 * @var	jQuery.fn.scrollable
@@ -1542,10 +1564,9 @@ WCF.Notification.Action.prototype = {
 				// remove item itself
 				$item.remove();
 				
-				// remove complete list
-				var $listItems = this._list.children('li');
-				if (!$listItems.length) {
-					this._list.html('<p>' + WCF.Language.get('wcf.user.notification.noNotifications') + '</p>');
+				// remove divider class
+				if (this._list.children('li').length == 1) {
+					this._list.children('li').removeClass('dropdownDivider');
 				}
 				
 				// show list
@@ -1580,8 +1601,11 @@ WCF.Notification.Action.prototype = {
 	_hideLoadingOverlay: function(data, textStatus, jqXHR) {
 		this._loading.hide();
 		this._removeItem();
+		
+		// update badge count
+		this._overlay.updateCount(data.returnValues.totalCount);
 	}
-};
+});
 
 /**
  * Loads notifications.
@@ -1589,8 +1613,7 @@ WCF.Notification.Action.prototype = {
  * @param	jQuery		container
  * @param	function	callback
  */
-WCF.Notification.Loader = function(container, callback) { this.init(container, callback); };
-WCF.Notification.Loader.prototype = {
+WCF.Notification.Loader = Class.extend({
 	/**
 	 * callback once all items are loaded
 	 * @var	function
@@ -1672,7 +1695,7 @@ WCF.Notification.Loader.prototype = {
 		// display a "show all" link
 		$('<li class="dropdownDivider"><a href="' + $userNotifications.data('link') + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
 	}
-};
+});
 
 /**
  * Handles notification list actions.
@@ -1765,7 +1788,7 @@ WCF.User.SignaturePreview = WCF.Message.Preview.extend({
 		// get preview container
 		var $preview = $('#previewContainer');
 		if (!$preview.length) {
-			$preview = $('<fieldset id="previewContainer"><legend>' + WCF.Language.get('wcf.user.signature.preview') + '</legend><div></div></fieldset>').insertBefore($('#signatureContainer')).wcfFadeIn();
+			$preview = $('<fieldset id="previewContainer"><legend>' + WCF.Language.get('wcf.global.preview') + '</legend><div></div></fieldset>').insertBefore($('#signatureContainer')).wcfFadeIn();
 		}
 		
 		$preview.children('div').first().html(data.returnValues.message);

@@ -77,7 +77,7 @@
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Dear {@$username},
 
 if you have lost your password you can request a new one.
-Please click on the following link to request a new password: {@PAGE_URL}/index.php/NewPassword/?u={@$userID}&k={@$key}
+Please click on the following link to request a new password: {link controller='NewPassword'}u={@$userID}&k={@$key}{/link}
 
 You can ignore this e-mail if you have not lost your password.
 
@@ -94,7 +94,7 @@ your new password for the web site "{@PAGE_TITLE|language}" is:
 {@$newPassword}
 
 You can change your password any time at:
-{@PAGE_URL}/index.php/AccountManagement/
+{link controller='AccountManagement'}{/link}
 
 
 Have a nice day,
