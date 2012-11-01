@@ -91,7 +91,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 			
 			// remove activity event
 			$packageID = PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user');
-			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, $this->parameters['data']['userID']);
+			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, array($this->parameters['data']['userID']));
 		}
 		
 		// reset storage
