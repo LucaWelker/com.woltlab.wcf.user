@@ -36,7 +36,7 @@ class UserProfileMenuCacheBuilder implements ICacheBuilder {
 			$itemIDs[$row['menuItem']] = $row['menuItemID'];
 		}
 		
-		if (count($itemIDs) > 0) {
+		if (!empty($itemIDs)) {
 			// get needed menu items
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("menu_item.menuItemID IN (?)", array($itemIDs));

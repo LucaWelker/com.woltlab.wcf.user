@@ -36,7 +36,7 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 			$categoryIDs[$row['categoryName']] = $row['categoryID'];
 		}
 		
-		if (count($categoryIDs) > 0) {
+		if (!empty($categoryIDs)) {
 			if (!isset($data['wcf.user.menu.settings'])) {
 				$data['wcf.user.menu.settings'] = array();
 			}
@@ -80,7 +80,7 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 			$itemIDs[$row['menuItem']] = $row['menuItemID'];
 		}
 		
-		if (count($itemIDs) > 0) {
+		if (!empty($itemIDs)) {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("menuItemID IN (?)", array($itemIDs));
 			

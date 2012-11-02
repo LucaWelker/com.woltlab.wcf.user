@@ -63,12 +63,12 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateDelete() {
 		// read objects
-		if (!count($this->objects)) {
+		if (empty($this->objects)) {
 			$this->readObjects();
-		}
-		
-		if (!count($this->objects)) {
-			throw new ValidateActionException('Invalid object id');
+			
+			if (empty($this->objects)) {
+				throw new ValidateActionException('Invalid object id');
+			}
 		}
 		
 		foreach ($this->objects as $object) {
