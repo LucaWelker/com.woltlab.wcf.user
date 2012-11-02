@@ -9,10 +9,10 @@
 		</header>
 	{/if}
 	
-	<ol class="containerList userList simpleUserList">
+	<ol class="containerList doubleColumned">
 		{if $group|count}
 			{foreach from=$group item=user}
-				{include file='__userListItem'}
+				{include file='userListItem'}
 			{/foreach}
 		{else}
 			<small>{$group->getNoUsersMessage()}</small>
