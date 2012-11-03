@@ -19,7 +19,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.activity.point
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserActivityPointHandler extends SingletonFactory {
 	/**

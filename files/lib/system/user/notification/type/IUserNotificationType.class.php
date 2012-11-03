@@ -13,7 +13,7 @@ use wcf\system\user\notification\event\IUserNotificationEvent;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 interface IUserNotificationType extends IDatabaseObjectProcessor {
 	/**

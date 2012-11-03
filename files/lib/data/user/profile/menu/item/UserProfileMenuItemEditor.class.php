@@ -13,7 +13,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.profile.menu.item
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
@@ -119,7 +119,7 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	}
 	
 	/**
-	 * @see wcf\data\IEditableCachedObject::resetCache()
+	 * @see	wcf\data\IEditableCachedObject::resetCache()
 	 */
 	public static function resetCache() {
 		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.userProfileMenu-*.php');

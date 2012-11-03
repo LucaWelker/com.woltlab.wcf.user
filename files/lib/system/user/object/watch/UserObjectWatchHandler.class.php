@@ -11,13 +11,13 @@ use wcf\system\WCF;
 class UserObjectWatchHandler extends SingletonFactory {
 	/**
 	 * object type id cache
-	 * @var array<integer>
+	 * @var	array<integer>
 	 */
 	protected $objectTypeIDs = array();
 	
 	/**
 	 * number of unread watched objects
-	 * @var array<integer>
+	 * @var	array<integer>
 	 */
 	protected $unreadObjectCount = array();
 	

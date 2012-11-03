@@ -24,7 +24,7 @@ use wcf\util\UserRegistrationUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class RegisterForm extends UserAddForm {
 	/**
@@ -38,14 +38,14 @@ class RegisterForm extends UserAddForm {
 	//public $loadActiveOptions = false;
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array();
 	
 	/**
 	 * holds a language variable with information about the registration process
 	 * e.g. if you need to activate your account
-	 * @var string
+	 * @var	string
 	 */
 	public $message = '';
 	
@@ -68,7 +68,7 @@ class RegisterForm extends UserAddForm {
 	public $useCaptcha = true;
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -91,7 +91,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -102,7 +102,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		// validate captcha first
@@ -114,7 +114,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -142,7 +142,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -154,7 +154,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		AbstractForm::show();
@@ -176,7 +176,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\acp\form\UserAddForm::validateUsername()
+	 * @see	wcf\acp\form\UserAddForm::validateUsername()
 	 */
 	protected function validateUsername($username) {
 		parent::validateUsername($username);
@@ -188,7 +188,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\acp\form\UserAddForm::validatePassword()
+	 * @see	wcf\acp\form\UserAddForm::validatePassword()
 	 */
 	protected function validatePassword($password, $confirmPassword) {
 		parent::validatePassword($password, $confirmPassword);
@@ -200,7 +200,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\acp\form\UserAddForm::validateEmail()
+	 * @see	wcf\acp\form\UserAddForm::validateEmail()
 	 */
 	protected function validateEmail($email, $confirmEmail) {
 		parent::validateEmail($email, $confirmEmail);
@@ -211,7 +211,7 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();

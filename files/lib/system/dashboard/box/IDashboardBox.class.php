@@ -11,7 +11,7 @@ use wcf\page\IPage;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.dashboard.box
- * @category 	Community Framework
+ * @category	Community Framework
  */
 interface IDashboardBox {
 	/**

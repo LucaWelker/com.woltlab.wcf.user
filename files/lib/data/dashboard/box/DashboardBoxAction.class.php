@@ -18,7 +18,7 @@ use wcf\util\ArrayUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.dashboard.box
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DashboardBoxAction extends AbstractDatabaseObjectAction implements IPositionAction {
 	/**

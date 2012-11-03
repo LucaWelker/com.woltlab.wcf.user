@@ -9,18 +9,18 @@ namespace wcf\system\user\activity\point;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.activity.point
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DefaultUserActivityPointObjectProcessor implements IUserActivityPointObjectProcessor {
 	/**
-	 * @see wcf\system\user\activity\point\IUserActivityPointObject::countRequests();
+	 * @see	wcf\system\user\activity\point\IUserActivityPointObject::countRequests();
 	 */
 	public function countRequests() {
 		return 0;
 	}
 	
 	/**
-	 * @see wcf\system\user\activity\point\IUserActivityPointObject::updateActivityPointEvents();
+	 * @see	wcf\system\user\activity\point\IUserActivityPointObject::updateActivityPointEvents();
 	 */
 	public function updateActivityPointEvents($request) {
 		return;

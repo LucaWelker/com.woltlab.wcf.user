@@ -19,7 +19,7 @@ use wcf\util\ClassUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.dashboard
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DashboardHandler extends SingletonFactory {
 	/**

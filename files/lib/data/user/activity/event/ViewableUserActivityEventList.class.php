@@ -12,7 +12,7 @@ use wcf\system\user\activity\event\UserActivityEventHandler;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.activity.event
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class ViewableUserActivityEventList extends UserActivityEventList {
 	/**
