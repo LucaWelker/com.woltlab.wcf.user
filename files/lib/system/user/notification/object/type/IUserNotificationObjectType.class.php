@@ -10,7 +10,7 @@ use wcf\data\IDatabaseObjectProcessor;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.object.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 interface IUserNotificationObjectType extends IDatabaseObjectProcessor {
 	/**

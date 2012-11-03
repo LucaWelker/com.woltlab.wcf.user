@@ -7,12 +7,12 @@ use wcf\system\WCF;
 /**
  * Implementation of IUserOnlineLocation for the user profile location.
  * 
- * @author 	Marcel Werk
+ * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.online.location
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserLocation implements IUserOnlineLocation {
 	/**

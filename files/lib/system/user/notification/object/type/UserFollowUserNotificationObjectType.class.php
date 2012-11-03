@@ -13,7 +13,7 @@ use wcf\system\user\notification\object\UserFollowUserNotificationObject;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.object.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor implements IUserNotificationObjectType {
 	/**

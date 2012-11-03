@@ -12,7 +12,7 @@ use wcf\system\menu\TreeMenu;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.menu.user
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserMenu extends TreeMenu {
 	/**

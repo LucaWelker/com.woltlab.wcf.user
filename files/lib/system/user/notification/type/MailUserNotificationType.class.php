@@ -17,7 +17,7 @@ use wcf\util\StringUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class MailUserNotificationType extends AbstractObjectTypeProcessor implements IUserNotificationType {        
 	/**

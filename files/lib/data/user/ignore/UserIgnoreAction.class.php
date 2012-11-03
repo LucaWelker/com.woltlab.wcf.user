@@ -15,7 +15,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.ignore
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	/**
@@ -68,7 +68,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 */
 	public function validateDelete() {
 		if (empty($this->objectIDs)) {
@@ -81,7 +81,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::delete()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
 		// disguise as unignore

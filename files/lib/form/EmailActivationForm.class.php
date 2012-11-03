@@ -18,7 +18,7 @@ use wcf\util\UserUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class EmailActivationForm extends RegisterActivationForm {
 	/**

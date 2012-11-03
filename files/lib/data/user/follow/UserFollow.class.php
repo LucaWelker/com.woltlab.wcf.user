@@ -11,7 +11,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.follow
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserFollow extends DatabaseObject {
 	/**

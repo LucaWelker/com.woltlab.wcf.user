@@ -9,12 +9,12 @@ use wcf\util\StringUtil;
 /**
  * Represents a list of currently online users.
  * 
- * @author 	Marcel Werk
+ * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.online
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UsersOnlineList extends SessionList {
 	/**
@@ -29,7 +29,7 @@ class UsersOnlineList extends SessionList {
 	
 	/**
 	 * users online stats
-	 * @var array
+	 * @var	array
 	 */
 	public $stats = array(
 		'total' => 0,
@@ -40,7 +40,7 @@ class UsersOnlineList extends SessionList {
 	
 	/**
 	 * users online markings
-	 * @var array
+	 * @var	array
 	 */
 	public $usersOnlineMarkings = null;
 	

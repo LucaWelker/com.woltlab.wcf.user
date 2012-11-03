@@ -13,7 +13,7 @@ use wcf\util\HeaderUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	action
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LogoutAction extends \wcf\acp\action\LogoutAction {
 	/**

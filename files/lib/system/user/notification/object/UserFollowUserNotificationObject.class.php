@@ -11,7 +11,7 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.object
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserFollowUserNotificationObject extends DatabaseObjectDecorator implements IUserNotificationObject {
 	/**

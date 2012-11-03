@@ -10,6 +10,6 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.rank
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserRankAction extends AbstractDatabaseObjectAction { }

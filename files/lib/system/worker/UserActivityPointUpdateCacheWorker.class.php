@@ -13,7 +13,7 @@ use wcf\util\StringUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.worker
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 	/**

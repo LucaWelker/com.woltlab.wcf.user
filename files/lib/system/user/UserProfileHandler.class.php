@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	system.user
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserProfileHandler extends SingletonFactory {
 	/**
