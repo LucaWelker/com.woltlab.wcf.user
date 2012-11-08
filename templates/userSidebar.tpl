@@ -11,7 +11,7 @@
 		{event name='statistics'}
 		
 		<dt>{lang}wcf.user.activityPoints{/lang}</dt>
-		<dd><a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoints.showDetails{/lang}">{#$user->activityPoints}</a></dd>
+		<dd>{if $user->activityPoints}<a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoints.showDetails{/lang}">{#$user->activityPoints}</a>{else}0{/if}</dd>
 		
 		<dt>{lang}wcf.user.profileHits{/lang}</dt>
 		<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
