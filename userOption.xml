@@ -74,7 +74,7 @@
 				<optiontype>radioButton</optiontype>
 				<outputclass>wcf\system\option\user\GenderUserOptionOutput</outputclass>
 				<selectoptions>
-					<![CDATA[0:wcf.user.profile.noDeclaration
+					<![CDATA[0:wcf.global.noDeclaration
 1:wcf.user.gender.male
 2:wcf.user.gender.female]]>
 				</selectoptions>

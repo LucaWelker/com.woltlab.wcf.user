@@ -251,19 +251,17 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Abonnieren]]></item>
 		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Abbestellen]]></item>
 		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[Es wurden keine Abonnements gefunden.]]></item>
-		
 		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
 		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
 		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>
-	</category>
-	
-	<category name="wcf.user.activity">
-		<item name="wcf.user.activity.point"><![CDATA[Aktivitätspunkte]]></item>
-		<item name="wcf.user.activity.point.objects"><![CDATA[Anzahl der Objekte]]></item>
-		<item name="wcf.user.activity.point.objectType"><![CDATA[Objekt-Art]]></item>
-		<item name="wcf.user.activity.point.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
-		<item name="wcf.user.activity.point.sum"><![CDATA[Summe]]></item>
-		<item name="wcf.user.activity.point.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
+		<item name="wcf.user.activityPoints"><![CDATA[Aktivitätspunkte]]></item>
+		<item name="wcf.user.activityPoints.showDetails"><![CDATA[Zeige Details]]></item>
+		<item name="wcf.user.activityPoints.objects"><![CDATA[Anzahl der Objekte]]></item>
+		<item name="wcf.user.activityPoints.objectType"><![CDATA[Objekt-Art]]></item>
+		<item name="wcf.user.activityPoints.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
+		<item name="wcf.user.activityPoints.sum"><![CDATA[Summe]]></item>
+		<item name="wcf.user.activityPoints.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
+		<item name="wcf.user.stats"><![CDATA[Statistiken]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">
@@ -305,6 +303,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.profile.followers"><![CDATA[{$user->username} folgen]]></item>
 		<item name="wcf.user.profile.followers.all"><![CDATA[Alle anzeigen]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
+		<item name="wcf.user.profile.visitors"><![CDATA[Profil-Besucher]]></item>
 	</category>
 	
 	<category name="wcf.user.option">

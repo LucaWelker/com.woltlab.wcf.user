@@ -1,22 +1,20 @@
 <fieldset>
-	<legend class="invisible">user avatar {* @todo: language variable*}</legend>
+	<legend class="invisible">{lang}wcf.user.avatar{/lang}</legend>
 	
 	<div class="userAvatar">{@$user->getAvatar()->getImageTag()}</div>
 </fieldset>
 
 <fieldset>
-	<legend class="invisible">stats {* @todo: language variable*}</legend>
+	<legend class="invisible">{lang}wcf.user.stats{/lang}</legend>
 	
 	<dl class="plain statsDataList">
 		{event name='statistics'}
 		
+		<dt>{lang}wcf.user.activityPoints{/lang}</dt>
+		<dd><a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoints.showDetails{/lang}">{#$user->activityPoints}</a></dd>
+		
 		<dt>{lang}wcf.user.profileHits{/lang}</dt>
 		<dd{if $user->getProfileAge() > 1} title="{lang}wcf.user.profileHits.hitsPerDay{/lang}"{/if}>{#$user->profileHits}</dd>
-		
-		{if $user->activityPoints}
-			<dt class="jsOnly"><a class="activityPointsDisplay">{lang}wcf.user.activity.point{/lang}</a></dt>
-			<dd class="jsOnly"><a class="activityPointsDisplay">{#$user->activityPoints}</a></dd>
-		{/if}
 	</dl>
 </fieldset>
 
