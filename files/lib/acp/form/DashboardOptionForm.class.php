@@ -15,7 +15,7 @@ use wcf\util\ArrayUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	acp.form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DashboardOptionForm extends ACPForm {
 	/**

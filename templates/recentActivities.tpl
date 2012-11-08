@@ -30,5 +30,7 @@
 		{/content}
 	</ul>
 {hascontentelse}
-	<div class="containerPadding"></div>
+	<div class="containerPadding">
+		{if $placeholder|isset}{$placeholder}{/if}
+	</div>
 {/hascontent}

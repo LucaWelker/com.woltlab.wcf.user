@@ -17,7 +17,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.follow
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserFollowAction extends AbstractDatabaseObjectAction {
 	/**
@@ -85,6 +85,13 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 		if ($follow->followID) {
 			$followEditor = new UserFollowEditor($follow);
 			$followEditor->delete();
+			
+			// revoke notification
+			UserNotificationHandler::getInstance()->revokeEvent('following', 'com.woltlab.wcf.user.follow', new UserFollowUserNotificationObject($follow));
+			
+			// remove activity event
+			$packageID = PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user');
+			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, array($this->parameters['data']['userID']));
 		}
 		
 		// reset storage
@@ -97,7 +104,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 */
 	public function validateDelete() {
 		if (empty($this->objectIDs)) {
@@ -110,7 +117,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::delete()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
 		// disguise as unfollow

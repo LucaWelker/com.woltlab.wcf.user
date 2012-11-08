@@ -4,12 +4,12 @@ namespace wcf\system\package\plugin;
 /**
  * This PIP installs, updates or deletes user menu items.
  *
- * @author 	Alexander Ebert
+ * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.package.plugin
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserMenuPackageInstallationPlugin extends AbstractMenuPackageInstallationPlugin {
 	/**

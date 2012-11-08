@@ -1,5 +1,5 @@
-<div id="userTableContainer" class="tabularBox marginTop shadow">
-	<table class="table jsClipboardContainer">
+<div id="userActivityPointListContainer" class="tabularBox marginTop shadow">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>{lang}wcf.user.activity.point.objects{/lang}</th>

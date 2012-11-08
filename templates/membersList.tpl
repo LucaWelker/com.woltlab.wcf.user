@@ -89,9 +89,9 @@
 </div>
 
 <div class="container marginTop shadow">
-	<ol class="containerList userList simpleUserList">
+	<ol class="containerList doubleColumned">
 		{foreach from=$objects item=user}
-			{include file='__userListItem'}
+			{include file='userListItem'}
 		{/foreach}
 	</ol>
 </div>

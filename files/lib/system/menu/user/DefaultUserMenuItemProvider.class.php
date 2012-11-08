@@ -10,7 +10,7 @@ use wcf\data\DatabaseObjectDecorator;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	system.menu.user
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DefaultUserMenuItemProvider extends DatabaseObjectDecorator implements IUserMenuItemProvider {
 	/**

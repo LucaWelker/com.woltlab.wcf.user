@@ -14,11 +14,11 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.notification
  * @subpackage	data.user.notification.recipient
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserNotificationRecipientList extends UserList {
 	/**
-	 * @see wcf\data\DatabaseObjectList\DatabaseObjectList::readObjects()
+	 * @see	wcf\data\DatabaseObjectList\DatabaseObjectList::readObjects()
 	 */
 	public function readObjects() {
 		if ($this->objectIDs === null) {

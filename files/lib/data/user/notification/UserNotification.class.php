@@ -10,7 +10,7 @@ use wcf\data\DatabaseObject;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.notification
  * @subpackage	data.user.notification
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserNotification extends DatabaseObject {
 	/**

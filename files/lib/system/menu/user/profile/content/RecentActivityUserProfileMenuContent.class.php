@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.menu.user.profile.content
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class RecentActivityUserProfileMenuContent extends SingletonFactory implements IUserProfileMenuContent {
 	/**
@@ -23,6 +23,7 @@ class RecentActivityUserProfileMenuContent extends SingletonFactory implements I
 		
 		WCF::getTPL()->assign(array(
 			'eventList' => $eventList,
+			'placeholder' => WCF::getLanguage()->get('wcf.user.profile.content.recentActivity.noEntries'),
 			'userID' => $userID
 		));
 		

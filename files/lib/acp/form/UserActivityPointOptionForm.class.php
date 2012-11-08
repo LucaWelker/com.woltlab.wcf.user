@@ -17,7 +17,7 @@ use wcf\util\HeaderUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	acp.form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserActivityPointOptionForm extends ACPForm {
 	/**
@@ -32,13 +32,13 @@ class UserActivityPointOptionForm extends ACPForm {
 	
 	/**
 	 * points to objectType
-	 * @var array<integer>
+	 * @var	array<integer>
 	 */
 	public $points = array();
 	
 	/**
 	 * valid object types
-	 * @var array<wcf\data\object\type\ObjectType>
+	 * @var	array<wcf\data\object\type\ObjectType>
 	 */
 	public $objectTypes = array();
 	

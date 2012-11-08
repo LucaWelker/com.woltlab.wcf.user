@@ -14,7 +14,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.notification
  * @subpackage	data.user.notification
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserNotificationAction extends AbstractDatabaseObjectAction {
 	/**
@@ -73,7 +73,8 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 		UserNotificationHandler::getInstance()->markAsConfirmed($this->parameters['notificationID']);
 		
 		return array(
-			'notificationID' => $this->parameters['notificationID']
+			'notificationID' => $this->parameters['notificationID'],
+			'totalCount' => UserNotificationHandler::getInstance()->getNotificationCount()
 		);
 	}
 }

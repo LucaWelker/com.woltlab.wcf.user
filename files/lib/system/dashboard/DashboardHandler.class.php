@@ -19,7 +19,7 @@ use wcf\util\ClassUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.dashboard
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DashboardHandler extends SingletonFactory {
 	/**
@@ -73,7 +73,7 @@ class DashboardHandler extends SingletonFactory {
 		foreach ($boxIDs as $boxID) {
 			$className = $this->boxCache[$boxID]->className;
 			if (!ClassUtil::isInstanceOf($className, 'wcf\system\dashboard\box\IDashboardBox')) {
-				throw new SystemException("Box '".$this->boxCache[$boxID]->boxName."' does not implement 'wcf\system\dashboard\box\IDashboardbox'");
+				throw new SystemException("'".$className."' does not implement 'wcf\system\dashboard\box\IDashboardbox'");
 			}
 			
 			$boxObject = new $className();

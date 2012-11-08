@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.dashboard.box
- * @category 	Community Framework
+ * @category	Community Framework
  */
 abstract class AbstractDashboardBoxContent implements IDashboardBox {
 	/**
