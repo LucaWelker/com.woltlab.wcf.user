@@ -9,7 +9,7 @@ namespace wcf\system\user\activity\event;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.activity.event
- * @category 	Community Framework
+ * @category	Community Framework
  */
 interface IUserActivityEvent {
 	/**

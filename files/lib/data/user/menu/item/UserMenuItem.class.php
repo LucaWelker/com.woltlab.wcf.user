@@ -14,7 +14,7 @@ use wcf\system\request\LinkHandler;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.menu.item
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserMenuItem extends ProcessibleDatabaseObject implements ITreeMenuItem {
 	/**
@@ -28,12 +28,12 @@ class UserMenuItem extends ProcessibleDatabaseObject implements ITreeMenuItem {
 	protected static $databaseTableIndexName = 'menuItemID';
 	
 	/**
-	 * @see wcf\data\ProcessibleDatabaseObject::$processorInterface
+	 * @see	wcf\data\ProcessibleDatabaseObject::$processorInterface
 	 */
 	protected static $processorInterface = 'wcf\system\menu\user\IUserMenuItemProvider';
 	
 	/**
-	 * @see wcf\data\ProcessibleDatabaseObject::getProcessor()
+	 * @see	wcf\data\ProcessibleDatabaseObject::getProcessor()
 	 */
 	public function getProcessor() {
 		if (parent::getProcessor() === null) {
@@ -44,7 +44,7 @@ class UserMenuItem extends ProcessibleDatabaseObject implements ITreeMenuItem {
 	}
 	
 	/**
-	 * @see wcf\system\menu\ITreeMenuItem::getLink()
+	 * @see	wcf\system\menu\ITreeMenuItem::getLink()
 	 */
 	public function getLink() {
 		$abbreviation = ApplicationHandler::getInstance()->getAbbreviation($this->packageID);

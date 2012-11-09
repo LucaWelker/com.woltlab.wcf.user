@@ -12,7 +12,7 @@ use wcf\util\DateUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class DateUserOptionOutput implements IUserOptionOutput {
 	/**

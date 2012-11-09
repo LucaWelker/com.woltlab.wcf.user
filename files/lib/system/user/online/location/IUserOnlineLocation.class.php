@@ -5,12 +5,12 @@ use wcf\data\user\online\UserOnline;
 /**
  * Any page location class should implement this interface.
  * 
- * @author 	Marcel Werk
+ * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.online.location
- * @category 	Community Framework
+ * @category	Community Framework
  */
 interface IUserOnlineLocation {
 	/**

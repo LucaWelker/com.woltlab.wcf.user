@@ -2,10 +2,10 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>{lang}wcf.user.activity.point.objects{/lang}</th>
-				<th>{lang}wcf.user.activity.point.objectType{/lang}</th>
-				<th>{lang}wcf.user.activity.point.pointsPerObject{/lang}</th>
-				<th>{lang}wcf.user.activity.point.sum{/lang}</th>
+				<th>{lang}wcf.user.activityPoints.objects{/lang}</th>
+				<th>{lang}wcf.user.activityPoints.objectType{/lang}</th>
+				<th>{lang}wcf.user.activityPoints.pointsPerObject{/lang}</th>
+				<th>{lang}wcf.user.activityPoints.sum{/lang}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,7 +17,7 @@
 							{#$objectType->activityPoints/$objectType->points} ×
 						</td>
 						<td class="columnTitle">
-							{lang}wcf.user.activity.point.objectType.{$objectType->objectType}{/lang}
+							{lang}wcf.user.activityPoints.objectType.{$objectType->objectType}{/lang}
 						</td>
 						<td class="columnDigits">
 							{#$objectType->points}
@@ -32,7 +32,7 @@
 			
 			{if $user->activityPoints - $activityPointSum > 0}
 				<tr>
-					<td class="columnTitle right" colspan="3">{lang}wcf.user.activity.point.notInDependency{/lang}</td>
+					<td class="columnTitle right" colspan="3">{lang}wcf.user.activityPoints.notInDependency{/lang}</td>
 					<td class="columnDigits">{#$user->activityPoints - $activityPointSum}</td>
 				</tr>
 			{/if}

@@ -4,12 +4,12 @@ namespace wcf\data\user\follow;
 /**
  * Represents a list of following users.
  * 
- * @author 	Alexander Ebert
+ * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.follow
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserFollowingList extends UserFollowerList {
 	/**

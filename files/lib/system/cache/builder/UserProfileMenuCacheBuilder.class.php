@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	system.cache.builder
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserProfileMenuCacheBuilder implements ICacheBuilder {
 	/**
@@ -36,7 +36,7 @@ class UserProfileMenuCacheBuilder implements ICacheBuilder {
 			$itemIDs[$row['menuItem']] = $row['menuItemID'];
 		}
 		
-		if (count($itemIDs) > 0) {
+		if (!empty($itemIDs)) {
 			// get needed menu items
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("menu_item.menuItemID IN (?)", array($itemIDs));

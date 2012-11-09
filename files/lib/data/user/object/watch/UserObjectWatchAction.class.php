@@ -14,12 +14,12 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.object.watch
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	/**
 	 * cached user object watch object
-	 * @var wcf\data\user\object\watch\UserObjectWatch
+	 * @var	wcf\data\user\object\watch\UserObjectWatch
 	 */
 	protected $__userObjectWatch = null;
 	
@@ -63,12 +63,12 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateDelete() {
 		// read objects
-		if (!count($this->objects)) {
+		if (empty($this->objects)) {
 			$this->readObjects();
-		}
-		
-		if (!count($this->objects)) {
-			throw new ValidateActionException('Invalid object id');
+			
+			if (empty($this->objects)) {
+				throw new ValidateActionException('Invalid object id');
+			}
 		}
 		
 		foreach ($this->objects as $object) {
@@ -79,7 +79,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::delete()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
 		parent::delete();

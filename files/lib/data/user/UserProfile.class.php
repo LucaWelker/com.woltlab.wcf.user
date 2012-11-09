@@ -19,11 +19,11 @@ use wcf\util\StringUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserProfile extends DatabaseObjectDecorator {
 	/**
-	 * @see wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\user\User';
 	
@@ -53,25 +53,25 @@ class UserProfile extends DatabaseObjectDecorator {
 	
 	/**
 	 * user avatar
-	 * @var wcf\data\user\avatar\IUserAvatar
+	 * @var	wcf\data\user\avatar\IUserAvatar
 	 */
 	protected $avatar = null;
 	
 	/**
 	 * user rank object
-	 * @var wcf\data\user\rank\UserRank
+	 * @var	wcf\data\user\rank\UserRank
 	 */
 	protected $rank = null;
 	
 	/**
 	 * age of this user
-	 * @var integer
+	 * @var	integer
 	 */
 	protected $__age = null; 
 	
 	/**
 	 * group data and permissions
-	 * @var array<array>
+	 * @var	array<array>
 	 */
 	protected $groupData = null;
 	

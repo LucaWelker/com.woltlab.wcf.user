@@ -8,16 +8,26 @@ use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
+/**
+ * Handles watched objects.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2012 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	system.user.object.watch
+ * @category 	Community Framework
+ */
 class UserObjectWatchHandler extends SingletonFactory {
 	/**
 	 * object type id cache
-	 * @var array<integer>
+	 * @var	array<integer>
 	 */
 	protected $objectTypeIDs = array();
 	
 	/**
 	 * number of unread watched objects
-	 * @var array<integer>
+	 * @var	array<integer>
 	 */
 	protected $unreadObjectCount = array();
 	
@@ -128,5 +138,69 @@ class UserObjectWatchHandler extends SingletonFactory {
 		}
 		
 		return $this->unreadObjectCount[$userID];
+	}
+	
+	/**
+	 * @see wcf\system\user\object\watch\UserObjectWatchHandler::resetObjects();
+	 */
+	public function resetObject($objectType, $objectID) {
+		$this->resetObjects($objectType, array($objectID));
+	}
+	
+	/**
+	 * Resets the object watch cache for all subscriber of the given object.
+	 * 
+	 * @param	string		$objectType
+	 * @param	array<integer>	$objectIDs
+	 */
+	public function resetObjects($objectType, array $objectIDs) {
+		// get object type id
+		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $objectType);
+		
+		// get subscriber
+		$userIDs = array();
+		$conditionsBuilder = new PreparedStatementConditionBuilder();
+		$conditionsBuilder->add('objectTypeID = ?', array($objectTypeObj->objectTypeID));
+		$conditionsBuilder->add('objectID IN (?)', array($objectIDs));
+		$sql = "SELECT		userID
+			FROM		wcf".WCF_N."_user_object_watch
+			".$conditionsBuilder;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionsBuilder->getParameters());
+		while ($row = $statement->fetchArray()) {
+			$userIDs[] = $row['userID'];
+		}
+		
+		if (!empty($userIDs)) {
+			// reset user storage
+			UserStorageHandler::getInstance()->reset($userIDs, 'unreadUserObjectWatchCount');
+		}
+	}
+	
+	public function updateObject($objectType, $objectID) {
+		// get object type id
+		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $objectType);
+		
+		// get subscriber
+		$userIDs = $recipientIDs = array();
+		$sql = "SELECT		userID, notificationType
+			FROM		wcf".WCF_N."_user_object_watch
+			WHERE		objectTypeID = ?
+					AND objectID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($objectTypeObj->objectTypeID, $objectID));
+		while ($row = $statement->fetchArray()) {
+			$userIDs[] = $row['userID'];
+			if ($row['notificationType'] == 1) $recipientIDs[] = $row['userID'];
+		}
+		
+		if (!empty($userIDs)) {
+			// reset user storage
+			UserStorageHandler::getInstance()->reset($userIDs, 'unreadUserObjectWatchCount');
+			
+			if (!empty($recipientIDs)) {
+				// @todo: create notifications
+			}
+		}
 	}
 }

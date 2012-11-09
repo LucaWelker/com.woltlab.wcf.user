@@ -10,11 +10,11 @@ use wcf\data\user\notification\recipient\UserNotificationRecipientList;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.notification
  * @subpackage	data.user.notification.event.recipient
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserNotificationEventRecipientList extends UserNotificationRecipientList {
 	/**
-	 * @see wcf\data\DatabaseObjectList\DatabaseObjectList::__construct()
+	 * @see	wcf\data\DatabaseObjectList\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
 		parent::__construct();
