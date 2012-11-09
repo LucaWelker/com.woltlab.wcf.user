@@ -5,6 +5,7 @@
 	{include file='headInclude'}
 	
 	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
+	{event name='javascriptInclude'}
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
@@ -46,6 +47,8 @@
 					});
 				});
 			{/if}
+			
+			{event name='javascriptInit'}
 		});
 		//]]>
 	</script>
