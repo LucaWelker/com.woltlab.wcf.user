@@ -58,6 +58,11 @@ class SignatureEditForm extends MessageForm {
 	public $permissionCanUseBBCodes = 'user.signature.canUseBBCodes';
 	
 	/**
+	 * @see	wcf\form\MessageForm::$showSignatureSetting
+	 */
+	public $showSignatureSetting = false;
+	
+	/**
 	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
