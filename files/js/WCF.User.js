@@ -553,7 +553,7 @@ WCF.User.Profile.Editor.Handler = {
 	 */
 	getButtons: function() {
 		return {
-			save: $('<button class="buttonPrimary">'+WCF.Language.get('wcf.global.button.save')+'</button>').data('action', 'save').click($.proxy(this._click, this)),
+			save: $('<button class="buttonPrimary" accesskey="s">'+WCF.Language.get('wcf.global.button.save')+'</button>').data('action', 'save').click($.proxy(this._click, this)),
 			restore: $('<button>'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').click($.proxy(this._click, this))
 		};
 	},
@@ -763,6 +763,15 @@ WCF.User.Profile.Editor.Base = Class.extend({
 		this._container.html(function(index, oldHTML) {
 			self._cache = oldHTML;
 			return returnValues;
+		});
+		this._container.find('input').on('keyup', function (event) {
+			if (event.keyCode === 13) { // Enter
+				WCF.User.Profile.Editor.Handler._pendingAction = 'save';
+				WCF.User.Profile.Editor.Handler._save();
+
+				// toggle button
+				WCF.User.Profile.Editor.Handler._ui.buttons.beginEdit.show();
+			}
 		});
 	},
 	
