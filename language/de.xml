@@ -323,5 +323,14 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Anzeige]]></item>
 		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privatsphäre]]></item>
 		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Datum &amp; Zeit]]></item>
+		<item name="wcf.user.option.category.settings.privacy.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.user.option.category.settings.privacy.messaging"><![CDATA[Kommunikation]]></item>
+		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Kann Online-Status sehen]]></item>
+		<item name="wcf.user.option.canViewProfile"><![CDATA[Kann Benutzerprofil sehen]]></item>
+		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Kann E-Mail-Adresse sehen]]></item>
+		<item name="wcf.user.option.canMail"><![CDATA[Kann E-Mails senden]]></item>
+		<item name="wcf.user.option.adminCanMail"><![CDATA[E-Mails der Administration akzeptieren]]></item>
+		<item name="wcf.user.option.canWriteProfileComments"><![CDATA[Kann Pinnwand-Kommentare schreiben]]></item>
+		<item name="wcf.user.option.canSendConversation"><![CDATA[Kann Konversationen schreiben]]></item>
 	</category>
 </language>
