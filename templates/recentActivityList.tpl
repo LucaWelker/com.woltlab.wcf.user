@@ -25,7 +25,7 @@
 	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
 </div>
 
-<div class="container marginTop shadow">
+<div class="container marginTop">
 	{include file='recentActivities' eventList=$objects}
 </div>
 

@@ -1,4 +1,4 @@
-<div id="userActivityPointListContainer" class="tabularBox marginTop shadow">
+<div id="userActivityPointListContainer" class="tabularBox marginTop">
 	<table class="table">
 		<thead>
 			<tr>

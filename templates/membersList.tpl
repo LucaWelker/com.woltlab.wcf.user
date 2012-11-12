@@ -88,7 +88,7 @@
 	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
 </div>
 
-<div class="container marginTop shadow">
+<div class="container marginTop">
 	<ol class="containerList doubleColumned">
 		{foreach from=$objects item=user}
 			{include file='userListItem'}

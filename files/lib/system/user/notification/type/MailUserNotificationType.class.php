@@ -22,37 +22,29 @@ use wcf\util\StringUtil;
 class MailUserNotificationType extends AbstractObjectTypeProcessor implements IUserNotificationType {        
 	/**
 	 * @see	wcf\system\user\notification\type\IUserNotificationType::send()
-	 * 
-	 * @todo	PAGE_URL is still used, but simply passing the primary application's URL might be wrong
 	 */
 	public function send(UserNotification $notification, UserNotificationRecipient $user, IUserNotificationEvent $event) {
 		// get message
 		$message = $event->getEmailMessage($this, array(
-			'user' => $user,
-			'pageURL' => FileUtil::addTrailingSlash(PAGE_URL)
+			'user' => $user
 		));
-		
 		
 		// append notification mail footer
 		$token = $user->notificationMailToken;
 		if (!$token) {
 			// generate token if not present
-			$token = StringUtil::substring($token = StringUtil::getHash(serialize(array($user->userID, StringUtil::getRandomID()))), 0, 20);
+			$token = StringUtil::substring(StringUtil::getHash(serialize(array($user->userID, StringUtil::getRandomID()))), 0, 20);
 			$editor = new UserEditor($user->getDecoratedObject());
-			$editor->updateUserOptions(array('notificationMailToken' => $token));
+			$editor->update(array('notificationMailToken' => $token));
 		}
-		$message .= "\n".$user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.footer', array(
+		$message .= "\n\n".$user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.footer', array(
 			'user' => $user,
-			'pageURL' => FileUtil::addTrailingSlash(PAGE_URL),
 			'token' => $token,
 			'notification' => $notification
 		));
 		
-		// use email title and strip its HTML
-		$subject = StringUtil::stripHTML($event->getEmailTitle());
-		
 		// build mail
-		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.type.mail.subject', array('title' => $subject)), $message);
+		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.subject', array('title' => $event->getEmailTitle())), $message);
 		$mail->send();
 	}
 	

@@ -31,7 +31,7 @@
 {/if}
 
 <form method="post" action="{link controller='Login'}{/link}" id="loginForm">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}wcf.user.login.data{/lang}</legend>
 			

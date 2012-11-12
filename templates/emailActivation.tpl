@@ -22,7 +22,7 @@
 {/if}
 	
 <form method="post" action="{link controller='EmailActivation'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend><label for="userID">{lang}wcf.user.emailActivation{/lang}</label></legend>
 			

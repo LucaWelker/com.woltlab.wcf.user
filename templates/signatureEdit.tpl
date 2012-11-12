@@ -37,7 +37,7 @@
 {/if}
 
 <form method="post" action="{link controller='SignatureEdit'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		{if $signatureCache}
 			<fieldset>
 				<legend>{lang}wcf.user.signature.current{/lang}</legend>

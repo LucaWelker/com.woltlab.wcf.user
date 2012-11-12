@@ -1,4 +1,4 @@
-/* todo 
+/*  
 Be careful with the following classes! 
  - [.scrollableContainer] Don't touch!
  - [.scrollableItems] Keep the inflated width, you may lower its number but it must be incredible bloated
@@ -11,51 +11,23 @@ Be careful with the following classes!
 }
 
 .userNotificationDetails {
-	padding: @wcfGapMedium;
+	padding: @wcfGapSmall @wcfGapMedium;
 	width: 250px - 2 * @wcfGapMedium;
 
-	> header {
-		margin-top: 0;
-		
-		hgroup {
-			h1 {
-				border-bottom: 1px solid @wcfContainerBorderColor;
-				font-size: 150%;
-				margin-bottom: @wcfGapTiny;
-				padding-bottom: @wcfGapTiny;
-			}
-			
-			h2 {
-				color: @wcfDimmedColor;
-				font-size: 90%;
-			}
-		}
-	}
-	
 	section {
 		border-top: 1px dotted @wcfContainerBorderColor;
-		margin-top: @wcfGapTiny;
-		padding-top: @wcfGapMedium;
+		padding-top: @wcfGapSmall;
 	}
 	
 	nav {
 		border-top: 1px dotted @wcfContainerBorderColor;
-		margin-bottom: -@wcfGapSmall;
-		margin-top: @wcfGapMedium;
+		margin-top: @wcfGapSmall;
 		padding-top: @wcfGapSmall;
 		text-align: center;
 		
 		ul {
 			display: inline-block;
-			float: none;
 		}
-	}
-}
-
-.userNotificationItem hgroup {
-	h2 {
-		color: @wcfDimmedColor;
-		font-size: 85%;
 	}
 }
 
@@ -75,26 +47,18 @@ Be careful with the following classes!
 			&:first-child {
 				border-right: 1px solid @wcfContainerBorderColor;
 				
-				ul li {
-					cursor: pointer;
-					display: inline-block;
+				> ul > li {
 					overflow: hidden;
-					padding: @wcfGapSmall @wcfGapMedium;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					width: 250px - 2 * @wcfGapMedium;
+					width: 250px;
 					
-					&:first-child {
-						margin-top: @wcfGapSmall;
-					}
-					
-					&.dropdownDivider {
-						padding-left: 0;
+					> a > hgroup > h1 {
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				}
 				
 				p {
-					padding: @wcfGapSmall;
+					padding: @wcfGapTiny @wcfGapMedium;
 				}
 			}
 		}

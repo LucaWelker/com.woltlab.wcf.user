@@ -24,7 +24,7 @@
 {/if}
 
 <form method="post" action="{link controller='RegisterActivation'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend><label for="userID">{lang}wcf.user.registerActivation{/lang}</label></legend>
 			

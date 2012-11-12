@@ -142,7 +142,7 @@
 		</hgroup>
 	</header>
 	
-	<div class="container marginTop shadow">
+	<div class="container marginTop">
 		<ol class="containerList userList simpleUserList">
 			{@$usersOnlineList}
 		</ol>
@@ -156,7 +156,7 @@
 		</hgroup>
 	</header>
 	
-	<div class="container marginTop shadow">
+	<div class="container marginTop">
 		<ol class="containerList userList simpleUserList">
 			{@$guestsOnlineList}
 		</ol>
@@ -170,7 +170,7 @@
 		</hgroup>
 	</header>
 	
-	<div class="container marginTop shadow">
+	<div class="container marginTop">
 		<ol class="containerList userList simpleUserList">
 			{@$robotsOnlineList}
 		</ol>

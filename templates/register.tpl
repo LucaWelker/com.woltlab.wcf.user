@@ -46,7 +46,7 @@
 {/if}
 
 <form method="post" action="{link controller='Register'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}wcf.user.username{/lang}</legend>
 			

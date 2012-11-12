@@ -24,7 +24,7 @@
 {/if}
 
 <form method="post" action="{link controller='Settings'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		{if $category == 'general'}
 			<fieldset>
 				<legend>{lang}wcf.user.language{/lang}</legend>

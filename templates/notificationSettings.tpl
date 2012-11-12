@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.notification.settings.title{/lang} - {lang}wcf.user.menu.settings{/lang} - {PAGE_TITLE|language}</title>
+	<title>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.notification.notifications{/lang} - {lang}wcf.user.menu.settings{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude'}
 </head>
@@ -14,7 +14,7 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.notification.settings.title{/lang}</h1>
+		<h1>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.notification.notifications{/lang}</h1>
 	</hgroup>
 </header>
 
@@ -29,7 +29,7 @@
 {/if}
 
 <form method="post" action="{link controller='NotificationSettings'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		{foreach from=$events key=eventCategory item=eventList}
 			<fieldset>
 				<legend>{lang}wcf.user.notification.{$eventCategory}{/lang}</legend>

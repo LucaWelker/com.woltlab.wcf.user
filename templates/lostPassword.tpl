@@ -33,7 +33,7 @@
 {/if}
 
 <form method="post" action="{link controller='LostPassword'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}wcf.user.lostPassword{/lang}</legend>
 			

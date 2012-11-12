@@ -1,11 +1,11 @@
 <div class="userNotificationDetails">
-	<header class="box64">
+	<header class="box32">
 		<a href="{link controller='User' object=$author}{/link}" title="{$author->username}" class="framed">
-			{@$author->getAvatar()->getImageTag(64)}
+			{@$author->getAvatar()->getImageTag(32)}
 		</a>
-		<hgroup>
+		<hgroup class="containerHeadline">
 			<h1><a href="{link controller='User' object=$author}{/link}">{$author->username}</a></h1>
-			<h2>{@$time|time}</h2>
+			<h2><small>{@$time|time}</small></h2>
 		</hgroup>
 	</header>
 	<section>

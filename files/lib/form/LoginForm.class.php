@@ -85,7 +85,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 	 */
 	protected function checkURL() {
 		if (empty($this->url) || StringUtil::indexOf($this->url, 'index.php/Login/') !== false) {
-			$this->url = 'index.php'.SID_ARG_1ST;
+			$this->url = LinkHandler::getInstance()->getLink();
 		}
 		// append missing session id
 		else if (SID_ARG_1ST != '' && !preg_match('/(?:&|\?)s=[a-z0-9]{40}/', $this->url)) {

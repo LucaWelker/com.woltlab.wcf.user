@@ -1702,7 +1702,7 @@ WCF.Notification.Loader = Class.extend({
 		this._callback($notificationList);
 		
 		// display a "show all" link
-		$('<li class="dropdownDivider"><a href="' + $userNotifications.data('link') + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
+		$('<li class="dropdownDivider"></li><li><a href="' + $userNotifications.data('link') + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo($notificationList);
 	}
 });
 

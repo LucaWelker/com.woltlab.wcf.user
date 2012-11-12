@@ -35,7 +35,7 @@
 {/if}
 	
 <form method="post" action="{link controller='AccountManagement'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend><label for="password">{lang}wcf.user.password{/lang}</label></legend>
 			

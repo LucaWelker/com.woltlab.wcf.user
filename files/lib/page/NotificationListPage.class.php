@@ -14,7 +14,7 @@ use wcf\system\WCF;
  * @subpackage	page
  * @category	Community Framework
  */
-class NotificationListPage extends AbstractPage {
+class NotificationListPage extends MultipleLinkPage {
 	/**
 	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
@@ -27,12 +27,29 @@ class NotificationListPage extends AbstractPage {
 	public $notifications = array();
 	
 	/**
+	 * @see	wcf\page\MultipleLinkPage::countItems()
+	 */
+	public function countItems() {
+		return UserNotificationHandler::getInstance()->getNotificationCount();
+	}
+	
+	/**
+	 * @see	wcf\page\MultipleLinkPage::initObjectList()
+	 */
+	protected function initObjectList() {}
+	
+	/**
+	 * @see	wcf\page\MultipleLinkPage::readObjects()
+	 */
+	protected function readObjects() {}
+	
+	/**
 	 * @see	wcf\page\AbstractPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
 		
-		$this->notifications = UserNotificationHandler::getInstance()->getNotifications(0, 0, true);
+		$this->notifications = UserNotificationHandler::getInstance()->getNotifications($this->sqlLimit, $this->sqlOffset, true);
 	}
 	
 	/**

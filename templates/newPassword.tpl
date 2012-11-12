@@ -22,7 +22,7 @@
 {/if}
 
 <form method="post" action="{link controller='NewPassword'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}wcf.user.newPassword{/lang}</legend>
 			
