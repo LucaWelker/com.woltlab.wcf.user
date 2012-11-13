@@ -17,7 +17,7 @@ use wcf\util\StringUtil;
  * @subpackage	system.option.user
  * @category	Community Framework
  */
-class EmailUserOptionOutput implements IUserOptionOutput, IUserOptionOutputContactInformation {
+class EmailUserOptionOutput implements IUserOptionOutput {
 	/**
 	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
@@ -41,33 +41,6 @@ class EmailUserOptionOutput implements IUserOptionOutput, IUserOptionOutputConta
 		if (!WCF::getSession()->getPermission('user.mail.canMail')) return '';
 		$email = StringUtil::encodeAllChars($user->email);
 		return '<a href="mailto:'.$email.'">'.$email.'</a>';
-	}
-	
-	/**
-	 * @see	wcf\system\option\user\IUserOptionOutputContactInformation::getOutput()
-	 */
-	public function getOutputData(User $user, UserOption $option, $value) {
-		if (!$user->email) return null;
-		if (!$user->hideEmailAddress || WCF::getSession()->getPermission('admin.user.canMailUser')) {
-			$email = StringUtil::encodeAllChars($user->email);
-			return array(
-				'icon' => StyleHandler::getInstance()->getStyle()->getIconPath('email', 'M'),
-				'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
-				'value' => $email,
-				'url' => 'mailto:'.$email
-			);
-		}
-		else if ($user->userCanMail && WCF::getSession()->getPermission('user.mail.canMail')) {
-			return array(
-				'icon' => StyleHandler::getInstance()->getStyle()->getIconPath('email', 'M'),
-				'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
-				'value' => WCF::getLanguage()->getDynamicVariable('wcf.user.profile.email.title', array('username' => StringUtil::encodeHTML($user->username))),
-				'url' => StringUtil::encodeHTML(LinkHandler::getInstance()->getLink('Mail', array('id' => $user->userID)))
-			);
-		}
-		else {
-			return null;
-		}
 	}
 	
 	/**

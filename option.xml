@@ -3,9 +3,6 @@
 	<import>
 		<categories>
 			<category name="user"></category>
-			<category name="user.general">
-				<parent>user</parent>
-			</category>
 			<category name="user.password">
 				<parent>security.general</parent>
 			</category>

@@ -16,7 +16,7 @@ use wcf\util\StringUtil;
  * @subpackage	system.option.user
  * @category	Community Framework
  */
-class URLUserOptionOutput implements IUserOptionOutput, IUserOptionOutputContactInformation {
+class URLUserOptionOutput implements IUserOptionOutput {
 	/**
 	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
 	 */
@@ -40,23 +40,6 @@ class URLUserOptionOutput implements IUserOptionOutput, IUserOptionOutputContact
 		$value = self::getURL($value);
 		$value = StringUtil::encodeHTML($value);
 		return '<a href="'.$value.'">'.$value.'</a>';
-	}
-	
-	/**
-	 * @see	wcf\system\option\user\IUserOptionOutputContactInformation::getOutput()
-	 */
-	public function getOutputData(User $user, UserOption $option, $value) {
-		if (empty($value) || $value == 'http://') return null;
-		
-		$value = self::getURL($value);
-		$value = StringUtil::encodeHTML($value);
-		
-		return array(
-			'icon' => StyleHandler::getInstance()->getStyle()->getIconPath('globe', 'M'),
-			'title' => WCF::getLanguage()->get('wcf.user.option.'.$option->optionName),
-			'value' => $value,
-			'url' => $value
-		);
 	}
 	
 	/**
