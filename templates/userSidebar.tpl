@@ -66,7 +66,7 @@
 			</ul>
 				
 			{if $visitorCount > 10}
-				<a id="followerAll" class="button more javascriptOnly">{lang}wcf.user.profile.visitors.all{/lang}</a>
+				<a id="visitorAll" class="button more javascriptOnly">{lang}wcf.user.profile.visitors.all{/lang}</a>
 			{/if}
 		</div>
 	</fieldset>

@@ -58,6 +58,16 @@
 					$followerList.open();
 				});
 			{/if}
+			{if $visitorCount > 10}
+				var $visitorList = null;
+				$('#visitorAll').click(function() {
+					if ($visitorList === null) {
+						$visitorList = new WCF.User.List('wcf\\data\\user\\profile\\visitor\\UserProfileVisitorAction', '{lang}wcf.user.profile.visitors{/lang}', { userID: {@$user->userID} });
+					}
+					
+					$visitorList.open();
+				});
+			{/if}
 			
 			{event name='javascriptInit'}
 		});

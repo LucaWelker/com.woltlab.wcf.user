@@ -25,6 +25,11 @@ use wcf\system\WCF;
  */
 class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedUserListAction {
 	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('getGroupedUserList');
+	
+	/**
 	 * user profile object
 	 * @var	wcf\data\user\UserProfile;
 	 */
@@ -161,19 +166,19 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 		$pageCount = ceil($row['count'] / 20);
 		
 		// get user ids
-		$sql = "SELECT	userID, time
+		$sql = "SELECT	userID
 			FROM	wcf".WCF_N."_user_follow
 			WHERE	followUserID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql, 20, ($this->parameters['pageNo'] - 1) * 20);
 		$statement->execute(array($this->parameters['userID']));
-		$users = array();
+		$userIDs = array();
 		while ($row = $statement->fetchArray()) {
-			$users[$row['userID']] = $row['time'];
+			$userIDs[] = $row['userID'];
 		}
 		
 		// create group
 		$group = new GroupedUserList();
-		$group->addUserIDs(array_keys($users));
+		$group->addUserIDs($userIDs);
 		
 		// load user profiles
 		GroupedUserList::loadUsers();
