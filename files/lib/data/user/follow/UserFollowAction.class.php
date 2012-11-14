@@ -1,12 +1,16 @@
 <?php
 namespace wcf\data\user\follow;
+use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\IGroupedUserListAction;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\ValidateActionException;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\notification\object\UserFollowUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\user\GroupedUserList;
 use wcf\system\WCF;
 
 /**
@@ -19,7 +23,18 @@ use wcf\system\WCF;
  * @subpackage	data.user.follow
  * @category	Community Framework
  */
-class UserFollowAction extends AbstractDatabaseObjectAction {
+class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedUserListAction {
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('getGroupedUserList');
+	
+	/**
+	 * user profile object
+	 * @var	wcf\data\user\UserProfile;
+	 */
+	public $userProfile = null;
+	
 	/**
 	 * Validates given parameters.
 	 */
@@ -122,5 +137,59 @@ class UserFollowAction extends AbstractDatabaseObjectAction {
 	public function delete() {
 		// disguise as unfollow
 		$this->unfollow();
+	}
+	
+	/**
+	 * @see	wcf\data\IGroupedUserListAction::validateGetGroupedUserList()
+	 */
+	public function validateGetGroupedUserList() {
+		$this->readInteger('pageNo');
+		$this->readInteger('userID');
+		
+		$this->userProfile = UserProfile::getUserProfile($this->parameters['userID']);
+		if ($this->userProfile->isProtected()) {
+			throw new PermissionDeniedException();
+		}
+	}
+	
+	/**
+	 * @see	wcf\data\IGroupedUserListAction::getGroupedUserList()
+	 */
+	public function getGroupedUserList() {
+		// resolve page count
+		$sql = "SELECT	COUNT(*) AS count
+			FROM	wcf".WCF_N."_user_follow
+			WHERE	followUserID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($this->parameters['userID']));
+		$row = $statement->fetchArray();
+		$pageCount = ceil($row['count'] / 20);
+		
+		// get user ids
+		$sql = "SELECT	userID
+			FROM	wcf".WCF_N."_user_follow
+			WHERE	followUserID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql, 20, ($this->parameters['pageNo'] - 1) * 20);
+		$statement->execute(array($this->parameters['userID']));
+		$userIDs = array();
+		while ($row = $statement->fetchArray()) {
+			$userIDs[] = $row['userID'];
+		}
+		
+		// create group
+		$group = new GroupedUserList();
+		$group->addUserIDs($userIDs);
+		
+		// load user profiles
+		GroupedUserList::loadUsers();
+		
+		WCF::getTPL()->assign(array(
+			'groupedUsers' => array($group)
+		));
+		
+		return array(
+			'pageCount' => $pageCount,
+			'template' => WCF::getTPL()->fetch('groupedUserList')
+		);
 	}
 }

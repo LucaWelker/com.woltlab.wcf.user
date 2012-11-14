@@ -48,6 +48,37 @@
 				});
 			{/if}
 			
+			{if $followingCount > 10}
+				var $followingList = null;
+				$('#followingAll').click(function() {
+					if ($followingList === null) {
+						$followingList = new WCF.User.List('wcf\\data\\user\\follow\\UserFollowingAction', '{lang}wcf.user.profile.following{/lang}', { userID: {@$user->userID} });
+					}
+					
+					$followingList.open();
+				});
+			{/if}
+			{if $followerCount > 10}
+				var $followerList = null;
+				$('#followerAll').click(function() {
+					if ($followerList === null) {
+						$followerList = new WCF.User.List('wcf\\data\\user\\follow\\UserFollowAction', '{lang}wcf.user.profile.followers{/lang}', { userID: {@$user->userID} });
+					}
+					
+					$followerList.open();
+				});
+			{/if}
+			{if $visitorCount > 10}
+				var $visitorList = null;
+				$('#visitorAll').click(function() {
+					if ($visitorList === null) {
+						$visitorList = new WCF.User.List('wcf\\data\\user\\profile\\visitor\\UserProfileVisitorAction', '{lang}wcf.user.profile.visitors{/lang}', { userID: {@$user->userID} });
+					}
+					
+					$visitorList.open();
+				});
+			{/if}
+			
 			{event name='javascriptInit'}
 		});
 		//]]>

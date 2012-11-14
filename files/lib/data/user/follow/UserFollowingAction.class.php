@@ -1,33 +1,28 @@
 <?php
-namespace wcf\data\user\profile\visitor;
+namespace wcf\data\user\follow;
 use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IGroupedUserListAction;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\GroupedUserList;
 use wcf\system\WCF;
 
 /**
- * Executes profile visitor-related actions.
+ * Executes following-related actions.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
- * @subpackage	data.user.profile.visitor
+ * @subpackage	data.user.follow
  * @category	Community Framework
  */
-class UserProfileVisitorAction extends AbstractDatabaseObjectAction implements IGroupedUserListAction {
+class UserFollowingAction extends UserFollowAction {
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $allowGuestAccess = array('getGroupedUserList');
-	
-	/**
-	 * user profile object
-	 * @var	wcf\data\user\UserProfile;
-	 */
-	public $userProfile = null;
+	protected $className = 'wcf\data\user\follow\UserFollowEditor';
 	
 	/**
 	 * @see	wcf\data\IGroupedUserListAction::validateGetGroupedUserList()
@@ -48,22 +43,22 @@ class UserProfileVisitorAction extends AbstractDatabaseObjectAction implements I
 	public function getGroupedUserList() {
 		// resolve page count
 		$sql = "SELECT	COUNT(*) AS count
-			FROM	wcf".WCF_N."_user_profile_visitor
-			WHERE	ownerID = ?";
+			FROM	wcf".WCF_N."_user_follow
+			WHERE	userID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->parameters['userID']));
 		$row = $statement->fetchArray();
 		$pageCount = ceil($row['count'] / 20);
 		
 		// get user ids
-		$sql = "SELECT	userID
-			FROM	wcf".WCF_N."_user_profile_visitor
-			WHERE	ownerID = ?";
+		$sql = "SELECT	followUserID
+			FROM	wcf".WCF_N."_user_follow
+			WHERE	userID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql, 20, ($this->parameters['pageNo'] - 1) * 20);
 		$statement->execute(array($this->parameters['userID']));
 		$userIDs = array();
 		while ($row = $statement->fetchArray()) {
-			$userIDs[] = $row['userID'];
+			$userIDs[] = $row['followUserID'];
 		}
 		
 		// create group
