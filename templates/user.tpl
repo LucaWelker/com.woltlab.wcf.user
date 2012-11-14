@@ -48,6 +48,17 @@
 				});
 			{/if}
 			
+			{if $followerCount > 10}
+				var $followerList = null;
+				$('#followerAll').click(function() {
+					if ($followerList === null) {
+						$followerList = new WCF.User.List('wcf\\data\\user\\follow\\UserFollowAction', '{lang}wcf.user.profile.followers{/lang}', { userID: {@$user->userID} });
+					}
+					
+					$followerList.open();
+				});
+			{/if}
+			
 			{event name='javascriptInit'}
 		});
 		//]]>

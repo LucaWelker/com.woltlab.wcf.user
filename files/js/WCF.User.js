@@ -2336,7 +2336,7 @@ WCF.User.List = Class.extend({
 			this._pageNo = data.activePage;
 		}
 		
-		if (this._pageNo != 1 && (this._pageNo > (this._pageCount - 1))) {
+		if (this._pageCount != 0 && (this._pageNo < 1 || this._pageNo > this._pageCount)) {
 			console.debug("[WCF.User.List] Cannot access page " + this._pageNo + " of " + this._pageCount);
 			return;
 		}
@@ -2358,8 +2358,8 @@ WCF.User.List = Class.extend({
 			if (this._pageCount > 1) {
 				this._dialog.find('.jsPagination').wcfPages({
 					activePage: this._pageNo,
-					maxPages: this._pageCount
-				}).bind('wcfpagesswitched', $.proxy(this._showPage, this));;
+					maxPage: this._pageCount
+				}).bind('wcfpagesswitched', $.proxy(this._showPage, this));
 			}
 			
 			// show dialog
