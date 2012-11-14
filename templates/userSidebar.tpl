@@ -20,7 +20,7 @@
 
 {if $followingCount}
 	<fieldset>
-		<legend>{lang}wcf.user.profile.following{/lang} <span class="badge">{#$followingCount}</legend>
+		<legend>{lang}wcf.user.profile.following{/lang} <span class="badge">{#$followingCount}</span></legend>
 		
 		<div>
 			<ul class="framedIconList">
@@ -38,7 +38,7 @@
 
 {if $followerCount}
 	<fieldset>
-		<legend>{lang}wcf.user.profile.followers{/lang} <span class="badge">{#$followerCount}</legend>
+		<legend>{lang}wcf.user.profile.followers{/lang} <span class="badge">{#$followerCount}</span></legend>
 		
 		<div>
 			<ul class="framedIconList">

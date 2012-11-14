@@ -179,6 +179,12 @@
 				<defaultvalue><![CDATA[192]]></defaultvalue>
 			</option>
 			<!-- /user.avatar -->
+			
+			<option name="profile_show_old_username">
+				<categoryname>user.profile.general</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue><![CDATA[182]]></defaultvalue>
+			</option>
 		</options>
 	</import>
 </data>

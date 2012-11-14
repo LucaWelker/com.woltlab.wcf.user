@@ -312,6 +312,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.profile.followers.all"><![CDATA[Alle anzeigen]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.profile.visitors"><![CDATA[Profil-Besucher]]></item>
+		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher &bdquo;{$user->getOldUsername()}&ldquo;]]></item>
 	</category>
 	
 	<category name="wcf.user.option">

@@ -65,14 +65,16 @@
 <header class="boxHeadline userHeadline">
 	<hgroup>
 		<h1>{$user->username}{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1>
-		<h2><ul class="dataList">
-			{if $user->gender}<li>{lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}</li>{/if}
-			{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}
-			{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
-			<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
-		</ul></h2>
-		<h3>{*TODO: last activity*}Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</h3>
 	</hgroup>
+	
+	<ul class="dataList">
+		{if $user->gender}<li>{lang}wcf.user.gender.{if $user->gender == 1}male{else}female{/if}{/lang}</li>{/if}
+		{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}
+		{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
+		{if $user->getOldUsername()}<li>{lang}wcf.user.profile.oldUsername{/lang}</li>{/if}
+		<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
+	</ul>
+	<p>{*TODO: last activity*}Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</p>
 	
 	<ul id="profileButtonContainer" class="buttonList">
 	</ul>

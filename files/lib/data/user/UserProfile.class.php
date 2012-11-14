@@ -534,4 +534,15 @@ class UserProfile extends DatabaseObjectDecorator {
 			$this->groupData = array();
 		}
 	}
+	
+	/**
+	 * Returns the old username of this user.
+	 */
+	public function getOldUsername() {
+		if ($this->oldUsername) {
+			if ($this->lastUsernameChange + PROFILE_SHOW_OLD_USERNAME * 86400 > TIME_NOW) {
+				return $this->oldUsername;
+			}
+		}
+	}
 }
