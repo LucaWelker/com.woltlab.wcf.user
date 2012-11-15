@@ -13,7 +13,7 @@
 			{foreach from=$activityPointObjectTypes item='objectType'}
 				{if $objectType->activityPoints > 0 && $objectType->points > 0}
 					<tr>
-						<td class="columnText">
+						<td class="columnDigits">
 							{#$objectType->activityPoints/$objectType->points} ×
 						</td>
 						<td class="columnTitle">
