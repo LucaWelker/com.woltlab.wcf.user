@@ -339,7 +339,5 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Kann E-Mail-Adresse sehen]]></item>
 		<item name="wcf.user.option.canMail"><![CDATA[Kann E-Mails senden]]></item>
 		<item name="wcf.user.option.adminCanMail"><![CDATA[E-Mails der Administration akzeptieren]]></item>
-		<item name="wcf.user.option.canWriteProfileComments"><![CDATA[Kann Pinnwand-Kommentare schreiben]]></item>
-		<item name="wcf.user.option.canSendConversation"><![CDATA[Kann Konversationen schreiben]]></item>
 	</category>
 </language>
