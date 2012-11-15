@@ -86,7 +86,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		
 		foreach ($objectTypes as $objectType) {
 			$userIDs[] = $userActivityEvent->userID;
-			$this->fireEvent($objectType, $userActivityEvent->objectID, $userActivityEvent->userID, $userActivityEvent->additionalData, true);
+			$this->fireEvent($objectType->objectType, $userActivityEvent->objectID, $userActivityEvent->userID, $userActivityEvent->additionalData, true);
 		}
 		$this->updateCaches($userIDs);
 	}
