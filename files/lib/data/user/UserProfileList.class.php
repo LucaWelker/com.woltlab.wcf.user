@@ -37,6 +37,10 @@ class UserProfileList extends UserList {
 			$this->sqlSelects .= ",user_rank.*";
 			$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_rank user_rank ON (user_rank.rankID = user_table.rankID)";
 		}
+		
+		// get current location
+		$this->sqlSelects .= ", session.controller, session.objectID AS locationObjectID, session.lastActivityTime AS sessionLastActivityTime";
+		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_session session ON (session.userID = user_table.userID)";
 	}
 	
 	/**

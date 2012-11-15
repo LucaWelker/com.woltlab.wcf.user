@@ -16,6 +16,7 @@ ALTER TABLE wcf1_user ADD signatureCache TEXT;
 ALTER TABLE wcf1_user ADD signatureEnableBBCodes TINYINT(1) NOT NULL DEFAULT 1;
 ALTER TABLE wcf1_user ADD signatureEnableHtml TINYINT(1) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD signatureEnableSmilies TINYINT(1) NOT NULL DEFAULT 1;
+ALTER TABLE wcf1_user ADD lastActivityTime INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD profileHits INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user ADD rankID INT(10);
 ALTER TABLE wcf1_user ADD userTitle VARCHAR(255) NOT NULL DEFAULT '';

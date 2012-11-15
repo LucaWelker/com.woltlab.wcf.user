@@ -105,7 +105,10 @@
 		{if $user->getOldUsername()}<li>{lang}wcf.user.profile.oldUsername{/lang}</li>{/if}
 		<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
 	</ul>
-	<p>{*TODO: last activity*}Letzte Aktivitaet: {@TIME_NOW|time}, Benutzerprofil von: Marcel Werk</p>
+	<dl class="plain inlineDataList">
+		<dt>{lang}wcf.user.usersOnline.lastActivity{/lang}</dt>
+		<dd>{@$user->getLastActivityTime()|time}{if $user->getCurrentLocation()}, {@$user->getCurrentLocation()}{/if}</dd>
+	</dl>
 	
 	<ul id="profileButtonContainer" class="buttonList">
 	</ul>

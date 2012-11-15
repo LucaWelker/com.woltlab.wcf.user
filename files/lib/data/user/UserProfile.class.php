@@ -75,6 +75,12 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	protected $groupData = null;
 	
+	/**
+	 * current location of this user.
+	 * @var string
+	 */
+	protected $currentLocation = null;
+	
 	const GENDER_MALE = 1;
 	const GENDER_FEMALE = 2;
 	
@@ -287,6 +293,32 @@ class UserProfile extends DatabaseObjectDecorator {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns the current location of this user.
+	 * 
+	 * @return	string
+	 */
+	public function getCurrentLocation() {
+		if ($this->currentLocation === null) {
+			$this->currentLocation = '';
+			$this->currentLocation = \wcf\system\user\online\location\UserOnlineLocationHandler::getInstance()->getLocation(new \wcf\data\user\online\UserOnline(new User(null, array(
+				'controller' => $this->controller,
+				'objectID' => $this->locationObjectID
+			))));
+		}
+		
+		return $this->currentLocation;
+	}
+	
+	/**
+	 * Returns the last activity time.
+	 * 
+	 * @return	integer
+	 */
+	public function getLastActivityTime() {
+		return max($this->lastActivityTime, $this->sessionLastActivityTime);
 	}
 	
 	/**
