@@ -2,19 +2,18 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
 	<import>
 		<categories>
-			<category name="user"></category>
-			<category name="user.password">
-				<parent>security.general</parent>
+			<category name="user.avatar">
+				<parent>user.general</parent>
 			</category>
 			<category name="user.register">
 				<parent>user</parent>
 			</category>
-			<category name="user.avatar">
-				<parent>user</parent>
-			</category>
-			<category name="user.ban">
-				<parent>user.general</parent>
-			</category>
+				<category name="user.password">
+					<parent>user.register</parent>
+				</category>
+				<category name="user.ban">
+					<parent>user.register</parent>
+				</category>
 		</categories>
 		
 		<options>
@@ -38,19 +37,6 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			
-			<!-- user.general -->
-			<option name="register_username_min_length">
-				<categoryname>user.general</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[3]]></defaultvalue>
-			</option>
-			<option name="register_username_max_length">
-				<categoryname>user.general</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[25]]></defaultvalue>
-			</option>
-			<!-- /user.general -->
 			
 			<!-- user.password -->
 			<option name="encryption_method">
@@ -126,6 +112,16 @@
 			<!-- /user.ban -->
 			
 			<!-- user.register -->
+			<option name="register_username_min_length">
+				<categoryname>user.register</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue><![CDATA[3]]></defaultvalue>
+			</option>
+			<option name="register_username_max_length">
+				<categoryname>user.register</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue><![CDATA[25]]></defaultvalue>
+			</option>
 			<option name="register_disabled">
 				<categoryname>user.register</categoryname>
 				<optiontype>boolean</optiontype>
