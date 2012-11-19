@@ -21,6 +21,8 @@ use wcf\util\StringUtil;
  * @category	Community Framework
  */
 class LostPasswordForm extends RecaptchaForm {
+	const AVAILABLE_DURING_OFFLINE_MODE = true;
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */

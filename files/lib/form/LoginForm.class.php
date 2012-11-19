@@ -17,6 +17,8 @@ use wcf\util\StringUtil;
  * @category	Community Framework
  */
 class LoginForm extends \wcf\acp\form\LoginForm {
+	const AVAILABLE_DURING_OFFLINE_MODE = true;
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */

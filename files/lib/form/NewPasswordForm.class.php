@@ -22,6 +22,8 @@ use wcf\util\UserRegistrationUtil;
  * @category	Community Framework
  */
 class NewPasswordForm extends AbstractForm {
+	const AVAILABLE_DURING_OFFLINE_MODE = true;
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
