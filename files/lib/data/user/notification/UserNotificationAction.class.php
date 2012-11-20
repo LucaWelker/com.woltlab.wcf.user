@@ -1,7 +1,7 @@
 <?php
 namespace wcf\data\user\notification;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
@@ -45,7 +45,7 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	public function validateMarkAsConfirmed() {
 		// validate notification id
 		if (!isset($this->parameters['notificationID'])) {
-			throw new ValidateActionException("missing parameter 'notificationID'");
+			throw new UserInputException('notificationID');
 		}
 		
 		$sql = "SELECT	COUNT(*) AS count
@@ -60,7 +60,7 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 		$row = $statement->fetchArray();
 		
 		if (!$row['count']) {
-			throw new ValidateActionException("notification id is invalid");
+			throw new UserInputException('notificationID');
 		}
 	}
 	

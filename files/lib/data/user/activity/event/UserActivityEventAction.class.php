@@ -1,7 +1,7 @@
 <?php
 namespace wcf\data\user\activity\event;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
 
@@ -26,11 +26,11 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateLoad() {
 		if (!isset($this->parameters['data']['userID']) || !intval($this->parameters['data']['userID'])) {
-			throw new ValidateActionException("Missing parameter 'userID'");
+			throw new UserInputException('userID');
 		}
 		
 		if (!isset($this->parameters['data']['pageNo']) || !intval($this->parameters['data']['pageNo'])) {
-			throw new ValidateActionException("Missing parameter 'pageNo'");
+			throw new UserInputException('pageNo');
 		}
 	}
 	

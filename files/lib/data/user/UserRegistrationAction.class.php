@@ -1,6 +1,6 @@
 <?php
 namespace wcf\data\user;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
 use wcf\util\UserRegistrationUtil;
@@ -26,7 +26,7 @@ class UserRegistrationAction extends UserAction {
 	 */
 	public function validateValidateUsername() {
 		if (empty($this->parameters['username'])) {
-			throw new ValidateActionException("missing parameter 'username'");
+			throw new UserInputException('username');
 		}
 	}
 	
@@ -35,7 +35,7 @@ class UserRegistrationAction extends UserAction {
 	 */
 	public function validateValidateEmailAddress() {
 		if (empty($this->parameters['email'])) {
-			throw new ValidateActionException("missing parameter 'email'");
+			throw new UserInputException('email');
 		}
 	}
 	
@@ -44,7 +44,7 @@ class UserRegistrationAction extends UserAction {
 	 */
 	public function validateValidatePassword() {
 		if (empty($this->parameters['password'])) {
-			throw new ValidateActionException("missing parameter 'password'");
+			throw new UserInputException('password');
 		}
 	}
 	
