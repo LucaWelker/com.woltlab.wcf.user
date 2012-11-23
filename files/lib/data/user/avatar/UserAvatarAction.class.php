@@ -2,8 +2,8 @@
 namespace wcf\data\user\avatar;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\user\UserEditor;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
-use wcf\system\exception\ValidateActionException;
 use wcf\system\image\ImageHandler;
 use wcf\system\upload\AvatarUploadFileValidationStrategy;
 use wcf\system\user\storage\UserStorageHandler;
@@ -27,11 +27,11 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	public function validateUpload() {
 		// check upload permissions
 		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar') || WCF::getUser()->disableAvatar) {
-			throw new ValidateActionException('Insufficient permissions');
+			throw new PermissionDeniedException();
 		}
 		
 		if (count($this->parameters['__files']->getFiles()) != 1) {
-			throw new ValidateActionException('Invalid input');
+			throw new UserInputException('files');
 		}
 		
 		// check max filesize, allowed file extensions etc.

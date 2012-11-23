@@ -1,7 +1,7 @@
 <?php
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\system\menu\user\profile\UserProfileMenu;
 
 /**
@@ -35,7 +35,7 @@ class UserProfileMenuItemAction extends AbstractDatabaseObjectAction {
 		}
 		
 		if ($this->menuItem === null) {
-			throw new ValidateActionException("user profile menu item '".$this->parameters['data']['menuItem']."' is unknown");
+			throw new UserInputException('menuItem');
 		}
 	}
 	

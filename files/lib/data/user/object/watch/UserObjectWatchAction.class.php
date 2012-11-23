@@ -2,7 +2,8 @@
 namespace wcf\data\user\object\watch;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\UserInputException;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
@@ -67,13 +68,13 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 			$this->readObjects();
 			
 			if (empty($this->objects)) {
-				throw new ValidateActionException('Invalid object id');
+				throw new UserInputException('objectIDs');
 			}
 		}
 		
 		foreach ($this->objects as $object) {
 			if ($object->userID != WCF::getUser()->userID) {
-				throw new ValidateActionException('Invalid object id');
+				throw new UserInputException('objectIDs');
 			}
 		}
 	}
@@ -96,7 +97,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		$this->__validateSubscribe();
 		
 		if ($this->__userObjectWatch !== null) {
-			throw new ValidateActionException('Given object is already subscribed');
+			throw new PermissionDeniedException();
 		}
 	}
 	
@@ -107,7 +108,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		$this->__validateSubscribe();
 		
 		if ($this->__userObjectWatch === null) {
-			throw new ValidateActionException('Given object is not subscribed');
+			throw new PermissionDeniedException();
 		}
 	}
 	
@@ -117,13 +118,13 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	protected function __validateSubscribe() {
 		// check parameters
 		if (!isset($this->parameters['data']['objectType']) || !isset($this->parameters['data']['objectID'])) {
-			throw new ValidateActionException('Missing parameters');
+			throw new UserInputException('objectType');
 		}
 		
 		// validate object type
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $this->parameters['data']['objectType']);
 		if ($objectType === null) {
-			throw new ValidateActionException('Invalid object type given');
+			throw new UserInputException('objectType');
 		}
 		
 		// validate object id

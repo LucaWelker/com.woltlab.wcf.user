@@ -2,7 +2,7 @@
 namespace wcf\data\user;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\bbcode\MessageParser;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -27,11 +27,11 @@ class UserProfileAction extends UserAction {
 	 */
 	public function validateGetMessagePreview() {
 		if (!isset($this->parameters['data']['message'])) {
-			throw new ValidateActionException("Missing parameter 'message'");
+			throw new UserInputException('message');
 		}
 		
 		if (!isset($this->parameters['options'])) {
-			throw new ValidateActionException("Missing parameter 'options'");
+			throw new UserInputException('options');
 		}
 	}
 	
@@ -66,7 +66,7 @@ class UserProfileAction extends UserAction {
 	public function validateGetUserProfile() {
 		switch (count($this->objectIDs)) {
 			case 0:
-				throw new ValidateActionException("Missing user id");
+				throw new UserInputException('objectIDs');
 			break;
 			
 			case 1:
@@ -75,7 +75,7 @@ class UserProfileAction extends UserAction {
 			
 			default:
 				// more than one user id is pointless
-				throw new ValidateActionException("Invalid parameter for user id given");
+				throw new UserInputException('objectIDs');
 			break;
 		}
 	}
@@ -108,7 +108,7 @@ class UserProfileAction extends UserAction {
 	public function validateGetDetailedActivityPointList() {
 		switch (count($this->objectIDs)) {
 			case 0:
-				throw new ValidateActionException("Missing user id");
+				throw new UserInputException('objectIDs');
 			break;
 			
 			case 1:
@@ -117,7 +117,7 @@ class UserProfileAction extends UserAction {
 			
 			default:
 				// more than one user id is pointless
-				throw new ValidateActionException("Invalid parameter for user id given");
+				throw new UserInputException('objectIDs');
 			break;
 		}
 	}

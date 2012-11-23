@@ -3,7 +3,7 @@ namespace wcf\data\user\ignore;
 use wcf\data\user\ignore\UserIgnore;
 use wcf\data\user\ignore\UserIgnoreEditor;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
@@ -72,7 +72,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateDelete() {
 		if (empty($this->objectIDs)) {
-			throw new ValidateActionException("missing parameter 'objectID'");
+			throw new UserInputException('objectIDs');
 		}
 		
 		// disguise as unignore

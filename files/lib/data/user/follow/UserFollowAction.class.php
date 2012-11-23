@@ -4,7 +4,7 @@ use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IGroupedUserListAction;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\exception\ValidateActionException;
+use wcf\system\exception\UserInputException;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\notification\object\UserFollowUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
@@ -40,12 +40,12 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 	 */
 	public function validateFollow() {
 		if (!isset($this->parameters['data']['userID'])) {
-			throw new ValidateActionException("missing parameter 'userID'");
+			throw new UserInputException('userID');
 		}
 		
 		// validate if you're retarded
 		if ($this->parameters['data']['userID'] == WCF::getUser()->userID) {
-			throw new ValidateActionException('Insufficient permissions');
+			throw new PermissionDeniedException();
 		}
 	}
 	
@@ -123,7 +123,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 	 */
 	public function validateDelete() {
 		if (empty($this->objectIDs)) {
-			throw new ValidateActionException("missing parameter 'objectID'");
+			throw new UserInputException('objectIDs');
 		}
 		
 		// disguise as unfollow
