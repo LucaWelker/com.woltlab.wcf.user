@@ -251,6 +251,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Abonnieren]]></item>
 		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Abbestellen]]></item>
 		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[Es wurden keine Abonnements gefunden.]]></item>
+		<item name="wcf.user.watchedObjects.showAll"><![CDATA[Zeige alle Abonnements]]></item>
 		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
 		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
 		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>

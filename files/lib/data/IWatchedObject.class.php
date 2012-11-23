@@ -52,5 +52,5 @@ interface IWatchedObject {
 	 * 
 	 * @return	wcf\data\user\UserProfile
 	 */
-	public function getUserProfile();
+	public function getLastUpdateUserProfile();
 }

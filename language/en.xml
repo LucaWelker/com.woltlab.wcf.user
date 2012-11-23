@@ -117,6 +117,11 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.quit"><![CDATA[Quit user account]]></item>
 		<item name="wcf.user.emailActivation"><![CDATA[Enable new e-mail address]]></item>
 		<item name="wcf.user.guest"><![CDATA[Guest]]></item>
+		<item name="wcf.user.watchedObjects"><![CDATA[Subscriptions]]></item>
+		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Subscribe]]></item>
+		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Unsubscribe]]></item>
+		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[You don't have any subscriptions.]]></item>
+		<item name="wcf.user.watchedObjects.showAll"><![CDATA[Show All Subscriptions]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
