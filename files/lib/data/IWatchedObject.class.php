@@ -20,6 +20,13 @@ interface IWatchedObject {
 	public function getApplication();
 	
 	/**
+	 * Returns template name.
+	 * 
+	 * @return	string
+	 */
+	public function getTemplateName();
+	
+	/**
 	 * Returns time of last update.
 	 * 
 	 * @return	integer
@@ -27,9 +34,23 @@ interface IWatchedObject {
 	public function getLastUpdateTime();
 	
 	/**
-	 * Returns template name.
+	 * Returns the link to this object.
 	 * 
 	 * @return	string
 	 */
-	public function getTemplateName();
+	public function getLink();
+	
+	/**
+	 * Returns the title of this object.
+	 * 
+	 * @return	string
+	 */
+	public function getTitle();
+	
+	/**
+	 * Returns the user profile of the author.
+	 * 
+	 * @return	wcf\data\user\UserProfile
+	 */
+	public function getUserProfile();
 }
