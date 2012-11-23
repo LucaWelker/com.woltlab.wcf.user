@@ -2498,3 +2498,54 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 		}, this));
 	}
 });
+
+/**
+ * Loads watched objects for user panel.
+ */
+WCF.User.ObjectWatch.UserPanel = Class.extend({
+	/**
+	 * loading state
+	 * @var	boolean
+	 */
+	_didLoad: false,
+	
+	/**
+	 * Initializes the conversation loader.
+	 */
+	init: function() {
+		$('#unreadWatchedObjects > .dropdownToggle').click($.proxy(this._click, this));
+	},
+	
+	/**
+	 * Handles clicks on the dropdown toggle.
+	 */
+	_click: function() {
+		if (this._didLoad) {
+			return;
+		}
+		
+		new WCF.Action.Proxy({
+			autoSend: true,
+			data: {
+				actionName: 'getUnreadObjects',
+				className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction'
+			},
+			success: $.proxy(this._success, this)
+		});
+		
+		this._didLoad = true;
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		var $list = $('#unreadWatchedObjects > .dropdownMenu');
+		$list.children('li:eq(0)').remove();
+		$('' + data.returnValues.template).prependTo($list);
+	}
+});

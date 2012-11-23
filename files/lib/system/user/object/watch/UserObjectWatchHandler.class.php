@@ -141,6 +141,44 @@ class UserObjectWatchHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * Returns a list of unread objects.
+	 * 
+	 * @param	integer				$userID
+	 * @param	integer				$limit
+	 * @return	array<wcf\data\IWatchedObject>
+	 */
+	public function getUnreadObjects($userID = null, $limit = 5) {
+		if ($userID === null) $userID = WCF::getUser()->userID;
+		$objects = array();
+		
+		// get type ids
+		$objectTypeIDs = $this->getObjectTypeIDs($userID);
+		if (!empty($objectTypeIDs)) {
+			foreach ($objectTypeIDs as $objectTypeID) {
+				$processor = ObjectTypeCache::getInstance()->getObjectType($objectTypeID)->getProcessor();
+				$objects = array_merge($objects, $processor->getUnreadObjects($userID, $limit));
+			}
+			
+			// sort by last update time (latest first)
+			usort($objects, function($a, $b) {
+				if ($a->getLastUpdateTime() == $b->getLastUpdateTime()) {
+					return 0;
+				}
+				
+				return ($a->getLastUpdateTime() < $b->getLastUpdateTime()) ? 1 : -1;
+			});
+			
+			$length = count($objects);
+			while ($length > $limit) {
+				$length--;
+				unset($objects[$length]);
+			}
+		}
+		
+		return $objects;
+	}
+	
+	/**
 	 * @see wcf\system\user\object\watch\UserObjectWatchHandler::resetObjects();
 	 */
 	public function resetObject($objectType, $objectID) {

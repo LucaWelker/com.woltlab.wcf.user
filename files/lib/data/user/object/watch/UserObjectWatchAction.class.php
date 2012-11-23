@@ -4,6 +4,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\user\object\watch\UserObjectWatchHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
@@ -110,6 +111,26 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		if ($this->__userObjectWatch === null) {
 			throw new PermissionDeniedException();
 		}
+	}
+	
+	/**
+	 * Does nothing.
+	 */
+	public function validateGetUnreadObjects() { }
+	
+	/**
+	 * Returns the last 5 updates of watched objects.
+	 * 
+	 * @return	array
+	 */
+	public function getUnreadObjects() {
+		WCF::getTPL()->assign(array(
+			'watchedObjects' => UserObjectWatchHandler::getInstance()->getUnreadObjects()
+		));
+		
+		return array(
+			'template' => WCF::getTPL()->fetch('userObjectWatchUnread')
+		);
 	}
 	
 	/**

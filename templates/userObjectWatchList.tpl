@@ -68,7 +68,7 @@
 			{content}
 				{foreach from=$objects->getObjects() item=watchedObject}
 					<li class="jsWatchedObject">
-						{include file=$watchedObject->getTemplateName()}
+						{include file=$watchedObject->getTemplateName() application=$watchedObject->getApplication()}
 					</li>
 				{/foreach}
 			{/content}

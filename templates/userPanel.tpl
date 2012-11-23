@@ -45,9 +45,33 @@
 		</li>
 	{/if}
 	
-	<li>
-		<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">Watched Objects</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
-	</li>
+	{if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}
+		{* dropdown menu with the x new watched objects updates *}
+		<li id="unreadWatchedObjects" class="dropdown">
+			<a class="dropdownToggle jsTooltip" title="{lang}wcf.user.watchedObjects{/lang}">
+				<img src="{icon}bookmarkInverse{/icon}" alt="" class="icon24" />
+				<span class="invisible">{lang}wcf.user.watchedObjects{/lang}</span>
+				<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>
+			</a>
+			<ul class="dropdownMenu">
+				<li><span>{lang}wcf.global.loading{/lang}</span></li>
+				<li class="dropdownDivider"></li>
+				<li><a href="{link controller='UserObjectWatchList'}{/link}">{lang}wcf.user.watchedObjects.showAll{/lang}</a></li>
+			</ul>
+			<script type="text/javascript">
+				//<![CDATA[
+				$(function() {
+					new WCF.User.ObjectWatch.UserPanel();
+				});
+				//]]>
+			</script>
+		</li>
+	{else}
+		{* static link to watched objects *}
+		<li>
+			<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.watchedObjects{/lang}</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
+		</li>
+	{/if}
 {else}
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
