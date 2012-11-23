@@ -25,8 +25,7 @@
 
 			WCF.TabMenu.init();
 
-			{* TODO: Handle admin permissions *}
-			{if $__wcf->getUser()->userID == $user->userID}
+			{if $user->canEdit() || ($__wcf->getUser()->userID == $user->userID && $user->canEditOwnProfile())}
 				WCF.Language.addObject({
 					'wcf.user.editProfile': '{lang}wcf.user.editProfile{/lang}',
 				});
