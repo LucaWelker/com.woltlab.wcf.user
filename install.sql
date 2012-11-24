@@ -240,7 +240,7 @@ CREATE TABLE wcf1_user_object_watch (
 	objectTypeID INT(10) NOT NULL,
 	objectID INT(10) NOT NULL,
 	userID INT(10) NOT NULL,
-	notificationType TINYINT(1) NOT NULL DEFAULT 0,
+	notification TINYINT(1) NOT NULL DEFAULT 0,
 	
 	UNIQUE KEY (objectTypeID, userID, objectID),
 	KEY (objectTypeID, objectID)

@@ -221,7 +221,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		
 		// get subscriber
 		$userIDs = $recipientIDs = array();
-		$sql = "SELECT		userID, notificationType
+		$sql = "SELECT		userID, notification
 			FROM		wcf".WCF_N."_user_object_watch
 			WHERE		objectTypeID = ?
 					AND objectID = ?";
@@ -229,7 +229,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		$statement->execute(array($objectTypeObj->objectTypeID, $objectID));
 		while ($row = $statement->fetchArray()) {
 			$userIDs[] = $row['userID'];
-			if ($row['notificationType'] == 1) $recipientIDs[] = $row['userID'];
+			if ($row['notification']) $recipientIDs[] = $row['userID'];
 		}
 		
 		if (!empty($userIDs)) {

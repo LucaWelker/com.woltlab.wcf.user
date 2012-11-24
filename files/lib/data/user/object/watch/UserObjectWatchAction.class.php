@@ -64,20 +64,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 * Validates the delete action.
 	 */
 	public function validateDelete() {
-		// read objects
-		if (empty($this->objects)) {
-			$this->readObjects();
-			
-			if (empty($this->objects)) {
-				throw new UserInputException('objectIDs');
-			}
-		}
-		
-		foreach ($this->objects as $object) {
-			if ($object->userID != WCF::getUser()->userID) {
-				throw new UserInputException('objectIDs');
-			}
-		}
+		$this->__validatePermission();
 	}
 	
 	/**
@@ -134,6 +121,50 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
+	 * Validates the enable notification action.
+	 */
+	public function validateEnableNotification() {
+		$this->__validatePermission();
+	}
+	
+	/**
+	 * Validates the disable notification action.
+	 */
+	public function validateDisableNotification() {
+		$this->__validatePermission();
+	}
+	
+	/**
+	 * Enables the notification for a watch objects.
+	 */
+	public function enableNotification() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		foreach ($this->objects as $objectWatch) {
+			$objectWatch->update(array(
+				'notification' => 1
+			));
+		}
+	}
+	
+	/**
+	 * Disables the notification for a watch objects.
+	 */
+	public function disableNotification() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		foreach ($this->objects as $objectWatch) {
+			$objectWatch->update(array(
+				'notification' => 0
+			));
+		}
+	}
+	
+	/**
 	 * Validates the subscribe action.
 	 */
 	protected function __validateSubscribe() {
@@ -153,5 +184,25 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		
 		// get existing subscription
 		$this->__userObjectWatch = UserObjectWatch::getUserObjectWatch($objectType->objectTypeID, WCF::getUser()->userID, intval($this->parameters['data']['objectID']));
+	}
+	
+	/**
+	 * Provides a default validation.
+	 */
+	protected function __validatePermission() {
+		// read objects
+		if (empty($this->objects)) {
+			$this->readObjects();
+			
+			if (empty($this->objects)) {
+				throw new UserInputException('objectIDs');
+			}
+		}
+		
+		foreach ($this->objects as $object) {
+			if ($object->userID != WCF::getUser()->userID) {
+				throw new UserInputException('objectIDs');
+			}
+		}
 	}
 }
