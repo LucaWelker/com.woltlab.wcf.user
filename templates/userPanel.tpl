@@ -23,28 +23,18 @@
 	</li>
 	
 	<!-- user notifications -->
-	{if $__wcf->getUserNotificationHandler()->getNotificationCount()}
-		<li id="userNotifications" class="dropdown" data-count="{@$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
-			<a class="dropdownToggle jsTooltip" data-toggle="userNotifications" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount() > 0} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
-			<div class="dropdownMenu userNotificationContainer">
-				<div id="userNotificationContainer" class="scrollableContainer">
-					<div class="scrollableItems cleafix">
-						<div>
-							<p>{lang}wcf.global.loading{/lang}</p>
-						</div>
-						<div>
-							<p>{lang}wcf.global.loading{/lang}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</li>
-	{else}
-		<li>
-			<a class="jsTooltip" href="{link controller='NotificationList'}{/link}" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span></a>
-		</li>
-	{/if}
+	<li id="userNotifications" class="dropdown" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}" data-title="{lang}wcf.user.notification.notifications{/lang}">
+		<a class="jsTooltip" href="{link controller='NotificationList'}{/link}" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+		<script type="text/javascript">
+			//<![CDATA[
+			$(function() {
+				new WCF.Notification.Handler();
+			});
+			//]]>
+		</script>
+	</li>
 	
+	<!-- watched objects -->
 	<li id="unreadWatchedObjects" data-count="{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}" data-title="{lang}wcf.user.watchedObjects{/lang}">
 		<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.watchedObjects{/lang}</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
 		<script type="text/javascript">
