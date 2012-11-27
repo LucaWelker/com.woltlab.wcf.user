@@ -2580,51 +2580,40 @@ WCF.User.ObjectWatch.Notification = Class.extend({
 
 /**
  * Loads watched objects for user panel.
+ * 
+ * @see	WCF.UserPanel
  */
-WCF.User.ObjectWatch.UserPanel = Class.extend({
+WCF.User.ObjectWatch.UserPanel = WCF.UserPanel.extend({
 	/**
-	 * loading state
-	 * @var	boolean
+	 * link to show all watched objects
+	 * @var	string
 	 */
-	_didLoad: false,
+	_showAllLink: '',
 	
 	/**
-	 * Initializes the conversation loader.
+	 * @see	WCF.UserPanel.init()
 	 */
-	init: function() {
-		$('#unreadWatchedObjects > .dropdownToggle').click($.proxy(this._click, this));
+	init: function(showAllLink) {
+		this._showAllLink = showAllLink;
+		
+		this._super('unreadWatchedObjects');
 	},
 	
 	/**
-	 * Handles clicks on the dropdown toggle.
+	 * @see	WCF.UserPanel._addDefaultItems()
 	 */
-	_click: function() {
-		if (this._didLoad) {
-			return;
-		}
-		
-		new WCF.Action.Proxy({
-			autoSend: true,
-			data: {
-				actionName: 'getUnreadObjects',
-				className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction'
-			},
-			success: $.proxy(this._success, this)
-		});
-		
-		this._didLoad = true;
+	_addDefaultItems: function(dropdownMenu) {
+		this._addDivider(dropdownMenu);
+		$('<li><a href="' + this._showAllLink + '">' + WCF.Language.get('wcf.user.watchedObjects.showAll') + '</a></li>').appendTo(dropdownMenu);
 	},
 	
 	/**
-	 * Handles successful AJAX requests.
-	 * 
-	 * @param	object		data
-	 * @param	string		textStatus
-	 * @param	jQuery		jqXHR
+	 * @see	WCF.UserPanel._getParameters()
 	 */
-	_success: function(data, textStatus, jqXHR) {
-		var $list = $('#unreadWatchedObjects > .dropdownMenu');
-		$list.children('li:eq(0)').remove();
-		$('' + data.returnValues.template).prependTo($list);
+	_getParameters: function() {
+		return {
+			actionName: 'getUnreadObjects',
+			className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction'
+		};
 	}
 });
