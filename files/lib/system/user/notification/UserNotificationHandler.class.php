@@ -8,6 +8,7 @@ use wcf\data\user\notification\UserNotificationAction;
 use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\user\notification\UserNotificationList;
 use wcf\data\user\User;
+use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfile;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -18,6 +19,7 @@ use wcf\system\user\notification\object\IUserNotificationObject;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Handles user notifications.

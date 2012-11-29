@@ -3,6 +3,7 @@ namespace wcf\data\user\avatar;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\user\UserEditor;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\image\ImageHandler;
 use wcf\system\upload\AvatarUploadFileValidationStrategy;
