@@ -3,18 +3,19 @@ namespace wcf\system\user\notification;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\event\recipient\UserNotificationEventRecipientList;
-use wcf\data\user\notification\recipient\UserNotificationRecipientList;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\notification\UserNotificationAction;
 use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\user\notification\UserNotificationList;
+use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\package\PackageDependencyHandler;
-use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\user\notification\event\IUserNotificationEvent;
 use wcf\system\user\notification\object\IUserNotificationObject;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -46,12 +47,6 @@ class UserNotificationHandler extends SingletonFactory {
 	 * @var	integer
 	 */
 	protected $notificationCount = null;
-	
-	/**
-	 * list of notification types
-	 * @var	array
-	 */
-	protected $notificationTypes = null;
 	
 	/**
 	 * list of object types
@@ -86,7 +81,7 @@ class UserNotificationHandler extends SingletonFactory {
 	public function fireEvent($eventName, $objectType, IUserNotificationObject $notificationObject, array $recipientIDs, array $additionalData = array()) {
 		// check given object type and event name
 		if (!isset($this->availableEvents[$objectType][$eventName])) {
-			throw new SystemException("Unknown event ".$objectType."-".$eventName." given".print_r($this->availableEvents, true));
+			throw new SystemException("Unknown event ".$objectType."-".$eventName." given");
 		}
 		
 		// get objects
@@ -95,31 +90,52 @@ class UserNotificationHandler extends SingletonFactory {
 		// set object data
 		$event->setObject(new UserNotification(null, array()), $notificationObject, new UserProfile(WCF::getUser()), $additionalData);
 		
+		// find existing events
+		$userIDs = array();
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('notification_to_user.notificationID = notification.notificationID');
+		$conditionBuilder->add('notification_to_user.userID IN (?)', array($recipientIDs));
+		$conditionBuilder->add('notification.eventHash = ?', array($event->getEventHash()));
+		$sql = "SELECT	notification_to_user.userID
+			FROM	wcf".WCF_N."_user_notification notification,
+				wcf".WCF_N."_user_notification_to_user notification_to_user
+			".$conditionBuilder;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
+		while ($row = $statement->fetchArray()) $userIDs[] = $row['userID'];
+		
+		// skip recipients with outstanding notifications
+		if (!empty($userIDs)) {
+			$recipientIDs = array_diff($recipientIDs, $userIDs);
+			if (empty($recpientIDs)) return;
+		}
+		
 		// get recipients
 		$recipientList = new UserNotificationEventRecipientList();
 		$recipientList->getConditionBuilder()->add('event_to_user.eventID = ?', array($event->eventID));
-		$recipientList->getConditionBuilder()->add('user_table.userID IN (?)', array($recipientIDs));
+		$recipientList->getConditionBuilder()->add('event_to_user.userID IN (?)', array($recipientIDs));
 		$recipientList->readObjects();
 		if (count($recipientList)) {
 			// save notification
-			$action = new UserNotificationAction(array(), 'create', array('data' => array(
-				'packageID' => $objectTypeObject->packageID,
-				'eventID' => $event->eventID,
-				'objectID' => $notificationObject->getObjectID(),
-				'authorID' => $event->getAuthorID(),
-				'time' => TIME_NOW,
-				'additionalData' => serialize($additionalData),
-				'recipientIDs' => $recipientList->getObjectIDs()
-			)));
+			$action = new UserNotificationAction(array(), 'create', array(
+				'data' => array(
+					'packageID' => $objectTypeObject->packageID,
+					'eventID' => $event->eventID,
+					'objectID' => $notificationObject->getObjectID(),
+					'authorID' => $event->getAuthorID(),
+					'time' => TIME_NOW,
+					'eventHash' => $event->getEventHash(),
+					'additionalData' => serialize($additionalData)
+				),
+				'recipients' => $recipientList->getObjects()
+			));
 			$result = $action->executeAction();
 			$notification = $result['returnValues'];
 			
 			// sends notifications
 			foreach ($recipientList->getObjects() as $recipient) {
-				foreach ($recipient->getNotificationTypes($event->eventID) as $notificationType) {
-					if ($event->supportsNotificationType($notificationType)) {
-						$notificationType->send($notification, $recipient, $event);
-					}
+				if ($recipient->mailNotificationType == 'instant') {
+					$this->sendInstantMailNotification($notification, $recipient, $event);
 				}
 			}
 			
@@ -128,113 +144,6 @@ class UserNotificationHandler extends SingletonFactory {
 		}
 	}
 	
-	/**
-	 * Revokes an event and all its messages if possible.
-	 *
-	 * @param	string								$eventName
-	 * @param	string								$objectType
-	 * @param	wcf\system\user\notification\object\IUserNotificationObject	$notificationObject
-	 */
-	public function revokeEvent($eventName, $objectType, IUserNotificationObject $notificationObject) {
-		$this->revokeEvents(array($eventName), $objectType, array($notificationObject));
-	}
-	
-	/**
-	 * Revokes events and all their messages if possible.
-	 *
-	 * @param	array<string>								$eventName
-	 * @param	string									$objectType
-	 * @param	array<wcf\system\user\notification\object\IUserNotificationObject>	$notificationObject
-	 */
-	public function revokeEvents(array $eventNames, $objectType, array $notificationObjects) {
-		// check given object type
-		if (!isset($this->availableObjectTypes[$objectType])) {
-			throw new SystemException("Unknown object type ".$objectType." given");
-		}
-		
-		// get object type object
-		$objectTypeObject = $this->availableObjectTypes[$objectType];
-		
-		// get event ids
-		$eventIDs = array();
-		foreach ($eventNames as $eventName) {
-			if (!isset($this->availableEvents[$objectType][$eventName])) {
-				throw new SystemException("Unknown event ".$objectType."-".$eventName." given");
-			}
-			
-			$eventIDs[] = $this->availableEvents[$objectType][$eventName]->eventID;
-		}
-		
-		// get notification object ids
-		$notificationObjectIDs = array();
-		foreach ($notificationObjects as $notificationObject) {
-			$notificationObjectIDs[] = $notificationObject->getObjectID();
-		}
-		
-		// get notifications
-		$notificationList = new UserNotificationList();
-		$notificationList->getConditionBuilder()->add('user_notification.eventID IN (?)', array($eventIDs));
-		$notificationList->getConditionBuilder()->add('user_notification.objectID IN (?)', array($notificationObjectIDs));
-		$notificationList->getConditionBuilder()->add('user_notification.packageID = ?', array($objectTypeObject->packageID));
-		$notificationList->sqlSelects = 'user_notification_event.eventName';
-		$notificationList->sqlJoins = " LEFT JOIN wcf".WCF_N."_user_notification_event user_notification_event ON (user_notification_event.eventID = user_notification.eventID) ";
-		$notificationList->readObjects();
-		
-		$notifications = $notificationList->getObjects();
-		$notificationIDs = array_keys($notifications);
-		
-		// break if no notifications are available
-		if (empty($notificationIDs)) {
-			return;
-		}
-		
-		// get recipient ids
-		$recipientIDs = $uniqueRecipientIDs = array();
-		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('user_notification_to_user.notificationID IN (?)', array($notificationIDs));
-		$sql = "SELECT	user_notification_to_user.*
-			FROM	wcf".WCF_N."_user_notification_to_user user_notification_to_user
-			".$conditionBuilder;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
-		while ($row = $statement->fetchArray()) {
-			if (!isset($recipientIDs[$row['notificationID']])) $recipientIDs[$row['notificationID']] = array();
-			$recipientIDs[$row['notificationID']][] = $row['userID'];
-			$uniqueRecipientIDs[$row['userID']] = $row['userID'];
-		}
-		
-		// get recipients
-		$recipients = array();
-		$recipientList = new UserNotificationRecipientList();
-		$recipientList->getConditionBuilder()->add('user_table.userID IN (?)', array($uniqueRecipientIDs));
-		$recipientList->readObjects();
-		foreach ($recipientList->getObjects() as $recipient) {
-			$recipients[$recipient->userID] = $recipient;
-		}
-		
-		// revoke notifications
-		foreach ($notifications as $notification) {
-			$event = $this->availableEvents[$objectType][$notification->eventName];
-			if (isset($recipientIDs[$notification->notificationID])) {
-				foreach ($recipientIDs[$notification->notificationID] as $recipientID) {
-					if (isset($recipients[$recipientID])) {
-						foreach ($recipients[$recipientID]->getNotificationTypes($notification->eventID) as $notificationType) {
-							if ($event->supportsNotificationType($notificationType)) {
-								$notificationType->revoke($notification, $recipients[$recipientID], $event);
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		// delete notifications
-		UserNotificationEditor::deleteAll($notificationIDs);
-		
-		// reset recipient storage
-		UserStorageHandler::getInstance()->reset($uniqueRecipientIDs, 'userNotificationCount');
-	}
-		
 	/**
 	 * Returns the number of outstanding notifications for the active user.
 	 * 
@@ -256,7 +165,6 @@ class UserNotificationHandler extends SingletonFactory {
 					$conditionBuilder = new PreparedStatementConditionBuilder();
 					$conditionBuilder->add('notification.notificationID = notification_to_user.notificationID');
 					$conditionBuilder->add('notification_to_user.userID = ?', array(WCF::getUser()->userID));
-					$conditionBuilder->add('notification_to_user.confirmed = 0');
 					$conditionBuilder->add('notification.packageID IN (?)', array(PackageDependencyHandler::getInstance()->getDependencies()));
 					
 					$sql = "SELECT	COUNT(*) AS count
@@ -292,7 +200,6 @@ class UserNotificationHandler extends SingletonFactory {
 		// build enormous query
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("notification_to_user.userID = ?", array(WCF::getUser()->userID));
-		$conditions->add("notification_to_user.confirmed = ?", array(0));
 		$conditions->add("notification.notificationID = notification_to_user.notificationID");
 		$conditions->add("notification.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		
@@ -411,54 +318,16 @@ class UserNotificationHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Marks a notification as confirmed.
-	 * 
-	 * @param	integer		$notificationID
-	 * @param	integer		$confirmationTime
-	 */
-	public function markAsConfirmed($notificationID, $confirmationTime = TIME_NOW) {
-		$sql = "UPDATE	wcf".WCF_N."_user_notification_to_user
-			SET	confirmed = ?,
-				confirmationTime = ?
-			WHERE	notificationID = ?
-				AND userID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			1,
-			$confirmationTime,
-			$notificationID,
-			WCF::getUser()->userID
-		));
-		
-		// reset notification count
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
-	}
-	
-	/**
-	 * Returns event id for given object type and event, returns NULL on failure.
+	 * Returns event object for given object type and event, returns NULL on failure.
 	 * 
 	 * @param	string		$objectType
 	 * @param	string		$eventName
-	 * @return	integer
+	 * @return	wcf\system\user\notification\event\IUserNotificationEvent
 	 */
-	public function getEventID($objectType, $eventName) {
-		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("object_type.objectTypeID = event.objectTypeID", array());
-		$conditions->add("object_type.objectType = ?", array($objectType));
-		$conditions->add("event.eventName = ?", array($eventName));
-		$conditions->add("event.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
+	public function getEvent($objectType, $eventName) {
+		if (!isset($this->availableEvents[$objectType][$eventName])) return null;
 		
-		$sql = "SELECT	event.eventID
-			FROM	wcf".WCF_N."_user_notification_event event,
-				wcf".WCF_N."_object_type object_type
-			".$conditions;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditions->getParameters());
-		$row = $statement->fetchArray();
-		
-		if (!$row) return null;
-		
-		return $row['eventID'];
+		return $this->availableEvents[$objectType][$eventName];
 	}
 	
 	/**
@@ -503,19 +372,6 @@ class UserNotificationHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns a list of notification types.
-	 * 
-	 * @return	array<wcf\data\object\type\ObjectType>
-	 */
-	public function getNotificationTypes() {
-		if ($this->notificationTypes === null) {
-			$this->notificationTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.notification.notificationType');
-		}
-		
-		return $this->notificationTypes;
-	}
-	
-	/**
 	 * Returns a list of available events.
 	 * 
 	 * @return	array<wcf\system\user\notification\event\IUserNotificationEvent>
@@ -550,5 +406,73 @@ class UserNotificationHandler extends SingletonFactory {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Sends the mail notification.
+	 * 
+	 * @param	wcf\data\user\notification\UserNotification			$notification
+	 * @param	wcf\data\user\User						$user
+	 * @param	wcf\system\user\notification\event\IUserNotificationEvent	$event
+	 */
+	public function sendInstantMailNotification(UserNotification $notification, User $user, IUserNotificationEvent $event) {
+		// get message
+		$message = $event->getEmailMessage();
+		
+		// append notification mail footer
+		$token = $user->notificationMailToken;
+		if (!$token) {
+			// generate token if not present
+			$token = StringUtil::substring(StringUtil::getHash(serialize(array($user->userID, StringUtil::getRandomID()))), 0, 20);
+			$editor = new UserEditor($user->getDecoratedObject());
+			$editor->update(array('notificationMailToken' => $token));
+		}
+		$message .= "\n\n".$user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.footer', array(
+			'user' => $user,
+			'token' => $token,
+			'notification' => $notification
+		));
+		
+		// build mail
+		$mail = new \wcf\system\mail\Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.subject', array('title' => $event->getEmailTitle())), $message);
+		$mail->send();
+	}
+	
+	/**
+	 * Deletes notifications.
+	 *
+	 * @param	string		$eventName
+	 * @param 	string		$objectType
+	 * @param	array<integer>	$recipientIDs
+	 * @param	array<integer>	$objectIDs
+	 */
+	public function deleteNotifications($eventName, $objectType, array $recipientIDs, array $objectIDs = array()) {
+		// check given object type and event name
+		if (!isset($this->availableEvents[$objectType][$eventName])) {
+			throw new SystemException("Unknown event ".$objectType."-".$eventName." given");
+		}
+		
+		// get objects
+		$objectTypeObject = $this->availableObjectTypes[$objectType];
+		$event = $this->availableEvents[$objectType][$eventName];
+		
+		// delete notifications
+		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user
+			WHERE		notificationID IN (
+						SELECT	notificationID
+						FROM	wcf".WCF_N."_user_notification
+						WHERE	packageID = ?
+							AND eventID = ?
+							".(!empty($objectIDs) ? "AND objectID IN (?".(count($objectIDs) > 1 ? str_repeat(',?', count($objectIDs) - 1) : '').")" : '')."	
+					)
+					AND userID IN (?".(count($recipientIDs) > 1 ? str_repeat(',?', count($recipientIDs) - 1) : '').")";
+		$parameters = array($objectTypeObject->packageID, $event->eventID);
+		if (!empty($objectIDs)) $parameters = array_merge($parameters, $objectIDs);
+		$parameters = array_merge($parameters, $recipientIDs);
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($parameters);
+		
+		// reset storage
+		UserStorageHandler::getInstance()->reset($recipientIDs, 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
 	}
 }

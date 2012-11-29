@@ -3,7 +3,6 @@ namespace wcf\system\user\notification\event;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\UserProfile;
 use wcf\data\IDatabaseObjectProcessor;
-use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\user\notification\object\IUserNotificationObject;
 
 /**
@@ -54,10 +53,9 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	/**
 	 * Returns the message for this notification event.
 	 *
-	 * @param	wcf\system\user\notification\type\IUserNotificationType	$notificationType
 	 * @return	string
 	 */
-	public function getEmailMessage(IUserNotificationType $notificationType);
+	public function getEmailMessage();
 	
 	/**
 	 * Returns the author id for this notification event.
@@ -81,12 +79,11 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	public function isVisible();
 
 	/**
-	 * Returns true if this event supports the given notification type.
-	 *
-	 * @param	wcf\system\user\notification\type\IUserNotificationType	$notificationType
-	 * @return	boolean
+	 * Returns a unique identifier of the event.
+	 * 
+	 * @return	string
 	 */
-	public function supportsNotificationType(IUserNotificationType $notificationType);
+	public function getEventHash();
 	
 	/**
 	 * Sets the object for the event.

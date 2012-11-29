@@ -3,8 +3,9 @@ namespace wcf\system\user\notification\event;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectDecorator;
-use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\user\notification\object\IUserNotificationObject;
+use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Provides default a implementation for user notification events.
@@ -78,16 +79,9 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 		$this->actions[] = array(
 			'actionName' => 'markAsConfirmed',
 			'className' => 'wcf\\data\\user\\notification\\UserNotificationAction',
-			'label' => 'OK',
+			'label' => WCF::getLanguage()->get('wcf.user.notification.button.confirmed'),
 			'objectID' => $this->notification->notificationID
 		);
-	}
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::supportsNotificationType()
-	 */
-	public function supportsNotificationType(IUserNotificationType $notificationType) {
-		return true;
 	}
 	
 	/**
@@ -121,7 +115,28 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailMessage()
 	 */
-	public function getEmailMessage(IUserNotificationType $notificationType) {
+	public function getEmailMessage() {
 		return $this->getMessage();
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEventHash()
+	 */
+	public function getEventHash() {
+		return StringUtil::getHash($this->packageID . '-'. $this->eventID . '-' . $this->userNotificationObject->getObjectID());
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getRenderedOutput()
+	 */
+	public function getRenderedOutput() {
+		WCF::getTPL()->assign(array(
+			'author' => $this->author,
+			'buttons' => $this->getActions(),
+			'message' => $this->getMessage(),
+			'time' => $this->userNotificationObject->time
+		));
+		
+		return WCF::getTPL()->fetch('userNotificationDetails');
 	}
 }

@@ -20,12 +20,6 @@
 		</type>
 		
 		<type>
-			<name>com.woltlab.wcf.notification.notificationType.mail</name>
-			<definitionname>com.woltlab.wcf.notification.notificationType</definitionname>
-			<classname>wcf\system\user\notification\type\MailUserNotificationType</classname>
-		</type>
-		
-		<type>
 			<name>com.woltlab.wcf.user.DashboardPage</name>
 			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
 			<allowcontent>1</allowcontent>

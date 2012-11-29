@@ -4,6 +4,8 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\application\ApplicationHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\package\PackageDependencyHandler;
+use wcf\system\user\notification\object\IUserNotificationObject;
+use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -215,7 +217,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		}
 	}
 	
-	public function updateObject($objectType, $objectID) {
+	public function updateObject($objectType, $objectID, $notificationEventName, $notificationObjectType, IUserNotificationObject $notificationObject, array $additionalData = array()) {
 		// get object type id
 		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $objectType);
 		
@@ -229,7 +231,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		$statement->execute(array($objectTypeObj->objectTypeID, $objectID));
 		while ($row = $statement->fetchArray()) {
 			$userIDs[] = $row['userID'];
-			if ($row['notification']) $recipientIDs[] = $row['userID'];
+			if ($row['notification'] && $notificationObject->getAuthorID() != $row['userID']) $recipientIDs[] = $row['userID'];
 		}
 		
 		if (!empty($userIDs)) {
@@ -237,7 +239,8 @@ class UserObjectWatchHandler extends SingletonFactory {
 			UserStorageHandler::getInstance()->reset($userIDs, 'unreadUserObjectWatchCount');
 			
 			if (!empty($recipientIDs)) {
-				// @todo: create notifications
+				// create notifications
+				UserNotificationHandler::getInstance()->fireEvent($notificationEventName, $notificationObjectType, $notificationObject, $recipientIDs, $additionalData);
 			}
 		}
 	}

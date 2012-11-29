@@ -68,37 +68,10 @@ class UserNotificationEventPackageInstallationPlugin extends AbstractXMLPackageI
 		if (empty($row['objectTypeID'])) throw new SystemException("unknown notification object type '".$data['elements']['objecttype']."' given");
 		$objectTypeID = $row['objectTypeID'];
 		
-		// get notification type id
-		$defaultNotificationTypeID = null;
-		if (!empty($data['elements']['defaultnotificationtype'])) {
-			$sql = "SELECT		object_type.objectTypeID
-				FROM		wcf".WCF_N."_package_dependency package_dependency,
-						wcf".WCF_N."_object_type object_type
-				WHERE		object_type.packageID = package_dependency.dependency
-						AND package_dependency.packageID = ?
-						AND object_type.objectType = ?
-						AND object_type.definitionID IN (
-							SELECT	definitionID
-							FROM	wcf".WCF_N."_object_type_definition
-							WHERE	definitionName = 'com.woltlab.wcf.notification.notificationType'
-						)
-				ORDER BY	package_dependency.priority DESC";
-			$statement = WCF::getDB()->prepareStatement($sql, 1);
-			$statement->execute(array($this->installation->getPackageID(), $data['elements']['defaultnotificationtype']));
-			$row = $statement->fetchArray();
-			if (empty($row['objectTypeID'])) throw new SystemException("unknown notification type '".$data['elements']['defaultnotificationtype']."' given");
-			$defaultNotificationTypeID = $row['objectTypeID'];
-		}
-		
 		return array(
 			'eventName' => $data['elements']['name'],
 			'className' => $data['elements']['classname'],
 			'objectTypeID' => $objectTypeID,
-			'defaultNotificationTypeID' => $defaultNotificationTypeID,
-			'languageCategory' => (isset($data['elements']['languagecategory']) ? $data['elements']['languagecategory'] : ''),
-			'requiresConfirmation' => (isset($data['elements']['requiresconfirmation']) ? intval($data['elements']['requiresconfirmation']) : 0),
-			'acceptURL' => (isset($data['elements']['accepturl']) ? $data['elements']['accepturl'] : ''),
-			'declineURL' => (isset($data['elements']['declineurl']) ? $data['elements']['declineurl'] : ''),
 			'permissions' => (isset($data['elements']['permissions']) ? $data['elements']['permissions'] : ''),
 			'options' => (isset($data['elements']['options']) ? $data['elements']['options'] : '')
 		);

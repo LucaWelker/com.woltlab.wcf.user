@@ -1,6 +1,6 @@
 <?php
 namespace wcf\data\user\notification\event\recipient;
-use wcf\data\user\notification\recipient\UserNotificationRecipientList;
+use wcf\data\user\UserList;
 
 /**
  * Extends the user list to provide special functions for handling recipients of user notifications.
@@ -12,14 +12,28 @@ use wcf\data\user\notification\recipient\UserNotificationRecipientList;
  * @subpackage	data.user.notification.event.recipient
  * @category	Community Framework
  */
-class UserNotificationEventRecipientList extends UserNotificationRecipientList {
+class UserNotificationEventRecipientList extends UserList {
 	/**
 	 * @see	wcf\data\DatabaseObjectList\DatabaseObjectList::__construct()
 	 */
 	public function __construct() {
-		parent::__construct();
+		$this->sqlJoins = "LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = event_to_user.userID)";
+		$this->sqlSelects = 'user_table.*';
 		
-		$this->sqlConditionJoins = ", wcf".WCF_N."_user_notification_event_to_user event_to_user";
-		$this->getConditionBuilder()->add("event_to_user.userID = user_table.userID");
+		parent::__construct();
+	}
+		
+	/**
+	 * @see wcf\data\DatabaseObjectList::getDatabaseTableName()
+	 */
+	public function getDatabaseTableName() {
+		return 'wcf'.WCF_N.'_user_notification_event_to_user';
+	}
+	
+	/**
+	 * @see wcf\data\DatabaseObjectList::getDatabaseTableAlias()
+	 */
+	public function getDatabaseTableAlias() {
+		return 'event_to_user';
 	}
 }
