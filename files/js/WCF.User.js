@@ -1306,8 +1306,10 @@ WCF.Notification = {};
 
 /**
  * Notification Overlay.
+ * 
+ * @see	WCF.UserPanel
  */
-WCF.Notification.Handler = Class.extend({
+WCF.Notification.Handler = WCF.UserPanel.extend({
 	/**
 	 * scrollable API
 	 * @var	jquery.fn.scrollable
@@ -1318,13 +1320,7 @@ WCF.Notification.Handler = Class.extend({
 	 * overlay container
 	 * @var	jQuery
 	 */
-	_container: null,
-	
-	/**
-	 * initialization state
-	 * @var	boolean
-	 */
-	_didInit: false,
+	_innerContainer: null,
 	
 	/**
 	 * notification list
@@ -1345,42 +1341,56 @@ WCF.Notification.Handler = Class.extend({
 	_notificationID: 0,
 	
 	/**
+	 * link to show all notifications
+	 * @var	string
+	 */
+	_showAllLink: '',
+	
+	/**
 	 * Creates a new overlay on init.
 	 */
-	init: function() {
+	init: function(showAllLink) {
+		this._super('userNotifications');
+		
 		WCF.Dropdown.registerCallback('userNotifications', $.proxy(this._createOverlay, this));
 	},
 	
 	/**
-	 * Creates the notification overlay.
+	 * @see	WCF.UserPanel._convert()
 	 */
-	_createOverlay: function() {
-		if (this._didInit) {
-			return;
-		}
+	_convert: function() {
+		this._container.addClass('dropdown');
+		this._link = this._container.children('a').remove();
 		
-		this._didInit = true;
-		this._container = $('#userNotificationContainer');
-		var $itemsContainer = this._container.find('div.scrollableItems').click(function(event) { event.stopPropagation(); });
+		$('<a class="dropdownToggle jsTooltip" title="' + this._container.data('title') + '">' + this._link.html() + '</a>').appendTo(this._container).click($.proxy(this._click, this));
+		var $dropdownMenu = $('<div class="dropdownMenu userNotificationContainer" />').appendTo(this._container);
+		this._innerContainer = $('<div id="userNotificationContainer" class="scrollableContainer" />').appendTo($dropdownMenu);
+		$('<div class="scrollableItems clearfix"><div><p>' + WCF.Language.get('wcf.global.loading') + '</p></div><div><p>' + WCF.Language.get('wcf.global.loading') + '</p></div></div>').appendTo(this._innerContainer);
+		
+		var $itemsContainer = this._innerContainer.find('div.scrollableItems').click(function(event) { event.stopPropagation(); });
 		this._listContainer = $itemsContainer.children('div:eq(0)');
 		this._messageContainer = $itemsContainer.children('div:eq(1)');
 		
 		// initialize scrollable API
-		this._container.scrollable({
+		this._innerContainer.scrollable({
 			mousewheel: false,
 			speed: 200
 		});
-		this._api = this._container.data('scrollable');
-		
-		// load notifications
-		this._loadContent();
+		this._api = this._innerContainer.data('scrollable');
 	},
 	
 	/**
-	 * Loads notifications.
+	 * @see	WCF.UserPanel._click()
 	 */
-	_loadContent: function() {
-		new WCF.Notification.Loader(this._container, $.proxy(this._bindListener, this));
+	_click: function() {
+		if (this._didLoad) {
+			return;
+		}
+		
+		// load notifications
+		new WCF.Notification.Loader(this._innerContainer, $.proxy(this._bindListener, this));
+		
+		this._didLoad = true;
 	},
 	
 	/**
@@ -1409,8 +1419,8 @@ WCF.Notification.Handler = Class.extend({
 		this._notificationID = $item.data('notificationID');
 		
 		// set fixed height (prevents box resize without animation)
-		var $containerDimensions = this._container.getDimensions('outer');
-		this._container.css({ height: $containerDimensions.height + 'px' });
+		var $containerDimensions = this._innerContainer.getDimensions('outer');
+		this._innerContainer.css({ height: $containerDimensions.height + 'px' });
 		
 		// insert html
 		this._messageContainer.html($item.data('message')).click($.proxy(this.showList, this));
@@ -1429,7 +1439,7 @@ WCF.Notification.Handler = Class.extend({
 		
 		// adjust height
 		if ($containerDimensions.height != $messageContainerDimensions.height) {
-			this._container.animate({
+			this._innerContainer.animate({
 				height: $messageContainerDimensions.height
 			}, 200);
 		}
@@ -1451,11 +1461,11 @@ WCF.Notification.Handler = Class.extend({
 			}
 		}
 		
-		this._container.stop();
+		this._innerContainer.stop();
 		this._api.prev();
 		
 		var $listHeight = this._listContainer.getDimensions();
-		this._container.animate({
+		this._innerContainer.animate({
 			height: $listHeight.height + 'px'
 		}, 200);
 	},
@@ -2580,51 +2590,40 @@ WCF.User.ObjectWatch.Notification = Class.extend({
 
 /**
  * Loads watched objects for user panel.
+ * 
+ * @see	WCF.UserPanel
  */
-WCF.User.ObjectWatch.UserPanel = Class.extend({
+WCF.User.ObjectWatch.UserPanel = WCF.UserPanel.extend({
 	/**
-	 * loading state
-	 * @var	boolean
+	 * link to show all watched objects
+	 * @var	string
 	 */
-	_didLoad: false,
+	_showAllLink: '',
 	
 	/**
-	 * Initializes the conversation loader.
+	 * @see	WCF.UserPanel.init()
 	 */
-	init: function() {
-		$('#unreadWatchedObjects > .dropdownToggle').click($.proxy(this._click, this));
+	init: function(showAllLink) {
+		this._showAllLink = showAllLink;
+		
+		this._super('unreadWatchedObjects');
 	},
 	
 	/**
-	 * Handles clicks on the dropdown toggle.
+	 * @see	WCF.UserPanel._addDefaultItems()
 	 */
-	_click: function() {
-		if (this._didLoad) {
-			return;
-		}
-		
-		new WCF.Action.Proxy({
-			autoSend: true,
-			data: {
-				actionName: 'getUnreadObjects',
-				className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction'
-			},
-			success: $.proxy(this._success, this)
-		});
-		
-		this._didLoad = true;
+	_addDefaultItems: function(dropdownMenu) {
+		this._addDivider(dropdownMenu);
+		$('<li><a href="' + this._showAllLink + '">' + WCF.Language.get('wcf.user.watchedObjects.showAll') + '</a></li>').appendTo(dropdownMenu);
 	},
 	
 	/**
-	 * Handles successful AJAX requests.
-	 * 
-	 * @param	object		data
-	 * @param	string		textStatus
-	 * @param	jQuery		jqXHR
+	 * @see	WCF.UserPanel._getParameters()
 	 */
-	_success: function(data, textStatus, jqXHR) {
-		var $list = $('#unreadWatchedObjects > .dropdownMenu');
-		$list.children('li:eq(0)').remove();
-		$('' + data.returnValues.template).prependTo($list);
+	_getParameters: function() {
+		return {
+			actionName: 'getUnreadObjects',
+			className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction'
+		};
 	}
 });
