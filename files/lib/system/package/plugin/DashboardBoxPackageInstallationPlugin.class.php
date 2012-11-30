@@ -81,14 +81,4 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 	protected function cleanup() {
 		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBoxes-*.php');
 	}
-	
-	/**
-	 * @see	wcf\system\package\plugin\IPackageInstallationPlugin::uninstall()
-	 */
-	public function uninstall() {
-		parent::uninstall();
-		
-		// clear cache immediately
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBoxes-*.php');
-	}
 }
