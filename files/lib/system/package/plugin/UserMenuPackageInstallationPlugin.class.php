@@ -24,7 +24,7 @@ class UserMenuPackageInstallationPlugin extends AbstractMenuPackageInstallationP
 	
 	/**
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::$tagName
-	 */	
+	 */
 	public $tagName = 'usermenuitem';
 	
 	/**

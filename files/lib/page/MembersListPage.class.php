@@ -45,7 +45,7 @@ class MembersListPage extends SortablePage {
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
-	 */	
+	 */
 	public $objectListClassName = 'wcf\data\user\UserProfileList';
 	
 	/**

@@ -45,7 +45,7 @@ class UsersOnlineListPage extends SortablePage {
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
-	 */	
+	 */
 	public $objectListClassName = 'wcf\data\user\online\UsersOnlineList';
 	
 	/**
@@ -114,7 +114,7 @@ class UsersOnlineListPage extends SortablePage {
 	
 	/**
 	 * Reads object list.
-	 */	
+	 */
 	protected function readObjects() {
 		$this->objectList->sqlLimit = 0;
 		if ($this->sqlOrderBy) $this->objectList->sqlOrderBy = ($this->sortField == 'lastActivityTime' ? 'session.' : '').$this->sqlOrderBy;

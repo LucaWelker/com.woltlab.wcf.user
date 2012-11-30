@@ -26,7 +26,7 @@ class UserNotificationEventPackageInstallationPlugin extends AbstractXMLPackageI
 	
 	/**
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::$tagName
-	 */	
+	 */
 	public $tagName = 'event';
 	
 	/**

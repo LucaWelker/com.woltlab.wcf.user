@@ -32,13 +32,13 @@ class NewPasswordForm extends AbstractForm {
 	/**
 	 * user id
 	 * @var	integer
-	 */	
+	 */
 	public $userID = 0;
 	
 	/**
 	 * lost password key
 	 * @var	string
-	 */	
+	 */
 	public $lostPasswordKey = '';
 	
 	/**
@@ -50,7 +50,7 @@ class NewPasswordForm extends AbstractForm {
 	/**
 	 * new password
 	 * @var	string
-	 */	
+	 */
 	public $newPassword = '';
 	
 	/**

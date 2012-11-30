@@ -52,13 +52,13 @@ class RegisterForm extends UserAddForm {
 	/**
 	 * challenge
 	 * @var	string
-	 */	
+	 */
 	public $challenge = '';
 	
 	/**
 	 * response
 	 * @var	string
-	 */	
+	 */
 	public $response = '';
 	
 	/**

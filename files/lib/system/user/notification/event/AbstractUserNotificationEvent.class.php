@@ -32,7 +32,7 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	/**
 	 * user notification
 	 * @var	wcf\data\user\notification\UserNotification
-	 */	
+	 */
 	protected $notification = null;
 	
 	/**
@@ -55,7 +55,7 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getActions()
-	 */	
+	 */
 	public function getActions() {
 		return $this->actions;
 	}

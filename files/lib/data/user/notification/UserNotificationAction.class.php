@@ -42,14 +42,14 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Does nothing.
-	 */	
+	 */
 	public function validateLoad() { }
 	
 	/**
 	 * Loads user notifications.
 	 * 
 	 * @return	array<array>
-	 */	
+	 */
 	public function load() {
 		$returnValues = UserNotificationHandler::getInstance()->getNotifications();
 		$returnValues['totalCount'] = UserNotificationHandler::getInstance()->getNotificationCount();

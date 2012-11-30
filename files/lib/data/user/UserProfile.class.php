@@ -91,7 +91,7 @@ class UserProfile extends DatabaseObjectDecorator {
 	
 	/**
 	 * @see	wcf\data\user\User::__toString()
-	 */	
+	 */
 	public function __toString() {
 		return $this->getDecoratedObject()->__toString();
 	}
@@ -247,7 +247,7 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * Gets the user's avatar.
 	 * 
 	 * @return	wcf\data\user\avatar\IUserAvatar
-	 */ 
+	 */
 	public function getAvatar() {
 		if ($this->avatar === null) {
 			if (!$this->disableAvatar) {

@@ -19,7 +19,7 @@ use wcf\system\WCF;
 class RecentActivityListPage extends MultipleLinkPage {
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
-	 */	
+	 */
 	public $objectListClassName = 'wcf\data\user\activity\event\ViewableUserActivityEventList';
 	
 	/**
