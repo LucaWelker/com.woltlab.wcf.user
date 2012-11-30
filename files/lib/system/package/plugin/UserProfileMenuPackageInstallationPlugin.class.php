@@ -3,7 +3,7 @@ namespace wcf\system\package\plugin;
 use wcf\system\WCF;
 
 /**
- * This PIP installs, updates or deletes user profile menu items.
+ * Installs, updates and deletes user profile menu items.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2011 WoltLab GmbH

@@ -4,7 +4,7 @@ use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 
 /**
- * This PIP installs, updates or deletes user notification events.
+ * Installs, updates and deletes user notification events.
  * 
  * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
