@@ -33,11 +33,6 @@ class RegisterForm extends UserAddForm {
 	public $enableTracking = true;
 	
 	/**
-	 * @see	wcf\lib\acp\form\AbstractOptionListForm::$loadActiveOptions
-	 */
-	//public $loadActiveOptions = false;
-	
-	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array();
@@ -83,11 +78,15 @@ class RegisterForm extends UserAddForm {
 			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.register.error.disabled'));
 		}
 		
+		// check disclaimer
+		if (REGISTER_ENABLE_DISCLAIMER && !WCF::getSession()->getVar('disclaimerAccepted')) {
+			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Disclaimer'));
+			exit;
+		}
+		
 		if (!REGISTER_USE_CAPTCHA || WCF::getSession()->getVar('recaptchaDone')) {
 			$this->useCaptcha = false;
 		}
-		
-		if (isset($_GET['username'])) $this->username = StringUtil::trim($_GET['username']);
 	}
 	
 	/**
