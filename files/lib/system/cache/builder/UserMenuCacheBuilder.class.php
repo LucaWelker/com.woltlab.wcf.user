@@ -19,7 +19,7 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 	 * @see	wcf\system\cache\ICacheBuilder::getData()
 	 */
 	public function getData(array $cacheResource) {
-		list(, $packageID) = explode('-', $cacheResource['cache']); 
+		list(, $packageID) = explode('-', $cacheResource['cache']);
 		$data = array();
 		
 		// get all option categories and filter categories with low priority

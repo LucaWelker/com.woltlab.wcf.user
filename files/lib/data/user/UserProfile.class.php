@@ -67,7 +67,7 @@ class UserProfile extends DatabaseObjectDecorator {
 	 * age of this user
 	 * @var	integer
 	 */
-	protected $__age = null; 
+	protected $__age = null;
 	
 	/**
 	 * group data and permissions

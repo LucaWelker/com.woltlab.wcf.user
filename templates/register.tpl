@@ -75,7 +75,7 @@
 				<dt>
 					<label for="email">{lang}wcf.user.email{/lang}</label>
 				</dt>
-				<dd>	
+				<dd>
 					<input type="email" id="email" name="email" value="{$email}" required="required" class="medium" />
 					{if $errorType.email|isset}
 						<small class="innerError">
