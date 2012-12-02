@@ -98,7 +98,7 @@
 				<categoryname>profile.personal</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
-				<visible>7</visible>
+				<visible>15</visible>
 			</option>
 			<option name="adminComment">
 				<categoryname>profile.personal</categoryname>
@@ -116,13 +116,6 @@
 				<defaultvalue>http://</defaultvalue>
 				<visible>15</visible>
 			</option>
-			<option name="email">
-				<categoryname>profile.contact</categoryname>
-				<optiontype>text</optiontype>
-				<outputclass>wcf\system\option\user\EmailUserOptionOutput</outputclass>
-				<editable>4</editable>
-				<visible>0</visible>
-			</option>
 			<!-- /profile -->
 			
 			<!-- settings -->
@@ -137,7 +130,7 @@
 				<optiontype>boolean</optiontype>
 				<visible>1</visible>
 				<defaultvalue>1</defaultvalue>
-				<!-- todo: <options>module_user_signature</options>-->
+				<options>module_user_signature</options>
 			</option>
 			
 			<!-- settings.privacy.content -->
