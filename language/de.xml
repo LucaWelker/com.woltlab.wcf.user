@@ -2,7 +2,7 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.dashboard">
 		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard-Boxen konfigurieren]]></item>
-		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. &bdquo;Deaktivierte Boxen&ldquo; verschieben.]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. “Deaktivierte Boxen“ verschieben.]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
