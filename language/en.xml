@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
-	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.user.community"><![CDATA[Community]]></item>
-	</category>
-	
 	<category name="wcf.user">
 		<item name="wcf.user.access.everyone"><![CDATA[Everyone]]></item>
 		<item name="wcf.user.access.following"><![CDATA[Users I follow]]></item>
@@ -117,6 +113,11 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.quit"><![CDATA[Quit user account]]></item>
 		<item name="wcf.user.emailActivation"><![CDATA[Enable new e-mail address]]></item>
 		<item name="wcf.user.guest"><![CDATA[Guest]]></item>
+		<item name="wcf.user.watchedObjects"><![CDATA[Subscriptions]]></item>
+		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Subscribe]]></item>
+		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Unsubscribe]]></item>
+		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[You don't have any subscriptions.]]></item>
+		<item name="wcf.user.watchedObjects.showAll"><![CDATA[Show All Subscriptions]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

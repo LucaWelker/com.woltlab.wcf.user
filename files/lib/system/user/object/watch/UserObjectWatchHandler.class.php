@@ -4,6 +4,8 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\application\ApplicationHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\package\PackageDependencyHandler;
+use wcf\system\user\notification\object\IUserNotificationObject;
+use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -141,6 +143,44 @@ class UserObjectWatchHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * Returns a list of unread objects.
+	 * 
+	 * @param	integer				$userID
+	 * @param	integer				$limit
+	 * @return	array<wcf\data\IWatchedObject>
+	 */
+	public function getUnreadObjects($userID = null, $limit = 5) {
+		if ($userID === null) $userID = WCF::getUser()->userID;
+		$objects = array();
+		
+		// get type ids
+		$objectTypeIDs = $this->getObjectTypeIDs($userID);
+		if (!empty($objectTypeIDs)) {
+			foreach ($objectTypeIDs as $objectTypeID) {
+				$processor = ObjectTypeCache::getInstance()->getObjectType($objectTypeID)->getProcessor();
+				$objects = array_merge($objects, $processor->getUnreadObjects($userID, $limit));
+			}
+			
+			// sort by last update time (latest first)
+			usort($objects, function($a, $b) {
+				if ($a->getLastUpdateTime() == $b->getLastUpdateTime()) {
+					return 0;
+				}
+				
+				return ($a->getLastUpdateTime() < $b->getLastUpdateTime()) ? 1 : -1;
+			});
+			
+			$length = count($objects);
+			while ($length > $limit) {
+				$length--;
+				unset($objects[$length]);
+			}
+		}
+		
+		return $objects;
+	}
+	
+	/**
 	 * @see wcf\system\user\object\watch\UserObjectWatchHandler::resetObjects();
 	 */
 	public function resetObject($objectType, $objectID) {
@@ -177,13 +217,13 @@ class UserObjectWatchHandler extends SingletonFactory {
 		}
 	}
 	
-	public function updateObject($objectType, $objectID) {
+	public function updateObject($objectType, $objectID, $notificationEventName, $notificationObjectType, IUserNotificationObject $notificationObject, array $additionalData = array()) {
 		// get object type id
 		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $objectType);
 		
 		// get subscriber
 		$userIDs = $recipientIDs = array();
-		$sql = "SELECT		userID, notificationType
+		$sql = "SELECT		userID, notification
 			FROM		wcf".WCF_N."_user_object_watch
 			WHERE		objectTypeID = ?
 					AND objectID = ?";
@@ -191,7 +231,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 		$statement->execute(array($objectTypeObj->objectTypeID, $objectID));
 		while ($row = $statement->fetchArray()) {
 			$userIDs[] = $row['userID'];
-			if ($row['notificationType'] == 1) $recipientIDs[] = $row['userID'];
+			if ($row['notification'] && $notificationObject->getAuthorID() != $row['userID']) $recipientIDs[] = $row['userID'];
 		}
 		
 		if (!empty($userIDs)) {
@@ -199,7 +239,8 @@ class UserObjectWatchHandler extends SingletonFactory {
 			UserStorageHandler::getInstance()->reset($userIDs, 'unreadUserObjectWatchCount');
 			
 			if (!empty($recipientIDs)) {
-				// @todo: create notifications
+				// create notifications
+				UserNotificationHandler::getInstance()->fireEvent($notificationEventName, $notificationObjectType, $notificationObject, $recipientIDs, $additionalData);
 			}
 		}
 	}

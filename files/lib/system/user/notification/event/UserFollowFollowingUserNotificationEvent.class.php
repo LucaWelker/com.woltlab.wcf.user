@@ -2,6 +2,7 @@
 namespace wcf\system\user\notification\event;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Notification event for followers.
@@ -29,16 +30,9 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getRenderedOutput()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEventHash()
 	 */
-	public function getRenderedOutput() {
-		WCF::getTPL()->assign(array(
-			'author' => $this->author,
-			'buttons' => $this->getActions(),
-			'message' => $this->getMessage(),
-			'time' => $this->userNotificationObject->time
-		));
-		
-		return WCF::getTPL()->fetch('userNotificationDetails');
+	public function getEventHash() {
+		return StringUtil::getHash($this->packageID . '-'. $this->eventID . '-' . $this->author->userID);
 	}
 }

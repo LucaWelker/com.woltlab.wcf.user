@@ -569,6 +569,8 @@ class UserProfile extends DatabaseObjectDecorator {
 	
 	/**
 	 * Returns the old username of this user.
+	 * 
+	 * @return	string
 	 */
 	public function getOldUsername() {
 		if ($this->oldUsername) {
@@ -576,5 +578,16 @@ class UserProfile extends DatabaseObjectDecorator {
 				return $this->oldUsername;
 			}
 		}
+		
+		return '';
+	}
+	
+	/**
+	 * Returns true, if this user can edit his profile.
+	 * 
+	 * @return	boolean
+	 */
+	public function canEditOwnProfile() {
+		return ($this->activationCode ? false : true);
 	}
 }

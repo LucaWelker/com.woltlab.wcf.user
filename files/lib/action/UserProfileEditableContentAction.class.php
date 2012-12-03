@@ -91,6 +91,12 @@ class UserProfileEditableContentAction extends AbstractSecureAction {
 			throw new ValidateActionException("invalid user id given");
 		}
 		
+		// check permissions
+		$userProfile = new \wcf\data\user\UserProfile($this->user);
+		if (!$this->user->canEdit() && !$userProfile->canEditOwnProfile()) {
+			throw new ValidateActionException("insufficient permissions");
+		}
+		
 		// validate object type ids
 		$this->initCache();
 		foreach ($this->objectTypeIDs as $objectTypeID) {

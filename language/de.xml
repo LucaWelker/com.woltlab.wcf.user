@@ -5,10 +5,6 @@
 		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen&ldquo; bzw. &bdquo;Deaktivierte Boxen&ldquo; verschieben.]]></item>
 	</category>
 	
-	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.user.community"><![CDATA[Community]]></item>
-	</category>
-	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Konfiguration]]></item>
@@ -251,6 +247,9 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Abonnieren]]></item>
 		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Abbestellen]]></item>
 		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[Es wurden keine Abonnements gefunden.]]></item>
+		<item name="wcf.user.watchedObjects.showAll"><![CDATA[Alle Abonnements anzeigen]]></item>
+		<item name="wcf.user.watchedObjects.disableNotification"><![CDATA[Benachrichtigung abschalten]]></item>
+		<item name="wcf.user.watchedObjects.enableNotification"><![CDATA[Benachrichtigung aktivieren]]></item>
 		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
 		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
 		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>
@@ -284,7 +283,6 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 	</category>
 	
 	<category name="wcf.user.notification">
-		<item name="wcf.user.notification.com.woltlab.wcf.notification.notificationType.mail"><![CDATA[E-Mail]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>
 		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> folgt dir.]]></item>
 		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[Neuer Follower]]></item>
@@ -298,6 +296,10 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, können Sie folgenden Link aufrufen, um die Benachrichtigung abzuschalten:
 {link controller='NotificationDisable' encode=false}eventID={@$notification->eventID}&userID={@$user->userID}&token={@$token}{/link}]]></item>
 		<item name="wcf.user.notification.mail.disabled"><![CDATA[Die E-Mail-Benachrichtigung wurde erfolgreich abgeschaltet.]]></item>
+		<item name="wcf.user.notification.button.confirmed"><![CDATA[OK]]></item>
+		<item name="wcf.user.notification.mailNotificationType.none"><![CDATA[Keine E-Mail-Benachrichtigung]]></item>
+		<item name="wcf.user.notification.mailNotificationType.instant"><![CDATA[Sofortige E-Mail-Benachrichtigung]]></item>
+		<item name="wcf.user.notification.mailNotificationType.daily"><![CDATA[Tägliche E-Mail-Benachrichtigung]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">

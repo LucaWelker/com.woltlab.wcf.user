@@ -4,6 +4,23 @@
 	<title>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.notification.notifications{/lang} - {lang}wcf.user.menu.settings{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude'}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			$('#notificationSettings > fieldset > dl > dd > label > input').each(function(index, value) {
+				var $input = $(value);
+				$input.on('click', function(event) {
+					var $input = $(event.currentTarget);
+					$input.parents('dd').find('small').toggle();
+				});
+				if (!$input.is(':checked')) {
+					$input.parents('dd').find('small').hide();
+				}
+			});
+		});
+		//]]>
+	</script>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -29,25 +46,23 @@
 {/if}
 
 <form method="post" action="{link controller='NotificationSettings'}{/link}">
-	<div class="container containerPadding marginTop">
+	<div class="container containerPadding marginTop" id="notificationSettings">
 		{foreach from=$events key=eventCategory item=eventList}
 			<fieldset>
 				<legend>{lang}wcf.user.notification.{$eventCategory}{/lang}</legend>
 				
-				<ul>
+				<dl>
 					{foreach from=$eventList item=event}
-						<li>
-							<input id="settings{@$event->eventID}" type="checkbox" name="settings[{@$event->eventID}][enabled]" value="1"{if $settings[$event->eventID][enabled]} checked="checked"{/if} />
-							<label for="settings{@$event->eventID}">{lang}wcf.user.notification.{$eventCategory}.{$event->eventName}{/lang}</label>
-							<select name="settings[{@$event->eventID}][type]">
-								<option value="0"></option>
-								{foreach from=$types item=type}
-									<option value="{@$type->objectTypeID}"{if $settings[$event->eventID][type] == $type->objectTypeID} selected="selected"{/if}>{lang}wcf.user.notification.{$type->objectType}{/lang}</option>
-								{/foreach}
-							</select>
-						</li>
+						<dd>
+							<label><input type="checkbox" name="settings[{@$event->eventID}][enabled]" value="1"{if $settings[$event->eventID][enabled]} checked="checked"{/if} /> {lang}wcf.user.notification.{$eventCategory}.{$event->eventName}{/lang}</label>
+							<small><select name="settings[{@$event->eventID}][mailNotificationType]">
+								<option value="none">{lang}wcf.user.notification.mailNotificationType.none{/lang}</option>
+								<option value="instant"{if $settings[$event->eventID][mailNotificationType] == 'instant'} selected="selected"{/if}>{lang}wcf.user.notification.mailNotificationType.instant{/lang}</option>
+								<option value="daily"{if $settings[$event->eventID][mailNotificationType] == 'daily'} selected="selected"{/if}>{lang}wcf.user.notification.mailNotificationType.daily{/lang}</option>
+							</select></small>
+						</dd>
 					{/foreach}
-				</ul>
+				</dl>
 			</fieldset>
 		{/foreach}
 	</div>
