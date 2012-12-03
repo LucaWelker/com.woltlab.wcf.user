@@ -2,7 +2,7 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.dashboard">
 		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard-Boxen konfigurieren]]></item>
-		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen&ldquo; bzw. &bdquo;Deaktivierte Boxen&ldquo; verschieben.]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. &bdquo;Deaktivierte Boxen&ldquo; verschieben.]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
@@ -78,7 +78,7 @@
 {/if}]]></item>
 		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
 		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legende]]></item>
-		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von „{$user->username}&ldquo;</a>]]></item>
+		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von „{$user->username}“</a>]]></item>
 		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer online-Liste]]></item>
 		<item name="wcf.user.usersOnline.location.MembersListPage"><![CDATA[Mitgliederliste]]></item>
 		<item name="wcf.user.usersOnline.location.DashboardPage"><![CDATA[Dashboard]]></item>
@@ -101,7 +101,7 @@
 		<item name="wcf.user.profileHits"><![CDATA[Profil-Aufrufe]]></item>
 		<item name="wcf.user.profileHits.hitsPerDay"><![CDATA[{#$user->profileHits/$user->getProfileAge()} Aufrufe pro Tag]]></item>
 		<item name="wcf.user.online"><![CDATA[Online]]></item>
-		<item name="wcf.user.online.title"><![CDATA[„{$username}&ldquo; ist online]]></item>
+		<item name="wcf.user.online.title"><![CDATA[„{$username}“ ist online]]></item>
 		<item name="wcf.user.button.follow"><![CDATA[Folgen]]></item>
 		<item name="wcf.user.button.unfollow"><![CDATA[Entfolgen]]></item>
 		<item name="wcf.user.button.ignore"><![CDATA[Blockieren]]></item>
@@ -113,7 +113,7 @@
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Das Kennwort muss mindestens {REGISTER_PASSWORD_MIN_LENGTH} Zeichen lang sein.{else}Ein sicheres Kennwort sollte mindestens 8 Zeichen lang sein.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Kennwort vergessen]]></item>
 		<item name="wcf.user.lostPassword.description"><![CDATA[Wenn Sie Ihr Kennwort vergessen haben, müssen Sie entweder den Benutzernamen oder die E-Mail-Adresse angeben, die Sie in Ihrem Profil hinterlegt haben. Sie können dabei nur eines der beiden Felder ausfüllen. Wenn Sie beide Daten nicht mehr wissen, wenden Sie sich bitte an den Administrator.]]></item>
-		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: „{$email}&ldquo; gefunden.]]></item>
+		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: „{$email}“ gefunden.]]></item>
 		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[Das Kennwort für dieses Benutzerkonto wurde in den letzten 24 Stunden bereits einmal angefordert. Aus Sicherheitsgründen kann das Kennwort eines Benutzers nur einmal pro Tag angefordert werden. Sie können das Kennwort für dieses Benutzerkonto in {#$hours} Stunde{if $hours != 1}n{/if} erneut anfordern.]]></item>
 		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Kennwort vergessen auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Hallo {@$username},
@@ -272,7 +272,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
-		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse („{$__wcf->user->email}&ldquo;) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com">www.gravatar.com</a>]]></item>
+		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse („{$__wcf->user->email}“) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com">www.gravatar.com</a>]]></item>
 		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
 		<item name="wcf.user.avatar.upload.success"><![CDATA[Der neue Avatar wurde erfolgreich gespeichert.]]></item>
 		<item name="wcf.user.avatar.upload.error.invalidExtension"><![CDATA[Die Datei hat eine ungültige Dateiendung.]]></item>
@@ -303,7 +303,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von „{$user->username}&ldquo;]]></item>
+		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von „{$user->username}“]]></item>
 		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[Der Benutzer hat noch keine für Sie sichtbaren Informationen hinterlegt.]]></item>
 		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[Es sind keine anzeigbaren Aktivitäten vorhanden.]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
@@ -314,7 +314,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.profile.followers.all"><![CDATA[Alle anzeigen]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.profile.visitors"><![CDATA[Profil-Besucher]]></item>
-		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher „{$user->getOldUsername()}&ldquo;]]></item>
+		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher „{$user->getOldUsername()}“]]></item>
 	</category>
 	
 	<category name="wcf.user.option">

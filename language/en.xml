@@ -67,7 +67,7 @@
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}The password has to be {REGISTER_PASSWORD_MIN_LENGTH} letters long.{else}A safe password should be at least 8 characters long.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Lost password]]></item>
 		<item name="wcf.user.lostPassword.description"><![CDATA[You only have to fill in one of the fields.]]></item>
-		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[No user with the e-mail address &ldquo;{$email}&rdquo; has been found.]]></item>
+		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[No user with the e-mail address “{$email}” has been found.]]></item>
 		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[At this user account the password was already requested in the last 24h. For security reasons the password can only be requested once a day. You can request the password for this account again in {#$hours} hour{if $hours != 1}s{/if}.]]></item>
 		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Lost password at {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Dear {@$username},
@@ -130,7 +130,7 @@ Your {@PAGE_TITLE|language} team]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile"><![CDATA[Profile of &ldquo;{$user->username}&rdquo;]]></item>
+		<item name="wcf.user.profile"><![CDATA[Profile of “{$user->username}”]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[About]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
 		<item name="wcf.user.profile.following"><![CDATA[Following]]></item>
