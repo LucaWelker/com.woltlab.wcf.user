@@ -69,6 +69,11 @@
 			<!-- /user.signature -->
 			
 			<!-- user.profile -->
+			<option name="user.profile.canMail">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			<option name="user.profile.canChangeEmail">
 				<categoryname>user.profile</categoryname>
 				<optiontype>boolean</optiontype>

@@ -81,7 +81,7 @@
 				<div class="box48">
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 					
-					<div class="userInformation">
+					<div class="details userInformation">
 						<hgroup class="containerHeadline">
 							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1> 
 							<h2>{@$sessionData}</h2>
@@ -102,7 +102,7 @@
 					{*todo: we need an avatar placeholder for search robots here*}
 					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
 					
-					<div class="userInformation">
+					<div class="details userInformation">
 						<hgroup class="containerHeadline">
 							<h1><a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Robot</a></h1> 
 							<h2>{@$sessionData}</h2>
@@ -121,7 +121,7 @@
 					{*todo: we need an avatar placeholder for guests here*}
 					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
 					
-					<div class="userInformation">
+					<div class="details userInformation">
 						<hgroup class="containerHeadline">
 							<h1>{lang}wcf.user.guest{/lang}</h1> 
 							<h2>{@$sessionData}</h2>
