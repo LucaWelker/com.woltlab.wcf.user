@@ -2,7 +2,6 @@
 namespace wcf\form;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
-use wcf\form\AbstractForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
@@ -20,12 +19,50 @@ use wcf\util\UserUtil;
  * @subpackage	form
  * @category	Community Framework
  */
-class EmailActivationForm extends RegisterActivationForm {
+class EmailActivationForm extends AbstractForm {
+	/**
+	 * user id
+	 * @var	integer
+	 */
+	public $userID = null;
+	
+	/**
+	 * activation code
+	 * @var	integer
+	 */
+	public $activationCode = '';
+	
+	/**
+	 * User object
+	 * @var	wcf\data\user\User
+	 */
+	public $user = null;
+	
+	/**
+	 * @see	wcf\page\IPage::readParameters()
+	 */
+	public function readParameters() {
+		parent::readParameters();
+		
+		if (isset($_GET['u']) && !empty($_GET['u'])) $this->userID = intval($_GET['u']);
+		if (isset($_GET['a']) && !empty($_GET['a'])) $this->activationCode = intval($_GET['a']);
+	}
+	
+	/**
+	 * @see	wcf\form\IForm::readFormParameters()
+	 */
+	public function readFormParameters() {
+		parent::readFormParameters();
+		
+		if (isset($_POST['u']) && !empty($_POST['u'])) $this->userID = intval($_POST['u']);
+		if (isset($_POST['a']) && !empty($_POST['a'])) $this->activationCode = intval($_POST['a']);
+	}
+	
 	/**
 	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
-		AbstractForm::validate();
+		parent::validate();
 		
 		// check given user id
 		$this->user = new UserEditor(new User($this->userID));
@@ -53,7 +90,7 @@ class EmailActivationForm extends RegisterActivationForm {
 	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
-		AbstractForm::save();
+		parent::save();
 		
 		// enable new email
 		$this->user->update(array(
@@ -66,5 +103,32 @@ class EmailActivationForm extends RegisterActivationForm {
 		// forward to index page
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->get('wcf.user.emailActivation.success'));
 		exit;
+	}
+	
+	/**
+	 * @see	wcf\page\IPage::assignVariables()
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'u' => $this->userID,
+			'a' => $this->activationCode
+		));
+	}
+	
+	/**
+	 * @see	wcf\page\IPage::show()
+	 */
+	public function show() {
+		if (REGISTER_ACTIVATION_METHOD != 1) {
+			throw new IllegalLinkException();
+		}
+		
+		if (empty($_POST) && $this->userID !== null && $this->activationCode != 0) {
+			$this->submit();
+		}
+		
+		parent::show();
 	}
 }

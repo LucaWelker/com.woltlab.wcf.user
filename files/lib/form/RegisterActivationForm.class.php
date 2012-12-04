@@ -9,6 +9,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
+use wcf\util\StringUtil;
 
 /**
  * Shows the user activation form.
@@ -22,10 +23,10 @@ use wcf\util\HeaderUtil;
  */
 class RegisterActivationForm extends AbstractForm {
 	/**
-	 * user id
-	 * @var	integer
+	 * username
+	 * @var	string
 	 */
-	public $userID = null;
+	public $username = null;
 	
 	/**
 	 * activation code
@@ -40,23 +41,13 @@ class RegisterActivationForm extends AbstractForm {
 	public $user = null;
 	
 	/**
-	 * @see	wcf\page\IPage::readParameters()
-	 */
-	public function readParameters() {
-		parent::readParameters();
-		
-		if (isset($_GET['u']) && !empty($_GET['u'])) $this->userID = intval($_GET['u']);
-		if (isset($_GET['a']) && !empty($_GET['a'])) $this->activationCode = intval($_GET['a']);
-	}
-	
-	/**
 	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
-		if (isset($_POST['u']) && !empty($_POST['u'])) $this->userID = intval($_POST['u']);
-		if (isset($_POST['a']) && !empty($_POST['a'])) $this->activationCode = intval($_POST['a']);
+		if (isset($_POST['username'])) $this->username = StringUtil::trim($_POST['username']);
+		if (isset($_POST['activationCode'])) $this->activationCode = intval($_POST['activationCode']);
 	}
 	
 	/**
@@ -66,9 +57,9 @@ class RegisterActivationForm extends AbstractForm {
 		parent::validate();
 		
 		// check given user id
-		$this->user = new User($this->userID);
+		$this->user = User::getUserByUsername($this->username);
 		if (!$this->user->userID) {
-			throw new UserInputException('u', 'notValid');
+			throw new UserInputException('username', 'notFound');
 		}
 		
 		// user is already enabled
@@ -78,7 +69,7 @@ class RegisterActivationForm extends AbstractForm {
 		
 		// check given activation code
 		if ($this->user->activationCode != $this->activationCode) {
-			throw new UserInputException('a', 'notValid');
+			throw new UserInputException('activationCode', 'notValid');
 		}
 	}
 	
@@ -116,8 +107,8 @@ class RegisterActivationForm extends AbstractForm {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'u' => $this->userID,
-			'a' => $this->activationCode
+			'username' => $this->username,
+			'activationCode' => $this->activationCode
 		));
 	}
 	
@@ -127,10 +118,6 @@ class RegisterActivationForm extends AbstractForm {
 	public function show() {
 		if (REGISTER_ACTIVATION_METHOD != 1) {
 			throw new IllegalLinkException();
-		}
-		
-		if (empty($_POST) && $this->userID !== null && $this->activationCode != 0) {
-			$this->submit();
 		}
 		
 		parent::show();

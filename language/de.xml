@@ -205,16 +205,11 @@ Vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}.
 Bevor wir Ihre Registrierung aktivieren können, müssen Sie einmalig die Gültigkeit Ihrer E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer E-Mail-Adresse, indem Sie folgenden Link aufrufen:
-{link controller='RegisterActivation'}u={@$user->userID}&a={@$user->activationCode}{/link} 
+{link controller='RegisterActivation'}{/link} 
 
-**** Funktioniert der Link oben nicht? ****
-Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
-{link controller='RegisterActivation'}{/link}
+Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihren Benutzernamen sowie den Aktivierungscode eingeben.
 
-Bitte achten Sie darauf, dass sich keine Leerzeichen in der Adresse befinden.
-Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
-
-Ihre Benutzernummer lautet: 	{@$user->userID} 
+Ihr Benutzername lautet: 	{@$user->username} 
 Ihr Aktivierungscode lautet: 	{@$user->activationCode} 
 
 Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} 

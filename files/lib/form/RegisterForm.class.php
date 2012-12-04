@@ -45,13 +45,13 @@ class RegisterForm extends UserAddForm {
 	public $message = '';
 	
 	/**
-	 * challenge
+	 * recaptcha challenge
 	 * @var	string
 	 */	
 	public $challenge = '';
 	
 	/**
-	 * response
+	 * recaptcha response
 	 * @var	string
 	 */	
 	public $response = '';
@@ -61,6 +61,12 @@ class RegisterForm extends UserAddForm {
 	 * @var	boolean
 	 */
 	public $useCaptcha = true;
+	
+	/**
+	 * min number of seconds between form request and submit
+	 * @var integer
+	 */
+	public static $minRegistrationTime = 15;
 	
 	/**
 	 * @see	wcf\page\IPage::readParameters()
@@ -109,7 +115,13 @@ class RegisterForm extends UserAddForm {
 			$this->validateCaptcha();
 		}
 		
+		
 		parent::validate();
+		
+		// validate registration time
+		if (!WCF::getSession()->getVar('registrationStartTime') || (TIME_NOW - WCF::getSession()->getVar('registrationStartTime')) < self::$minRegistrationTime) {
+			throw new UserInputException('registrationStartTime', array());
+		}
 	}
 	
 	/**
@@ -129,6 +141,8 @@ class RegisterForm extends UserAddForm {
 				$this->email = $this->confirmEmail = WCF::getSession()->getVar('__email');
 				WCF::getSession()->unregister('__email');
 			}
+			
+			WCF::getSession()->register('registrationStartTime', TIME_NOW);
 		}
 	}
 	
