@@ -311,6 +311,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
       im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, 
       vor.</p>
 <p><small><em>Quellen: <a href="http://www.e-recht24.de/muster-disclaimer.htm" class="externalURL">eRecht24 Disclaimer</a></small></em></p>]]></item>
+		<item name="wcf.user.button.mail"><![CDATA[E-Mail senden]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

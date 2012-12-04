@@ -2,6 +2,13 @@
 	{if $user->homepage}
 		<li><a class="jsTooltip" href="{@$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}"><img src="{icon}home{/icon}" alt="" /></a></li>
 	{/if}
+	
+	{if $user->isAccessible('canViewEmailAddress')}
+		<li><a class="jsTooltip" href="mailto:{$user->email}" title="{lang}wcf.user.button.mail{/lang}"><img src="{icon}eMail{/icon}" alt="" /></a></li>
+	{elseif $user->isAccessible('canMail') && $__wcf->session->getPermission('user.profile.canMail')}
+		<li><a class="jsTooltip" href="{link controller='Mail' object=$user}{/link}" title="{lang}wcf.user.button.mail{/lang}"><img src="{icon}eMail{/icon}" alt="" /></a></li>
+	{/if}
+	
 	{if $__wcf->user->userID && $user->userID != $__wcf->user->userID}
 		{if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}
 			<li><a data-following="1" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.unfollow{/lang}"><img src="{icon}remove{/icon}" alt="" class="icon16" /></a></li>
