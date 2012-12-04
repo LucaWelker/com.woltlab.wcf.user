@@ -50,20 +50,16 @@ class UserNotificationEventPackageInstallationPlugin extends AbstractXMLPackageI
 	 */
 	protected function prepareImport(array $data) {
 		// get object type id
-		$sql = "SELECT		object_type.objectTypeID
-			FROM		wcf".WCF_N."_package_dependency package_dependency,
-					wcf".WCF_N."_object_type object_type
-			WHERE		object_type.packageID = package_dependency.dependency
-					AND package_dependency.packageID = ?
-					AND object_type.objectType = ?
-					AND object_type.definitionID IN (
-						SELECT	definitionID
-						FROM	wcf".WCF_N."_object_type_definition
-						WHERE	definitionName = 'com.woltlab.wcf.notification.objectType'
-					)
-			ORDER BY	package_dependency.priority DESC";
+		$sql = "SELECT	object_type.objectTypeID
+			FROM	wcf".WCF_N."_object_type object_type
+			WHERE	object_type.objectType = ?
+				AND object_type.definitionID IN (
+					SELECT	definitionID
+					FROM	wcf".WCF_N."_object_type_definition
+					WHERE	definitionName = 'com.woltlab.wcf.notification.objectType'
+				)";
 		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute(array($this->installation->getPackageID(), $data['elements']['objecttype']));
+		$statement->execute(array($data['elements']['objecttype']));
 		$row = $statement->fetchArray();
 		if (empty($row['objectTypeID'])) throw new SystemException("unknown notification object type '".$data['elements']['objecttype']."' given");
 		$objectTypeID = $row['objectTypeID'];

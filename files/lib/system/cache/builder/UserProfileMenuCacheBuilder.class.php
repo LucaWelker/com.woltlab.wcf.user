@@ -18,19 +18,14 @@ class UserProfileMenuCacheBuilder implements ICacheBuilder {
 	/**
 	 * @see	wcf\system\cache\ICacheBuilder::getData()
 	 */
-	public function getData(array $cacheResource) {
-		list(, $packageID) = explode('-', $cacheResource['cache']); 
+	public function getData(array $cacheResource) { 
 		$data = array();
 		
 		// get all menu items and filter menu items with low priority
 		$sql = "SELECT		menuItem, menuItemID 
-			FROM		wcf".WCF_N."_user_profile_menu_item menu_item
-			LEFT JOIN	wcf".WCF_N."_package_dependency package_dependency
-			ON		(package_dependency.dependency = menu_item.packageID)
-			WHERE 		package_dependency.packageID = ?
-			ORDER BY	package_dependency.priority ASC";
+			FROM		wcf".WCF_N."_user_profile_menu";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($packageID));
+		$statement->execute();
 		$itemIDs = array();
 		while ($row = $statement->fetchArray()) {
 			$itemIDs[$row['menuItem']] = $row['menuItemID'];

@@ -21,13 +21,12 @@ class UserMenu extends TreeMenu {
 	protected function loadCache() {
 		parent::loadCache();
 		
-		$cacheName = 'userMenu-'.PACKAGE_ID;
 		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			WCF_DIR.'cache/cache.'.$cacheName.'.php',
+			'userMenu',
+			WCF_DIR.'cache/cache.userMenu.php',
 			'wcf\system\cache\builder\UserMenuCacheBuilder'
 		);
-		$this->menuItems = CacheHandler::getInstance()->get($cacheName);
+		$this->menuItems = CacheHandler::getInstance()->get('userMenu');
 	}
 	
 	/**

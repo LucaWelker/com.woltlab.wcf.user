@@ -6,7 +6,6 @@ use wcf\data\IPositionAction;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 
@@ -77,7 +76,6 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements IPositi
 			// validate box ids
 			if (!empty($this->boxStructure)) {
 				$boxList = new DashboardBoxList();
-				$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 				$boxList->sqlLimit = 0;
 				$boxList->readObjects();
 				$this->boxes = $boxList->getObjects();

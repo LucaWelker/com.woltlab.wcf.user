@@ -127,7 +127,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'followingUserIDs', serialize($this->followingUserIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'followingUserIDs', serialize($this->followingUserIDs));
 				}
 				else {
 					$this->followingUserIDs = unserialize($data[$this->userID]);
@@ -166,7 +166,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'followerUserIDs', serialize($this->followerUserIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'followerUserIDs', serialize($this->followerUserIDs));
 				}
 				else {
 					$this->followerUserIDs = unserialize($data[$this->userID]);
@@ -205,7 +205,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'ignoredUserIDs', serialize($this->ignoredUserIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'ignoredUserIDs', serialize($this->ignoredUserIDs));
 				}
 				else {
 					$this->ignoredUserIDs = unserialize($data[$this->userID]);
@@ -262,7 +262,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 						
 						if ($data[$this->userID] === null) {
 							$this->avatar = new UserAvatar($this->avatarID);
-							UserStorageHandler::getInstance()->update($this->userID, 'avatar', serialize($this->avatar), 1);
+							UserStorageHandler::getInstance()->update($this->userID, 'avatar', serialize($this->avatar));
 						}
 						else {
 							$this->avatar = unserialize($data[$this->userID]);
@@ -553,13 +553,12 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 		// get group ids
 		$groupIDs = $this->getGroupIDs();
 		$groups = implode(',', $groupIDs);
-		$groupsFileName = StringUtil::getHash($groups);
 		
 		// register cache resource
-		$cacheName = 'groups-'.PACKAGE_ID.'-'.$groups;
+		$cacheName = 'userGroupPermission-'.$groups;
 		CacheHandler::getInstance()->addResource(
 			$cacheName,
-			WCF_DIR.'cache/cache.groups-'.PACKAGE_ID.'-'.$groupsFileName.'.php',
+			WCF_DIR.'cache/cache.userGroupPermission-'.StringUtil::getHash($groups).'.php',
 			'wcf\system\cache\builder\UserGroupPermissionCacheBuilder'
 		);
 		

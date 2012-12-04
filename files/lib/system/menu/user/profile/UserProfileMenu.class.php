@@ -50,13 +50,12 @@ class UserProfileMenu extends SingletonFactory {
 		// call loadCache event
 		EventHandler::getInstance()->fireAction($this, 'loadCache');
 		
-		$cacheName = 'userProfileMenu-'.PACKAGE_ID;
 		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			WCF_DIR.'cache/cache.'.$cacheName.'.php',
+			'userProfileMenu',
+			WCF_DIR.'cache/cache.userProfileMenu.php',
 			'wcf\system\cache\builder\UserProfileMenuCacheBuilder'
 		);
-		$this->menuItems = CacheHandler::getInstance()->get($cacheName);
+		$this->menuItems = CacheHandler::getInstance()->get('userProfileMenu');
 	}
 	
 	/**

@@ -186,7 +186,7 @@ class SettingsForm extends AbstractForm {
 		// static options
 		if ($this->category == 'general') {
 			// reset user language ids cache
-			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'languageIDs', 1);
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'languageIDs');
 		}
 		$this->saved();
 		

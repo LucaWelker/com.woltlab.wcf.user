@@ -18,19 +18,14 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 	/**
 	 * @see	wcf\system\cache\ICacheBuilder::getData()
 	 */
-	public function getData(array $cacheResource) {
-		list(, $packageID) = explode('-', $cacheResource['cache']); 
+	public function getData(array $cacheResource) { 
 		$data = array();
 		
 		// get all option categories and filter categories with low priority
 		$sql = "SELECT		categoryName, categoryID
-			FROM		wcf".WCF_N."_user_option_category option_category
-			LEFT JOIN	wcf".WCF_N."_package_dependency package_dependency
-			ON 		(option_category.packageID = package_dependency.dependency)
-			WHERE		package_dependency.packageID = ?
-			ORDER BY	package_dependency.priority";
+			FROM		wcf".WCF_N."_user_option_category";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($packageID));
+		$statement->execute();
 		$categoryIDs = array();
 		while ($row = $statement->fetchArray()) {
 			$categoryIDs[$row['categoryName']] = $row['categoryID'];
@@ -68,13 +63,9 @@ class UserMenuCacheBuilder implements ICacheBuilder {
 		
 		// get all menu items and filter menu items with low priority
 		$sql = "SELECT		menuItem, menuItemID
-			FROM		wcf".WCF_N."_user_menu_item menu_item
-			LEFT JOIN	wcf".WCF_N."_package_dependency package_dependency
-			ON 		(menu_item.packageID = package_dependency.dependency)
-			WHERE		package_dependency.packageID = ?
-			ORDER BY	package_dependency.priority ASC";
+			FROM		wcf".WCF_N."_user_menu_item";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($packageID));
+		$statement->execute();
 		$itemIDs = array();
 		while ($row = $statement->fetchArray()) {
 			$itemIDs[$row['menuItem']] = $row['menuItemID'];
