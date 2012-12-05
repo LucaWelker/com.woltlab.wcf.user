@@ -4,7 +4,6 @@ use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\cache\builder\ICacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
 
 /**
@@ -29,7 +28,6 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 		
 		// load boxes
 		$boxList = new DashboardBoxList();
-		$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		$boxList->sqlLimit = 0;
 		$boxList->readObjects();
 		

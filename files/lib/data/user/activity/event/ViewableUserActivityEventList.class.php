@@ -1,7 +1,6 @@
 <?php
 namespace wcf\data\user\activity\event;
 use wcf\data\user\UserProfile;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 
 /**
@@ -29,15 +28,6 @@ class ViewableUserActivityEventList extends UserActivityEventList {
 	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
 	 */
 	public $sqlOrderBy = 'user_activity_event.time DESC';
-	
-	/**
-	 * @see	wcf\data\DatabaseObjectList::__construct()
-	 */
-	public function __construct() {
-		parent::__construct();
-		
-		$this->getConditionBuilder()->add("user_activity_event.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
-	}
 	
 	/**
 	 * @see	wcf\data\DatabaseObjectList::readObjects()

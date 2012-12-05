@@ -2,7 +2,6 @@
 namespace wcf\data\user\notification;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\storage\UserStorageHandler;
@@ -103,7 +102,7 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 		));
 		
 		// reset notification count
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount');
 		
 		return array(
 			'notificationID' => $this->parameters['notificationID'],

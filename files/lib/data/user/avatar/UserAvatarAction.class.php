@@ -112,7 +112,7 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 					));
 					
 					// reset user storage
-					UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'avatar', 1);
+					UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'avatar');
 					
 					// return result
 					return array(

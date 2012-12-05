@@ -79,7 +79,7 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::cleanup()
 	 */	
 	protected function cleanup() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBoxes-*.php');
+		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBox.php');
 	}
 	
 	/**
@@ -89,6 +89,6 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 		parent::uninstall();
 		
 		// clear cache immediately
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBoxes-*.php');
+		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBox.php');
 	}
 }
