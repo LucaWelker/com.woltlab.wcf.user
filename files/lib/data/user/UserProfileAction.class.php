@@ -2,6 +2,7 @@
 namespace wcf\data\user;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\bbcode\MessageParser;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -158,5 +159,67 @@ class UserProfileAction extends UserAction {
 		return array(
 			'template' => WCF::getTPL()->fetch('detailedActivityPointList')
 		);
+	}
+	
+	/**
+	 * Updates user ranks.
+	 */
+	public function updateUserRank() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		foreach ($this->objects as $user) {
+			$conditionBuilder = new PreparedStatementConditionBuilder();
+			$conditionBuilder->add('user_rank.groupID IN (?)', array($user->getGroupIDs()));
+			$conditionBuilder->add('user_rank.neededPoints <= ?', array($user->activityPoints));
+			if ($user->gender) $conditionBuilder->add('user_rank.gender IN (?)', array(0, $user->gender));
+			else $conditionBuilder->add('user_rank.gender = ?', array(0));
+			
+			$sql = "SELECT		user_rank.rankID
+				FROM		wcf".WCF_N."_user_rank user_rank
+				LEFT JOIN	wcf".WCF_N."_user_group user_group
+				ON		(user_group.groupID = user_rank.groupID)
+				".$conditionBuilder."
+				ORDER BY	user_group.priority DESC, user_rank.neededPoints DESC, user_rank.gender DESC";
+			$statement = WCF::getDB()->prepareStatement($sql, 1);
+			$statement->execute($conditionBuilder->getParameters());
+			$row = $statement->fetchArray();
+			if ($row === false) {
+				if ($user->rankID) {
+					$user->update(array('rankID' => null));
+				}
+			}
+			else {
+				if ($row['rankID'] != $user->rankID) {
+					$user->update(array('rankID' => $row['rankID']));
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Updates user online markings.
+	 */
+	public function updateUserOnlineMarking() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		foreach ($this->objects as $user) {
+			$conditionBuilder = new PreparedStatementConditionBuilder();
+			$conditionBuilder->add('groupID IN (?)', array($user->getGroupIDs()));
+			
+			$sql = "SELECT		groupID
+				FROM		wcf".WCF_N."_user_group
+				".$conditionBuilder."
+				ORDER BY	priority DESC";
+			$statement = WCF::getDB()->prepareStatement($sql, 1);
+			$statement->execute($conditionBuilder->getParameters());
+			$row = $statement->fetchArray();
+			if ($row['groupID'] != $user->userOnlineGroupID) {
+				$user->update(array('userOnlineGroupID' => $row['groupID']));
+			}
+		}
 	}
 }

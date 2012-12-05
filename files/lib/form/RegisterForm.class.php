@@ -3,6 +3,8 @@ namespace wcf\form;
 use wcf\acp\form\UserAddForm;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\UserAction;
+use wcf\data\user\UserEditor;
+use wcf\data\user\UserProfileAction;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
@@ -259,6 +261,16 @@ class RegisterForm extends UserAddForm {
 		$this->objectAction = new UserAction(array(), 'create', $data);
 		$result = $this->objectAction->executeAction();
 		$user = $result['returnValues'];
+		$userEditor = new UserEditor($user);
+		
+		// update user rank
+		if (MODULE_USER_RANK) {
+			$action = new UserProfileAction(array($userEditor), 'updateUserRank');
+			$action->executeAction();
+		}
+		// update user online marking
+		$action = new UserProfileAction(array($userEditor), 'updateOnlineMarking');
+		$action->executeAction();
 		
 		// update session
 		WCF::getSession()->changeUser($user);
