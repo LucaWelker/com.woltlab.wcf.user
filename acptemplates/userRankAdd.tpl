@@ -30,7 +30,7 @@
 			<dl{if $errorField == 'rankTitle'} class="formError"{/if}>
 				<dt><label for="rankTitle">{lang}wcf.acp.user.rank.title{/lang}</label></dt>
 				<dd>
-					<input type="text" id="rankTitle" name="rankTitle" value="{$rankTitle}" autofocus="autofocus" class="long" />
+					<input type="text" id="rankTitle" name="rankTitle" value="{$rankTitle}" required="required" autofocus="autofocus" class="long" />
 					{if $errorField == 'rankTitle'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -88,7 +88,7 @@
 			<dl{if $errorField == 'repeatImage'} class="formError"{/if}>
 				<dt><label for="repeatImage">{lang}wcf.acp.user.rank.repeatImage{/lang}</label></dt>
 				<dd>
-					<input type="number" id="repeatImage" name="repeatImage" value="{@$repeatImage}" class="short" />
+					<input type="number" id="repeatImage" name="repeatImage" value="{@$repeatImage}" min="1" class="short" />
 					{if $errorField == 'rankImage'}
 						<small class="innerError">
 							{lang}wcf.acp.user.rank.repeatImage.error.{@$errorType}{/lang}
@@ -143,14 +143,14 @@
 							{lang}wcf.acp.user.rank.gender.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<small>{lang}wcf.user.option.gender.description{/lang}</small>
+					<small>{lang}wcf.acp.user.rank.gender.description{/lang}</small>
 				</dd>
 			</dl>
 			
 			<dl{if $errorField == 'neededPoints'} class="formError"{/if}>
 				<dt><label for="neededPoints">{lang}wcf.acp.user.rank.neededPoints{/lang}</label></dt>
 				<dd>
-					<input type="number" id="neededPoints" name="neededPoints" value="{@$neededPoints}" class="medium" />
+					<input type="number" id="neededPoints" name="neededPoints" value="{@$neededPoints}" min="0" class="medium" />
 					{if $errorField == 'neededPoints'}
 						<small class="innerError">
 							{lang}wcf.acp.user.rank.neededPoints.error.{@$errorType}{/lang}
