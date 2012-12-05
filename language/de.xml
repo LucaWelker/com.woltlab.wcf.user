@@ -9,12 +9,37 @@
 		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Konfiguration]]></item>
 		<item name="wcf.acp.menu.link.activityPoint"><![CDATA[Aktivitätspunkte]]></item>
+		<item name="wcf.acp.menu.link.user.rank"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.menu.link.user.rank.list"><![CDATA[Benutzerränge auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
 	</category>
 	
 	<category name="wcf.acp.user">
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
 		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Punkte neu vergeben]]></item>
 		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Objekte neu einlesen]]></item>
+	</category>
+	
+	<category name="wcf.acp.user.rank">
+		<item name="wcf.acp.user.rank.list"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.user.rank.list.count"><![CDATA[Insgesamt {#$items} Benutzerränge]]></item>
+		<item name="wcf.acp.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
+		<item name="wcf.acp.user.rank.edit"><![CDATA[Benutzerrang bearbeiten]]></item>
+		<item name="wcf.acp.user.rank.title"><![CDATA[Rangbezeichnung]]></item>
+		<item name="wcf.acp.user.rank.image"><![CDATA[Ranggrafik]]></item>
+		<item name="wcf.acp.user.rank.neededPoints"><![CDATA[Punkte]]></item>
+		<item name="wcf.acp.user.rank.delete.sure"><![CDATA[Wollen Sie den Benutzerrang „{$userRank->rankTitle|language}“ wirklich löschen?]]></item>
+		<item name="wcf.acp.user.rank.general"><![CDATA[Allgemeine Daten]]></item>
+		<item name="wcf.acp.user.rank.requirement"><![CDATA[Beschränkungen]]></item>
+		<item name="wcf.acp.user.rank.repeatImage"><![CDATA[Ranggrafik wiederholen]]></item>
+		<item name="wcf.acp.user.rank.currentImage"><![CDATA[Aktuelle Ranggrafik]]></item>
+		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[Darstellung]]></item>
+		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
+		<item name="wcf.user.option.gender.description"><![CDATA[Optional können Sie diesen Benutzerrang auf Benutzer mit einem bestimmten Geschlecht einschränken.]]></item>
+		<item name="wcf.acp.user.rank.neededPoints.description"><![CDATA[Benötigte Menge an Aktivitätspunkten, die ein Benutzer erreichen muss, um in diesen Rang aufzusteigen.]]></item>
+		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[Sie können aus den vorgegebenen Darstellungen wählen oder eine eigene Darstellung mittels <abbr title="Cascading Style Sheets">CSS</abbr>-Klasse nutzen.]]></item>
+		<item name="wcf.acp.user.rank.rankImage.description"><![CDATA[Der Pfad zur Ranggrafik kann relativ zum WCF-Verzeichnis oder absolut angegeben werden.]]></item>
+		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Bestimmt wie oft die Grafik wiederholt wird.]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">

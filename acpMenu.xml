@@ -16,5 +16,22 @@
 			<link>index.php/UserActivityPointOption/</link>
 			<permissions>admin.user.canEditActivityPoints</permissions>
 		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.user.rank">
+			<parent>wcf.acp.menu.link.user</parent>
+			<options>module_user_rank</options>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.user.rank.list">
+			<parent>wcf.acp.menu.link.user.rank</parent>
+			<link>index.php/UserRankList/</link>
+			<permissions>admin.user.rank.canManageRank</permissions>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.user.rank.add">
+			<parent>wcf.acp.menu.link.user.rank</parent>
+			<link>index.php/UserRankAdd/</link>
+			<permissions>admin.user.rank.canManageRank</permissions>
+		</acpmenuitem>
 	</import>
 </data>
