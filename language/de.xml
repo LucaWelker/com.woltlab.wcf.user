@@ -432,4 +432,16 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.mail.title"><![CDATA[E-Mail an „{$user->username}“ senden]]></item>
 		<item name="wcf.user.mail.information"><![CDATA[Informationen]]></item>
 	</category>
+	
+	<category name="wcf.user.rank">
+		<item name="wcf.user.rank.administrator"><![CDATA[Administrator]]></item>
+		<item name="wcf.user.rank.moderator"><![CDATA[Moderator]]></item>
+		<item name="wcf.user.rank.superModerator"><![CDATA[Super-Moderator]]></item>
+		<item name="wcf.user.rank.user0"><![CDATA[Anfänger]]></item>
+		<item name="wcf.user.rank.user1"><![CDATA[Schüler]]></item>
+		<item name="wcf.user.rank.user2"><![CDATA[Fortgeschrittener]]></item>
+		<item name="wcf.user.rank.user3"><![CDATA[Profi]]></item>
+		<item name="wcf.user.rank.user4"><![CDATA[Meister]]></item>
+		<item name="wcf.user.rank.user5"><![CDATA[Erleuchteter]]></item>
+	</category>
 </language>
