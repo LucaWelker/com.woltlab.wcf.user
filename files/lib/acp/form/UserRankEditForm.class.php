@@ -1,10 +1,10 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\package\PackageCache;
 use wcf\data\user\rank\UserRankAction;
 use wcf\data\user\rank\UserRank;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
 
 /**
@@ -56,13 +56,11 @@ class UserRankEditForm extends UserRankAddForm {
 		
 		$this->rankTitle = 'wcf.user.rank.userRank'.$this->rank->rankID;
 		if (I18nHandler::getInstance()->isPlainValue('rankTitle')) {
-			// @todo: PackageDependencyHandler > PackageCache
-			I18nHandler::getInstance()->remove($this->rankTitle, PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+			I18nHandler::getInstance()->remove($this->rankTitle, PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user'));
 			$this->rankTitle = I18nHandler::getInstance()->getValue('rankTitle');
 		}
 		else {
-			// @todo: PackageDependencyHandler > PackageCache
-			I18nHandler::getInstance()->save('rankTitle', $this->rankTitle, 'wcf.user', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+			I18nHandler::getInstance()->save('rankTitle', $this->rankTitle, 'wcf.user', PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user'));
 		}
 		
 		// update label
@@ -94,8 +92,7 @@ class UserRankEditForm extends UserRankAddForm {
 		parent::readData();
 		
 		if (empty($_POST)) {
-			// @todo: PackageDependencyHandler > PackageCache
-			I18nHandler::getInstance()->setOptions('rankTitle', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'), $this->rank->rankTitle, 'wcf.user.rank.userRank\d+');
+			I18nHandler::getInstance()->setOptions('rankTitle', PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user'), $this->rank->rankTitle, 'wcf.user.rank.userRank\d+');
 			$this->rankTitle = $this->rank->rankTitle;
 			$this->cssClassName = $this->rank->cssClassName;
 			if (!in_array($this->cssClassName, $this->availableCssClassNames)) {

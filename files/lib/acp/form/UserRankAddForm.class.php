@@ -1,11 +1,11 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\package\PackageCache;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\rank\UserRankEditor;
 use wcf\data\user\rank\UserRankAction;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -29,7 +29,7 @@ class UserRankAddForm extends ACPForm {
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
-	//public $neededPermissions = array('admin.user.rank.canManageRank');
+	public $neededPermissions = array('admin.user.rank.canManageRank');
 	
 	/**
 	 * rank group id
@@ -190,8 +190,7 @@ class UserRankAddForm extends ACPForm {
 		if (!I18nHandler::getInstance()->isPlainValue('rankTitle')) {
 			$returnValues = $this->objectAction->getReturnValues();
 			$rankID = $returnValues['returnValues']->rankID;
-			// @todo: PackageDependencyHandler > PackageCache
-			I18nHandler::getInstance()->save('rankTitle', 'wcf.user.rank.userRank'.$rankID, 'wcf.user', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+			I18nHandler::getInstance()->save('rankTitle', 'wcf.user.rank.userRank'.$rankID, 'wcf.user', PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user'));
 			
 			// update name
 			$rankEditor = new UserRankEditor($returnValues['returnValues']);
