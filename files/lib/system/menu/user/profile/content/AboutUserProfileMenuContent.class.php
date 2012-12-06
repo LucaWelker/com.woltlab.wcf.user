@@ -21,7 +21,7 @@ class AboutUserProfileMenuContent extends SingletonFactory implements IUserProfi
 	 * cache name
 	 * @var	string
 	 */
-	public $cacheName = 'user-option';
+	public $cacheName = 'userOption';
 	
 	/**
 	 * cache class name

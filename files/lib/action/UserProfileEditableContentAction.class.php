@@ -29,7 +29,7 @@ class UserProfileEditableContentAction extends AbstractSecureAction {
 				throw $e;
 			}
 			else {
-				throw new AJAXException($e->getMessage());
+				throw new AJAXException($e->getMessage(), 503, $e->getTraceAsString());
 			}
 		}
 	}
