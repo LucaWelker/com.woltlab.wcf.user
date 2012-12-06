@@ -1,7 +1,6 @@
 <?php
 namespace wcf\system\cache\builder;
 use wcf\data\user\profile\menu\item\UserProfileMenuItem;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 
 /**
@@ -21,35 +20,17 @@ class UserProfileMenuCacheBuilder implements ICacheBuilder {
 	public function getData(array $cacheResource) { 
 		$data = array();
 		
-		// get all menu items and filter menu items with low priority
-		$sql = "SELECT		menuItem, menuItemID 
-			FROM		wcf".WCF_N."_user_profile_menu";
+		$sql = "SELECT		menuItemID, menuItem, permissions, options, packageDir, menu_item.packageID, className
+			FROM		wcf".WCF_N."_user_profile_menu_item menu_item
+			LEFT JOIN	wcf".WCF_N."_package package
+			ON		(package.packageID = menu_item.packageID)
+			ORDER BY	showOrder ASC";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		$itemIDs = array();
 		while ($row = $statement->fetchArray()) {
-			$itemIDs[$row['menuItem']] = $row['menuItemID'];
+			$data[] = new UserProfileMenuItem(null, $row);
 		}
-		
-		if (!empty($itemIDs)) {
-			// get needed menu items
-			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("menu_item.menuItemID IN (?)", array($itemIDs));
-			
-			$sql = "SELECT		menuItemID, menuItem, permissions, options, packageDir, className,
-						CASE WHEN parentPackageID <> 0 THEN parentPackageID ELSE menu_item.packageID END AS packageID
-				FROM		wcf".WCF_N."_user_profile_menu_item menu_item
-				LEFT JOIN	wcf".WCF_N."_package package
-				ON		(package.packageID = menu_item.packageID)
-				".$conditions."
-				ORDER BY	showOrder ASC";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute($conditions->getParameters());
-			while ($row = $statement->fetchArray()) {
-				$data[] = new UserProfileMenuItem(null, $row);
-			}
-		}
-		
+				
 		return $data;
 	}
 }
