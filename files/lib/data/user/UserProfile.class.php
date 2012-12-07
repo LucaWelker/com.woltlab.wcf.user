@@ -530,16 +530,31 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	public function getRank() {
 		if ($this->rank === null) {
 			if (MODULE_USER_RANK && $this->rankID) {
-				$this->rank = new UserRank(null, array(
-					'rankID' => $this->rankID,
-					'groupID' => $this->groupID,
-					'neededPoints' => $this->neededPoints,
-					'rankTitle' => $this->rankTitle,
-					'cssClassName' => $this->cssClassName,
-					'rankImage' => $this->rankImage,
-					'repeatImage' => $this->repeatImage,
-					'gender' => $this->gender
-				));
+				if ($this->rankTitle) {
+					$this->rank = new UserRank(null, array(
+						'rankID' => $this->rankID,
+						'groupID' => $this->groupID,
+						'neededPoints' => $this->neededPoints,
+						'rankTitle' => $this->rankTitle,
+						'cssClassName' => $this->cssClassName,
+						'rankImage' => $this->rankImage,
+						'repeatImage' => $this->repeatImage,
+						'gender' => $this->gender
+					));
+				}
+				else {
+					// load storage data
+					UserStorageHandler::getInstance()->loadStorage(array($this->userID));
+					$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'userRank');
+					
+					if ($data[$this->userID] === null) {
+						$this->rank = new UserRank($this->rankID);
+						UserStorageHandler::getInstance()->update($this->userID, 'userRank', serialize($this->rank));
+					}
+					else {
+						$this->rank = unserialize($data[$this->userID]);
+					}
+				}
 			}
 		}
 	
