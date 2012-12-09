@@ -96,7 +96,7 @@
 				<categoryname>user.profile</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-			 	<enableoptions>user.profile.renamePeriod</enableoptions>
+				<enableoptions>user.profile.renamePeriod</enableoptions>
 			</option>
 			<option name="user.profile.renamePeriod">
 				<categoryname>user.profile</categoryname>

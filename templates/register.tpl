@@ -75,7 +75,7 @@
 				<dt>
 					<label for="email">{lang}wcf.user.email{/lang}</label>
 				</dt>
-				<dd>	
+				<dd>
 					<input type="email" id="email" name="email" value="{$email}" required="required" class="medium" />
 					{if $errorType.email|isset}
 						<small class="innerError">
@@ -188,7 +188,7 @@
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
- 	</div>
+	</div>
 </form>
 
 {include file='footer'}

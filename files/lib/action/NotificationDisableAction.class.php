@@ -22,31 +22,31 @@ use wcf\util\StringUtil;
 class NotificationDisableAction extends AbstractAction {
 	/**
 	 * event id
-	 * @var integer
+	 * @var	integer
 	 */
 	public $eventID = 0;
 	
 	/**
 	 * notification event
-	 * @var wcf\data\user\notification\event\UserNotificationEvent
+	 * @var	wcf\data\user\notification\event\UserNotificationEvent
 	 */
 	public $event = null;
 	
 	/**
 	 * user id
-	 * @var integer
+	 * @var	integer
 	 */
 	public $userID = 0;
 	
 	/**
 	 * user object
-	 * @var wcf\data\user\User
+	 * @var	wcf\data\user\User
 	 */
 	public $user = null;
 	
 	/**
 	 * security token
-	 * @var string
+	 * @var	string
 	 */
 	public $token = '';
 	

@@ -70,7 +70,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * age of this user
 	 * @var	integer
 	 */
-	protected $__age = null; 
+	protected $__age = null;
 	
 	/**
 	 * group data and permissions
@@ -80,7 +80,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	
 	/**
 	 * current location of this user.
-	 * @var string
+	 * @var	string
 	 */
 	protected $currentLocation = null;
 	
@@ -94,7 +94,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	
 	/**
 	 * @see	wcf\data\user\User::__toString()
-	 */	
+	 */
 	public function __toString() {
 		return $this->getDecoratedObject()->__toString();
 	}
@@ -250,7 +250,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * Gets the user's avatar.
 	 * 
 	 * @return	wcf\data\user\avatar\IUserAvatar
-	 */ 
+	 */
 	public function getAvatar() {
 		if ($this->avatar === null) {
 			if (!$this->disableAvatar) {
@@ -502,7 +502,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	/**
 	 * Returns the value of the permission with the given name.
 	 *
-	 * @param 	string		$permission
+	 * @param	string		$permission
 	 * @return	mixed		permission value
 	 */
 	public function getPermission($permission) {
@@ -609,7 +609,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * @see wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
+	 * @see	wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
 	 */
 	public function getBreadcrumb() {
 		return new Breadcrumb($this->username, LinkHandler::getInstance()->getLink('User', array(

@@ -1,9 +1,7 @@
 <?php
 namespace wcf\form;
-use wcf\system\exception\UserInputException;
-
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\UserInputException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
@@ -38,7 +36,7 @@ class NotificationSettingsForm extends AbstractForm {
 	
 	/**
 	 * list of valid options for the mail notification type.
-	 * @var array<string>
+	 * @var	array<string>
 	 */
 	protected static $validMailNotificationTypes = array('none', 'instant', 'daily');
 	

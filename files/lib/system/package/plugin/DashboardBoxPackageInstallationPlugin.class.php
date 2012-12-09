@@ -4,7 +4,7 @@ use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 
 /**
- * This PIP installs, updates or deletes dashboard boxes.
+ * Installs, updates and deletes dashboard boxes.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
@@ -26,7 +26,7 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 	
 	/**
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::$tagName
-	 */	
+	 */
 	public $tagName = 'dashboardbox';
 	
 	/**
@@ -77,18 +77,8 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 	
 	/**
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::cleanup()
-	 */	
-	protected function cleanup() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBox.php');
-	}
-	
-	/**
-	 * @see	wcf\system\package\plugin\IPackageInstallationPlugin::uninstall()
 	 */
-	public function uninstall() {
-		parent::uninstall();
-		
-		// clear cache immediately
+	protected function cleanup() {
 		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBox.php');
 	}
 }

@@ -199,7 +199,7 @@ class UserNotificationHandler extends SingletonFactory {
 	 * @param	integer		$offset
 	 * @param	boolean		$detailedView
 	 * @return	array<array>
-	 */	
+	 */
 	public function getNotifications($limit = 5, $offset = 0, $detailedView = false) {
 		// build enormous query
 		$conditions = new PreparedStatementConditionBuilder();
@@ -444,7 +444,7 @@ class UserNotificationHandler extends SingletonFactory {
 	 * Deletes notifications.
 	 *
 	 * @param	string		$eventName
-	 * @param 	string		$objectType
+	 * @param	string		$objectType
 	 * @param	array<integer>	$recipientIDs
 	 * @param	array<integer>	$objectIDs
 	 */

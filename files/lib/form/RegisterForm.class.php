@@ -49,13 +49,13 @@ class RegisterForm extends UserAddForm {
 	/**
 	 * recaptcha challenge
 	 * @var	string
-	 */	
+	 */
 	public $challenge = '';
 	
 	/**
 	 * recaptcha response
 	 * @var	string
-	 */	
+	 */
 	public $response = '';
 	
 	/**
@@ -66,7 +66,7 @@ class RegisterForm extends UserAddForm {
 	
 	/**
 	 * min number of seconds between form request and submit
-	 * @var integer
+	 * @var	integer
 	 */
 	public static $minRegistrationTime = 15;
 	

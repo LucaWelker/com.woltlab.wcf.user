@@ -3,7 +3,7 @@ namespace wcf\system\package\plugin;
 use wcf\system\WCF;
 
 /**
- * This PIP installs, updates or deletes user profile menu items.
+ * Installs, updates and deletes user profile menu items.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2011 WoltLab GmbH
@@ -20,12 +20,12 @@ class UserProfileMenuPackageInstallationPlugin extends AbstractXMLPackageInstall
 	
 	/**
 	 * @see	wcf\system\package\plugin\AbstractPackageInstallationPlugin::$tableName
-	 */	
+	 */
 	public $tableName = 'user_profile_menu_item';
 	
 	/**
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::$tagName
-	 */	
+	 */
 	public $tagName = 'userprofilemenuitem';
 	
 	/**

@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class UserNotificationAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::create()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::create()
 	 */
 	public function create() {
 		// create notification
@@ -41,14 +41,14 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Does nothing.
-	 */	
+	 */
 	public function validateLoad() { }
 	
 	/**
 	 * Loads user notifications.
 	 * 
 	 * @return	array<array>
-	 */	
+	 */
 	public function load() {
 		$returnValues = UserNotificationHandler::getInstance()->getNotifications();
 		$returnValues['totalCount'] = UserNotificationHandler::getInstance()->getNotificationCount();

@@ -40,7 +40,7 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	 * Returns rendered HTML used within the notification overlay.
 	 * 
 	 * @return	string
-	 */	
+	 */
 	public function getRenderedOutput();
 	
 	/**
