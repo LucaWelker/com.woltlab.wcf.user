@@ -29,6 +29,8 @@ ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registr
 
 ALTER TABLE wcf1_user_group ADD priority MEDIUMINT(8) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user_group ADD userOnlineMarking VARCHAR(255) NOT NULL DEFAULT '%s';
+ALTER TABLE wcf1_user_group ADD showOnTeamPage TINYINT(1) NOT NULL DEFAULT 0;
+
 
 -- dashboard
 DROP TABLE IF EXISTS wcf1_dashboard_box;

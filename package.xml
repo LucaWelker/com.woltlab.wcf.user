@@ -41,6 +41,7 @@
 		<instruction type="sitemap">sitemap.xml</instruction>
 		<instruction type="dashboardBox">dashboardBox.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="eventListener">eventListener.xml</instruction>
 		<instruction type="script">acp/install_com.woltlab.wcf.user_1.0.0.php</instruction>
 	</instructions>
 </package>

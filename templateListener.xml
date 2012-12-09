@@ -8,6 +8,27 @@
 			<eventname>userAvatar</eventname>
 			<templatecode><![CDATA[{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userGroupAddDataFields">
+			<environment>admin</environment>
+			<templatename>userGroupAdd</templatename>
+			<eventname>dataFields</eventname>
+			<templatecode><![CDATA[{include file='__groupAddAdditionalSettings'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="userGroupListColumnHeads">
+			<environment>admin</environment>
+			<templatename>userGroupList</templatename>
+			<eventname>columnHeads</eventname>
+			<templatecode><![CDATA[{include file='__userGroupListPriorityColumnHead'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="userGroupListColumns">
+			<environment>admin</environment>
+			<templatename>userGroupList</templatename>
+			<eventname>columns</eventname>
+			<templatecode><![CDATA[{include file='__userGroupListPriorityColumn'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->
