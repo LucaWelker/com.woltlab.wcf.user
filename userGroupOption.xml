@@ -6,6 +6,10 @@
 				<parent>admin.content</parent>
 			</category>
 			
+			<category name="admin.user.rank">
+				<parent>admin.user</parent>
+			</category>
+			
 			<category name="user.profile">
 				<parent>user</parent>
 			</category>
@@ -40,14 +44,18 @@
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
-			<!-- admin.content.dashboard -->
 			<option name="admin.content.dashboard.canEditDashboard">
 				<categoryname>admin.content.dashboard</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<!-- /admin.content.dashboard -->
+			<option name="admin.user.rank.canManageRank">
+				<categoryname>admin.user.rank</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
 			
 			<!-- user.signature -->
 			<option name="user.signature.canUseSmilies">
@@ -69,6 +77,11 @@
 			<!-- /user.signature -->
 			
 			<!-- user.profile -->
+			<option name="user.profile.canMail">
+				<categoryname>user.profile</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			<option name="user.profile.canChangeEmail">
 				<categoryname>user.profile</categoryname>
 				<optiontype>boolean</optiontype>

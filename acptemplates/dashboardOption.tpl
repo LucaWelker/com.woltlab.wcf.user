@@ -76,7 +76,7 @@
 			</fieldset>
 			
 			<div class="formSubmit">
-				<button data-type="submit">{lang}wcf.global.button.save{/lang}</button>
+				<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 			</div>
 			
 			<script type="text/javascript">
@@ -124,7 +124,7 @@
 			</fieldset>
 			
 			<div class="formSubmit">
-				<button data-type="submit">{lang}wcf.global.button.save{/lang}</button>
+				<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 			</div>
 			
 			<script type="text/javascript">

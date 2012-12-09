@@ -4,7 +4,6 @@ use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IGroupedUserListAction;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\GroupedUserList;
 use wcf\system\WCF;
 

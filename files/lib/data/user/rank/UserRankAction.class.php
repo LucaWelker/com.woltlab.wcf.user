@@ -12,4 +12,9 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @subpackage	data.user.rank
  * @category	Community Framework
  */
-class UserRankAction extends AbstractDatabaseObjectAction { }
+class UserRankAction extends AbstractDatabaseObjectAction {
+	/**
+	 * @see wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 */
+	protected $permissionsDelete = array('admin.user.rank.canManageRank');
+}

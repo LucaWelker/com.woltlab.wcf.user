@@ -109,7 +109,7 @@
 		</li>
 	{/if}
 	<!-- language switcher -->
-	<li id="languageIDContainer">
+	<li id="pageLanguageContainer">
 		<script type="text/javascript">
 			//<![CDATA[
 			$(function() {
@@ -122,7 +122,7 @@
 					{/implode}
 				};
 				
-				new WCF.Language.Chooser('languageIDContainer', 'languageID', {@$__wcf->getLanguage()->languageID}, $languages, function(item) {
+				new WCF.Language.Chooser('pageLanguageContainer', 'languageID', {@$__wcf->getLanguage()->languageID}, $languages, function(item) {
 					var $location = window.location.toString().replace(/#.*/, '').replace(/(\?|&)l=[0-9]+/g, '');
 					var $delimiter = ($location.indexOf('?') == -1) ? '?' : '&';
 					

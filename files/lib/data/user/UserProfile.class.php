@@ -5,7 +5,10 @@ use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
 use wcf\data\user\rank\UserRank;
 use wcf\data\DatabaseObjectDecorator;
+use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\cache\CacheHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -21,7 +24,7 @@ use wcf\util\StringUtil;
  * @subpackage	data.user
  * @category	Community Framework
  */
-class UserProfile extends DatabaseObjectDecorator {
+class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider {
 	/**
 	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
@@ -124,7 +127,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'followingUserIDs', serialize($this->followingUserIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'followingUserIDs', serialize($this->followingUserIDs));
 				}
 				else {
 					$this->followingUserIDs = unserialize($data[$this->userID]);
@@ -163,7 +166,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'followerUserIDs', serialize($this->followerUserIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'followerUserIDs', serialize($this->followerUserIDs));
 				}
 				else {
 					$this->followerUserIDs = unserialize($data[$this->userID]);
@@ -202,7 +205,7 @@ class UserProfile extends DatabaseObjectDecorator {
 					}
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update($this->userID, 'ignoredUserIDs', serialize($this->ignoredUserIDs), 1);
+					UserStorageHandler::getInstance()->update($this->userID, 'ignoredUserIDs', serialize($this->ignoredUserIDs));
 				}
 				else {
 					$this->ignoredUserIDs = unserialize($data[$this->userID]);
@@ -259,7 +262,7 @@ class UserProfile extends DatabaseObjectDecorator {
 						
 						if ($data[$this->userID] === null) {
 							$this->avatar = new UserAvatar($this->avatarID);
-							UserStorageHandler::getInstance()->update($this->userID, 'avatar', serialize($this->avatar), 1);
+							UserStorageHandler::getInstance()->update($this->userID, 'avatar', serialize($this->avatar));
 						}
 						else {
 							$this->avatar = unserialize($data[$this->userID]);
@@ -527,16 +530,31 @@ class UserProfile extends DatabaseObjectDecorator {
 	public function getRank() {
 		if ($this->rank === null) {
 			if (MODULE_USER_RANK && $this->rankID) {
-				$this->rank = new UserRank(null, array(
-					'rankID' => $this->rankID,
-					'groupID' => $this->groupID,
-					'neededPoints' => $this->neededPoints,
-					'rankTitle' => $this->rankTitle,
-					'cssClassName' => $this->cssClassName,
-					'rankImage' => $this->rankImage,
-					'repeatImage' => $this->repeatImage,
-					'gender' => $this->gender
-				));
+				if ($this->rankTitle) {
+					$this->rank = new UserRank(null, array(
+						'rankID' => $this->rankID,
+						'groupID' => $this->groupID,
+						'neededPoints' => $this->neededPoints,
+						'rankTitle' => $this->rankTitle,
+						'cssClassName' => $this->cssClassName,
+						'rankImage' => $this->rankImage,
+						'repeatImage' => $this->repeatImage,
+						'gender' => $this->gender
+					));
+				}
+				else {
+					// load storage data
+					UserStorageHandler::getInstance()->loadStorage(array($this->userID));
+					$data = UserStorageHandler::getInstance()->getStorage(array($this->userID), 'userRank');
+					
+					if ($data[$this->userID] === null) {
+						$this->rank = new UserRank($this->rankID);
+						UserStorageHandler::getInstance()->update($this->userID, 'userRank', serialize($this->rank));
+					}
+					else {
+						$this->rank = unserialize($data[$this->userID]);
+					}
+				}
 			}
 		}
 	
@@ -550,13 +568,12 @@ class UserProfile extends DatabaseObjectDecorator {
 		// get group ids
 		$groupIDs = $this->getGroupIDs();
 		$groups = implode(',', $groupIDs);
-		$groupsFileName = StringUtil::getHash($groups);
 		
 		// register cache resource
-		$cacheName = 'groups-'.PACKAGE_ID.'-'.$groups;
+		$cacheName = 'userGroupPermission-'.$groups;
 		CacheHandler::getInstance()->addResource(
 			$cacheName,
-			WCF_DIR.'cache/cache.groups-'.PACKAGE_ID.'-'.$groupsFileName.'.php',
+			WCF_DIR.'cache/cache.userGroupPermission-'.StringUtil::getHash($groups).'.php',
 			'wcf\system\cache\builder\UserGroupPermissionCacheBuilder'
 		);
 		
@@ -589,5 +606,14 @@ class UserProfile extends DatabaseObjectDecorator {
 	 */
 	public function canEditOwnProfile() {
 		return ($this->activationCode ? false : true);
+	}
+	
+	/**
+	 * @see wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
+	 */
+	public function getBreadcrumb() {
+		return new Breadcrumb($this->username, LinkHandler::getInstance()->getLink('User', array(
+			'object' => $this
+		)));
 	}
 }

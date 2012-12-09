@@ -38,7 +38,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 				'userID' => WCF::getUser()->userID,
 			));
 			
-			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'ignoredUserIDs', 1);
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'ignoredUserIDs');
 		}
 		
 		return array('isIgnoredUser' => 1);
@@ -61,7 +61,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 			$ignoreEditor = new UserIgnoreEditor($ignore);
 			$ignoreEditor->delete();
 			
-			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'ignoredUserIDs', 1);
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'ignoredUserIDs');
 		}
 		
 		return array('isIgnoredUser' => 0);

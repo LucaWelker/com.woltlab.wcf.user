@@ -13,7 +13,6 @@ use wcf\data\user\UserProfile;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\notification\event\IUserNotificationEvent;
 use wcf\system\user\notification\object\IUserNotificationObject;
 use wcf\system\user\storage\UserStorageHandler;
@@ -67,8 +66,12 @@ class UserNotificationHandler extends SingletonFactory {
 		}
 		
 		// get available events
-		CacheHandler::getInstance()->addResource('user-notification-event-'.PACKAGE_ID, WCF_DIR.'cache/cache.user-notification-event-'.PACKAGE_ID.'.php', 'wcf\system\cache\builder\UserNotificationEventCacheBuilder');
-		$this->availableEvents = CacheHandler::getInstance()->get('user-notification-event-'.PACKAGE_ID);
+		CacheHandler::getInstance()->addResource(
+			'userNotificationEvent',
+			WCF_DIR.'cache/cache.userNotificationEvent.php',
+			'wcf\system\cache\builder\UserNotificationEventCacheBuilder'
+		);
+		$this->availableEvents = CacheHandler::getInstance()->get('userNotificationEvent');
 	}
 	
 	/**
@@ -142,7 +145,7 @@ class UserNotificationHandler extends SingletonFactory {
 			}
 			
 			// reset notification count
-			UserStorageHandler::getInstance()->reset($recipientList->getObjectIDs(), 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+			UserStorageHandler::getInstance()->reset($recipientList->getObjectIDs(), 'userNotificationCount');
 		}
 	}
 	
@@ -167,7 +170,6 @@ class UserNotificationHandler extends SingletonFactory {
 					$conditionBuilder = new PreparedStatementConditionBuilder();
 					$conditionBuilder->add('notification.notificationID = notification_to_user.notificationID');
 					$conditionBuilder->add('notification_to_user.userID = ?', array(WCF::getUser()->userID));
-					$conditionBuilder->add('notification.packageID IN (?)', array(PackageDependencyHandler::getInstance()->getDependencies()));
 					
 					$sql = "SELECT	COUNT(*) AS count
 						FROM	wcf".WCF_N."_user_notification_to_user notification_to_user,
@@ -179,7 +181,7 @@ class UserNotificationHandler extends SingletonFactory {
 					$this->notificationCount = $row['count'];
 					
 					// update storage data
-					UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'userNotificationCount', serialize($this->notificationCount), PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+					UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'userNotificationCount', serialize($this->notificationCount));
 				}
 				else {
 					$this->notificationCount = unserialize($data[WCF::getUser()->userID]);
@@ -203,7 +205,6 @@ class UserNotificationHandler extends SingletonFactory {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("notification_to_user.userID = ?", array(WCF::getUser()->userID));
 		$conditions->add("notification.notificationID = notification_to_user.notificationID");
-		$conditions->add("notification.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		
 		$sql = "SELECT		notification_to_user.notificationID, notification_event.eventID,
 					object_type.objectType, notification.objectID,
@@ -349,7 +350,6 @@ class UserNotificationHandler extends SingletonFactory {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("eventID = ?", array($eventID));
 		$conditions->add("objectID = ?", array($objectID));
-		$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		if ($authorID !== null) $conditions->add("authorID = ?", array($authorID));
 		if ($time !== null) $conditions->add("time = ?", array($time));
 		
@@ -475,6 +475,6 @@ class UserNotificationHandler extends SingletonFactory {
 		$statement->execute($parameters);
 		
 		// reset storage
-		UserStorageHandler::getInstance()->reset($recipientIDs, 'userNotificationCount', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.user'));
+		UserStorageHandler::getInstance()->reset($recipientIDs, 'userNotificationCount');
 	}
 }

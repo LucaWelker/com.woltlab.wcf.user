@@ -28,23 +28,23 @@
 		<fieldset>
 			<legend><label for="userID">{lang}wcf.user.registerActivation{/lang}</label></legend>
 			
-			<dl{if $errorField == 'u'} class="formError"{/if}>
-				<dt><label for="userID">{lang}wcf.user.userID{/lang}</label></dt>
+			<dl{if $errorField == 'username'} class="formError"{/if}>
+				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
 				<dd>
-					<input type="text" id="userID" name="u" value="{@$u}" required="required" class="medium" />
-					{if $errorField == 'u'}
+					<input type="text" id="username" name="username" value="{@$username}" required="required" class="medium" />
+					{if $errorField == 'username'}
 						<small class="innerError">
-							{if $errorType == 'notValid'}{lang}wcf.user.userID.error.invalid{/lang}{/if}
+							{if $errorType == 'notFound'}{lang}wcf.user.username.error.notFound{/lang}{/if}
 						</small>
 					{/if}
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'a'} class="formError"{/if}>
+			<dl{if $errorField == 'activationCode'} class="formError"{/if}>
 				<dt><label for="activationCode">{lang}wcf.user.activationCode{/lang}</label></dt>
 				<dd>
-					<input type="text" id="activationCode" maxlength="9" name="a" value="{@$a}" required="required" class="medium" />
-					{if $errorField == 'a'}
+					<input type="text" id="activationCode" maxlength="9" name="activationCode" value="{@$activationCode}" required="required" class="medium" />
+					{if $errorField == 'activationCode'}
 						<small class="innerError">
 							{if $errorType == 'notValid'}{lang}wcf.user.activationCode.error.notValid{/lang}{/if}
 						</small>
@@ -57,7 +57,7 @@
 			<dl>
 				<dd>
 					<ul class="buttonList">
-						<li><a class="button small" href="{link controller='RegisterNewActivationCode'}{/link}"><img src="{icon}eMail{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.newActivationCode{/lang}</span></a></li>
+						<li><a class="button small" href="{link controller='RegisterNewActivationCode'}{/link}"><span>{lang}wcf.user.newActivationCode{/lang}</span></a></li>
 						{event name='buttons'}
 					</ul>
 				</dd>

@@ -87,7 +87,7 @@ class SettingsForm extends AbstractForm {
 		if (!empty($_REQUEST['category'])) $this->category = $_REQUEST['category'];
 		// todo validate category
 		
-		$this->optionHandler = new UserOptionHandler('user-option', 'wcf\system\cache\builder\OptionCacheBuilder', false, '', 'settings.'.$this->category, false);
+		$this->optionHandler = new UserOptionHandler('userOption', 'wcf\system\cache\builder\OptionCacheBuilder', false, '', 'settings.'.$this->category, false);
 		$this->optionHandler->setUser(WCF::getUser());
 		
 		if ($this->category == 'general') {
@@ -186,7 +186,7 @@ class SettingsForm extends AbstractForm {
 		// static options
 		if ($this->category == 'general') {
 			// reset user language ids cache
-			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'languageIDs', 1);
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'languageIDs');
 		}
 		$this->saved();
 		

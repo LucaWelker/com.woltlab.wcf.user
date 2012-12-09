@@ -2,19 +2,44 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.dashboard">
 		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard-Boxen konfigurieren]]></item>
-		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in &bdquo;Aktive Boxen&ldquo; bzw. &bdquo;Deaktivierte Boxen&ldquo; verschieben.]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. „Deaktivierte Boxen“ verschieben.]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Konfiguration]]></item>
 		<item name="wcf.acp.menu.link.activityPoint"><![CDATA[Aktivitätspunkte]]></item>
+		<item name="wcf.acp.menu.link.user.rank"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.menu.link.user.rank.list"><![CDATA[Benutzerränge auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
 	</category>
 	
 	<category name="wcf.acp.user">
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
 		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Punkte neu vergeben]]></item>
 		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Objekte neu einlesen]]></item>
+	</category>
+	
+	<category name="wcf.acp.user.rank">
+		<item name="wcf.acp.user.rank.list"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.user.rank.list.count"><![CDATA[Insgesamt {#$items} Benutzerränge]]></item>
+		<item name="wcf.acp.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
+		<item name="wcf.acp.user.rank.edit"><![CDATA[Benutzerrang bearbeiten]]></item>
+		<item name="wcf.acp.user.rank.title"><![CDATA[Rangbezeichnung]]></item>
+		<item name="wcf.acp.user.rank.image"><![CDATA[Ranggrafik]]></item>
+		<item name="wcf.acp.user.rank.neededPoints"><![CDATA[Punkte]]></item>
+		<item name="wcf.acp.user.rank.delete.sure"><![CDATA[Wollen Sie den Benutzerrang „{$userRank->rankTitle|language}“ wirklich löschen?]]></item>
+		<item name="wcf.acp.user.rank.general"><![CDATA[Allgemeine Daten]]></item>
+		<item name="wcf.acp.user.rank.requirement"><![CDATA[Beschränkungen]]></item>
+		<item name="wcf.acp.user.rank.repeatImage"><![CDATA[Ranggrafik wiederholen]]></item>
+		<item name="wcf.acp.user.rank.currentImage"><![CDATA[Aktuelle Ranggrafik]]></item>
+		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[Darstellung]]></item>
+		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
+		<item name="wcf.acp.user.rank.gender.description"><![CDATA[Optional können Sie diesen Benutzerrang auf Benutzer mit einem bestimmten Geschlecht einschränken.]]></item>
+		<item name="wcf.acp.user.rank.neededPoints.description"><![CDATA[Benötigte Menge an Aktivitätspunkten, die ein Benutzer erreichen muss, um in diesen Rang aufzusteigen.]]></item>
+		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[Sie können aus den vorgegebenen Darstellungen wählen oder eine eigene Darstellung mittels <abbr title="Cascading Style Sheets">CSS</abbr>-Klasse nutzen.]]></item>
+		<item name="wcf.acp.user.rank.rankImage.description"><![CDATA[Der Pfad zur Ranggrafik kann relativ zum WCF-Verzeichnis oder absolut angegeben werden.]]></item>
+		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Bestimmt wie oft die Grafik wiederholt wird.]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">
@@ -78,7 +103,7 @@
 {/if}]]></item>
 		<item name="wcf.user.usersOnline.invisible"><![CDATA[ (unsichtbar)]]></item>
 		<item name="wcf.user.usersOnline.marking.legend"><![CDATA[Legende]]></item>
-		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von &bdquo;{$user->username}&ldquo;</a>]]></item>
+		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von „{$user->username}“</a>]]></item>
 		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer online-Liste]]></item>
 		<item name="wcf.user.usersOnline.location.MembersListPage"><![CDATA[Mitgliederliste]]></item>
 		<item name="wcf.user.usersOnline.location.DashboardPage"><![CDATA[Dashboard]]></item>
@@ -101,7 +126,7 @@
 		<item name="wcf.user.profileHits"><![CDATA[Profil-Aufrufe]]></item>
 		<item name="wcf.user.profileHits.hitsPerDay"><![CDATA[{#$user->profileHits/$user->getProfileAge()} Aufrufe pro Tag]]></item>
 		<item name="wcf.user.online"><![CDATA[Online]]></item>
-		<item name="wcf.user.online.title"><![CDATA[&bdquo;{$username}&ldquo; ist online]]></item>
+		<item name="wcf.user.online.title"><![CDATA[„{$username}“ ist online]]></item>
 		<item name="wcf.user.button.follow"><![CDATA[Folgen]]></item>
 		<item name="wcf.user.button.unfollow"><![CDATA[Entfolgen]]></item>
 		<item name="wcf.user.button.ignore"><![CDATA[Blockieren]]></item>
@@ -113,7 +138,7 @@
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Das Kennwort muss mindestens {REGISTER_PASSWORD_MIN_LENGTH} Zeichen lang sein.{else}Ein sicheres Kennwort sollte mindestens 8 Zeichen lang sein.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Kennwort vergessen]]></item>
 		<item name="wcf.user.lostPassword.description"><![CDATA[Wenn Sie Ihr Kennwort vergessen haben, müssen Sie entweder den Benutzernamen oder die E-Mail-Adresse angeben, die Sie in Ihrem Profil hinterlegt haben. Sie können dabei nur eines der beiden Felder ausfüllen. Wenn Sie beide Daten nicht mehr wissen, wenden Sie sich bitte an den Administrator.]]></item>
-		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: &bdquo;{$email}&ldquo; gefunden.]]></item>
+		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[Es wurde kein Benutzer mit der E-Mail-Adresse: „{$email}“ gefunden.]]></item>
 		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[Das Kennwort für dieses Benutzerkonto wurde in den letzten 24 Stunden bereits einmal angefordert. Aus Sicherheitsgründen kann das Kennwort eines Benutzers nur einmal pro Tag angefordert werden. Sie können das Kennwort für dieses Benutzerkonto in {#$hours} Stunde{if $hours != 1}n{/if} erneut anfordern.]]></item>
 		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Kennwort vergessen auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Hallo {@$username},
@@ -205,16 +230,11 @@ Vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}.
 Bevor wir Ihre Registrierung aktivieren können, müssen Sie einmalig die Gültigkeit Ihrer E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer E-Mail-Adresse, indem Sie folgenden Link aufrufen:
-{link controller='RegisterActivation'}u={@$user->userID}&a={@$user->activationCode}{/link} 
+{link controller='RegisterActivation'}{/link} 
 
-**** Funktioniert der Link oben nicht? ****
-Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
-{link controller='RegisterActivation'}{/link}
+Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihren Benutzernamen sowie den Aktivierungscode eingeben.
 
-Bitte achten Sie darauf, dass sich keine Leerzeichen in der Adresse befinden.
-Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
-
-Ihre Benutzernummer lautet: 	{@$user->userID} 
+Ihr Benutzername lautet: 	{@$user->username} 
 Ihr Aktivierungscode lautet: 	{@$user->activationCode} 
 
 Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} 
@@ -262,6 +282,61 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.activityPoints.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
 		<item name="wcf.user.stats"><![CDATA[Statistiken]]></item>
 		<item name="wcf.user.usercp"><![CDATA[Benutzerkonto]]></item>
+		
+		<item name="wcf.user.register.disclaimer"><![CDATA[Disclaimer]]></item>
+		<item name="wcf.user.register.disclaimer.accept"><![CDATA[Akzeptieren]]></item>
+		<item name="wcf.user.register.disclaimer.decline"><![CDATA[Ablehnen]]></item>
+		<item name="wcf.user.register.disclaimer.text"><![CDATA[<h1>Haftung für Inhalte</h1>
+    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. 
+      Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte 
+      können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für 
+      eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. 
+      Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht 
+      verpflichtet, übermittelte oder gespeicherte fremde Informationen zu 
+      überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige 
+      Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der 
+      Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon 
+      unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem 
+      Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei 
+      Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte 
+      umgehend entfernen.</p>
+    <h1>Haftung für Links</h1>
+    <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren 
+      Inhalte wir keinen Einfluss haben. Deshalb können wir für diese 
+      fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte 
+      der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der 
+      Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung 
+      auf mögliche Rechtsverstöße überprüft. Rechtswidrige 
+      Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente 
+      inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte 
+      einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen 
+      werden wir derartige Links umgehend entfernen.</p>
+    <h1>Urheberrecht</h1>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten 
+      unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und 
+      jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen 
+      der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads 
+      und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen 
+      Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, 
+      werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche 
+      gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. 
+      Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+    <h1>Datenschutz</h1>
+    <p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, 
+      Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.   
+    </p>
+    <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. 
+      bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. 
+      Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht 
+      möglich. </p>
+    <p>Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten 
+      durch Dritte zur Übersendung von nicht ausdrücklich angeforderter 
+      Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. 
+      Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte 
+      im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, 
+      vor.</p>
+<p><small><em>Quellen: <a href="http://www.e-recht24.de/muster-disclaimer.htm" class="externalURL">eRecht24 Disclaimer</a></small></em></p>]]></item>
+		<item name="wcf.user.button.mail"><![CDATA[E-Mail senden]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">
@@ -272,7 +347,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
-		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse (&bdquo;{$__wcf->user->email}&ldquo;) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com">www.gravatar.com</a>]]></item>
+		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse („{$__wcf->user->email}“) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com">www.gravatar.com</a>]]></item>
 		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
 		<item name="wcf.user.avatar.upload.success"><![CDATA[Der neue Avatar wurde erfolgreich gespeichert.]]></item>
 		<item name="wcf.user.avatar.upload.error.invalidExtension"><![CDATA[Die Datei hat eine ungültige Dateiendung.]]></item>
@@ -303,7 +378,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von &bdquo;{$user->username}&ldquo;]]></item>
+		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von „{$user->username}“]]></item>
 		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[Der Benutzer hat noch keine für Sie sichtbaren Informationen hinterlegt.]]></item>
 		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[Es sind keine anzeigbaren Aktivitäten vorhanden.]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
@@ -314,7 +389,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.profile.followers.all"><![CDATA[Alle anzeigen]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.profile.visitors"><![CDATA[Profil-Besucher]]></item>
-		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher &bdquo;{$user->getOldUsername()}&ldquo;]]></item>
+		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher „{$user->getOldUsername()}“]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
@@ -341,5 +416,32 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Kann E-Mail-Adresse sehen]]></item>
 		<item name="wcf.user.option.canMail"><![CDATA[Kann E-Mails senden]]></item>
 		<item name="wcf.user.option.adminCanMail"><![CDATA[E-Mails der Administration akzeptieren]]></item>
+	</category>
+	
+	<category name="wcf.user.mail">
+		<item name="wcf.user.mail.mail"><![CDATA[Hallo {@$recipient->username},
+
+„{@$username}“ hat Ihnen auf der Website „{@PAGE_TITLE}“ folgende Nachricht gesandt:
+{@$message}]]></item>
+		<item name="wcf.user.mail.mail.subject"><![CDATA[Nachricht von {@$username}: {@$subject}]]></item>
+		<item name="wcf.user.mail.message"><![CDATA[Nachricht]]></item>
+		<item name="wcf.user.mail.senderEmail"><![CDATA[Ihre E-Mail-Adresse]]></item>
+		<item name="wcf.user.mail.sent"><![CDATA[Ihre Nachricht an „{$user->username}“ wurde erfolgreich versandt.]]></item>
+		<item name="wcf.user.mail.showAddress"><![CDATA[Meine E-Mail-Adresse als Absender-Adresse benutzen. Der Empfänger kann direkt auf die Nachricht antworten.]]></item>
+		<item name="wcf.user.mail.subject"><![CDATA[Betreff]]></item>
+		<item name="wcf.user.mail.title"><![CDATA[E-Mail an „{$user->username}“ senden]]></item>
+		<item name="wcf.user.mail.information"><![CDATA[Informationen]]></item>
+	</category>
+	
+	<category name="wcf.user.rank">
+		<item name="wcf.user.rank.administrator"><![CDATA[Administrator]]></item>
+		<item name="wcf.user.rank.moderator"><![CDATA[Moderator]]></item>
+		<item name="wcf.user.rank.superModerator"><![CDATA[Super-Moderator]]></item>
+		<item name="wcf.user.rank.user0"><![CDATA[Anfänger]]></item>
+		<item name="wcf.user.rank.user1"><![CDATA[Schüler]]></item>
+		<item name="wcf.user.rank.user2"><![CDATA[Fortgeschrittener]]></item>
+		<item name="wcf.user.rank.user3"><![CDATA[Profi]]></item>
+		<item name="wcf.user.rank.user4"><![CDATA[Meister]]></item>
+		<item name="wcf.user.rank.user5"><![CDATA[Erleuchteter]]></item>
 	</category>
 </language>

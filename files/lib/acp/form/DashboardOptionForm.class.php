@@ -3,7 +3,6 @@ namespace wcf\acp\form;
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 
@@ -77,7 +76,6 @@ class DashboardOptionForm extends ACPForm {
 		}
 		
 		$boxList = new DashboardBoxList();
-		$boxList->getConditionBuilder()->add("dashboard_box.packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 		$boxList->getConditionBuilder()->add("dashboard_box.boxType IN (?)", array($allowedBoxTypes));
 		$boxList->sqlLimit = 0;
 		$boxList->readObjects();

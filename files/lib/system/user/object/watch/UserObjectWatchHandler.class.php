@@ -1,9 +1,7 @@
 <?php
 namespace wcf\system\user\object\watch;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\application\ApplicationHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\user\notification\object\IUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\storage\UserStorageHandler;
@@ -74,7 +72,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 				}
 				
 				// update storage data
-				UserStorageHandler::getInstance()->update($userID, 'userObjectWatchTypeIDs', serialize($this->objectTypeIDs[$userID]), ApplicationHandler::getInstance()->getPrimaryApplication()->packageID);
+				UserStorageHandler::getInstance()->update($userID, 'userObjectWatchTypeIDs', serialize($this->objectTypeIDs[$userID]));
 			}
 			else {
 				$this->objectTypeIDs[$userID] = unserialize($data[$userID]);
@@ -132,7 +130,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 				}
 				
 				// update storage data
-				UserStorageHandler::getInstance()->update($userID, 'unreadUserObjectWatchCount', serialize($this->unreadObjectCount[$userID]), ApplicationHandler::getInstance()->getPrimaryApplication()->packageID);
+				UserStorageHandler::getInstance()->update($userID, 'unreadUserObjectWatchCount', serialize($this->unreadObjectCount[$userID]));
 			}
 			else {
 				$this->unreadObjectCount[$userID] = unserialize($data[$userID]);

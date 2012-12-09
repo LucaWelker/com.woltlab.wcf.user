@@ -122,6 +122,6 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	 * @see	wcf\data\IEditableCachedObject::resetCache()
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.userProfileMenu-*.php');
+		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.userProfileMenu.php');
 	}
 }

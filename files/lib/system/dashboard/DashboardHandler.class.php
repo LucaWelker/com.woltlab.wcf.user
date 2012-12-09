@@ -2,11 +2,9 @@
 namespace wcf\system\dashboard;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
-use wcf\system\application\ApplicationHandler;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\ClassUtil;
@@ -38,16 +36,13 @@ class DashboardHandler extends SingletonFactory {
 	 * @see	wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		$primaryApplication = ApplicationHandler::getInstance()->getPrimaryApplication();
-		$cacheName = 'dashboardBoxes-'.$primaryApplication->packageID;
-		
 		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			WCF_DIR.'cache/cache.'.$cacheName.'.php',
+			'dashboardBox',
+			WCF_DIR.'cache/cache.dashboardBox.php',
 			'wcf\system\cache\builder\DashboardBoxCacheBuilder'
 		);
-		$this->boxCache = CacheHandler::getInstance()->get($cacheName, 'boxes');
-		$this->pageCache = CacheHandler::getInstance()->get($cacheName, 'pages');
+		$this->boxCache = CacheHandler::getInstance()->get('dashboardBox', 'boxes');
+		$this->pageCache = CacheHandler::getInstance()->get('dashboardBox', 'pages');
 	}
 	
 	/**
@@ -124,7 +119,6 @@ class DashboardHandler extends SingletonFactory {
 			
 			// select available box ids
 			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("packageID IN (?)", array(PackageDependencyHandler::getInstance()->getDependencies()));
 			$conditions->add("boxName IN (?)", array(array_keys($enableBoxNames)));
 			
 			$sql = "SELECT	boxID, boxName
@@ -202,6 +196,6 @@ class DashboardHandler extends SingletonFactory {
 	 * Clears dashboard box cache.
 	 */
 	public static function clearCache() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.dashboardBoxes-*.php');
+		CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.dashboardBox.php');
 	}
 }
