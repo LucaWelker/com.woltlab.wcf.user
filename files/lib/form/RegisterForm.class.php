@@ -264,12 +264,12 @@ class RegisterForm extends UserAddForm {
 		$userEditor = new UserEditor($user);
 		
 		// update user rank
-		if (MODULE_USER_RANK) {
+		if (MODULE_USER_RANK && !REGISTER_ACTIVATION_METHOD) {
 			$action = new UserProfileAction(array($userEditor), 'updateUserRank');
 			$action->executeAction();
 		}
 		// update user online marking
-		$action = new UserProfileAction(array($userEditor), 'updateOnlineMarking');
+		$action = new UserProfileAction(array($userEditor), 'updateUserOnlineMarking');
 		$action->executeAction();
 		
 		// update session

@@ -170,16 +170,16 @@ CREATE TABLE wcf1_user_rank (
 );
 
 -- default ranks
-INSERT INTO wcf1_user_rank (groupID, neededPoints, rankTitle) VALUES
-	(4, 0, 'wcf.user.rank.administrator'),
-	(5, 0, 'wcf.user.rank.moderator'),
-	(6, 0, 'wcf.user.rank.superModerator'),
-	(3, 0, 'wcf.user.rank.user0'),
-	(3, 300, 'wcf.user.rank.user1'),
-	(3, 900, 'wcf.user.rank.user2'),
-	(3, 3000, 'wcf.user.rank.user3'),
-	(3, 9000, 'wcf.user.rank.user4'),
-	(3, 15000, 'wcf.user.rank.user5');
+INSERT INTO wcf1_user_rank (groupID, neededPoints, rankTitle, cssClassName) VALUES
+	(4, 0, 'wcf.user.rank.administrator', 'blue'),
+	(5, 0, 'wcf.user.rank.moderator', 'blue'),
+	(6, 0, 'wcf.user.rank.superModerator', 'blue'),
+	(3, 0, 'wcf.user.rank.user0', ''),
+	(3, 300, 'wcf.user.rank.user1', ''),
+	(3, 900, 'wcf.user.rank.user2', ''),
+	(3, 3000, 'wcf.user.rank.user3', ''),
+	(3, 9000, 'wcf.user.rank.user4', ''),
+	(3, 15000, 'wcf.user.rank.user5', '');
 
 -- recent activity
 DROP TABLE IF EXISTS wcf1_user_activity_event;

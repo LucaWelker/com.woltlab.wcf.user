@@ -3,6 +3,8 @@ namespace wcf\form;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserAction;
+use wcf\data\user\UserEditor;
+use wcf\data\user\UserProfileAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
@@ -81,7 +83,8 @@ class RegisterActivationForm extends AbstractForm {
 		
 		// enable user
 		// update activation code
-		$this->objectAction = new UserAction(array($this->user->userID), 'update', array(
+		$userEditor = new UserEditor($this->user);
+		$this->objectAction = new UserAction(array($userEditor), 'update', array(
 			'data' => array(
 				'activationCode' => 0
 			),
@@ -93,6 +96,15 @@ class RegisterActivationForm extends AbstractForm {
 			)
 		));
 		$this->objectAction->executeAction();
+		
+		// update user rank
+		if (MODULE_USER_RANK) {
+			$action = new UserProfileAction(array($userEditor), 'updateUserRank');
+			$action->executeAction();
+		}
+		// update user online marking
+		$action = new UserProfileAction(array($userEditor), 'updateUserOnlineMarking');
+		$action->executeAction();
 		$this->saved();
 		
 		// forward to index page
