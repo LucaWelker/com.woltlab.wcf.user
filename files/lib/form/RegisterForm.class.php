@@ -66,7 +66,7 @@ class RegisterForm extends UserAddForm {
 	
 	/**
 	 * min number of seconds between form request and submit
-	 * @var integer
+	 * @var	integer
 	 */
 	public static $minRegistrationTime = 15;
 	

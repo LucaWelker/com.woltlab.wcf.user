@@ -444,7 +444,7 @@ class UserNotificationHandler extends SingletonFactory {
 	 * Deletes notifications.
 	 *
 	 * @param	string		$eventName
-	 * @param 	string		$objectType
+	 * @param	string		$objectType
 	 * @param	array<integer>	$recipientIDs
 	 * @param	array<integer>	$objectIDs
 	 */

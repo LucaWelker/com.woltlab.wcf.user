@@ -29,42 +29,42 @@ class MailForm extends RecaptchaForm {
 	
 	/**
 	 * recipient's user id
-	 * @var integer
+	 * @var	integer
 	 */
 	public $userID = 0;
 	
 	/**
 	 * recipient's user object
-	 * @var wcf\data\user\UserProfile
+	 * @var	wcf\data\user\UserProfile
 	 */
 	public $user = 0;
 	
 	/**
 	 * true to add the reply-to header
-	 * @var boolean
+	 * @var	boolean
 	 */
 	public $showAddress = true;
 	
 	/**
 	 * email subject
-	 * @var string
+	 * @var	string
 	 */
 	public $subject = '';
 	
 	/**
 	 * email message
-	 * @var string
+	 * @var	string
 	 */
 	public $message = '';
 	
 	/**
 	 * sender's email address
-	 * @var string
+	 * @var	string
 	 */
 	public $email = '';
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -77,7 +77,7 @@ class MailForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -88,9 +88,9 @@ class MailForm extends RecaptchaForm {
 		if (isset($_POST['email'])) $this->email = StringUtil::trim($_POST['email']);
 		if (isset($_POST['showAddress'])) $this->showAddress = intval($_POST['showAddress']);
 	}
-
+	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		if (!WCF::getUser()->userID) {
@@ -113,13 +113,13 @@ class MailForm extends RecaptchaForm {
 		
 		parent::validate();
 	}
-
+	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
-
+		
 		// get recipient's language
 		$userLanguage = $this->user->getLanguage();
 		
@@ -153,9 +153,9 @@ class MailForm extends RecaptchaForm {
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('User', array('object' => $this->user)), WCF::getLanguage()->getDynamicVariable('wcf.user.mail.sent', array('user' => $this->user)));
 		exit;
 	}
-
+	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -164,7 +164,7 @@ class MailForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -179,7 +179,7 @@ class MailForm extends RecaptchaForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		WCF::getSession()->checkPermissions(array('user.profile.canMail'));

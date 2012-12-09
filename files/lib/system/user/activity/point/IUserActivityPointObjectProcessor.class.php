@@ -16,7 +16,7 @@ interface IUserActivityPointObjectProcessor {
 	 * This method has to return the amount of requests needed to completely
 	 * process this UserActivityPointObject.
 	 * 
-	 * @return integer
+	 * @return	integer
 	 */
 	public function countRequests();
 	

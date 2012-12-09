@@ -24,14 +24,14 @@ class UserNotificationEventRecipientList extends UserList {
 	}
 		
 	/**
-	 * @see wcf\data\DatabaseObjectList::getDatabaseTableName()
+	 * @see	wcf\data\DatabaseObjectList::getDatabaseTableName()
 	 */
 	public function getDatabaseTableName() {
 		return 'wcf'.WCF_N.'_user_notification_event_to_user';
 	}
 	
 	/**
-	 * @see wcf\data\DatabaseObjectList::getDatabaseTableAlias()
+	 * @see	wcf\data\DatabaseObjectList::getDatabaseTableAlias()
 	 */
 	public function getDatabaseTableAlias() {
 		return 'event_to_user';

@@ -16,7 +16,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.object.watch
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class UserObjectWatchHandler extends SingletonFactory {
 	/**
@@ -179,7 +179,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * @see wcf\system\user\object\watch\UserObjectWatchHandler::resetObjects();
+	 * @see	wcf\system\user\object\watch\UserObjectWatchHandler::resetObjects();
 	 */
 	public function resetObject($objectType, $objectID) {
 		$this->resetObjects($objectType, array($objectID));

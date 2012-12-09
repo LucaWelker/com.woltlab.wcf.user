@@ -17,7 +17,7 @@ class UserRankListPage extends SortablePage {
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
-	//public $neededPermissions = array('admin.user.rank.canManageRank');
+	public $neededPermissions = array('admin.user.rank.canManageRank');
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName

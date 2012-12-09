@@ -67,8 +67,8 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 		if ($this->showOrder != $showOrder) {
 			if ($showOrder < $this->showOrder) {
 				$sql = "UPDATE	wcf".WCF_N."_page_menu_item
-					SET 	showOrder = showOrder + 1
-					WHERE 	showOrder >= ?
+					SET	showOrder = showOrder + 1
+					WHERE	showOrder >= ?
 						AND showOrder < ?";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array(
@@ -109,8 +109,8 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 		}
 		else {
 			$sql = "UPDATE	wcf".WCF_N."_page_menu_item
-				SET 	showOrder = showOrder + 1
-				WHERE 	showOrder >= ?";
+				SET	showOrder = showOrder + 1
+				WHERE	showOrder >= ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array($showOrder));
 		}

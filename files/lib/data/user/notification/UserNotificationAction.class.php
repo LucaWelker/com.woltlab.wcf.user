@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class UserNotificationAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::create()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::create()
 	 */
 	public function create() {
 		// create notification

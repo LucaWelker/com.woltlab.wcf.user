@@ -23,7 +23,7 @@ class UserOnlineLocationHandler extends SingletonFactory {
 	public $locations = array();
 	
 	/**
-	 * @see wcf\system\SingletonFactory::init()
+	 * @see	wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
 		// load locations

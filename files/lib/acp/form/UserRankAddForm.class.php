@@ -12,7 +12,7 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the user rank add form.
- *
+ * 
  * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -57,25 +57,25 @@ class UserRankAddForm extends ACPForm {
 	
 	/**
 	 * required activity points to acquire the rank
-	 * @var integer
+	 * @var	integer
 	 */
 	public $neededPoints = 0;
 	
 	/**
 	 * path to user rank image
-	 * @var string
+	 * @var	string
 	 */
 	public $rankImage = '';
 	
 	/**
 	 * number of image repeats
-	 * @var integer
+	 * @var	integer
 	 */
 	public $repeatImage = 1;
 	
 	/**
 	 * gender setting (1=male; 2=female)
-	 * @var integer
+	 * @var	integer
 	 */
 	public $gender = 0;
 	

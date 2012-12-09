@@ -21,7 +21,7 @@ final class UserRegistrationUtil {
 	 * Returns true, if the given name is a valid username.
 	 * 
 	 * @param	string		$name		username
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	public static function isValidUsername($name) {
 		$length = StringUtil::length($name);
@@ -32,7 +32,7 @@ final class UserRegistrationUtil {
 	 * Returns true, if the given e-mail is a valid address.
 	 * 
 	 * @param	string		$email
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	public static function isValidEmail($email) {
 		return (UserUtil::isValidEmail($email) && self::checkForbiddenEmails($email));
@@ -60,7 +60,7 @@ final class UserRegistrationUtil {
 	 * Returns true, if the given password is secure.
 	 * 
 	 * @param	string		$password
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	public static function isSecurePassword($password) {
 		if (REGISTER_ENABLE_PASSWORD_SECURITY_CHECK) {

@@ -80,7 +80,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	
 	/**
 	 * current location of this user.
-	 * @var string
+	 * @var	string
 	 */
 	protected $currentLocation = null;
 	
@@ -502,7 +502,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	/**
 	 * Returns the value of the permission with the given name.
 	 *
-	 * @param 	string		$permission
+	 * @param	string		$permission
 	 * @return	mixed		permission value
 	 */
 	public function getPermission($permission) {
@@ -609,7 +609,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * @see wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
+	 * @see	wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
 	 */
 	public function getBreadcrumb() {
 		return new Breadcrumb($this->username, LinkHandler::getInstance()->getLink('User', array(
