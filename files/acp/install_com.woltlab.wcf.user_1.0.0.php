@@ -16,5 +16,5 @@ DashboardHandler::setDefaultValues('com.woltlab.wcf.user.DashboardPage', array('
 $editor = new UserEditor(WCF::getUser());
 $action = new UserProfileAction(array($editor), 'updateUserRank');
 $action->executeAction();
-$action = new UserProfileAction(array($editor), 'updateOnlineMarking');
+$action = new UserProfileAction(array($editor), 'updateUserOnlineMarking');
 $action->executeAction();
