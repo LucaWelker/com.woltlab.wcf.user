@@ -146,7 +146,7 @@ class UserRankAddForm extends ACPForm {
 			throw new UserInputException('groupID');
 		}
 		$userGroup = UserGroup::getGroupByID($this->groupID);
-		if ($userGroup === null || ($userGroup->groupType != UserGroup::USERS && $userGroup->groupType != UserGroup::OTHER)) {
+		if ($userGroup === null || $userGroup->groupType == UserGroup::GUESTS || $userGroup->groupType == UserGroup::EVERYONE) {
 			throw new UserInputException('groupID', 'invalid');
 		}
 		
@@ -226,7 +226,7 @@ class UserRankAddForm extends ACPForm {
 			'customCssClassName' => $this->customCssClassName,
 			'groupID' => $this->groupID,
 			'rankTitle' => $this->rankTitle,
-			'availableGroups' => UserGroup::getGroupsByType(array(UserGroup::USERS, UserGroup::OTHER)),
+			'availableGroups' => UserGroup::getGroupsByType(array(), array(UserGroup::GUESTS, UserGroup::EVERYONE)),
 			'neededPoints' => $this->neededPoints,
 			'rankImage' => $this->rankImage,
 			'repeatImage' => $this->repeatImage,
