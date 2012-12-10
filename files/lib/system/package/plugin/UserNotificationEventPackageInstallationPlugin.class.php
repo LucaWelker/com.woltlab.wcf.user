@@ -77,12 +77,27 @@ class UserNotificationEventPackageInstallationPlugin extends AbstractXMLPackageI
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::findExistingItem()
 	 */
 	protected function findExistingItem(array $data) {
+		// get object type id
+		$sql = "SELECT	object_type.objectTypeID
+			FROM	wcf".WCF_N."_object_type object_type
+			WHERE	object_type.objectType = ?
+				AND object_type.definitionID IN (
+					SELECT	definitionID
+					FROM	wcf".WCF_N."_object_type_definition
+					WHERE	definitionName = 'com.woltlab.wcf.notification.objectType'
+				)";
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array($data['elements']['objecttype']));
+		$row = $statement->fetchArray();
+		
 		$sql = "SELECT	*
 			FROM	wcf".WCF_N."_".$this->tableName."
 			WHERE	packageID = ?
+				AND objectTypeID = ?
 				AND eventName = ?";
 		$parameters = array(
 			$this->installation->getPackageID(),
+			$row['objectTypeID'],
 			$data['eventName']
 		);
 		

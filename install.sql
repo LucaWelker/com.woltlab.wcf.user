@@ -131,7 +131,7 @@ CREATE TABLE wcf1_user_notification_event (
 	className VARCHAR(255) NOT NULL DEFAULT '',
 	permissions TEXT,
 	options TEXT,
-	UNIQUE KEY packageID (packageID, eventName)
+	UNIQUE KEY eventName (eventName, objectTypeID)
 );
 
 -- user configuration for events
