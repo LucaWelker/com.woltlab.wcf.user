@@ -260,5 +260,18 @@ class UserActivityPointHandler extends SingletonFactory {
 		$statement->execute($conditionBuilder->getParameters());
 		
 		WCF::getDB()->commitTransaction();
+		
+		// update user ranks
+		$this->updateUserRanks($userIDs);
+	}
+	
+	/**
+	 * Updates the user ranks for the given users.
+	 *
+	 * @param array<integer> $userIDs
+	 */
+	protected function updateUserRanks(array $userIDs) {
+		$action = new \wcf\data\user\UserProfileAction($userIDs, 'updateUserRank');
+		$action->executeAction();
 	}
 }

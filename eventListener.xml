@@ -38,5 +38,13 @@
 			<listenerclassname>wcf\system\event\listener\UserGroupListPagePriorityListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
+			<eventname>saved</eventname>
+			<listenerclassname>wcf\system\event\listener\UserAddFormUserRankListener</listenerclassname>
+			<inherit>1</inherit>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>

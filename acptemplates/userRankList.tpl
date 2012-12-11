@@ -9,6 +9,11 @@
 		//<![CDATA[
 		$(function() {
 			new WCF.Action.Delete('wcf\\data\\user\\rank\\UserRankAction', $('.jsUserRankRow'), $('.tabularBox > hgroup > .badge'));
+			
+			$('#updateUserRanks').click(function () {
+				$('#updateUserRanks').unbind('click');
+				new WCF.ACP.Worker('updateUserRanks', 'wcf\\system\\worker\\UserRankUpdateWorker');
+			});
 		});
 		//]]>
 	</script>
@@ -19,7 +24,10 @@
 	
 	<nav>
 		<ul>
+			<li><a id="updateUserRanks" title="{lang}wcf.acp.user.rank.updateRanks{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/update.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.rank.updateRanks{/lang}</span></a></li>
 			<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
+			
+			{event name='largeButtonsTop'}
 		</ul>
 	</nav>
 </div>
@@ -76,6 +84,8 @@
 		<nav>
 			<ul>
 				<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
+				
+				{event name='largeButtonsBottom'}
 			</ul>
 		</nav>
 	</div>
