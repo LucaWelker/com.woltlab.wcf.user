@@ -140,9 +140,9 @@ class UserProfileAction extends UserAction {
 		$activityPointObjectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.activityPointEvent');
 		
 		$sql = "SELECT	activityPoints
-			FROM	wcf".WCF_N."_user_activity_points
-			WHERE		userID = ?
-				AND	objectTypeID = ?";
+			FROM	wcf".WCF_N."_user_activity_point
+			WHERE	userID = ?
+			AND	objectTypeID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($activityPointObjectTypes as $objectType) {
 			$statement->execute(array($user->userID, $objectType->objectTypeID));
