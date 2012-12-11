@@ -79,10 +79,10 @@ class UserNotificationEventPackageInstallationPlugin extends AbstractXMLPackageI
 	protected function findExistingItem(array $data) {
 		$sql = "SELECT	*
 			FROM	wcf".WCF_N."_".$this->tableName."
-			WHERE	packageID = ?
+			WHERE	objectTypeID = ?
 				AND eventName = ?";
 		$parameters = array(
-			$this->installation->getPackageID(),
+			$data['objectTypeID'],
 			$data['eventName']
 		);
 		
