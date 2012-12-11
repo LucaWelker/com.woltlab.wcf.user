@@ -76,6 +76,49 @@ class UserActivityPointHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * Bulk import for user activity point events.
+	 * 
+	 * structure of $data:
+	 * array(
+	 * 	objectID => array(
+	 * 		userID => userID,
+	 * 		additionalData => mixed (optional)
+	 *	)
+	 * )
+	 * 
+	 * @param	string		$objectType
+	 * @param	array<array>	$data
+	 */
+	public function fireEvents($objectType, array $data) {
+		$objectTypeObj = $this->getObjectTypeByName($objectType);
+		if ($objectTypeObj === null) {
+			throw new SystemException("Object type '".$objectType."' is not valid for object type definition 'com.woltlab.wcf.user.activityPointEvent'");
+		}
+		
+		$sql = "INSERT INTO	wcf".WCF_N."_user_activity_point_event
+					(objectTypeID, objectID, userID, additionalData)
+			VALUES		(?, ?, ?, ?)";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		WCF::getDB()->beginTransaction();
+		$userIDs = array();
+		foreach ($data as $objectID => $objectData) {
+			$statement->execute(array(
+				$objectTypeObj->objectTypeID,
+				$objectID,
+				$objectData['userID'],
+				(isset($objectData['additionalData']) ? serialize($objectData['additionalData']) : '')
+			));
+			
+			$userIDs[] = $objectData['userID'];
+		}
+		WCF::getDB()->commitTransaction();
+		
+		$userIDs = array_unique($userIDs);
+		$this->updateUsers($userIDs, $objectType);
+	}
+	
+	/**
 	 * Removes activity point events.
 	 * 
 	 * @param	string			$objectType
@@ -145,11 +188,10 @@ class UserActivityPointHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Updates the caches for the given user. When no user is given the current user is used.
+	 * Updates the caches for the given user.
 	 * 
 	 * @param	integer		$userID
 	 * @param	string		$objectType
-	 * @param	boolean		$removePoints
 	 */
 	public function updateUser($userID, $objectType) {
 		$objectType = $this->getObjectType($event->objectTypeID);
@@ -206,7 +248,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("userID IN (?)", array($userIDs));
 		$conditions->add("objectTypeID IN (?)", array($objectTypeIDs));
-		$sql = "DELETE FROM	wcf".WCF_N."_user_acitvity_point
+		$sql = "DELETE FROM	wcf".WCF_N."_user_activity_point
 			".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
@@ -214,6 +256,10 @@ class UserActivityPointHandler extends SingletonFactory {
 		// update users for every given object type
 		WCF::getDB()->beginTransaction();
 		foreach ($objectTypes as $objectType) {
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("userID IN (?)", array($userIDs));
+			$conditions->add("objectTypeID = ?", array($objectType->objectTypeID));
+			
 			$parameters = $conditions->getParameters();
 			array_unshift($parameters, $objectType->points);
 			
