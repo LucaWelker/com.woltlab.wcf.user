@@ -17,7 +17,7 @@
 					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
 				});
 
-				new WCF.User.Profile.Follow({$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
+				new WCF.User.Profile.Follow({@$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 				new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
 			{/if}
 
@@ -30,7 +30,7 @@
 					'wcf.user.editProfile': '{lang}wcf.user.editProfile{/lang}',
 				});
 
-				WCF.User.Profile.Editor.Handler.init({$user->userID}, {if $editOnInit}true{else}false{/if});
+				WCF.User.Profile.Editor.Handler.init({@$user->userID}, {if $editOnInit}true{else}false{/if});
 				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
 			{/if}
 			
@@ -41,7 +41,7 @@
 						data: {
 							className: 'wcf\\data\\user\\UserProfileAction',
 							actionName: 'getDetailedActivityPointList',
-							objectIDs: [ {$user->userID} ]
+							objectIDs: [ {@$user->userID} ]
 						}
 					});
 				});
@@ -111,8 +111,10 @@
 		</dl>
 	{/if}
 	
-	<ul id="profileButtonContainer" class="buttonList">
-	</ul>
+	<ul id="profileButtonContainer" class="buttonGroup">{*
+		*}{if $user->userID != $__wcf->user->userID}{if $user->isAccessible('canViewEmailAddress')}<li><a class="button jsTooltip" href="mailto:{$user->email}" title="{lang}wcf.user.button.mail{/lang}"><img src="{icon}eMail{/icon}" alt="" /></a></li>{elseif $user->isAccessible('canMail') && $__wcf->session->getPermission('user.profile.canMail')}<li><a class="button jsTooltip" href="{link controller='Mail' object=$user}{/link}" title="{lang}wcf.user.button.mail{/lang}"><img src="{icon}eMail{/icon}" alt="" /></a></li>{/if}{/if}{*
+		*}{event name='buttons'}{*
+	*}</ul>
 </header>
 
 {include file='userNotice'}

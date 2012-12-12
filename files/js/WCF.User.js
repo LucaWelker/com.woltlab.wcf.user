@@ -162,7 +162,7 @@ WCF.User.Profile.Follow = Class.extend({
 	 * Creates the (un-)follow button
 	 */
 	_createButton: function () {
-		this._button = $('<li id="followUser"><a class="button">'+WCF.Language.get('wcf.user.button.follow')+'</a></li>').appendTo($('#profileButtonContainer'));
+		this._button = $('<li id="followUser"><a class="button">'+WCF.Language.get('wcf.user.button.follow')+'</a></li>').prependTo($('#profileButtonContainer'));
 		this._button.click($.proxy(this._execute, this));
 	},
 	
@@ -299,7 +299,7 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 	 */
 	_updateButton: function() {
 		if (this._button === null) {
-			this._button = $('<li id="ignoreUser"><a class="button"></a></li>').appendTo($('#profileButtonContainer'));
+			this._button = $('<li id="ignoreUser"><a class="button"></a></li>').prependTo($('#profileButtonContainer'));
 		}
 
 		this._button.find('.button').text(WCF.Language.get('wcf.user.button.' + (this._isIgnoredUser ? 'un' : '') + 'ignore'));
@@ -508,7 +508,7 @@ WCF.User.Profile.Editor.Handler = {
 		// create interface elements
 		this._ui = {
 			buttons: {
-				beginEdit: $('<li class="button">'+WCF.Language.get('wcf.user.editProfile')+'</li>').data('action', 'beginEdit').appendTo($buttonContainer)
+				beginEdit: $('<li><a class="button"><img src="'+WCF.Icon.get('wcf.icon.edit')+'" class="icon24" /> <span>'+WCF.Language.get('wcf.user.editProfile')+'</span></a></li>').data('action', 'beginEdit').prependTo($buttonContainer)
 			}
 		};
 		
