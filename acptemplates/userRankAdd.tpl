@@ -130,33 +130,33 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'gender'} class="formError"{/if}>
-				<dt><label for="gender">{lang}wcf.user.option.gender{/lang}</label></dt>
+			<dl{if $errorField == 'requiredGender'} class="formError"{/if}>
+				<dt><label for="requiredGender">{lang}wcf.user.option.gender{/lang}</label></dt>
 				<dd>
-					<select id="gender" name="gender">
+					<select id="requiredGender" name="requiredGender">
 						<option value="0"></option>
-						<option value="1"{if $gender == 1} selected="selected"{/if}>{lang}wcf.user.gender.male{/lang}</option>
-						<option value="2"{if $gender == 2} selected="selected"{/if}>{lang}wcf.user.gender.female{/lang}</option>
+						<option value="1"{if $requiredGender == 1} selected="selected"{/if}>{lang}wcf.user.gender.male{/lang}</option>
+						<option value="2"{if $requiredGender == 2} selected="selected"{/if}>{lang}wcf.user.gender.female{/lang}</option>
 					</select>
-					{if $errorField == 'gender'}
+					{if $errorField == 'requiredGender'}
 						<small class="innerError">
-							{lang}wcf.acp.user.rank.gender.error.{@$errorType}{/lang}
+							{lang}wcf.acp.user.rank.requiredGender.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<small>{lang}wcf.acp.user.rank.gender.description{/lang}</small>
+					<small>{lang}wcf.acp.user.rank.requiredGender.description{/lang}</small>
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'neededPoints'} class="formError"{/if}>
-				<dt><label for="neededPoints">{lang}wcf.acp.user.rank.neededPoints{/lang}</label></dt>
+			<dl{if $errorField == 'requiredPoints'} class="formError"{/if}>
+				<dt><label for="requiredPoints">{lang}wcf.acp.user.rank.requiredPoints{/lang}</label></dt>
 				<dd>
-					<input type="number" id="neededPoints" name="neededPoints" value="{@$neededPoints}" min="0" class="medium" />
-					{if $errorField == 'neededPoints'}
+					<input type="number" id="requiredPoints" name="requiredPoints" value="{@$requiredPoints}" min="0" class="medium" />
+					{if $errorField == 'requiredPoints'}
 						<small class="innerError">
-							{lang}wcf.acp.user.rank.neededPoints.error.{@$errorType}{/lang}
+							{lang}wcf.acp.user.rank.requiredPoints.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<small>{lang}wcf.acp.user.rank.neededPoints.description{/lang}</small>
+					<small>{lang}wcf.acp.user.rank.requiredPoints.description{/lang}</small>
 				</dd>
 			</dl>
 			

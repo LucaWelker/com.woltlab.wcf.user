@@ -59,7 +59,7 @@ class UserRankAddForm extends ACPForm {
 	 * required activity points to acquire the rank
 	 * @var	integer
 	 */
-	public $neededPoints = 0;
+	public $requiredPoints = 0;
 	
 	/**
 	 * path to user rank image
@@ -74,10 +74,10 @@ class UserRankAddForm extends ACPForm {
 	public $repeatImage = 1;
 	
 	/**
-	 * gender setting (1=male; 2=female)
+	 * required gender setting (1=male; 2=female)
 	 * @var	integer
 	 */
-	public $gender = 0;
+	public $requiredGender = 0;
 	
 	/**
 	 * list of pre-defined css class names
@@ -119,10 +119,10 @@ class UserRankAddForm extends ACPForm {
 		if (isset($_POST['cssClassName'])) $this->cssClassName = StringUtil::trim($_POST['cssClassName']);
 		if (isset($_POST['customCssClassName'])) $this->customCssClassName = StringUtil::trim($_POST['customCssClassName']);
 		if (isset($_POST['groupID'])) $this->groupID = intval($_POST['groupID']);
-		if (isset($_POST['neededPoints'])) $this->neededPoints = intval($_POST['neededPoints']);
+		if (isset($_POST['requiredPoints'])) $this->requiredPoints = intval($_POST['requiredPoints']);
 		if (isset($_POST['rankImage'])) $this->rankImage = StringUtil::trim($_POST['rankImage']);
 		if (isset($_POST['repeatImage'])) $this->repeatImage = intval($_POST['repeatImage']);
-		if (isset($_POST['gender'])) $this->gender = intval($_POST['gender']);
+		if (isset($_POST['requiredGender'])) $this->requiredGender = intval($_POST['requiredGender']);
 	}
 	
 	/**
@@ -163,9 +163,9 @@ class UserRankAddForm extends ACPForm {
 			}
 		}
 		
-		// gender
-		if ($this->gender < 0 || $this->gender > 2) {
-			$this->gender = 0;
+		// required gender
+		if ($this->requiredGender < 0 || $this->requiredGender > 2) {
+			$this->requiredGender = 0;
 		}
 	}
 	
@@ -180,10 +180,10 @@ class UserRankAddForm extends ACPForm {
 			'rankTitle' => $this->rankTitle,
 			'cssClassName' => ($this->cssClassName == 'custom' ? $this->customCssClassName : $this->cssClassName),
 			'groupID' => $this->groupID,
-			'neededPoints' => $this->neededPoints,
+			'requiredPoints' => $this->requiredPoints,
 			'rankImage' => $this->rankImage,
 			'repeatImage' => $this->repeatImage,
-			'gender' => $this->gender
+			'requiredGender' => $this->requiredGender
 		)));
 		$this->objectAction->executeAction();
 		
@@ -202,7 +202,7 @@ class UserRankAddForm extends ACPForm {
 		
 		// reset values
 		$this->rankTitle = $this->cssClassName = $this->customCssClassName = $this->rankImage = '';
-		$this->groupID = $this->repeatImage = $this->neededPoints = $this->gender = 0;
+		$this->groupID = $this->repeatImage = $this->requiredPoints = $this->requiredGender = 0;
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		
 		// show success
@@ -227,10 +227,10 @@ class UserRankAddForm extends ACPForm {
 			'groupID' => $this->groupID,
 			'rankTitle' => $this->rankTitle,
 			'availableGroups' => UserGroup::getGroupsByType(array(), array(UserGroup::GUESTS, UserGroup::EVERYONE)),
-			'neededPoints' => $this->neededPoints,
+			'requiredPoints' => $this->requiredPoints,
 			'rankImage' => $this->rankImage,
 			'repeatImage' => $this->repeatImage,
-			'gender' => $this->gender
+			'requiredGender' => $this->requiredGender
 		));
 	}
 }

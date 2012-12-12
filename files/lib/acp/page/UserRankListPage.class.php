@@ -32,7 +32,7 @@ class UserRankListPage extends SortablePage {
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$validSortFields
 	 */
-	public $validSortFields = array('rankID', 'groupID', 'neededPoints', 'rankTitle', 'rankImage', 'gender');
+	public $validSortFields = array('rankID', 'groupID', 'requiredPoints', 'rankTitle', 'rankImage', 'requiredGender');
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::show()

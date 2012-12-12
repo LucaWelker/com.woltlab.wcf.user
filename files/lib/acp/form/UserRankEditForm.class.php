@@ -68,10 +68,10 @@ class UserRankEditForm extends UserRankAddForm {
 			'rankTitle' => $this->rankTitle,
 			'cssClassName' => ($this->cssClassName == 'custom' ? $this->customCssClassName : $this->cssClassName),
 			'groupID' => $this->groupID,
-			'neededPoints' => $this->neededPoints,
+			'requiredPoints' => $this->requiredPoints,
 			'rankImage' => $this->rankImage,
 			'repeatImage' => $this->repeatImage,
-			'gender' => $this->gender
+			'requiredGender' => $this->requiredGender
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -100,8 +100,8 @@ class UserRankEditForm extends UserRankAddForm {
 				$this->cssClassName = 'custom';
 			}
 			$this->groupID = $this->rank->groupID;
-			$this->neededPoints = $this->rank->neededPoints;
-			$this->gender = $this->rank->gender;
+			$this->requiredPoints = $this->rank->requiredPoints;
+			$this->requiredGender = $this->rank->requiredGender;
 			$this->repeatImage = $this->rank->repeatImage;
 			$this->rankImage = $this->rank->rankImage;
 		}

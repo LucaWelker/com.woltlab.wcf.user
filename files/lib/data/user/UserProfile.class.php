@@ -534,12 +534,12 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 					$this->rank = new UserRank(null, array(
 						'rankID' => $this->rankID,
 						'groupID' => $this->groupID,
-						'neededPoints' => $this->neededPoints,
+						'requiredPoints' => $this->requiredPoints,
 						'rankTitle' => $this->rankTitle,
 						'cssClassName' => $this->cssClassName,
 						'rankImage' => $this->rankImage,
 						'repeatImage' => $this->repeatImage,
-						'gender' => $this->gender
+						'requiredGender' => $this->requiredGender
 					));
 				}
 				else {

@@ -166,16 +166,16 @@ DROP TABLE IF EXISTS wcf1_user_rank;
 CREATE TABLE wcf1_user_rank (
 	rankID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	groupID INT(10),
-	neededPoints INT(10) NOT NULL DEFAULT 0,
+	requiredPoints INT(10) NOT NULL DEFAULT 0,
 	rankTitle VARCHAR(255) NOT NULL DEFAULT '',
 	cssClassName VARCHAR(255) NOT NULL DEFAULT '',
 	rankImage VARCHAR(255) NOT NULL DEFAULT '',
 	repeatImage TINYINT(3) NOT NULL DEFAULT 1,
-	gender TINYINT(1) NOT NULL DEFAULT 0
+	requiredGender TINYINT(1) NOT NULL DEFAULT 0
 );
 
 -- default ranks
-INSERT INTO wcf1_user_rank (groupID, neededPoints, rankTitle, cssClassName) VALUES
+INSERT INTO wcf1_user_rank (groupID, requiredPoints, rankTitle, cssClassName) VALUES
 	(4, 0, 'wcf.user.rank.administrator', 'blue'),
 	(5, 0, 'wcf.user.rank.moderator', 'blue'),
 	(6, 0, 'wcf.user.rank.superModerator', 'blue'),

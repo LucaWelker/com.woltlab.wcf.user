@@ -172,16 +172,16 @@ class UserProfileAction extends UserAction {
 		foreach ($this->objects as $user) {
 			$conditionBuilder = new PreparedStatementConditionBuilder();
 			$conditionBuilder->add('user_rank.groupID IN (?)', array($user->getGroupIDs()));
-			$conditionBuilder->add('user_rank.neededPoints <= ?', array($user->activityPoints));
-			if ($user->gender) $conditionBuilder->add('user_rank.gender IN (?)', array(0, $user->gender));
-			else $conditionBuilder->add('user_rank.gender = ?', array(0));
+			$conditionBuilder->add('user_rank.requiredPoints <= ?', array($user->activityPoints));
+			if ($user->gender) $conditionBuilder->add('user_rank.requiredGender IN (?)', array(0, $user->gender));
+			else $conditionBuilder->add('user_rank.requiredGender = ?', array(0));
 			
 			$sql = "SELECT		user_rank.rankID
 				FROM		wcf".WCF_N."_user_rank user_rank
 				LEFT JOIN	wcf".WCF_N."_user_group user_group
 				ON		(user_group.groupID = user_rank.groupID)
 				".$conditionBuilder."
-				ORDER BY	user_group.priority DESC, user_rank.neededPoints DESC, user_rank.gender DESC";
+				ORDER BY	user_group.priority DESC, user_rank.requiredPoints DESC, user_rank.requiredGender DESC";
 			$statement = WCF::getDB()->prepareStatement($sql, 1);
 			$statement->execute($conditionBuilder->getParameters());
 			$row = $statement->fetchArray();

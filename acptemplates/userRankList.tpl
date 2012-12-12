@@ -45,8 +45,8 @@
 					<th class="columnTitle columnRankTitle{if $sortField == 'rankTitle'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankTitle&sortOrder={if $sortField == 'rankTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.title{/lang}{if $sortField == 'rankTitle'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					<th class="columnText columnRankImage{if $sortField == 'rankImage'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankImage&sortOrder={if $sortField == 'rankImage' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.image{/lang}{if $sortField == 'rankImage'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					<th class="columnText columnGroupID{if $sortField == 'groupID'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'groupID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.group{/lang}{if $sortField == 'groupID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnText columnGender{if $sortField == 'gender'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=gender&sortOrder={if $sortField == 'gender' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.option.gender{/lang}{if $sortField == 'gender'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnDigits columnNeededPoints{if $sortField == 'neededPoints'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=neededPoints&sortOrder={if $sortField == 'neededPoints' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.neededPoints{/lang}{if $sortField == 'neededPoints'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnText columnRequiredGender{if $sortField == 'requiredGender'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredGender&sortOrder={if $sortField == 'requiredGender' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.option.gender{/lang}{if $sortField == 'requiredGender'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnDigits columnRequiredPoints{if $sortField == 'requiredPoints'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredPoints&sortOrder={if $sortField == 'requiredPoints' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.requiredPoints{/lang}{if $sortField == 'requiredPoints'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					
 					{event name='headColumns'}
 				</tr>
@@ -66,8 +66,8 @@
 							<td class="columnTitle columnRankTitle"><p><a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}" title="{lang}wcf.acp.user.rank.edit{/lang}" class="badge label{if $userRank->cssClassName} {$userRank->cssClassName}{/if}">{$userRank->rankTitle|language}</a></p></td>
 							<td class="columnText columnRankImage">{if $userRank->rankImage}<p>{@$userRank->getImage()}</p>{/if}</td>
 							<td class="columnText columnGroupID"><p>{$userRank->groupName|language}</p></td>
-							<td class="columnText columnGender">{if $userRank->gender}<p>{if $userRank->gender == 1}{lang}wcf.user.gender.male{/lang}{else}{lang}wcf.user.gender.female{/lang}{/if}</p>{/if}</td>
-							<td class="columnDigits columnNeededPoints"><p>{#$userRank->neededPoints}</p></td>
+							<td class="columnText columnRequiredGender">{if $userRank->requiredGender}<p>{if $userRank->requiredGender == 1}{lang}wcf.user.gender.male{/lang}{else}{lang}wcf.user.gender.female{/lang}{/if}</p>{/if}</td>
+							<td class="columnDigits columnRequiredPoints"><p>{#$userRank->requiredPoints}</p></td>
 							
 							{event name='columns'}
 						</tr>
