@@ -200,7 +200,7 @@ CREATE TABLE wcf1_user_activity_event (
 );
 
 DROP TABLE IF EXISTS wcf1_user_activity_point;
-CREATE TABLE wcf1_user_activity_points (
+CREATE TABLE wcf1_user_activity_point (
 	userID INT(10) NOT NULL,
 	objectTypeID INT(10) NOT NULL,
 	activityPoints INT(10) NOT NULL DEFAULT 0,
