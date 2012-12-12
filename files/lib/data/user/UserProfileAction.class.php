@@ -173,7 +173,7 @@ class UserProfileAction extends UserAction {
 			$conditionBuilder = new PreparedStatementConditionBuilder();
 			$conditionBuilder->add('user_rank.groupID IN (?)', array($user->getGroupIDs()));
 			$conditionBuilder->add('user_rank.requiredPoints <= ?', array($user->activityPoints));
-			if ($user->gender) $conditionBuilder->add('user_rank.requiredGender IN (?)', array(0, $user->gender));
+			if ($user->gender) $conditionBuilder->add('user_rank.requiredGender IN (?)', array(array(0, $user->gender)));
 			else $conditionBuilder->add('user_rank.requiredGender = ?', array(0));
 			
 			$sql = "SELECT		user_rank.rankID
