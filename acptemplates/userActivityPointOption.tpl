@@ -41,7 +41,7 @@
 </div>
 
 <form method="post" action="{link controller='UserActivityPointOption'}{/link}">
-	<div class="container containerPadding marginTop shadow">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}wcf.user.activity.point.pointsPerObject{/lang}</legend>
 			{foreach from=$objectTypes item='objectType'}
