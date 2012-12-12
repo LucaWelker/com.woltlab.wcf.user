@@ -194,7 +194,7 @@ class UserActivityPointHandler extends SingletonFactory {
 	 * @param	string		$objectType
 	 */
 	public function updateUser($userID, $objectType) {
-		$objectType = $this->getObjectType($event->objectTypeID);
+		$objectType = $this->getObjectTypeByName($objectType);
 		
 		$sql = "UPDATE	wcf".WCF_N."_user_activity_point
 			SET	activityPoints = activityPoints + ?
@@ -203,8 +203,8 @@ class UserActivityPointHandler extends SingletonFactory {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
 			$objectType->points,
-			$event->userID,
-			$event->objectTypeID
+			$userID,
+			$objectType->objectTypeID
 		));
 		
 		$sql = "UPDATE	wcf".WCF_N."_user
@@ -213,11 +213,11 @@ class UserActivityPointHandler extends SingletonFactory {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
 			$objectType->points,
-			$event->userID
+			$userID
 		));
 		
 		// update user ranks
-		$this->updateUserRanks(array($event->userID));
+		$this->updateUserRanks(array($userID));
 	}
 	
 	/**
