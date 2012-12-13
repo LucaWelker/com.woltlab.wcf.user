@@ -135,7 +135,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		
 		// get user ids
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("objectTypeID = ?", array($objectType->objectTypeID));
+		$conditions->add("objectTypeID = ?", array($objectTypeObj->objectTypeID));
 		$conditions->add("objectID IN (?)", array($objectIDs));
 		$sql = "SELECT	DISTINCT userID
 			FROM	wcf".WCF_N."_user_activity_point_event
@@ -154,7 +154,9 @@ class UserActivityPointHandler extends SingletonFactory {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
 		
-		$this->updateUsers($userIDs, $objectType);
+		if (!empty($userIDs)) {
+			$this->updateUsers($userIDs, $objectType);
+		}
 	}
 	
 	/**
@@ -232,7 +234,7 @@ class UserActivityPointHandler extends SingletonFactory {
 			$objectTypes = $this->objectTypes;
 		}
 		else {
-			$objectTypeObj = $this->getObjectType($event->objectTypeID);
+			$objectTypeObj = $this->getObjectTypeByName($objectType);
 			if ($objectTypeObj === null) {
 				throw new SystemException("Object type '".$objectType."' is not valid for object type definition 'com.woltlab.wcf.user.activityPointEvent'");
 			}
@@ -276,10 +278,10 @@ class UserActivityPointHandler extends SingletonFactory {
 		
 		// update activity points for given user ids
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("user_table.userID IN (?)", array($userIDs));
+		$conditions->add("userID IN (?)", array($userIDs));
 		
 		$sql = "UPDATE	wcf".WCF_N."_user user_table
-			SET	user.activityPoints = COALESCE((
+			SET	activityPoints = COALESCE((
 					SELECT		SUM(activityPoints) AS activityPoints
 					FROM		wcf".WCF_N."_user_activity_point
 					WHERE		userID = user_table.userID
