@@ -39,7 +39,7 @@ class URLUserOptionOutput implements IUserOptionOutput {
 		
 		$value = self::getURL($value);
 		$value = StringUtil::encodeHTML($value);
-		return '<a href="'.$value.'" class="externalURL"'.(EXTERNAL_LINK_REL_NOFOLLOW ? ' rel="nofollow"' : '').'>'.$value.'</a>';
+		return '<a href="'.$value.'" class="externalURL"'.(EXTERNAL_LINK_REL_NOFOLLOW ? ' rel="nofollow"' : '').(EXTERNAL_LINK_TARGET_BLANK ? ' target="_blank"' : '').'>'.$value.'</a>';
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class URLUserOptionOutput implements IUserOptionOutput {
 		
 		$value = self::getURL($value);
 		$title = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.homepage.title', array('username' => StringUtil::encodeHTML($user->username)));
-		return '<a href="'.StringUtil::encodeHTML($value).'" class="externalURL"'.(EXTERNAL_LINK_REL_NOFOLLOW ? ' rel="nofollow"' : '').'><img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('globe', $imageSize).'" alt="" title="'.$title.'" /></a>';
+		return '<a href="'.StringUtil::encodeHTML($value).'" class="externalURL"'.(EXTERNAL_LINK_REL_NOFOLLOW ? ' rel="nofollow"' : '').(EXTERNAL_LINK_TARGET_BLANK ? ' target="_blank"' : '').'><img src="'.StyleHandler::getInstance()->getStyle()->getIconPath('globe').'" alt="" title="'.$title.'" /></a>';
 	}
 	
 	/**

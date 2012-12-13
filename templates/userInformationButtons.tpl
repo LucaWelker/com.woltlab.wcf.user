@@ -1,6 +1,6 @@
 <ul class="buttonList">
 	{if $user->homepage}
-		<li><a class="jsTooltip" href="{@$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}"><img src="{icon}home{/icon}" alt="" class="icon16" /></a></li>
+		<li><a class="jsTooltip" href="{@$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}"{if EXTERNAL_LINK_REL_NOFOLLOW} rel="nofollow"{/if}{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}><img src="{icon}home{/icon}" alt="" class="icon16" /></a></li>
 	{/if}
 	
 	{if $user->userID != $__wcf->user->userID}
