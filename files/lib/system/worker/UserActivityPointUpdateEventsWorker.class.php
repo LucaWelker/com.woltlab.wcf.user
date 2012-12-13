@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
 /**
  * Worker implementation for updating user activity point events.
  * 
- * @author	Tim Düsterhus
+ * @author	Tim Duesterhus
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user

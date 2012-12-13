@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
 /**
  * Worker implementation for updating user activity point caches.
  * 
- * @author	Tim Düsterhus
+ * @author	Tim Duesterhus
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
@@ -57,7 +57,7 @@ class UserActivityPointUpdateCacheWorker extends AbstractWorker {
 			$userIDs[] = $row['userID'];
 		}
 		
-		UserActivityPointHandler::getInstance()->updateCaches($userIDs);
+		UserActivityPointHandler::getInstance()->updateUsers($userIDs);
 	}
 	
 	/**

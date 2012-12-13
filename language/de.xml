@@ -24,8 +24,8 @@
 	
 	<category name="wcf.acp.user">
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
-		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Punkte neu vergeben]]></item>
-		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Objekte neu einlesen]]></item>
+		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Aktivitätspunkte neu vergeben]]></item>
+		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Punkte pro Aktivität aktualisieren]]></item>
 	</category>
 	
 	<category name="wcf.acp.user.rank">

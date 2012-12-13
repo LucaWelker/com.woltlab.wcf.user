@@ -11,7 +11,7 @@ use wcf\system\WCF;
 /**
  * Handles the user activity point events
  * 
- * @author	Tim Duesterhus,  Matthias Schmidt
+ * @author	Tim Duesterhus, Alexander Ebert, Matthias Schmidt
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
@@ -198,16 +198,43 @@ class UserActivityPointHandler extends SingletonFactory {
 	public function updateUser($userID, $objectType) {
 		$objectType = $this->getObjectTypeByName($objectType);
 		
-		$sql = "UPDATE	wcf".WCF_N."_user_activity_point
-			SET	activityPoints = activityPoints + ?
+		// updata user_activity_point
+		$sql = "SELECT	COUNT(*) AS count
+			FROM	wcf".WCF_N."_user_activity_point
 			WHERE	userID = ?
 				AND objectTypeID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
-			$objectType->points,
 			$userID,
 			$objectType->objectTypeID
 		));
+		$row = $statement->fetchArray();
+		
+		// create new entry
+		if ($row['count']) {
+			$sql = "UPDATE	wcf".WCF_N."_user_activity_point
+				SET	activityPoints = activityPoints + ?
+				WHERE	userID = ?
+					AND objectTypeID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$objectType->points,
+				$userID,
+				$objectType->objectTypeID
+			));
+		}
+		else {
+			// update existing entry
+			$sql = "INSERT INTO	wcf".WCF_N."_user_activity_point
+						(userID, objectTypeID, activityPoints)
+				VALUES		(?, ?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$userID,
+				$objectType->objectTypeID,
+				$objectType->points
+			));
+		}
 		
 		$sql = "UPDATE	wcf".WCF_N."_user
 			SET	activityPoints = activityPoints + ?

@@ -4,7 +4,7 @@ namespace wcf\system\user\activity\point;
 /**
  * Every UserActivityPointObjectProcessor has to implement this interface.
  * 
- * @author	Tim Düsterhus
+ * @author	Tim Duesterhus
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user

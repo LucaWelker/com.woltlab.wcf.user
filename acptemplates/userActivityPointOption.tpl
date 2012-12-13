@@ -4,12 +4,10 @@
 	//<![CDATA[
 	$(function() {
 		$('#updateCache').click(function () {
-			$('#updateCache').unbind('click');
-			new WCF.ACP.Worker('cache', 'wcf\\system\\worker\\UserActivityPointUpdateCacheWorker');
+			new WCF.ACP.Worker('cache', 'wcf\\system\\worker\\UserActivityPointUpdateCacheWorker', '{lang}wcf.acp.user.activityPoint.updateCache{/lang}');
 		});
 		$('#updateEvents').click(function () {
-			$('#updateEvents').unbind('click');
-			new WCF.ACP.Worker('events', 'wcf\\system\\worker\\UserActivityPointUpdateEventsWorker');
+			new WCF.ACP.Worker('events', 'wcf\\system\\worker\\UserActivityPointUpdateEventsWorker', '{lang}wcf.acp.user.activityPoint.updateEvents{/lang}');
 		});
 	});
 	//]]>
