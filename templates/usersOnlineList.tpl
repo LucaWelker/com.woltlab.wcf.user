@@ -3,6 +3,29 @@
 <head>
 	<title>{lang}wcf.user.usersOnline{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude'}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+			$(function() {
+				WCF.Icon.addObject({
+					'wcf.icon.add': '{icon}add{/icon}',
+					'wcf.icon.enabled': '{icon}enabled{/icon}',
+					'wcf.icon.disabled': '{icon}disabled{/icon}',
+					'wcf.icon.remove': '{icon}remove{/icon}'
+				})
+				
+				WCF.Language.addObject({
+					'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
+					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
+					'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
+					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
+				})
+				
+				new WCF.User.Action.Follow($('.userList > li'));
+				new WCF.User.Action.Ignore($('.userList > li'));
+			});
+		//]]>
+	</script>
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
@@ -143,7 +166,7 @@
 	</header>
 	
 	<div class="container marginTop">
-		<ol class="containerList userList simpleUserList">
+		<ol class="containerList userList">
 			{@$usersOnlineList}
 		</ol>
 	</div>
@@ -157,7 +180,7 @@
 	</header>
 	
 	<div class="container marginTop">
-		<ol class="containerList userList simpleUserList">
+		<ol class="containerList">
 			{@$guestsOnlineList}
 		</ol>
 	</div>
@@ -171,7 +194,7 @@
 	</header>
 	
 	<div class="container marginTop">
-		<ol class="containerList userList simpleUserList">
+		<ol class="containerList">
 			{@$robotsOnlineList}
 		</ol>
 	</div>

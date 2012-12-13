@@ -22,8 +22,8 @@
 					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
 				})
 				
-				new WCF.User.Action.Follow($('.simpleUserList > li'));
-				new WCF.User.Action.Ignore($('.simpleUserList > li'));
+				new WCF.User.Action.Follow($('.userList > li'));
+				new WCF.User.Action.Ignore($('.userList > li'));
 			});
 		//]]>
 	</script>
@@ -89,7 +89,7 @@
 </div>
 
 <div class="container marginTop">
-	<ol class="containerList doubleColumned">
+	<ol class="containerList doubleColumned userList">
 		{foreach from=$objects item=user}
 			{include file='userListItem'}
 		{/foreach}
