@@ -72,7 +72,7 @@
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>radioButton</optiontype>
-				<outputclass>wcf\system\option\user\GenderUserOptionOutput</outputclass>
+				<outputclass>wcf\system\option\user\SelectOptionsUserOptionOutput</outputclass>
 				<selectoptions>
 					<![CDATA[0:wcf.global.noDeclaration
 1:wcf.user.gender.male

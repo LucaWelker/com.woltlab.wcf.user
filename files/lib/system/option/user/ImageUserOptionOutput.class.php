@@ -16,22 +16,6 @@ use wcf\util\StringUtil;
  */
 class ImageUserOptionOutput implements IUserOptionOutput {
 	/**
-	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
-	 */
-	public function getShortOutput(User $user, UserOption $option, $value) {
-		return $this->getOutput($user, $option, $value);
-	}
-	
-	/**
-	 * @see	wcf\system\option\user\IUserOptionOutput::getMediumOutput()
-	 */
-	public function getMediumOutput(User $user, UserOption $option, $value) {
-		if (empty($value)) return '';
-		
-		return '<img src="'.StringUtil::encodeHTML($value).'" alt="" style="max-width: 50px; max-height: 50px" />';
-	}
-	
-	/**
 	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {

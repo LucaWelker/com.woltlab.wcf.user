@@ -16,20 +16,6 @@ use wcf\util\DateUtil;
  */
 class DateUserOptionOutput implements IUserOptionOutput {
 	/**
-	 * @see	wcf\system\option\user\IUserOptionOutput::getShortOutput()
-	 */
-	public function getShortOutput(User $user, UserOption $option, $value) {
-		return $this->getOutput($user, $option, $value);
-	}
-	
-	/**
-	 * @see	wcf\system\option\user\IUserOptionOutput::getMediumOutput()
-	 */
-	public function getMediumOutput(User $user, UserOption $option, $value) {
-		return $this->getOutput($user, $option, $value);
-	}
-
-	/**
 	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
