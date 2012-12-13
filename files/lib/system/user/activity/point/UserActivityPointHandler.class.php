@@ -198,7 +198,7 @@ class UserActivityPointHandler extends SingletonFactory {
 	public function updateUser($userID, $objectType) {
 		$objectType = $this->getObjectTypeByName($objectType);
 		
-		// updata user_activity_point
+		// update user_activity_point
 		$sql = "SELECT	COUNT(*) AS count
 			FROM	wcf".WCF_N."_user_activity_point
 			WHERE	userID = ?
@@ -210,7 +210,7 @@ class UserActivityPointHandler extends SingletonFactory {
 		));
 		$row = $statement->fetchArray();
 		
-		// create new entry
+		// update existing entry
 		if ($row['count']) {
 			$sql = "UPDATE	wcf".WCF_N."_user_activity_point
 				SET	activityPoints = activityPoints + ?
@@ -224,7 +224,7 @@ class UserActivityPointHandler extends SingletonFactory {
 			));
 		}
 		else {
-			// update existing entry
+			// create new entry
 			$sql = "INSERT INTO	wcf".WCF_N."_user_activity_point
 						(userID, objectTypeID, activityPoints)
 				VALUES		(?, ?, ?)";
