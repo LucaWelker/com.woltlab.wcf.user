@@ -616,4 +616,13 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 			'object' => $this
 		)));
 	}
+	
+	/**
+	 * Returns encoded email address.
+	 * 
+	 * @return string
+	 */
+	public function getEncodedEmail() {
+		return StringUtil::encodeAllChars($this->email);
+	}
 }
