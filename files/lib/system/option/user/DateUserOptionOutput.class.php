@@ -16,13 +16,19 @@ use wcf\util\DateUtil;
  */
 class DateUserOptionOutput implements IUserOptionOutput {
 	/**
+	 * date format
+	 * @var string
+	 */
+	protected $dateFormat = DateUtil::DATE_FORMAT;
+	
+	/**
 	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
 		if (empty($value) || $value == '0000-00-00') return '';
 		
 		$date = self::splitDate($value);
-		return DateUtil::format(DateUtil::getDateTimeByTimestamp(gmmktime(12, 1, 1, $date['month'], $date['day'], $date['year'])));
+		return DateUtil::format(DateUtil::getDateTimeByTimestamp(gmmktime(12, 1, 1, $date['month'], $date['day'], $date['year'])), $this->dateFormat);
 	}
 	
 	/**

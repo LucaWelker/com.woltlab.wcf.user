@@ -62,13 +62,22 @@
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\MessageUserOptionOutput</outputclass>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
 			<option name="birthday">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>date</optiontype>
 				<outputclass>wcf\system\option\user\BirthdayUserOptionOutput</outputclass>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
+			<option name="birthdayShowYear">
+				<categoryname>profile.personal</categoryname>
+				<optiontype>boolean</optiontype>
+				<visible>0</visible>
+				<editable>3</editable>
+			</option>
+			
 			<option name="gender">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>radioButton</optiontype>
@@ -81,24 +90,28 @@
 				<defaultvalue>0</defaultvalue>
 				<searchable>1</searchable>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
 			<option name="location">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
 			<option name="occupation">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
 			<option name="hobbies">
 				<categoryname>profile.personal</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
 			<option name="adminComment">
 				<categoryname>profile.personal</categoryname>
@@ -106,6 +119,7 @@
 				<editable>3</editable>
 				<outputclass>wcf\system\option\user\NewlineToBreakUserOptionOutput</outputclass>
 				<visible>2</visible>
+				<editable>2</editable>
 			</option>
 			<option name="homepage">
 				<categoryname>profile.contact</categoryname>
@@ -115,6 +129,7 @@
 				<validationpattern>^$|^https?://</validationpattern>
 				<defaultvalue>http://</defaultvalue>
 				<visible>15</visible>
+				<editable>3</editable>
 			</option>
 			<!-- /profile -->
 			
@@ -122,13 +137,13 @@
 			<option name="timezone">
 				<categoryname>settings.general.date</categoryname>
 				<optiontype>timezone</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<defaultvalue>Europe/London</defaultvalue>
 			</option>
 			<option name="showSignature">
 				<categoryname>settings.general.interface</categoryname>
 				<optiontype>boolean</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<defaultvalue>1</defaultvalue>
 				<options>module_user_signature</options>
 			</option>
@@ -137,7 +152,7 @@
 			<option name="canViewOnlineStatus">
 				<categoryname>settings.privacy.content</categoryname>
 				<optiontype>select</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<selectoptions><![CDATA[0:wcf.user.access.everyone
 1:wcf.user.access.registered
 2:wcf.user.access.following
@@ -147,7 +162,7 @@
 			<option name="canViewProfile">
 				<categoryname>settings.privacy.content</categoryname>
 				<optiontype>select</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<selectoptions><![CDATA[0:wcf.user.access.everyone
 1:wcf.user.access.registered
 2:wcf.user.access.following
@@ -159,7 +174,7 @@
 			<option name="canViewEmailAddress">
 				<categoryname>settings.privacy.messaging</categoryname>
 				<optiontype>select</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<selectoptions><![CDATA[0:wcf.user.access.everyone
 1:wcf.user.access.registered
 2:wcf.user.access.following
@@ -169,7 +184,7 @@
 			<option name="canMail">
 				<categoryname>settings.privacy.messaging</categoryname>
 				<optiontype>select</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<selectoptions><![CDATA[0:wcf.user.access.everyone
 1:wcf.user.access.registered
 2:wcf.user.access.following
@@ -179,7 +194,7 @@
 			<option name="adminCanMail">
 				<categoryname>settings.privacy.messaging</categoryname>
 				<optiontype>boolean</optiontype>
-				<visible>1</visible>
+				<editable>3</editable>
 				<defaultvalue>1</defaultvalue>
 			</option>
 			<!-- /settings -->

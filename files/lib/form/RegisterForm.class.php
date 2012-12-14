@@ -98,6 +98,14 @@ class RegisterForm extends UserAddForm {
 	}
 	
 	/**
+	 * wcf\acp\form\AbstractOptionListForm::initOptionHandler()
+	 */
+	protected function initOptionHandler() {
+		$this->optionHandler->setInRegistration();
+		parent::initOptionHandler();
+	}
+	
+	/**
 	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
@@ -152,7 +160,6 @@ class RegisterForm extends UserAddForm {
 	 * Reads option tree on page init.
 	 */
 	protected function readOptionTree() {
-		$this->optionHandler->setInRegistration(true);
 		$this->optionTree = $this->optionHandler->getOptionTree('profile');
 	}
 	
@@ -232,7 +239,6 @@ class RegisterForm extends UserAddForm {
 		AbstractForm::save();
 		
 		// get options
-		$this->optionHandler->setInRegistration(true);
 		$saveOptions = $this->optionHandler->save();
 		$this->additionalFields['languageID'] = $this->languageID;
 		$this->additionalFields['registrationIpAddress'] = WCF::getSession()->ipAddress;

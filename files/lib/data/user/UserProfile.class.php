@@ -466,9 +466,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * @return	boolean
 	 */
 	public function isProtected() {
-		// TODO: include override for admins here
-		
-		return !$this->isAccessible('protectedProfile');
+		return (!WCF::getSession()->getPermission('admin.general.canViewPrivateUserOptions') && !$this->isAccessible('protectedProfile'));
 	}
 	
 	/**
@@ -478,8 +476,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 */
 	public function getAge() {
 		if ($this->__age === null) {
-			// TODO: add option to hide year/age
-			if ($this->birthday) {
+			if ($this->birthday && $this->birthdayShowYear) {
 				$this->__age = DateUtil::getAge($this->birthday);
 			}
 			else {

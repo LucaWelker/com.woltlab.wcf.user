@@ -53,7 +53,6 @@ class AboutUserProfileEditableContent implements IUserProfileEditableContent {
 	 */
 	public function beginEdit() {
 		$this->initOptionHandler();
-		$this->optionHandler->showEmptyOptions();
 		
 		$optionTree = $this->optionHandler->getOptionTree();
 		WCF::getTPL()->assign(array(
@@ -89,8 +88,7 @@ class AboutUserProfileEditableContent implements IUserProfileEditableContent {
 		$this->user = new User($this->user->userID);
 		
 		// reload option handler
-		$this->initOptionHandler();
-		$this->optionHandler->hideEmptyOptions();
+		$this->initOptionHandler(false);
 		
 		$options = $this->optionHandler->getOptionTree();
 		WCF::getTPL()->assign(array(
@@ -103,8 +101,12 @@ class AboutUserProfileEditableContent implements IUserProfileEditableContent {
 	/**
 	 * Initializes the user option handler
 	 */
-	protected function initOptionHandler() {
-		$this->optionHandler = new UserOptionHandler($this->cacheName, $this->cacheClass, false, '', 'profile', false);
+	protected function initOptionHandler($editMode = true) {
+		$this->optionHandler = new UserOptionHandler($this->cacheName, $this->cacheClass, false, '', 'profile');
+		if (!$editMode) {
+			$this->optionHandler->showEmptyOptions(false);
+			$this->optionHandler->enableEditMode(false);
+		}
 		$this->optionHandler->setUser($this->user);
 	}
 }
