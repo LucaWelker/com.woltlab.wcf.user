@@ -411,6 +411,8 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.option.location"><![CDATA[Wohnort]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Beruf]]></item>
 		<item name="wcf.user.option.birthday"><![CDATA[Geburtstag]]></item>
+		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Geburtsjahr im Profil anzeigen]]></item>
+		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[Mitglieder können dadurch Ihr aktuelles Alter sehen.]]></item>
 		<item name="wcf.user.option.timezone"><![CDATA[Zeitzone]]></item>
 		<item name="wcf.user.option.showSignature"><![CDATA[Persönliche Signatur anderer Mitglieder anzeigen]]></item>
 		<item name="wcf.user.option.category.settings.general"><![CDATA[Allgemein]]></item>
