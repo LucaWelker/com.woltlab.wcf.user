@@ -41,10 +41,10 @@
 <form method="post" action="{link controller='UserActivityPointOption'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}wcf.user.activityPoints.pointsPerObject{/lang}</legend>
+			<legend>{lang}wcf.user.activityPoint.pointsPerObject{/lang}</legend>
 			{foreach from=$objectTypes item='objectType'}
 				<dl{if $errorField == $objectType->objectTypeID} class="formError"{/if}>
-					<dt><label for="{$objectType->objectType}">{lang}wcf.user.activityPoints.objectType.{$objectType->objectType}{/lang}</label></dt>
+					<dt><label for="{$objectType->objectType}">{lang}wcf.user.activityPoint.objectType.{$objectType->objectType}{/lang}</label></dt>
 					<dd>
 						<input type="text" id="{$objectType->objectType}" name="points[{$objectType->objectTypeID}]" value="{$points[$objectType->objectTypeID]}" required="required" pattern="^[0-9]+$" class="medium" />
 						{if $errorField == $objectType->objectTypeID}

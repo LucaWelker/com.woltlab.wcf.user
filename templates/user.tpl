@@ -35,9 +35,9 @@
 			{/if}
 			
 			{if $user->activityPoints}
-				$('.activityPointsDisplay').click(function (event) {
+				$('.activityPointDisplay').click(function (event) {
 					WCF.showAJAXDialog('detailedActivityPointList', true, {
-						title: '{lang}wcf.user.activityPoints{/lang}',
+						title: '{lang}wcf.user.activityPoint{/lang}',
 						data: {
 							className: 'wcf\\data\\user\\UserProfileAction',
 							actionName: 'getDetailedActivityPointList',
