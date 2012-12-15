@@ -58,8 +58,7 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInit</eventname>
-			<templatecode><![CDATA[{if $__wcf->getUserNotificationHandler()->getNotificationCount()}new WCF.Notification.Handler();{/if}
-new WCF.User.ProfilePreview()]]></templatecode>
+			<templatecode><![CDATA[new WCF.User.ProfilePreview()]]></templatecode>
 		</templatelistener>
 		
 		<templatelistener name="userNoticeNeedActivation">
