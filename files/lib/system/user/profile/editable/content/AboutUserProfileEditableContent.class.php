@@ -56,7 +56,8 @@ class AboutUserProfileEditableContent implements IUserProfileEditableContent {
 		
 		$optionTree = $this->optionHandler->getOptionTree();
 		WCF::getTPL()->assign(array(
-			'optionTree' => $optionTree
+			'optionTree' => $optionTree,
+			'__userTitle' => $this->user->userTitle
 		));
 		
 		return WCF::getTPL()->fetch('userProfileAboutEditable');
