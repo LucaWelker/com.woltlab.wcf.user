@@ -270,7 +270,8 @@ class UserProfileAction extends UserAction {
 			
 			$options = $optionHandler->getOptionTree();
 			WCF::getTPL()->assign(array(
-				'options' => $options
+				'options' => $options,
+				'userID' => $this->userProfile->userID
 			));
 			
 			return array(

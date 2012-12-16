@@ -76,6 +76,7 @@
 				<optiontype>boolean</optiontype>
 				<visible>0</visible>
 				<editable>3</editable>
+				<defaultvalue>1</defaultvalue>
 			</option>
 			
 			<option name="gender">

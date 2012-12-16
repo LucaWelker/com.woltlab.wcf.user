@@ -258,7 +258,7 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 				<defaultvalue>1</defaultvalue>
 			</option>
 			<option name="users_online_default_sort_field">
-				<categoryname>user.list.members</categoryname>
+				<categoryname>user.list.online</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[lastActivityTime]]></defaultvalue>
 				<selectoptions><![CDATA[username:wcf.user.username
@@ -266,7 +266,7 @@ lastActivityTime:wcf.user.usersOnline.lastActivity
 requestURI:wcf.user.usersOnline.location]]></selectoptions>
 			</option>
 			<option name="users_online_default_sort_order">
-				<categoryname>user.list.members</categoryname>
+				<categoryname>user.list.online</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[DESC]]></defaultvalue>
 				<selectoptions><![CDATA[ASC:wcf.global.sortOrder.ascending
