@@ -2,10 +2,10 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>{lang}wcf.user.activityPoints.objects{/lang}</th>
-				<th>{lang}wcf.user.activityPoints.objectType{/lang}</th>
-				<th>{lang}wcf.user.activityPoints.pointsPerObject{/lang}</th>
-				<th>{lang}wcf.user.activityPoints.sum{/lang}</th>
+				<th>{lang}wcf.user.activityPoint.objects{/lang}</th>
+				<th>{lang}wcf.user.activityPoint.objectType{/lang}</th>
+				<th>{lang}wcf.user.activityPoint.pointsPerObject{/lang}</th>
+				<th>{lang}wcf.user.activityPoint.sum{/lang}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,7 +17,7 @@
 							{#$objectType->activityPoints/$objectType->points} ×
 						</td>
 						<td class="columnTitle">
-							{lang}wcf.user.activityPoints.objectType.{$objectType->objectType}{/lang}
+							{lang}wcf.user.activityPoint.objectType.{$objectType->objectType}{/lang}
 						</td>
 						<td class="columnDigits">
 							{#$objectType->points}
@@ -30,12 +30,6 @@
 				{/if}
 			{/foreach}
 			
-			{if $user->activityPoints - $activityPointSum > 0}
-				<tr>
-					<td class="columnTitle right" colspan="3">{lang}wcf.user.activityPoints.notInDependency{/lang}</td>
-					<td class="columnDigits">{#$user->activityPoints - $activityPointSum}</td>
-				</tr>
-			{/if}
 			<tr>
 				<td class="columnTitle focus right" colspan="3">Σ</td>
 				<td class="columnDigits focus"><span class="badge">{#$user->activityPoints}</span></td>

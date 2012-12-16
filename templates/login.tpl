@@ -101,6 +101,7 @@
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		<input type="hidden" name="url" value="{@$url}" />
 	</div>
 </form>
 

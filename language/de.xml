@@ -281,13 +281,12 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
 		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
 		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>
-		<item name="wcf.user.activityPoints"><![CDATA[Aktivitätspunkte]]></item>
-		<item name="wcf.user.activityPoints.showDetails"><![CDATA[Zeige Details]]></item>
-		<item name="wcf.user.activityPoints.objects"><![CDATA[Anzahl der Objekte]]></item>
-		<item name="wcf.user.activityPoints.objectType"><![CDATA[Objekt-Art]]></item>
-		<item name="wcf.user.activityPoints.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
-		<item name="wcf.user.activityPoints.sum"><![CDATA[Summe]]></item>
-		<item name="wcf.user.activityPoints.notInDependency"><![CDATA[Punkte aus anderen Anwendungen]]></item>
+		<item name="wcf.user.activityPoint"><![CDATA[Punkte]]></item>
+		<item name="wcf.user.activityPoint.showDetails"><![CDATA[Zeige Details]]></item>
+		<item name="wcf.user.activityPoint.objects"><![CDATA[Anzahl der Objekte]]></item>
+		<item name="wcf.user.activityPoint.objectType"><![CDATA[Objekt-Art]]></item>
+		<item name="wcf.user.activityPoint.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
+		<item name="wcf.user.activityPoint.sum"><![CDATA[Summe]]></item>
 		<item name="wcf.user.stats"><![CDATA[Statistiken]]></item>
 		<item name="wcf.user.usercp"><![CDATA[Benutzerkonto]]></item>
 		
@@ -391,7 +390,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 	
 	<category name="wcf.user.profile">
 		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von „{$user->username}“]]></item>
-		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[Der Benutzer hat noch keine für Sie sichtbaren Informationen hinterlegt.]]></item>
+		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[{if $userID == $__wcf->getUser()->userID}Sie haben noch keine sichtbaren Informationen hinterlegt.{else}Der Benutzer hat noch keine für Sie sichtbaren Informationen hinterlegt.{/if}]]></item>
 		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[Es sind keine anzeigbaren Aktivitäten vorhanden.]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>

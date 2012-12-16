@@ -1352,7 +1352,7 @@ WCF.Notification.Handler = WCF.UserPanel.extend({
 	init: function(showAllLink) {
 		this._super('userNotifications');
 		
-		WCF.Dropdown.registerCallback('userNotifications', $.proxy(this._createOverlay, this));
+		WCF.Dropdown.registerCallback('userNotifications', $.proxy(this._click, this));
 	},
 	
 	/**

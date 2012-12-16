@@ -10,7 +10,7 @@
 	<dl class="plain statsDataList">
 		{event name='statistics'}
 		
-		<dt>{if $user->activityPoints}<a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoints.showDetails{/lang}">{lang}wcf.user.activityPoints{/lang}</a>{else}{lang}wcf.user.activityPoints{/lang}{/if}</dt>
+		<dt>{if $user->activityPoints}<a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoint.showDetails{/lang}">{lang}wcf.user.activityPoint{/lang}</a>{else}{lang}wcf.user.activityPoint{/lang}{/if}</dt>
 		<dd>{#$user->activityPoints}</dd>
 		
 		<dt>{lang}wcf.user.profileHits{/lang}</dt>
