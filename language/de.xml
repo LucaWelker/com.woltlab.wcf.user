@@ -348,6 +348,10 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.ignoredUsers.noUsers"><![CDATA[Sie ignorieren derzeit keine Benutzer.]]></item>
 		<item name="wcf.user.following"><![CDATA[Sie folgen folgenden Benutzern]]></item>
 		<item name="wcf.user.following.noUsers"><![CDATA[Sie folgen derzeit keinen Benutzern.]]></item>
+		<item name="wcf.user.userTitle"><![CDATA[Individueller Benutzertitel]]></item>
+		<item name="wcf.user.userTitle.description"><![CDATA[Sie können sich einen individuellen Benutzertitel geben.]]></item>
+		<item name="wcf.user.userTitle.error.tooLong"><![CDATA[Der eingegebene Titel ist zu lang. Die maximal zulässige Gesamtlänge beträgt {#USER_TITLE_MAX_LENGTH} Zeichen.]]></item>
+		<item name="wcf.user.userTitle.error.forbidden"><![CDATA[Sie haben einen ungültigen Benutzertitel eingegeben.]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

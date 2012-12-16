@@ -242,7 +242,17 @@ class UserProfileAction extends UserAction {
 		
 		// validate user title
 		if ($userTitle !== null) {
-			// TODO: insert validation for userTitle here
+			try {
+				if (StringUtil::length($userTitle) > USER_TITLE_MAX_LENGTH) {
+					throw new UserInputException('__userTitle', 'tooLong');
+				}
+				if (!StringUtil::executeWordFilter($userTitle, USER_FORBIDDEN_TITLES)) {
+					throw new UserInputException('__userTitle', 'forbidden');
+				}
+			}
+			catch (UserInputException $e) {
+				$errors[$e->getField()] = $e->getType();
+			}
 		}
 		
 		// validation was successful
@@ -284,7 +294,7 @@ class UserProfileAction extends UserAction {
 			WCF::getTPL()->assign(array(
 				'errorType' => $errors,
 				'optionTree' => $optionHandler->getOptionTree(),
-				'__userTitle' => $this->userProfile->userTitle
+				'__userTitle' => ($userTitle !== null ? $userTitle : $this->userProfile->userTitle)
 			));
 			
 			return array(
