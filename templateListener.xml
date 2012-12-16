@@ -29,6 +29,13 @@
 			<eventname>columns</eventname>
 			<templatecode><![CDATA[{include file='__userGroupListPriorityColumn'}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userAddCategoryFields">
+			<environment>admin</environment>
+			<templatename>userAdd</templatename>
+			<eventname>categoryFields</eventname>
+			<templatecode><![CDATA[{include file='__userAddUserTitle'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->
