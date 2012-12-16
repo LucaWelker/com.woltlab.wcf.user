@@ -7,7 +7,7 @@
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('wcf\\data\\user\\follow\\UserFollowAction', $('.jsFollowing'));
+			new WCF.Action.Delete('wcf\\data\\user\\follow\\UserFollowAction', '.jsFollowing');
 		});
 		//]]>
 	</script>

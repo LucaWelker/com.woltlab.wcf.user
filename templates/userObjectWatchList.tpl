@@ -12,7 +12,7 @@
 				'wcf.user.watchedObjects.enableNotification': '{lang}wcf.user.watchedObjects.enableNotification{/lang}'
 			});
 
-			new WCF.Action.Delete('wcf\\data\\user\\object\\watch\\UserObjectWatchAction', $('.jsWatchedObject'));
+			new WCF.Action.Delete('wcf\\data\\user\\object\\watch\\UserObjectWatchAction', '.jsWatchedObject');
 			new WCF.User.ObjectWatch.Notification();
 		});
 		//]]>
