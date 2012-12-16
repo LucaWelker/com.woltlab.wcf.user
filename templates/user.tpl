@@ -20,18 +20,17 @@
 				new WCF.User.Profile.Follow({@$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 				new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
 			{/if}
-
+			
 			new WCF.User.Profile.TabMenu({@$user->userID});
-
+			
 			WCF.TabMenu.init();
-
+			
 			{if $user->canEdit() || ($__wcf->getUser()->userID == $user->userID && $user->canEditOwnProfile())}
 				WCF.Language.addObject({
 					'wcf.user.editProfile': '{lang}wcf.user.editProfile{/lang}',
 				});
-
-				WCF.User.Profile.Editor.Handler.init({@$user->userID}, {if $editOnInit}true{else}false{/if});
-				new WCF.User.Profile.Editor.Information({@$overviewObjectType->objectTypeID});
+				
+				new WCF.User.Profile.Editor({@$user->userID}, {if $editOnInit}true{else}false{/if});
 			{/if}
 			
 			{if $user->activityPoints}

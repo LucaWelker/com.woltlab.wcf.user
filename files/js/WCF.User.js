@@ -418,37 +418,29 @@ WCF.User.Profile.TabMenu = Class.extend({
 });
 
 /**
- * Namespace for editable profile content.
+ * User profile inline editor.
+ * 
+ * @param	integer		userID
+ * @param	boolean		editOnInit
  */
-WCF.User.Profile.Editor = {};
-
-/**
- * Editable profile content handler.
- */
-WCF.User.Profile.Editor.Handler = {
+WCF.User.Profile.Editor = Class.extend({
 	/**
-	 * list of registered editors
-	 * @var	array<WCF.User.Profile.Editor.Base>
-	 */
-	_callbacks: [ ],
-	
-	/**
-	 * initialization state
-	 * @var	boolean
-	 */
-	_didInit: false,
-	
-	/**
-	 * number of active editors
-	 * @var	integer
-	 */
-	_loading: 0,
-	
-	/**
-	 * currently active action
+	 * current action
 	 * @var	string
 	 */
-	_pendingAction: '',
+	_actionName: '',
+	
+	/**
+	 * list of interface buttons
+	 * @var	object
+	 */
+	_buttons: { },
+	
+	/**
+	 * cached tab content
+	 * @var	string
+	 */
+	_cachedTemplate: '',
 	
 	/**
 	 * action proxy
@@ -457,10 +449,10 @@ WCF.User.Profile.Editor.Handler = {
 	_proxy: null,
 	
 	/**
-	 * user interface elements
-	 * @var	object
+	 * tab object
+	 * @var	jQuery
 	 */
-	_ui: {},
+	_tab: null,
 	
 	/**
 	 * target user id
@@ -469,433 +461,157 @@ WCF.User.Profile.Editor.Handler = {
 	_userID: 0,
 	
 	/**
-	 * Initializes the user profile editor handler.
+	 * Initializes the WCF.User.Profile.Editor object.
 	 * 
 	 * @param	integer		userID
 	 * @param	boolean		editOnInit
 	 */
 	init: function(userID, editOnInit) {
-		if (this._didInit) return;
-		
+		this._actionName = '';
+		this._cachedTemplate = '';
+		this._tab = $('#about');
 		this._userID = userID;
-		
-		this._prepareUI();
-		this._didInit = true;
-		
 		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this),
-			url: 'index.php/UserProfileEditableContent/?t=' + SECURITY_TOKEN + SID_ARG_2ND
+			success: $.proxy(this._success, this)
 		});
 		
+		this._initButtons();
+		
+		// begin editing on page load
 		if (editOnInit) {
-			// delay execution by 250 ms to allow handlers to register themselves
-			var self = this;
-			new WCF.PeriodicalExecuter(function(pe) {
-				pe.stop();
-				
-				self._pendingAction = 'beginEdit';
-				self._beginEdit();
-			}, 250);
+			this._beginEdit();
 		}
 	},
 	
 	/**
-	 * Prepares user interface elements on init.
+	 * Initializes interface buttons.
 	 */
-	_prepareUI: function() {
+	_initButtons: function() {
 		var $buttonContainer = $('#profileButtonContainer');
 		
-		// create interface elements
-		this._ui = {
-			buttons: {
-				beginEdit: $('<li><a class="button"><img src="'+WCF.Icon.get('wcf.icon.edit')+'" class="icon24" /> <span>'+WCF.Language.get('wcf.user.editProfile')+'</span></a></li>').data('action', 'beginEdit').prependTo($buttonContainer)
-			}
-		};
-		
-		// bind event listener
-		this._ui.buttons.beginEdit.click($.proxy(this._click, this));
-		// toggle buttons
-	},
-	
-	/**
-	 * Handles button clicks.
-	 * 
-	 * @param	object		event
-	 */
-	_click: function(event) {
-		this._pendingAction = $(event.currentTarget).data('action');
-		
-		switch (this._pendingAction) {
-			case 'beginEdit':
-				this._beginEdit();
-			break;
-			
-			case 'restore':
-				this._restore();
-				
-				// toggle button
-				this._ui.buttons.beginEdit.show();
-			break;
-			
-			case 'save':
-				this._save();
-
-				// toggle button
-				this._ui.buttons.beginEdit.show();
-			break;
-		}
-	},
-	
-	/**
-	 * Returns action buttons.
-	 * 
-	 * @return	object
-	 */
-	getButtons: function() {
-		return {
-			save: $('<button class="buttonPrimary" accesskey="s">'+WCF.Language.get('wcf.global.button.save')+'</button>').data('action', 'save').click($.proxy(this._click, this)),
-			restore: $('<button>'+WCF.Language.get('wcf.global.button.cancel')+'</button>').data('action', 'restore').click($.proxy(this._click, this))
+		// create buttons
+		this._buttons = {
+			beginEdit: $('<li><a class="button"><img src="' + WCF.Icon.get('wcf.icon.edit') + '" class="icon24" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
 		};
 	},
 	
 	/**
-	 * Begins editing mode by sending all active object type ids.
+	 * Begins editing.
 	 */
 	_beginEdit: function() {
-		// toggle button
-		this._ui.buttons.beginEdit.hide();
+		this._actionName = 'beginEdit';
+		this._buttons.beginEdit.hide();
+		$('#profileContent').wcfTabs('select', 'about');
 		
-		var $objectTypeIDs = [ ];
-		
-		for (var $i = 0, $length = this._callbacks.length; $i < $length; $i++) {
-			$objectTypeIDs.push(this._callbacks[$i].beginEdit());
-		}
-		
+		// load form
 		this._proxy.setOption('data', {
 			actionName: 'beginEdit',
-			objectTypeIDs: $objectTypeIDs,
-			userID: this._userID
+			className: 'wcf\\data\\user\\UserProfileAction',
+			objectIDs: [ this._userID ]
 		});
 		this._proxy.sendRequest();
 	},
 	
 	/**
-	 * Restores previous view.
-	 */
-	_restore: function() {
-		this._execute($.proxy(function(callback) {
-			callback.restore();
-		}, this));
-	},
-	
-	/**
-	 * Saves changed values.
+	 * Saves input values.
 	 */
 	_save: function() {
-		var $objectTypeIDs = [ ];
-		var $values = {};
-		this._execute($.proxy(function(callback) {
-			var $objectTypeID = callback.getObjectTypeID();
+		this._actionName = 'save';
+		
+		// collect values
+		var $regExp = /values\[([a-zA-Z0-9._-]+)\]/;
+		var $values = { };
+		this._tab.find('input, textarea').each(function(index, element) {
+			var $element = $(element);
 			
-			$objectTypeIDs.push($objectTypeID);
-			$values[$objectTypeID] = callback.save();
-		}, this));
+			if ($element.getTagName() === 'input') {
+				var $type = $element.attr('type');
+				
+				if (($type === 'radio' || $type === 'checkbox') && !$element.prop('checked')) {
+					return;
+				}
+			}
+			
+			var $name = $element.attr('name');
+			if ($regExp.test($name)) {
+				$values[RegExp.$1] = $element.val();
+			}
+		});
 		
 		this._proxy.setOption('data', {
 			actionName: 'save',
-			objectTypeIDs: $objectTypeIDs,
-			userID: this._userID,
-			values: $values
+			className: 'wcf\\data\\user\\UserProfileAction',
+			objectIDs: [ this._userID ],
+			parameters: {
+				values: $values
+			}
 		});
 		this._proxy.sendRequest();
 	},
 	
 	/**
-	 * Displays the requested buttons.
-	 * 
-	 * @param	boolean		beginEdit
-	 * @param	boolean		restore
-	 * @param	boolean		save
+	 * Restores back to default view.
 	 */
-	_showButtons: function(beginEdit, restore, save) {
-		if (beginEdit) this._ui.buttons.beginEdit.show();
-		else this._ui.buttons.beginEdit.hide();
+	_restore: function() {
+		this._actionName = 'restore';
+		this._buttons.beginEdit.show();
 		
-		if (restore) this._ui.buttons.restore.show();
-		else this._ui.buttons.restore.hide();
-		
-		if (save) this._ui.buttons.save.show();
-		else this._ui.buttons.save.hide();
+		this._tab.html(this._cachedTemplate).children().css({ height: 'auto' });
 	},
 	
 	/**
-	 * Registers a new callback.
-	 * 
-	 * @param	string		identifier
-	 * @param	object		callback
-	 */
-	addCallback: function(identifier, callback) {
-		if (!(callback instanceof WCF.User.Profile.Editor.Base)) {
-			console.debug("[WCF.User.Profile.Editor.Handler] Given callback identified by '" + identifier + "' is not a valid callback, aborting.");
-			return;
-		}
-		
-		this._callbacks.push(callback);
-	},
-	
-	/**
-	 * Notifies that a callback is ready.
-	 */
-	didLoad: function() {
-		this._loading--;
-	},
-	
-	/**
-	 * Handles AJAX responses.
+	 * Handles successful AJAX requests.
 	 * 
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
-		this._execute($.proxy(function(callback) {
-			var $objectTypeID = callback.getObjectTypeID();
+		switch (this._actionName) {
+			case 'beginEdit':
+				this._prepareEdit(data);
+			break;
 			
-			if (typeof data[$objectTypeID] === undefined) {
-				return;
-			}
-			
-			switch (this._pendingAction) {
-				case 'beginEdit':
-					callback.prepareEdit(data[$objectTypeID]);
-				break;
-				
-				case 'save':
-					callback.updateCache(data[$objectTypeID]);
-					callback.restore();
-				break;
-			}
-		}, this));
-	},
-	
-	/**
-	 * Executes a callback on all previously registered callbacks.
-	 * 
-	 * @param	object		callback
-	 */
-	_execute: function(callback) {
-		for (var $i = 0, $length = this._callbacks.length; $i < $length; $i++) {
-			var $callback = this._callbacks[$i];
-			callback($callback);
+			case 'save':
+				// save was successful, show parsed template
+				if (data.returnValues.success) {
+					this._cachedTemplate = data.returnValues.template;
+					this._restore();
+				}
+				else {
+					this._prepareEdit(data);
+				}
+			break;
 		}
-	}
-};
-
-/**
- * Default implementation for user profile editors.
- * 
- * @param	integer		objectTypeID
- */
-WCF.User.Profile.Editor.Base = Class.extend({
-	/**
-	 * cached view
-	 * @var	string
-	 */
-	_cache: '',
-	
-	/**
-	 * target container id
-	 * @var	string
-	 */
-	_containerID: '',
-	
-	/**
-	 * target container
-	 * @var	jQuery
-	 */
-	_container: null,
-	
-	/**
-	 * editor identifier
-	 * @var	string
-	 */
-	_name: '',
-	
-	/**
-	 * object type id
-	 * @var	integer
-	 */
-	_objectTypeID: 0,
-	
-	/**
-	 * Initializes a user profile editor.
-	 * 
-	 * @param	integer		objectTypeID
-	 */
-	init: function(objectTypeID) {
-		this._objectTypeID = objectTypeID;
-		
-		if (this._name !== '') {
-			WCF.User.Profile.Editor.Handler.addCallback(this._name, this);
-		}
-		
-		this._container = $('#' + $.wcfEscapeID(this._containerID));
 	},
 	
 	/**
-	 * Begins editing mode.
+	 * Prepares editing mode.
 	 * 
-	 * @return	integer
+	 * @param	object		data
 	 */
-	beginEdit: function() {
-		return this._objectTypeID;
-	},
-	
-	/**
-	 * Prepares the editing mode by exchanging current view.
-	 * 
-	 * @param	string		returnValues
-	 */
-	prepareEdit: function(returnValues) {
-		WCF.User.Profile.Editor.Handler.didLoad();
-		
+	_prepareEdit: function(data) {
+		// update template
 		var self = this;
-		this._container.html(function(index, oldHTML) {
-			self._cache = oldHTML;
-			return returnValues;
+		this._tab.html(function(index, oldHTML) {
+			self._cachedTemplate = oldHTML;
+			return data.returnValues.template;
 		});
-		this._container.find('input').on('keyup', function (event) {
-			if (event.keyCode === 13) { // Enter
-				WCF.User.Profile.Editor.Handler._pendingAction = 'save';
-				WCF.User.Profile.Editor.Handler._save();
-
-				// toggle button
-				WCF.User.Profile.Editor.Handler._ui.buttons.beginEdit.show();
+		
+		// bind event listener
+		this._tab.find('.formSubmit > button[data-type=save]').click($.proxy(this._save, this));
+		this._tab.find('.formSubmit > button[data-type=restore]').click($.proxy(this._restore, this));
+		this._tab.find('input').keyup(function(event) {
+			if (event.which === 13) { // Enter
+				self._save();
+				
+				event.preventDefault();
+				return false;
 			}
 		});
-	},
-	
-	/**
-	 * Restores previous view.
-	 */
-	restore: function() {
-		WCF.User.Profile.Editor.Handler.didLoad();
-		
-		this._container.html(this._cache);
-	},
-	
-	/**
-	 * Returns edit input field values.
-	 * 
-	 * @return	object
-	 */
-	save: function() {
-		return { };
-	},
-	
-	/**
-	 * Returns editor's object type id.
-	 * 
-	 * @return	integer
-	 */
-	getObjectTypeID: function() {
-		return this._objectTypeID;
-	},
-	
-	/**
-	 * Updates cached view.
-	 * 
-	 * @param	string		cache
-	 */
-	updateCache: function(cache) {
-		this._cache = cache;
 	}
 });
 
-/**
- * User profile editor implementation for information contents.
- * 
- * @see	WCF.User.Profile.Editor.Base
- */
-WCF.User.Profile.Editor.Information = WCF.User.Profile.Editor.Base.extend({
-	/**
-	 * @see	WCF.User.Profile.Editor.Base._containerID
-	 */
-	_containerID: 'about',
-	
-	/**
-	 * @see	WCF.User.Profile.Editor.Base._name
-	 */
-	_name: 'WCF.User.Profile.Editor.Information',
-	
-	/**
-	 * @see	WCF.User.Profile.Editor.Base.beginEdit()
-	 */
-	beginEdit: function() {
-		// show tab
-		$('#profileContent').wcfTabs('select', 'about');
-		
-		return this._super();
-	},
-	
-	/**
-	 * @see	WCF.User.Profile.Editor.Base.prepareEdit()
-	 */
-	prepareEdit: function(returnValues) {
-		this._super(returnValues);
-		
-		var $formSubmit = $('<div class="formSubmit" />').appendTo($('#' + this._containerID).children('.containerPadding'));
-		var $buttons = WCF.User.Profile.Editor.Handler.getButtons();
-		$buttons.save.appendTo($formSubmit);
-		$buttons.restore.appendTo($formSubmit);
-	},
-	
-	/**
-	 * @see	WCF.User.Profile.Editor.Base.save()
-	 */
-	save: function() {
-		var $values = { };
-		
-		// collect values
-		this._container.find('input').each(function(index, element) {
-			var $element = $(element);
-			var $type = $element.attr('type');
-			
-			if (($type == 'radio' || $type === 'checkbox') && !$element.prop('checked')) {
-				return;
-			}
-			
-			$values[$element.attr('name')] = $element.val();
-		});
-		this._container.find('textarea').each(function(index, element) {
-			var $element = $(element);
-			
-			$values[$element.attr('name')] = $element.val();
-		});
-		
-		return this._parseValues($values);
-	},
-	
-	/**
-	 * Parses input names.
-	 * 
-	 * @param	object		values
-	 * @return	object
-	 */
-	_parseValues: function(values) {
-		var $parsedValues = { };
-		var $regEx = /values\[([a-zA-Z0-9._-]+)\]/;
-		
-		for (var $i in values) {
-			if ($regEx.test($i)) {
-				var $matches = $regEx.exec($i);
-				$parsedValues[$matches[1]] = values[$i];
-			}
-		}
-		
-		return $parsedValues;
-	}
-});
 
 /**
  * Namespace for registration functions.

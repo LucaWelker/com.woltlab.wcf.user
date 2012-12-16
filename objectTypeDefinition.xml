@@ -2,11 +2,6 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectTypeDefinition.xsd">
 	<import>
 		<definition>
-			<name>com.woltlab.wcf.user.profileEditableContent</name>
-			<interfacename>wcf\system\user\profile\editable\content\IUserProfileEditableContent</interfacename>
-		</definition>
-		
-		<definition>
 			<name>com.woltlab.wcf.user.recentActivityEvent</name>
 			<interfacename>wcf\system\user\activity\event\IUserActivityEvent</interfacename>
 		</definition>

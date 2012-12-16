@@ -4,7 +4,7 @@
 			<fieldset>
 				<legend>{lang}wcf.user.option.category.{@$categoryLevel2[object]->categoryName}{/lang}</legend>
 				
-				{if $categoryLevel2[object]->categoryName == 'profile.personal' && !$__wcf->session->getPermission('user.profile.canEditUserTitle')}
+				{if $categoryLevel2[object]->categoryName == 'profile.personal' && $__wcf->session->getPermission('user.profile.canEditUserTitle')}
 					<dl>
 						<dt><label for="__userTitle">{lang}wcf.user.userTitle{/lang}</label></dt>
 						<dd>
@@ -24,4 +24,9 @@
 			</fieldset>
 		{/foreach}
 	{/foreach}
+	
+	<div class="formSubmit">
+		<button class="primaryButton" accesskey="s" data-type="save">{lang}wcf.global.button.save{/lang}</button>
+		<button data-type="restore">{lang}wcf.global.button.cancel{/lang}</button>
+	</div>
 </div>

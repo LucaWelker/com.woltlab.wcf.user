@@ -3,7 +3,9 @@ namespace wcf\data\user;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\option\user\UserOptionHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -22,6 +24,12 @@ class UserProfileAction extends UserAction {
 	 * @see	wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
 	 */
 	protected $allowGuestAccess = array('getUserProfile', 'getDetailedActivityPointList');
+	
+	/**
+	 * user profile object
+	 * @var	wcf\data\user\UserProfile
+	 */
+	public $userProfile = null;
 	
 	/**
 	 * Validates parameters for signature preview.
@@ -162,6 +170,130 @@ class UserProfileAction extends UserAction {
 	}
 	
 	/**
+	 * Validates parameters to begin profile inline editing.
+	 */
+	public function validateBeginEdit() {
+		if (!empty($this->objectIDs) && count($this->objectIDs) == 1) {
+			$userID = reset($this->objectIDs);
+			$this->userProfile = UserProfile::getUserProfile($userID);
+		}
+		
+		if ($this->userProfile === null || !$this->userProfile->userID) {
+			throw new UserInputException('objectIDs');
+		}
+		
+		if (!$this->userProfile->canEdit() && $this->userProfile->userID != WCF::getUser()->userID) {
+			throw new PermissionDeniedException();
+		}
+		else if (!$this->userProfile->canEditOwnProfile()) {
+			throw new PermissionDeniedException();
+		}
+	}
+	
+	/**
+	 * Begins profile inline editing.
+	 * 
+	 * @return	array
+	 */
+	public function beginEdit() {
+		$optionTree = $this->getOptionHandler($this->userProfile->getDecoratedObject())->getOptionTree();
+		WCF::getTPL()->assign(array(
+			'errorType' => array(),
+			'optionTree' => $optionTree,
+			'__userTitle' => $this->userProfile->userTitle
+		));
+		
+		return array(
+			'template' => WCF::getTPL()->fetch('userProfileAboutEditable')
+		);
+	}
+	
+	/**
+	 * Validates parameters to save changes to user profile.
+	 */
+	public function validateSave() {
+		$this->validateBeginEdit();
+		
+		if (!isset($this->parameters['values']) || !is_array($this->parameters['values'])) {
+			throw new UserInputException('values');
+		}
+		
+		if (isset($this->parameters['values']['__userTitle']) && !WCF::getSession()->getPermission('user.profile.canEditUserTitle')) {
+			throw new PermissionDeniedException();
+		}
+	}
+	
+	/**
+	 * Saves changes to user profile.
+	 * 
+	 * @return	array
+	 */
+	public function save() {
+		$userTitle = null;
+		if (isset($this->parameters['values']['__userTitle'])) {
+			$userTitle = $this->parameters['values']['__userTitle'];
+			unset($this->parameters['values']['__userTitle']);
+		}
+		
+		$optionHandler = $this->getOptionHandler($this->userProfile->getDecoratedObject());
+		$optionHandler->readUserInput($this->parameters);
+		
+		$errors = $optionHandler->validate();
+		
+		// validate user title
+		if ($userTitle !== null) {
+			// TODO: insert validation for userTitle here
+		}
+		
+		// validation was successful
+		if (empty($errors)) {
+			$saveOptions = $optionHandler->save();
+			$data = array(
+				'options' => $saveOptions
+			);
+			
+			// save user title
+			if ($userTitle !== null) {
+				$data['data'] = array(
+					'userTitle' => $userTitle
+				);
+			}
+			
+			$userAction = new UserAction(array($this->userProfile->userID), 'update', $data);
+			$userAction->executeAction();
+			
+			// return parsed template
+			$user = new User($this->userProfile->userID);
+			
+			// reload option handler
+			$optionHandler = $this->getOptionHandler($user, false);
+			
+			$options = $optionHandler->getOptionTree();
+			WCF::getTPL()->assign(array(
+				'options' => $options
+			));
+			
+			return array(
+				'success' => true,
+				'template' => WCF::getTPL()->fetch('userProfileAbout')
+			);
+		}
+		else {
+			// validation failed
+			WCF::getTPL()->assign(array(
+				'errorType' => $errors,
+				'optionTree' => $optionHandler->getOptionTree(),
+				'__userTitle' => $this->userProfile->userTitle
+			));
+			
+			return array(
+				'success' => false,
+				'template' => WCF::getTPL()->fetch('userProfileAboutEditable')
+			);
+		}
+	}
+	
+	/**
 	 * Updates user ranks.
 	 */
 	public function updateUserRank() {
@@ -221,5 +353,23 @@ class UserProfileAction extends UserAction {
 				$user->update(array('userOnlineGroupID' => $row['groupID']));
 			}
 		}
+	}
+	
+	/**
+	 * Returns the user option handler object.
+	 * 
+	 * @param	wcf\data\user\User	$user
+	 * @param	boolean			$editMode
+	 * @return	wcf\system\option\user\UserOptionHandler
+	 */
+	protected function getOptionHandler(User $user, $editMode = true) {
+		$optionHandler = new UserOptionHandler('userOption', 'wcf\system\cache\builder\OptionCacheBuilder', false, '', 'profile');
+		if (!$editMode) {
+			$optionHandler->showEmptyOptions(false);
+			$optionHandler->enableEditMode(false);
+		}
+		$optionHandler->setUser($user);
+		
+		return $optionHandler;
 	}
 }
