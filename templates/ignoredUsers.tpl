@@ -1,40 +1,16 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.ignoredUsers.title{/lang}</title>
+	<title>{lang}wcf.user.ignoredUsers{/lang} - {lang}wcf.user.usercp{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude'}
 	
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('wcf\\data\\user\\ignore\\UserIgnoreAction', $('.jsIgnoredUser'), $('.jsIgnoredUsersBadge'));
+			new WCF.Action.Delete('wcf\\data\\user\\ignore\\UserIgnoreAction', $('.jsIgnoredUser'));
 		});
 		//]]>
 	</script>
-	{*TODO: css*}
-	<style type="text/css">
-		#ignoredUsersList li {
-			display: inline-block;
-			position: relative;
-		}
-		
-		#ignoredUsersList span {
-			opacity: 0;
-			position: absolute;
-			right: 2px;
-			top: 2px;
-		
-			-o-transition: opacity .2s ease 0;
-		}
-		
-		#ignoredUsersList li:hover span {
-			opacity: 1;
-		}
-		
-		#ignoredUsersList span > img {
-			border-bottom-left-radius: 5px;
-		}
-	</style>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -45,33 +21,47 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.ignoredUsers.title{/lang} <span class="badge jsIgnoredUsersBadge">{#$count}</span></h1>
+		<h1>{lang}wcf.user.ignoredUsers{/lang} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
 {include file='userNotice'}
 
-<section id="ignoredUsersList">
-	{hascontent}
-		<ul>
+<div class="contentNavigation">
+	{pages print=true assign=pagesLinks controller='IgnoredUsers' link="pageNo=%d"}
+</div>
+
+{hascontent}
+	<div class="container marginTop">
+		<ol class="containerList doubleColumned userList">
 			{content}
-				{foreach from=$ignoredUsers item=ignoredUser}
-					<li class="framed jsIgnoredUser">
-						<div title="{$ignoredUser->username}" class="jsTooltip">
-							<span><img src="{icon}delete{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$ignoredUser->userID}" /></span>
-							<a href="{link controller='User' object=$ignoredUser}{/link}">
-								{@$ignoredUser->getAvatar()->getImageTag(64)}
-							</a>
+				{foreach from=$objects item=user}
+					<li class="jsIgnoredUser">
+						<div class="box48">
+							<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
+								
+							<div class="details userInformation">
+								{include file='userInformationHeadline'}
+								
+								<ul class="buttonList">
+									<li><img src="{icon}delete{/icon}" alt="" class="icon16 pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unignore{/lang}" data-object-id="{@$user->ignoreID}" /></li>
+								</ul>
+								
+								{include file='userInformationStatistics'}
+							</div>
 						</div>
 					</li>
 				{/foreach}
 			{/content}
-		</ul>
-	{hascontentelse}
-		<!-- TODO: What should we display here? -->
-		<p class="info">You do not ignore any users yet</p>
-	{/hascontent}
-</section>
+		</ol>
+	</div>
+	
+	<div class="contentNavigation">
+		{@$pagesLinks}
+	</div>
+{hascontentelse}
+	<p class="info">{lang}wcf.user.ignoredUsers.noUsers{/lang}</p>
+{/hascontent}
 
 {include file='footer'}
 

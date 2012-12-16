@@ -119,21 +119,42 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 	 * @see	wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 */
 	public function validateDelete() {
-		if (empty($this->objectIDs)) {
-			throw new UserInputException('objectIDs');
+		// read objects
+		if (empty($this->objects)) {
+			$this->readObjects();
+			
+			if (empty($this->objects)) {
+				throw new UserInputException('objectIDs');
+			}
 		}
 		
-		// disguise as unfollow
-		$this->parameters['data']['userID'] = array_shift($this->objectIDs);
-		$this->validateUnfollow();
+		// validate ownership
+		foreach ($this->objects as $follow) {
+			if ($follow->userID != WCF::getUser()->userID) {
+				throw new PermissionDeniedException();
+			}
+		}
 	}
 	
 	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
-		// disguise as unfollow
-		$this->unfollow();
+		$returnValues = parent::delete();
+		
+		$followUserIDs = array();
+		$packageID = PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user');
+		foreach ($this->objects as $follow) {
+			$followUserIDs[] = $follow->followUserID;
+			// remove activity event
+			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, array($follow->followUserID));
+		}
+		
+		// reset storage
+		UserStorageHandler::getInstance()->reset($followUserIDs, 'followerUserIDs');
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'followingUserIDs');
+		
+		return $returnValues;
 	}
 	
 	/**

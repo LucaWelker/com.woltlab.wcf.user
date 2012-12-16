@@ -1,40 +1,16 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.following.title{/lang}</title>
+	<title>{lang}wcf.user.following{/lang} - {lang}wcf.user.usercp{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude'}
 	
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('wcf\\data\\user\\follow\\UserFollowAction', $('.jsFollowing'), $('.jsFollowingBadge'));
+			new WCF.Action.Delete('wcf\\data\\user\\follow\\UserFollowAction', $('.jsFollowing'));
 		});
 		//]]>
 	</script>
-	{*TODO: css*}
-	<style type="text/css">
-		#followingList li {
-			display: inline-block;
-			position: relative;
-		}
-		
-		#followingList span {
-			opacity: 0;
-			position: absolute;
-			right: 2px;
-			top: 2px;
-		
-			-o-transition: opacity .2s ease 0;
-		}
-		
-		#followingList li:hover span {
-			opacity: 1;
-		}
-		
-		#followingList span > img {
-			border-bottom-left-radius: 5px;
-		}
-	</style>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -45,33 +21,47 @@
 
 <header class="boxHeadline"> 
 	<hgroup >
-		<h1>{lang}wcf.user.following.title{/lang} <span class="badge jsFollowingBadge">{#$count}</span></h1>
+		<h1>{lang}wcf.user.following{/lang} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
 {include file='userNotice'}
 
-<section id="followingList">
-	{hascontent}
-		<ul>
+<div class="contentNavigation">
+	{pages print=true assign=pagesLinks controller='Following' link="pageNo=%d"}
+</div>
+
+{hascontent}
+	<div class="container marginTop">
+		<ol class="containerList doubleColumned userList">
 			{content}
-				{foreach from=$following item=followingUser}
-					<li class="framed jsFollowing">
-						<div title="{$followingUser->username}" class="jsTooltip">
-							<span><img src="{icon}delete{/icon}" alt="" class="jsDeleteButton" data-object-id="{@$followingUser->userID}" /></span>
-							<a href="{link controller='User' object=$followingUser}{/link}">
-								{@$followingUser->getAvatar()->getImageTag(64)}
-							</a>
+				{foreach from=$objects item=user}
+					<li class="jsFollowing">
+						<div class="box48">
+							<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
+								
+							<div class="details userInformation">
+								{include file='userInformationHeadline'}
+								
+								<ul class="buttonList">
+									<li><img src="{icon}delete{/icon}" alt="" class="icon16 pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unfollow{/lang}" data-object-id="{@$user->followID}" /></li>
+								</ul>
+								
+								{include file='userInformationStatistics'}
+							</div>
 						</div>
 					</li>
 				{/foreach}
 			{/content}
-		</ul>
-	{hascontentelse}
-		<!-- TODO: What should we display here? -->
-		<p class="info">You are not yet following anyone</p>
-	{/hascontent}
-</section>
+		</ol>
+	</div>
+	
+	<div class="contentNavigation">
+		{@$pagesLinks}
+	</div>
+{hascontentelse}
+	<p class="info">{lang}wcf.user.following.noUsers{/lang}</p>
+{/hascontent}
 
 {include file='footer'}
 

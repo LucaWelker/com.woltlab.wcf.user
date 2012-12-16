@@ -14,41 +14,29 @@ use wcf\system\WCF;
  * @subpackage	page
  * @category	Community Framework
  */
-class FollowingPage extends AbstractPage {
+class FollowingPage extends MultipleLinkPage {
 	/**
 	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
 	
 	/**
-	 * list of following users
-	 * @var	wcf\data\user\follow\UserFollowingList
+	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $following = array();
+	public $objectListClassName = 'wcf\data\user\follow\UserFollowingList';
 	
 	/**
-	 * @see	wcf\page\AbstractPage::readData()
+	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
 	 */
-	public function readData() {
-		parent::readData();
-		
-		$this->following = new UserFollowingList();
-		$this->following->sqlLimit = 100;
-		$this->following->sqlOrderBy = "user_table.username ASC";
-		$this->following->getConditionBuilder()->add("user_follow.userID = ?", array(WCF::getUser()->userID));
-		$this->following->readObjects();
-	}
+	public $sqlOrderBy = 'user_follow.time DESC';
 	
 	/**
-	 * @see	wcf\page\AbstractPage::assignVariables()
+	 * @see	wcf\page\MultipleLinkPage::readData()
 	 */
-	public function assignVariables() {
-		parent::assignVariables();
-		
-		WCF::getTPL()->assign(array(
-			'count' => $this->following->countObjects(),
-			'following' => $this->following
-		));
+	protected function initObjectList() {
+		parent::initObjectList();
+	
+		$this->objectList->getConditionBuilder()->add("user_follow.userID = ?", array(WCF::getUser()->userID));
 	}
 	
 	/**

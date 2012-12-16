@@ -26,6 +26,10 @@
 			});
 		//]]>
 	</script>
+	
+	{if USERS_ONLINE_PAGE_REFRESH > 0}
+		<meta http-equiv="refresh" content="{@USERS_ONLINE_PAGE_REFRESH}; url={link controller='UsersOnlineList'}sortField={@$sortField}&sortOrder={@$sortOrder}{/link}" />
+	{/if}
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
@@ -172,7 +176,7 @@
 	</div>
 {/if}
 
-{if $guestsOnline}
+{if $guestsOnline && USERS_ONLINE_SHOW_GUESTS}
 	<header class="boxHeadline">
 		<hgroup>
 			<h1>{lang}wcf.user.usersOnline.guests{/lang} <span class="badge">{#$guestsOnline}</span></h1>
@@ -186,7 +190,7 @@
 	</div>
 {/if}
 
-{if $robotsOnline}
+{if $robotsOnline && USERS_ONLINE_SHOW_ROBOTS}
 	<header class="boxHeadline">
 		<hgroup>
 			<h1>{lang}wcf.user.usersOnline.robots{/lang} <span class="badge">{#$robotsOnline}</span></h1>

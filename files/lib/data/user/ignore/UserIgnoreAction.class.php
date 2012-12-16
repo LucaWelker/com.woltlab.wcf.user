@@ -3,6 +3,7 @@ namespace wcf\data\user\ignore;
 use wcf\data\user\ignore\UserIgnore;
 use wcf\data\user\ignore\UserIgnoreEditor;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
@@ -71,20 +72,32 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	 * @see	wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 */
 	public function validateDelete() {
-		if (empty($this->objectIDs)) {
-			throw new UserInputException('objectIDs');
+		// read objects
+		if (empty($this->objects)) {
+			$this->readObjects();
+			
+			if (empty($this->objects)) {
+				throw new UserInputException('objectIDs');
+			}
 		}
 		
-		// disguise as unignore
-		$this->parameters['data']['ignoreUserID'] = array_shift($this->objectIDs);
-		$this->validateUnignore();
+		// validate ownership
+		foreach ($this->objects as $ignore) {
+			if ($ignore->userID != WCF::getUser()->userID) {
+				throw new PermissionDeniedException();
+			}
+		}
 	}
 	
 	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
-		// disguise as unignore
-		$this->unignore();
+		$returnValues = parent::delete();
+		
+		// reset storage
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'ignoredUserIDs');
+		
+		return $returnValues;
 	}
 }

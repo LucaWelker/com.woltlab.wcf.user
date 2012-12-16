@@ -1,6 +1,5 @@
 <?php
 namespace wcf\page;
-use wcf\data\user\ignore\UserIgnoreList;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
@@ -14,41 +13,29 @@ use wcf\system\WCF;
  * @subpackage	page
  * @category	Community Framework
  */
-class IgnoredUsersPage extends AbstractPage {
+class IgnoredUsersPage extends MultipleLinkPage {
 	/**
 	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
 	
 	/**
-	 * list of ignored users
-	 * @var	wcf\data\user\ignore\UserIgnoreList
+	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $ignoredUsers = null;
+	public $objectListClassName = 'wcf\data\user\ignore\ViewableUserIgnoreList';
 	
 	/**
-	 * @see	wcf\page\AbstractPage::readData()
+	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
 	 */
-	public function readData() {
-		parent::readData();
-		
-		$this->ignoredUsers = new UserIgnoreList();
-		$this->ignoredUsers->sqlLimit = 100;
-		$this->ignoredUsers->sqlOrderBy = "user_table.username ASC";
-		$this->ignoredUsers->getConditionBuilder()->add("user_ignore.userID = ?", array(WCF::getUser()->userID));
-		$this->ignoredUsers->readObjects();
-	}
+	public $sqlOrderBy = 'user_ignore.time DESC';
 	
 	/**
-	 * @see	wcf\page\AbstractPage::assignVariables()
+	 * @see	wcf\page\MultipleLinkPage::readData()
 	 */
-	public function assignVariables() {
-		parent::assignVariables();
+	protected function initObjectList() {
+		parent::initObjectList();
 		
-		WCF::getTPL()->assign(array(
-			'count' => $this->ignoredUsers->countObjects(),
-			'ignoredUsers' => $this->ignoredUsers
-		));
+		$this->objectList->getConditionBuilder()->add("user_ignore.userID = ?", array(WCF::getUser()->userID));
 	}
 	
 	/**

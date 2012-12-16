@@ -34,14 +34,24 @@ class MembersListPage extends SortablePage {
 	public $enableTracking = true;
 	
 	/**
+	 * @see	wcf\page\MultipleLinkPage::$itemsPerPage
+	 */
+	public $itemsPerPage = MEMBERS_LIST_USERS_PER_PAGE;
+	
+	/**
 	 * @see	wcf\page\SortablePage::$defaultSortField
 	 */
-	public $defaultSortField = 'username';
+	public $defaultSortField = MEMBERS_LIST_DEFAULT_SORT_FIELD;
+	
+	/**
+	 * @see	wcf\page\SortablePage::$defaultSortOrder
+	 */
+	public $defaultSortOrder = MEMBERS_LIST_DEFAULT_SORT_ORDER;
 	
 	/**
 	 * @see	wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('username', 'registrationDate');
+	public $validSortFields = array('username', 'registrationDate', 'activityPoints');
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName

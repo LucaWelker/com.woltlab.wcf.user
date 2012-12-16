@@ -31,12 +31,12 @@ class UsersOnlineListPage extends SortablePage {
 	/**
 	 * @see	wcf\page\SortablePage::$defaultSortField
 	 */
-	public $defaultSortField = 'lastActivityTime';
+	public $defaultSortField = USERS_ONLINE_DEFAULT_SORT_FIELD;
 	
 	/**
 	 * @see	wcf\page\SortablePage::$defaultSortOrder
 	 */
-	public $defaultSortOrder = 'DESC';
+	public $defaultSortOrder = USERS_ONLINE_DEFAULT_SORT_ORDER;
 	
 	/**
 	 * @see	wcf\page\SortablePage::$validSortFields
