@@ -8,7 +8,7 @@
 					<dl>
 						<dt><label for="__userTitle">{lang}wcf.user.userTitle{/lang}</label></dt>
 						<dd>
-							<input type="text" id="__userTitle" name="values[__userTitle]" value="{$__userTitle}" class="long" />
+							<input type="text" id="__userTitle" name="values[__userTitle]" value="{$__userTitle}" class="long" maxlength="{@USER_TITLE_MAX_LENGTH}" />
 							<small>{lang}wcf.user.userTitle.description{/lang}</small>
 							
 							{if $errorType[__userTitle]|isset}
@@ -26,7 +26,7 @@
 	{/foreach}
 	
 	<div class="formSubmit">
-		<button class="primaryButton" accesskey="s" data-type="save">{lang}wcf.global.button.save{/lang}</button>
+		<button class="buttonPrimary" accesskey="s" data-type="save">{lang}wcf.global.button.save{/lang}</button>
 		<button data-type="restore">{lang}wcf.global.button.cancel{/lang}</button>
 	</div>
 </div>
