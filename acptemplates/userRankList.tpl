@@ -8,7 +8,7 @@
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('wcf\\data\\user\\rank\\UserRankAction', $('.jsUserRankRow'), $('.tabularBox > hgroup > .badge'));
+			new WCF.Action.Delete('wcf\\data\\user\\rank\\UserRankAction', '.jsUserRankRow');
 			
 			$('#updateUserRanks').click(function () {
 				$('#updateUserRanks').unbind('click');
