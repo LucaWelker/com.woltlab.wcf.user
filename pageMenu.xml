@@ -20,5 +20,13 @@
 			<permissions>user.profile.canViewUsersOnlineList</permissions>
 			<options>module_users_online</options>
 		</pagemenuitem>
+		
+		<pagemenuitem name="wcf.user.team">
+			<link>index.php/Team/</link>
+			<position>header</position>
+			<parent>wcf.user.members</parent>
+			<permissions>user.profile.canViewMembersList</permissions>
+			<options>module_team_page</options>
+		</pagemenuitem>
 	</import>
 </data>

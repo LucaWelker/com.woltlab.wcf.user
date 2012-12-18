@@ -26,7 +26,7 @@
 	</dl>
 {/if}
 
-{if $action == 'add' || $group->groupType > 3}
+{if MODULE_TEAM_PAGE && ($action == 'add' || $group->groupType > 3)}
 	<dl>
 		<dd>
 			<label><input type="checkbox" id="showOnTeamPage" name="showOnTeamPage" value="1" {if $showOnTeamPage}checked="checked" {/if}/> {lang}wcf.acp.group.showOnTeamPage{/lang}</label>
