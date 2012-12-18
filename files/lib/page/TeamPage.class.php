@@ -1,6 +1,8 @@
 <?php
 namespace wcf\page;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -57,5 +59,15 @@ class TeamPage extends MultipleLinkPage {
 		PageMenu::getInstance()->setActiveMenuItem('wcf.user.team');
 
 		parent::show();
+	}
+	
+	/**
+	 * @see	wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+	
+		// add breadcrumbs
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.user.members'), LinkHandler::getInstance()->getLink('MembersList')));
 	}
 }
