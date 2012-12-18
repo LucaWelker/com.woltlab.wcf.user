@@ -3,6 +3,7 @@ namespace wcf\system\option\user;
 use wcf\data\user\option\UserOption;
 use wcf\data\user\User;
 use wcf\system\bbcode\MessageParser;
+use wcf\system\WCF;
 
 /**
  * User option output implementation for a formatted textarea value.
@@ -20,6 +21,11 @@ class MessageUserOptionOutput implements IUserOptionOutput {
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
 		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($value);
+		
+		WCF::getTPL()->assign(array(
+			'option' => $option,
+			'value' => MessageParser::getInstance()->parse($value),
+		));
+		return WCF::getTPL()->fetch('messageUserOptionOutput');
 	}
 }

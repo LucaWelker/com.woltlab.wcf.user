@@ -4,7 +4,7 @@
 			<fieldset>
 				<legend>{lang}wcf.user.option.category.{@$categoryLevel2[object]->categoryName}{/lang}</legend>
 				
-				{if $categoryLevel2[object]->categoryName == 'profile.personal' &&  && MODULE_USER_RANK && $__wcf->session->getPermission('user.profile.canEditUserTitle')}
+				{if $categoryLevel2[object]->categoryName == 'profile.personal' && MODULE_USER_RANK && $__wcf->session->getPermission('user.profile.canEditUserTitle')}
 					<dl>
 						<dt><label for="__userTitle">{lang}wcf.user.userTitle{/lang}</label></dt>
 						<dd>

@@ -53,13 +53,7 @@
 			<!-- profile -->
 			<option name="aboutMe">
 				<categoryname>profile.aboutMe</categoryname>
-				<!--
-					TODO:	This should be a message type, but OptionTypeMessage is
-						missing so far. Change the type once it's implemented
-					
-					<optiontype>message</optiontype>
-				-->
-				<optiontype>text</optiontype>
+				<optiontype>message</optiontype>
 				<outputclass>wcf\system\option\user\MessageUserOptionOutput</outputclass>
 				<visible>15</visible>
 				<editable>3</editable>
