@@ -352,7 +352,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.userTitle.description"><![CDATA[Sie können sich einen individuellen Benutzertitel geben.]]></item>
 		<item name="wcf.user.userTitle.error.tooLong"><![CDATA[Der eingegebene Titel ist zu lang. Die maximal zulässige Gesamtlänge beträgt {#USER_TITLE_MAX_LENGTH} Zeichen.]]></item>
 		<item name="wcf.user.userTitle.error.forbidden"><![CDATA[Sie haben einen ungültigen Benutzertitel eingegeben.]]></item>
-		<item name="wcf.user.team"><![CDATA[Team]]></item>
+		<item name="wcf.user.team"><![CDATA[Team-Mitglieder]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">
