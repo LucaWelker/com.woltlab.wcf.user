@@ -1,18 +1,13 @@
 <?php 
 namespace wcf\form;
-use wcf\data\search\SearchEditor;
-
-use wcf\system\request\LinkHandler;
-
-use wcf\util\HeaderUtil;
-
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-
-use wcf\system\exception\UserInputException;
-
 use wcf\acp\form\UserOptionListForm;
+use wcf\data\search\SearchEditor;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\exception\UserInputException;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -47,7 +42,7 @@ class UserSearchForm extends UserOptionListForm {
 	/**
 	 * condtion builder object
 	 * @var	wcf\system\database\condition\PreparedStatementConditionBuilder
-	*/
+	 */
 	public $conditions = null;
 	
 	/**
