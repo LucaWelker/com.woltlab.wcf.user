@@ -125,7 +125,6 @@ class RegisterForm extends UserAddForm {
 			$this->validateCaptcha();
 		}
 		
-		
 		parent::validate();
 		
 		// validate registration time

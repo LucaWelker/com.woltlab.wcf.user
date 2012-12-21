@@ -29,7 +29,7 @@ class TeamPage extends MultipleLinkPage {
 	
 	/**
 	 * @see	wcf\page\AbstractPage::$enableTracking
-	*/
+	 */
 	public $enableTracking = true;
 
 	/**
@@ -49,7 +49,7 @@ class TeamPage extends MultipleLinkPage {
 
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
-	*/
+	 */
 	public $objectListClassName = 'wcf\data\user\TeamList';
 
 	/**

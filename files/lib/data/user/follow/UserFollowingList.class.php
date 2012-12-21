@@ -28,7 +28,6 @@ class UserFollowingList extends UserFollowerList {
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = user_follow.followUserID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_option_value user_option_value ON (user_option_value.userID = user_table.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
-		
 
 		if (MODULE_USER_RANK) {
 			$this->sqlSelects .= ",user_rank.*";
