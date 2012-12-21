@@ -1,6 +1,8 @@
 <?php
 namespace wcf\page;
+use wcf\data\search\Search;
 use wcf\system\database\PostgreSQLDatabase;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
@@ -65,6 +67,18 @@ class MembersListPage extends SortablePage {
 	public $letter = '';
 	
 	/**
+	 * id of a user search
+	 * @var	integer
+	 */
+	public $searchID = 0;
+	
+	/**
+	 * user search
+	 * @var	wcf\data\search\Search
+	 */
+	public $search = null;
+	
+	/**
 	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -74,6 +88,14 @@ class MembersListPage extends SortablePage {
 		if (isset($_REQUEST['letter']) && StringUtil::length($_REQUEST['letter']) == 1 && StringUtil::indexOf(self::$availableLetters, $_REQUEST['letter']) !== false) {
 			$this->letter = $_REQUEST['letter'];
 		}
+		
+		if (!empty($_REQUEST['id'])) {
+			$this->searchID = intval($_REQUEST['id']);
+			$this->search = new Search($this->searchID);
+			if (!$this->search->searchID || $this->search->userID != WCF::getUser()->userID || $this->search->searchType != 'users') {
+				throw new IllegalLinkException();
+			}
+		}
 	}
 	
 	/**
@@ -81,6 +103,12 @@ class MembersListPage extends SortablePage {
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
+		
+		if ($this->search !== null) {
+			$searchData = unserialize($this->search->searchData);
+			$this->objectList->getConditionBuilder()->add("user_table.userID IN (?)", array($searchData['matches']));
+			unset($searchData);
+		}
 		
 		if (!empty($this->letter)) {
 			if ($this->letter == '#') {
@@ -108,8 +136,9 @@ class MembersListPage extends SortablePage {
 		WCF::getTPL()->assign(array(
 			'letters' => str_split(self::$availableLetters),
 			'letter' => $this->letter,
+			'searchID' => $this->searchID,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersList'),
-			'sidebarName' => 'com.woltlab.wcf.user.MembersList',
+			'sidebarName' => 'com.woltlab.wcf.user.MembersList'
 		));
 	}
 	

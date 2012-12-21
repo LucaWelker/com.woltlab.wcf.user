@@ -118,6 +118,8 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Unsubscribe]]></item>
 		<item name="wcf.user.watchedObjects.noObjects"><![CDATA[You don't have any subscriptions.]]></item>
 		<item name="wcf.user.watchedObjects.showAll"><![CDATA[Show All Subscriptions]]></item>
+		<item name="wcf.user.userTitle"><![CDATA[Custom Title]]></item>
+		<item name="wcf.user.userTitle.description"><![CDATA[You can enter a custom user title.]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
@@ -141,16 +143,18 @@ Your {@PAGE_TITLE|language} team]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
-		<item name="wcf.user.option.aboutMe"><![CDATA[About me]]></item>
-		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[About me]]></item>
-		<item name="wcf.user.option.category.profile.contact"><![CDATA[Contact options]]></item>
-		<item name="wcf.user.option.category.profile.personal"><![CDATA[Personal information]]></item>
+		<item name="wcf.user.option.aboutMe"><![CDATA[About Me]]></item>
+		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[About Me]]></item>
+		<item name="wcf.user.option.category.profile.contact"><![CDATA[Contact Options]]></item>
+		<item name="wcf.user.option.category.profile.personal"><![CDATA[Personal Information]]></item>
 		<item name="wcf.user.option.gender"><![CDATA[Gender]]></item>
 		<item name="wcf.user.option.hobbies"><![CDATA[Hobbies]]></item>
-		<item name="wcf.user.option.homepage"><![CDATA[Personal website]]></item>
+		<item name="wcf.user.option.homepage"><![CDATA[Personal Website]]></item>
 		<item name="wcf.user.option.location"><![CDATA[Location]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
 		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
+		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Show year of birth]]></item>
+		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[This will allow other members to see your age.]]></item>
 		<item name="wcf.user.option.timezone"><![CDATA[Timezone]]></item>
 		<item name="wcf.user.option.showSignature"><![CDATA[Show other members' signatures]]></item>
 		<item name="wcf.user.option.category.settings.general"><![CDATA[General]]></item>

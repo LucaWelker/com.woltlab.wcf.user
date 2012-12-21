@@ -28,5 +28,11 @@
 			<permissions>user.profile.canViewMembersList</permissions>
 			<options>module_team_page</options>
 		</pagemenuitem>
+		
+		<pagemenuitem name="wcf.user.search">
+			<link>index.php/UserSearch/</link>
+			<position>header</position>
+			<permissions>user.profile.canViewMembersList</permissions>
+		</pagemenuitem>
 	</import>
 </data>

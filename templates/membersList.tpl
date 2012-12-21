@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.members{/lang} {if $pageNo > 1}- {lang}wcf.page.pageNo{/lang} {/if}- {PAGE_TITLE|language}</title>
+	<title>{if $searchID}{lang}wcf.user.search.results{/lang}{else}{lang}wcf.user.members{/lang}{/if} {if $pageNo > 1}- {lang}wcf.page.pageNo{/lang} {/if}- {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude'}
 	
@@ -39,14 +39,14 @@
 				
 		<ul class="buttonList letters">
 			{foreach from=$letters item=__letter}
-				<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
+				<li><a href="{if $searchID}{link controller='MembersList' id=$searchID}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}{else}{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}{/if}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
 			{/foreach}
-			{if !$letter|empty}<li><a href="{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
+			{if !$letter|empty}<li><a href="{if $searchID}{link controller='MembersList' id=$searchID}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}{else}{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}{/if}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
 		</ul>
 	</fieldset>
 		
 	<div>
-		<form method="get" action="{link controller='MembersList'}{/link}">
+		<form method="get" action="{if $searchID}{link controller='MembersList' id=$searchID}{/link}{else}{link controller='MembersList'}{/link}{/if}">
 			<fieldset>
 				<legend>{lang}wcf.user.members.sort{/lang}</legend>
 				
@@ -79,14 +79,18 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.members{/lang} <span class="badge">{#$items}</span></h1>
+		<h1>{if $searchID}{lang}wcf.user.search.results{/lang}{else}{lang}wcf.user.members{/lang}{/if} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
 
 {include file='userNotice'}
 
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
+	{if $searchID}
+		{pages print=true assign=pagesLinks controller='MembersList' id=$searchID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
+	{else}
+		{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
+	{/if}
 </div>
 
 <div class="container marginTop">
