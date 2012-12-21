@@ -80,7 +80,7 @@
 		</eventlistener>
 		
 		<eventlistener>
-			<eventclassname>wcf\acp\form\UserGroupAddForm</eventclassname>
+			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
 			<eventname>save</eventname>
 			<listenerclassname>wcf\system\event\listener\UserAddFormUserTitleListener</listenerclassname>
 			<inherit>1</inherit>
