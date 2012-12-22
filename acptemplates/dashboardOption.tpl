@@ -31,10 +31,10 @@
 	<nav class="tabMenu">
 		<ul>
 			{if $objectType->allowcontent}
-				<li><a href="#dashboard-content">{lang}wcf.dashboard.boxType.content{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('dashboard-content')}">{lang}wcf.dashboard.boxType.content{/lang}</a></li>
 			{/if}
 			{if $objectType->allowsidebar}
-				<li><a href="#dashboard-sidebar">{lang}wcf.dashboard.boxType.sidebar{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('dashboard-sidebar')}">{lang}wcf.dashboard.boxType.sidebar{/lang}</a></li>
 			{/if}
 			
 			{event name='tabMenuTabs'}
