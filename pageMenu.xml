@@ -32,6 +32,7 @@
 		<pagemenuitem name="wcf.user.search">
 			<link>index.php/UserSearch/</link>
 			<position>header</position>
+			<parent>wcf.user.members</parent>
 			<permissions>user.profile.canViewMembersList</permissions>
 		</pagemenuitem>
 	</import>
