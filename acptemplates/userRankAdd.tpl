@@ -44,7 +44,7 @@
 					{/if}
 				</dd>
 			</dl>
-			{include file='multipleLanguageInputJavascript' elementIdentifier='rankTitle'}
+			{include file='multipleLanguageInputJavascript' elementIdentifier='rankTitle' forceSelection=false}
 			
 			<dl{if $errorField == 'cssClassName'} class="formError"{/if}>
 				<dt><label for="cssClassName">{lang}wcf.acp.user.rank.cssClassName{/lang}</label></dt>
