@@ -2,19 +2,19 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/pageMenu.xsd">
 	<import>
 		<pagemenuitem name="wcf.user.members">
-			<link>index.php/MembersList/</link>
+			<controller><![CDATA[wcf\page\MembersListPage]]></controller>
 			<position>header</position>
 			<permissions>user.profile.canViewMembersList</permissions>
 		</pagemenuitem>
 		
 		<pagemenuitem name="wcf.user.recentActivity">
-			<link>index.php/RecentActivityList/</link>
+			<controller><![CDATA[wcf\page\RecentActivityListPage]]></controller>
 			<position>header</position>
 			<parent>wcf.user.members</parent>
 		</pagemenuitem>
 		
 		<pagemenuitem name="wcf.user.usersOnline">
-			<link>index.php/UsersOnlineList/</link>
+			<controller><![CDATA[wcf\page\UsersOnlineListPage]]></controller>
 			<position>header</position>
 			<parent>wcf.user.members</parent>
 			<permissions>user.profile.canViewUsersOnlineList</permissions>
@@ -22,7 +22,7 @@
 		</pagemenuitem>
 		
 		<pagemenuitem name="wcf.user.team">
-			<link>index.php/Team/</link>
+			<controller><![CDATA[wcf\page\TeamPage]]></controller>
 			<position>header</position>
 			<parent>wcf.user.members</parent>
 			<permissions>user.profile.canViewMembersList</permissions>
@@ -30,7 +30,7 @@
 		</pagemenuitem>
 		
 		<pagemenuitem name="wcf.user.search">
-			<link>index.php/UserSearch/</link>
+			<controller><![CDATA[wcf\form\UserSearchForm]]></controller>
 			<position>header</position>
 			<parent>wcf.user.members</parent>
 			<permissions>user.profile.canViewMembersList</permissions>
