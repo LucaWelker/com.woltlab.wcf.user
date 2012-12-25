@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
+	<category name="wcf.acp.dashboard">
+		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard boxes configuration]]></item>
+		<!-- todo: <item name="wcf.acp.dashboard.box.sort"><![CDATA[]]></item> -->
+	</category>
+	
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.admin.content.dashboard.canEditDashboard"><![CDATA[Can configure dashbaords]]></item>
+		<item name="wcf.acp.group.option.admin.user.rank.canManageRank"><![CDATA[Can manage user ranks]]></item>
+		<item name="wcf.acp.group.option.admin.user.canEditActivityPoints"><![CDATA[Can edit activity points]]></item>
+		<item name="wcf.acp.group.option.admin.user.canViewInvisible"><![CDATA[Can view invisible users]]></item>
+		<item name="wcf.acp.group.option.admin.user.canViewIpAddress"><![CDATA[Can view the IP address of the users]]></item>
+		
+		<item name="wcf.acp.group.option.category.admin.content.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="wcf.acp.group.option.category.user.profile"><![CDATA[User profiles]]></item>
+		<item name="wcf.acp.group.option.category.user.profile.avatar"><![CDATA[Avatars]]></item>
+		<item name="wcf.acp.group.option.category.user.rank"><![CDATA[User ranks]]></item>
+		<item name="wcf.acp.group.option.category.user.signature"><![CDATA[Signatures]]></item>
+		
+		<item name="wcf.acp.group.option.user.profile.avatar.allowedFileExtensions"><![CDATA[Allowed file extensions]]></item>
+		<item name="wcf.acp.group.option.user.profile.avatar.canUploadAvatar"><![CDATA[Can upload own avatar]]></item>
+		<item name="wcf.acp.group.option.user.profile.avatar.maxSize"><![CDATA[Maximum file size]]></item>
+		<item name="wcf.acp.group.option.user.profile.canChangeEmail"><![CDATA[Can change e-mail address]]></item>
+		<item name="wcf.acp.group.option.user.profile.canEditUserTitle"><![CDATA[Can edit own user title]]></item>
+		<item name="wcf.acp.group.option.user.profile.canMail"><![CDATA[Can send e-mails to other users]]></item>
+		<item name="wcf.acp.group.option.user.profile.canQuit"><![CDATA[Can delete user account]]></item>
+		<item name="wcf.acp.group.option.user.profile.canRename"><![CDATA[Can change username]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewMembersList"><![CDATA[Can view members list]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUserProfile"><![CDATA[Can view user profiles]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUsersOnlineList"><![CDATA[Can view users online list]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseBBCodes"><![CDATA[Can use BBCodes in the signature]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseHtml"><![CDATA[Can use HTML in the signature]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseSmilies"><![CDATA[Can use smilies in the signature]]></item>
+		
+		<item name="wcf.acp.group.priority"><![CDATA[Priority]]></item>
+		<!-- todo: <item name="wcf.acp.group.priority.description"><![CDATA[]]></item> -->
+		<item name="wcf.acp.group.userOnlineMarking"><![CDATA[„Users Online“ display]]></item>
+		<!-- todo: <item name="wcf.acp.group.userOnlineMarking.description"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.acp.group.showOnTeamPage"><![CDATA[]]></item> -->
+	</category>
+	
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="wcf.acp.menu.link.dashboard.list"><![CDATA[Configuration]]></item>
+		<item name="wcf.acp.menu.link.activityPoint"><![CDATA[Activity points]]></item>
+		<item name="wcf.acp.menu.link.user.rank"><![CDATA[User ranks]]></item>
+		<item name="wcf.acp.menu.link.user.rank.list"><![CDATA[List user ranks]]></item>
+		<item name="wcf.acp.menu.link.user.rank.add"><![CDATA[Add user ranks]]></item>
+	</category>
+	
+	<category name="wcf.acp.user">
+		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Activity points]]></item>
+		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Recalculate users' activity points]]></item>
+		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Update points per activity]]></item>
+		
+		<item name="wcf.acp.user.rank.add"><![CDATA[Add user rank]]></item>
+		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[CSS classes]]></item>
+		<!-- todo: <item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[]]></item> -->
+		<item name="wcf.acp.user.rank.currentImage"><![CDATA[Current rank image]]></item>
+		<item name="wcf.acp.user.rank.delete.sure"><![CDATA[Are you sure that you want to remove the user title „{$userRank->rankTitle|language}“?]]></item>
+		<item name="wcf.acp.user.rank.edit"><![CDATA[Edit user rank]]></item>
+		<item name="wcf.acp.user.rank.image"><![CDATA[Rank image]]></item>
+		<item name="wcf.acp.user.rank.list"><![CDATA[User ranks]]></item>
+		<item name="wcf.acp.user.rank.list.count"><![CDATA[{#$items} user rank{if $items != 1}s{/if}]]></item>
+		<!-- todo: <item name="wcf.acp.user.rank.rankImage.description"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.acp.user.rank.requiredGender.description"><![CDATA[]]></item> -->
+		<item name="wcf.acp.user.rank.requiredPoints"><![CDATA[Points]]></item>
+		<!-- todo: <item name="wcf.acp.user.rank.requiredPoints.description"><![CDATA[]]></item> -->
+		<item name="wcf.acp.user.rank.requirement"><![CDATA[Requirements]]></item>
+		<item name="wcf.acp.user.rank.repeatImage"><![CDATA[Repetition of rank image]]></item>
+		<!-- todo: <item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[]]></item> -->
+		<item name="wcf.acp.user.rank.title"><![CDATA[Rank title]]></item>
+		<!-- todo: <item name="wcf.acp.user.rank.userGroup.description"><![CDATA[]]></item> -->
+	</category>
+	
+	<category name="wcf.dashboard">
+		<item name="wcf.dashboard.box.availableBoxes"><![CDATA[Disabled boxes]]></item>
+		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Enabled boxes]]></item>
+		<item name="wcf.dashboard.box.recentActivity"><![CDATA[Recent Activity]]></item>
+		<item name="wcf.dashboard.boxType.content"><![CDATA[Content area]]></item>
+		<item name="wcf.dashboard.boxType.sidebar"><![CDATA[Sidebar]]></item>
+		<item name="wcf.dashboard.objectType"><![CDATA[Page]]></item>
+		<item name="wcf.dashboard.objectType.com.woltlab.wcf.user.DashboardPage"><![CDATA[Dashboard]]></item>
+		<item name="wcf.dashboard.objectType.com.woltlab.wcf.user.MembersListPage"><![CDATA[Members list]]></item>
+	</category>
+	
+	<category name="wcf.sitemap">
+		<item name="wcf.sitemap.userAccount"><![CDATA[Account]]></item>
+	</category>
+	
 	<category name="wcf.user">
 		<item name="wcf.user.access.everyone"><![CDATA[Everyone]]></item>
 		<item name="wcf.user.access.following"><![CDATA[Users I follow]]></item>
@@ -122,44 +211,105 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.userTitle.description"><![CDATA[You can enter a custom user title.]]></item>
 	</category>
 	
+	<category name="wcf.user.avatar">
+		<item name="wcf.user.avatar"><![CDATA[Avatar]]></item>
+		<item name="wcf.user.avatar.edit"><![CDATA[Manage avatar]]></item>
+		<!-- todo: <item name="wcf.user.avatar.error.disabled"><![CDATA[]]></item> -->
+		<item name="wcf.user.avatar.type.custom"><![CDATA[Upload own avatar]]></item>
+		<!-- todo: <item name="wcf.user.avatar.type.custom.description"><![CDATA[]]></item> -->
+		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Use Gravatar]]></item>
+		<!-- todo: <item name="wcf.user.avatar.type.gravatar.description"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.avatar.type.none"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.avatar.type.none.description"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.avatar.upload.error.badImage"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.avatar.upload.error.invalidExtension"><![CDATA[]]></item> -->
+		<item name="wcf.user.avatar.upload.error.tooLarge"><![CDATA[The file is too large.]]></item>
+		<item name="wcf.user.avatar.upload.error.tooSmall"><![CDATA[The image is too small.]]></item>
+		<!-- todo: <item name="wcf.user.avatar.upload.error.uploadFailed"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.avatar.upload.success"><![CDATA[]]></item> -->
+	</category>
+	
 	<category name="wcf.user.notification">
-		<item name="wcf.user.notification.com.woltlab.wcf.notification.notificationType.mail"><![CDATA[E-mail]]></item>
+		<item name="wcf.user.notification.button.confirmed"><![CDATA[OK]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "No notifications" } else if (data.returnValues.count == 1) { "One notification" } else { data.returnValues.count + " notifications" }]]></item>
 		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> follows you.]]></item>
 		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[New follower]]></item>
+		<!-- todo: <item name="wcf.user.notification.mail.disabled"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.notification.mail.footer"><![CDATA[]]></item> -->
+		<item name="wcf.user.notification.mail.subject"><![CDATA[New notification: {@$title}]]></item>
+		<item name="wcf.user.notification.mailNotificationType.none"><![CDATA[No e-mail notifications]]></item>
+		<item name="wcf.user.notification.mailNotificationType.instant"><![CDATA[Instant e-mail notification]]></item>
+		<item name="wcf.user.notification.mailNotificationType.daily"><![CDATA[Daily e-mail notification]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[No new notifications]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
+		<item name="wcf.user.notification.showAll"><![CDATA[Show all notifications]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">
 		<item name="wcf.user.profile"><![CDATA[Profile of “{$user->username}”]]></item>
-		<item name="wcf.user.profile.menu.about"><![CDATA[About]]></item>
-		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
-		<item name="wcf.user.profile.following"><![CDATA[Following]]></item>
-		<item name="wcf.user.profile.following.all"><![CDATA[Show all following]]></item>
+		<!-- todo: <item name="wcf.user.profile.content.about.noPublicData"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[]]></item> -->
 		<item name="wcf.user.profile.followers"><![CDATA[Followers]]></item>
 		<item name="wcf.user.profile.followers.all"><![CDATA[Show all followers]]></item>
+		<item name="wcf.user.profile.following"><![CDATA[Following]]></item>
+		<item name="wcf.user.profile.following.all"><![CDATA[Show all following]]></item>
+		<item name="wcf.user.profile.menu.about"><![CDATA[About]]></item>
+		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
+		<!-- <item name="wcf.user.profile.oldUsername"><![CDATA[]]></item> -->
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Now follows <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
+		<item name="wcf.user.profile.visitors"><![CDATA[Profile visitors]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
 		<item name="wcf.user.option.aboutMe"><![CDATA[About Me]]></item>
+		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
+		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Show year of birth]]></item>
+		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[This will allow other members to see your age.]]></item>
+		<item name="wcf.user.option.canMail"><![CDATA[Can send e-mails]]></item>
+		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Can view e-mail address]]></item>
+		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Can view online status]]></item>
+		<item name="wcf.user.option.canViewProfile"><![CDATA[Can view user profile]]></item>
+		
 		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[About Me]]></item>
 		<item name="wcf.user.option.category.profile.contact"><![CDATA[Contact Options]]></item>
 		<item name="wcf.user.option.category.profile.personal"><![CDATA[Personal Information]]></item>
+		<item name="wcf.user.option.category.settings.general"><![CDATA[General]]></item>
+		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Date &amp; Time]]></item>
+		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Interface]]></item>
+		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privacy]]></item>
+		<item name="wcf.user.option.category.settings.privacy.content"><![CDATA[Content]]></item>
+		<item name="wcf.user.option.category.settings.privacy.messaging"><![CDATA[Communication]]></item>
+		
 		<item name="wcf.user.option.gender"><![CDATA[Gender]]></item>
 		<item name="wcf.user.option.hobbies"><![CDATA[Hobbies]]></item>
 		<item name="wcf.user.option.homepage"><![CDATA[Personal Website]]></item>
 		<item name="wcf.user.option.location"><![CDATA[Location]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
-		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
-		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Show year of birth]]></item>
-		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[This will allow other members to see your age.]]></item>
-		<item name="wcf.user.option.timezone"><![CDATA[Timezone]]></item>
 		<item name="wcf.user.option.showSignature"><![CDATA[Show other members' signatures]]></item>
-		<item name="wcf.user.option.category.settings.general"><![CDATA[General]]></item>
-		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Interface]]></item>
-		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privacy]]></item>
-		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Date &amp; Time]]></item>
+		<item name="wcf.user.option.timezone"><![CDATA[Timezone]]></item>
+	</category>
+	
+	<category name="wcf.user.mail">
+		<item name="wcf.user.mail.information"><![CDATA[Information]]></item>
+		<!-- todo: <item name="wcf.user.mail.mail"><![CDATA[]]></item> -->
+		<item name="wcf.user.mail.mail.subject"><![CDATA[Message from {@$username}: {@$subject}]]></item>
+		<item name="wcf.user.mail.message"><![CDATA[Message]]></item>
+		<item name="wcf.user.mail.senderEmail"><![CDATA[Your e-mail address]]></item>
+		<!-- todo: <item name="wcf.user.mail.sent"><![CDATA[]]></item> -->
+		<!-- todo: <item name="wcf.user.mail.showAddress"><![CDATA[]]></item> -->
+		<item name="wcf.user.mail.subject"><![CDATA[Subject]]></item>
+		<item name="wcf.user.mail.title"><![CDATA[Send e-mail to „{$user->username}“]]></item>
+	</category>
+	
+	<category name="wcf.user.rank">
+		<item name="wcf.user.rank.administrator"><![CDATA[Administrator]]></item>
+		<item name="wcf.user.rank.moderator"><![CDATA[Moderator]]></item>
+		<item name="wcf.user.rank.superModerator"><![CDATA[Super Moderator]]></item>
+		<item name="wcf.user.rank.user0"><![CDATA[Beginner]]></item>
+		<item name="wcf.user.rank.user1"><![CDATA[Trainee]]></item>
+		<item name="wcf.user.rank.user2"><![CDATA[Intermediate]]></item>
+		<item name="wcf.user.rank.user3"><![CDATA[Professional]]></item>
+		<item name="wcf.user.rank.user4"><![CDATA[Master]]></item>
+		<item name="wcf.user.rank.user5"><![CDATA[Sage]]></item>
 	</category>
 </language>

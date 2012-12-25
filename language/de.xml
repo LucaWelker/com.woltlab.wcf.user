@@ -2,13 +2,40 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.dashboard">
 		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard-Boxen konfigurieren]]></item>
-		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch ziehen und loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. „Deaktivierte Boxen“ verschieben.]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch Ziehen und Loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. „Deaktivierte Boxen“ verschieben.]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.admin.content.dashboard.canEditDashboard"><![CDATA[Kann Dashboards konfigurieren]]></item>
+		<item name="wcf.acp.group.option.admin.user.rank.canManageRank"><![CDATA[Kann Benutzerränge verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.user.canEditActivityPoints"><![CDATA[Kann Aktivtitätspunkte bearbeiten]]></item>
+		<item name="wcf.acp.group.option.admin.user.canViewInvisible"><![CDATA[Kann unsichtbare Benutzer sehen]]></item>
+		<item name="wcf.acp.group.option.admin.user.canViewIpAddress"><![CDATA[Kann die IP-Adressen der Benutzer sehen]]></item>
+		
+		<item name="wcf.acp.group.option.category.admin.content.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="wcf.acp.group.option.category.user.profile"><![CDATA[Benutzerprofile]]></item>
+		<item name="wcf.acp.group.option.category.user.profile.avatar"><![CDATA[Avatare]]></item>
+		<item name="wcf.acp.group.option.category.user.rank"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.group.option.category.user.signature"><![CDATA[Signaturen]]></item>
+		
+		<item name="wcf.acp.group.option.user.profile.avatar.allowedFileExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
+		<item name="wcf.acp.group.option.user.profile.avatar.canUploadAvatar"><![CDATA[Kann eigenen Avatar hochladen]]></item>
+		<item name="wcf.acp.group.option.user.profile.avatar.maxSize"><![CDATA[Maximale Dateigröße]]></item>
+		<item name="wcf.acp.group.option.user.profile.canChangeEmail"><![CDATA[Kann E-Mail-Adresse ändern]]></item>
+		<item name="wcf.acp.group.option.user.profile.canEditUserTitle"><![CDATA[Kann eigenen Benutzertitel bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.profile.canMail"><![CDATA[Kann E-Mails an andere Benutzer senden]]></item>
+		<item name="wcf.acp.group.option.user.profile.canQuit"><![CDATA[Kann Benutzerkonto löschen]]></item>
+		<item name="wcf.acp.group.option.user.profile.canRename"><![CDATA[Kann Benutzernamen ändern]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewMembersList"><![CDATA[Kann Mitglieder-Liste sehen]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUserProfile"><![CDATA[Kann Benutzerprofile sehen]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUsersOnlineList"><![CDATA[Kann Benutzer online-Liste sehen]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseBBCodes"><![CDATA[Kann BBCodes in der Signatur verwenden]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseHtml"><![CDATA[Kann HTML in der Signatur verwenden]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseSmilies"><![CDATA[Kann Smileys in der Signatur verwenden]]></item>
+		
 		<item name="wcf.acp.group.priority"><![CDATA[Priorisierung]]></item>
 		<item name="wcf.acp.group.priority.description"><![CDATA[Bestimmt u.a. die Reihenfolge auf der Team-Seite, sowie die Auswahl von Benutzerränge und „Wer ist online“-Darstellungen auf Basis der höchsten Priorität.]]></item>
-		<item name="wcf.acp.group.userOnlineMarking"><![CDATA[„Wer ist online“-Darstellung]]></item>
+		<item name="wcf.acp.group.userOnlineMarking"><![CDATA[„Benutzer online“-Darstellung]]></item>
 		<item name="wcf.acp.group.userOnlineMarking.description"><![CDATA[Sie können die HTML-Formatierung für Mitglieder dieser Benutzergruppe in der „Wer ist online“-Anzeige anpassen. <em>&lt;strong&gt;%s&lt;/strong&gt;</em> stellt Mitglieder dieser Gruppe beispielsweise in Fettdruck dar.]]></item>
 		<item name="wcf.acp.group.showOnTeamPage"><![CDATA[Mitglieder dieser Benutzergruppe auf der Team-Seite anzeigen]]></item>
 	</category>
@@ -26,28 +53,25 @@
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
 		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Aktivitätspunkte neu vergeben]]></item>
 		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Punkte pro Aktivität aktualisieren]]></item>
-	</category>
-	
-	<category name="wcf.acp.user.rank">
-		<item name="wcf.acp.user.rank.list"><![CDATA[Benutzerränge]]></item>
-		<item name="wcf.acp.user.rank.list.count"><![CDATA[Insgesamt {#$items} Benutzerränge]]></item>
+		
 		<item name="wcf.acp.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
-		<item name="wcf.acp.user.rank.edit"><![CDATA[Benutzerrang bearbeiten]]></item>
-		<item name="wcf.acp.user.rank.title"><![CDATA[Rangbezeichnung]]></item>
-		<item name="wcf.acp.user.rank.image"><![CDATA[Ranggrafik]]></item>
-		<item name="wcf.acp.user.rank.requiredPoints"><![CDATA[Punkte]]></item>
-		<item name="wcf.acp.user.rank.delete.sure"><![CDATA[Wollen Sie den Benutzerrang „{$userRank->rankTitle|language}“ wirklich löschen?]]></item>
-		<item name="wcf.acp.user.rank.general"><![CDATA[Allgemeine Daten]]></item>
-		<item name="wcf.acp.user.rank.requirement"><![CDATA[Beschränkungen]]></item>
-		<item name="wcf.acp.user.rank.repeatImage"><![CDATA[Ranggrafik wiederholen]]></item>
+		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[CSS-Klassen]]></item>
+		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[Sie können aus den vorgegebenen Darstellungen wählen oder eine eigene Darstellung durch Angabe einer <abbr title="Cascading Style Sheets">CSS</abbr>-Klasse nutzen.]]></item>
 		<item name="wcf.acp.user.rank.currentImage"><![CDATA[Aktuelle Ranggrafik]]></item>
-		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[Darstellung]]></item>
-		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
-		<item name="wcf.acp.user.rank.requiredGender.description"><![CDATA[Optional können Sie diesen Benutzerrang auf Benutzer mit einem bestimmten Geschlecht einschränken.]]></item>
-		<item name="wcf.acp.user.rank.requiredPoints.description"><![CDATA[Benötigte Menge an Aktivitätspunkten, die ein Benutzer erreichen muss, um in diesen Rang aufzusteigen.]]></item>
-		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[Sie können aus den vorgegebenen Darstellungen wählen oder eine eigene Darstellung mittels <abbr title="Cascading Style Sheets">CSS</abbr>-Klasse nutzen.]]></item>
+		<item name="wcf.acp.user.rank.delete.sure"><![CDATA[Wollen Sie den Benutzerrang „{$userRank->rankTitle|language}“ wirklich löschen?]]></item>
+		<item name="wcf.acp.user.rank.edit"><![CDATA[Benutzerrang bearbeiten]]></item>
+		<item name="wcf.acp.user.rank.image"><![CDATA[Ranggrafik]]></item>
+		<item name="wcf.acp.user.rank.list"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.user.rank.list.count"><![CDATA[{#$items} {if $items == 1}Benutzerrang{else}Benutzerränge{/if}]]></item>
 		<item name="wcf.acp.user.rank.rankImage.description"><![CDATA[Der Pfad zur Ranggrafik kann relativ zum WCF-Verzeichnis oder absolut angegeben werden.]]></item>
+		<item name="wcf.acp.user.rank.requiredGender.description"><![CDATA[Optional können Sie diesen Benutzerrang auf Benutzer mit einem bestimmten Geschlecht einschränken.]]></item>
+		<item name="wcf.acp.user.rank.requiredPoints"><![CDATA[Punkte]]></item>
+		<item name="wcf.acp.user.rank.requiredPoints.description"><![CDATA[Benötigte Menge an Aktivitätspunkten, die ein Benutzer erreichen muss, um in diesen Rang aufzusteigen.]]></item>
+		<item name="wcf.acp.user.rank.requirement"><![CDATA[Beschränkungen]]></item>
+		<item name="wcf.acp.user.rank.repeatImage"><![CDATA[Wiederholung der Rankgrafik]]></item>
 		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Bestimmt wie oft die Grafik wiederholt wird.]]></item>
+		<item name="wcf.acp.user.rank.title"><![CDATA[Rangbezeichnung]]></item>
+		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">
@@ -363,85 +387,88 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 	<category name="wcf.user.avatar">
 		<item name="wcf.user.avatar"><![CDATA[Avatar]]></item>
 		<item name="wcf.user.avatar.edit"><![CDATA[Avatar verwalten]]></item>
+		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Eigenen Avatar hochladen]]></item>
 		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} und maximal eine Größe {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Die Mindestgröße für Avatare liegt bei 24x24 Pixel, die empfohlene Maximalgröße bei {@MAX_AVATAR_WIDTH}x{@MAX_AVATAR_HEIGHT} Pixel, größere Avatare werden - sofern möglich - automatisch auf die Maximalgröße verkleinert.]]></item>
-		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
-		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse („{$__wcf->user->email}“) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com" class="externalURL">www.gravatar.com</a>]]></item>
-		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
-		<item name="wcf.user.avatar.upload.success"><![CDATA[Der neue Avatar wurde erfolgreich gespeichert.]]></item>
+		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
+		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
+		<item name="wcf.user.avatar.upload.error.badImage"><![CDATA[Sie haben kein gültiges Bild hochgeladen.]]></item>
 		<item name="wcf.user.avatar.upload.error.invalidExtension"><![CDATA[Die Datei hat eine ungültige Dateiendung.]]></item>
 		<item name="wcf.user.avatar.upload.error.tooLarge"><![CDATA[Die Datei ist zu groß.]]></item>
-		<item name="wcf.user.avatar.upload.error.uploadFailed"><![CDATA[Beim Hochladen der Datei ist ein unbekannter Fehler aufgetreten.]]></item>
 		<item name="wcf.user.avatar.upload.error.tooSmall"><![CDATA[Das Bild ist zu klein.]]></item>
-		<item name="wcf.user.avatar.upload.error.badImage"><![CDATA[Sie haben kein gültiges Bild hochgeladen.]]></item>
+		<item name="wcf.user.avatar.upload.error.uploadFailed"><![CDATA[Beim Hochladen der Datei ist ein unbekannter Fehler aufgetreten.]]></item>
+		<item name="wcf.user.avatar.upload.success"><![CDATA[Der neue Avatar wurde erfolgreich gespeichert.]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
+		<item name="wcf.user.notification.button.confirmed"><![CDATA[OK]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>
 		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> folgt dir.]]></item>
 		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[Neuer Follower]]></item>
-		<item name="wcf.user.notification.noNotifications"><![CDATA[Es sind keine neuen Benachrichtigungen vorhanden.]]></item>
-		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
-		<item name="wcf.user.notification.showAll"><![CDATA[Alle Benachrichtigungen anzeigen]]></item>
-		<item name="wcf.user.notification.mail.subject"><![CDATA[Neue Benachrichtigung: {@$title}]]></item>
+		<item name="wcf.user.notification.mail.disabled"><![CDATA[Die E-Mail-Benachrichtigung wurde erfolgreich abgeschaltet.]]></item>
 		<item name="wcf.user.notification.mail.footer"><![CDATA[Sie können die Einstellungen für Ihre Benachrichtigungen auf {@PAGE_TITLE|language} unter folgender URL detailliert konfigurieren:
 {link controller='NotificationSettings' encode=false}{/link} 
 
 Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, können Sie folgenden Link aufrufen, um die Benachrichtigung abzuschalten:
 {link controller='NotificationDisable' encode=false}eventID={@$notification->eventID}&userID={@$user->userID}&token={@$token}{/link}]]></item>
-		<item name="wcf.user.notification.mail.disabled"><![CDATA[Die E-Mail-Benachrichtigung wurde erfolgreich abgeschaltet.]]></item>
-		<item name="wcf.user.notification.button.confirmed"><![CDATA[OK]]></item>
+		<item name="wcf.user.notification.mail.subject"><![CDATA[Neue Benachrichtigung: {@$title}]]></item>
 		<item name="wcf.user.notification.mailNotificationType.none"><![CDATA[Keine E-Mail-Benachrichtigung]]></item>
 		<item name="wcf.user.notification.mailNotificationType.instant"><![CDATA[Sofortige E-Mail-Benachrichtigung]]></item>
 		<item name="wcf.user.notification.mailNotificationType.daily"><![CDATA[Tägliche E-Mail-Benachrichtigung]]></item>
+		<item name="wcf.user.notification.noNotifications"><![CDATA[Es sind keine neuen Benachrichtigungen vorhanden.]]></item>
+		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
+		<item name="wcf.user.notification.showAll"><![CDATA[Alle Benachrichtigungen anzeigen]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">
 		<item name="wcf.user.profile"><![CDATA[Benutzerprofil von „{$user->username}“]]></item>
 		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[{if $userID == $__wcf->getUser()->userID}Sie haben noch keine sichtbaren Informationen hinterlegt.{else}Der Benutzer hat noch keine für Sie sichtbaren Informationen hinterlegt.{/if}]]></item>
 		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[Es sind keine anzeigbaren Aktivitäten vorhanden.]]></item>
-		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
-		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
-		<item name="wcf.user.profile.following"><![CDATA[{$user->username} folgt]]></item>
-		<item name="wcf.user.profile.following.all"><![CDATA[Alle anzeigen]]></item>
 		<item name="wcf.user.profile.followers"><![CDATA[{$user->username} folgen]]></item>
 		<item name="wcf.user.profile.followers.all"><![CDATA[Alle anzeigen]]></item>
+		<item name="wcf.user.profile.following"><![CDATA[{$user->username} folgt]]></item>
+		<item name="wcf.user.profile.following.all"><![CDATA[Alle anzeigen]]></item>
+		<item name="wcf.user.profile.menu.about"><![CDATA[Über mich]]></item>
+		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
+		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher „{$user->getOldUsername()}“]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.profile.visitors"><![CDATA[Profil-Besucher]]></item>
-		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher „{$user->getOldUsername()}“]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
 		<item name="wcf.user.option.aboutMe"><![CDATA[Über mich]]></item>
+		<item name="wcf.user.option.adminCanMail"><![CDATA[E-Mails der Administration akzeptieren]]></item>
+		<item name="wcf.user.option.birthday"><![CDATA[Geburtstag]]></item>
+		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Geburtsjahr im Profil anzeigen]]></item>
+		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[Mitglieder können dadurch Ihr aktuelles Alter sehen.]]></item>
+		<item name="wcf.user.option.canMail"><![CDATA[Kann E-Mails senden]]></item>
+		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Kann E-Mail-Adresse sehen]]></item>
+		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Kann Online-Status sehen]]></item>
+		<item name="wcf.user.option.canViewProfile"><![CDATA[Kann Benutzerprofil sehen]]></item>
+		
 		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.option.category.profile.contact"><![CDATA[Kontaktmöglichkeiten]]></item>
 		<item name="wcf.user.option.category.profile.personal"><![CDATA[Persönliche Informationen]]></item>
+		<item name="wcf.user.option.category.settings.general"><![CDATA[Allgemein]]></item>
+		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Datum &amp; Zeit]]></item>
+		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Anzeige]]></item>
+		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privatsphäre]]></item>
+		<item name="wcf.user.option.category.settings.privacy.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.user.option.category.settings.privacy.messaging"><![CDATA[Kommunikation]]></item>
+		
 		<item name="wcf.user.option.gender"><![CDATA[Geschlecht]]></item>
 		<item name="wcf.user.option.hobbies"><![CDATA[Hobbys]]></item>
 		<item name="wcf.user.option.homepage"><![CDATA[Website]]></item>
 		<item name="wcf.user.option.location"><![CDATA[Wohnort]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Beruf]]></item>
-		<item name="wcf.user.option.birthday"><![CDATA[Geburtstag]]></item>
-		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Geburtsjahr im Profil anzeigen]]></item>
-		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[Mitglieder können dadurch Ihr aktuelles Alter sehen.]]></item>
-		<item name="wcf.user.option.timezone"><![CDATA[Zeitzone]]></item>
 		<item name="wcf.user.option.showSignature"><![CDATA[Persönliche Signatur anderer Mitglieder anzeigen]]></item>
-		<item name="wcf.user.option.category.settings.general"><![CDATA[Allgemein]]></item>
-		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Anzeige]]></item>
-		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privatsphäre]]></item>
-		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Datum &amp; Zeit]]></item>
-		<item name="wcf.user.option.category.settings.privacy.content"><![CDATA[Inhalt]]></item>
-		<item name="wcf.user.option.category.settings.privacy.messaging"><![CDATA[Kommunikation]]></item>
-		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Kann Online-Status sehen]]></item>
-		<item name="wcf.user.option.canViewProfile"><![CDATA[Kann Benutzerprofil sehen]]></item>
-		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Kann E-Mail-Adresse sehen]]></item>
-		<item name="wcf.user.option.canMail"><![CDATA[Kann E-Mails senden]]></item>
-		<item name="wcf.user.option.adminCanMail"><![CDATA[E-Mails der Administration akzeptieren]]></item>
+		<item name="wcf.user.option.timezone"><![CDATA[Zeitzone]]></item>
 	</category>
 	
 	<category name="wcf.user.mail">
+		<item name="wcf.user.mail.information"><![CDATA[Informationen]]></item>
 		<item name="wcf.user.mail.mail"><![CDATA[Hallo {@$recipient->username},
 
 „{@$username}“ hat Ihnen auf der Website „{@PAGE_TITLE}“ folgende Nachricht gesandt:
@@ -453,7 +480,6 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.mail.showAddress"><![CDATA[Meine E-Mail-Adresse als Absender-Adresse benutzen. Der Empfänger kann direkt auf die Nachricht antworten.]]></item>
 		<item name="wcf.user.mail.subject"><![CDATA[Betreff]]></item>
 		<item name="wcf.user.mail.title"><![CDATA[E-Mail an „{$user->username}“ senden]]></item>
-		<item name="wcf.user.mail.information"><![CDATA[Informationen]]></item>
 	</category>
 	
 	<category name="wcf.user.rank">

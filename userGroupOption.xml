@@ -125,7 +125,7 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-						
+			
 			<option name="user.profile.avatar.canUploadAvatar">
 				<categoryname>user.profile.avatar</categoryname>
 				<optiontype>boolean</optiontype>
