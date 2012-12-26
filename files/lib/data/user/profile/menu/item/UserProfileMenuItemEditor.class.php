@@ -49,7 +49,7 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	 */
 	public function delete() {
 		// update show order
-		$sql = "UPDATE	wcf".WCF_N."_page_menu_item
+		$sql = "UPDATE	wcf".WCF_N."_user_profile_menu_item
 			SET	showOrder = showOrder - 1
 			WHERE	showOrder >= ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -66,7 +66,7 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	protected function updateShowOrder($showOrder) {
 		if ($this->showOrder != $showOrder) {
 			if ($showOrder < $this->showOrder) {
-				$sql = "UPDATE	wcf".WCF_N."_page_menu_item
+				$sql = "UPDATE	wcf".WCF_N."_user_profile_menu_item
 					SET	showOrder = showOrder + 1
 					WHERE	showOrder >= ?
 						AND showOrder < ?";
@@ -77,7 +77,7 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 				));
 			}
 			else if ($showOrder > $this->showOrder) {
-				$sql = "UPDATE	wcf".WCF_N."_page_menu_item
+				$sql = "UPDATE	wcf".WCF_N."_user_profile_menu_item
 					SET	showOrder = showOrder - 1
 					WHERE	showOrder <= ?
 						AND showOrder > ?";
@@ -100,7 +100,7 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 		if ($showOrder == 0) {
 			// get next number in row
 			$sql = "SELECT	MAX(showOrder) AS showOrder
-				FROM	wcf".WCF_N."_page_menu_item";
+				FROM	wcf".WCF_N."_user_profile_menu_item";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute();
 			$row = $statement->fetchArray();
