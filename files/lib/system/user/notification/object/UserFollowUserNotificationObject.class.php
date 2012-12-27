@@ -25,14 +25,14 @@ class UserFollowUserNotificationObject extends DatabaseObjectDecorator implement
 	public function getObjectID() {
 		return $this->followID;
 	}
-
+	
 	/**
 	 * @see	wcf\system\user\notification\object\IUserNotificationObject::getTitle()
 	 */
 	public function getTitle() {
 		return '';
 	}
-
+	
 	/**
 	 * @see	wcf\system\user\notification\object\IUserNotificationObject::getURL()
 	 */
