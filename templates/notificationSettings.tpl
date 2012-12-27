@@ -12,10 +12,10 @@
 				var $input = $(value);
 				$input.on('click', function(event) {
 					var $input = $(event.currentTarget);
-					$input.parents('dd').find('small').toggle();
+					$input.parents('dd').find('.jsMailNotificationType').toggle();
 				});
 				if (!$input.is(':checked')) {
-					$input.parents('dd').find('small').hide();
+					$input.parents('dd').find('.jsMailNotificationType').hide();
 				}
 			});
 		});
@@ -47,19 +47,22 @@
 
 <form method="post" action="{link controller='NotificationSettings'}{/link}">
 	<div class="container containerPadding marginTop" id="notificationSettings">
-		{foreach from=$events key=eventCategory item=eventList}
+		{foreach from=$events key='eventCategory' item='eventList'}
 			<fieldset>
 				<legend>{lang}wcf.user.notification.{$eventCategory}{/lang}</legend>
 				
 				<dl>
-					{foreach from=$eventList item=event}
+					{foreach from=$eventList item='event'}
 						<dd>
 							<label><input type="checkbox" name="settings[{@$event->eventID}][enabled]" value="1"{if $settings[$event->eventID][enabled]} checked="checked"{/if} /> {lang}wcf.user.notification.{$eventCategory}.{$event->eventName}{/lang}</label>
-							<small><select name="settings[{@$event->eventID}][mailNotificationType]">
-								<option value="none">{lang}wcf.user.notification.mailNotificationType.none{/lang}</option>
-								<option value="instant"{if $settings[$event->eventID][mailNotificationType] == 'instant'} selected="selected"{/if}>{lang}wcf.user.notification.mailNotificationType.instant{/lang}</option>
-								<option value="daily"{if $settings[$event->eventID][mailNotificationType] == 'daily'} selected="selected"{/if}>{lang}wcf.user.notification.mailNotificationType.daily{/lang}</option>
-							</select></small>
+							{hascontent}<small>{content}{lang __optional=true}wcf.user.notification.{$eventCategory}.{$event->eventName}.description{/lang}{/content}</small>{/hascontent}
+							<small class="jsMailNotificationType">
+								<select name="settings[{@$event->eventID}][mailNotificationType]">
+									<option value="none">{lang}wcf.user.notification.mailNotificationType.none{/lang}</option>
+									<option value="instant"{if $settings[$event->eventID][mailNotificationType] == 'instant'} selected="selected"{/if}>{lang}wcf.user.notification.mailNotificationType.instant{/lang}</option>
+									<option value="daily"{if $settings[$event->eventID][mailNotificationType] == 'daily'} selected="selected"{/if}>{lang}wcf.user.notification.mailNotificationType.daily{/lang}</option>
+								</select>
+							</small>
 						</dd>
 					{/foreach}
 				</dl>
