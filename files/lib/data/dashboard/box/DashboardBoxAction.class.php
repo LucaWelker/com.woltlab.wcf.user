@@ -2,7 +2,7 @@
 namespace wcf\data\dashboard\box;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\data\IPositionAction;
+use wcf\data\ISortableAction;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
@@ -19,7 +19,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	data.dashboard.box
  * @category	Community Framework
  */
-class DashboardBoxAction extends AbstractDatabaseObjectAction implements IPositionAction {
+class DashboardBoxAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	/**
 	 * list of available dashboard boxes
 	 * @var	array<wcf\data\dashboard\box\DashboardBox>
@@ -39,7 +39,7 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements IPositi
 	public $objectType = null;
 	
 	/**
-	 * @see	wcf\data\IPositionAction::validateUpdatePosition()
+	 * @see	wcf\data\ISortableAction::validateUpdatePosition()
 	 */
 	public function validateUpdatePosition() {
 		// validate permissions
@@ -90,7 +90,7 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements IPositi
 	}
 	
 	/**
-	 * @see	wcf\data\IPositionAction::updatePosition()
+	 * @see	wcf\data\ISortableAction::updatePosition()
 	 */
 	public function updatePosition() {
 		// remove previous settings
