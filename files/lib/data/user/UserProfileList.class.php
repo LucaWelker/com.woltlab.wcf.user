@@ -18,8 +18,7 @@ class UserProfileList extends UserList {
 	public $sqlOrderBy = 'user_table.username';
 	
 	/**
-	 * decorator class name
-	 * @var	string
+	 * @see	wcf\data\DatabaseObjectList::$decoratorClassName
 	 */
 	public $decoratorClassName = 'wcf\data\user\UserProfile';
 	
@@ -47,11 +46,10 @@ class UserProfileList extends UserList {
 	 * @see	wcf\data\DatabaseObjectList::readObjects()
 	 */
 	public function readObjects() {
-		if ($this->objectIDs === null) $this->readObjectIDs();
-		parent::readObjects();
-		
-		foreach ($this->objects as $userID => $user) {
-			$this->objects[$userID] = new $this->decoratorClassName($user);
+		if ($this->objectIDs === null) {
+			$this->readObjectIDs();
 		}
+		
+		parent::readObjects();
 	}
 }
