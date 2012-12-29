@@ -18,7 +18,12 @@ class StatsSidebarDashboardBox extends AbstractSidebarDashboardBox {
 	 * @see	wcf\system\dashboard\box\AbstractContentDashboardBox::render()
 	 */
 	protected function render() {
-		CacheHandler::getInstance()->addResource('userStats', WBB_DIR.'cache/cache.userStats.php', 'wcf\system\cache\builder\UserStatsCacheBuilder', 600);
+		CacheHandler::getInstance()->addResource(
+			'userStats',
+			WCF_DIR.'cache/cache.userStats.php',
+			'wcf\system\cache\builder\UserStatsCacheBuilder',
+			600
+		);
 		WCF::getTPL()->assign(array(
 			'dashboardStats' => CacheHandler::getInstance()->get('userStats')
 		));
