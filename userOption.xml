@@ -122,7 +122,6 @@
 				<outputclass>wcf\system\option\user\URLUserOptionOutput</outputclass>
 				<searchable>1</searchable>
 				<validationpattern>^$|^https?://</validationpattern>
-				<defaultvalue>http://</defaultvalue>
 				<visible>15</visible>
 				<editable>3</editable>
 			</option>

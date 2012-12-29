@@ -29,6 +29,12 @@ class UserAddFormUserTitleListener implements IEventListener {
 	protected $priority = 0;
 	
 	/**
+	 * title of the user
+	 * @var	string
+	 */
+	protected $userTitle = '';
+	
+	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
