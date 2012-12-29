@@ -1,2 +1,3 @@
-<!-- TODO: what kind of outer container do we want? -->
-{@$template}
+<div class="dashboardBox dashboardBox{$box->boxName|ucfirst}">
+	{@$template}
+</div>

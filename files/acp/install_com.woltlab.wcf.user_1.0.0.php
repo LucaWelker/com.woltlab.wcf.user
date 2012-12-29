@@ -10,7 +10,11 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  */
 // set dashboard default values 
-DashboardHandler::setDefaultValues('com.woltlab.wcf.user.DashboardPage', array('recentActivity' => 1));
+DashboardHandler::setDefaultValues('com.woltlab.wcf.user.DashboardPage', array(
+	'registerButton' => 1,
+	'signedInAs' => 2,
+	'statsSidebar' => 3
+));
 
 // update administrator user rank and user online marking
 $editor = new UserEditor(WCF::getUser());

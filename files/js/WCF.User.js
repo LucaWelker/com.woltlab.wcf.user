@@ -51,7 +51,7 @@ WCF.User.Login = Class.extend({
 		//$loginForm.find('input[type=reset]').click($.proxy(this._reset, this));
 		
 		if (isQuickLogin) {
-			$('#loginLink').click(function() {
+			$('.loginLink').click(function() {
 				WCF.showDialog('loginForm', {
 					title: WCF.Language.get('wcf.user.login')
 				});

@@ -3,7 +3,6 @@ namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\page\IPage;
-use wcf\system\dashboard\box\AbstractDashboardBoxSidebar;
 use wcf\system\WCF;
 
 /**
@@ -16,7 +15,7 @@ use wcf\system\WCF;
  * @subpackage	system.dashboard.box
  * @category	Community Framework
  */
-class RecentActivityDashboardBox extends AbstractDashboardBoxSidebar {
+class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
 	/**
 	 * recent activity list
 	 * @var	wcf\data\user\activity\event\ViewableUserActivityEventList
@@ -37,7 +36,7 @@ class RecentActivityDashboardBox extends AbstractDashboardBoxSidebar {
 	}
 	
 	/**
-	 * @see	wcf\system\dashboard\box\AbstractDashboardBoxContent::render()
+	 * @see	wcf\system\dashboard\box\AbstractContentDashboardBox::render()
 	 */
 	protected function render() {
 		WCF::getTPL()->assign(array(

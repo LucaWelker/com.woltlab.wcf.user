@@ -11,7 +11,7 @@ namespace wcf\system\dashboard\box;
  * @subpackage	system.dashboard.box
  * @category	Community Framework
  */
-abstract class AbstractDashboardBoxSidebar extends AbstractDashboardBoxContent {
+abstract class AbstractSidebarDashboardBox extends AbstractContentDashboardBox {
 	/**
 	 * @see	wcf\system\dashboard\box\AbstractDashboardBoxContent::$templateName
 	 */
