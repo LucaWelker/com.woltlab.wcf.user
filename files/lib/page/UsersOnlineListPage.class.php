@@ -3,7 +3,6 @@ namespace wcf\page;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
@@ -18,6 +17,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class UsersOnlineListPage extends SortablePage {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.user.members';
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
@@ -119,14 +123,5 @@ class UsersOnlineListPage extends SortablePage {
 		$this->objectList->sqlLimit = 0;
 		if ($this->sqlOrderBy) $this->objectList->sqlOrderBy = ($this->sortField == 'lastActivityTime' ? 'session.' : '').$this->sqlOrderBy;
 		$this->objectList->readObjects();
-	}
-	
-	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
-		
-		parent::show();
 	}
 }

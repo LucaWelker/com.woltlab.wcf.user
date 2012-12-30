@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
@@ -16,9 +17,9 @@ use wcf\util\ArrayUtil;
  * @subpackage	acp.form
  * @category	Community Framework
  */
-class DashboardOptionForm extends ACPForm {
+class DashboardOptionForm extends AbstractForm {
 	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.dashboard';
 	

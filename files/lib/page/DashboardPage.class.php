@@ -1,7 +1,6 @@
 <?php
 namespace wcf\page;
 use wcf\system\dashboard\DashboardHandler;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
@@ -17,13 +16,9 @@ use wcf\system\WCF;
  */
 class DashboardPage extends AbstractPage {
 	/**
-	 * @see	wcf\page\IPage::show()
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.dashboard');
-	
-		parent::show();
-	}
+	public $activeMenuItem = 'wcf.user.dashboard';
 	
 	/**
 	 * @see	wcf\page\AbstractPage::assignVariables()

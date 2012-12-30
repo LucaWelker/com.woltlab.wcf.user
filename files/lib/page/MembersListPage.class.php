@@ -3,7 +3,6 @@ namespace wcf\page;
 use wcf\data\search\Search;
 use wcf\system\database\PostgreSQLDatabase;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -19,6 +18,11 @@ use wcf\util\StringUtil;
  * @category	Community Framework
  */
 class MembersListPage extends SortablePage {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.user.members';
+	
 	/**
 	 * available letters
 	 * @var	string
@@ -140,14 +144,5 @@ class MembersListPage extends SortablePage {
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersList'),
 			'sidebarName' => 'com.woltlab.wcf.user.MembersList'
 		));
-	}
-	
-	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
-		
-		parent::show();
 	}
 }

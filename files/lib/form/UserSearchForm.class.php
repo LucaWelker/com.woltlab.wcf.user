@@ -4,7 +4,6 @@ use wcf\acp\form\UserOptionListForm;
 use wcf\data\search\SearchEditor;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -21,6 +20,11 @@ use wcf\util\StringUtil;
  * @category	Community Framework
  */
 class UserSearchForm extends UserOptionListForm {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.user.search';
+	
 	/**
 	 * username
 	 * @var	string
@@ -62,7 +66,7 @@ class UserSearchForm extends UserOptionListForm {
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
-	
+		
 		if (isset($_POST['username'])) $this->username = StringUtil::trim($_POST['username']);
 		if (isset($_POST['email'])) $this->email = StringUtil::trim($_POST['email']);
 	}
@@ -96,7 +100,7 @@ class UserSearchForm extends UserOptionListForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-	
+		
 		WCF::getTPL()->assign(array(
 			'username' => $this->username,
 			'email' => $this->email,
@@ -105,20 +109,11 @@ class UserSearchForm extends UserOptionListForm {
 	}
 	
 	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.search');
-		
-		parent::show();
-	}
-	
-	/**
 	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
-	
+		
 		// store search result in database
 		$search = SearchEditor::create(array(
 			'userID' => WCF::getUser()->userID,
@@ -126,11 +121,11 @@ class UserSearchForm extends UserOptionListForm {
 			'searchTime' => TIME_NOW,
 			'searchType' => 'users'
 		));
-	
+		
 		// get new search id
 		$this->searchID = $search->searchID;
 		$this->saved();
-	
+		
 		// forward to result page
 		$url = LinkHandler::getInstance()->getLink('MembersList', array('id' => $this->searchID));
 		HeaderUtil::redirect($url);
@@ -142,10 +137,10 @@ class UserSearchForm extends UserOptionListForm {
 	 */
 	public function validate() {
 		AbstractForm::validate();
-	
+		
 		// do search
 		$this->search();
-	
+		
 		if (empty($this->matches)) {
 			throw new UserInputException('search', 'noMatches');
 		}
@@ -160,16 +155,16 @@ class UserSearchForm extends UserOptionListForm {
 			FROM		wcf".WCF_N."_user user_table
 			LEFT JOIN	wcf".WCF_N."_user_option_value option_value
 			ON		(option_value.userID = user_table.userID)";
-	
+		
 		// build search condition
 		$this->conditions = new PreparedStatementConditionBuilder();
-	
+		
 		// static fields
 		$this->buildStaticConditions();
-	
+		
 		// dynamic fields
 		$this->buildDynamicConditions();
-	
+		
 		// do search
 		$statement = WCF::getDB()->prepareStatement($sql.$this->conditions, $this->maxResults);
 		$statement->execute($this->conditions->getParameters());
@@ -189,14 +184,14 @@ class UserSearchForm extends UserOptionListForm {
 			$this->conditions->add("user_table.email LIKE ?", array('%'.addcslashes($this->email, '_%').'%'));
 		}
 	}
-
+	
 	/**
 	 * Builds the dynamic conditions.
 	 */
 	protected function buildDynamicConditions() {
 		foreach ($this->optionHandler->getCategoryOptions('profile') as $option) {
 			$option = $option['object'];
-				
+			
 			$value = isset($this->optionHandler->optionValues[$option->optionName]) ? $this->optionHandler->optionValues[$option->optionName] : null;
 			$this->optionHandler->getTypeObject($option->optionType)->getCondition($this->conditions, $option, $value);
 		}

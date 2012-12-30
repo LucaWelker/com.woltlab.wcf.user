@@ -2,7 +2,6 @@
 namespace wcf\page;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
@@ -17,6 +16,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class RecentActivityListPage extends MultipleLinkPage {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.user.recentActivity';
+	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */
@@ -42,14 +46,5 @@ class RecentActivityListPage extends MultipleLinkPage {
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.RecentActivityList'),
 			'sidebarName' => 'com.woltlab.wcf.user.RecentActivityList',
 		));
-	}
-	
-	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
-		
-		parent::show();
 	}
 }
