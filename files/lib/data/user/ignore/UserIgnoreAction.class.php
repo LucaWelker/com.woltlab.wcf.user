@@ -2,7 +2,9 @@
 namespace wcf\data\user\ignore;
 use wcf\data\user\ignore\UserIgnore;
 use wcf\data\user\ignore\UserIgnoreEditor;
+use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\user\storage\UserStorageHandler;
@@ -22,7 +24,20 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Does nothing.
 	 */
-	public function validateIgnore() {}
+	public function validateIgnore() {
+		$ignoreUserID = 0;
+		if (!empty($this->parameters['data']['ignoreUserID'])) $ignoreUserID = intval($this->parameters['data']['ignoreUserID']);
+		
+		$userProfile = UserProfile::getUserProfile($ignoreUserID);
+		if ($userProfile === null) {
+			throw new IllegalLinkException();
+		}
+		
+		// check permissions
+		if ($userProfile->getPermission('user.profile.cannotBeIgnored')) {
+			throw new PermissionDeniedException();
+		}
+	}
 	
 	/**
 	 * Ignores an user.
@@ -48,7 +63,15 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Does nothing.
 	 */
-	public function validateUnignore() {}
+	public function validateUnignore() {
+		$ignoreUserID = 0;
+		if (!empty($this->parameters['data']['ignoreUserID'])) $ignoreUserID = intval($this->parameters['data']['ignoreUserID']);
+		
+		$userProfile = UserProfile::getUserProfile($ignoreUserID);
+		if ($userProfile === null) {
+			throw new IllegalLinkException();
+		}
+	}
 	
 	/**
 	 * Unignores an user.
