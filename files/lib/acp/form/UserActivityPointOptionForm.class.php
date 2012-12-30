@@ -2,12 +2,10 @@
 namespace wcf\acp\form;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\object\type\ObjectTypeEditor;
+use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
-use wcf\system\request\LinkHandler;
-use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\util\HeaderUtil;
 
 /**
  * Provides the user activity point option form.
@@ -19,9 +17,9 @@ use wcf\util\HeaderUtil;
  * @subpackage	acp.form
  * @category	Community Framework
  */
-class UserActivityPointOptionForm extends ACPForm {
+class UserActivityPointOptionForm extends AbstractForm {
 	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.activityPoint';
 	

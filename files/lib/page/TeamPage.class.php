@@ -1,13 +1,11 @@
 <?php
 namespace wcf\page;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
- * Shows the list team members.
+ * Shows the team members list.
  * 
  * @author	Marcel Werk
  * @copyright	2001-2012 WoltLab GmbH
@@ -18,10 +16,15 @@ use wcf\util\StringUtil;
  */
 class TeamPage extends MultipleLinkPage {
 	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.user.team';
+	
+	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('user.profile.canViewMembersList');
-
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededModules
 	 */
@@ -31,42 +34,33 @@ class TeamPage extends MultipleLinkPage {
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
-
+	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$itemsPerPage
 	 */
 	public $itemsPerPage = 1000;
-
+	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$sortField
 	 */
 	public $sortField = MEMBERS_LIST_DEFAULT_SORT_FIELD;
-
+	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$sortOrder
 	 */
 	public $sortOrder = MEMBERS_LIST_DEFAULT_SORT_ORDER;
-
+	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'wcf\data\user\TeamList';
-
-	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.team');
-
-		parent::show();
-	}
 	
 	/**
 	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
-	
+		
 		// add breadcrumbs
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.user.members'), LinkHandler::getInstance()->getLink('MembersList')));
 	}

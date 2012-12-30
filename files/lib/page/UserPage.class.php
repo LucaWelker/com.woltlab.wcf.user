@@ -10,7 +10,6 @@ use wcf\data\user\UserProfile;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\menu\user\profile\UserProfileMenu;
 use wcf\system\WCF;
@@ -26,6 +25,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class UserPage extends AbstractPage {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.user.members';
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
@@ -158,8 +162,6 @@ class UserPage extends AbstractPage {
 	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
-		PageMenu::getInstance()->setActiveMenuItem('wcf.user.members');
-		
 		// update profile hits
 		if ($this->user->userID != WCF::getUser()->userID && !WCF::getSession()->spiderID) {
 			$editor = new UserEditor($this->user->getDecoratedObject());
