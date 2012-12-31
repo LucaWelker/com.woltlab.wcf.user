@@ -88,9 +88,7 @@
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 
-{capture assign='sidebar'}
-	{include file='userSidebar'}
-{/capture}
+{include file='userSidebar' assign='sidebar'}
 
 {include file='header' sidebarOrientation='left'}
 
