@@ -15,15 +15,15 @@ use wcf\data\IDatabaseObjectProcessor;
 interface IUserNotificationObjectType extends IDatabaseObjectProcessor {
 	/**
 	 * Gets a notification object by its ID.
-	 *
+	 * 
 	 * @param	integer		$objectID
 	 * @return	wcf\system\user\notification\object\IUserNotificationObject
 	 */
 	public function getObjectByID($objectID);
-
+	
 	/**
 	 * Gets notification objects by their IDs.
-	 *
+	 * 
 	 * @param	array<integer>		$objectIDs
 	 * @return	array<wcf\system\user\notification\object\IUserNotificationObject>
 	 */
