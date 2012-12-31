@@ -16,7 +16,7 @@
 					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
 					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
 				});
-
+				
 				new WCF.User.Profile.Follow({@$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
 				
 				{if !$user->getPermission('user.profile.cannotBeIgnored')}
@@ -37,7 +37,7 @@
 			{/if}
 			
 			{if $user->activityPoints}
-				$('.activityPointDisplay').click(function (event) {
+				$('.activityPointsDisplay').click(function (event) {
 					WCF.showAJAXDialog('detailedActivityPointList', true, {
 						title: '{lang}wcf.user.activityPoint{/lang}',
 						data: {
