@@ -6,7 +6,8 @@
 	{include file='headInclude'}
 </head>
 
-<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+<body id="tpl{$templateName|ucfirst}">
+
 {include file='header'}
 
 <header class="boxHeadline">
@@ -20,7 +21,7 @@
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
-	
+
 <form method="post" action="{link controller='EmailActivation'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>

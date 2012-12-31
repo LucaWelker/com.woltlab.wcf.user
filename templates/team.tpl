@@ -29,7 +29,7 @@
 	</script>
 </head>
 
-<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+<body id="tpl{$templateName|ucfirst}">
 
 {include file='header' sidebarOrientation='right'}
 
