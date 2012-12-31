@@ -29,7 +29,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 		if (!empty($this->parameters['data']['ignoreUserID'])) $ignoreUserID = intval($this->parameters['data']['ignoreUserID']);
 		
 		$userProfile = UserProfile::getUserProfile($ignoreUserID);
-		if ($userProfile === null) {
+		if ($userProfile === null || $userProfile->userID == WCF::getUser()->userID) {
 			throw new IllegalLinkException();
 		}
 		
