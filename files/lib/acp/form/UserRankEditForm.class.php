@@ -3,6 +3,7 @@ namespace wcf\acp\form;
 use wcf\data\package\PackageCache;
 use wcf\data\user\rank\UserRankAction;
 use wcf\data\user\rank\UserRank;
+use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -19,7 +20,7 @@ use wcf\system\WCF;
  */
 class UserRankEditForm extends UserRankAddForm {
 	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.user.rank.list';
 	
@@ -52,7 +53,7 @@ class UserRankEditForm extends UserRankAddForm {
 	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
-		ACPForm::save();
+		AbstractForm::save();
 		
 		$this->rankTitle = 'wcf.user.rank.userRank'.$this->rank->rankID;
 		if (I18nHandler::getInstance()->isPlainValue('rankTitle')) {

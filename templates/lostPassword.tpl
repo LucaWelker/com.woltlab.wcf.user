@@ -14,7 +14,7 @@
 	</script>
 </head>
 
-<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+<body id="tpl{$templateName|ucfirst}">
 
 {include file='header'}
 
@@ -27,7 +27,7 @@
 {include file='userNotice'}
 
 <p class="info">{lang}wcf.user.lostPassword.description{/lang}</p>
-	
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
@@ -67,7 +67,7 @@
 				</dd>
 			</dl>
 		</fieldset>
-			
+		
 		{if $useCaptcha}{include file='recaptcha'}{/if}
 	</div>
 		

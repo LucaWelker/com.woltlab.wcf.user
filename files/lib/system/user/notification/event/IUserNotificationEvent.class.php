@@ -18,13 +18,14 @@ use wcf\system\user\notification\object\IUserNotificationObject;
 interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	/**
 	 * Returns a list of actions for this notification event.
+	 * 
 	 * @return	array<array>
 	 */
 	public function getActions();
-
+	
 	/**
-	 * Returns a short title used for the notification overlay, e.g. "new follower".
-	 *
+	 * Returns a short title used for the notification overlay, e.g. "New follower".
+	 * 
 	 * @return	string
 	 */
 	public function getTitle();
@@ -77,7 +78,7 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	 * @return	boolean
 	 */
 	public function isVisible();
-
+	
 	/**
 	 * Returns a unique identifier of the event.
 	 * 
@@ -87,7 +88,7 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	
 	/**
 	 * Sets the object for the event.
-	 *
+	 * 
 	 * @param	wcf\data\user\notification\UserNotification			$notification
 	 * @param	wcf\system\user\notification\object\IUserNotificationObject	$object
 	 * @param	wcf\data\user\UserProfile					$author

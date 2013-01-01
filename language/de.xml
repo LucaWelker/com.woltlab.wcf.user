@@ -77,7 +77,8 @@
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.availableBoxes"><![CDATA[Deaktivierte Boxen]]></item>
 		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Aktive Boxen]]></item>
-		<item name="wcf.dashboard.box.recentActivity"><![CDATA[Letzte Aktivität]]></item>
+		<item name="wcf.dashboard.box.recentActivitySidebar"><![CDATA[Letzte Aktivität]]></item>
+		<item name="wcf.dashboard.box.statsSidebar"><![CDATA[Statistiken]]></item>
 		<item name="wcf.dashboard.boxType.content"><![CDATA[Inhaltsbereich]]></item>
 		<item name="wcf.dashboard.boxType.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="wcf.dashboard.objectType"><![CDATA[Seite]]></item>
@@ -382,6 +383,9 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.birthday.age.to"><![CDATA[bis]]></item>
 		<item name="wcf.user.search"><![CDATA[Mitgliedersuche]]></item>
 		<item name="wcf.user.search.error.noMatches"><![CDATA[Zu den angegebenen Kriterien wurde kein Mitglied gefunden.]]></item>
+		<item name="wcf.user.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="wcf.user.registerNow"><![CDATA[Jetzt registrieren]]></item>
+		<item name="wcf.user.newestMember"><![CDATA[Neuestes Mitglied]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

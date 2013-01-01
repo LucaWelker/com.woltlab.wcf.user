@@ -5,7 +5,7 @@
 	{include file='headInclude'}
 </head>
 
-<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+<body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
 	{*TODO: sidebar content*}

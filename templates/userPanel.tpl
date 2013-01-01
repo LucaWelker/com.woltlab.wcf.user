@@ -52,7 +52,7 @@
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
 		<li>
-			<a id="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a>
+			<a class="loginLink" href="{link controller='Login'}{/link}">{lang}wcf.user.loginOrRegister{/lang}</a>
 			<div id="loginForm" style="display: none;">
 				<form method="post" action="{link controller='Login'}{/link}">
 					<fieldset>

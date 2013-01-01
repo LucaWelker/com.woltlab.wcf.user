@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/dashboardBox.xsd">
 	<import>
-		<dashboardbox name="recentActivity">
-			<classname><![CDATA[wcf\system\dashboard\box\RecentActivityDashboardBox]]></classname>
+		<dashboardbox name="recentActivitySidebar">
+			<classname><![CDATA[wcf\system\dashboard\box\RecentActivitySidebarDashboardBox]]></classname>
+			<boxtype>sidebar</boxtype>
+		</dashboardbox>
+		
+		<dashboardbox name="registerButton">
+			<classname><![CDATA[wcf\system\dashboard\box\RegisterButtonDashboardBox]]></classname>
+			<boxtype>sidebar</boxtype>
+		</dashboardbox>
+		
+		<dashboardbox name="signedInAs">
+			<classname><![CDATA[wcf\system\dashboard\box\SignedInAsDashboardBox]]></classname>
+			<boxtype>sidebar</boxtype>
+		</dashboardbox>
+		
+		<dashboardbox name="statsSidebar">
+			<classname><![CDATA[wcf\system\dashboard\box\StatsSidebarDashboardBox]]></classname>
 			<boxtype>sidebar</boxtype>
 		</dashboardbox>
 	</import>

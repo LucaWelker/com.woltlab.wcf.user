@@ -5,7 +5,6 @@ use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\event\recipient\UserNotificationEventRecipientList;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\notification\UserNotificationAction;
-use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\user\notification\UserNotificationList;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
