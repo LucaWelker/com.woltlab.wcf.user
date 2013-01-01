@@ -47,10 +47,10 @@
 				<legend>{lang}wcf.dashboard.box.enabledBoxes{/lang}</legend>
 				
 				<div class="container containerPadding sortableListContainer">
-					<ol class="sortableList" data-object-id="0">
+					<ol class="sortableList simpleSortableList" data-object-id="0">
 						{foreach from=$enabledBoxes item=boxID}
 							{if $boxes[$boxID]->boxType == 'content'}
-								<li class="sortableList" data-object-id="{@$boxID}">
+								<li class="sortableNode" data-object-id="{@$boxID}">
 									<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$boxes[$boxID]->boxName}{/lang}</span>
 								</li>
 							{/if}
@@ -63,10 +63,10 @@
 				<legend>{lang}wcf.dashboard.box.availableBoxes{/lang}</legend>
 				
 				<div class="container containerPadding sortableListContainer">
-					<ol class="sortableList">
+					<ol class="sortableList simpleSortableList">
 						{foreach from=$boxes item=box}
 							{if $box->boxType == 'content' && !$box->boxID|in_array:$enabledBoxes}
-								<li class="sortableList" data-object-id="{@$box->boxID}">
+								<li class="sortableNode" data-object-id="{@$box->boxID}">
 									<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$box->boxName}{/lang}</span>
 								</li>
 							{/if}
