@@ -25,7 +25,7 @@
 <form method="post" action="{if $action == 'add'}{link controller='UserRankAdd'}{/link}{else}{link controller='UserRankEdit' id=$rankID}{/link}{/if}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}wcf.acp.user.rank.general{/lang}</legend>
+			<legend>{lang}wcf.global.form.data{/lang}</legend>
 			
 			<dl{if $errorField == 'rankTitle'} class="formError"{/if}>
 				<dt><label for="rankTitle">{lang}wcf.acp.user.rank.title{/lang}</label></dt>
