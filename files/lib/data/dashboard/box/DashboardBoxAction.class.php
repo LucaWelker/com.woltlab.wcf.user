@@ -69,17 +69,19 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements ISortab
 			throw new UserInputException('objectTypeID');
 		}
 		
+		// read all dashboard boxes of the relevant box type
+		$boxList = new DashboardBoxList();
+		$boxList->sqlLimit = 0;
+		$boxList->getConditionBuilder()->add("dashboard_box.boxType = ?", array($this->parameters['boxType']));
+		$boxList->readObjects();
+		$this->boxes = $boxList->getObjects();
+		
 		// parse structure
 		if (isset($this->parameters['data']) & isset($this->parameters['data']['structure']) && isset($this->parameters['data']['structure'][0])) {
 			$this->boxStructure = ArrayUtil::toIntegerArray($this->parameters['data']['structure'][0]);
 			
 			// validate box ids
 			if (!empty($this->boxStructure)) {
-				$boxList = new DashboardBoxList();
-				$boxList->sqlLimit = 0;
-				$boxList->readObjects();
-				$this->boxes = $boxList->getObjects();
-				
 				foreach ($this->boxStructure as $boxID) {
 					if (!isset($this->boxes[$boxID])) {
 						throw new UserInputException('boxID');
