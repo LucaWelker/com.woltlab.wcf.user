@@ -6,6 +6,16 @@ use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
+/**
+ * Handles object visit tracking.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2013 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	system.visitTracker
+ * @category	Community Framework
+ */
 class VisitTracker extends SingletonFactory {
 	/**
 	 * default tracking lifetime
