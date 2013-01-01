@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.dashboard{/lang}</title>
+	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'wcf.user.dashboard'}{lang}wcf.user.dashboard{/lang} - {/if}{PAGE_TITLE|language}</title>
 	{include file='headInclude'}
 </head>
 
@@ -15,11 +15,20 @@
 
 {include file='header' sidebarOrientation='right'}
 
-<header class="boxHeadline">
-	<hgroup >
-		<h1>{lang}wcf.user.dashboard{/lang}</h1>
-	</hgroup>
-</header>
+{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'wcf.user.dashboard'}
+	<header class="boxHeadline">
+		<hgroup>
+			<h1>{PAGE_TITLE|language}</h1>
+			{hascontent}<h2>{content}{PAGE_DESCRIPTION|language}{/content}</h2>{/hascontent}
+		</hgroup>
+	</header>
+{else}
+	<header class="boxHeadline">
+		<hgroup>
+			<h1>{lang}wcf.user.dashboard{/lang}</h1>
+		</hgroup>
+	</header>
+{/if}
 
 {include file='userNotice'}
 

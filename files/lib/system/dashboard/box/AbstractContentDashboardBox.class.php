@@ -2,6 +2,7 @@
 namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\page\IPage;
+use wcf\system\event\EventHandler;
 use wcf\system\WCF;
 
 /**
@@ -14,7 +15,7 @@ use wcf\system\WCF;
  * @subpackage	system.dashboard.box
  * @category	Community Framework
  */
-abstract class AbstractDashboardBoxContent implements IDashboardBox {
+abstract class AbstractContentDashboardBox implements IDashboardBox {
 	/**
 	 * dashboard box object
 	 * @var	wcf\data\dashboard\box\DashboardBox
@@ -39,6 +40,9 @@ abstract class AbstractDashboardBoxContent implements IDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		$this->box = $box;
 		$this->page = $page;
+		
+		// fire event
+		EventHandler::getInstance()->fireAction($this, 'init');
 	}
 	
 	/**

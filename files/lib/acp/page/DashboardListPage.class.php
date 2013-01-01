@@ -2,7 +2,6 @@
 namespace wcf\acp\page;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\AbstractPage;
-use wcf\system\menu\acp\ACPMenu;
 use wcf\system\WCF;
 
 /**
@@ -16,6 +15,11 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 class DashboardListPage extends AbstractPage {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.acp.menu.link.dashboard.list';
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
@@ -46,15 +50,5 @@ class DashboardListPage extends AbstractPage {
 		WCF::getTPL()->assign(array(
 			'objectTypes' => $this->objectTypes
 		));
-	}
-	
-	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		// enable menu item
-		ACPMenu::getInstance()->setActiveMenuItem('wcf.acp.menu.link.dashboard.list');
-	
-		parent::show();
 	}
 }

@@ -20,7 +20,7 @@ interface IUserNotificationObject extends IDatabaseObjectProcessor, ITitledDatab
 	 * @return	integer
 	 */
 	public function getObjectID();
-
+	
 	/**
 	 * Returns the url of this object.
 	 * 

@@ -4,6 +4,7 @@ use wcf\data\package\PackageCache;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\rank\UserRankEditor;
 use wcf\data\user\rank\UserRankAction;
+use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\Regex;
@@ -20,9 +21,9 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Community Framework
  */
-class UserRankAddForm extends ACPForm {
+class UserRankAddForm extends AbstractForm {
 	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.user.rank.add';
 	

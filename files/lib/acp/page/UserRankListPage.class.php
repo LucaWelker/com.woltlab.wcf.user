@@ -1,7 +1,6 @@
 <?php
 namespace wcf\acp\page;
 use wcf\page\SortablePage;
-use wcf\system\menu\acp\ACPMenu;
 
 /**
  * Lists available user ranks.
@@ -14,6 +13,11 @@ use wcf\system\menu\acp\ACPMenu;
  * @category	Community Framework
  */
 class UserRankListPage extends SortablePage {
+	/**
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.acp.menu.link.user.rank.list';
+	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
@@ -42,15 +46,5 @@ class UserRankListPage extends SortablePage {
 		
 		$this->objectList->sqlSelects = 'user_group.groupName';
 		$this->objectList->sqlJoins = 'LEFT JOIN wcf'.WCF_N.'_user_group user_group ON (user_group.groupID = user_rank.groupID)';
-	}
-	
-	/**
-	 * @see	wcf\page\IPage::show()
-	 */
-	public function show() {
-		// set active menu item.
-		ACPMenu::getInstance()->setActiveMenuItem('wcf.acp.menu.link.user.rank.list');
-		
-		parent::show();
 	}
 }

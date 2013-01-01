@@ -18,7 +18,10 @@
 				});
 
 				new WCF.User.Profile.Follow({@$user->userID}, {if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}true{else}false{/if});
-				new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
+				
+				{if !$user->getPermission('user.profile.cannotBeIgnored')}
+					new WCF.User.Profile.IgnoreUser({@$user->userID}, {if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}true{else}false{/if});
+				{/if}
 			{/if}
 			
 			new WCF.User.Profile.TabMenu({@$user->userID});
@@ -34,7 +37,7 @@
 			{/if}
 			
 			{if $user->activityPoints}
-				$('.activityPointDisplay').click(function (event) {
+				$('.activityPointsDisplay').click(function (event) {
 					WCF.showAJAXDialog('detailedActivityPointList', true, {
 						title: '{lang}wcf.user.activityPoint{/lang}',
 						data: {
@@ -83,11 +86,9 @@
 	</script>
 </head>
 
-<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+<body id="tpl{$templateName|ucfirst}">
 
-{capture assign='sidebar'}
-	{include file='userSidebar'}
-{/capture}
+{include file='userSidebar' assign='sidebar'}
 
 {include file='header' sidebarOrientation='left'}
 

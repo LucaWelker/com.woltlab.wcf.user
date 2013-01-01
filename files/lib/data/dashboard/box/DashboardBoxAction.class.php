@@ -96,7 +96,9 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements ISortab
 		// remove previous settings
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("objectTypeID = ?", array($this->objectType->objectTypeID));
-		$conditions->add("boxID IN (?)", array(array_keys($this->boxes)));
+		if (!empty($this->boxes)) {
+			$conditions->add("boxID IN (?)", array(array_keys($this->boxes)));
+		}
 		
 		$sql = "DELETE FROM	wcf".WCF_N."_dashboard_option
 			".$conditions;

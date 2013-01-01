@@ -37,6 +37,9 @@ UPDATE wcf1_user_group SET priority = 1000 WHERE groupID = 4;
 UPDATE wcf1_user_group SET priority = 50 WHERE groupID = 5;
 UPDATE wcf1_user_group SET priority = 100 WHERE groupID = 6;
 
+-- default 'showOnTeamPage' setting
+UPDATE wcf1_user_group SET showOnTeamPage = 1 WHERE groupID IN (4, 5, 6);
+
 -- dashboard
 DROP TABLE IF EXISTS wcf1_dashboard_box;
 CREATE TABLE wcf1_dashboard_box (
