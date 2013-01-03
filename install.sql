@@ -58,6 +58,25 @@ CREATE TABLE wcf1_dashboard_option (
 	UNIQUE KEY dashboardOption (objectTypeID, boxID)
 );
 
+DROP TABLE IF EXISTS wcf1_tracked_visit;
+CREATE TABLE wcf1_tracked_visit (
+	objectTypeID INT(10) NOT NULL,
+	objectID INT(10) NOT NULL,
+	userID INT(10) NOT NULL,
+	visitTime INT(10) NOT NULL DEFAULT 0,
+	UNIQUE KEY (objectTypeID, objectID, userID),
+	KEY (userID, visitTime)
+);
+
+DROP TABLE IF EXISTS wcf1_tracked_visit_type;
+CREATE TABLE wcf1_tracked_visit_type (
+	objectTypeID INT(10) NOT NULL,
+	userID INT(10) NOT NULL,
+	visitTime INT(10) NOT NULL DEFAULT 0,
+	UNIQUE KEY (objectTypeID, userID),
+	KEY (userID, visitTime)
+);
+
 -- avatar table
 DROP TABLE IF EXISTS wcf1_user_avatar;
 CREATE TABLE wcf1_user_avatar (
@@ -250,6 +269,12 @@ ALTER TABLE wcf1_dashboard_box ADD FOREIGN KEY (packageID) REFERENCES wcf1_packa
 ALTER TABLE wcf1_dashboard_option ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_dashboard_option ADD FOREIGN KEY (boxID) REFERENCES wcf1_dashboard_box (boxID) ON DELETE CASCADE;
 
+ALTER TABLE wcf1_tracked_visit ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE wcf1_tracked_visit ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_tracked_visit_type ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE wcf1_tracked_visit_type ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+
 ALTER TABLE wcf1_user ADD FOREIGN KEY (avatarID) REFERENCES wcf1_user_avatar (avatarID) ON DELETE SET NULL;
 ALTER TABLE wcf1_user ADD FOREIGN KEY (rankID) REFERENCES wcf1_user_rank (rankID) ON DELETE SET NULL;
 ALTER TABLE wcf1_user ADD FOREIGN KEY (userOnlineGroupID) REFERENCES wcf1_user_group (groupID) ON DELETE SET NULL;
@@ -296,3 +321,4 @@ ALTER TABLE wcf1_user_profile_visitor ADD FOREIGN KEY (userID) REFERENCES wcf1_u
 
 ALTER TABLE wcf1_user_object_watch ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_object_watch ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+

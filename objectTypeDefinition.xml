@@ -34,5 +34,10 @@
 			<name>com.woltlab.wcf.user.objectWatch</name>
 			<interfacename>wcf\system\user\object\watch\IUserObjectWatch</interfacename>
 		</definition>
+
+		<definition>
+			<name>com.woltlab.wcf.visitTracker.objectType</name>
+			<!-- <interfacename>wcf\system\visitTracker\IVisitTrackerObjectType</interfacename>-->
+		</definition>
 	</import>
 </data>
