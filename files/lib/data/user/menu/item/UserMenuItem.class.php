@@ -1,7 +1,6 @@
 <?php
 namespace wcf\data\user\menu\item;
 use wcf\data\ProcessibleDatabaseObject;
-use wcf\system\application\ApplicationHandler;
 use wcf\system\menu\user\DefaultUserMenuItemProvider;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\request\LinkHandler;
@@ -12,7 +11,7 @@ use wcf\system\WCF;
  * Represents an user menu item.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.menu.item

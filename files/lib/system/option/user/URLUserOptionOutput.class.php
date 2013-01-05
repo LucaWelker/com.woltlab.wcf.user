@@ -2,15 +2,13 @@
 namespace wcf\system\option\user;
 use wcf\data\user\option\UserOption;
 use wcf\data\user\User;
-use wcf\system\style\StyleHandler;
-use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
  * User option output implementation for the output of an url.
- *
+ * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user

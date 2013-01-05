@@ -1,6 +1,5 @@
 <?php
 namespace wcf\page;
-use wcf\data\user\follow\UserFollowingList;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
@@ -35,7 +34,7 @@ class FollowingPage extends MultipleLinkPage {
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
-	
+		
 		$this->objectList->getConditionBuilder()->add("user_follow.userID = ?", array(WCF::getUser()->userID));
 	}
 	

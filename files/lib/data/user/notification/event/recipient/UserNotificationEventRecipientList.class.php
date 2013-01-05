@@ -22,7 +22,7 @@ class UserNotificationEventRecipientList extends UserList {
 		
 		parent::__construct();
 	}
-		
+	
 	/**
 	 * @see	wcf\data\DatabaseObjectList::getDatabaseTableName()
 	 */

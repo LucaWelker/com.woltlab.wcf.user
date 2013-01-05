@@ -26,7 +26,7 @@ class DashboardPage extends AbstractPage {
 	 */
 	public function readData() {
 		parent::readData();
-	
+		
 		// remove default breadcrumb entry
 		if (PageMenu::getInstance()->getLandingPage()->menuItem == 'wcf.user.dashboard') {
 			WCF::getBreadcrumbs()->remove(0);

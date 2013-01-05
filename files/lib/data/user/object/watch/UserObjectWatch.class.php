@@ -5,9 +5,9 @@ use wcf\system\WCF;
 
 /**
  * Represents a watched object.
- *
+ * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.object.watch
@@ -24,7 +24,15 @@ class UserObjectWatch extends DatabaseObject {
 	 */
 	protected static $databaseTableIndexName = 'watchID';
 	
-	
+	/**
+	 * Returns the UserObjectWatch with the given data or null if no such object
+	 * exists.
+	 * 
+	 * @param	integer		$objectTypeID
+	 * @param	integer		$userID
+	 * @param	integer		$objectID
+	 * @return	wcf\data\user\object\watch\UserObjectWatch
+	 */
 	public static function getUserObjectWatch($objectTypeID, $userID, $objectID) {
 		$sql = "SELECT	*
 			FROM	wcf".WCF_N."_user_object_watch

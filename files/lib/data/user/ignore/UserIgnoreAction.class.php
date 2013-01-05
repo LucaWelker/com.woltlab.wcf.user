@@ -22,7 +22,7 @@ use wcf\system\WCF;
  */
 class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	/**
-	 * Does nothing.
+	 * Validates the 'ignore' action.
 	 */
 	public function validateIgnore() {
 		$ignoreUserID = 0;
@@ -61,7 +61,7 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * Does nothing.
+	 * Validates the 'unignore' action.
 	 */
 	public function validateUnignore() {
 		$ignoreUserID = 0;

@@ -3,13 +3,12 @@ namespace wcf\system\worker;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
  * Worker implementation for updating user activity point caches.
  * 
  * @author	Tim Duesterhus
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.worker
