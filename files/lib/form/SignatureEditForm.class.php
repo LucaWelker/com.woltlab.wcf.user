@@ -43,6 +43,11 @@ class SignatureEditForm extends MessageForm {
 	public $useCaptacha = false;
 	
 	/**
+	 * @see	wcf\form\MessageForm::$allowedBBCodesPermission
+	 */
+	public $allowedBBCodesPermission = 'user.signature.allowedBBCodes';
+	
+	/**
 	 * @see	wcf\form\MessageForm::$permissionCanUseSmilies
 	 */
 	public $permissionCanUseSmilies = 'user.signature.canUseSmilies';

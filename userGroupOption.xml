@@ -74,6 +74,11 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
+			<option name="user.signature.allowedBBCodes">
+				<categoryname>user.signature</categoryname>
+				<optiontype>BBCodeSelect</optiontype>
+				<defaultvalue>all</defaultvalue>
+			</option>
 			<!-- /user.signature -->
 			
 			<!-- user.profile -->
