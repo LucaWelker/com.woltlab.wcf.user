@@ -1,8 +1,8 @@
 <?php
 namespace wcf\system\worker;
 use wcf\data\user\UserEditor;
-use wcf\data\user\UserProfileAction;
 use wcf\data\user\UserList;
+use wcf\data\user\UserProfileAction;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * Worker implementation for updating user ranks.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.worker

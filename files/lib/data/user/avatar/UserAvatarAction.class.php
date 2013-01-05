@@ -1,7 +1,7 @@
 <?php
 namespace wcf\data\user\avatar;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\user\UserEditor;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
@@ -15,7 +15,7 @@ use wcf\util\FileUtil;
  * Executes avatar-related actions.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.avatar

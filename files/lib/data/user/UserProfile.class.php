@@ -3,12 +3,14 @@ namespace wcf\data\user;
 use wcf\data\user\avatar\DefaultAvatar;
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatar;
+use wcf\data\user\online\UserOnline;
 use wcf\data\user\rank\UserRank;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\cache\CacheHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\online\location\UserOnlineLocationHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -306,7 +308,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	public function getCurrentLocation() {
 		if ($this->currentLocation === null) {
 			$this->currentLocation = '';
-			$this->currentLocation = \wcf\system\user\online\location\UserOnlineLocationHandler::getInstance()->getLocation(new \wcf\data\user\online\UserOnline(new User(null, array(
+			$this->currentLocation = UserOnlineLocationHandler::getInstance()->getLocation(new UserOnline(new User(null, array(
 				'controller' => $this->controller,
 				'objectID' => $this->locationObjectID
 			))));

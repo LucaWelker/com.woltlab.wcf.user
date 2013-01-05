@@ -1,8 +1,8 @@
 <?php
 namespace wcf\system\user\notification;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\event\recipient\UserNotificationEventRecipientList;
+use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\notification\UserNotificationAction;
 use wcf\data\user\notification\UserNotificationList;
@@ -12,6 +12,7 @@ use wcf\data\user\UserProfile;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
+use wcf\system\mail\Mail;
 use wcf\system\user\notification\event\IUserNotificationEvent;
 use wcf\system\user\notification\object\IUserNotificationObject;
 use wcf\system\user\storage\UserStorageHandler;
@@ -23,7 +24,7 @@ use wcf\util\StringUtil;
  * Handles user notifications.
  * 
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2013 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification
@@ -435,7 +436,7 @@ class UserNotificationHandler extends SingletonFactory {
 		));
 		
 		// build mail
-		$mail = new \wcf\system\mail\Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.subject', array('title' => $event->getEmailTitle())), $message);
+		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.subject', array('title' => $event->getEmailTitle())), $message);
 		$mail->send();
 	}
 	

@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
+use wcf\acp\form\UserEditForm;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfileAction;
@@ -9,7 +10,7 @@ use wcf\system\event\IEventListener;
  * Handles user ranks in user administration.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.event.listener
@@ -22,7 +23,7 @@ class UserAddFormUserRankListener implements IEventListener {
 	public function execute($eventObj, $className, $eventName) {
 		if (!MODULE_USER_RANK && !MODULE_USERS_ONLINE) return;
 		
-		if ($eventObj instanceof \wcf\acp\form\UserEditForm) {
+		if ($eventObj instanceof UserEditForm) {
 			$user = new User($eventObj->userID);
 		}
 		else {
