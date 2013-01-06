@@ -2,8 +2,8 @@
 namespace wcf\acp\form;
 use wcf\data\package\PackageCache;
 use wcf\data\user\group\UserGroup;
-use wcf\data\user\rank\UserRankEditor;
 use wcf\data\user\rank\UserRankAction;
+use wcf\data\user\rank\UserRankEditor;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -15,7 +15,7 @@ use wcf\util\StringUtil;
  * Shows the user rank add form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	acp.form

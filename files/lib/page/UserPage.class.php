@@ -1,5 +1,6 @@
 <?php
 namespace wcf\page;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\user\follow\UserFollowerList;
 use wcf\data\user\follow\UserFollowingList;
 use wcf\data\user\profile\visitor\UserProfileVisitor;
@@ -7,18 +8,17 @@ use wcf\data\user\profile\visitor\UserProfileVisitorEditor;
 use wcf\data\user\profile\visitor\UserProfileVisitorList;
 use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfile;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\request\LinkHandler;
 use wcf\system\menu\user\profile\UserProfileMenu;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
  * Shows the user profile page.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	page

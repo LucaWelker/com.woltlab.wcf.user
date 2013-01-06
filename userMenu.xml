@@ -7,17 +7,17 @@
 		</usermenuitem>
 		
 		<usermenuitem name="wcf.user.menu.profile.accountManagement">
-			<link>index.php/AccountManagement/</link>
+			<controller><![CDATA[wcf\form\AccountManagementForm]]></controller>
 			<parent>wcf.user.menu.profile</parent>
 			<showorder>1</showorder>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.profile.avatar">
-			<link>index.php/AvatarEdit/</link>
+			<controller><![CDATA[wcf\form\AvatarEditForm]]></controller>
 			<parent>wcf.user.menu.profile</parent>
 			<showorder>2</showorder>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.profile.signature">
-			<link>index.php/SignatureEdit/</link>
+			<controller><![CDATA[wcf\form\SignatureEditForm]]></controller>
 			<parent>wcf.user.menu.profile</parent>
 			<showorder>3</showorder>
 			<options>module_user_signature</options>
@@ -30,7 +30,7 @@
 		</usermenuitem>
 		
 		<usermenuitem name="wcf.user.menu.settings.notification">
-			<link>index.php/NotificationSettings/</link>
+			<controller><![CDATA[wcf\form\NotificationSettingsForm]]></controller>
 			<parent>wcf.user.menu.settings</parent>
 		</usermenuitem>
 		<!-- /settings -->
@@ -41,17 +41,17 @@
 		</usermenuitem>
 		
 		<usermenuitem name="wcf.user.menu.community.notification">
-			<link>index.php/NotificationList/</link>
+			<controller><![CDATA[wcf\page\NotificationListPage]]></controller>
 			<parent>wcf.user.menu.community</parent>
 			<showorder>1</showorder>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.community.following">
-			<link>index.php/Following/</link>
+			<controller><![CDATA[wcf\page\FollowingPage]]></controller>
 			<parent>wcf.user.menu.community</parent>
 			<showorder>2</showorder>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.community.ignoredUsers">
-			<link>index.php/IgnoredUsers/</link>
+			<controller><![CDATA[wcf\page\IgnoredUsersPage]]></controller>
 			<parent>wcf.user.menu.community</parent>
 			<showorder>3</showorder>
 		</usermenuitem>

@@ -1,11 +1,13 @@
 <?php
 namespace wcf\form;
+use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\system\exception\UserInputException;
 use wcf\system\mail\Mail;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
+use wcf\util\PasswordUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserRegistrationUtil;
 use wcf\util\UserUtil;
@@ -14,7 +16,7 @@ use wcf\util\UserUtil;
  * Shows the account management form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -301,7 +303,10 @@ class AccountManagementForm extends AbstractSecureForm {
 			
 			// update cookie
 			if (isset($_COOKIE[COOKIE_PREFIX.'password'])) {
-				HeaderUtil::setCookie('password', StringUtil::getSaltedHash($this->newPassword, $userEditor->salt), TIME_NOW + 365 * 24 * 3600);
+				// reload user
+				$user = new User($userEditor->userID);
+				
+				HeaderUtil::setCookie('password', PasswordUtil::getSaltedHash($this->newPassword, $user->password), TIME_NOW + 365 * 24 * 3600);
 			}
 			
 			$success[] = 'wcf.user.changePassword.success';

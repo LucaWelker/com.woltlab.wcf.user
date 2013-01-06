@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\bbcode\BBCodeParser;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\PermissionDeniedException;
@@ -41,6 +42,13 @@ class UserProfileAction extends UserAction {
 		
 		if (!isset($this->parameters['options'])) {
 			throw new UserInputException('options');
+		}
+		
+		if (isset($this->parameters['options']['enableBBCodes']) && WCF::getSession()->getPermission('user.signature.canUseBBCodes')) {
+			$disallowedBBCodes = BBCodeParser::getInstance()->validateBBCodes($this->parameters['data']['message'], explode(',', WCF::getSession()->getPermission('user.signature.allowedBBCodes')));
+			if (!empty($disallowedBBCodes)) {
+				throw new UserInputException('message', 'disallowedBBCodes', $disallowedBBCodes);
+			}
 		}
 	}
 	

@@ -1,6 +1,5 @@
 <?php
 namespace wcf\data\user\ignore;
-use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectList;
 
 /**
@@ -13,6 +12,4 @@ use wcf\data\DatabaseObjectList;
  * @subpackage	data.user.ignore
  * @category	Community Framework
  */
-class UserIgnoreList extends DatabaseObjectList {
-	
-}
+class UserIgnoreList extends DatabaseObjectList { }
