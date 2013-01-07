@@ -79,8 +79,8 @@
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.availableBoxes"><![CDATA[Deaktivierte Boxen]]></item>
 		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Aktive Boxen]]></item>
-		<item name="wcf.dashboard.box.recentActivitySidebar"><![CDATA[Letzte Aktivität]]></item>
-		<item name="wcf.dashboard.box.statsSidebar"><![CDATA[Statistiken]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.recentActivitySidebar"><![CDATA[Letzte Aktivität]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.statsSidebar"><![CDATA[Statistiken]]></item>
 		<item name="wcf.dashboard.boxType.content"><![CDATA[Inhaltsbereich]]></item>
 		<item name="wcf.dashboard.boxType.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="wcf.dashboard.objectType"><![CDATA[Seite]]></item>

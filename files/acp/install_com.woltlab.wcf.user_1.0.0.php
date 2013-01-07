@@ -11,9 +11,9 @@ use wcf\system\WCF;
  */
 // set dashboard default values 
 DashboardHandler::setDefaultValues('com.woltlab.wcf.user.DashboardPage', array(
-	'registerButton' => 1,
-	'signedInAs' => 2,
-	'statsSidebar' => 3
+	'com.woltlab.wcf.user.registerButton' => 1,
+	'com.woltlab.wcf.user.signedInAs' => 2,
+	'com.woltlab.wcf.user.statsSidebar' => 3
 ));
 
 // update administrator user rank and user online marking
