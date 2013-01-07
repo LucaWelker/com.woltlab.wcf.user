@@ -6,7 +6,7 @@ use wcf\page\IPage;
 use wcf\system\WCF;
 
 /**
- * Dashboard box for recent activity.
+ * Dashboard box for recent activity in the sidebar.
  * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
@@ -43,6 +43,6 @@ class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
 			'recentActivityList' => $this->recentActivityList
 		));
 		
-		return WCF::getTPL()->fetch('dashboardBoxRecentActivity');
+		return WCF::getTPL()->fetch('dashboardBoxRecentActivitySidebar');
 	}
 }
