@@ -1,6 +1,7 @@
 <header class="boxHeadline boxSubHeadline">
 	<hgroup>
 		<h1>{lang}wcf.user.recentActivity{/lang}</h1>
+		{if $filteredByFollowedUsers}<h2>{lang}wcf.user.recentActivity.filteredByFollowedUsers{/lang}</h2>{/if}
 	</hgroup>
 </header>
 

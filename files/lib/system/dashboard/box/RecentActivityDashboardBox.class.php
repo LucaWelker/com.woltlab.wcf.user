@@ -23,15 +23,23 @@ class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 	public $eventList = null;
 	
 	/**
+	 * true, if results were filtered by followed users
+	 * @var boolean
+	 */
+	public $filteredByFollowedUsers = false;
+	
+	/**
 	 * @see	wcf\system\dashboard\box\IDashboardBox::init()
 	 */
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		// TODO: add setting
-		// TODO: use caching here?
 		$this->eventList = new ViewableUserActivityEventList();
-		//$this->recentActivityList->sqlLimit = 5;
+		if (count(WCF::getUserProfileHandler()->getFollowingUsers())) {
+			$this->filteredByFollowedUsers = true;
+			$this->eventList->getConditionBuilder()->add('user_activity_event.userID IN (?)', array(WCF::getUserProfileHandler()->getFollowingUsers()));
+		}
+		//$this->recentActivityList->sqlLimit = 5; // TODO: add setting
 		$this->eventList->readObjects();
 	}
 	
@@ -41,7 +49,8 @@ class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 	protected function render() {
 		if (count($this->eventList)) {
 			WCF::getTPL()->assign(array(
-				'eventList' => $this->eventList
+				'eventList' => $this->eventList,
+				'filteredByFollowedUsers' => $this->filteredByFollowedUsers
 			));
 			
 			return WCF::getTPL()->fetch('dashboardBoxRecentActivity');
