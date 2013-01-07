@@ -213,13 +213,15 @@ INSERT INTO wcf1_user_rank (groupID, requiredPoints, rankTitle, cssClassName) VA
 DROP TABLE IF EXISTS wcf1_user_activity_event;
 CREATE TABLE wcf1_user_activity_event (
 	eventID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	packageID INT(10) NOT NULL,
 	objectTypeID INT(10) NOT NULL,
 	objectID INT(10) NOT NULL,
 	userID INT(10) NOT NULL,
 	time INT(10) NOT NULL,
 	additionalData TEXT,
-	KEY (packageID, userID)
+	
+	KEY (time),
+	KEY (userID, time),
+	KEY (objectTypeID, objectID)
 );
 
 DROP TABLE IF EXISTS wcf1_user_activity_point;

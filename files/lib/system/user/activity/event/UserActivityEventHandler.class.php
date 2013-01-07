@@ -100,21 +100,19 @@ class UserActivityEventHandler extends SingletonFactory {
 	 * Fires a new activity event.
 	 * 
 	 * @param	string		$objectType
-	 * @param	integer		$packageID
 	 * @param	integer		$objectID
 	 * @param	integer		$userID
 	 * @param	integer		$time
 	 * @param	array		$additonalData
 	 * @return	wcf\data\user\activity\event\UserActivityEvent
 	 */
-	public function fireEvent($objectType, $packageID, $objectID, $userID = null, $time = TIME_NOW, $additonalData = array()) {
+	public function fireEvent($objectType, $objectID, $userID = null, $time = TIME_NOW, $additonalData = array()) {
 		$objectTypeID = $this->getObjectTypeID($objectType);
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
 		$eventAction = new UserActivityEventAction(array(), 'create', array(
 			'data' => array(
 				'objectTypeID' => $objectTypeID,
-				'packageID' => $packageID,
 				'objectID' => $objectID,
 				'userID' => $userID,
 				'time' => $time,
@@ -130,14 +128,12 @@ class UserActivityEventHandler extends SingletonFactory {
 	 * Removes activity events.
 	 * 
 	 * @param	string		$objectType
-	 * @param	integer		$packageID
 	 * @param	array<integer>	$objectIDs
 	 */
-	public function removeEvents($objectType, $packageID, array $objectIDs) {
+	public function removeEvents($objectType, array $objectIDs) {
 		$objectTypeID = $this->getObjectTypeID($objectType);
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("objectTypeID = ?", array($objectTypeID));
-		$conditions->add("packageID = ?", array($packageID));
 		$conditions->add("objectID IN (?)", array($objectIDs));
 		
 		$sql = "DELETE FROM	wcf".WCF_N."_user_activity_event

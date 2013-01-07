@@ -1,6 +1,5 @@
 <?php
 namespace wcf\data\user\follow;
-use wcf\data\package\PackageCache;
 use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IGroupedUserListAction;
@@ -69,8 +68,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 			UserNotificationHandler::getInstance()->fireEvent('following', 'com.woltlab.wcf.user.follow', new UserFollowUserNotificationObject($follow), array($follow->followUserID));
 			
 			// fire activity event
-			$packageID = PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user');
-			UserActivityEventHandler::getInstance()->fireEvent('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, $this->parameters['data']['userID']);
+			UserActivityEventHandler::getInstance()->fireEvent('com.woltlab.wcf.user.recentActivityEvent.follow', $this->parameters['data']['userID']);
 			
 			// reset storage
 			UserStorageHandler::getInstance()->reset(array($this->parameters['data']['userID']), 'followerUserIDs');
@@ -102,8 +100,7 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 			$followEditor->delete();
 			
 			// remove activity event
-			$packageID = PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user');
-			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, array($this->parameters['data']['userID']));
+			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', array($this->parameters['data']['userID']));
 		}
 		
 		// reset storage
@@ -143,11 +140,10 @@ class UserFollowAction extends AbstractDatabaseObjectAction implements IGroupedU
 		$returnValues = parent::delete();
 		
 		$followUserIDs = array();
-		$packageID = PackageCache::getInstance()->getPackageID('com.woltlab.wcf.user');
 		foreach ($this->objects as $follow) {
 			$followUserIDs[] = $follow->followUserID;
 			// remove activity event
-			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', $packageID, array($follow->followUserID));
+			UserActivityEventHandler::getInstance()->removeEvents('com.woltlab.wcf.user.recentActivityEvent.follow', array($follow->followUserID));
 		}
 		
 		// reset storage
