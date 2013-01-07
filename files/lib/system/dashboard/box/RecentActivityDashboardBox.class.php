@@ -6,16 +6,16 @@ use wcf\page\IPage;
 use wcf\system\WCF;
 
 /**
- * Dashboard box for recent activity in the sidebar.
+ * Dashboard box for recent activity.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.dashboard.box
  * @category	Community Framework
  */
-class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
+class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 	/**
 	 * recent activity list
 	 * @var	wcf\data\user\activity\event\ViewableUserActivityEventList
@@ -31,7 +31,7 @@ class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
 		// TODO: add setting
 		// TODO: use caching here?
 		$this->eventList = new ViewableUserActivityEventList();
-		$this->eventList->sqlLimit = 5;
+		//$this->recentActivityList->sqlLimit = 5;
 		$this->eventList->readObjects();
 	}
 	
@@ -44,7 +44,7 @@ class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
 				'eventList' => $this->eventList
 			));
 			
-			return WCF::getTPL()->fetch('dashboardBoxRecentActivitySidebar');
+			return WCF::getTPL()->fetch('dashboardBoxRecentActivity');
 		}
 	}
 }

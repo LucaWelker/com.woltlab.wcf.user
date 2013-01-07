@@ -1,16 +1,12 @@
-{hascontent}
-	<ul class="sidebarBoxList">
-		{content}
-			{foreach from=$recentActivityList item=recentActivityEvent}
-				<li class="box24">
-					<a href="{link controller='User' object=$recentActivityEvent->getUserProfile()}{/link}" title="{$recentActivityEvent->getUserProfile()->username}" class="framed">{@$recentActivityEvent->getUserProfile()->getAvatar()->getImageTag(24)}</a>
-					
-					<hgroup class="sidebarBoxHeadline">
-						<h1><a href="{link controller='User' object=$recentActivityEvent->getUserProfile()}{/link}" class="userLink" data-user-id="{@$recentActivityEvent->getUserProfile()->userID}">{$recentActivityEvent->getUserProfile()->username}</a><small> - {@$recentActivityEvent->time|time}</small></h1> 
-						<h2><small>{@$recentActivityEvent->getTitle()}</small></h2>
-					</hgroup>
-				</li>
-			{/foreach}
-		{/content}
-	</ul>
-{/hascontent}
+<ul class="sidebarBoxList">
+	{foreach from=$eventList item=event}
+		<li class="box24">
+			<a href="{link controller='User' object=$event->getUserProfile()}{/link}" title="{$event->getUserProfile()->username}" class="framed">{@$event->getUserProfile()->getAvatar()->getImageTag(24)}</a>
+			
+			<hgroup class="sidebarBoxHeadline">
+				<h1><a href="{link controller='User' object=$event->getUserProfile()}{/link}" class="userLink" data-user-id="{@$event->getUserProfile()->userID}">{$event->getUserProfile()->username}</a><small> - {@$event->time|time}</small></h1> 
+				<h2><small>{@$event->getTitle()}</small></h2>
+			</hgroup>
+		</li>
+	{/foreach}
+</ul>
