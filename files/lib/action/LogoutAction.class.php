@@ -23,12 +23,7 @@ class LogoutAction extends \wcf\acp\action\LogoutAction {
 	 */
 	public function execute() {
 		AbstractSecureAction::execute();
-		
-		// validate
-		if (!WCF::getUser()->userID) {
-			throw new IllegalLinkException();
-		}
-		
+
 		// do logout
 		WCF::getSession()->delete();
 		
@@ -43,7 +38,7 @@ class LogoutAction extends \wcf\acp\action\LogoutAction {
 		$this->executed();
 		
 		// forward to index page
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Index'));
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink());
 		exit;
 	}
 }
