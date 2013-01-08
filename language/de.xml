@@ -105,6 +105,7 @@
 		<item name="wcf.user.login.action.register"><![CDATA[Nein, ich möchte mich jetzt registrieren.]]></item>
 		<item name="wcf.user.login.redirect"><![CDATA[Sie wurden erfolgreich angemeldet.]]></item>
 		<item name="wcf.user.loginOrRegister"><![CDATA[Anmelden{if !REGISTER_DISABLED} oder registrieren{/if}]]></item>
+		<item name="wcf.user.logout.redirect"><![CDATA[Sie wurden erfolgreich abgemeldet.]]></item>
 		<item name="wcf.user.menu.community"><![CDATA[Community]]></item>
 		<item name="wcf.user.menu.community.notification"><![CDATA[Benachrichtigungen]]></item>
 		<item name="wcf.user.menu.community.following"><![CDATA[Sie folgen]]></item>
