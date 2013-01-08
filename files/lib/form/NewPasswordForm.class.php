@@ -8,14 +8,14 @@ use wcf\system\mail\Mail;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
+use wcf\util\PasswordUtil;
 use wcf\util\StringUtil;
-use wcf\util\UserRegistrationUtil;
 
 /**
  * Shows the new password form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -91,7 +91,7 @@ class NewPasswordForm extends AbstractForm {
 		parent::save();
 		
 		// generate new password
-		$this->newPassword = UserRegistrationUtil::getNewPassword((REGISTER_PASSWORD_MIN_LENGTH > 9 ? REGISTER_PASSWORD_MIN_LENGTH : 9));
+		$this->newPassword = PasswordUtil::getRandomPassword((REGISTER_PASSWORD_MIN_LENGTH > 9 ? REGISTER_PASSWORD_MIN_LENGTH : 9));
 		
 		// update user
 		$userEditor = new UserEditor($this->user);

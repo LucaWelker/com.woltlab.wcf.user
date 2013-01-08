@@ -85,21 +85,4 @@ final class UserRegistrationUtil {
 	public static function getActivationCode($length = 9) {
 		return MathUtil::getRandomValue(pow(10, $length - 1), pow(10, $length) - 1);
 	}
-	
-	/**
-	 * Generates a random user password with the given character length.
-	 *
-	 * @param	integer		$length
-	 * @return	string		new password
-	 */
-	public static function getNewPassword($length = 9) {
-		static $availableCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+#-.,;:?!';
-		
-		$password = '';
-		for ($i = 0; $i < $length; $i++) {
-			$password .= substr($availableCharacters, MathUtil::getRandomValue(0, strlen($availableCharacters) - 1), 1);
-		}
-		
-		return $password;
-	}
 }
