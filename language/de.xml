@@ -126,6 +126,7 @@
 		<item name="wcf.user.members.sort.letters.all"><![CDATA[Alle]]></item>
 		<item name="wcf.user.recentActivity"><![CDATA[Letzte Aktivitäten]]></item>
 		<item name="wcf.user.recentActivity.filteredByFollowedUsers"><![CDATA[Von Benutzern denen Sie folgen]]></item>
+		<item name="wcf.user.recentActivity.more"><![CDATA[Weitere Aktivitäten]]></item>
 		<item name="wcf.user.usersOnline"><![CDATA[Benutzer online]]></item>
 		<item name="wcf.user.usersOnline.detail"><![CDATA[
 {if $usersOnlineList->stats[members] > 0}
