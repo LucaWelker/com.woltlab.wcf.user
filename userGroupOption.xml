@@ -145,8 +145,8 @@
 			</option>
 			<option name="user.profile.avatar.maxSize">
 				<categoryname>user.profile.avatar</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>40000</defaultvalue>
+				<optiontype>filesize</optiontype>
+				<defaultvalue>100 kB</defaultvalue>
 			</option>
 			<option name="user.profile.avatar.allowedFileExtensions">
 				<categoryname>user.profile.avatar</categoryname>
