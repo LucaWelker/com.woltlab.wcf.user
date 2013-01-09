@@ -7,7 +7,7 @@ use wcf\data\DatabaseObjectDecorator;
  * Provides methods for viewable user activity events.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.activity.event
@@ -26,6 +26,18 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	protected $description = '';
 	
 	/**
+	 * accessible by current user
+	 * @var	boolean
+	 */
+	protected $isAccessible = false;
+	
+	/**
+	 * associated object was removed
+	 * @var	boolean
+	 */
+	protected $isOrphaned = false;
+	
+	/**
 	 * event title
 	 * @var	string
 	 */
@@ -36,6 +48,38 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	 * @var	wcf\data\user\UserProfile
 	 */
 	protected $userProfile = null;
+	
+	/**
+	 * Marks this event as accessible for current user.
+	 */
+	public function setIsAccessible() {
+		$this->isAccessible = true;
+	}
+	
+	/**
+	 * Returns true, if event is accessible by current user.
+	 * 
+	 * @return	boolean
+	 */
+	public function isAccessible() {
+		return $this->isAccessible;
+	}
+	
+	/**
+	 * Marks this event as orphaned.
+	 */
+	public function setIsOrphaned() {
+		$this->isOrphaned = true;
+	}
+	
+	/**
+	 * Returns true, if event is orphaned (associated object removed).
+	 * 
+	 * @return	boolean
+	 */
+	public function isOrphaned() {
+		return $this->isOrphaned;
+	}
 	
 	/**
 	 * Sets user profile.

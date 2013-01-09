@@ -11,7 +11,7 @@ use wcf\system\WCF;
  * User activity event handler.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.activity.event
@@ -65,38 +65,6 @@ class UserActivityEventHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Counts available events.
-	 * 
-	 * @param	array		$userIDs
-	 * @return	integer
-	 */
-	public function countEvents(array $userIDs) {
-		$eventList = new ViewableUserActivityEventList($userIDs);
-		$eventList->getConditionBuilder()->add("user_activity_event.userID IN (?)", array($userIDs));
-		return $eventList->countObjects();
-	}
-	
-	/**
-	 * Returns a list of events.
-	 * 
-	 * @param	array		$userIDs
-	 * @param	integer		$sqlLimit
-	 * @param	integer		$sqlOffset
-	 * @param	string		$sqlOrderBy
-	 * @return	wcf\data\user\activity\event\ViewableUserActivityEventList
-	 */
-	public function getEvents(array $userIDs, $sqlLimit = 20, $sqlOffset = 0, $sqlOrderBy = 'user_activity_event.time DESC') {
-		$eventList = new ViewableUserActivityEventList($userIDs);
-		$eventList->getConditionBuilder()->add("user_activity_event.userID IN (?)", array($userIDs));
-		$eventList->sqlLimit = $sqlLimit;
-		$eventList->sqlOffset = $sqlOffset;
-		$eventList->sqlOrderBy = $sqlOrderBy;
-		$eventList->readObjects();
-		
-		return $eventList;
-	}
-	
-	/**
 	 * Fires a new activity event.
 	 * 
 	 * @param	string		$objectType
@@ -140,5 +108,25 @@ class UserActivityEventHandler extends SingletonFactory {
 			".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
+	}
+	
+	/**
+	 * Validates an event list and removes orphaned events.
+	 * 
+	 * @param	wcf\data\user\activity\event\ViewableUserActivityEventList	$eventList
+	 */
+	public static function validateEvents(ViewableUserActivityEventList $eventList) {
+		$eventIDs = $eventList->validateEvents();
+		
+		// remove orphaned event ids
+		if (!empty($eventIDs)) {
+			$sql = "DELETE FROM	wcf".WCF_N."_user_activity_event
+				WHERE		eventID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			
+			foreach ($eventIDs as $eventID) {
+				$statement->execute(array($eventID));
+			}
+		}
 	}
 }

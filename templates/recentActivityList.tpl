@@ -1,8 +1,16 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{lang}wcf.user.recentActivity{/lang} {if $pageNo > 1}- {lang}wcf.page.pageNo{/lang} {/if}- {PAGE_TITLE|language}</title>
+	<title>{lang}wcf.user.recentActivity{/lang} - {PAGE_TITLE|language}</title>
 	{include file='headInclude'}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			new WCF.User.RecentActivityLoader(null);
+		});
+		//]]>
+	</script>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -15,23 +23,21 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.recentActivity{/lang} <span class="badge">{#$items}</span></h1>
+		<h1>{lang}wcf.user.recentActivity{/lang}</h1>
 	</hgroup>
 </header>
 
 {include file='userNotice'}
 
-<div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller='RecentActivityList' link="pageNo=%d"}
-</div>
+<div class="contentNavigation"></div>
 
 <div class="container marginTop">
-	{include file='recentActivities' eventList=$objects}
+	<ul id="recentActivities" class="containerList" data-last-event-time="{@$eventList->getLastEventTime()}">
+		{include file='recentActivityListItem'}
+	</ul>
 </div>
 
-<div class="contentNavigation">
-	{@$pagesLinks}
-</div>
+<div class="contentNavigation"></div>
 
 {include file='footer'}
 

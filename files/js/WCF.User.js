@@ -1537,22 +1537,22 @@ WCF.User.SignaturePreview = WCF.Message.Preview.extend({
  */
 WCF.User.RecentActivityLoader = Class.extend({
 	/**
-	 * pagination offset
-	 * @var	integer
+	 * container object
+	 * @var	jQuery
 	 */
-	_pageNo: 0,
+	_container: null,
+	
+	/**
+	 * button to load next events
+	 * @var	jQuery
+	 */
+	_loadButton: null,
 	
 	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
 	 */
 	_proxy: null,
-	
-	/**
-	 * API reference
-	 * @var	WCF.Action.Scroll
-	 */
-	_scrollAPI: null,
 	
 	/**
 	 * user id
@@ -1566,37 +1566,39 @@ WCF.User.RecentActivityLoader = Class.extend({
 	 * @param	integer		userID
 	 */
 	init: function(userID) {
-		this._pageNo = 0;
+		this._container = $('#recentActivities');
 		this._userID = userID;
+		
+		if (this._userID !== null && !this._userID) {
+			console.debug("[WCF.User.RecentActivityLoader] Invalid parameter 'userID' given.");
+			return;
+		}
+		
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
 		
-		new WCF.Action.Scroll(300, $.proxy(this._scroll, this));
+		this._loadButton = $('<li class="recentActivitiesMore"><button class="buttonPrimary small">' + WCF.Language.get('wcf.user.recentActivity.more') + '</button></li>').appendTo(this._container);
+		this._loadButton.children('button').click($.proxy(this._click, this));
 	},
 	
 	/**
-	 * Loads next entries once users hits the very bottom.
-	 * 
-	 * @param	WCF.Action.Scroll	api
+	 * Loads next activity events.
 	 */
-	_scroll: function(api) {
-		// bind API reference
-		this._scrollAPI = api;
+	_click: function() {
+		this._loadButton.enable();
 		
-		// stop event until request was sucessful
-		this._scrollAPI.stop();
+		var $parameters = {
+			lastEventTime: this._container.data('lastEventTime')
+		};
+		if (this._userID) {
+			$parameters.userID = this._userID;
+		}
 		
-		this._pageNo++;
 		this._proxy.setOption('data', {
 			actionName: 'load',
 			className: 'wcf\\data\\user\\activity\\event\\UserActivityEventAction',
-			parameters: {
-				data: {
-					userID: this._userID,
-					pageNo: this._pageNo
-				}
-			}
+			parameters: $parameters
 		});
 		this._proxy.sendRequest();
 	},
@@ -1610,19 +1612,13 @@ WCF.User.RecentActivityLoader = Class.extend({
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (data.returnValues.template) {
-			var $listItems = $('<div>' + data.returnValues.template + '</div>').find('.containerList > li');
-			if ($listItems.length) {
-				var $recentActivities = $('#recentActivities');
-				console.debug($recentActivities.find('li'));
-				$listItems.each(function(index, item) {
-					$(item).appendTo($recentActivities);
-				});
-			}
+			$(data.returnValues.template).insertBefore(this._loadButton);
+			
+			this._container.data('lastEventTime', data.returnValues.lastEventTime);
+			this._loadButton.enable();
 		}
-		
-		// resume scroll event handler
-		if (data.returnValues.hasMoreElements) {
-			this._scrollAPI.start();
+		else {
+			this._loadButton.hide();
 		}
 	}
 });

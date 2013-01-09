@@ -7,7 +7,7 @@ use wcf\system\user\activity\event\UserActivityEventHandler;
  * Represents a list of viewable user activity events.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.activity.event
@@ -68,5 +68,45 @@ class ViewableUserActivityEventList extends UserActivityEventList {
 			$eventClass = call_user_func(array($eventData['className'], 'getInstance'));
 			$eventClass->prepare($eventData['objects']);
 		}
+	}
+	
+	/**
+	 * Returns timestamp of oldest entry fetched.
+	 * 
+	 * @return	integer
+	 */
+	public function getLastEventTime() {
+		$lastEventTime = 0;
+		foreach ($this->objects as $event) {
+			if (!$lastEventTime) {
+				$lastEventTime = $event->time;
+			}
+			
+			$lastEventTime = min($lastEventTime, $event->time);
+		}
+		
+		return $lastEventTime;
+	}
+	
+	/**
+	 * Validates event permissions and returns a list of orphaned event ids.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function validateEvents() {
+		$orphanedEventIDs = array();
+		
+		foreach ($this->objects as $index => $event) {
+			if (!$event->isAccessible()) {
+				unset($this->objects[$index]);
+			}
+			else if ($event->isOrphaned()) {
+				$orphanedEventIDs[] = $event->eventID;
+				unset($this->objects[$index]);
+			}
+		}
+		$this->indexToObject = array_keys($this->objects);
+		
+		return $orphanedEventIDs;
 	}
 }

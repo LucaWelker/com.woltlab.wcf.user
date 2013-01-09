@@ -8,7 +8,7 @@ use wcf\system\WCF;
  * User activity event implementation for follows.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.activity.event
@@ -34,8 +34,13 @@ class FollowUserActivityEvent extends SingletonFactory implements IUserActivityE
 		// set message
 		foreach ($events as $event) {
 			if (isset($users[$event->objectID])) {
+				$event->setIsAccessible();
+				
 				$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.follow', array('user' => $users[$event->objectID]));
 				$event->setTitle($text);
+			}
+			else {
+				$event->setIsOrphaned();
 			}
 		}
 	}

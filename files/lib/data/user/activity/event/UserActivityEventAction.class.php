@@ -9,7 +9,7 @@ use wcf\system\WCF;
  * Executes user activity event-related actions.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.activity.event
@@ -25,13 +25,11 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 	 * Validates parameters to load recent activity entries.
 	 */
 	public function validateLoad() {
-		if (!isset($this->parameters['data']['userID']) || !intval($this->parameters['data']['userID'])) {
+		if (isset($this->parameters['userID']) && !intval($this->parameters['userID'])) {
 			throw new UserInputException('userID');
 		}
 		
-		if (!isset($this->parameters['data']['pageNo']) || !intval($this->parameters['data']['pageNo'])) {
-			throw new UserInputException('pageNo');
-		}
+		$this->readInteger('lastEventTime');
 	}
 	
 	/**
@@ -40,30 +38,32 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 	 * @return	array
 	 */
 	public function load() {
-		$returnValues = array(
-			'hasMoreElements' => false,
-			'template' => ''
-		);
+		$eventList = new ViewableUserActivityEventList();
+		$eventList->getConditionBuilder()->add("user_activity_event.time < ?", array($this->parameters['lastEventTime']));
 		
-		$eventList = UserActivityEventHandler::getInstance()->getEvents(array($this->parameters['data']['userID']), 20, ($this->parameters['data']['pageNo'] * 20));
-		switch (count($eventList)) {
-			case 0:
-				// offset is beyond valid values
-				return $returnValues;
-			break;
-			
-			case 20:
-				$returnValues['hasMoreElements'] = true;
-			break;
+		// profile view
+		if (isset($this->parameters['userID'])) {
+			$eventList->getConditionBuilder()->add("user_activity_event.userID = ?", array($this->parameters['userID']));
 		}
+		
+		$eventList->readObjects();
+		$lastEventTime = $eventList->getLastEventTime();
+		
+		if (!$lastEventTime) {
+			return array();
+		}
+		
+		// removes orphaned and non-accessable events
+		UserActivityEventHandler::validateEvents($eventList);
 		
 		// parse template
 		WCF::getTPL()->assign(array(
-			'eventList' => $eventList,
-			'userID' => $this->parameters['data']['userID']
+			'eventList' => $eventList
 		));
-		$returnValues['template'] = WCF::getTPL()->fetch('recentActivities');
 		
-		return $returnValues;
+		return array(
+			'lastEventTime' => $lastEventTime,
+			'template' => WCF::getTPL()->fetch('recentActivityListItem')
+		);
 	}
 }
