@@ -87,7 +87,7 @@ class SignatureEditForm extends MessageForm {
 			$this->enableBBCodes = WCF::getUser()->signatureEnableBBCodes;
 			$this->enableHtml = WCF::getUser()->signatureEnableHtml;
 			$this->enableSmilies = WCF::getUser()->signatureEnableSmilies;
-			$this->parseURL = true;
+			$this->preParse = true;
 		}
 	}
 	
