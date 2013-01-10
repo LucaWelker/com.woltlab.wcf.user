@@ -1,3 +1,3 @@
-<div class="dashboardBox dashboardBox{$box->boxName|ucfirst}">
+<div class="dashboardBox">
 	{@$template}
 </div>

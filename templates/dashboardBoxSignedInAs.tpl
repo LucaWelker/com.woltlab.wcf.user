@@ -1,4 +1,4 @@
-<fieldset class="dashboardBox dashboardBox{$box->boxName|ucfirst}">
+<fieldset class="dashboardBox dashboardBoxSignedInAs">
 	<legend class="invisible">{lang}wcf.dashboard.box.{$box->boxName}{/lang}</legend>
 	
 	<div class="box96 framed">

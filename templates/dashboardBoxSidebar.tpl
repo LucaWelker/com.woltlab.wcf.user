@@ -1,4 +1,4 @@
-<fieldset class="dashboardBox dashboardBox{$box->boxName|ucfirst}">
+<fieldset class="dashboardBox">
 	<legend>{lang}wcf.dashboard.box.{$box->boxName}{/lang}</legend>
 	
 	<div>
