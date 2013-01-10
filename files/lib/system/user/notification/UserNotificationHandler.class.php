@@ -112,7 +112,7 @@ class UserNotificationHandler extends SingletonFactory {
 		// skip recipients with outstanding notifications
 		if (!empty($userIDs)) {
 			$recipientIDs = array_diff($recipientIDs, $userIDs);
-			if (empty($recpientIDs)) return;
+			if (empty($recipientIDs)) return;
 		}
 		
 		// get recipients
