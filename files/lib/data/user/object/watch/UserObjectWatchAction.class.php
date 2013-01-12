@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * Executes watched object-related actions.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.object.watch
@@ -38,8 +38,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		));
 		
 		// reset user storage
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userObjectWatchTypeIDs');
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'unreadUserObjectWatchCount');
+		$objectType->getProcessor()->resetUserStorage(array(WCF::getUser()->userID));
 	}
 	
 	/**
@@ -56,8 +55,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		$editor->delete();
 		
 		// reset user storage
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userObjectWatchTypeIDs');
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'unreadUserObjectWatchCount');
+		$objectType->getProcessor()->resetUserStorage(array(WCF::getUser()->userID));
 	}
 	
 	/**
@@ -74,8 +72,14 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		parent::delete();
 		
 		// reset user storage
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userObjectWatchTypeIDs');
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'unreadUserObjectWatchCount');
+		$objectTypes = array();
+		foreach ($this->objects as $object) {
+			if (!isset($objectType[$object->objectTypeID])) {
+				$objectType[$object->objectTypeID] = ObjectTypeCache::getInstance()->getObjectType($object->objectTypeID);
+			}
+			
+			$objectType[$object->objectTypeID]->getProcessor()->resetUserStorage(array(WCF::getUser()->userID));
+		}
 	}
 	
 	/**
@@ -98,26 +102,6 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		if ($this->__userObjectWatch === null) {
 			throw new PermissionDeniedException();
 		}
-	}
-	
-	/**
-	 * Does nothing.
-	 */
-	public function validateGetUnreadObjects() { }
-	
-	/**
-	 * Returns the last 5 updates of watched objects.
-	 * 
-	 * @return	array
-	 */
-	public function getUnreadObjects() {
-		WCF::getTPL()->assign(array(
-			'watchedObjects' => UserObjectWatchHandler::getInstance()->getUnreadObjects()
-		));
-		
-		return array(
-			'template' => WCF::getTPL()->fetch('userObjectWatchUnread')
-		);
 	}
 	
 	/**
@@ -180,7 +164,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		}
 		
 		// validate object id
-		$objectType->getProcessor()->validateObjectID(intval($this->parameters['data']['objectID']), WCF::getUser()->userID);
+		$objectType->getProcessor()->validateObjectID(intval($this->parameters['data']['objectID']));
 		
 		// get existing subscription
 		$this->__userObjectWatch = UserObjectWatch::getUserObjectWatch($objectType->objectTypeID, WCF::getUser()->userID, intval($this->parameters['data']['objectID']));

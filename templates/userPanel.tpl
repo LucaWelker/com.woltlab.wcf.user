@@ -23,27 +23,12 @@
 	</li>
 	
 	<!-- user notifications -->
-	<li id="userNotifications" class="dropdown" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}" data-title="{lang}wcf.user.notification.notifications{/lang}">
-		<a class="jsTooltip" href="{link controller='NotificationList'}{/link}" title="{lang}wcf.user.notification.notifications{/lang}"><img src="{icon}flashInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+	<li id="userNotifications" class="dropdown" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
+		<a href="{link controller='NotificationList'}{/link}"><img src="{icon}fireInverse{/icon}" alt="" class="icon24" /> <span>{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
 		<script type="text/javascript">
 			//<![CDATA[
 			$(function() {
 				new WCF.Notification.Handler();
-			});
-			//]]>
-		</script>
-	</li>
-	
-	<!-- watched objects -->
-	<li id="unreadWatchedObjects" data-count="{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}" data-title="{lang}wcf.user.watchedObjects{/lang}">
-		<a class="jsTooltip" href="{link controller='UserObjectWatchList'}{/link}" title="{lang}wcf.user.watchedObjects{/lang}"><img src="{icon}bookmarkInverse{/icon}" alt="" class="icon24" /> <span class="invisible">{lang}wcf.user.watchedObjects{/lang}</span> {if $__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}<span class="badge badgeInverse">{#$__wcf->getUserObjectWatchHandler()->getUnreadObjectCount()}</span>{/if}</a>
-		<script type="text/javascript">
-			//<![CDATA[
-			$(function() {
-				WCF.Language.addObject({
-					'wcf.user.watchedObjects.showAll': '{lang}wcf.user.watchedObjects.showAll{/lang}'
-				});
-				new WCF.User.ObjectWatch.UserPanel('{link controller='UserObjectWatchList'}{/link}');
 			});
 			//]]>
 		</script>

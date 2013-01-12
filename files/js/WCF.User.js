@@ -1078,7 +1078,7 @@ WCF.Notification.Handler = WCF.UserPanel.extend({
 		this._container.addClass('dropdown');
 		this._link = this._container.children('a').remove();
 		
-		$('<a class="dropdownToggle jsTooltip" title="' + this._container.data('title') + '">' + this._link.html() + '</a>').appendTo(this._container).click($.proxy(this._click, this));
+		$('<a class="dropdownToggle">' + this._link.html() + '</a>').appendTo(this._container).click($.proxy(this._click, this));
 		var $dropdownMenu = $('<div class="dropdownMenu userNotificationContainer" />').appendTo(this._container);
 		this._innerContainer = $('<div id="userNotificationContainer" class="scrollableContainer" />').appendTo($dropdownMenu);
 		$('<div class="scrollableItems clearfix"><div><p>' + WCF.Language.get('wcf.global.loading') + '</p></div><div><p>' + WCF.Language.get('wcf.global.loading') + '</p></div></div>').appendTo(this._innerContainer);
@@ -2297,45 +2297,5 @@ WCF.User.ObjectWatch.Notification = Class.extend({
 				return false;
 			}
 		}, this));
-	}
-});
-
-/**
- * Loads watched objects for user panel.
- * 
- * @see	WCF.UserPanel
- */
-WCF.User.ObjectWatch.UserPanel = WCF.UserPanel.extend({
-	/**
-	 * link to show all watched objects
-	 * @var	string
-	 */
-	_showAllLink: '',
-	
-	/**
-	 * @see	WCF.UserPanel.init()
-	 */
-	init: function(showAllLink) {
-		this._showAllLink = showAllLink;
-		
-		this._super('unreadWatchedObjects');
-	},
-	
-	/**
-	 * @see	WCF.UserPanel._addDefaultItems()
-	 */
-	_addDefaultItems: function(dropdownMenu) {
-		this._addDivider(dropdownMenu);
-		$('<li><a href="' + this._showAllLink + '">' + WCF.Language.get('wcf.user.watchedObjects.showAll') + '</a></li>').appendTo(dropdownMenu);
-	},
-	
-	/**
-	 * @see	WCF.UserPanel._getParameters()
-	 */
-	_getParameters: function() {
-		return {
-			actionName: 'getUnreadObjects',
-			className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction'
-		};
 	}
 });

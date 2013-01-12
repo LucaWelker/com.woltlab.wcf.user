@@ -34,6 +34,10 @@
 	}
 }
 
+.userTitleBadge {
+	font-weight: normal;
+}
+
 .userProfilePreview {
 	position: relative;
 
@@ -79,80 +83,6 @@
 			min-width: 1.2em;
 			text-align: center;
 		}
-	}
-}
-
-/* ### user object watch list */
-.userObjectWatchList {
-	> li {
-		> .box48 {
-			> .avatar {
-				position: relative;
-				
-				> .myAvatar {
-					position: absolute;
-					width: 24px;
-					height: 24px;
-					bottom: -4px;
-					left: 32px;
-					opacity: 1;
-					
-					.boxShadow(0, 0, rgba(0, 0, 0, .3), 3px);
-				}
-			}
-			
-			> div:not(:first-child) {
-				margin-left: 67px;
-				position: relative;
-				
-				
-				> div {
-					padding-right: 216px + @wcfGapMedium;
-					
-					> .containerHeadline {
-						margin-bottom: 0;
-					}
-					
-					> .labelList {
-						float: right;
-						padding-left: 7px;
-					}
-				}
-				
-				> .buttonList {
-					opacity: 0;
-					position: absolute;
-					right: 0;
-					top: 0;
-					
-					.transition(opacity, .1s);
-				}
-			}
-		}
-		
-		&:hover > .box48 > div > .buttonList {
-			opacity: 1;
-		}
-	}
-	
-	.lastPost {
-		position: absolute;
-		right: 36px;
-		top: 0;
-		width: 180px;
-		
-		hgroup > h2 {
-			color: @wcfDimmedColor;
-			font-size: @wcfSmallFontSize;
-		}
-	}
-}
-
-#unreadWatchedObjects .dropdownMenu > li {
-	h1 {
-		max-width: 250px;
-		overflow: hidden;
-		text-overflow: ellipsis;
 	}
 }
 
