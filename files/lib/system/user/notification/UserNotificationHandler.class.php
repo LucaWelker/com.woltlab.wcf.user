@@ -426,7 +426,7 @@ class UserNotificationHandler extends SingletonFactory {
 		if (!$token) {
 			// generate token if not present
 			$token = StringUtil::substring(StringUtil::getHash(serialize(array($user->userID, StringUtil::getRandomID()))), 0, 20);
-			$editor = new UserEditor($user->getDecoratedObject());
+			$editor = new UserEditor($user);
 			$editor->update(array('notificationMailToken' => $token));
 		}
 		$message .= "\n\n".$user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.footer', array(
