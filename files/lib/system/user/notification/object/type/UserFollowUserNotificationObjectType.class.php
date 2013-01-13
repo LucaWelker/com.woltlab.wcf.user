@@ -15,40 +15,19 @@ use wcf\system\user\notification\object\UserFollowUserNotificationObject;
  * @subpackage	system.user.notification.object.type
  * @category	Community Framework
  */
-class UserFollowUserNotificationObjectType extends AbstractObjectTypeProcessor implements IUserNotificationObjectType {
+class UserFollowUserNotificationObjectType extends AbstractUserNotificationObjectType {
 	/**
-	 * @see	wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectByID()
+	 * @see wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$decoratorClassName
 	 */
-	public function getObjectByID($objectID) {
-		$follow = new UserFollow($objectID);
-		if (!$follow->followID) {
-			// create empty object for unknown follow id
-			$follow = new UserFollow(null, array('followID' => $objectID));
-		}
-		
-		return array($follow->followID => new UserFollowUserNotificationObject($follow));
-	}
+	protected static $decoratorClassName = 'wcf\system\user\notification\object\UserFollowUserNotificationObject';
 	
 	/**
-	 * @see	wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectsByIDs()
+	 * @see wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectClassName
 	 */
-	public function getObjectsByIDs(array $objectIDs) {
-		$followList = new UserFollowList();
-		$followList->getConditionBuilder()->add("user_follow.followID IN (?)", array($objectIDs));
-		$followList->readObjects();
-		
-		$follows = array();
-		foreach ($followList as $follow) {
-			$follows[$follow->followID] = new UserFollowUserNotificationObject($follow);
-		}
-		
-		foreach ($objectIDs as $objectID) {
-			// append empty objects for unknown ids
-			if (!isset($follows[$objectID])) {
-				$follows[$objectID] = new UserFollowUserNotificationObject(new UserFollow(null, array('followID' => $objectID)));
-			}
-		}
-		
-		return $follows;
-	}
+	protected static $objectClassName = 'wcf\data\user\follow\UserFollow';
+	
+	/**
+	 * @see wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectListClassName
+	 */
+	protected static $objectListClassName = 'wcf\data\user\follow\UserFollowList';
 }
