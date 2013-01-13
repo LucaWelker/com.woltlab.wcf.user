@@ -36,18 +36,14 @@ class AbstractUserNotificationObjectType extends AbstractObjectTypeProcessor imp
 	 */
 	public function getObjectsByIDs(array $objectIDs) {
 		$indexName = call_user_func(array(static::$objectClassName, 'getDatabaseTableIndexName'));
-		$tableAlias = call_user_func(array(static::$objectClassName, 'getDatabaseTableAlias'));
 		
 		$objectList = new static::$objectListClassName();
-		$objectList->getConditionBuilder()->add($tableAlias.'.'.$indexName.' IN (?)', array($objectIDs));
+		$objectList->setObjectIDs($objectIDs);
 		$objectList->sqLimit = 0;
+		$objectList->decoratorClassName = static::$decoratorClassName;
 		$objectList->readObjects();
-	
-		$objects = array();
-		foreach ($objectList as $object) {
-			$objects[$object->$indexName] = new static::$decoratorClassName($object);
-		}
-	
+		$objects = $objectList->getObjects();
+		
 		foreach ($objectIDs as $objectID) {
 			// append empty objects for unknown ids
 			if (!isset($objects[$objectID])) {
