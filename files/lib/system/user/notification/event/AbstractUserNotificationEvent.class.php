@@ -134,7 +134,7 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 			'author' => $this->author,
 			'buttons' => $this->getActions(),
 			'message' => $this->getMessage(),
-			'time' => $this->userNotificationObject->time
+			'time' => $this->notification->time
 		));
 		
 		return WCF::getTPL()->fetch('userNotificationDetails');
