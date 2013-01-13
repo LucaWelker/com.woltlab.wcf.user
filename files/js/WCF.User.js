@@ -2141,28 +2141,35 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 	_buttonSelector: '.jsSubscribeButton',
 	
 	/**
-	 * id of the object that is currently being subscribed
-	 * @var	integer
+	 * list of buttons
+	 * @var	object
 	 */
-	_objectID: 0,
+	_buttons: { },
 	
 	/**
-	 * object type of the object that is currently being subscribed
-	 * @var	string
+	 * dialog overlay
+	 * @var	object
 	 */
-	_objectType: '',
+	_dialog: null,
 	
 	/**
 	 * WCF.User.ObjectWatch.Subscribe object.
 	 */
 	init: function() {
+		this._buttons = { };
+		
 		// initialize proxy
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
 		
 		// bind event listeners
-		$(this._buttonSelector).click($.proxy(this._click, this));
+		var self = this;
+		$(this._buttonSelector).each(function(index, button) {
+			var $button = $(button);
+			var $objectID = $button.data('objectID');
+			self._buttons[$objectID] = $button.click(self._click);
+		});
 	},
 	
 	/**
@@ -2171,53 +2178,41 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 	 * @param	object		event
 	 */
 	_click: function(event) {
-		var link = $(event.target);
-		if (!link.is('a')) {
-			link = link.closest('a');
-		}
-		this._objectID = link.data('objectID');
-		this._objectType = link.data('objectType');
+		var $link = $(event.currentTarget);
 		
 		this._proxy.setOption('data', {
-			'actionName': link.data('subscribed') ? 'unsubscribe' : 'subscribe',
-			'className': 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction',
-			'parameters': {
-				data: {
-					objectID: this._objectID,
-					objectType: this._objectType
-				}
+			actionName: 'manageSubscription',
+			className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction',
+			parameters: {
+				objectID: $link.data('objectID'),
+				objectType: this.$link.data('objectType')
 			}
 		});
 		this._proxy.sendRequest();
 	},
 	
 	/**
-	 * Handles the successful subscription.
+	 * Handles successful AJAX requests.
 	 * 
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
-		$(this._buttonSelector).each($.proxy(function(index, container) {
-			var button = $(container);
-			
-			if (button.data('objectID') == this._objectID && button.data('objectType') == this._objectType) {
-				// toogle icon title
-				if (button.data('subscribed')) {
-					button.children('img').attr('src', WCF.Icon.get('wcf.icon.bookmark'));
-					button.data('tooltip', WCF.Language.get('wcf.user.watchedObjects.subscribe'));
-				}
-				else {
-					button.children('img').attr('src', WCF.Icon.get('wcf.icon.bookmark.delete'));
-					button.data('tooltip', WCF.Language.get('wcf.user.watchedObjects.unsubscribe'));
-				}
-				
-				button.data('subscribed', !button.data('subscribed'));
-				
-				return false;
+		if (data.actionName === 'manageSubscription') {
+			if (this._dialog === null) {
+				this._dialog = $('<div>' + data.returnValues.template + '</div>').hide().appendTo(document.body);
+				this._dialog.wcfDialog({
+					title: WCF.Language.get('wcf.user.objectWatch.manageSubscription')
+				});
 			}
-		}, this));
+			else {
+				this._dialog.html(data.returnValues.template);
+				this._dialog.wcfDialog('show');
+			}
+			
+			// TODO: bind event listener here
+		}
 	}
 });
 
