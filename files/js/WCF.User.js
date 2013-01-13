@@ -2164,12 +2164,11 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 		});
 		
 		// bind event listeners
-		var self = this;
-		$(this._buttonSelector).each(function(index, button) {
+		$(this._buttonSelector).each($.proxy(function(index, button) {
 			var $button = $(button);
 			var $objectID = $button.data('objectID');
-			self._buttons[$objectID] = $button.click(self._click);
-		});
+			this._buttons[$objectID] = $button.click($.proxy(this._click, this));
+		}, this));
 	},
 	
 	/**
@@ -2178,14 +2177,14 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 	 * @param	object		event
 	 */
 	_click: function(event) {
-		var $link = $(event.currentTarget);
+		var $button = $(event.currentTarget);
 		
 		this._proxy.setOption('data', {
 			actionName: 'manageSubscription',
 			className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction',
 			parameters: {
-				objectID: $link.data('objectID'),
-				objectType: this.$link.data('objectType')
+				objectID: $button.data('objectID'),
+				objectType: $button.data('objectType')
 			}
 		});
 		this._proxy.sendRequest();
@@ -2208,11 +2207,56 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 			}
 			else {
 				this._dialog.html(data.returnValues.template);
-				this._dialog.wcfDialog('show');
+				this._dialog.wcfDialog('open');
 			}
 			
-			// TODO: bind event listener here
+			// bind event listener
+			this._dialog.find('.formSubmit > .jsButtonSave').data('objectID', data.returnValues.objectID).click($.proxy(this._save, this));
+			var $enableNotification = this._dialog.find('input[name=enableNotification]').disable();
+			
+			// toggle subscription
+			this._dialog.find('input[name=subscribe]').change(function(event) {
+				var $input = $(event.currentTarget);
+				if ($input.val() == 1) {
+					$enableNotification.enable();
+				}
+				else {
+					$enableNotification.disable();
+				}
+			});
+			
+			// setup
+			var $selectedOption = this._dialog.find('input[name=subscribe]:checked');
+			if ($selectedOption.length && $selectedOption.val() == 1) {
+				$enableNotification.enable();
+			}
 		}
+		else if (data.actionName === 'saveSubscription' && this._dialog.is(':visible')) {
+			this._dialog.wcfDialog('close');
+		}
+	},
+	
+	/**
+	 * Saves the subscription.
+	 * 
+	 * @param	object		event
+	 */
+	_save: function(event) {
+		var $button = this._buttons[$(event.currentTarget).data('objectID')];
+		var $subscribe = this._dialog.find('input[name=subscribe]:checked').val();
+		var $enableNotification = (this._dialog.find('input[name=enableNotification]').is(':checked')) ? 1 : 0;
+		
+		this._proxy.setOption('data', {
+			actionName: 'saveSubscription',
+			className: 'wcf\\data\\user\\object\\watch\\UserObjectWatchAction',
+			parameters: {
+				enableNotification: $enableNotification,
+				objectID: $button.data('objectID'),
+				objectType: $button.data('objectType'),
+				subscribe: $subscribe
+			}
+		});
+		this._proxy.sendRequest();
 	}
 });
 
