@@ -32,19 +32,11 @@ class AbstractUserNotificationObjectType extends AbstractObjectTypeProcessor imp
 	protected static $objectListClassName = '';
 	
 	/**
-	 * @see	wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectByID()
-	 */
-	public function getObjectByID($objectID) {
-		$objects = $this->getObjectsByIDs(array($objectID));
-		return $objects[$objectID];
-	}
-	
-	/**
 	 * @see	wcf\system\user\notification\object\type\IUserNotificationObjectType::getObjectsByIDs()
 	 */
 	public function getObjectsByIDs(array $objectIDs) {
-		$indexName = call_user_func(array(static::$baseClass, 'getDatabaseTableIndexName'));
-		$tableAlias = call_user_func(array(static::$baseClass, 'getDatabaseTableAlias'));
+		$indexName = call_user_func(array(static::$objectClassName, 'getDatabaseTableIndexName'));
+		$tableAlias = call_user_func(array(static::$objectClassName, 'getDatabaseTableAlias'));
 		
 		$objectList = new static::$objectListClassName();
 		$objectList->getConditionBuilder()->add($tableAlias.'.'.$indexName.' IN (?)', array($objectIDs));

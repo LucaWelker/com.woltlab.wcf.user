@@ -253,12 +253,7 @@ class UserNotificationHandler extends SingletonFactory {
 		
 		// load objects associated with each object type
 		foreach ($objectTypes as $objectType => $objectData) {
-			if (count($objectData['objectIDs']) > 1) {
-				$objectTypes[$objectType]['objects'] = $objectData['objectType']->getObjectsByIDs($objectData['objectIDs']);
-			}
-			else {
-				$objectTypes[$objectType]['objects'] = $objectData['objectType']->getObjectByID($objectData['objectIDs'][0]);
-			}
+			$objectTypes[$objectType]['objects'] = $objectData['objectType']->getObjectsByIDs($objectData['objectIDs']);
 		}
 		
 		// load required events
