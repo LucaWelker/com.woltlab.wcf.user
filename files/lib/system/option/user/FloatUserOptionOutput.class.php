@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
  * User option output implementation for the output of a float.
  * 
  * @author	Tobias Friebel
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option.user
@@ -22,7 +22,7 @@ class FloatUserOptionOutput implements IUserOptionOutput {
 		if (empty($value) || $value == '0') {
 			$value = 0.00;
 		}
-
+		
 		return StringUtil::formatDouble($value, 2);
 	}
 }

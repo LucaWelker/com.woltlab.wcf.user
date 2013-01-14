@@ -4,7 +4,21 @@ use wcf\data\user\group\Team;
 use wcf\data\user\group\UserGroup;
 use wcf\system\WCF;
 
+/**
+ * Represents a list of team user groups.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2013 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	data.user
+ * @category	Community Framework
+ */
 class TeamList extends UserProfileList {
+	/**
+	 * teams included in the list
+	 * @var	array<wcf\data\user\group\Team>
+	 */
 	protected $teams = array();
 	
 	/**
@@ -47,7 +61,7 @@ class TeamList extends UserProfileList {
 	 */
 	public function readObjects() {
 		parent::readObjects();
-	
+		
 		$sql = "SELECT		user_to_group.*
 			FROM		wcf".WCF_N."_user_group user_group,
 					wcf".WCF_N."_user_to_group user_to_group
@@ -68,6 +82,11 @@ class TeamList extends UserProfileList {
 		}
 	}
 	
+	/**
+	 * Returns the teams in the list.
+	 * 
+	 * @return	array<wcf\data\user\group\Team>
+	 */
 	public function getTeams() {
 		return $this->teams;
 	}

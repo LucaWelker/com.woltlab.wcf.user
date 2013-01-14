@@ -7,13 +7,18 @@ use wcf\data\DatabaseObjectList;
  * Represents a list of profile visitors.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.profile.visitor
  * @category	Community Framework
  */
 class UserProfileVisitorList extends DatabaseObjectList {
+	/**
+	 * @see	wcf\data\DatabaseObjectList::$decoratorClassName
+	 */
+	public $decoratorClassName = 'wcf\data\user\UserProfile';
+	
 	/**
 	 * @see	wcf\data\DatabaseObjectList::$objectClassName
 	 */
@@ -35,16 +40,5 @@ class UserProfileVisitorList extends DatabaseObjectList {
 		
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = user_profile_visitor.userID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
-	}
-	
-	/**
-	 * @see	wcf\data\DatabaseObjectList::readObjects()
-	 */
-	public function readObjects() {
-		parent::readObjects();
-		
-		foreach ($this->objects as &$object) {
-			$object = new UserProfile($object);
-		}
 	}
 }

@@ -5,7 +5,7 @@ namespace wcf\data;
  * Default interface for user generated content.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data
@@ -22,7 +22,7 @@ interface IUserContent extends ILinkableDatabaseObject, ITitledDatabaseObject {
 	/**
 	 * Returns author's user id.
 	 * 
-	 * @return	id
+	 * @return	integer
 	 */
 	public function getUserID();
 	

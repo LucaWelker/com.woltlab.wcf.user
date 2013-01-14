@@ -3,8 +3,6 @@ namespace wcf\data\user\object\watch;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
-use wcf\system\user\object\watch\UserObjectWatchHandler;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
 /**

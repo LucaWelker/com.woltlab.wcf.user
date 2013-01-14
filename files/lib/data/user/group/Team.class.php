@@ -3,6 +3,16 @@ namespace wcf\data\user\group;
 use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectDecorator;
 
+/**
+ * Represents a team user group.
+ * 
+ * @author	Marcel Werk
+ * @copyright	2001-2013 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.woltlab.wcf.user
+ * @subpackage	data.user.group
+ * @category	Community Framework
+ */
 class Team extends DatabaseObjectDecorator {
 	/**
 	 * @see wcf\data\DatabaseObjectDecorator::$baseClass

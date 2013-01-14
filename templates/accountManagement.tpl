@@ -187,7 +187,7 @@
 		
 		{event name='fieldsets'}
 	</div>
-		
+	
 	<div class="formSubmit">
 		{@SECURITY_TOKEN_INPUT_TAG}
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

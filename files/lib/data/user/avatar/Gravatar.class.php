@@ -9,7 +9,7 @@ use wcf\system\WCF;
  * Represents a gravatar.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.avatar
@@ -34,13 +34,13 @@ class Gravatar extends DefaultAvatar {
 	 * @var	integer
 	 */
 	const GRAVATAR_CACHE_EXPIRE = 7;
-
+	
 	/**
 	 * gravatar e-mail address
 	 * @var	string
 	 */
 	public $gravatar = '';
-
+	
 	/**
 	 * urls of this gravatar
 	 * @var	array<string>

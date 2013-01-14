@@ -22,7 +22,7 @@ use wcf\util\UserRegistrationUtil;
  * Shows the user registration form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -192,7 +192,7 @@ class RegisterForm extends UserAddForm {
 			}
 			catch (UserInputException $e) {
 				$this->errorType[$e->getField()] = $e->getType();
-			}	
+			}
 		}
 	}
 	

@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * Shows the avatar edit form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -64,8 +64,7 @@ class AvatarEditForm extends AbstractForm {
 				if (!WCF::getUser()->avatarID) {
 					throw new UserInputException('custom');
 				}
-				
-				break;
+			break;
 				
 			case 'gravatar':
 				if (!MODULE_GRAVATAR) $this->avatarType = 'none';
@@ -74,8 +73,7 @@ class AvatarEditForm extends AbstractForm {
 				if (!Gravatar::test(WCF::getUser()->email)) {
 					throw new UserInputException('gravatar', 'notFound');
 				}
-				
-				break;
+			break;
 		}
 	}
 	
@@ -101,15 +99,14 @@ class AvatarEditForm extends AbstractForm {
 					'avatarID' => null,
 					'enableGravatar' => 0
 				));
-				
-				break;
+			break;
 				
 			case 'custom':
 				$editor = new UserEditor(WCF::getUser());
 				$editor->update(array(
 					'enableGravatar' => 0
 				));
-				break;
+			break;
 				
 			case 'gravatar':
 				$editor = new UserEditor(WCF::getUser());
@@ -117,7 +114,7 @@ class AvatarEditForm extends AbstractForm {
 					'avatarID' => null,
 					'enableGravatar' => 1
 				));
-				break;
+			break;
 		}
 		
 		$this->saved();
