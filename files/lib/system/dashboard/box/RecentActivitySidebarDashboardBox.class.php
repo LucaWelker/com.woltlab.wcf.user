@@ -3,6 +3,7 @@ namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\page\IPage;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
 
 /**
@@ -33,6 +34,9 @@ class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
 		$this->eventList = new ViewableUserActivityEventList();
 		$this->eventList->sqlLimit = 5;
 		$this->eventList->readObjects();
+		
+		// removes orphaned and non-accessable events
+		UserActivityEventHandler::validateEvents($this->eventList);
 	}
 	
 	/**

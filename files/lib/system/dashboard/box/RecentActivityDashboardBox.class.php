@@ -3,6 +3,7 @@ namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\page\IPage;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
 
 /**
@@ -29,6 +30,12 @@ class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 	public $filteredByFollowedUsers = false;
 	
 	/**
+	 * latest event time
+	 * @var integer
+	 */
+	public $lastEventTime = 0;
+	
+	/**
 	 * @see	wcf\system\dashboard\box\IDashboardBox::init()
 	 */
 	public function init(DashboardBox $box, IPage $page) {
@@ -39,8 +46,12 @@ class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 			$this->filteredByFollowedUsers = true;
 			$this->eventList->getConditionBuilder()->add('user_activity_event.userID IN (?)', array(WCF::getUserProfileHandler()->getFollowingUsers()));
 		}
-		//$this->recentActivityList->sqlLimit = 5; // TODO: add setting
+		$this->eventList->sqlLimit = 10; // TODO: add setting
 		$this->eventList->readObjects();
+		$this->lastEventTime = $this->eventList->getLastEventTime();
+		
+		// removes orphaned and non-accessable events
+		UserActivityEventHandler::validateEvents($this->eventList);
 	}
 	
 	/**
@@ -50,6 +61,7 @@ class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 		if (count($this->eventList)) {
 			WCF::getTPL()->assign(array(
 				'eventList' => $this->eventList,
+				'lastEventTime' => $this->lastEventTime,
 				'filteredByFollowedUsers' => $this->filteredByFollowedUsers
 			));
 			

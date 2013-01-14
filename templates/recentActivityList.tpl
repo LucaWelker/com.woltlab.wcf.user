@@ -36,7 +36,7 @@
 <div class="contentNavigation"></div>
 
 <div class="container marginTop">
-	<ul id="recentActivities" class="containerList" data-last-event-time="{@$eventList->getLastEventTime()}">
+	<ul id="recentActivities" class="containerList" data-last-event-time="{@$lastEventTime}">
 		{include file='recentActivityListItem'}
 	</ul>
 </div>
