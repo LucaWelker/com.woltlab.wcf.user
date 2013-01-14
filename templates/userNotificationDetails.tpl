@@ -15,7 +15,7 @@
 		<nav>
 			<ul>
 				{foreach from=$buttons item=button}
-					<li data-action="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}" class="button">{$button[label]}</li>
+					<li data-action="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}" class="button small">{$button[label]}</li>
 				{/foreach}
 			</ul>
 		</nav>
