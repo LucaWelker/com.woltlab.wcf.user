@@ -73,6 +73,27 @@ class UserObjectWatchHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * Deletes the given objects.
+	 *
+	 * @param	string		$objectType
+	 * @param	array<integer>	$objectIDs
+	 */
+	public function deleteObjects($objectType, array $objectIDs) {
+		// get object type id
+		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $objectType);
+		
+		// delete objects
+		$conditionsBuilder = new PreparedStatementConditionBuilder();
+		$conditionsBuilder->add('objectTypeID = ?', array($objectTypeObj->objectTypeID));
+		$conditionsBuilder->add('objectID IN (?)', array($objectIDs));
+		
+		$sql = "DELETE FROM	wcf".WCF_N."_user_object_watch
+			".$conditionsBuilder;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionsBuilder->getParameters());
+	}
+	
+	/**
 	 * Updates a watched object for all subscriber.
 	 *
 	 * @param	string								$objectType
