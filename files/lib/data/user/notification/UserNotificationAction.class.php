@@ -94,20 +94,21 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 * @return	array
 	 */
 	public function markAsConfirmed() {
-		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('notificationID = ?', array($this->parameters['notificationID']));
-		$conditionBuilder->add('userID = ?', array(WCF::getUser()->userID));
-		
-		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user ".$conditionBuilder;
+		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user
+			WHERE		notificationID = ?
+					AND userID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
+		$statement->execute(array(
+			$this->parameters['notificationID'],
+			WCF::getUser()->userID
+		));
 		
 		// remove entirely read notifications
 		$sql = "SELECT	COUNT(*) as count
 			FROM	wcf".WCF_N."_user_notification_to_user
-			".$conditionBuilder;
+			WHERE		notificationID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
+		$statement->execute(array($this->parameters['notificationID']));
 		$row = $statement->fetchArray();
 		if (!$row['count']) {
 			UserNotificationEditor::deleteAll(array($this->parameters['notificationID']));
