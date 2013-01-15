@@ -7,9 +7,9 @@ use wcf\system\user\notification\object\IUserNotificationObject;
 
 /**
  * This interface should be implemented by every event which is fired by the notification system.
- *
+ * 
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2013 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.event

@@ -108,7 +108,7 @@
 		
 		<fieldset>
 			<legend>{lang}wcf.acp.user.rank.requirement{/lang}</legend>
-		
+			
 			<dl{if $errorField == 'groupID'} class="formError"{/if}>
 				<dt><label for="groupID">{lang}wcf.user.group{/lang}</label></dt>
 				<dd>

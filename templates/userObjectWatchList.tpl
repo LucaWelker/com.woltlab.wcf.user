@@ -11,7 +11,7 @@
 				'wcf.user.watchedObjects.disableNotification': '{lang}wcf.user.watchedObjects.disableNotification{/lang}',
 				'wcf.user.watchedObjects.enableNotification': '{lang}wcf.user.watchedObjects.enableNotification{/lang}'
 			});
-
+			
 			new WCF.Action.Delete('wcf\\data\\user\\object\\watch\\UserObjectWatchAction', '.jsWatchedObject');
 			new WCF.User.ObjectWatch.Notification();
 		});
@@ -45,7 +45,7 @@
 					</dd>
 				</dl>
 			</fieldset>
-		
+			
 			<div class="formSubmit">
 				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 				<input type="hidden" name="pageNo" value="{@$pageNo}" />

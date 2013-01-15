@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * Handles the user activity point events
  * 
  * @author	Tim Duesterhus, Alexander Ebert, Matthias Schmidt
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.activity.point
@@ -36,7 +36,7 @@ class UserActivityPointHandler extends SingletonFactory {
 	 */
 	protected function init() {
 		$this->objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.user.activityPointEvent');
-	
+		
 		foreach ($this->objectTypes as $objectType) {
 			$this->objectTypeNames[$objectType->objectTypeID] = $objectType->objectType;
 		}
@@ -83,7 +83,7 @@ class UserActivityPointHandler extends SingletonFactory {
 	 * 	objectID => array(
 	 * 		userID => userID,
 	 * 		additionalData => mixed (optional)
-	 *	)
+	 * 	)
 	 * )
 	 * 
 	 * @param	string		$objectType
@@ -324,7 +324,7 @@ class UserActivityPointHandler extends SingletonFactory {
 	
 	/**
 	 * Updates the user ranks for the given users.
-	 *
+	 * 
 	 * @param	array<integer>		$userIDs
 	 */
 	protected function updateUserRanks(array $userIDs) {

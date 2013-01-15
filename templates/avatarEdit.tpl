@@ -100,7 +100,7 @@
 			'wcf.user.avatar.upload.success': '{lang}wcf.user.avatar.upload.success{/lang}',
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
-
+		
 		{if !$__wcf->user->disableAvatar}
 			new WCF.User.Avatar.Upload();
 		{/if}

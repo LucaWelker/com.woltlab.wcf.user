@@ -8,6 +8,7 @@
 				<th>{lang}wcf.user.activityPoint.sum{/lang}</th>
 			</tr>
 		</thead>
+		
 		<tbody>
 			{assign var='activityPointSum' value=0}
 			{foreach from=$activityPointObjectTypes item='objectType'}

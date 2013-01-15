@@ -5,7 +5,6 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\user\notification\object\IUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -95,7 +94,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 	
 	/**
 	 * Updates a watched object for all subscriber.
-	 *
+	 * 
 	 * @param	string								$objectType
 	 * @param	integer								$objectIDs
 	 * @param	string								$notificationEventName

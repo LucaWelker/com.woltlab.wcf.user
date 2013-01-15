@@ -11,7 +11,7 @@
 				<category name="user.title">
 					<parent>user.profile</parent>
 				</category>
-				
+			
 			<category name="user.list">
 				<parent>user</parent>
 			</category>
@@ -24,7 +24,7 @@
 				<!-- <category name="user.list.team"> @todo
 					<parent>user.list</parent>
 				</category>-->
-				
+			
 			<category name="user.register">
 				<parent>user</parent>
 			</category>

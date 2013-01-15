@@ -157,7 +157,7 @@ class UserNotificationHandler extends SingletonFactory {
 	public function getNotificationCount() {
 		if ($this->notificationCount === null) {
 			$this->notificationCount = 0;
-		
+			
 			if (WCF::getUser()->userID) {
 				// load storage data
 				UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));

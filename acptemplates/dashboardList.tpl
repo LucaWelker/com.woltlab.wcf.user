@@ -20,6 +20,7 @@
 				<th class="columnText">{lang}wcf.dashboard.objectType{/lang}</th>
 			</tr>
 		</thead>
+		
 		<tbody>
 			{foreach from=$objectTypes item=$objectType}
 				<tr>

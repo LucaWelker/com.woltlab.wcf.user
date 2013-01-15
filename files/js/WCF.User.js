@@ -191,7 +191,7 @@ WCF.User.Profile.Follow = Class.extend({
 		if (this._following) {
 			$label = WCF.Language.get('wcf.user.button.unfollow');
 		}
-
+		
 		// update label
 		this._button.find('.button').text($label);
 		
@@ -301,7 +301,7 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 		if (this._button === null) {
 			this._button = $('<li id="ignoreUser"><a class="button"></a></li>').prependTo($('#profileButtonContainer'));
 		}
-
+		
 		this._button.find('.button').text(WCF.Language.get('wcf.user.button.' + (this._isIgnoredUser ? 'un' : '') + 'ignore'));
 		if (this._isIgnoredUser) this._button.find('.button').addClass('active');
 		else this._button.find('.button').removeClass('active');

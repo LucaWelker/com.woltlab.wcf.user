@@ -8,9 +8,9 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the user login form.
- *
+ * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -23,6 +23,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
+	
 	/**
 	 * true enables the usage of cookies 
 	 * @var	boolean
