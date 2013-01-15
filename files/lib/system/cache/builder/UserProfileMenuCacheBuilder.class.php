@@ -18,7 +18,6 @@ class UserProfileMenuCacheBuilder implements ICacheBuilder {
 	 */
 	public function getData(array $cacheResource) { 
 		$itemList = new UserProfileMenuItemList();
-		$itemList->sqlLimit = 0;
 		$itemList->sqlOrderBy = "user_profile_menu_item.showOrder ASC";
 		$itemList->readObjects();
 		

@@ -78,7 +78,6 @@ class DashboardOptionForm extends AbstractForm {
 		
 		$boxList = new DashboardBoxList();
 		$boxList->getConditionBuilder()->add("dashboard_box.boxType IN (?)", array($allowedBoxTypes));
-		$boxList->sqlLimit = 0;
 		$boxList->readObjects();
 		$this->boxes = $boxList->getObjects();
 	}

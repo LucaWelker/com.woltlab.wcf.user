@@ -60,7 +60,6 @@ class UserLocation implements IUserOnlineLocation {
 		
 		$userList = new UserList();
 		$userList->getConditionBuilder()->add('user_table.userID IN (?)', array($this->userIDs));
-		$userList->sqlLimit = 0;
 		$userList->readObjects();
 		$this->users = $userList->getObjects();
 	}

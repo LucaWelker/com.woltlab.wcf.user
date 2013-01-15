@@ -259,14 +259,12 @@ class UserNotificationHandler extends SingletonFactory {
 		// load required events
 		$eventList = new UserNotificationEventList();
 		$eventList->getConditionBuilder()->add("user_notification_event.eventID IN (?)", array($eventIDs));
-		$eventList->sqlLimit = 0;
 		$eventList->readObjects();
 		$eventObjects = $eventList->getObjects();
 		
 		// load notification objects
 		$notificationList = new UserNotificationList();
 		$notificationList->getConditionBuilder()->add("user_notification.notificationID IN (?)", array($notificationIDs));
-		$notificationList->sqlLimit = 0;
 		$notificationList->readObjects();
 		$notificationObjects = $notificationList->getObjects();
 		

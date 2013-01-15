@@ -28,7 +28,6 @@ class DashboardBoxCacheBuilder implements ICacheBuilder {
 		
 		// load boxes
 		$boxList = new DashboardBoxList();
-		$boxList->sqlLimit = 0;
 		$boxList->readObjects();
 		
 		foreach ($boxList as $box) {
