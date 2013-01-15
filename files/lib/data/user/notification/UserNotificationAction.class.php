@@ -1,6 +1,8 @@
 <?php
 namespace wcf\data\user\notification;
+use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\UserNotificationHandler;
@@ -92,14 +94,24 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 * @return	array
 	 */
 	public function markAsConfirmed() {
-		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user
-			WHERE		notificationID = ?
-					AND userID = ?";
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('notificationID = ?', array($this->parameters['notificationID']));
+		$conditionBuilder->add('userID = ?', array(WCF::getUser()->userID));
+		
+		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user ".$conditionBuilder;
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$this->parameters['notificationID'],
-			WCF::getUser()->userID
-		));
+		$statement->execute($conditionBuilder->getParameters());
+		
+		// remove entirely read notifications
+		$sql = "SELECT	COUNT(*) as count
+			FROM	wcf".WCF_N."_user_notification_to_user
+			".$conditionBuilder;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
+		$row = $statement->fetchArray();
+		if (!$row['count']) {
+			UserNotificationEditor::deleteAll(array($this->parameters['notificationID']));
+		}
 		
 		// reset notification count
 		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount');
