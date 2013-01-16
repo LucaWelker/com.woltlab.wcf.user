@@ -259,14 +259,12 @@ class UserNotificationHandler extends SingletonFactory {
 		// load required events
 		$eventList = new UserNotificationEventList();
 		$eventList->getConditionBuilder()->add("user_notification_event.eventID IN (?)", array($eventIDs));
-		$eventList->sqlLimit = 0;
 		$eventList->readObjects();
 		$eventObjects = $eventList->getObjects();
 		
 		// load notification objects
 		$notificationList = new UserNotificationList();
 		$notificationList->getConditionBuilder()->add("user_notification.notificationID IN (?)", array($notificationIDs));
-		$notificationList->sqlLimit = 0;
 		$notificationList->readObjects();
 		$notificationObjects = $notificationList->getObjects();
 		
@@ -462,14 +460,19 @@ class UserNotificationHandler extends SingletonFactory {
 							AND eventID = ?
 							".(!empty($objectIDs) ? "AND objectID IN (?".(count($objectIDs) > 1 ? str_repeat(',?', count($objectIDs) - 1) : '').")" : '')."	
 					)
-					AND userID IN (?".(count($recipientIDs) > 1 ? str_repeat(',?', count($recipientIDs) - 1) : '').")";
+					".(!empty($recipientIDs) ? ("AND userID IN (?".(count($recipientIDs) > 1 ? str_repeat(',?', count($recipientIDs) - 1) : '').")") : '');
 		$parameters = array($objectTypeObject->packageID, $event->eventID);
 		if (!empty($objectIDs)) $parameters = array_merge($parameters, $objectIDs);
-		$parameters = array_merge($parameters, $recipientIDs);
+		if (!empty($recipientIDs)) $parameters = array_merge($parameters, $recipientIDs);
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($parameters);
 		
 		// reset storage
-		UserStorageHandler::getInstance()->reset($recipientIDs, 'userNotificationCount');
+		if (!empty($recipientIDs)) {
+			UserStorageHandler::getInstance()->reset($recipientIDs, 'userNotificationCount');
+		}
+		else {
+			UserStorageHandler::getInstance()->resetAll('userNotificationCount');
+		}
 	}
 }

@@ -71,7 +71,6 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements ISortab
 		
 		// read all dashboard boxes of the relevant box type
 		$boxList = new DashboardBoxList();
-		$boxList->sqlLimit = 0;
 		$boxList->getConditionBuilder()->add("dashboard_box.boxType = ?", array($this->parameters['boxType']));
 		$boxList->readObjects();
 		$this->boxes = $boxList->getObjects();
