@@ -86,5 +86,12 @@
 			<inherit>1</inherit>
 			<environment>admin</environment>
 		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\system\bbcode\PreParser</eventclassname>
+			<eventname>beforeParsing</eventname>
+			<listenerclassname>wcf\system\event\listener\PreParserAtUserListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
 	</import>
 </data>
