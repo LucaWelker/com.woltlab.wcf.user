@@ -24,8 +24,8 @@
 	
 	<nav>
 		<ul>
-			<li><a id="updateUserRanks" title="{lang}wcf.acp.user.rank.updateRanks{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/update.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.rank.updateRanks{/lang}</span></a></li>
-			<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
+			<li><a id="updateUserRanks" title="{lang}wcf.acp.user.rank.updateRanks{/lang}" class="button"><span class="icon icon16 icon-repeat"></span> <span>{lang}wcf.acp.user.rank.updateRanks{/lang}</span></a></li>
+			<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
 			
 			{event name='largeButtonsTop'}
 		</ul>
@@ -41,12 +41,12 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th class="columnID columnRankID{if $sortField == 'rankID'} active{/if}" colspan="2"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankID&sortOrder={if $sortField == 'rankID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'rankID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnTitle columnRankTitle{if $sortField == 'rankTitle'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankTitle&sortOrder={if $sortField == 'rankTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.title{/lang}{if $sortField == 'rankTitle'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnText columnRankImage{if $sortField == 'rankImage'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankImage&sortOrder={if $sortField == 'rankImage' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.image{/lang}{if $sortField == 'rankImage'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnText columnGroupID{if $sortField == 'groupID'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'groupID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.group{/lang}{if $sortField == 'groupID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnText columnRequiredGender{if $sortField == 'requiredGender'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredGender&sortOrder={if $sortField == 'requiredGender' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.option.gender{/lang}{if $sortField == 'requiredGender'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnDigits columnRequiredPoints{if $sortField == 'requiredPoints'} active{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredPoints&sortOrder={if $sortField == 'requiredPoints' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.requiredPoints{/lang}{if $sortField == 'requiredPoints'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnID columnRankID{if $sortField == 'rankID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankID&sortOrder={if $sortField == 'rankID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+					<th class="columnTitle columnRankTitle{if $sortField == 'rankTitle'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankTitle&sortOrder={if $sortField == 'rankTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.title{/lang}</a></th>
+					<th class="columnText columnRankImage{if $sortField == 'rankImage'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=rankImage&sortOrder={if $sortField == 'rankImage' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.image{/lang}</a></th>
+					<th class="columnText columnGroupID{if $sortField == 'groupID'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'groupID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.group{/lang}</a></th>
+					<th class="columnText columnRequiredGender{if $sortField == 'requiredGender'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredGender&sortOrder={if $sortField == 'requiredGender' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.option.gender{/lang}</a></th>
+					<th class="columnDigits columnRequiredPoints{if $sortField == 'requiredPoints'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredPoints&sortOrder={if $sortField == 'requiredPoints' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.requiredPoints{/lang}</a></th>
 					
 					{event name='headColumns'}
 				</tr>
@@ -57,8 +57,8 @@
 					{foreach from=$objects item=userRank}
 						<tr class="jsUserRankRow">
 							<td class="columnIcon">
-								<a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 jsTooltip" /></a>
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 jsDeleteButton jsTooltip pointer" data-object-id="{@$userRank->rankID}" data-confirm-message="{lang}wcf.acp.user.rank.delete.sure{/lang}" />
+								<a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$userRank->rankID}" data-confirm-message="{lang}wcf.acp.user.rank.delete.sure{/lang}"></span>
 								
 								{event name='buttons'}
 							</td>
@@ -83,7 +83,7 @@
 		
 		<nav>
 			<ul>
-				<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
+				<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
 				
 				{event name='largeButtonsBottom'}
 			</ul>

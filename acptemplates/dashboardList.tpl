@@ -25,7 +25,7 @@
 			{foreach from=$objectTypes item=$objectType}
 				<tr>
 					<td class="columnIcon">
-						<a href="{link controller='DashboardOption' id=$objectType->objectTypeID}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 jsTooltip" /></a>
+						<a href="{link controller='DashboardOption' id=$objectType->objectTypeID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 					</td>
 					<td class="columnID"><p>{#$objectType->objectTypeID}</p></td>
 					<td class="columnText">

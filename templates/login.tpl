@@ -88,8 +88,8 @@
 			<dl>
 				<dd>
 					<ul class="buttonList">
-						<li><a class="button small" href="{link controller='LostPassword'}{/link}"><img src="{icon}key{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.lostPassword{/lang}</span></a></li>
-						{if !REGISTER_DISABLED && REGISTER_ACTIVATION_METHOD == 1}<li><a class="button small" href="{link controller='RegisterActivation'}{/link}"><img src="{icon}check{/icon}" alt="" class="icon16" /> <span>{lang}wcf.user.registerActivation{/lang}</span></a></li>{/if}
+						<li><a class="button small" href="{link controller='LostPassword'}{/link}"><span>{lang}wcf.user.lostPassword{/lang}</span></a></li>
+						{if !REGISTER_DISABLED && REGISTER_ACTIVATION_METHOD == 1}<li><a class="button small" href="{link controller='RegisterActivation'}{/link}"><span>{lang}wcf.user.registerActivation{/lang}</span></a></li>{/if}
 						{event name='buttons'}
 					</ul>
 				</dd>

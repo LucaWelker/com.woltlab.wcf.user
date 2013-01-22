@@ -4,19 +4,12 @@
 	<script type="text/javascript">
 		//<![CDATA[
 			$(function() {
-				WCF.Icon.addObject({
-					'wcf.icon.add': '{icon}add{/icon}',
-					'wcf.icon.enabled': '{icon}enabled{/icon}',
-					'wcf.icon.disabled': '{icon}disabled{/icon}',
-					'wcf.icon.remove': '{icon}remove{/icon}'
-				})
-				
 				WCF.Language.addObject({
 					'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
 					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
 					'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
 					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
-				})
+				});
 				
 				new WCF.User.Action.Follow($('.userInformation'));
 				new WCF.User.Action.Ignore($('.userInformation'));

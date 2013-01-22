@@ -17,7 +17,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='UserRankList'}{/link}" title="{lang}wcf.acp.menu.link.user.rank.list{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/list.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.menu.link.user.rank.list{/lang}</span></a></li>
+			<li><a href="{link controller='UserRankList'}{/link}" title="{lang}wcf.acp.menu.link.user.rank.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.rank.list{/lang}</span></a></li>
 		</ul>
 	</nav>
 </div>

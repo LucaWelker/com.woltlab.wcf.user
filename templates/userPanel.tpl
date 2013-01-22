@@ -24,7 +24,7 @@
 	
 	<!-- user notifications -->
 	<li id="userNotifications" class="dropdown" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
-		<a href="{link controller='NotificationList'}{/link}"><img src="{icon}fireInverse{/icon}" alt="" class="icon24" /> <span>{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+		<a href="{link controller='NotificationList'}{/link}"><span class="icon icon16 icon-bell-alt"></span> <span>{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
 		<script type="text/javascript">
 			//<![CDATA[
 			$(function() {

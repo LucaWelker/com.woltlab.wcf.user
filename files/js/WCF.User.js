@@ -491,7 +491,7 @@ WCF.User.Profile.Editor = Class.extend({
 		
 		// create buttons
 		this._buttons = {
-			beginEdit: $('<li><a class="button"><img src="' + WCF.Icon.get('wcf.icon.edit') + '" class="icon24" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
+			beginEdit: $('<li><a class="button"><span class="icon icon24 icon-pencil" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
 		};
 	},
 	
@@ -1778,12 +1778,10 @@ WCF.User.Action.Follow = Class.extend({
 				
 				// toogle icon title
 				if (data.returnValues.following) {
-					button.children('img').attr('src', WCF.Icon.get('wcf.icon.remove'));
-					button.data('tooltip', WCF.Language.get('wcf.user.button.unfollow'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.unfollow')).children('.icon').removeClass('icon-plus').addClass('icon-minus');
 				}
 				else {
-					button.children('img').attr('src', WCF.Icon.get('wcf.icon.add'));
-					button.data('tooltip', WCF.Language.get('wcf.user.button.follow'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.follow')).children('.icon').removeClass('icon-minus').addClass('icon-plus');
 				}
 				
 				button.data('following', data.returnValues.following);
@@ -1883,12 +1881,10 @@ WCF.User.Action.Ignore = Class.extend({
 				
 				// toogle icon title
 				if (data.returnValues.isIgnoredUser) {
-					button.children('img').attr('src', WCF.Icon.get('wcf.icon.enabled'));
-					button.data('tooltip', WCF.Language.get('wcf.user.button.unignore'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.unignore')).children('.icon').removeClass('icon-off').addClass('icon-circle-blank');
 				}
 				else {
-					button.children('img').attr('src', WCF.Icon.get('wcf.icon.disabled'));
-					button.data('tooltip', WCF.Language.get('wcf.user.button.ignore'));
+					button.data('tooltip', WCF.Language.get('wcf.user.button.ignore')).children('.icon').removeClass('icon-circle-blank').addClass('icon-off');
 				}
 				
 				button.data('ignored', data.returnValues.isIgnoredUser);

@@ -44,7 +44,7 @@
 								{include file='userInformationHeadline'}
 								
 								<ul class="buttonList">
-									<li><img src="{icon}delete{/icon}" alt="" class="icon16 pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unfollow{/lang}" data-object-id="{@$user->followID}" /></li>
+									<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unfollow{/lang}" data-object-id="{@$user->followID}"></span></li>
 								</ul>
 								
 								{include file='userInformationStatistics'}
