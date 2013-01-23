@@ -60,8 +60,9 @@
 			</option>
 			<option name="birthday">
 				<categoryname>profile.personal</categoryname>
-				<optiontype>date</optiontype>
+				<optiontype>birthday</optiontype>
 				<outputclass>wcf\system\option\user\BirthdayUserOptionOutput</outputclass>
+				<searchable>1</searchable>
 				<visible>15</visible>
 				<editable>3</editable>
 			</option>
