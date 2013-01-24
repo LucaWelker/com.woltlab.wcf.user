@@ -34,6 +34,15 @@
 				<category name="user.ban">
 					<parent>user.register</parent>
 				</category>
+				
+			<category name="dashboard">
+			</category>
+				<category name="dashboard.content">
+					<parent>dashboard</parent>
+				</category>
+				<category name="dashboard.sidebar">
+					<parent>dashboard</parent>
+				</category>
 		</categories>
 		
 		<options>
