@@ -317,7 +317,7 @@ class RegisterForm extends UserAddForm {
 		$this->saved();
 		
 		// forward to index page
-		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->getDynamicVariable($this->message, array('user' => $user)), 15);
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink(), WCF::getLanguage()->getDynamicVariable($this->message, array('user' => $user)), 15);
 		exit;
 	}
 }
