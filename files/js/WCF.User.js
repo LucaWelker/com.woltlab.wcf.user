@@ -1579,7 +1579,7 @@ WCF.User.RecentActivityLoader = Class.extend({
 		});
 		
 		this._loadButton = $('<li class="recentActivitiesMore"><button class="buttonPrimary small">' + WCF.Language.get('wcf.user.recentActivity.more') + '</button></li>').appendTo(this._container);
-		this._loadButton.children('button').click($.proxy(this._click, this));
+		this._loadButton = this._loadButton.children('button').click($.proxy(this._click, this));
 	},
 	
 	/**
@@ -1618,7 +1618,8 @@ WCF.User.RecentActivityLoader = Class.extend({
 			this._loadButton.enable();
 		}
 		else {
-			this._loadButton.hide();
+			$('<small>' + WCF.Language.get('wcf.user.recentActivity.noMoreEntries') + '</small>').appendTo(this._loadButton.parent());
+			this._loadButton.remove();
 		}
 	}
 });
