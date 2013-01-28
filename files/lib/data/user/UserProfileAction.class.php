@@ -7,6 +7,7 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\option\user\UserOptionHandler;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -320,6 +321,7 @@ class UserProfileAction extends UserAction {
 			$this->readObjects();
 		}
 		
+		$resetUserIDs = array();
 		foreach ($this->objects as $user) {
 			$conditionBuilder = new PreparedStatementConditionBuilder();
 			$conditionBuilder->add('user_rank.groupID IN (?)', array($user->getGroupIDs()));
@@ -339,13 +341,19 @@ class UserProfileAction extends UserAction {
 			if ($row === false) {
 				if ($user->rankID) {
 					$user->update(array('rankID' => null));
+					$resetUserIDs[] = $user->userID;
 				}
 			}
 			else {
 				if ($row['rankID'] != $user->rankID) {
 					$user->update(array('rankID' => $row['rankID']));
+					$resetUserIDs[] = $user->userID;
 				}
 			}
+		}
+		
+		if (!empty($resetUserIDs)) {
+			UserStorageHandler::getInstance()->reset($resetUserIDs, 'userRank');
 		}
 	}
 	
