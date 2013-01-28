@@ -5,7 +5,7 @@
 			
 			<div>
 				<hgroup class="containerHeadline">
-					<h1><a href="{link controller='User' object=$event->getUserProfile()}{/link}">{$event->getUserProfile()->username}</a><small> - {@$event->time|time}</small></h1> 
+					<h1><a href="{link controller='User' object=$event->getUserProfile()}{/link}" class="userLink" data-user-id="{@$event->getUserProfile()->userID}">{$event->getUserProfile()->username}</a><small> - {@$event->time|time}</small></h1> 
 					<h2><strong>{@$event->getTitle()}</strong></h2>
 				</hgroup>
 				
