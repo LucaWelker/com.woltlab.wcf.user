@@ -105,7 +105,7 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 		// remove entirely read notifications
 		$sql = "SELECT	COUNT(*) as count
 			FROM	wcf".WCF_N."_user_notification_to_user
-			WHERE		notificationID = ?";
+			WHERE	notificationID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->parameters['notificationID']));
 		$row = $statement->fetchArray();
