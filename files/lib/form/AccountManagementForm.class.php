@@ -318,6 +318,8 @@ class AccountManagementForm extends AbstractSecureForm {
 		
 		$this->saved();
 		
+		$success = array_merge($success, WCF::getTPL()->get('success') ?: array());
+		
 		// show success message
 		WCF::getTPL()->assign('success', $success);
 		
