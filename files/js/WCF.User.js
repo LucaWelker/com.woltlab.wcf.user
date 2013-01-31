@@ -556,6 +556,8 @@ WCF.User.Profile.Editor = Class.extend({
 		this._actionName = 'restore';
 		this._buttons.beginEdit.show();
 		
+		this._destroyCKEditor();
+		
 		this._tab.html(this._cachedTemplate).children().css({ height: 'auto' });
 	},
 	
@@ -579,7 +581,7 @@ WCF.User.Profile.Editor = Class.extend({
 					this._restore();
 				}
 				else {
-					this._prepareEdit(data);
+					this._prepareEdit(data, true);
 				}
 			break;
 		}
@@ -589,12 +591,18 @@ WCF.User.Profile.Editor = Class.extend({
 	 * Prepares editing mode.
 	 * 
 	 * @param	object		data
+	 * @param	boolean		disableCache
 	 */
-	_prepareEdit: function(data) {
+	_prepareEdit: function(data, disableCache) {
+		this._destroyCKEditor();
+		
 		// update template
 		var self = this;
 		this._tab.html(function(index, oldHTML) {
-			self._cachedTemplate = oldHTML;
+			if (disableCache !== true) {
+				self._cachedTemplate = oldHTML;
+			}
+			
 			return data.returnValues.template;
 		});
 		
@@ -607,6 +615,19 @@ WCF.User.Profile.Editor = Class.extend({
 				
 				event.preventDefault();
 				return false;
+			}
+		});
+	},
+	
+	/**
+	 * Destroys all CKEditor instances within current tab.
+	 */
+	_destroyCKEditor: function() {
+		// destroy all CKEditor instances
+		this._tab.find('textarea + .cke').each(function(index, container) {
+			var $instanceName = $(container).attr('id').replace(/cke_/, '');
+			if (CKEDITOR.instances[$instanceName]) {
+				CKEDITOR.instances[$instanceName].destroy();
 			}
 		});
 	}
@@ -1579,7 +1600,7 @@ WCF.User.RecentActivityLoader = Class.extend({
 		});
 		
 		this._loadButton = $('<li class="recentActivitiesMore"><button class="buttonPrimary small">' + WCF.Language.get('wcf.user.recentActivity.more') + '</button></li>').appendTo(this._container);
-		this._loadButton.children('button').click($.proxy(this._click, this));
+		this._loadButton = this._loadButton.children('button').click($.proxy(this._click, this));
 	},
 	
 	/**
@@ -1618,7 +1639,8 @@ WCF.User.RecentActivityLoader = Class.extend({
 			this._loadButton.enable();
 		}
 		else {
-			this._loadButton.hide();
+			$('<small>' + WCF.Language.get('wcf.user.recentActivity.noMoreEntries') + '</small>').appendTo(this._loadButton.parent());
+			this._loadButton.remove();
 		}
 	}
 });

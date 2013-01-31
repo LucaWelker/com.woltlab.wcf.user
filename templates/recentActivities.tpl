@@ -3,7 +3,8 @@
 		//<![CDATA[
 		$(function() {
 			WCF.Language.addObject({
-				'wcf.user.recentActivity.more': '{lang}wcf.user.recentActivity.more{/lang}'
+				'wcf.user.recentActivity.more': '{lang}wcf.user.recentActivity.more{/lang}',
+				'wcf.user.recentActivity.noMoreEntries': '{lang}wcf.user.recentActivity.noMoreEntries{/lang}'
 			});
 			
 			new WCF.User.RecentActivityLoader({@$userID});

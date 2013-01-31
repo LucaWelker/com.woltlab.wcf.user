@@ -1,5 +1,6 @@
 <?php
 namespace wcf\data\user\notification;
+use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
@@ -100,6 +101,17 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 			$this->parameters['notificationID'],
 			WCF::getUser()->userID
 		));
+		
+		// remove entirely read notifications
+		$sql = "SELECT	COUNT(*) as count
+			FROM	wcf".WCF_N."_user_notification_to_user
+			WHERE	notificationID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($this->parameters['notificationID']));
+		$row = $statement->fetchArray();
+		if (!$row['count']) {
+			UserNotificationEditor::deleteAll(array($this->parameters['notificationID']));
+		}
 		
 		// reset notification count
 		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount');
