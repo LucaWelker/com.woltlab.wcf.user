@@ -26,7 +26,7 @@ class PreParserAtUserListener implements IEventListener {
 		
 		static $userRegex = null;
 		if ($userRegex === null) {
-			$userRegex = new Regex('(?:^|\s)@([^,\s]*)');
+			$userRegex = new Regex('(?<=^|\s)@([^,\s]*)');
 		}
 		
 		$userRegex->match($eventObj->text, true);
