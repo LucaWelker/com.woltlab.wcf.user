@@ -1633,7 +1633,7 @@ WCF.User.RecentActivityLoader = Class.extend({
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (data.returnValues.template) {
-			$(data.returnValues.template).insertBefore(this._loadButton);
+			$(data.returnValues.template).insertBefore(this._loadButton.parent());
 			
 			this._container.data('lastEventTime', data.returnValues.lastEventTime);
 			this._loadButton.enable();
