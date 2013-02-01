@@ -1599,7 +1599,7 @@ WCF.User.RecentActivityLoader = Class.extend({
 			success: $.proxy(this._success, this)
 		});
 		
-		this._loadButton = $('<li class="recentActivitiesMore"><button class="buttonPrimary small">' + WCF.Language.get('wcf.user.recentActivity.more') + '</button></li>').appendTo(this._container);
+		this._loadButton = $('<li class="recentActivitiesMore"><button class="small">' + WCF.Language.get('wcf.user.recentActivity.more') + '</button></li>').appendTo(this._container);
 		this._loadButton = this._loadButton.children('button').click($.proxy(this._click, this));
 	},
 	
