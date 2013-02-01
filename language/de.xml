@@ -389,6 +389,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.user.registerNow"><![CDATA[Jetzt registrieren]]></item>
 		<item name="wcf.user.newestMember"><![CDATA[Neuestes Mitglied]]></item>
+		<item name="wcf.user.recentActivity.com.woltlab.wcf.user.recentActivityEvent.follow"><![CDATA[Folgen]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

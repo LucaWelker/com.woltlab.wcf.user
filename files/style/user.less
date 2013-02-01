@@ -87,8 +87,19 @@
 }
 
 /* recent activities */
-#recentActivities > li.recentActivitiesMore {
-	text-align: center;
+.recentActivityList {
+	> li.recentActivitiesMore {
+		text-align: center;
+		
+		> button {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		
+		> small {
+			color: @wcfDimmedColor;
+		}
+	}
 }
 
 /* dashboard boxes */

@@ -2,6 +2,7 @@
 namespace wcf\data\user\activity\event;
 use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectDecorator;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 
 /**
  * Provides methods for viewable user activity events.
@@ -133,5 +134,14 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+	
+	/**
+	 * Returns the object type name.
+	 * 
+	 * @return	string
+	 */
+	public function getObjectTypeName() {
+		return UserActivityEventHandler::getInstance()->getObjectType($this->objectTypeID)->objectType;
 	}
 }
