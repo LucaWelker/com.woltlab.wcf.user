@@ -2,6 +2,7 @@
 namespace wcf\form;
 use wcf\acp\form\UserOptionListForm;
 use wcf\data\search\SearchEditor;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
@@ -86,6 +87,9 @@ class UserSearchForm extends UserOptionListForm {
 		parent::readData();
 		
 		$this->readOptionTree();
+		
+		// add breadcrumbs
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.user.members'), LinkHandler::getInstance()->getLink('MembersList')));
 	}
 	
 	/**
