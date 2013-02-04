@@ -120,7 +120,7 @@ class UserSearchForm extends UserOptionListForm {
 		
 		// store search result in database
 		$search = SearchEditor::create(array(
-			'userID' => WCF::getUser()->userID,
+			'userID' => WCF::getUser()->userID ?: null,
 			'searchData' => serialize(array('matches' => $this->matches)),
 			'searchTime' => TIME_NOW,
 			'searchType' => 'users'

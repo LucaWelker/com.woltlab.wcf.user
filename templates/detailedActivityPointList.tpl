@@ -15,7 +15,7 @@
 				{if $objectType->activityPoints > 0 && $objectType->points > 0}
 					<tr>
 						<td class="columnDigits">
-							{#$objectType->activityPoints/$objectType->points} ×
+							{#$objectType->activityPoints/$objectType->points} &times;
 						</td>
 						<td class="columnTitle">
 							{lang}wcf.user.activityPoint.objectType.{$objectType->objectType}{/lang}
@@ -32,7 +32,7 @@
 			{/foreach}
 			
 			<tr>
-				<td class="columnTitle focus right" colspan="3">Σ</td>
+				<td class="columnTitle focus right" colspan="3">&Sigma;</td>
 				<td class="columnDigits focus"><span class="badge">{#$user->activityPoints}</span></td>
 			</tr>
 		</tbody>
