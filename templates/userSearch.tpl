@@ -4,6 +4,14 @@
 	<title>{lang}wcf.user.search{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude'}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			new WCF.Search.User('#username', null, false, [ ], false);
+		});
+		//]]>
+	</script>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
