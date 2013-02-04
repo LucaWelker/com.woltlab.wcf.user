@@ -15,7 +15,7 @@ use wcf\util\StringUtil;
  * Executes user profile-related actions.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user
@@ -82,19 +82,8 @@ class UserProfileAction extends UserAction {
 	 * Validates user profile preview.
 	 */
 	public function validateGetUserProfile() {
-		switch (count($this->objectIDs)) {
-			case 0:
-				throw new UserInputException('objectIDs');
-			break;
-			
-			case 1:
-				// we're fine
-			break;
-			
-			default:
-				// more than one user id is pointless
-				throw new UserInputException('objectIDs');
-			break;
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
 		}
 	}
 	
@@ -124,19 +113,8 @@ class UserProfileAction extends UserAction {
 	 * Validates detailed activity point list
 	 */
 	public function validateGetDetailedActivityPointList() {
-		switch (count($this->objectIDs)) {
-			case 0:
-				throw new UserInputException('objectIDs');
-			break;
-			
-			case 1:
-				// we're fine
-			break;
-			
-			default:
-				// more than one user id is pointless
-				throw new UserInputException('objectIDs');
-			break;
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
 		}
 	}
 	
@@ -390,7 +368,7 @@ class UserProfileAction extends UserAction {
 	 * @return	wcf\system\option\user\UserOptionHandler
 	 */
 	protected function getOptionHandler(User $user, $editMode = true) {
-		$optionHandler = new UserOptionHandler('userOption', 'wcf\system\cache\builder\OptionCacheBuilder', false, '', 'profile');
+		$optionHandler = new UserOptionHandler(false, '', 'profile');
 		if (!$editMode) {
 			$optionHandler->showEmptyOptions(false);
 			$optionHandler->enableEditMode(false);
