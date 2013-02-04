@@ -13,11 +13,11 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Community Framework
  */
-class UserMenuCacheBuilder implements ICacheBuilder {
+class UserMenuCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	wcf\system\cache\ICacheBuilder::getData()
+	 * @see	wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
-	public function getData(array $cacheResource) { 
+	protected function rebuild(array $parameters) {
 		$data = array();
 		
 		// get all option categories

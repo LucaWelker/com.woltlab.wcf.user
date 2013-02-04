@@ -1,7 +1,7 @@
 <?php
 namespace wcf\system\menu\user\profile;
 use wcf\data\user\profile\menu\item\UserProfileMenuItem;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserProfileMenuCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * Builds the user profile menu.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.menu.user.profile
@@ -50,12 +50,7 @@ class UserProfileMenu extends SingletonFactory {
 		// call loadCache event
 		EventHandler::getInstance()->fireAction($this, 'loadCache');
 		
-		CacheHandler::getInstance()->addResource(
-			'userProfileMenu',
-			WCF_DIR.'cache/cache.userProfileMenu.php',
-			'wcf\system\cache\builder\UserProfileMenuCacheBuilder'
-		);
-		$this->menuItems = CacheHandler::getInstance()->get('userProfileMenu');
+		$this->menuItems = UserProfileMenuCacheBuilder::getInstance()->getData()
 	}
 	
 	/**

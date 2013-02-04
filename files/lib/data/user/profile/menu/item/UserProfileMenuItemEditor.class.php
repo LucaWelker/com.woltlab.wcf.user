@@ -2,14 +2,14 @@
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserProfileMenuCacheBuilder;
 use wcf\system\WCF;
 
 /**
  * Provides functions to edit user profile menu items.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.user.profile.menu.item
@@ -122,6 +122,6 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	 * @see	wcf\data\IEditableCachedObject::resetCache()
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.userProfileMenu.php');
+		UserProfileMenuCacheBuilder::getInstance()->reset();
 	}
 }

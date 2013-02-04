@@ -1,13 +1,13 @@
 <?php
 namespace wcf\system\package\plugin;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\DashboardBoxCacheBuilder;
 use wcf\system\WCF;
 
 /**
  * Installs, updates and deletes dashboard boxes.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.package.plugin
@@ -79,6 +79,6 @@ class DashboardBoxPackageInstallationPlugin extends AbstractXMLPackageInstallati
 	 * @see	wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::cleanup()
 	 */
 	protected function cleanup() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache', 'cache.dashboardBox.php');
+		DashboardBoxCacheBuilder::getInstance()->reset();
 	}
 }

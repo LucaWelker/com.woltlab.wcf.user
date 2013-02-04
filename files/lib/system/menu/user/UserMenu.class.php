@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\menu\user;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserMenuCacheBuilder;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\menu\TreeMenu;
 
@@ -21,12 +21,7 @@ class UserMenu extends TreeMenu {
 	protected function loadCache() {
 		parent::loadCache();
 		
-		CacheHandler::getInstance()->addResource(
-			'userMenu',
-			WCF_DIR.'cache/cache.userMenu.php',
-			'wcf\system\cache\builder\UserMenuCacheBuilder'
-		);
-		$this->menuItems = CacheHandler::getInstance()->get('userMenu');
+		$this->menuItems = UserMenuCacheBuilder::getInstance()->getData();
 	}
 	
 	/**

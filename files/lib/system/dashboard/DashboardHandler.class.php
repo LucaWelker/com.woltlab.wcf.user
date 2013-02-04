@@ -2,7 +2,7 @@
 namespace wcf\system\dashboard;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\DashboardBoxCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
@@ -13,7 +13,7 @@ use wcf\util\ClassUtil;
  * Handles dashboard boxes.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.dashboard
@@ -36,13 +36,8 @@ class DashboardHandler extends SingletonFactory {
 	 * @see	wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		CacheHandler::getInstance()->addResource(
-			'dashboardBox',
-			WCF_DIR.'cache/cache.dashboardBox.php',
-			'wcf\system\cache\builder\DashboardBoxCacheBuilder'
-		);
-		$this->boxCache = CacheHandler::getInstance()->get('dashboardBox', 'boxes');
-		$this->pageCache = CacheHandler::getInstance()->get('dashboardBox', 'pages');
+		$this->boxCache = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
+		$this->pageCache = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'pages');
 	}
 	
 	/**
@@ -196,6 +191,6 @@ class DashboardHandler extends SingletonFactory {
 	 * Clears dashboard box cache.
 	 */
 	public static function clearCache() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.dashboardBox.php');
+		DashboardBoxCacheBuilder::getInstance()->reset();
 	}
 }

@@ -13,11 +13,11 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Community Framework
  */
-class UserNotificationEventCacheBuilder implements ICacheBuilder {
+class UserNotificationEventCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	wcf\system\cache\ICacheBuilder::getData()
+	 * @see	wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array();
 		
 		// get events

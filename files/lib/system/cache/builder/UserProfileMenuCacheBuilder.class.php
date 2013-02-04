@@ -12,11 +12,11 @@ use wcf\data\user\profile\menu\item\UserProfileMenuItemList;
  * @subpackage	system.cache.builder
  * @category	Community Framework
  */
-class UserProfileMenuCacheBuilder implements ICacheBuilder {
+class UserProfileMenuCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	wcf\system\cache\ICacheBuilder::getData()
+	 * @see	wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
-	public function getData(array $cacheResource) { 
+	protected function rebuild(array $parameters) {
 		$itemList = new UserProfileMenuItemList();
 		$itemList->sqlOrderBy = "user_profile_menu_item.showOrder ASC";
 		$itemList->readObjects();

@@ -9,7 +9,7 @@ use wcf\data\user\notification\UserNotificationList;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfile;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserNotificationEventCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\mail\Mail;
@@ -66,12 +66,7 @@ class UserNotificationHandler extends SingletonFactory {
 		}
 		
 		// get available events
-		CacheHandler::getInstance()->addResource(
-			'userNotificationEvent',
-			WCF_DIR.'cache/cache.userNotificationEvent.php',
-			'wcf\system\cache\builder\UserNotificationEventCacheBuilder'
-		);
-		$this->availableEvents = CacheHandler::getInstance()->get('userNotificationEvent');
+		$this->availableEvents = UserNotificationEventCacheBuilder::getInstance()->getData();
 	}
 	
 	/**

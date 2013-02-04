@@ -8,7 +8,7 @@ use wcf\data\user\rank\UserRank;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserGroupPermissionCacheBuilder;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\online\location\UserOnlineLocationHandler;
 use wcf\system\user\storage\UserStorageHandler;
@@ -563,21 +563,9 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * Loads group data from cache.
 	 */
 	protected function loadGroupData() {
-		// get group ids
-		$groupIDs = $this->getGroupIDs();
-		$groups = implode(',', $groupIDs);
-		
-		// register cache resource
-		$cacheName = 'userGroupPermission-'.$groups;
-		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			WCF_DIR.'cache/cache.userGroupPermission-'.StringUtil::getHash($groups).'.php',
-			'wcf\system\cache\builder\UserGroupPermissionCacheBuilder'
-		);
-		
 		// get group data from cache
-		$this->groupData = CacheHandler::getInstance()->get($cacheName);
-		if (isset($this->groupData['groupIDs']) && $this->groupData['groupIDs'] != $groups) {
+		$this->groupData = UserGroupPermissionCacheBuilder::getInstance()->getData($this->getGroupIDs());
+		if (isset($this->groupData['groupIDs']) && $this->groupData['groupIDs'] != $this->getGroupIDs()) {
 			$this->groupData = array();
 		}
 	}

@@ -12,11 +12,16 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Community Framework
  */
-class UserStatsCacheBuilder implements ICacheBuilder {
+class UserStatsCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see wcf\system\cache\ICacheBuilder::getData()
+	 * @see	wcf\system\cache\builder\AbstractCacheBuilder::$maxLifetime
 	 */
-	public function getData(array $cacheResource) {
+	protected $maxLifetime = 600;
+	
+	/**
+	 * @see	wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 */
+	protected function rebuild(array $parameters) {
 		$data = array();
 		
 		// number of members
