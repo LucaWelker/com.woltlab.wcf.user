@@ -50,7 +50,7 @@ class UserProfileMenu extends SingletonFactory {
 		// call loadCache event
 		EventHandler::getInstance()->fireAction($this, 'loadCache');
 		
-		$this->menuItems = UserProfileMenuCacheBuilder::getInstance()->getData()
+		$this->menuItems = UserProfileMenuCacheBuilder::getInstance()->getData();
 	}
 	
 	/**
