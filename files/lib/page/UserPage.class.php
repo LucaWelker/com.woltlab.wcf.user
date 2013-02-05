@@ -10,6 +10,7 @@ use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfile;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\profile\UserProfileMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -99,6 +100,10 @@ class UserPage extends AbstractPage {
 		if ($this->user === null) {
 			throw new IllegalLinkException();
 		}
+		
+		// check is Accessible
+		if ($this->user->isProtected())
+			throw new PermissionDeniedException();
 		
 		if (isset($_REQUEST['editOnInit'])) $this->editOnInit = true;
 	}
