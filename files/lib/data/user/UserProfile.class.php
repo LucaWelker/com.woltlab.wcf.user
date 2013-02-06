@@ -467,7 +467,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * @return	boolean
 	 */
 	public function isProtected() {
-		return !(WCF::getSession()->getPermission('admin.general.canViewPrivateUserOptions') || $this->isAccessible('canViewProfile'));
+		return (!WCF::getSession()->getPermission('admin.general.canViewPrivateUserOptions') && !$this->isAccessible('canViewProfile'));
 	}
 	
 	/**
