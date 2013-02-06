@@ -102,8 +102,9 @@ class UserPage extends AbstractPage {
 		}
 		
 		// check is Accessible
-		if ($this->user->isProtected())
+		if ($this->user->isProtected()) {
 			throw new PermissionDeniedException();
+		}
 		
 		if (isset($_REQUEST['editOnInit'])) $this->editOnInit = true;
 	}
