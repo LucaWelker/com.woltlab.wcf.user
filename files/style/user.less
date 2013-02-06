@@ -91,16 +91,22 @@
 
 /* recent activities */
 .recentActivityList {
-	> li.recentActivitiesMore {
-		text-align: center;
-		
-		> button {
-			padding-left: 30px;
-			padding-right: 30px;
+	> li {
+		&.recentActivitiesMore {
+			text-align: center;
+			
+			> button {
+				padding-left: 30px;
+				padding-right: 30px;
+			}
+			
+			> small {
+				color: @wcfDimmedColor;
+			}
 		}
 		
-		> small {
-			color: @wcfDimmedColor;
+		> div.box48 > div {
+			overflow: hidden;
 		}
 	}
 }
