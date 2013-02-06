@@ -87,7 +87,7 @@ class SettingsForm extends AbstractForm {
 		if (!empty($_REQUEST['category'])) $this->category = $_REQUEST['category'];
 		// todo validate category
 		
-		$this->optionHandler = new UserOptionHandler('userOption', 'wcf\system\cache\builder\OptionCacheBuilder', false, '', 'settings.'.$this->category);
+		$this->optionHandler = new UserOptionHandler(false, '', 'settings.'.$this->category);
 		$this->optionHandler->setUser(WCF::getUser());
 		
 		if ($this->category == 'general') {
