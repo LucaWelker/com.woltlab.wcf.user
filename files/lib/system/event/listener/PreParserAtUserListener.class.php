@@ -4,7 +4,6 @@ use wcf\data\user\User;
 use wcf\system\event\IEventListener;
 use wcf\system\request\LinkHandler;
 use wcf\system\Regex;
-use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**

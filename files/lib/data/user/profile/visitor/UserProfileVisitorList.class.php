@@ -1,6 +1,5 @@
 <?php
 namespace wcf\data\user\profile\visitor;
-use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectList;
 
 /**
