@@ -219,7 +219,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if current user is following given user id.
+	 * Returns true if current user is following given user id.
 	 * 
 	 * @param	integer		$userID
 	 * @return	boolean
@@ -229,7 +229,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if given user ids follows current user.
+	 * Returns true if given user ids follows current user.
 	 * 
 	 * @param	integer		$userID
 	 * @return	boolean
@@ -239,7 +239,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if given user is ignored.
+	 * Returns true if given user is ignored.
 	 * 
 	 * @param	integer		$userID
 	 * @return	boolean
@@ -289,7 +289,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if this user is currently online.
+	 * Returns true if this user is currently online.
 	 * 
 	 * @return	boolean
 	 */
@@ -436,7 +436,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if current user fulfills the required permissions.
+	 * Returns true if current user fulfills the required permissions.
 	 * 
 	 * @param	string		$name
 	 * @return	boolean
@@ -462,7 +462,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if current user profile is protected.
+	 * Returns true if current user profile is protected.
 	 * 
 	 * @return	boolean
 	 */
@@ -586,7 +586,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if this user can edit his profile.
+	 * Returns true if this user can edit his profile.
 	 * 
 	 * @return	boolean
 	 */

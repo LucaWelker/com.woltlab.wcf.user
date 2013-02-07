@@ -58,7 +58,7 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	}
 	
 	/**
-	 * Returns true, if event is accessible by current user.
+	 * Returns true if event is accessible by current user.
 	 * 
 	 * @return	boolean
 	 */
@@ -74,7 +74,7 @@ class ViewableUserActivityEvent extends DatabaseObjectDecorator {
 	}
 	
 	/**
-	 * Returns true, if event is orphaned (associated object removed).
+	 * Returns true if event is orphaned (associated object removed).
 	 * 
 	 * @return	boolean
 	 */
