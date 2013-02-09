@@ -6,9 +6,9 @@ use wcf\data\user\UserList;
  * Extends the user list to provide special functions for handling recipients of user notifications.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf.notification
+ * @package	com.woltlab.wcf.user
  * @subpackage	data.user.notification.event.recipient
  * @category	Community Framework
  */
