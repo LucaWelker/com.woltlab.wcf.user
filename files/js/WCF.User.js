@@ -5,6 +5,12 @@
  */
 WCF.User.Login = Class.extend({
 	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
+	/**
 	 * login button
 	 * @var	jQuery
 	 */
@@ -48,13 +54,19 @@ WCF.User.Login = Class.extend({
 		
 		var $loginForm = $('#loginForm');
 		$loginForm.find('input[name=action]').change($.proxy(this._change, this));
-		//$loginForm.find('input[type=reset]').click($.proxy(this._reset, this));
 		
 		if (isQuickLogin) {
+			var self = this;
 			$('.loginLink').click(function() {
-				WCF.showDialog('loginForm', {
-					title: WCF.Language.get('wcf.user.login')
-				});
+				if (self._dialog === null) {
+					self._dialog = $('#loginForm').wcfDialog({
+						title: WCF.Language.get('wcf.user.login')
+					});
+				}
+				else {
+					self._dialog.wcfDialog('open');
+				}
+				
 				return false;
 			});
 		}
@@ -73,13 +85,6 @@ WCF.User.Login = Class.extend({
 			this._setState(true, WCF.Language.get('wcf.user.button.login'));
 		}
 	},
-	
-	/**
-	 * Handles clicks on the reset button.
-	 */
-	/*_reset: function() {
-		this._setState(true, WCF.Language.get('wcf.user.button.login'));
-	},*/
 	
 	/**
 	 * Sets form states.
