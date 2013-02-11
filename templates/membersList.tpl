@@ -105,13 +105,18 @@
 	{/if}
 </div>
 
-<div class="container marginTop">
-	<ol class="containerList doubleColumned userList">
-		{foreach from=$objects item=user}
-			{include file='userListItem'}
-		{/foreach}
-	</ol>
-</div>
+{if $items}
+	<div class="container marginTop">
+		<ol class="containerList doubleColumned userList">
+			{foreach from=$objects item=user}
+				{include file='userListItem'}
+			{/foreach}
+		</ol>
+	</div>
+{else}
+	<p class="info">{lang}wcf.user.members.noMembers{/lang}</p>
+{/if}
+	
 
 <div class="contentNavigation">
 	{@$pagesLinks}

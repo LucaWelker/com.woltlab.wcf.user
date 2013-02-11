@@ -121,6 +121,7 @@
 		<item name="wcf.user.gender.male"><![CDATA[Männlich]]></item>
 		<item name="wcf.user.gender.female"><![CDATA[Weiblich]]></item>
 		<item name="wcf.user.members"><![CDATA[Mitglieder]]></item>
+		<item name="wcf.user.members.noMembers"><![CDATA[Es wurden keine Mitglieder gefunden.]]></item>
 		<item name="wcf.user.members.sort"><![CDATA[Sortierung]]></item>
 		<item name="wcf.user.members.sort.letters"><![CDATA[Anfangsbuchstabe]]></item>
 		<item name="wcf.user.members.sort.letters.all"><![CDATA[Alle]]></item>
