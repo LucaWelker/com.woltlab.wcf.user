@@ -41,13 +41,6 @@
 					<input type="text" id="username" name="username" value="{$username}" class="medium" />
 				</dd>
 			</dl>
-			
-			<dl>
-				<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
-				<dd>
-					<input type="email" id="email" name="email" value="{$email}" class="medium" />
-				</dd>
-			</dl>
 		</fieldset>
 		
 		{foreach from=$optionTree[0][categories] item=category}

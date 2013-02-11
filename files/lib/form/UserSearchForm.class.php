@@ -33,12 +33,6 @@ class UserSearchForm extends UserOptionListForm {
 	public $username = '';
 	
 	/**
-	 * email address
-	 * @var	string
-	 */
-	public $email = '';
-	
-	/**
 	 * matches
 	 * @var	array<integer>
 	 */
@@ -69,7 +63,6 @@ class UserSearchForm extends UserOptionListForm {
 		parent::readFormParameters();
 		
 		if (isset($_POST['username'])) $this->username = StringUtil::trim($_POST['username']);
-		if (isset($_POST['email'])) $this->email = StringUtil::trim($_POST['email']);
 	}
 	
 	/**
@@ -107,7 +100,6 @@ class UserSearchForm extends UserOptionListForm {
 		
 		WCF::getTPL()->assign(array(
 			'username' => $this->username,
-			'email' => $this->email,
 			'optionTree' => $this->optionTree
 		));
 	}
@@ -183,9 +175,6 @@ class UserSearchForm extends UserOptionListForm {
 	protected function buildStaticConditions() {
 		if (!empty($this->username)) {
 			$this->conditions->add("user_table.username LIKE ?", array('%'.addcslashes($this->username, '_%').'%'));
-		}
-		if (!empty($this->email)) {
-			$this->conditions->add("user_table.email LIKE ?", array('%'.addcslashes($this->email, '_%').'%'));
 		}
 	}
 	
