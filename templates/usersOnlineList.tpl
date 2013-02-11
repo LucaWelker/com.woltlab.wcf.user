@@ -28,7 +28,6 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
-{*TODO: sidebar content*}
 	<div>
 		<form method="get" action="{link controller='UsersOnlineList'}{/link}">
 			<fieldset>
@@ -59,6 +58,8 @@
 			</div>
 		</form>
 	</div>
+	
+	{@$__boxSidebar}
 {/capture}
 
 {include file='header' sidebarOrientation='right'}

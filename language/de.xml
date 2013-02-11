@@ -81,6 +81,10 @@
 		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Aktive Boxen]]></item>
 		<item name="wcf.dashboard.box.com.woltlab.wcf.user.recentActivitySidebar"><![CDATA[Letzte Aktivität]]></item>
 		<item name="wcf.dashboard.box.com.woltlab.wcf.user.statsSidebar"><![CDATA[Statistiken]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.newestMembers"><![CDATA[Neueste Mitglieder]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.mostActiveMembers"><![CDATA[Aktivste Mitglieder]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.registerButton"><![CDATA[Registrierungs-Button]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.signedInAs"><![CDATA[Angemeldet als]]></item>
 		<item name="wcf.dashboard.boxType.content"><![CDATA[Inhaltsbereich]]></item>
 		<item name="wcf.dashboard.boxType.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="wcf.dashboard.objectType"><![CDATA[Seite]]></item>

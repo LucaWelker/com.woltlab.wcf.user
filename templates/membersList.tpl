@@ -30,8 +30,7 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
-{assign var=encodedLetter value=$letter|rawurlencode}
-{*TODO: sidebar content*}
+	{assign var=encodedLetter value=$letter|rawurlencode}
 	<div class="javascriptOnly">
 		<form method="get" action="{if $searchID}{link controller='MembersList' id=$searchID}{/link}{else}{link controller='MembersList'}{/link}{/if}">
 			<fieldset>
@@ -85,6 +84,8 @@
 			</div>
 		</form>
 	</div>
+	
+	{@$__boxSidebar}
 {/capture}
 
 {include file='header' sidebarOrientation='right'}

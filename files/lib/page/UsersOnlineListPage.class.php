@@ -1,9 +1,10 @@
 <?php
 namespace wcf\page;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
 /**
@@ -110,9 +111,11 @@ class UsersOnlineListPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
+		DashboardHandler::getInstance()->loadBoxes('com.woltlab.wcf.user.MembersListPage', $this);
+		
 		WCF::getTPL()->assign(array(
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.UsersOnlineList'),
-			'sidebarName' => 'com.woltlab.wcf.user.UsersOnlineList',
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersListPage'),
+			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage'
 		));
 	}
 	
