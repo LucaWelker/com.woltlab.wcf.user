@@ -1,7 +1,7 @@
 <fieldset>
 	<legend class="invisible">{lang}wcf.user.avatar{/lang}</legend>
 	
-	<div class="userAvatar">{@$user->getAvatar()->getImageTag()}</div>
+	<div class="userAvatar framed">{@$user->getAvatar()->getImageTag()}</div>
 </fieldset>
 
 <fieldset>
