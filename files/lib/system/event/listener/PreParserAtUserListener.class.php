@@ -32,8 +32,8 @@ class PreParserAtUserListener implements IEventListener {
 		$matches = $userRegex->getMatches();
 		
 		if (!empty($matches[1])) {
-			// remove duplicates, saves queries
-			array_unique($matches[1]);
+			// remove duplicates
+			$matches[1] = array_unique($matches[1]);
 			
 			// fetch users
 			$userList = new UserList();
