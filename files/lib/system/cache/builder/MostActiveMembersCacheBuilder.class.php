@@ -24,6 +24,7 @@ class MostActiveMembersCacheBuilder extends AbstractCacheBuilder {
 	 */
 	protected function rebuild(array $parameters) {
 		$userProfileList = new UserList();
+		$userProfileList->getConditionBuilder()->add('user_table.activityPoints > 0');
 		$userProfileList->sqlOrderBy = 'user_table.activityPoints DESC';
 		$userProfileList->sqlLimit = 5;
 		$userProfileList->readObjectIDs();

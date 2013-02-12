@@ -5,7 +5,7 @@
 			
 			<hgroup class="sidebarBoxHeadline">
 				<h1><a href="{link controller='User' object=$activeMember}{/link}" class="userLink" data-user-id="{@$activeMember->userID}">{$activeMember->username}</a></h1>
-				<h2><small>{#$activeMember->activityPoints} {lang}wcf.user.activityPoint{/lang}</small></h2>
+				<h2><small>{lang}wcf.dashboard.box.mostActiveMembers.points{/lang}</small></h2>
 			</hgroup>
 		</li>
 	{/foreach}
