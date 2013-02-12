@@ -7,7 +7,7 @@ use wcf\system\WCF;
 /**
  * Shows a list of the most active members.
  * 
- * @author	Marcel Weerk
+ * @author	Marcel Werk
  * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user

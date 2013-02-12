@@ -6,7 +6,7 @@ use wcf\system\WCF;
 /**
  * Stats dashboard box.
  * 
- * @author	Marcel Weerk
+ * @author	Marcel Werk
  * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
