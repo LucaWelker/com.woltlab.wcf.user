@@ -26,6 +26,7 @@ ALTER TABLE wcf1_user ADD notificationMailToken VARCHAR(20) NOT NULL DEFAULT '';
 
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);
+ALTER TABLE wcf1_user ADD INDEX activityPoints (activityPoints);
 
 ALTER TABLE wcf1_user_group ADD priority MEDIUMINT(8) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_user_group ADD userOnlineMarking VARCHAR(255) NOT NULL DEFAULT '%s';
