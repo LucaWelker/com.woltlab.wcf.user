@@ -1,4 +1,12 @@
 /**
+ * User-related classes.
+ * 
+ * @author	Alexander Ebert
+ * @copyright	2001-2013 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ */
+
+/**
  * Quick login box
  * 
  * @param	boolean		isQuickLogin
@@ -114,6 +122,114 @@ WCF.User.Login = Class.extend({
  * UserProfile namespace
  */
 WCF.User.Profile = {};
+
+/**
+ * Shows the activity point list for users.
+ */
+WCF.User.Profile.ActivityPointList = {
+	/**
+	 * list of cached templates
+	 * @var	object
+	 */
+	_cache: { },
+	
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
+	/**
+	 * initialization state
+	 * @var	boolean
+	 */
+	_didInit: false,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * Initializes the WCF.User.Profile.ActivityPointList class.
+	 */
+	init: function() {
+		if (this._didInit) {
+			return;
+		}
+		
+		this._cache = { };
+		this._dialog = null;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		this._init();
+		
+		WCF.DOMNodeInsertedHandler.addCallback('WCF.User.Profile.ActivityPointList', $.proxy(this._init, this));
+		
+		this._didInit = true;
+	},
+	
+	/**
+	 * Initializes display for activity points.
+	 */
+	_init: function() {
+		$('.activityPointsDisplay').removeClass('activityPointsDisplay').click($.proxy(this._click, this));
+	},
+	
+	/**
+	 * Shows or loads the activity point for selected user.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var $userID = $(event.currentTarget).data('userID');
+		
+		if (this._cache[$userID] === undefined) {
+			this._proxy.setOption('data', {
+				actionName: 'getDetailedActivityPointList',
+				className: 'wcf\\data\\user\\UserProfileAction',
+				objectIDs: [ $userID ]
+			});
+			this._proxy.sendRequest();
+		}
+		else {
+			this._show($userID);
+		}
+	},
+	
+	/**
+	 * Displays activity points for given user.
+	 * 
+	 * @param	integer		userID
+	 */
+	_show: function(userID) {
+		if (this._dialog === null) {
+			this._dialog = $('<div>' + this._cache[userID] + '</div>').hide().appendTo(document.body);
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('wcf.user.activityPoint')
+			});
+		}
+		else {
+			this._dialog.html(this._cache[userID]);
+			this._dialog.wcfDialog('open');
+		}
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._cache[data.returnValues.userID] = data.returnValues.template;
+		this._show(data.returnValues.userID);
+	}
+};
 
 /**
  * Provides methods to follow an user.

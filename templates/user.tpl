@@ -11,6 +11,7 @@
 		$(function() {
 			{if $__wcf->getUser()->userID && $__wcf->getUser()->userID != $user->userID}
 				WCF.Language.addObject({
+					'wcf.user.activityPoint': '{lang}wcf.user.activityPoint{/lang}',
 					'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
 					'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
 					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
@@ -37,16 +38,11 @@
 			{/if}
 			
 			{if $user->activityPoints}
-				$('.activityPointsDisplay').click(function (event) {
-					WCF.showAJAXDialog('detailedActivityPointList', true, {
-						title: '{lang}wcf.user.activityPoint{/lang}',
-						data: {
-							className: 'wcf\\data\\user\\UserProfileAction',
-							actionName: 'getDetailedActivityPointList',
-							objectIDs: [ {@$user->userID} ]
-						}
-					});
+				WCF.Language.addObject({
+					'wcf.user.activityPoint': '{lang}wcf.user.activityPoint{/lang}'
 				});
+				
+				WCF.User.Profile.ActivityPointList.init();
 			{/if}
 			
 			{if $followingCount > 10}

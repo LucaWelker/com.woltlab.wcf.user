@@ -105,7 +105,8 @@ class UserProfileAction extends UserAction {
 		));
 		
 		return array(
-			'template' => WCF::getTPL()->fetch('userProfilePreview')
+			'template' => WCF::getTPL()->fetch('userProfilePreview'),
+			'userID' => $userID
 		);
 	}
 	
@@ -152,7 +153,8 @@ class UserProfileAction extends UserAction {
 		));
 		
 		return array(
-			'template' => WCF::getTPL()->fetch('detailedActivityPointList')
+			'template' => WCF::getTPL()->fetch('detailedActivityPointList'),
+			'userID' => $userID
 		);
 	}
 	
