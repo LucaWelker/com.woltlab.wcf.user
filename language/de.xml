@@ -113,8 +113,8 @@
 		<item name="wcf.user.logout.redirect"><![CDATA[Sie wurden erfolgreich abgemeldet.]]></item>
 		<item name="wcf.user.menu.community"><![CDATA[Community]]></item>
 		<item name="wcf.user.menu.community.notification"><![CDATA[Benachrichtigungen]]></item>
-		<item name="wcf.user.menu.community.following"><![CDATA[Sie folgen]]></item>
-		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Sie ignorieren]]></item>
+		<item name="wcf.user.menu.community.following"><![CDATA[Nutzer, denen Sie folgen]]></item>
+		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Blockierte Nutzer]]></item>
 		<item name="wcf.user.menu.profile"><![CDATA[Benutzerkonto]]></item>
 		<item name="wcf.user.menu.profile.accountManagement"><![CDATA[Verwaltung]]></item>
 		<item name="wcf.user.menu.profile.avatar"><![CDATA[Avatar]]></item>
@@ -174,8 +174,8 @@
 		<item name="wcf.user.online.title"><![CDATA[„{$username}“ ist online]]></item>
 		<item name="wcf.user.button.follow"><![CDATA[Folgen]]></item>
 		<item name="wcf.user.button.unfollow"><![CDATA[Entfolgen]]></item>
-		<item name="wcf.user.button.ignore"><![CDATA[Ignorieren]]></item>
-		<item name="wcf.user.button.unignore"><![CDATA[Nicht mehr ignorieren]]></item>
+		<item name="wcf.user.button.ignore"><![CDATA[Blockieren]]></item>
+		<item name="wcf.user.button.unignore"><![CDATA[Nicht mehr blockieren]]></item>
 		<item name="wcf.user.style"><![CDATA[Stile]]></item>
 		<item name="wcf.user.style.description"><![CDATA[Stile der Benutzeroberfläche]]></item>
 		<item name="wcf.user.register"><![CDATA[Registierung]]></item>
@@ -374,8 +374,8 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
       vor.</p>
 <p><small><em>Quellen: <a href="http://www.e-recht24.de/muster-disclaimer.htm" class="externalURL">eRecht24 Disclaimer</a></small></em></p>]]></item>
 		<item name="wcf.user.button.mail"><![CDATA[E-Mail senden]]></item>
-		<item name="wcf.user.ignoredUsers"><![CDATA[Sie ignorieren folgende Benutzer]]></item>
-		<item name="wcf.user.ignoredUsers.noUsers"><![CDATA[Sie ignorieren derzeit keine Benutzer.]]></item>
+		<item name="wcf.user.ignoredUsers"><![CDATA[Sie blockieren folgende Benutzer]]></item>
+		<item name="wcf.user.ignoredUsers.noUsers"><![CDATA[Sie blockieren derzeit keine Benutzer.]]></item>
 		<item name="wcf.user.following"><![CDATA[Sie folgen folgenden Benutzern]]></item>
 		<item name="wcf.user.following.noUsers"><![CDATA[Sie folgen derzeit keinen Benutzern.]]></item>
 		<item name="wcf.user.userTitle"><![CDATA[Individueller Benutzertitel]]></item>
