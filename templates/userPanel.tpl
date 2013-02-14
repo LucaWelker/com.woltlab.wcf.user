@@ -65,9 +65,11 @@
 							</dd>
 						</dl>
 						
-						<dl>
-							<dd><label><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label></dd>
-						</dl>
+						{if $__wcf->getUserAuthenticationFactory->getUserAuthentication()->supportsPersistentLogins()}
+							<dl>
+								<dd><label><input type="checkbox" id="useCookies" name="useCookies" value="1" checked="checked" /> {lang}wcf.user.useCookies{/lang}</label></dd>
+							</dl>
+						{/if}
 						
 						{event name='additionalLoginFields'}
 						
