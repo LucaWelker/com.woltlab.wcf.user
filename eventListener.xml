@@ -93,5 +93,19 @@
 			<listenerclassname>wcf\system\event\listener\PreParserAtUserListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
+		
+		
+		<eventlistener>
+			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>wcf\system\event\listener\UserCleanUpListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>wcf\system\event\listener\UserCleanUpListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>
