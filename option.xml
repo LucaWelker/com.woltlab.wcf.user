@@ -80,32 +80,6 @@
 				<defaultvalue>1</defaultvalue>
 			</option>
 			
-			<!-- user.password -->
-			<option name="encryption_method">
-				<categoryname>user.password</categoryname>
-				<optiontype>text</optiontype>
-				<defaultvalue><![CDATA[sha1]]></defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="encryption_enable_salting">
-				<categoryname>user.password</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue><![CDATA[1]]></defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="encryption_salt_position">
-				<categoryname>user.password</categoryname>
-				<optiontype>text</optiontype>
-				<defaultvalue><![CDATA[before]]></defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="encryption_encrypt_before_salting">
-				<categoryname>user.password</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue><![CDATA[1]]></defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			
 			<option name="register_enable_password_security_check">
 				<categoryname>user.password</categoryname>
 				<optiontype>boolean</optiontype>
