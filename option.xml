@@ -133,11 +133,14 @@
 				<optiontype>integer</optiontype>
 				<defaultvalue><![CDATA[3]]></defaultvalue>
 				<minvalue>3</minvalue>
+				<maxvalue>255</maxvalue>
 			</option>
 			<option name="register_username_max_length">
 				<categoryname>user.register</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue><![CDATA[25]]></defaultvalue>
+				<minvalue>3</minvalue>
+				<maxvalue>255</maxvalue>
 			</option>
 			<option name="register_disabled">
 				<categoryname>user.register</categoryname>
