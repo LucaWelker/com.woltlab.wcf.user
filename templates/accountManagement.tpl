@@ -171,7 +171,7 @@
 				{if $quitStarted}
 					<dl>
 						<dd>
-							<label><input type="checkbox" name="quit" value="1" {if $quit == 1}checked="checked" {/if}/> {lang}wcf.user.quit.cancel{/lang}</label>
+							<label><input type="checkbox" name="cancelQuit" value="1" {if $cancelQuit == 1}checked="checked" {/if}/> {lang}wcf.user.quit.cancel{/lang}</label>
 						</dd>
 					</dl>
 				{else}
