@@ -158,6 +158,7 @@
 				<categoryname>user.register</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue><![CDATA[3]]></defaultvalue>
+				<minvalue>3</minvalue>
 			</option>
 			<option name="register_username_max_length">
 				<categoryname>user.register</categoryname>
