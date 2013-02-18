@@ -1,7 +1,13 @@
 <fieldset>
 	<legend class="invisible">{lang}wcf.user.avatar{/lang}</legend>
 	
-	<div class="userAvatar framed">{@$user->getAvatar()->getImageTag()}</div>
+	<div class="userAvatar">
+		{if $user->userID == $__wcf->user->userID}
+			<a href="{link controller='AvatarEdit'}{/link}" class="framed jsTooltip" title="{lang}wcf.user.avatar.edit{/lang}">{@$user->getAvatar()->getImageTag()}</a>
+		{else}
+			<span class="framed">{@$user->getAvatar()->getImageTag()}</span>
+		{/if}
+	</div>
 </fieldset>
 
 <fieldset>
