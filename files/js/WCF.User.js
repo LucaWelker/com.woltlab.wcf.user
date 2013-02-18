@@ -612,7 +612,7 @@ WCF.User.Profile.Editor = Class.extend({
 		
 		// create buttons
 		this._buttons = {
-			beginEdit: $('<li><a class="button"><span class="icon icon24 icon-pencil" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
+			beginEdit: $('<li><a class="button"><span class="icon icon16 icon-pencil" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
 		};
 	},
 	
