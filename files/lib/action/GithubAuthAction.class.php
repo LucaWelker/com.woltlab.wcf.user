@@ -64,10 +64,15 @@ class GithubAuthAction extends AbstractAction {
 		$user = $this->getUser($data['access_token']);
 		
 		if ($user->userID) {
-			// login
-			WCF::getSession()->changeUser($user);
-			WCF::getSession()->update();
-			HeaderUtil::redirect(LinkHandler::getInstance()->getLink());
+			if (WCF::getUser()->userID) {
+				throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.github.connect.error.inuse'));
+			}
+			else {
+				// login
+				WCF::getSession()->changeUser($user);
+				WCF::getSession()->update();
+				HeaderUtil::redirect(LinkHandler::getInstance()->getLink());
+			}
 		}
 		else {
 			if (WCF::getUser()->userID) {
@@ -141,7 +146,7 @@ class GithubAuthAction extends AbstractAction {
 	/**
 	 * Fetches the User with the given access-token.
 	 * 
-	 * @param	string	$token	access-token
+	 * @param	string			$token
 	 * @return	\wcf\data\user\User
 	 */
 	public function getUser($token) {
@@ -150,7 +155,7 @@ class GithubAuthAction extends AbstractAction {
 			WHERE	userOption".User::getUserOptionID('githubToken')." = ?";
 		$stmt = WCF::getDB()->prepareStatement($sql);
 		$stmt->execute(array($token));
-		$row = $stmt->fetchColumn();
+		$row = $stmt->fetchArray();
 		
 		$user = new User($row['userID']);
 		return $user;

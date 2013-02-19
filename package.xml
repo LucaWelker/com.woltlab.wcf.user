@@ -3,7 +3,7 @@
 	<packageinformation>
 		<packagename>User System</packagename>
 		<packagedescription>Provides functions to create and view user profiles</packagedescription>
-		<version>1.0.0 Alpha 5</version>
+		<version>1.0.0 Alpha 9</version>
 		<date>2011-03-01</date>
 	</packageinformation>
 	
@@ -47,5 +47,11 @@
 	
 	<instructions type="update" fromversion="*">
 		<instruction type="language">language/*.xml</instruction>
+		<instruction type="file">files.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+		<instruction type="userOption">userOption.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="coreObject">coreObject.xml</instruction>
 	</instructions>
 </package>

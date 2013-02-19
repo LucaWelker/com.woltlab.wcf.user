@@ -248,6 +248,20 @@ class RegisterForm extends UserAddForm {
 			WCF::getSession()->unregister('__githubToken');
 			
 			$registerVia3rdParty = true;
+			
+			// TODO: Check if we can fill in any profile fields
+		}
+		// save twitter data
+		if (WCF::getSession()->getVar('__twitterData')) {
+			$twitterData = WCF::getSession()->getVar('__twitterData');
+			$saveOptions[User::getUserOptionID('twitterData')] = serialize($twitterData);
+			$saveOptions[User::getUserOptionID('twitterUserID')] = $twitterData['user_id'];
+			
+			WCF::getSession()->unregister('__twitterData');
+			
+			$registerVia3rdParty = true;
+			
+			// TODO: Check if we can fill in any profile fields
 		}
 		
 		$this->additionalFields['languageID'] = $this->languageID;

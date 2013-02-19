@@ -97,6 +97,15 @@ class AccountManagementForm extends AbstractSecureForm {
 	 */
 	public $githubDisconnect = 0;
 	
+	/**
+	 * indicates if the user wants do connect twitter
+	 */
+	public $twitterConnect = 0;
+	
+	/**
+	 * indicates if the user wants do disconnect twitter
+	 */
+	public $twitterDisconnect = 0;
 	
 	/**
 	 * @see	wcf\page\IPage::readParameters()
@@ -123,6 +132,8 @@ class AccountManagementForm extends AbstractSecureForm {
 		if (isset($_POST['cancelQuit'])) $this->cancelQuit = intval($_POST['cancelQuit']);
 		if (isset($_POST['githubConnect'])) $this->githubConnect = intval($_POST['githubConnect']);
 		if (isset($_POST['githubDisconnect'])) $this->githubDisconnect = intval($_POST['githubDisconnect']);
+		if (isset($_POST['twitterConnect'])) $this->twitterConnect = intval($_POST['twitterConnect']);
+		if (isset($_POST['twitterDisconnect'])) $this->twitterDisconnect = intval($_POST['twitterDisconnect']);
 	}
 	
 	/**
@@ -235,7 +246,9 @@ class AccountManagementForm extends AbstractSecureForm {
 			'quit' => $this->quit,
 			'cancelQuit' => $this->cancelQuit,
 			'githubConnect' => $this->githubConnect,
-			'githubDisconnect' => $this->githubDisconnect
+			'githubDisconnect' => $this->githubDisconnect,
+			'twitterConnect' => $this->twitterConnect,
+			'twitterDisconnect' => $this->twitterDisconnect
 		));
 	}
 	
@@ -346,6 +359,28 @@ class AccountManagementForm extends AbstractSecureForm {
 				WCF::getUser()->githubToken = '';
 				
 				$success[] = 'wcf.user.3rdparty.github.disconnect.success';
+			}
+		}
+		if (TWITTER_PUBLIC_KEY !== '' && TWITTER_PRIVATE_KEY !== '') {
+			if ($this->twitterConnect && WCF::getSession()->getVar('__twitterData')) {
+				$twitterData = WCF::getSession()->getVar('__twitterData');
+				$updateOptions[User::getUserOptionID('twitterData')] = serialize($twitterData);
+				$updateOptions[User::getUserOptionID('twitterUserID')] = $twitterData['user_id'];
+				
+				WCF::getUser()->twitterUserID = $twitterData['user_id'];
+				
+				$success[] = 'wcf.user.3rdparty.twitter.connect.success';
+				
+				\wcf\system\WCF::getSession()->unregister('__twitterData');
+				\wcf\system\WCF::getSession()->unregister('__twitterUsername');
+			}
+			else if ($this->twitterDisconnect && WCF::getUser()->twitterUserID) {
+				$updateOptions[User::getUserOptionID('twitterData')] = '';
+				$updateOptions[User::getUserOptionID('twitterUserID')] = '';
+				
+				WCF::getUser()->twitterUserID = '';
+				
+				$success[] = 'wcf.user.3rdparty.twitter.disconnect.success';
 			}
 		}
 		

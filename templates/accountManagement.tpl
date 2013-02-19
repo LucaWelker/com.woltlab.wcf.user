@@ -208,6 +208,25 @@
 							<a href="https://github.com/login/oauth/authorize?client_id={@GITHUB_PUBLIC_KEY|rawurlencode}&amp;scope={@'user:email'|rawurlencode}" class="button marginTop"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.connect{/lang}</span></a>
 						{/if}
 					{/if}
+					
+					{if TWITTER_PUBLIC_KEY !== '' && TWITTER_PRIVATE_KEY !== ''}
+						{if $__wcf->user->twitterUserID}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="twitterDisconnect" value="1"{if $twitterDisconnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.twitter.disconnect{/lang}</label>
+								</dd>
+							</dl>
+						{elseif $__wcf->session->getVar('__twitterData')}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="twitterConnect" value="1"{if $twitterConnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.twitter.connect{/lang}</label>
+								</dd>
+							</dl>
+						{else}
+							<p class="info">{lang}wcf.user.3rdparty.twitter.connect.info{/lang}</p>
+							<a href="{link controller='TwitterAuth'}{/link}" class="button marginTop"><span class="icon icon16 icon-twitter"></span> <span>{lang}wcf.user.3rdparty.twitter.connect{/lang}</span></a>
+						{/if}
+					{/if}
 					{event name='3rdParty'}
 				{/content}
 			</fieldset>

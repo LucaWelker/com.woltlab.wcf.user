@@ -125,6 +125,12 @@
 			<a href="https://github.com/login/oauth/authorize?client_id={@GITHUB_PUBLIC_KEY|rawurlencode}&amp;scope={@'user:email'|rawurlencode}"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.login{/lang}</span></a>
 		</li>
 	{/if}
+	
+	{if TWITTER_PUBLIC_KEY !== '' && TWITTER_PRIVATE_KEY !== ''}
+		<li>
+			<a href="{link controller='TwitterAuth'}{/link}"><span class="icon icon16 icon-twitter"></span> <span>{lang}wcf.user.3rdparty.twitter.login{/lang}</span></a>
+		</li>
+	{/if}
 {/if}
 
 {event name='menuItems'}

@@ -55,6 +55,9 @@
 		<item name="wcf.acp.option.github_public_key"><![CDATA[github Client ID]]></item>
 		<item name="wcf.acp.option.github_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://github.com/settings/applications"}" class="externalURL">github</a> anfordern.]]></item>
 		<item name="wcf.acp.option.github_private_key"><![CDATA[github Client Secret]]></item>
+		<item name="wcf.acp.option.twitter_public_key"><![CDATA[Twitter Consumer key]]></item>
+		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://dev.twitter.com/apps"}" class="externalURL">Twitter</a> anfordern.]]></item>
+		<item name="wcf.acp.option.twitter_private_key"><![CDATA[Twitter Consumer secret]]></item>
 	</category>
 	
 	<category name="wcf.acp.user">
@@ -405,8 +408,17 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.3rdparty.github.connect"><![CDATA[Mit github-Konto {if $__wcf->session->getVar('__githubUsername')}(„<a href="https://github.com/{$__wcf->session->getVar('__githubUsername')}">{$__wcf->session->getVar('__githubUsername')}</a>“){/if} verknüpfen]]></item>
 		<item name="wcf.user.3rdparty.github.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://github.com" class="externalURL">github-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr github-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
 		<item name="wcf.user.3rdparty.github.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem github-Konto verknüpft.]]></item>
-		<item name="wcf.user.3rdparty.github.disconnect"><![CDATA[Verknüpfung zu github</a> trennen]]></item>
+		<item name="wcf.user.3rdparty.github.connect.error.inuse"><![CDATA[Ihr github-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.github.disconnect"><![CDATA[Verknüpfung zu github trennen]]></item>
 		<item name="wcf.user.3rdparty.github.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem github-Konto wurde erfolgreich getrennt.]]></item>
+		<item name="wcf.user.3rdparty.twitter.login"><![CDATA[Mit Twitter anmelden]]></item>
+		<item name="wcf.user.3rdparty.twitter.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-twitter"></span>&nbsp;Twitter. Der Benutzername wurde daher bereits ausgefüllt. Geben Sie nun noch Ihre E-Mail-Adresse an und wählen Sie ein Passwort aus und Sie können sofort loslegen!]]></item>
+		<item name="wcf.user.3rdparty.twitter.connect"><![CDATA[Mit Twitter-Konto {if $__wcf->session->getVar('__twitterUsername')}(„<a href="https://twitter.com/{$__wcf->session->getVar('__twitterUsername')}">{$__wcf->session->getVar('__twitterUsername')}</a>“){/if} verknüpfen]]></item>
+		<item name="wcf.user.3rdparty.twitter.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://twitter.com" class="externalURL">Twitter-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr Twitter-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
+		<item name="wcf.user.3rdparty.twitter.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem Twitter-Konto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.twitter.connect.error.inuse"><![CDATA[Ihr Twitter-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.twitter.disconnect"><![CDATA[Verknüpfung zu Twitter trennen]]></item>
+		<item name="wcf.user.3rdparty.twitter.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem Twitter-Konto wurde erfolgreich getrennt.]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

@@ -45,6 +45,10 @@
 	<p class="info">{lang}wcf.user.3rdparty.github.register{/lang}</p>
 {/if}
 
+{if $__wcf->session->getVar('__twitterData')}
+	<p class="info">{lang}wcf.user.3rdparty.twitter.register{/lang}</p>
+{/if}
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
