@@ -69,7 +69,10 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 		$width = $this->width;
 		$height = $this->height;
 		if ($size !== null) {
-			if ($this->width > $size || $this->height > $size) {
+			if ($this->width > $size && $this->height > $size) {
+				$width = $height = $size;
+			}
+			else if ($this->width > $size || $this->height > $size) {
 				$widthFactor = $size / $this->width;
 				$heightFactor = $size / $this->height;
 				

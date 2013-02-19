@@ -6,9 +6,9 @@ use wcf\data\ProcessibleDatabaseObject;
  * Represents a user notification event.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf.notification
+ * @package	com.woltlab.wcf.user
  * @subpackage	data.user.notification.event
  * @category	Community Framework
  */

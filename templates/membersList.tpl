@@ -17,6 +17,11 @@
 				
 				new WCF.User.Action.Follow($('.userList > li'));
 				new WCF.User.Action.Ignore($('.userList > li'));
+				
+				new WCF.Search.User('#username', function(data) {
+					var $link = '{link controller='User' id=2147483646 title='wcfTitlePlaceholder' encode=false}{/link}';
+					window.location = $link.replace('2147483646', data.objectID).replace('wcfTitlePlaceholder', data.label);
+				}, false, [ ], false);
 			});
 		//]]>
 	</script>
@@ -25,8 +30,21 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
-{assign var=encodedLetter value=$letter|rawurlencode}
-{*TODO: sidebar content*}
+	{assign var=encodedLetter value=$letter|rawurlencode}
+	<div class="javascriptOnly">
+		<form method="get" action="{if $searchID}{link controller='MembersList' id=$searchID}{/link}{else}{link controller='MembersList'}{/link}{/if}">
+			<fieldset>
+				<legend><label for="username">{lang}wcf.user.search{/lang}</label></legend>
+				
+				<dl>
+					<dd>
+						<input type="text" id="username" name="username" class="long" placeholder="{lang}wcf.user.username{/lang}" />
+					</dd>
+				</dl>
+			</fieldset>
+		</form>
+	</div>
+	
 	<fieldset>
 		<legend>{lang}wcf.user.members.sort.letters{/lang}</legend>
 				
@@ -41,7 +59,7 @@
 	<div>
 		<form method="get" action="{if $searchID}{link controller='MembersList' id=$searchID}{/link}{else}{link controller='MembersList'}{/link}{/if}">
 			<fieldset>
-				<legend>{lang}wcf.user.members.sort{/lang}</legend>
+				<legend><label for="sortField">{lang}wcf.user.members.sort{/lang}</label></legend>
 				
 				<dl>
 					<dd>
@@ -66,6 +84,8 @@
 			</div>
 		</form>
 	</div>
+	
+	{@$__boxSidebar}
 {/capture}
 
 {include file='header' sidebarOrientation='right'}
@@ -86,13 +106,18 @@
 	{/if}
 </div>
 
-<div class="container marginTop">
-	<ol class="containerList doubleColumned userList">
-		{foreach from=$objects item=user}
-			{include file='userListItem'}
-		{/foreach}
-	</ol>
-</div>
+{if $items}
+	<div class="container marginTop">
+		<ol class="containerList doubleColumned userList">
+			{foreach from=$objects item=user}
+				{include file='userListItem'}
+			{/foreach}
+		</ol>
+	</div>
+{else}
+	<p class="info">{lang}wcf.user.members.noMembers{/lang}</p>
+{/if}
+	
 
 <div class="contentNavigation">
 	{@$pagesLinks}

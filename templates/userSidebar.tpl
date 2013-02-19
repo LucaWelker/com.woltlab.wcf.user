@@ -1,7 +1,13 @@
 <fieldset>
 	<legend class="invisible">{lang}wcf.user.avatar{/lang}</legend>
 	
-	<div class="userAvatar">{@$user->getAvatar()->getImageTag()}</div>
+	<div class="userAvatar">
+		{if $user->userID == $__wcf->user->userID}
+			<a href="{link controller='AvatarEdit'}{/link}" class="framed jsTooltip" title="{lang}wcf.user.avatar.edit{/lang}">{@$user->getAvatar()->getImageTag()}</a>
+		{else}
+			<span class="framed">{@$user->getAvatar()->getImageTag()}</span>
+		{/if}
+	</div>
 </fieldset>
 
 <fieldset>
@@ -10,7 +16,7 @@
 	<dl class="plain statsDataList">
 		{event name='statistics'}
 		
-		<dt>{if $user->activityPoints}<a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoint.showDetails{/lang}">{lang}wcf.user.activityPoint{/lang}</a>{else}{lang}wcf.user.activityPoint{/lang}{/if}</dt>
+		<dt>{if $user->activityPoints}<a class="activityPointsDisplay jsTooltip" title="{lang}wcf.user.activityPoint.showDetails{/lang}" data-user-id="{@$user->userID}">{lang}wcf.user.activityPoint{/lang}</a>{else}{lang}wcf.user.activityPoint{/lang}{/if}</dt>
 		<dd>{#$user->activityPoints}</dd>
 		
 		<dt>{lang}wcf.user.profileHits{/lang}</dt>

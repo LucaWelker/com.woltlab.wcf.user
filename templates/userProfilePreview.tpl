@@ -1,21 +1,26 @@
 <div class="box128 userProfilePreview">
 	<a href="{link controller='User' object=$user}{/link}" title="{$user->username}">{@$user->getAvatar()->getImageTag(128)}</a>
 	
-	<script type="text/javascript">
-		//<![CDATA[
-			$(function() {
-				WCF.Language.addObject({
-					'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
-					'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
-					'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
-					'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
+	{if $__wcf->getUser()->userID && $__wcf->getUser()->userID != $user->userID}
+		<script type="text/javascript">
+			//<![CDATA[
+				$(function() {
+					WCF.Language.addObject({
+						'wcf.user.button.follow': '{lang}wcf.user.button.follow{/lang}',
+						'wcf.user.button.ignore': '{lang}wcf.user.button.ignore{/lang}',
+						'wcf.user.button.unfollow': '{lang}wcf.user.button.unfollow{/lang}',
+						'wcf.user.button.unignore': '{lang}wcf.user.button.unignore{/lang}'
+					});
+					
+					new WCF.User.Action.Follow($('.userInformation'));
+					
+					{if !$user->getPermission('user.profile.cannotBeIgnored')}
+						new WCF.User.Action.Ignore($('.userInformation'));
+					{/if}
 				});
-				
-				new WCF.User.Action.Follow($('.userInformation'));
-				new WCF.User.Action.Ignore($('.userInformation'));
-			});
-		//]]>
-	</script>
+			//]]>
+		</script>
+	{/if}
 	
 	<div class="userInformation">
 		{include file='userInformation'}

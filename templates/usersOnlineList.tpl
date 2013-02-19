@@ -28,11 +28,10 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
-{*TODO: sidebar content*}
 	<div>
 		<form method="get" action="{link controller='UsersOnlineList'}{/link}">
 			<fieldset>
-				<legend>{lang}wcf.user.members.sort{/lang}</legend>
+				<legend><label for="sortField">{lang}wcf.user.members.sort{/lang}</label></legend>
 				
 				<dl>
 					<dd>
@@ -59,6 +58,8 @@
 			</div>
 		</form>
 	</div>
+	
+	{@$__boxSidebar}
 {/capture}
 
 {include file='header' sidebarOrientation='right'}

@@ -16,6 +16,10 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
+{capture assign='sidebar'}
+	{@$__boxSidebar}
+{/capture}
+
 {include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">
@@ -39,13 +43,6 @@
 				<dt><label for="username">{lang}wcf.user.username{/lang}</label></dt>
 				<dd>
 					<input type="text" id="username" name="username" value="{$username}" class="medium" />
-				</dd>
-			</dl>
-			
-			<dl>
-				<dt><label for="email">{lang}wcf.user.email{/lang}</label></dt>
-				<dd>
-					<input type="email" id="email" name="email" value="{$email}" class="medium" />
 				</dd>
 			</dl>
 		</fieldset>

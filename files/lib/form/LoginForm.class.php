@@ -56,7 +56,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		
 		// set cookies
 		if ($this->useCookies == 1) {
-			UserAuthenticationFactory::getUserAuthentication()->storeAccessData($this->user, $this->username, $this->password);
+			UserAuthenticationFactory::getInstance()->getUserAuthentication()->storeAccessData($this->user, $this->username, $this->password);
 		}
 		
 		// change user
@@ -79,7 +79,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		
 		WCF::getTPL()->assign(array(
 			'useCookies' => $this->useCookies,
-			'supportsPersistentLogins' => UserAuthenticationFactory::getUserAuthentication()->supportsPersistentLogins()
+			'supportsPersistentLogins' => UserAuthenticationFactory::getInstance()->getUserAuthentication()->supportsPersistentLogins()
 		));
 	}
 	

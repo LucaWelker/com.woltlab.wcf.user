@@ -10,7 +10,7 @@
 					<h3 class="containerContentType"><small>{lang}wcf.user.recentActivity.{@$event->getObjectTypeName()}{/lang}</small></h3>
 				</hgroup>
 				
-				<p>{@$event->getDescription()}</p>
+				<div>{@$event->getDescription()}</div>
 			</div>
 		</div>
 	</li>

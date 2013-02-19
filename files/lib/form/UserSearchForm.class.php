@@ -3,9 +3,11 @@ namespace wcf\form;
 use wcf\acp\form\UserOptionListForm;
 use wcf\data\search\SearchEditor;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
@@ -31,12 +33,6 @@ class UserSearchForm extends UserOptionListForm {
 	 * @var	string
 	 */
 	public $username = '';
-	
-	/**
-	 * email address
-	 * @var	string
-	 */
-	public $email = '';
 	
 	/**
 	 * matches
@@ -69,7 +65,6 @@ class UserSearchForm extends UserOptionListForm {
 		parent::readFormParameters();
 		
 		if (isset($_POST['username'])) $this->username = StringUtil::trim($_POST['username']);
-		if (isset($_POST['email'])) $this->email = StringUtil::trim($_POST['email']);
 	}
 	
 	/**
@@ -105,10 +100,13 @@ class UserSearchForm extends UserOptionListForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
+		DashboardHandler::getInstance()->loadBoxes('com.woltlab.wcf.user.MembersListPage', $this);
+		
 		WCF::getTPL()->assign(array(
 			'username' => $this->username,
-			'email' => $this->email,
-			'optionTree' => $this->optionTree
+			'optionTree' => $this->optionTree,
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersListPage'),
+			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage'
 		));
 	}
 	
@@ -183,9 +181,6 @@ class UserSearchForm extends UserOptionListForm {
 	protected function buildStaticConditions() {
 		if (!empty($this->username)) {
 			$this->conditions->add("user_table.username LIKE ?", array('%'.addcslashes($this->username, '_%').'%'));
-		}
-		if (!empty($this->email)) {
-			$this->conditions->add("user_table.email LIKE ?", array('%'.addcslashes($this->email, '_%').'%'));
 		}
 	}
 	

@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
-use wcf\data\user\User;
+use wcf\data\user\UserList;
 use wcf\system\event\IEventListener;
 use wcf\system\request\LinkHandler;
 use wcf\system\Regex;
@@ -31,17 +31,20 @@ class PreParserAtUserListener implements IEventListener {
 		$userRegex->match($eventObj->text, true);
 		$matches = $userRegex->getMatches();
 		
-		// remove duplicates, saves queries
-		array_unique($matches[1]);
-		foreach ($matches[1] as $key => $match) {
-			$user = User::getUserByUsername($match);
-		
-			if ($user->userID) {
+		if (!empty($matches[1])) {
+			// remove duplicates
+			$matches[1] = array_unique($matches[1]);
+			
+			// fetch users
+			$userList = new UserList();
+			$userList->getConditionBuilder()->add('user_table.username IN (?)', array($matches[1]));
+			$userList->readObjects();
+			foreach ($userList as $user) {
 				$link = LinkHandler::getInstance()->getLink('User', array(
 					'object' => $user
 				));
 				
-				$eventObj->text = StringUtil::replace($matches[0][$key], "[url='".$link."']".$matches[0][$key].'[/url]', $eventObj->text);
+				$eventObj->text = StringUtil::replace('@'.$user->username, "[url='".$link."']@".$user->username.'[/url]', $eventObj->text);
 			}
 		}
 	}

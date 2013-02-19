@@ -87,11 +87,16 @@
 		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Aktive Boxen]]></item>
 		<item name="wcf.dashboard.box.com.woltlab.wcf.user.recentActivitySidebar"><![CDATA[Letzte Aktivität]]></item>
 		<item name="wcf.dashboard.box.com.woltlab.wcf.user.statsSidebar"><![CDATA[Statistiken]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.newestMembers"><![CDATA[Neueste Mitglieder]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.mostActiveMembers"><![CDATA[Aktivste Mitglieder]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.registerButton"><![CDATA[Registrierungs-Button]]></item>
+		<item name="wcf.dashboard.box.com.woltlab.wcf.user.signedInAs"><![CDATA[Angemeldet als]]></item>
 		<item name="wcf.dashboard.boxType.content"><![CDATA[Inhaltsbereich]]></item>
 		<item name="wcf.dashboard.boxType.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="wcf.dashboard.objectType"><![CDATA[Seite]]></item>
 		<item name="wcf.dashboard.objectType.com.woltlab.wcf.user.DashboardPage"><![CDATA[Dashboard]]></item>
 		<item name="wcf.dashboard.objectType.com.woltlab.wcf.user.MembersListPage"><![CDATA[Mitgliederliste]]></item>
+		<item name="wcf.dashboard.box.mostActiveMembers.points"><![CDATA[{#$activeMember->activityPoints} Punkt{if $activeMember->activityPoints != 1}e{/if}]]></item>
 	</category>
 	
 	<category name="wcf.sitemap">
@@ -114,8 +119,8 @@
 		<item name="wcf.user.logout.redirect"><![CDATA[Sie wurden erfolgreich abgemeldet.]]></item>
 		<item name="wcf.user.menu.community"><![CDATA[Community]]></item>
 		<item name="wcf.user.menu.community.notification"><![CDATA[Benachrichtigungen]]></item>
-		<item name="wcf.user.menu.community.following"><![CDATA[Sie folgen]]></item>
-		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Sie ignorieren]]></item>
+		<item name="wcf.user.menu.community.following"><![CDATA[Nutzer, denen Sie folgen]]></item>
+		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Blockierte Nutzer]]></item>
 		<item name="wcf.user.menu.profile"><![CDATA[Benutzerkonto]]></item>
 		<item name="wcf.user.menu.profile.accountManagement"><![CDATA[Verwaltung]]></item>
 		<item name="wcf.user.menu.profile.avatar"><![CDATA[Avatar]]></item>
@@ -127,6 +132,7 @@
 		<item name="wcf.user.gender.male"><![CDATA[Männlich]]></item>
 		<item name="wcf.user.gender.female"><![CDATA[Weiblich]]></item>
 		<item name="wcf.user.members"><![CDATA[Mitglieder]]></item>
+		<item name="wcf.user.members.noMembers"><![CDATA[Es wurden keine Mitglieder gefunden.]]></item>
 		<item name="wcf.user.members.sort"><![CDATA[Sortierung]]></item>
 		<item name="wcf.user.members.sort.letters"><![CDATA[Anfangsbuchstabe]]></item>
 		<item name="wcf.user.members.sort.letters.all"><![CDATA[Alle]]></item>
@@ -174,8 +180,8 @@
 		<item name="wcf.user.online.title"><![CDATA[„{$username}“ ist online]]></item>
 		<item name="wcf.user.button.follow"><![CDATA[Folgen]]></item>
 		<item name="wcf.user.button.unfollow"><![CDATA[Entfolgen]]></item>
-		<item name="wcf.user.button.ignore"><![CDATA[Ignorieren]]></item>
-		<item name="wcf.user.button.unignore"><![CDATA[Nicht mehr ignorieren]]></item>
+		<item name="wcf.user.button.ignore"><![CDATA[Blockieren]]></item>
+		<item name="wcf.user.button.unignore"><![CDATA[Nicht mehr blockieren]]></item>
 		<item name="wcf.user.style"><![CDATA[Stile]]></item>
 		<item name="wcf.user.style.description"><![CDATA[Stile der Benutzeroberfläche]]></item>
 		<item name="wcf.user.register"><![CDATA[Registierung]]></item>
@@ -308,10 +314,6 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.registerActivation.info"><![CDATA[Eine E-Mail mit dem 9-stelligen Aktivierungscode wurde an Ihre E-Mail-Adresse {$__wcf->user->email} verschickt.]]></item>
 		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Der Benutzername wurde innerhalb der letzten {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} Tage bereits einmal verändert.]]></item>
 		<item name="wcf.user.guest"><![CDATA[Gast]]></item>
-		<item name="wcf.user.watchedObjects.subscribe"><![CDATA[Abonnieren]]></item>
-		<item name="wcf.user.watchedObjects.unsubscribe"><![CDATA[Abbestellen]]></item>
-		<item name="wcf.user.watchedObjects.disableNotification"><![CDATA[Benachrichtigung abschalten]]></item>
-		<item name="wcf.user.watchedObjects.enableNotification"><![CDATA[Benachrichtigung aktivieren]]></item>
 		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
 		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
 		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>
@@ -378,8 +380,8 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
       vor.</p>
 <p><small><em>Quellen: <a href="http://www.e-recht24.de/muster-disclaimer.htm" class="externalURL">eRecht24 Disclaimer</a></small></em></p>]]></item>
 		<item name="wcf.user.button.mail"><![CDATA[E-Mail senden]]></item>
-		<item name="wcf.user.ignoredUsers"><![CDATA[Sie ignorieren folgende Benutzer]]></item>
-		<item name="wcf.user.ignoredUsers.noUsers"><![CDATA[Sie ignorieren derzeit keine Benutzer.]]></item>
+		<item name="wcf.user.ignoredUsers"><![CDATA[Sie blockieren folgende Benutzer]]></item>
+		<item name="wcf.user.ignoredUsers.noUsers"><![CDATA[Sie blockieren derzeit keine Benutzer.]]></item>
 		<item name="wcf.user.following"><![CDATA[Sie folgen folgenden Benutzern]]></item>
 		<item name="wcf.user.following.noUsers"><![CDATA[Sie folgen derzeit keinen Benutzern.]]></item>
 		<item name="wcf.user.userTitle"><![CDATA[Individueller Benutzertitel]]></item>
@@ -412,7 +414,7 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.avatar.edit"><![CDATA[Avatar verwalten]]></item>
 		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Eigenen Avatar hochladen]]></item>
-		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} und maximal eine Größe {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Die Mindestgröße für Avatare liegt bei 24×24 Pixel, die empfohlene Maximalgröße bei {@MAX_AVATAR_WIDTH}×{@MAX_AVATAR_HEIGHT} Pixel, größere Avatare werden - sofern möglich - automatisch auf die Maximalgröße verkleinert.]]></item>
+		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} und maximal eine Größe {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Die Mindestgröße für Avatare liegt bei 48×48 Pixel, die empfohlene Maximalgröße bei {@MAX_AVATAR_WIDTH}×{@MAX_AVATAR_HEIGHT} Pixel, größere Avatare werden - sofern möglich - automatisch auf die Maximalgröße verkleinert.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse („{$__wcf->user->email}“) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com" class="externalURL">www.gravatar.com</a>]]></item>
 		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
@@ -458,6 +460,10 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.profile.oldUsername"><![CDATA[Hieß früher „{$user->getOldUsername()}“]]></item>
 		<item name="wcf.user.profile.recentActivity.follow"><![CDATA[Folgt nun <a href="{link controller='User' object=$user}{/link}">{$user->username}</a>.]]></item>
 		<item name="wcf.user.profile.visitors"><![CDATA[Profil-Besucher]]></item>
+	</category>
+	
+	<category name="wcf.user.objectWatch">
+		<item name="wcf.user.objectWatch.manageSubscription"><![CDATA[Abonnement verwalten]]></item>
 	</category>
 	
 	<category name="wcf.user.option">

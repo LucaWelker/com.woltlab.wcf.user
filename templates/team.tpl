@@ -24,6 +24,10 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
+{capture assign='sidebar'}
+	{@$__boxSidebar}
+{/capture}
+
 {include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">

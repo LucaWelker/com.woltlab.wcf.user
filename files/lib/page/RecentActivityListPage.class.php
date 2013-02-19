@@ -3,6 +3,7 @@ namespace wcf\page;
 use wcf\data\user\activity\event\ViewableUserActivityEventList;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
@@ -53,11 +54,13 @@ class RecentActivityListPage extends AbstractPage {
 		// removes orphaned and non-accessable events
 		UserActivityEventHandler::validateEvents($this->eventList);
 		
+		DashboardHandler::getInstance()->loadBoxes('com.woltlab.wcf.user.MembersListPage', $this);
+		
 		WCF::getTPL()->assign(array(
 			'eventList' => $this->eventList,
 			'lastEventTime' => $lastEventTime,
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.RecentActivityList'),
-			'sidebarName' => 'com.woltlab.wcf.user.RecentActivityList',
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersListPage'),
+			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage'
 		));
 	}
 }

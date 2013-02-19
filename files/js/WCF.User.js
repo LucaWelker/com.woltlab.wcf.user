@@ -1,9 +1,23 @@
 /**
+ * User-related classes.
+ * 
+ * @author	Alexander Ebert
+ * @copyright	2001-2013 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ */
+
+/**
  * Quick login box
  * 
  * @param	boolean		isQuickLogin
  */
 WCF.User.Login = Class.extend({
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
 	/**
 	 * login button
 	 * @var	jQuery
@@ -48,13 +62,19 @@ WCF.User.Login = Class.extend({
 		
 		var $loginForm = $('#loginForm');
 		$loginForm.find('input[name=action]').change($.proxy(this._change, this));
-		//$loginForm.find('input[type=reset]').click($.proxy(this._reset, this));
 		
 		if (isQuickLogin) {
+			var self = this;
 			$('.loginLink').click(function() {
-				WCF.showDialog('loginForm', {
-					title: WCF.Language.get('wcf.user.login')
-				});
+				if (self._dialog === null) {
+					self._dialog = $('#loginForm').wcfDialog({
+						title: WCF.Language.get('wcf.user.login')
+					});
+				}
+				else {
+					self._dialog.wcfDialog('open');
+				}
+				
 				return false;
 			});
 		}
@@ -73,13 +93,6 @@ WCF.User.Login = Class.extend({
 			this._setState(true, WCF.Language.get('wcf.user.button.login'));
 		}
 	},
-	
-	/**
-	 * Handles clicks on the reset button.
-	 */
-	/*_reset: function() {
-		this._setState(true, WCF.Language.get('wcf.user.button.login'));
-	},*/
 	
 	/**
 	 * Sets form states.
@@ -109,6 +122,114 @@ WCF.User.Login = Class.extend({
  * UserProfile namespace
  */
 WCF.User.Profile = {};
+
+/**
+ * Shows the activity point list for users.
+ */
+WCF.User.Profile.ActivityPointList = {
+	/**
+	 * list of cached templates
+	 * @var	object
+	 */
+	_cache: { },
+	
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
+	/**
+	 * initialization state
+	 * @var	boolean
+	 */
+	_didInit: false,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * Initializes the WCF.User.Profile.ActivityPointList class.
+	 */
+	init: function() {
+		if (this._didInit) {
+			return;
+		}
+		
+		this._cache = { };
+		this._dialog = null;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		this._init();
+		
+		WCF.DOMNodeInsertedHandler.addCallback('WCF.User.Profile.ActivityPointList', $.proxy(this._init, this));
+		
+		this._didInit = true;
+	},
+	
+	/**
+	 * Initializes display for activity points.
+	 */
+	_init: function() {
+		$('.activityPointsDisplay').removeClass('activityPointsDisplay').click($.proxy(this._click, this));
+	},
+	
+	/**
+	 * Shows or loads the activity point for selected user.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var $userID = $(event.currentTarget).data('userID');
+		
+		if (this._cache[$userID] === undefined) {
+			this._proxy.setOption('data', {
+				actionName: 'getDetailedActivityPointList',
+				className: 'wcf\\data\\user\\UserProfileAction',
+				objectIDs: [ $userID ]
+			});
+			this._proxy.sendRequest();
+		}
+		else {
+			this._show($userID);
+		}
+	},
+	
+	/**
+	 * Displays activity points for given user.
+	 * 
+	 * @param	integer		userID
+	 */
+	_show: function(userID) {
+		if (this._dialog === null) {
+			this._dialog = $('<div>' + this._cache[userID] + '</div>').hide().appendTo(document.body);
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('wcf.user.activityPoint')
+			});
+		}
+		else {
+			this._dialog.html(this._cache[userID]);
+			this._dialog.wcfDialog('open');
+		}
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._cache[data.returnValues.userID] = data.returnValues.template;
+		this._show(data.returnValues.userID);
+	}
+};
 
 /**
  * Provides methods to follow an user.
@@ -162,7 +283,7 @@ WCF.User.Profile.Follow = Class.extend({
 	 * Creates the (un-)follow button
 	 */
 	_createButton: function () {
-		this._button = $('<li id="followUser"><a class="button">'+WCF.Language.get('wcf.user.button.follow')+'</a></li>').prependTo($('#profileButtonContainer'));
+		this._button = $('<li id="followUser"><a class="button jsTooltip" title="'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'follow')+'"><span class="icon icon16 icon-plus"></span></a></li>').prependTo($('#profileButtonContainer'));
 		this._button.click($.proxy(this._execute, this));
 	},
 	
@@ -187,16 +308,12 @@ WCF.User.Profile.Follow = Class.extend({
 	 * Displays current follow state.
 	 */
 	_showButton: function () {
-		var $label = WCF.Language.get('wcf.user.button.follow');
 		if (this._following) {
-			$label = WCF.Language.get('wcf.user.button.unfollow');
+			this._button.find('.button').data('tooltip', WCF.Language.get('wcf.user.button.unfollow')).addClass('active').children('.icon').removeClass('icon-plus').addClass('icon-minus');
 		}
-		
-		// update label
-		this._button.find('.button').text($label);
-		
-		if (this._following) this._button.find('.button').addClass('active');
-		else this._button.find('.button').removeClass('active');
+		else {
+			this._button.find('.button').data('tooltip', WCF.Language.get('wcf.user.button.follow')).removeClass('active').children('.icon').removeClass('icon-minus').addClass('icon-plus');
+		}
 	},
 	
 	/**
@@ -299,12 +416,12 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 	 */
 	_updateButton: function() {
 		if (this._button === null) {
-			this._button = $('<li id="ignoreUser"><a class="button"></a></li>').prependTo($('#profileButtonContainer'));
+			this._button = $('<li id="ignoreUser"><a class="button jsTooltip" title="'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'ignore')+'"><span class="icon icon16 icon-off"></span></a></li>').prependTo($('#profileButtonContainer'));
 		}
 		
-		this._button.find('.button').text(WCF.Language.get('wcf.user.button.' + (this._isIgnoredUser ? 'un' : '') + 'ignore'));
-		if (this._isIgnoredUser) this._button.find('.button').addClass('active');
-		else this._button.find('.button').removeClass('active');
+		this._button.find('.button').data('tooltip', WCF.Language.get('wcf.user.button.' + (this._isIgnoredUser ? 'un' : '') + 'ignore'));
+		if (this._isIgnoredUser) this._button.find('.button').addClass('active').children('.icon').removeClass('icon-off').addClass('icon-circle-blank');
+		else this._button.find('.button').removeClass('active').children('.icon').removeClass('icon-circle-blank').addClass('icon-off');
 	}
 });
 
@@ -491,7 +608,7 @@ WCF.User.Profile.Editor = Class.extend({
 		
 		// create buttons
 		this._buttons = {
-			beginEdit: $('<li><a class="button"><span class="icon icon24 icon-pencil" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
+			beginEdit: $('<li><a class="button"><span class="icon icon16 icon-pencil" /> <span>' + WCF.Language.get('wcf.user.editProfile') + '</span></a></li>').click($.proxy(this._beginEdit, this)).appendTo($buttonContainer)
 		};
 	},
 	
