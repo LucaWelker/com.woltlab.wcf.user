@@ -183,6 +183,16 @@
 1:wcf.acp.option.register_activation_method.byUser
 2:wcf.acp.option.register_activation_method.byAdmin]]></selectoptions>
 			</option>
+			<option name="github_public_key">
+				<categoryname>user.register</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue></defaultvalue>
+			</option>
+			<option name="github_private_key">
+				<categoryname>user.register</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue></defaultvalue>
+			</option>
 			<!-- /user.register -->
 			
 			<!-- user.security -->

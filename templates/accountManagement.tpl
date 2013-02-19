@@ -185,6 +185,34 @@
 			</fieldset>
 		{/if}
 		
+		{hascontent}
+			<fieldset id="3rdParty">
+			<legend>{lang}wcf.user.3rdparty{/lang}</legend>
+			
+				{content}
+					{if GITHUB_PUBLIC_KEY !== '' && GITHUB_PRIVATE_KEY !== ''}
+						{if $__wcf->user->githubToken}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="githubDisconnect" value="1"{if $githubDisconnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.github.disconnect{/lang}</label>
+								</dd>
+							</dl>
+						{elseif $__wcf->session->getVar('__githubToken')}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="githubConnect" value="1"{if $githubConnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.github.connect{/lang}</label>
+								</dd>
+							</dl>
+						{else}
+							<p class="info">{lang}wcf.user.3rdparty.github.connect.info{/lang}</p>
+							<a href="https://github.com/login/oauth/authorize?client_id={@GITHUB_PUBLIC_KEY|rawurlencode}&amp;scope={@'user:email'|rawurlencode}" class="button marginTop"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.connect{/lang}</span></a>
+						{/if}
+					{/if}
+					{event name='3rdParty'}
+				{/content}
+			</fieldset>
+		{/hascontent}
+		
 		{event name='fieldsets'}
 	</div>
 	

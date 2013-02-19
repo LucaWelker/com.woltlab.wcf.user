@@ -51,6 +51,12 @@
 		<item name="wcf.acp.menu.link.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
 	</category>
 	
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.github_public_key"><![CDATA[github Client ID]]></item>
+		<item name="wcf.acp.option.github_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://github.com/settings/applications"}" class="externalURL">github</a> anfordern.]]></item>
+		<item name="wcf.acp.option.github_private_key"><![CDATA[github Client Secret]]></item>
+	</category>
+	
 	<category name="wcf.acp.user">
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
 		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Aktivitätspunkte neu vergeben]]></item>
@@ -390,6 +396,15 @@ auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung dur
 		<item name="wcf.user.registerNow"><![CDATA[Jetzt registrieren]]></item>
 		<item name="wcf.user.newestMember"><![CDATA[Neuestes Mitglied]]></item>
 		<item name="wcf.user.recentActivity.com.woltlab.wcf.user.recentActivityEvent.follow"><![CDATA[Folgen]]></item>
+		
+		<item name="wcf.user.3rdparty"><![CDATA[Drittanbieter]]></item>
+		<item name="wcf.user.3rdparty.github.login"><![CDATA[Mit github anmelden]]></item>
+		<item name="wcf.user.3rdparty.github.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-github"></span>&nbsp;github. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
+		<item name="wcf.user.3rdparty.github.connect"><![CDATA[Mit github-Konto {if $__wcf->session->getVar('__githubUsername')}(„<a href="https://github.com/{$__wcf->session->getVar('__githubUsername')}">{$__wcf->session->getVar('__githubUsername')}</a>“){/if} verknüpfen]]></item>
+		<item name="wcf.user.3rdparty.github.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://github.com" class="externalURL">github-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr github-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
+		<item name="wcf.user.3rdparty.github.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem github-Konto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.github.disconnect"><![CDATA[Verknüpfung zu github</a> trennen]]></item>
+		<item name="wcf.user.3rdparty.github.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem github-Konto wurde erfolgreich getrennt.]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

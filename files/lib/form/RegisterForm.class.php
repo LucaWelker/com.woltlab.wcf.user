@@ -2,6 +2,7 @@
 namespace wcf\form;
 use wcf\acp\form\UserAddForm;
 use wcf\data\user\group\UserGroup;
+use wcf\data\user\User;
 use wcf\data\user\UserAction;
 use wcf\data\user\UserEditor;
 use wcf\data\user\UserProfileAction;
@@ -239,12 +240,22 @@ class RegisterForm extends UserAddForm {
 		
 		// get options
 		$saveOptions = $this->optionHandler->save();
+		$registerVia3rdParty = false;
+		
+		// save github token
+		if (WCF::getSession()->getVar('__githubToken')) {
+			$saveOptions[User::getUserOptionID('githubToken')] = WCF::getSession()->getVar('__githubToken');
+			WCF::getSession()->unregister('__githubToken');
+			
+			$registerVia3rdParty = true;
+		}
+		
 		$this->additionalFields['languageID'] = $this->languageID;
 		$this->additionalFields['registrationIpAddress'] = WCF::getSession()->ipAddress;
 		
 		// generate activation code
 		$addDefaultGroups = true;
-		if (REGISTER_ACTIVATION_METHOD == 1 || REGISTER_ACTIVATION_METHOD == 2) {
+		if ((REGISTER_ACTIVATION_METHOD == 1 && !$registerVia3rdParty) || REGISTER_ACTIVATION_METHOD == 2) {
 			$activationCode = UserRegistrationUtil::getActivationCode();
 			$this->additionalFields['activationCode'] = $activationCode;
 			$addDefaultGroups = false;
@@ -284,17 +295,21 @@ class RegisterForm extends UserAddForm {
 		if (REGISTER_ACTIVATION_METHOD == 0) {
 			$this->message = 'wcf.user.register.success';
 		}
-		
-		if (REGISTER_ACTIVATION_METHOD == 1) {
-			$mail = new Mail(array($this->username => $this->email),
-				WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail.subject'),
-				WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail', array('user' => $user))
-			);
-			$mail->send();
-			$this->message = 'wcf.user.register.needActivation';
+		else if (REGISTER_ACTIVATION_METHOD == 1) {
+			// registering via 3rdParty leads to instant activation
+			if ($registerVia3rdParty) {
+				$this->message = 'wcf.user.register.success';
+			}
+			else {
+				$mail = new Mail(array($this->username => $this->email),
+					WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail.subject'),
+					WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail', array('user' => $user))
+				);
+				$mail->send();
+				$this->message = 'wcf.user.register.needActivation';
+			}
 		}
-
-		if (REGISTER_ACTIVATION_METHOD == 2) {
+		else if (REGISTER_ACTIVATION_METHOD == 2) {
 			$this->message = 'wcf.user.register.awaitActivation';
 		}
 		

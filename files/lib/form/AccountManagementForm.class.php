@@ -88,6 +88,17 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $quitStarted = 0;
 	
 	/**
+	 * indicates if the user wants do connect github
+	 */
+	public $githubConnect = 0;
+	
+	/**
+	 * indicates if the user wants do disconnect github
+	 */
+	public $githubDisconnect = 0;
+	
+	
+	/**
 	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -110,6 +121,8 @@ class AccountManagementForm extends AbstractSecureForm {
 		if (isset($_POST['username'])) $this->username = StringUtil::trim($_POST['username']);
 		if (isset($_POST['quit'])) $this->quit = intval($_POST['quit']);
 		if (isset($_POST['cancelQuit'])) $this->cancelQuit = intval($_POST['cancelQuit']);
+		if (isset($_POST['githubConnect'])) $this->githubConnect = intval($_POST['githubConnect']);
+		if (isset($_POST['githubDisconnect'])) $this->githubDisconnect = intval($_POST['githubDisconnect']);
 	}
 	
 	/**
@@ -220,7 +233,9 @@ class AccountManagementForm extends AbstractSecureForm {
 			'renamePeriod' => WCF::getSession()->getPermission('user.profile.renamePeriod'),
 			'quitStarted' => $this->quitStarted,
 			'quit' => $this->quit,
-			'cancelQuit' => $this->cancelQuit
+			'cancelQuit' => $this->cancelQuit,
+			'githubConnect' => $this->githubConnect,
+			'githubDisconnect' => $this->githubDisconnect
 		));
 	}
 	
@@ -242,6 +257,7 @@ class AccountManagementForm extends AbstractSecureForm {
 		
 		$success = array();
 		$updateParameters = array();
+		$updateOptions = array();
 		$userEditor = new UserEditor(WCF::getUser());
 		
 		// quit
@@ -312,8 +328,32 @@ class AccountManagementForm extends AbstractSecureForm {
 			$success[] = 'wcf.user.changePassword.success';
 		}
 		
+		// 3rdParty
+		if (GITHUB_PUBLIC_KEY !== '' && GITHUB_PRIVATE_KEY !== '') {
+			if ($this->githubConnect && WCF::getSession()->getVar('__githubToken')) {
+				$updateOptions[User::getUserOptionID('githubToken')] = WCF::getSession()->getVar('__githubToken');
+				
+				WCF::getUser()->githubToken = WCF::getSession()->getVar('__githubToken');
+				
+				$success[] = 'wcf.user.3rdparty.github.connect.success';
+				
+				\wcf\system\WCF::getSession()->unregister('__githubToken');
+				\wcf\system\WCF::getSession()->unregister('__githubUsername');
+			}
+			else if ($this->githubDisconnect && WCF::getUser()->githubToken) {
+				$updateOptions[User::getUserOptionID('githubToken')] = '';
+				
+				WCF::getUser()->githubToken = '';
+				
+				$success[] = 'wcf.user.3rdparty.github.disconnect.success';
+			}
+		}
+		
 		if (!empty($updateParameters)) {
 			$userEditor->update($updateParameters);
+		}
+		if (!empty($updateOptions)) {
+			$userEditor->updateUserOptions($updateOptions);
 		}
 		
 		$this->saved();

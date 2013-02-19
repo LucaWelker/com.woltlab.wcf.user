@@ -41,6 +41,10 @@
 
 {include file='userNotice'}
 
+{if $__wcf->session->getVar('__githubToken')}
+	<p class="info">{lang}wcf.user.3rdparty.github.register{/lang}</p>
+{/if}
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
