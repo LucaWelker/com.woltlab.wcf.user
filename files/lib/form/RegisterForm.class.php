@@ -312,7 +312,7 @@ class RegisterForm extends UserAddForm {
 		}
 		
 		// login user
-		UserAuthenticationFactory::getUserAuthentication()->storeAccessData($user, $this->username, $this->password);
+		UserAuthenticationFactory::getInstance()->getUserAuthentication()->storeAccessData($user, $this->username, $this->password);
 		WCF::getSession()->unregister('recaptchaDone');
 		$this->saved();
 		
