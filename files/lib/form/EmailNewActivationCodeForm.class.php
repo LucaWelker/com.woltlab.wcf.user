@@ -73,7 +73,7 @@ class EmailNewActivationCodeForm extends RegisterNewActivationCodeForm {
 		$this->saved();
 		
 		// forward to index page
-		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation'), 10);
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink(), WCF::getLanguage()->getDynamicVariable('wcf.user.changeEmail.needReactivation'), 10);
 		exit;
 	}
 }
