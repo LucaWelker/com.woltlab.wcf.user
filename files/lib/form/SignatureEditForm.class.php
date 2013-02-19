@@ -73,7 +73,9 @@ class SignatureEditForm extends MessageForm {
 	public function validate() {
 		AbstractForm::validate();
 		
-		$this->validateText();
+		if (!empty($this->text)) {
+			$this->validateText();
+		}
 	}
 	
 	/**
