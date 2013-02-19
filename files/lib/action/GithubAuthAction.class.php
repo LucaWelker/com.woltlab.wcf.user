@@ -3,6 +3,7 @@ namespace wcf\action;
 use wcf\data\user\option\UserOption;
 use wcf\data\user\User;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\NamedUserException;
 use wcf\system\exception\SystemException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -56,7 +57,9 @@ class GithubAuthAction extends AbstractAction {
 		parse_str($content, $data);
 		
 		// check whether the token is okay
-		if (isset($data['error'])) throw new IllegalLinkException();
+		if (isset($data['error'])) {
+			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.github.login.error.'.$data['error']));
+		}
 		
 		$user = $this->getUser($data['access_token']);
 		
@@ -122,6 +125,7 @@ class GithubAuthAction extends AbstractAction {
 				
 				// save token
 				WCF::getSession()->register('__githubToken', $data['access_token']);
+				
 				// we assume that bots won't register on github first
 				WCF::getSession()->register('recaptchaDone', true);
 				
