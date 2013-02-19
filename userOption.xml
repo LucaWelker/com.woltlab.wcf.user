@@ -57,6 +57,7 @@
 				<outputclass>wcf\system\option\user\MessageUserOptionOutput</outputclass>
 				<visible>15</visible>
 				<editable>3</editable>
+				<maxlength>500</maxlength>
 			</option>
 			<option name="birthday">
 				<categoryname>profile.personal</categoryname>
