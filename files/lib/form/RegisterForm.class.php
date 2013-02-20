@@ -5,6 +5,7 @@ use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserAction;
 use wcf\data\user\UserEditor;
+use wcf\data\user\UserProfile;
 use wcf\data\user\UserProfileAction;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
@@ -272,10 +273,15 @@ class RegisterForm extends UserAddForm {
 			$saveOptions[User::getUserOptionID('facebookUserID')] = $facebookData['id'];
 			
 			WCF::getSession()->unregister('__facebookData');
-				
+			
 			$registerVia3rdParty = true;
-				
+			
 			// TODO: Check if we can fill in any profile fields
+			$saveOptions[User::getUserOptionID('gender')] = ($facebookData['gender'] == 'male' ? UserProfile::GENDER_MALE : UserProfile::GENDER_FEMALE);
+			if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = implode('-', array_reverse(explode('/', $facebookData['birthday'])));
+			if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
+			if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
+			if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
 		}
 		
 		$this->additionalFields['languageID'] = $this->languageID;
