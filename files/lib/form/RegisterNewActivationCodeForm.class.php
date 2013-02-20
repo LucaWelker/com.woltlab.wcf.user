@@ -144,7 +144,7 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 		$this->saved();
 		
 		// forward to index page
-		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->getDynamicVariable('wcf.user.newActivationCode.success', array('email' => (!empty($this->email) ? $this->email : $this->user->email))), 10);
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink(), WCF::getLanguage()->getDynamicVariable('wcf.user.newActivationCode.success', array('email' => (!empty($this->email) ? $this->email : $this->user->email))), 10);
 		exit;
 	}
 	

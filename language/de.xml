@@ -198,13 +198,9 @@
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Hallo {@$username},
 
 wenn Sie Ihr Kennwort vergessen haben, können Sie über folgenden Link ein neues Kennwort anfordern.
-Klicken Sie hier, um ein neues Kennwort anzufordern: {link controller='NewPassword'}u={@$userID}&k={@$key}{/link}  
+Klicken Sie hier, um ein neues Kennwort anzufordern: {link controller='NewPassword' encode=false}u={@$userID}&k={@$key}{/link}  
 
-Falls Sie Ihr Kennwort nicht vergessen haben, können Sie diese E-Mail ignorieren.
-
-
-Vielen Dank,
-Ihr {@PAGE_TITLE|language} Team]]></item>
+Falls Sie Ihr Kennwort nicht vergessen haben, können Sie diese E-Mail ignorieren.]]></item>
 		<item name="wcf.user.lostPassword.mail.sent"><![CDATA[Sie erhalten in Kürze eine E-Mail mit weiteren Informationen.]]></item>
 		<item name="wcf.user.newPassword"><![CDATA[Neues Kennwort anfordern]]></item>
 		<item name="wcf.user.lostPasswordKey"><![CDATA[Sicherheitsschlüssel]]></item>
@@ -216,11 +212,7 @@ Ihr neues Kennwort für die Website "{@PAGE_TITLE|language}" lautet:
 {@$newPassword} 
 
 Sie können Ihr Kennwort unter folgender Adresse jederzeit ändern:
-{link controller='AccountManagement'}{/link}
-
-
-Vielen Dank,
-Ihr {@PAGE_TITLE|language} Team]]></item>
+{link controller='AccountManagement' encode=false}{/link} ]]></item>
 		<item name="wcf.user.newPassword.mail.subject"><![CDATA[Neues Kennwort auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.newPassword.success"><![CDATA[Sie erhalten in Kürze eine E-Mail mit Ihrem neuen Kennwort.]]></item>
 		<item name="wcf.user.accountManagement"><![CDATA[Benutzerkonto-Verwaltung]]></item>
@@ -256,11 +248,11 @@ Ihr {@PAGE_TITLE|language} Team]]></item>
 Sie haben Ihre E-Mail-Adresse auf der Website: {@PAGE_TITLE|language} geändert. Zum Abschließen dieser Änderung müssen Sie einmalig die Gültigkeit Ihrer neuen E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer neuen E-Mail-Adresse, indem Sie folgenden Link aufrufen:
-{link controller='EmailActivation'}u={@$userID}&a={@$activationCode}{/link} 
+{link controller='EmailActivation' encode=false}u={@$userID}&a={@$activationCode}{/link} 
 
 **** Funktioniert der Link oben nicht? ****
 Wenn der Link nicht funktioniert, sollten Sie folgende Adresse in Ihrem Browser aufrufen:
-{link controller='EmailActivation'}{/link}
+{link controller='EmailActivation' encode=false}{/link}
 
 Bitte achten Sie darauf, dass keine Leerzeichen in der Adresse sind.
 Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre Benutzernummer sowie den Aktivierungscode eingeben.
@@ -268,10 +260,7 @@ Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihre
 Ihre Benutzernummer lautet: 	{@$userID} 
 Ihr Aktivierungscode lautet: 	{@$activationCode} 
 
-Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} 
-
-Vielen Dank,
-Ihr {@PAGE_TITLE|language} Team]]></item>
+Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} ]]></item>
 		<item name="wcf.user.changeEmail.needReactivation.mail.subject"><![CDATA[Aktivierung der neuen E-Mail-Adresse auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.changePassword.success"><![CDATA[Ihr Kennwort wurde erfolgreich geändert.]]></item>
 		<item name="wcf.user.activationCode"><![CDATA[9-stelliger Aktivierungscode]]></item>
@@ -284,7 +273,7 @@ Vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}.
 Bevor wir Ihre Registrierung aktivieren können, müssen Sie einmalig die Gültigkeit Ihrer E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer E-Mail-Adresse, indem Sie folgenden Link aufrufen:
-{link controller='RegisterActivation'}{/link} 
+{link controller='RegisterActivation' encode=false}{/link} 
 
 Wenn Sie den Link aufgerufen haben, müssen Sie auf der erscheinenden Seite Ihren Benutzernamen sowie den Aktivierungscode eingeben.
 
@@ -293,17 +282,20 @@ Ihr Aktivierungscode lautet: 	{@$user->activationCode}
 
 Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Administrator: {@MAIL_ADMIN_ADDRESS} 
 
-Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben, können Sie diese E-Mail ignorieren.
-
-Vielen Dank,
-Ihr {@PAGE_TITLE|language} Team]]></item>
+Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben, können Sie diese E-Mail ignorieren. ]]></item>
 		<item name="wcf.user.register.needActivation.mail.subject"><![CDATA[Aktivierung der Registrierung auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.register.needActivation"><![CDATA[Vielen Dank für die Registrierung, {$user->username}.<br />
 Wir haben Ihnen eine E-Mail an {$user->email} geschickt. Die E-Mail enthält einen Link, den Sie einmalig aufrufen müssen, um die Gültigkeit Ihrer E-Mail-Adresse zu bestätigen und damit Ihre Registrierung abzuschließen.]]></item>
 		<item name="wcf.user.register.awaitActivation"><![CDATA[Vielen Dank für die Registrierung, {$user->username}. Ihre Benutzerdaten werden in Kürze von einem Administrator geprüft.<br />
 Sobald Ihr Benutzerkonto freigeschaltet ist, werden Sie per E-Mail darüber in Kenntnis gesetzt.]]></item>
 		<item name="wcf.user.register.notification.mail"><![CDATA[Hallo Administrator,
-auf der Website: {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung durch: {@$user->username}]]></item>
+		
+auf der Website {@PAGE_TITLE|language} erfolgte eine neue Benutzeranmeldung durch: {@$user->username} 
+
+Die E-Mail-Adresse des neuen Benutzers lautet: {@$user->email} 
+
+Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link aufrufen:
+{link controller='User' object=$user encode=false}{/link} ]]></item>
 		<item name="wcf.user.register.notification.mail.subject"><![CDATA[Neue Benutzeranmeldung auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.registerActivation"><![CDATA[Registrierung abschließen]]></item>
 		<item name="wcf.user.registerActivation.error.userAlreadyEnabled"><![CDATA[Dieser Benutzer ist bereits freigeschaltet.]]></item>

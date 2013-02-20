@@ -116,7 +116,7 @@ class LostPasswordForm extends RecaptchaForm {
 		$this->saved();
 		
 		// forward to index page
-		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index'), WCF::getLanguage()->get('wcf.user.lostPassword.mail.sent'));
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink(), WCF::getLanguage()->get('wcf.user.lostPassword.mail.sent'));
 		exit;
 	}
 	
