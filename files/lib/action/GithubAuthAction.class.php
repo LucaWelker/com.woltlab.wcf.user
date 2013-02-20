@@ -103,7 +103,7 @@ class GithubAuthAction extends AbstractAction {
 					
 					WCF::getSession()->register('__username', $userData['login']);
 				}
-				catch (\wcf\system\exception\SystemException $e) { }
+				catch (SystemException $e) { }
 				
 				if (isset($userData) && isset($userData['email']) && $userData['email'] !== null) {
 					WCF::getSession()->register('__email', $userData['email']);

@@ -39,7 +39,7 @@ class TwitterAuthAction extends AbstractAction {
 			if (!$initData) throw new IllegalLinkException();
 			
 			if ($_GET['oauth_token'] !== $initData['oauth_token']) throw new IllegalLinkException();
-				
+			
 			try {
 				$oauthHeader = array(
 					'oauth_consumer_key' => TWITTER_PUBLIC_KEY,
@@ -52,10 +52,10 @@ class TwitterAuthAction extends AbstractAction {
 				$postData = array(
 					'oauth_verifier' => $_GET['oauth_verifier']
 				);
-		
+				
 				$signature = $this->createSignature('https://api.twitter.com/oauth/access_token', array_merge($oauthHeader, $postData));
 				$oauthHeader['oauth_signature'] = $signature;
-		
+				
 				// call api
 				$request = new HTTPRequest('https://api.twitter.com/oauth/access_token', array(), $postData);
 				$request->addHeader('Authorization', 'OAuth '.$this->buildOAuthHeader($oauthHeader));
@@ -63,7 +63,7 @@ class TwitterAuthAction extends AbstractAction {
 				$reply = $request->getReply();
 				$content = $reply['body'];
 			}
-			catch(SystemException $e) {
+			catch (SystemException $e) {
 				throw new IllegalLinkException();
 			}
 			
