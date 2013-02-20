@@ -34,6 +34,10 @@ class GithubAuthAction extends AbstractAction {
 	public function execute() {
 		parent::execute();
 		
+		if (isset($_GET['error'])) {
+			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.github.login.error.'.$_GET['error']));
+		}
+		
 		// check whether we have the code
 		if (!isset($_GET['code'])) throw new IllegalLinkException();
 		
@@ -57,9 +61,7 @@ class GithubAuthAction extends AbstractAction {
 		parse_str($content, $data);
 		
 		// check whether the token is okay
-		if (isset($data['error'])) {
-			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.github.login.error.'.$data['error']));
-		}
+		if (isset($data['error'])) throw new IllegalLinkException();
 		
 		$user = $this->getUser($data['access_token']);
 		

@@ -131,6 +131,12 @@
 			<a href="{link controller='TwitterAuth'}{/link}"><span class="icon icon16 icon-twitter"></span> <span>{lang}wcf.user.3rdparty.twitter.login{/lang}</span></a>
 		</li>
 	{/if}
+	
+	{if FACEBOOK_PUBLIC_KEY !== '' && FACEBOOK_PRIVATE_KEY !== ''}
+		<li>
+			<a href="{link controller='FacebookAuth'}{/link}"><span class="icon icon16 icon-facebook"></span> <span>{lang}wcf.user.3rdparty.facebook.login{/lang}</span></a>
+		</li>
+	{/if}
 {/if}
 
 {event name='menuItems'}

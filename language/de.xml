@@ -396,6 +396,7 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		
 		<item name="wcf.user.3rdparty"><![CDATA[Drittanbieter]]></item>
 		<item name="wcf.user.3rdparty.github.login"><![CDATA[Mit github anmelden]]></item>
+		<item name="wcf.user.3rdparty.github.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit github nicht möglich.]]></item>
 		<item name="wcf.user.3rdparty.github.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-github"></span>&nbsp;github. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
 		<item name="wcf.user.3rdparty.github.connect"><![CDATA[Mit github-Konto {if $__wcf->session->getVar('__githubUsername')}(„<a href="https://github.com/{$__wcf->session->getVar('__githubUsername')}">{$__wcf->session->getVar('__githubUsername')}</a>“){/if} verknüpfen]]></item>
 		<item name="wcf.user.3rdparty.github.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://github.com" class="externalURL">github-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr github-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
@@ -404,6 +405,7 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		<item name="wcf.user.3rdparty.github.disconnect"><![CDATA[Verknüpfung zu github trennen]]></item>
 		<item name="wcf.user.3rdparty.github.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem github-Konto wurde erfolgreich getrennt.]]></item>
 		<item name="wcf.user.3rdparty.twitter.login"><![CDATA[Mit Twitter anmelden]]></item>
+		<item name="wcf.user.3rdparty.twitter.login.error.denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit Twitter nicht möglich.]]></item>
 		<item name="wcf.user.3rdparty.twitter.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-twitter"></span>&nbsp;Twitter. Der Benutzername wurde daher bereits ausgefüllt. Geben Sie nun noch Ihre E-Mail-Adresse an und wählen Sie ein Passwort aus und Sie können sofort loslegen!]]></item>
 		<item name="wcf.user.3rdparty.twitter.connect"><![CDATA[Mit Twitter-Konto {if $__wcf->session->getVar('__twitterUsername')}(„<a href="https://twitter.com/{$__wcf->session->getVar('__twitterUsername')}">{$__wcf->session->getVar('__twitterUsername')}</a>“){/if} verknüpfen]]></item>
 		<item name="wcf.user.3rdparty.twitter.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://twitter.com" class="externalURL">Twitter-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr Twitter-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
@@ -411,6 +413,16 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		<item name="wcf.user.3rdparty.twitter.connect.error.inuse"><![CDATA[Ihr Twitter-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
 		<item name="wcf.user.3rdparty.twitter.disconnect"><![CDATA[Verknüpfung zu Twitter trennen]]></item>
 		<item name="wcf.user.3rdparty.twitter.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem Twitter-Konto wurde erfolgreich getrennt.]]></item>
+		<item name="wcf.user.3rdparty.facebook.login"><![CDATA[Mit facebook anmelden]]></item>
+		<item name="wcf.user.3rdparty.facebook.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit facebook nicht möglich.]]></item>
+		<item name="wcf.user.3rdparty.facebook.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-facebook"></span>&nbsp;facebook. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect"><![CDATA[Mit facebook-Konto {if $__wcf->session->getVar('__facebookUsername')}(„{$__wcf->session->getVar('__facebookUsername')}“){/if} verknüpfen]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://facebook.com" class="externalURL">facebook-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr facebook-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem facebook-Konto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect.error.inuse"><![CDATA[Ihr facebook-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.facebook.disconnect"><![CDATA[Verknüpfung zu facebook trennen]]></item>
+		<item name="wcf.user.3rdparty.facebook.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem facebook-Konto wurde erfolgreich getrennt.]]></item>
+		
 	</category>
 	
 	<category name="wcf.user.avatar">

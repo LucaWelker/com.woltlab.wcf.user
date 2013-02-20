@@ -227,6 +227,25 @@
 							<a href="{link controller='TwitterAuth'}{/link}" class="button marginTop"><span class="icon icon16 icon-twitter"></span> <span>{lang}wcf.user.3rdparty.twitter.connect{/lang}</span></a>
 						{/if}
 					{/if}
+					
+					{if FACEBOOK_PUBLIC_KEY !== '' && FACEBOOK_PRIVATE_KEY !== ''}
+						{if $__wcf->user->facebookUserID}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="facebookDisconnect" value="1"{if $facebookDisconnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.facebook.disconnect{/lang}</label>
+								</dd>
+							</dl>
+						{elseif $__wcf->session->getVar('__facebookData')}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="facebookConnect" value="1"{if $facebookConnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.facebook.connect{/lang}</label>
+								</dd>
+							</dl>
+						{else}
+							<p class="info">{lang}wcf.user.3rdparty.facebook.connect.info{/lang}</p>
+							<a href="{link controller='FacebookAuth'}{/link}" class="button marginTop"><span class="icon icon16 icon-facebook"></span> <span>{lang}wcf.user.3rdparty.facebook.connect{/lang}</span></a>
+						{/if}
+					{/if}
 					{event name='3rdParty'}
 				{/content}
 			</fieldset>

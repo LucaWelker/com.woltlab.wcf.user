@@ -108,6 +108,16 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $twitterDisconnect = 0;
 	
 	/**
+	 * indicates if the user wants do connect facebook
+	 */
+	public $facebookConnect = 0;
+	
+	/**
+	 * indicates if the user wants do disconnect facebook
+	 */
+	public $facebookDisconnect = 0;
+	
+	/**
 	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -134,6 +144,8 @@ class AccountManagementForm extends AbstractSecureForm {
 		if (isset($_POST['githubDisconnect'])) $this->githubDisconnect = intval($_POST['githubDisconnect']);
 		if (isset($_POST['twitterConnect'])) $this->twitterConnect = intval($_POST['twitterConnect']);
 		if (isset($_POST['twitterDisconnect'])) $this->twitterDisconnect = intval($_POST['twitterDisconnect']);
+		if (isset($_POST['facebookConnect'])) $this->facebookConnect = intval($_POST['facebookConnect']);
+		if (isset($_POST['facebookDisconnect'])) $this->facebookDisconnect = intval($_POST['facebookDisconnect']);
 	}
 	
 	/**
@@ -248,7 +260,9 @@ class AccountManagementForm extends AbstractSecureForm {
 			'githubConnect' => $this->githubConnect,
 			'githubDisconnect' => $this->githubDisconnect,
 			'twitterConnect' => $this->twitterConnect,
-			'twitterDisconnect' => $this->twitterDisconnect
+			'twitterDisconnect' => $this->twitterDisconnect,
+			'facebookConnect' => $this->facebookConnect,
+			'facebookDisconnect' => $this->facebookDisconnect
 		));
 	}
 	
@@ -381,6 +395,28 @@ class AccountManagementForm extends AbstractSecureForm {
 				WCF::getUser()->twitterUserID = '';
 				
 				$success[] = 'wcf.user.3rdparty.twitter.disconnect.success';
+			}
+		}
+		if (FACEBOOK_PUBLIC_KEY !== '' && FACEBOOK_PRIVATE_KEY !== '') {
+			if ($this->facebookConnect && WCF::getSession()->getVar('__facebookData')) {
+				$facebookData = WCF::getSession()->getVar('__facebookData');
+				$updateOptions[User::getUserOptionID('facebookData')] = serialize($facebookData);
+				$updateOptions[User::getUserOptionID('facebookUserID')] = $facebookData['id'];
+		
+				WCF::getUser()->facebookUserID = $facebookData['id'];
+		
+				$success[] = 'wcf.user.3rdparty.facebook.connect.success';
+		
+				\wcf\system\WCF::getSession()->unregister('__facebookData');
+				\wcf\system\WCF::getSession()->unregister('__facebookUsername');
+			}
+			else if ($this->facebookDisconnect && WCF::getUser()->facebookUserID) {
+				$updateOptions[User::getUserOptionID('facebookData')] = '';
+				$updateOptions[User::getUserOptionID('facebookUserID')] = '';
+		
+				WCF::getUser()->facebookUserID = '';
+		
+				$success[] = 'wcf.user.3rdparty.facebook.disconnect.success';
 			}
 		}
 		

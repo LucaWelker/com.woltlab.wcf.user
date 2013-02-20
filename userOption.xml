@@ -223,6 +223,22 @@
 				<editable>0</editable>
 				<defaultvalue></defaultvalue>
 			</option>
+			
+			<option name="facebookUserID">
+				<categoryname>settings.3rdparty</categoryname>
+				<optiontype>text</optiontype>
+				<visible>0</visible>
+				<editable>0</editable>
+				<defaultvalue></defaultvalue>
+			</option>
+			
+			<option name="facebookData">
+				<categoryname>settings.3rdparty</categoryname>
+				<optiontype>text</optiontype>
+				<visible>0</visible>
+				<editable>0</editable>
+				<defaultvalue></defaultvalue>
+			</option>
 			<!-- /settings -->
 		</options>
 	</import>

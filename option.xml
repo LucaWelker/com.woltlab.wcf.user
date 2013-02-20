@@ -184,6 +184,16 @@
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
+			<option name="facebook_public_key">
+				<categoryname>user.register</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue></defaultvalue>
+			</option>
+			<option name="facebook_private_key">
+				<categoryname>user.register</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue></defaultvalue>
+			</option>
 			<!-- /user.register -->
 			
 			<!-- user.security -->

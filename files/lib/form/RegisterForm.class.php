@@ -263,6 +263,18 @@ class RegisterForm extends UserAddForm {
 			
 			// TODO: Check if we can fill in any profile fields
 		}
+		// save facebook data
+		if (WCF::getSession()->getVar('__facebookData')) {
+			$facebookData = WCF::getSession()->getVar('__facebookData');
+			$saveOptions[User::getUserOptionID('facebookData')] = serialize($facebookData);
+			$saveOptions[User::getUserOptionID('facebookUserID')] = $facebookData['id'];
+			
+			WCF::getSession()->unregister('__facebookData');
+				
+			$registerVia3rdParty = true;
+				
+			// TODO: Check if we can fill in any profile fields
+		}
 		
 		$this->additionalFields['languageID'] = $this->languageID;
 		$this->additionalFields['registrationIpAddress'] = WCF::getSession()->ipAddress;
