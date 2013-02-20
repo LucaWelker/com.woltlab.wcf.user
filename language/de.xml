@@ -53,11 +53,15 @@
 	
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.github_public_key"><![CDATA[GitHub Client ID]]></item>
-		<item name="wcf.acp.option.github_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://github.com/settings/applications"}" class="externalURL">GitHub</a> anfordern.]]></item>
+		<item name="wcf.acp.option.github_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://github.com/settings/applications'|rawurlencode}" class="externalURL">GitHub</a> anfordern.]]></item>
 		<item name="wcf.acp.option.github_private_key"><![CDATA[GitHub Client Secret]]></item>
 		<item name="wcf.acp.option.twitter_public_key"><![CDATA[Twitter Consumer key]]></item>
-		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://dev.twitter.com/apps"}" class="externalURL">Twitter</a> anfordern.]]></item>
+		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[Sie können Ihren Consumer key und Ihr Consumer secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://dev.twitter.com/apps'|rawurlencode}" class="externalURL">Twitter</a> anfordern.]]></item>
 		<item name="wcf.acp.option.twitter_private_key"><![CDATA[Twitter Consumer secret]]></item>
+		<item name="wcf.acp.option.twitter_public_key"><![CDATA[facebook APP-ID]]></item>
+		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[Sie können Ihre APP-ID und Ihren Anwendungs-Geheimcode bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://developers.facebook.com/apps'|rawurlencode}" class="externalURL">facebook</a> anfordern.]]></item>
+		<item name="wcf.acp.option.twitter_private_key"><![CDATA[facebook Anwendungs-Geheimcode]]></item>
+		
 	</category>
 	
 	<category name="wcf.acp.user">
