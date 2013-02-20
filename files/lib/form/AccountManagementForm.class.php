@@ -364,8 +364,8 @@ class AccountManagementForm extends AbstractSecureForm {
 				
 				$success[] = 'wcf.user.3rdparty.github.connect.success';
 				
-				\wcf\system\WCF::getSession()->unregister('__githubToken');
-				\wcf\system\WCF::getSession()->unregister('__githubUsername');
+				WCF::getSession()->unregister('__githubToken');
+				WCF::getSession()->unregister('__githubUsername');
 			}
 			else if ($this->githubDisconnect && WCF::getUser()->githubToken) {
 				$updateOptions[User::getUserOptionID('githubToken')] = '';
@@ -385,8 +385,8 @@ class AccountManagementForm extends AbstractSecureForm {
 				
 				$success[] = 'wcf.user.3rdparty.twitter.connect.success';
 				
-				\wcf\system\WCF::getSession()->unregister('__twitterData');
-				\wcf\system\WCF::getSession()->unregister('__twitterUsername');
+				WCF::getSession()->unregister('__twitterData');
+				WCF::getSession()->unregister('__twitterUsername');
 			}
 			else if ($this->twitterDisconnect && WCF::getUser()->twitterUserID) {
 				$updateOptions[User::getUserOptionID('twitterData')] = '';
@@ -407,8 +407,8 @@ class AccountManagementForm extends AbstractSecureForm {
 		
 				$success[] = 'wcf.user.3rdparty.facebook.connect.success';
 		
-				\wcf\system\WCF::getSession()->unregister('__facebookData');
-				\wcf\system\WCF::getSession()->unregister('__facebookUsername');
+				WCF::getSession()->unregister('__facebookData');
+				WCF::getSession()->unregister('__facebookUsername');
 			}
 			else if ($this->facebookDisconnect && WCF::getUser()->facebookUserID) {
 				$updateOptions[User::getUserOptionID('facebookData')] = '';
