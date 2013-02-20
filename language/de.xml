@@ -52,9 +52,9 @@
 	</category>
 	
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.github_public_key"><![CDATA[github Client ID]]></item>
-		<item name="wcf.acp.option.github_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://github.com/settings/applications"}" class="externalURL">github</a> anfordern.]]></item>
-		<item name="wcf.acp.option.github_private_key"><![CDATA[github Client Secret]]></item>
+		<item name="wcf.acp.option.github_public_key"><![CDATA[GitHub Client ID]]></item>
+		<item name="wcf.acp.option.github_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://github.com/settings/applications"}" class="externalURL">GitHub</a> anfordern.]]></item>
+		<item name="wcf.acp.option.github_private_key"><![CDATA[GitHub Client Secret]]></item>
 		<item name="wcf.acp.option.twitter_public_key"><![CDATA[Twitter Consumer key]]></item>
 		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"https://dev.twitter.com/apps"}" class="externalURL">Twitter</a> anfordern.]]></item>
 		<item name="wcf.acp.option.twitter_private_key"><![CDATA[Twitter Consumer secret]]></item>
@@ -395,15 +395,15 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		<item name="wcf.user.recentActivity.com.woltlab.wcf.user.recentActivityEvent.follow"><![CDATA[Folgen]]></item>
 		
 		<item name="wcf.user.3rdparty"><![CDATA[Drittanbieter]]></item>
-		<item name="wcf.user.3rdparty.github.login"><![CDATA[Mit github anmelden]]></item>
-		<item name="wcf.user.3rdparty.github.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit github nicht möglich.]]></item>
-		<item name="wcf.user.3rdparty.github.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-github"></span>&nbsp;github. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
-		<item name="wcf.user.3rdparty.github.connect"><![CDATA[Mit github-Konto {if $__wcf->session->getVar('__githubUsername')}(„<a href="https://github.com/{$__wcf->session->getVar('__githubUsername')}">{$__wcf->session->getVar('__githubUsername')}</a>“){/if} verknüpfen]]></item>
-		<item name="wcf.user.3rdparty.github.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://github.com" class="externalURL">github-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr github-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
-		<item name="wcf.user.3rdparty.github.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem github-Konto verknüpft.]]></item>
-		<item name="wcf.user.3rdparty.github.connect.error.inuse"><![CDATA[Ihr github-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
-		<item name="wcf.user.3rdparty.github.disconnect"><![CDATA[Verknüpfung zu github trennen]]></item>
-		<item name="wcf.user.3rdparty.github.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem github-Konto wurde erfolgreich getrennt.]]></item>
+		<item name="wcf.user.3rdparty.github.login"><![CDATA[Mit GitHub anmelden]]></item>
+		<item name="wcf.user.3rdparty.github.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit GitHub nicht möglich.]]></item>
+		<item name="wcf.user.3rdparty.github.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-github"></span>&nbsp;GitHub. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
+		<item name="wcf.user.3rdparty.github.connect"><![CDATA[Mit GitHub-Konto {if $__wcf->session->getVar('__githubUsername')}(„<a href="https://github.com/{$__wcf->session->getVar('__githubUsername')}">{$__wcf->session->getVar('__githubUsername')}</a>“){/if} verknüpfen]]></item>
+		<item name="wcf.user.3rdparty.github.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://github.com" class="externalURL">GitHub-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr GitHub-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
+		<item name="wcf.user.3rdparty.github.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem GitHub-Konto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.github.connect.error.inuse"><![CDATA[Ihr GitHub-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.github.disconnect"><![CDATA[Verknüpfung zu GitHub trennen]]></item>
+		<item name="wcf.user.3rdparty.github.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem GitHub-Konto wurde erfolgreich getrennt.]]></item>
 		<item name="wcf.user.3rdparty.twitter.login"><![CDATA[Mit Twitter anmelden]]></item>
 		<item name="wcf.user.3rdparty.twitter.login.error.denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit Twitter nicht möglich.]]></item>
 		<item name="wcf.user.3rdparty.twitter.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-twitter"></span>&nbsp;Twitter. Der Benutzername wurde daher bereits ausgefüllt. Geben Sie nun noch Ihre E-Mail-Adresse an und wählen Sie ein Passwort aus und Sie können sofort loslegen!]]></item>
