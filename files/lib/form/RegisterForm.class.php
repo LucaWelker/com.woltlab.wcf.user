@@ -240,6 +240,8 @@ class RegisterForm extends UserAddForm {
 		
 		// get options
 		$saveOptions = $this->optionHandler->save();
+		
+		// TODO: Set this only when the email address is not changed (i.e. the verified email address provided by facebook / github is used)?
 		$registerVia3rdParty = false;
 		
 		// save github token
