@@ -283,6 +283,27 @@ class RegisterForm extends UserAddForm {
 			if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
 			if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
 		}
+		// save google data
+		if (WCF::getSession()->getVar('__googleData')) {
+			$googleData = WCF::getSession()->getVar('__googleData');
+			$saveOptions[User::getUserOptionID('googleData')] = serialize($googleData);
+			$saveOptions[User::getUserOptionID('googleUserID')] = $googleData['id'];
+			
+			WCF::getSession()->unregister('__googleData');
+			
+			$registerVia3rdParty = true;
+			
+			// TODO: Check if we can fill in any profile fields
+			switch ($googleData['gender']) {
+				case 'male':
+					$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_MALE;
+				break;
+				case 'female':
+					$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_FEMALE;
+				break;
+			}
+			if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = $googleData['birthday'];
+		}
 		
 		$this->additionalFields['languageID'] = $this->languageID;
 		$this->additionalFields['registrationIpAddress'] = WCF::getSession()->ipAddress;

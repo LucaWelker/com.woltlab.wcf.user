@@ -137,6 +137,12 @@
 			<a href="{link controller='FacebookAuth'}{/link}"><span class="icon icon16 icon-facebook"></span> <span>{lang}wcf.user.3rdparty.facebook.login{/lang}</span></a>
 		</li>
 	{/if}
+	
+	{if GOOGLE_PUBLIC_KEY !== '' && GOOGLE_PRIVATE_KEY !== ''}
+		<li>
+			<a href="{link controller='GoogleAuth'}{/link}"><span class="icon icon16 icon-google-plus"></span> <span>{lang}wcf.user.3rdparty.google.login{/lang}</span></a>
+		</li>
+	{/if}
 {/if}
 
 {event name='menuItems'}

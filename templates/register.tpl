@@ -53,6 +53,10 @@
 	<p class="info">{lang}wcf.user.3rdparty.facebook.register{/lang}</p>
 {/if}
 
+{if $__wcf->session->getVar('__googleData')}
+	<p class="info">{lang}wcf.user.3rdparty.google.register{/lang}</p>
+{/if}
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}

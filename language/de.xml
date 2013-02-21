@@ -426,7 +426,15 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		<item name="wcf.user.3rdparty.facebook.connect.error.inuse"><![CDATA[Ihr facebook-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
 		<item name="wcf.user.3rdparty.facebook.disconnect"><![CDATA[Verknüpfung zu facebook trennen]]></item>
 		<item name="wcf.user.3rdparty.facebook.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem facebook-Konto wurde erfolgreich getrennt.]]></item>
-		
+		<item name="wcf.user.3rdparty.google.login"><![CDATA[Mit Google anmelden]]></item>
+		<item name="wcf.user.3rdparty.google.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit Google nicht möglich.]]></item>
+		<item name="wcf.user.3rdparty.google.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-google-plus"></span>&nbsp;Google. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
+		<item name="wcf.user.3rdparty.google.connect"><![CDATA[Mit Google-Konto {if $__wcf->session->getVar('__googleUsername')}(„{$__wcf->session->getVar('__googleUsername')}“){/if} verknüpfen]]></item>
+		<item name="wcf.user.3rdparty.google.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://google.com" class="externalURL">Google-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr Google-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
+		<item name="wcf.user.3rdparty.google.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem Google-Konto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.google.connect.error.inuse"><![CDATA[Ihr Google-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.google.disconnect"><![CDATA[Verknüpfung zu Google trennen]]></item>
+		<item name="wcf.user.3rdparty.google.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem Google-Konto wurde erfolgreich getrennt.]]></item>
 	</category>
 	
 	<category name="wcf.user.avatar">

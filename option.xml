@@ -194,6 +194,16 @@
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
+			<option name="google_public_key">
+				<categoryname>user.register</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue></defaultvalue>
+			</option>
+			<option name="google_private_key">
+				<categoryname>user.register</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue></defaultvalue>
+			</option>
 			<!-- /user.register -->
 			
 			<!-- user.security -->

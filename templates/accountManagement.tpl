@@ -246,6 +246,25 @@
 							<a href="{link controller='FacebookAuth'}{/link}" class="button marginTop"><span class="icon icon16 icon-facebook"></span> <span>{lang}wcf.user.3rdparty.facebook.connect{/lang}</span></a>
 						{/if}
 					{/if}
+					
+					{if GOOGLE_PUBLIC_KEY !== '' && GOOGLE_PRIVATE_KEY !== ''}
+						{if $__wcf->user->googleUserID}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="googleDisconnect" value="1"{if $googleDisconnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.google.disconnect{/lang}</label>
+								</dd>
+							</dl>
+						{elseif $__wcf->session->getVar('__googleData')}
+							<dl>
+								<dd>
+									<label><input type="checkbox" name="googleConnect" value="1"{if $googleConnect} checked="checked"{/if} /> {lang}wcf.user.3rdparty.google.connect{/lang}</label>
+								</dd>
+							</dl>
+						{else}
+							<p class="info">{lang}wcf.user.3rdparty.google.connect.info{/lang}</p>
+							<a href="{link controller='GoogleAuth'}{/link}" class="button marginTop"><span class="icon icon16 icon-google-plus"></span> <span>{lang}wcf.user.3rdparty.google.connect{/lang}</span></a>
+						{/if}
+					{/if}
 					{event name='3rdParty'}
 				{/content}
 			</fieldset>
