@@ -122,7 +122,7 @@
 	
 	{if GITHUB_PUBLIC_KEY !== '' && GITHUB_PRIVATE_KEY !== ''}
 		<li id="githubAuth" class="3rdPartyAuth">
-			<a href="https://github.com/login/oauth/authorize?client_id={@GITHUB_PUBLIC_KEY|rawurlencode}&amp;scope={@'user:email'|rawurlencode}"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.login{/lang}</span></a>
+			<a href="{link controller='GithubAuth'}{/link}"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.login{/lang}</span></a>
 		</li>
 	{/if}
 	

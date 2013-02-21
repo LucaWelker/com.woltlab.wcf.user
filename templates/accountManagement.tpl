@@ -205,7 +205,7 @@
 							</dl>
 						{else}
 							<p class="info">{lang}wcf.user.3rdparty.github.connect.info{/lang}</p>
-							<a href="https://github.com/login/oauth/authorize?client_id={@GITHUB_PUBLIC_KEY|rawurlencode}&amp;scope={@'user:email'|rawurlencode}" class="button marginTop"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.connect{/lang}</span></a>
+							<a href="{link controller='GithubAuth'}{/link}" class="button marginTop"><span class="icon icon16 icon-github"></span> <span>{lang}wcf.user.3rdparty.github.connect{/lang}</span></a>
 						{/if}
 					{/if}
 					
