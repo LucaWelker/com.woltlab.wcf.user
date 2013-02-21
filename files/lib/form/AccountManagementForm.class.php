@@ -88,49 +88,49 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $quitStarted = 0;
 	
 	/**
-	 * indicates if the user wants do connect github
+	 * indicates if the user wants to connect github
 	 * @var	integer
 	 */
 	public $githubConnect = 0;
 	
 	/**
-	 * indicates if the user wants do disconnect github
+	 * indicates if the user wants to disconnect github
 	 * @var	integer
 	 */
 	public $githubDisconnect = 0;
 	
 	/**
-	 * indicates if the user wants do connect twitter
+	 * indicates if the user wants to connect twitter
 	 * @var	integer
 	 */
 	public $twitterConnect = 0;
 	
 	/**
-	 * indicates if the user wants do disconnect twitter
+	 * indicates if the user wants to disconnect twitter
 	 * @var	integer
 	 */
 	public $twitterDisconnect = 0;
 	
 	/**
-	 * indicates if the user wants do connect facebook
+	 * indicates if the user wants to connect facebook
 	 * @var	integer
 	 */
 	public $facebookConnect = 0;
 	
 	/**
-	 * indicates if the user wants do disconnect facebook
+	 * indicates if the user wants to disconnect facebook
 	 * @var	integer
 	 */
 	public $facebookDisconnect = 0;
 	
 	/**
-	 * indicates if the user wants do connect google
+	 * indicates if the user wants to connect google
 	 * @var	integer
 	 */
 	public $googleConnect = 0;
 	
 	/**
-	 * indicates if the user wants do disconnect google
+	 * indicates if the user wants to disconnect google
 	 * @var	integer
 	 */
 	public $googleDisconnect = 0;
