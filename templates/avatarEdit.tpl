@@ -35,7 +35,7 @@
 <form method="post" action="{link controller='AvatarEdit'}{/link}" id="avatarForm">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend><label for="password">{lang}wcf.user.avatar{/lang}</label></legend>
+			<legend>{lang}wcf.user.avatar{/lang}</legend>
 				
 			<dl>
 				<dd>
