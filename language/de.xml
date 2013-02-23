@@ -102,7 +102,6 @@
 		<item name="wcf.user.access.following"><![CDATA[Benutzer, denen ich folge]]></item>
 		<item name="wcf.user.access.nobody"><![CDATA[Keiner]]></item>
 		<item name="wcf.user.access.registered"><![CDATA[Registrierte Benutzer]]></item>
-		<item name="wcf.user.avatar.alt"><![CDATA[Benutzer-Avatarbild]]></item>
 		<item name="wcf.user.button.login"><![CDATA[Anmelden]]></item>
 		<item name="wcf.user.button.register"><![CDATA[Registrieren]]></item>
 		<item name="wcf.user.login.action"><![CDATA[Sind Sie bereits registriert?]]></item>
@@ -388,12 +387,14 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 	
 	<category name="wcf.user.avatar">
 		<item name="wcf.user.avatar"><![CDATA[Avatar]]></item>
+		<item name="wcf.user.avatar.alt"><![CDATA[Benutzer-Avatarbild]]></item>
 		<item name="wcf.user.avatar.edit"><![CDATA[Avatar verwalten]]></item>
 		<item name="wcf.user.avatar.error.disabled"><![CDATA[Der Administrator hat{if $__wcf->user->avatarID || $__wcf->user->enableGravatar} Ihren derzeitigen Avatar gesperrt und{/if} Ihnen die weitere Nutzungsberechtigung der Avatar-Funktion {if !$__wcf->user->disableAvatarReason}entzogen.{else} aus folgenden Gründen entzogen: {$__wcf->user->disableAvatarReason}{/if}]]></item>
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Eigenen Avatar hochladen]]></item>
 		<item name="wcf.user.avatar.type.custom.description"><![CDATA[Eigene Avatare dürfen die Dateiendungen {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} und maximal eine Größe {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize} besitzen. Die Mindestgröße für Avatare liegt bei 48×48 Pixel, die empfohlene Maximalgröße bei {@MAX_AVATAR_WIDTH}×{@MAX_AVATAR_HEIGHT} Pixel, größere Avatare werden - sofern möglich - automatisch auf die Maximalgröße verkleinert.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Gravatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Bei einem Gravatar handelt es sich um einen global verfügbaren Avatar (Global Recognized Avatar), welcher mit Ihrer E-Mail-Adresse („{$__wcf->user->email}“) verknüpft ist. Auf der folgenden Website können Sie einen Gravatar anlegen: <a href="http://www.gravatar.com" class="externalURL">www.gravatar.com</a>]]></item>
+		<item name="wcf.user.avatar.type.gravatar.error.notFound"><![CDATA[Zu Ihrer E-Mail-Adresse konnte kein Gravatar gefunden werden.]]></item>
 		<item name="wcf.user.avatar.type.none"><![CDATA[Keinen Avatar verwenden]]></item>
 		<item name="wcf.user.avatar.type.none.description"><![CDATA[Bereits hochgeladene Avatare werden bei Auswahl dieser Option gelöscht.]]></item>
 		<item name="wcf.user.avatar.upload.error.badImage"><![CDATA[Sie haben kein gültiges Bild hochgeladen.]]></item>
