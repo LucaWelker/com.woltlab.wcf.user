@@ -5,6 +5,7 @@
 			<name>com.woltlab.wcf.user.follow</name>
 			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
 			<classname>wcf\system\user\notification\object\type\UserFollowUserNotificationObjectType</classname>
+			<category>com.woltlab.wcf.user</category>
 		</type>
 		
 		<type>

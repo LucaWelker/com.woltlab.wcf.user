@@ -423,6 +423,8 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.notification.noNotifications"><![CDATA[Es sind keine neuen Benachrichtigungen vorhanden.]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
 		<item name="wcf.user.notification.showAll"><![CDATA[Alle Benachrichtigungen anzeigen]]></item>
+		<item name="wcf.user.notification.com.woltlab.wcf.user"><![CDATA[Benutzer-Profile]]></item>
+		<item name="wcf.user.notification.com.woltlab.wcf.user.follow.following"><![CDATA[Jemand folgt Ihnen]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">
