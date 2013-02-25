@@ -144,7 +144,7 @@ class UserPage extends AbstractPage {
 		$this->visitorList->sqlLimit = 10;
 		$this->visitorList->readObjects();
 		
-		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('link', LinkHandler::getInstance()->getLink('User', array('object' => $this->user->getDecoratedObject()))));
+		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('url', LinkHandler::getInstance()->getLink('User', array('object' => $this->user->getDecoratedObject()))));
 		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('type', 'profile'));
 		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('profile:username', $this->user->username));
 		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('title', WCF::getLanguage()->getDynamicVariable('wcf.user.profile', array('user' => $this->user)) . ' - ' . WCF::getLanguage()->get(PAGE_TITLE)));
