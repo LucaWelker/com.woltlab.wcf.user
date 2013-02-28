@@ -148,6 +148,7 @@ class UserPage extends AbstractPage {
 		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('type', 'profile'));
 		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('profile:username', $this->user->username));
 		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('title', WCF::getLanguage()->getDynamicVariable('wcf.user.profile', array('user' => $this->user)) . ' - ' . WCF::getLanguage()->get(PAGE_TITLE)));
+		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('image', $this->user->getAvatar()->getURL()));
 	}
 	
 	/**
