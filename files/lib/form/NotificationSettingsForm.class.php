@@ -155,6 +155,8 @@ class NotificationSettingsForm extends AbstractForm {
 			foreach ($events as $event) $groupedEvents[$category][] = $event;
 		}
 		
+		ksort($groupedEvents);
+		
 		WCF::getTPL()->assign(array(
 			'events' => $groupedEvents,
 			'settings' => $this->settings
