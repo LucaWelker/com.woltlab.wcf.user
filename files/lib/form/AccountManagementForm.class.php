@@ -88,6 +88,54 @@ class AccountManagementForm extends AbstractSecureForm {
 	public $quitStarted = 0;
 	
 	/**
+	 * indicates if the user wants to connect github
+	 * @var	integer
+	 */
+	public $githubConnect = 0;
+	
+	/**
+	 * indicates if the user wants to disconnect github
+	 * @var	integer
+	 */
+	public $githubDisconnect = 0;
+	
+	/**
+	 * indicates if the user wants to connect twitter
+	 * @var	integer
+	 */
+	public $twitterConnect = 0;
+	
+	/**
+	 * indicates if the user wants to disconnect twitter
+	 * @var	integer
+	 */
+	public $twitterDisconnect = 0;
+	
+	/**
+	 * indicates if the user wants to connect facebook
+	 * @var	integer
+	 */
+	public $facebookConnect = 0;
+	
+	/**
+	 * indicates if the user wants to disconnect facebook
+	 * @var	integer
+	 */
+	public $facebookDisconnect = 0;
+	
+	/**
+	 * indicates if the user wants to connect google
+	 * @var	integer
+	 */
+	public $googleConnect = 0;
+	
+	/**
+	 * indicates if the user wants to disconnect google
+	 * @var	integer
+	 */
+	public $googleDisconnect = 0;
+	
+	/**
 	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -110,6 +158,14 @@ class AccountManagementForm extends AbstractSecureForm {
 		if (isset($_POST['username'])) $this->username = StringUtil::trim($_POST['username']);
 		if (isset($_POST['quit'])) $this->quit = intval($_POST['quit']);
 		if (isset($_POST['cancelQuit'])) $this->cancelQuit = intval($_POST['cancelQuit']);
+		if (isset($_POST['githubConnect'])) $this->githubConnect = intval($_POST['githubConnect']);
+		if (isset($_POST['githubDisconnect'])) $this->githubDisconnect = intval($_POST['githubDisconnect']);
+		if (isset($_POST['twitterConnect'])) $this->twitterConnect = intval($_POST['twitterConnect']);
+		if (isset($_POST['twitterDisconnect'])) $this->twitterDisconnect = intval($_POST['twitterDisconnect']);
+		if (isset($_POST['facebookConnect'])) $this->facebookConnect = intval($_POST['facebookConnect']);
+		if (isset($_POST['facebookDisconnect'])) $this->facebookDisconnect = intval($_POST['facebookDisconnect']);
+		if (isset($_POST['googleConnect'])) $this->googleConnect = intval($_POST['googleConnect']);
+		if (isset($_POST['googleDisconnect'])) $this->googleDisconnect = intval($_POST['googleDisconnect']);
 	}
 	
 	/**
@@ -220,7 +276,15 @@ class AccountManagementForm extends AbstractSecureForm {
 			'renamePeriod' => WCF::getSession()->getPermission('user.profile.renamePeriod'),
 			'quitStarted' => $this->quitStarted,
 			'quit' => $this->quit,
-			'cancelQuit' => $this->cancelQuit
+			'cancelQuit' => $this->cancelQuit,
+			'githubConnect' => $this->githubConnect,
+			'githubDisconnect' => $this->githubDisconnect,
+			'twitterConnect' => $this->twitterConnect,
+			'twitterDisconnect' => $this->twitterDisconnect,
+			'facebookConnect' => $this->facebookConnect,
+			'facebookDisconnect' => $this->facebookDisconnect,
+			'googleConnect' => $this->googleConnect,
+			'googleDisconnect' => $this->googleDisconnect
 		));
 	}
 	
@@ -242,6 +306,7 @@ class AccountManagementForm extends AbstractSecureForm {
 		
 		$success = array();
 		$updateParameters = array();
+		$updateOptions = array();
 		$userEditor = new UserEditor(WCF::getUser());
 		
 		// quit
@@ -312,8 +377,98 @@ class AccountManagementForm extends AbstractSecureForm {
 			$success[] = 'wcf.user.changePassword.success';
 		}
 		
+		// 3rdParty
+		if (GITHUB_PUBLIC_KEY !== '' && GITHUB_PRIVATE_KEY !== '') {
+			if ($this->githubConnect && WCF::getSession()->getVar('__githubToken')) {
+				$updateOptions[User::getUserOptionID('githubToken')] = WCF::getSession()->getVar('__githubToken');
+				
+				WCF::getUser()->githubToken = WCF::getSession()->getVar('__githubToken');
+				
+				$success[] = 'wcf.user.3rdparty.github.connect.success';
+				
+				WCF::getSession()->unregister('__githubToken');
+				WCF::getSession()->unregister('__githubUsername');
+			}
+			else if ($this->githubDisconnect && WCF::getUser()->githubToken) {
+				$updateOptions[User::getUserOptionID('githubToken')] = '';
+				
+				WCF::getUser()->githubToken = '';
+				
+				$success[] = 'wcf.user.3rdparty.github.disconnect.success';
+			}
+		}
+		if (TWITTER_PUBLIC_KEY !== '' && TWITTER_PRIVATE_KEY !== '') {
+			if ($this->twitterConnect && WCF::getSession()->getVar('__twitterData')) {
+				$twitterData = WCF::getSession()->getVar('__twitterData');
+				$updateOptions[User::getUserOptionID('twitterData')] = serialize($twitterData);
+				$updateOptions[User::getUserOptionID('twitterUserID')] = $twitterData['user_id'];
+				
+				WCF::getUser()->twitterUserID = $twitterData['user_id'];
+				
+				$success[] = 'wcf.user.3rdparty.twitter.connect.success';
+				
+				WCF::getSession()->unregister('__twitterData');
+				WCF::getSession()->unregister('__twitterUsername');
+			}
+			else if ($this->twitterDisconnect && WCF::getUser()->twitterUserID) {
+				$updateOptions[User::getUserOptionID('twitterData')] = '';
+				$updateOptions[User::getUserOptionID('twitterUserID')] = '';
+				
+				WCF::getUser()->twitterUserID = '';
+				
+				$success[] = 'wcf.user.3rdparty.twitter.disconnect.success';
+			}
+		}
+		if (FACEBOOK_PUBLIC_KEY !== '' && FACEBOOK_PRIVATE_KEY !== '') {
+			if ($this->facebookConnect && WCF::getSession()->getVar('__facebookData')) {
+				$facebookData = WCF::getSession()->getVar('__facebookData');
+				$updateOptions[User::getUserOptionID('facebookData')] = serialize($facebookData);
+				$updateOptions[User::getUserOptionID('facebookUserID')] = $facebookData['id'];
+				
+				WCF::getUser()->facebookUserID = $facebookData['id'];
+				
+				$success[] = 'wcf.user.3rdparty.facebook.connect.success';
+				
+				WCF::getSession()->unregister('__facebookData');
+				WCF::getSession()->unregister('__facebookUsername');
+			}
+			else if ($this->facebookDisconnect && WCF::getUser()->facebookUserID) {
+				$updateOptions[User::getUserOptionID('facebookData')] = '';
+				$updateOptions[User::getUserOptionID('facebookUserID')] = '';
+				
+				WCF::getUser()->facebookUserID = '';
+				
+				$success[] = 'wcf.user.3rdparty.facebook.disconnect.success';
+			}
+		}
+		if (GOOGLE_PUBLIC_KEY !== '' && GOOGLE_PRIVATE_KEY !== '') {
+			if ($this->googleConnect && WCF::getSession()->getVar('__googleData')) {
+				$googleData = WCF::getSession()->getVar('__googleData');
+				$updateOptions[User::getUserOptionID('googleData')] = serialize($googleData);
+				$updateOptions[User::getUserOptionID('googleUserID')] = $googleData['id'];
+				
+				WCF::getUser()->googleUserID = $googleData['id'];
+				
+				$success[] = 'wcf.user.3rdparty.google.connect.success';
+				
+				WCF::getSession()->unregister('__googleData');
+				WCF::getSession()->unregister('__googleUsername');
+			}
+			else if ($this->googleDisconnect && WCF::getUser()->googleUserID) {
+				$updateOptions[User::getUserOptionID('googleData')] = '';
+				$updateOptions[User::getUserOptionID('googleUserID')] = '';
+				
+				WCF::getUser()->googleUserID = '';
+				
+				$success[] = 'wcf.user.3rdparty.google.disconnect.success';
+			}
+		}
+		
 		if (!empty($updateParameters)) {
 			$userEditor->update($updateParameters);
+		}
+		if (!empty($updateOptions)) {
+			$userEditor->updateUserOptions($updateOptions);
 		}
 		
 		$this->saved();
