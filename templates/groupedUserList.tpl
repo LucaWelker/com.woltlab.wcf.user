@@ -7,17 +7,17 @@
 		</header>
 	{/if}
 	
-	<div class="container marginTop">
-		<ol class="containerList doubleColumned">
-			{if $group|count}
+	{if $group|count}
+		<div class="container marginTop">
+			<ol class="containerList doubleColumned">
 				{foreach from=$group item=user}
 					{include file='userListItem'}
 				{/foreach}
-			{else}
-				<small>{$group->getNoUsersMessage()}</small>
-			{/if}
-		</ol>
-	</div>
+			</ol>
+		</div>
+	{else}
+		<p class="marginTop">{$group->getNoUsersMessage()}</p>
+	{/if}
 {/foreach}
 
 <div class="contentNavigation"><div class="jsPagination"></div></div>
