@@ -151,7 +151,8 @@ class NotificationSettingsForm extends AbstractForm {
 			if (!isset($groupedEvents[$category])) {
 				$groupedEvents[$category] = array();
 			}
-			$groupedEvents[$category] = array_merge($groupedEvents[$category], $events);
+			
+			foreach ($events as $event) $groupedEvents[$category][] = $event;
 		}
 		
 		WCF::getTPL()->assign(array(

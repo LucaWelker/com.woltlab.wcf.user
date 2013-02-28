@@ -54,8 +54,8 @@
 				<dl>
 					{foreach from=$eventList item='event'}
 						<dd>
-							<label><input type="checkbox" name="settings[{@$event->eventID}][enabled]" value="1"{if $settings[$event->eventID][enabled]} checked="checked"{/if} /> {lang}wcf.user.notification.{$eventCategory}.{$event->eventName}{/lang}</label>
-							{hascontent}<small>{content}{lang __optional=true}wcf.user.notification.{$eventCategory}.{$event->eventName}.description{/lang}{/content}</small>{/hascontent}
+							<label><input type="checkbox" name="settings[{@$event->eventID}][enabled]" value="1"{if $settings[$event->eventID][enabled]} checked="checked"{/if} /> {lang}wcf.user.notification.{$event->objectType}.{$event->eventName}{/lang}</label>
+							{hascontent}<small>{content}{lang __optional=true}wcf.user.notification.{$event->objectType}.{$event->eventName}.description{/lang}{/content}</small>{/hascontent}
 							<small class="jsMailNotificationType">
 								<select name="settings[{@$event->eventID}][mailNotificationType]">
 									<option value="none">{lang}wcf.user.notification.mailNotificationType.none{/lang}</option>
