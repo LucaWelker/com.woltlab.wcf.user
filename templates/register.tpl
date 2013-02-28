@@ -41,6 +41,22 @@
 
 {include file='userNotice'}
 
+{if $__wcf->session->getVar('__githubToken')}
+	<p class="info">{lang}wcf.user.3rdparty.github.register{/lang}</p>
+{/if}
+
+{if $__wcf->session->getVar('__twitterData')}
+	<p class="info">{lang}wcf.user.3rdparty.twitter.register{/lang}</p>
+{/if}
+
+{if $__wcf->session->getVar('__facebookData')}
+	<p class="info">{lang}wcf.user.3rdparty.facebook.register{/lang}</p>
+{/if}
+
+{if $__wcf->session->getVar('__googleData')}
+	<p class="info">{lang}wcf.user.3rdparty.google.register{/lang}</p>
+{/if}
+
 {if $errorField}
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
