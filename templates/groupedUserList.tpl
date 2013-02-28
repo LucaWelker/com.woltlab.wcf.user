@@ -9,7 +9,7 @@
 	
 	{if $group|count}
 		<div class="container marginTop">
-			<ol class="containerList doubleColumned">
+			<ol class="containerList">
 				{foreach from=$group item=user}
 					{include file='userListItem'}
 				{/foreach}
