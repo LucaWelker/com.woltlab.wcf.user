@@ -41,20 +41,16 @@
 
 {include file='userNotice'}
 
-{if $__wcf->session->getVar('__githubToken')}
-	<p class="info">{lang}wcf.user.3rdparty.github.register{/lang}</p>
-{/if}
-
-{if $__wcf->session->getVar('__twitterData')}
-	<p class="info">{lang}wcf.user.3rdparty.twitter.register{/lang}</p>
-{/if}
-
-{if $__wcf->session->getVar('__facebookData')}
-	<p class="info">{lang}wcf.user.3rdparty.facebook.register{/lang}</p>
-{/if}
-
-{if $__wcf->session->getVar('__googleData')}
-	<p class="info">{lang}wcf.user.3rdparty.google.register{/lang}</p>
+{if $isExternalAuthentication}
+	{if $__wcf->session->getVar('__githubToken')}
+		<p class="info">{lang}wcf.user.3rdparty.github.register{/lang}</p>
+	{else if $__wcf->session->getVar('__twitterData')}
+		<p class="info">{lang}wcf.user.3rdparty.twitter.register{/lang}</p>
+	{else if $__wcf->session->getVar('__facebookData')}
+		<p class="info">{lang}wcf.user.3rdparty.facebook.register{/lang}</p>
+	{else if $__wcf->session->getVar('__googleData')}
+		<p class="info">{lang}wcf.user.3rdparty.google.register{/lang}</p>
+	{/if}
 {/if}
 
 {if $errorField}
@@ -118,39 +114,41 @@
 			</dl>
 		</fieldset>
 		
-		<fieldset>
-			<legend>{lang}wcf.user.password{/lang}</legend>
-			
-			<dl{if $errorType.password|isset} class="formError"{/if}>
-				<dt>
-					<label for="password">{lang}wcf.user.password{/lang}</label>
-				</dt>
-				<dd>
-					<input type="password" id="password" name="password" value="{$password}" required="required" class="medium" />
-					{if $errorType.password|isset}
-						<small class="innerError">
-							{if $errorType.password == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType.password == 'notSecure'}{lang}wcf.user.password.error.notSecure{/lang}{/if}
-						</small>
-					{/if}
-					<small>{lang}wcf.user.password.description{/lang}</small>
-				</dd>
-			</dl>
-			
-			<dl{if $errorType.confirmPassword|isset} class="formError"{/if}>
-				<dt>
-					<label for="confirmPassword">{lang}wcf.user.confirmPassword{/lang}</label>
-				</dt>
-				<dd>
-					<input type="password" id="confirmPassword" name="confirmPassword" value="{$confirmPassword}" required="required" class="medium" />
-					{if $errorType.confirmPassword|isset}
-						<small class="innerError">
-							{if $errorType.confirmPassword == 'notEqual'}{lang}wcf.user.confirmPassword.error.notEqual{/lang}{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-		</fieldset>
+		{if !$isExternalAuthentication}
+			<fieldset>
+				<legend>{lang}wcf.user.password{/lang}</legend>
+				
+				<dl{if $errorType.password|isset} class="formError"{/if}>
+					<dt>
+						<label for="password">{lang}wcf.user.password{/lang}</label>
+					</dt>
+					<dd>
+						<input type="password" id="password" name="password" value="{$password}" required="required" class="medium" />
+						{if $errorType.password|isset}
+							<small class="innerError">
+								{if $errorType.password == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
+								{if $errorType.password == 'notSecure'}{lang}wcf.user.password.error.notSecure{/lang}{/if}
+							</small>
+						{/if}
+						<small>{lang}wcf.user.password.description{/lang}</small>
+					</dd>
+				</dl>
+				
+				<dl{if $errorType.confirmPassword|isset} class="formError"{/if}>
+					<dt>
+						<label for="confirmPassword">{lang}wcf.user.confirmPassword{/lang}</label>
+					</dt>
+					<dd>
+						<input type="password" id="confirmPassword" name="confirmPassword" value="{$confirmPassword}" required="required" class="medium" />
+						{if $errorType.confirmPassword|isset}
+							<small class="innerError">
+								{if $errorType.confirmPassword == 'notEqual'}{lang}wcf.user.confirmPassword.error.notEqual{/lang}{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+			</fieldset>
+		{/if}
 		
 		{if $availableLanguages|count > 1}
 			<fieldset>

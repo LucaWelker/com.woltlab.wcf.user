@@ -32,9 +32,21 @@ use wcf\util\UserRegistrationUtil;
  */
 class RegisterForm extends UserAddForm {
 	/**
+	 * recaptcha challenge
+	 * @var	string
+	 */
+	public $challenge = '';
+	
+	/**
 	 * @see	wcf\page\AbstractPage::$enableTracking
 	 */
 	public $enableTracking = true;
+	
+	/**
+	 * true if external authentication is used
+	 * @var	boolean
+	 */
+	public $isExternalAuthentication = false;
 	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
@@ -47,12 +59,6 @@ class RegisterForm extends UserAddForm {
 	 * @var	string
 	 */
 	public $message = '';
-	
-	/**
-	 * recaptcha challenge
-	 * @var	string
-	 */
-	public $challenge = '';
 	
 	/**
 	 * recaptcha response
@@ -97,6 +103,10 @@ class RegisterForm extends UserAddForm {
 		if (!REGISTER_USE_CAPTCHA || WCF::getSession()->getVar('recaptchaDone')) {
 			$this->useCaptcha = false;
 		}
+		
+		if (WCF::getSession()->getVar('__githubToken') || WCF::getSession()->getVar('__twitterData') || WCF::getSession()->getVar('__facebookData') || WCF::getSession()->getVar('__googleData')) {
+			$this->isExternalAuthentication = true;
+		}
 	}
 	
 	/**
@@ -130,7 +140,7 @@ class RegisterForm extends UserAddForm {
 		parent::validate();
 		
 		// validate registration time
-		if (!WCF::getSession()->getVar('registrationStartTime') || (TIME_NOW - WCF::getSession()->getVar('registrationStartTime')) < self::$minRegistrationTime) {
+		if (!$this->isExternalAuthentication && (!WCF::getSession()->getVar('registrationStartTime') || (TIME_NOW - WCF::getSession()->getVar('registrationStartTime')) < self::$minRegistrationTime)) {
 			throw new UserInputException('registrationStartTime', array());
 		}
 	}
@@ -172,6 +182,7 @@ class RegisterForm extends UserAddForm {
 		
 		RecaptchaHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
+			'isExternalAuthentication' => $this->isExternalAuthentication,
 			'useCaptcha' => $this->useCaptcha
 		));
 	}
@@ -214,11 +225,13 @@ class RegisterForm extends UserAddForm {
 	 * @see	wcf\acp\form\UserAddForm::validatePassword()
 	 */
 	protected function validatePassword($password, $confirmPassword) {
-		parent::validatePassword($password, $confirmPassword);
-		
-		// check security of the given password
-		if (!UserRegistrationUtil::isSecurePassword($password)) {
-			throw new UserInputException('password', 'notSecure');
+		if (!$this->isExternalAuthentication) {
+			parent::validatePassword($password, $confirmPassword);
+			
+			// check security of the given password
+			if (!UserRegistrationUtil::isSecurePassword($password)) {
+				throw new UserInputException('password', 'notSecure');
+			}
 		}
 	}
 	
@@ -245,61 +258,66 @@ class RegisterForm extends UserAddForm {
 		// TODO: Set this only when the email address is not changed (i.e. the verified email address provided by facebook / github is used)?
 		$registerVia3rdParty = false;
 		
-		// save github token
-		if (WCF::getSession()->getVar('__githubToken')) {
-			$this->additionalFields['authData'] = 'github:'.WCF::getSession()->getVar('__githubToken');
-			WCF::getSession()->unregister('__githubToken');
-			
-			$registerVia3rdParty = true;
-			
-			// TODO: Check if we can fill in any profile fields
-		}
-		// save twitter data
-		if (WCF::getSession()->getVar('__twitterData')) {
-			$twitterData = WCF::getSession()->getVar('__twitterData');
-			$this->additionalFields['authData'] = 'twitter:'.$twitterData['user_id'];
-			
-			WCF::getSession()->unregister('__twitterData');
-			
-			$registerVia3rdParty = true;
-			
-			// TODO: Check if we can fill in any profile fields
-		}
-		// save facebook data
-		if (WCF::getSession()->getVar('__facebookData')) {
-			$facebookData = WCF::getSession()->getVar('__facebookData');
-			$this->additionalFields['authData'] = 'facebook:'.$facebookData['id'];
-			
-			WCF::getSession()->unregister('__facebookData');
-			
-			$registerVia3rdParty = true;
-			
-			// TODO: Check if we can fill in any profile fields
-			$saveOptions[User::getUserOptionID('gender')] = ($facebookData['gender'] == 'male' ? UserProfile::GENDER_MALE : UserProfile::GENDER_FEMALE);
-			if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = implode('-', array_reverse(explode('/', $facebookData['birthday'])));
-			if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
-			if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
-			if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
-		}
-		// save google data
-		if (WCF::getSession()->getVar('__googleData')) {
-			$googleData = WCF::getSession()->getVar('__googleData');
-			$this->additionalFields['authData'] = 'google:'.$googleData['id'];
-			
-			WCF::getSession()->unregister('__googleData');
-			
-			$registerVia3rdParty = true;
-			
-			// TODO: Check if we can fill in any profile fields
-			switch ($googleData['gender']) {
-				case 'male':
-					$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_MALE;
-				break;
-				case 'female':
-					$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_FEMALE;
-				break;
+		if ($this->isExternalAuthentication) {
+			// save github token
+			if (WCF::getSession()->getVar('__githubToken')) {
+				$this->additionalFields['authData'] = 'github:'.WCF::getSession()->getVar('__githubToken');
+				WCF::getSession()->unregister('__githubToken');
+				
+				$registerVia3rdParty = true;
+				
+				// TODO: Check if we can fill in any profile fields
 			}
-			if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = $googleData['birthday'];
+			// save twitter data
+			if (WCF::getSession()->getVar('__twitterData')) {
+				$twitterData = WCF::getSession()->getVar('__twitterData');
+				$this->additionalFields['authData'] = 'twitter:'.$twitterData['user_id'];
+				
+				WCF::getSession()->unregister('__twitterData');
+				
+				$registerVia3rdParty = true;
+				
+				// TODO: Check if we can fill in any profile fields
+			}
+			// save facebook data
+			if (WCF::getSession()->getVar('__facebookData')) {
+				$facebookData = WCF::getSession()->getVar('__facebookData');
+				$this->additionalFields['authData'] = 'facebook:'.$facebookData['id'];
+				
+				WCF::getSession()->unregister('__facebookData');
+				
+				$registerVia3rdParty = true;
+				
+				// TODO: Check if we can fill in any profile fields
+				$saveOptions[User::getUserOptionID('gender')] = ($facebookData['gender'] == 'male' ? UserProfile::GENDER_MALE : UserProfile::GENDER_FEMALE);
+				if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = implode('-', array_reverse(explode('/', $facebookData['birthday'])));
+				if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
+				if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
+				if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
+			}
+			// save google data
+			if (WCF::getSession()->getVar('__googleData')) {
+				$googleData = WCF::getSession()->getVar('__googleData');
+				$this->additionalFields['authData'] = 'google:'.$googleData['id'];
+				
+				WCF::getSession()->unregister('__googleData');
+				
+				$registerVia3rdParty = true;
+				
+				// TODO: Check if we can fill in any profile fields
+				switch ($googleData['gender']) {
+					case 'male':
+						$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_MALE;
+					break;
+					case 'female':
+						$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_FEMALE;
+					break;
+				}
+				if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = $googleData['birthday'];
+			}
+			
+			// create fake password
+			$this->password = StringUtil::getRandomID();
 		}
 		
 		$this->additionalFields['languageID'] = $this->languageID;
