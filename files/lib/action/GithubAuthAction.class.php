@@ -155,13 +155,14 @@ class GithubAuthAction extends AbstractAction {
 	 */
 	public function getUser($token) {
 		$sql = "SELECT	userID
-			FROM	wcf".WCF_N."_user_option_value
-			WHERE	userOption".User::getUserOptionID('githubToken')." = ?";
-		$stmt = WCF::getDB()->prepareStatement($sql);
-		$stmt->execute(array($token));
-		$row = $stmt->fetchArray();
+			FROM	wcf".WCF_N."_user
+			WHERE	authData LIKE ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			'github:'.$token.'%'
+		));
+		$row = $statement->fetchArray();
 		
-		$user = new User($row['userID']);
-		return $user;
+		return new User($row['userID']);
 	}
 }

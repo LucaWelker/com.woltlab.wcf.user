@@ -56,7 +56,7 @@ class FacebookAuthAction extends AbstractAction {
 			
 			try {
 				// fetch userdata
-				$request = new HTTPRequest('https://graph.facebook.com/me?access_token='.rawurlencode($data['access_token']));
+				$request = new HTTPRequest('https://graph.facebook.com/me?access_token='.rawurlencode($data['access_token']).'&fields=birthday,bio,gender,id,location,picture,username,website');
 				$request->execute();
 				$reply = $request->getReply();
 				
