@@ -23,6 +23,7 @@ ALTER TABLE wcf1_user ADD userTitle VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user ADD userOnlineGroupID INT(10);
 ALTER TABLE wcf1_user ADD activityPoints INT(10) NOT NULL DEFAULT 0; -- hopefully 2'147'483'647 is enough
 ALTER TABLE wcf1_user ADD notificationMailToken VARCHAR(20) NOT NULL DEFAULT '';
+ALTER TABLE wcf1_user ADD authData VARCHAR(255) NOT NULL DEFAULT '';
 
 ALTER TABLE wcf1_user ADD INDEX activationCode (activationCode);
 ALTER TABLE wcf1_user ADD INDEX registrationData (registrationIpAddress, registrationDate);

@@ -247,7 +247,7 @@ class RegisterForm extends UserAddForm {
 		
 		// save github token
 		if (WCF::getSession()->getVar('__githubToken')) {
-			$saveOptions[User::getUserOptionID('githubToken')] = WCF::getSession()->getVar('__githubToken');
+			$this->additionalFields['authData'] = 'github:'.WCF::getSession()->getVar('__githubToken');
 			WCF::getSession()->unregister('__githubToken');
 			
 			$registerVia3rdParty = true;
@@ -257,8 +257,7 @@ class RegisterForm extends UserAddForm {
 		// save twitter data
 		if (WCF::getSession()->getVar('__twitterData')) {
 			$twitterData = WCF::getSession()->getVar('__twitterData');
-			$saveOptions[User::getUserOptionID('twitterData')] = serialize($twitterData);
-			$saveOptions[User::getUserOptionID('twitterUserID')] = $twitterData['user_id'];
+			$this->additionalFields['authData'] = 'twitter:'.$twitterData['user_id'];
 			
 			WCF::getSession()->unregister('__twitterData');
 			
@@ -269,8 +268,7 @@ class RegisterForm extends UserAddForm {
 		// save facebook data
 		if (WCF::getSession()->getVar('__facebookData')) {
 			$facebookData = WCF::getSession()->getVar('__facebookData');
-			$saveOptions[User::getUserOptionID('facebookData')] = serialize($facebookData);
-			$saveOptions[User::getUserOptionID('facebookUserID')] = $facebookData['id'];
+			$this->additionalFields['authData'] = 'facebook:'.$facebookData['id'];
 			
 			WCF::getSession()->unregister('__facebookData');
 			
@@ -286,8 +284,7 @@ class RegisterForm extends UserAddForm {
 		// save google data
 		if (WCF::getSession()->getVar('__googleData')) {
 			$googleData = WCF::getSession()->getVar('__googleData');
-			$saveOptions[User::getUserOptionID('googleData')] = serialize($googleData);
-			$saveOptions[User::getUserOptionID('googleUserID')] = $googleData['id'];
+			$this->additionalFields['authData'] = 'google:'.$googleData['id'];
 			
 			WCF::getSession()->unregister('__googleData');
 			
