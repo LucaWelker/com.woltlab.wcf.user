@@ -36,7 +36,7 @@
 			</ul>
 			
 			{if $followingCount > 10}
-				<a id="followingAll" class="button small more javascriptOnly">{lang}wcf.user.profile.following.all{/lang}</a>
+				<a id="followingAll" class="button small more javascriptOnly">{lang}wcf.user.profile.userList.showAll{/lang}</a>
 			{/if}
 		</div>
 	</fieldset>
@@ -54,7 +54,7 @@
 			</ul>
 				
 			{if $followerCount > 10}
-				<a id="followerAll" class="button small more javascriptOnly">{lang}wcf.user.profile.followers.all{/lang}</a>
+				<a id="followerAll" class="button small more javascriptOnly">{lang}wcf.user.profile.userList.showAll{/lang}</a>
 			{/if}
 		</div>
 	</fieldset>
@@ -72,7 +72,7 @@
 			</ul>
 				
 			{if $visitorCount > 10}
-				<a id="visitorAll" class="button small more javascriptOnly">{lang}wcf.user.profile.visitors.all{/lang}</a>
+				<a id="visitorAll" class="button small more javascriptOnly">{lang}wcf.user.profile.userList.showAll{/lang}</a>
 			{/if}
 		</div>
 	</fieldset>
