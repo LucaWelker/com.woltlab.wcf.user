@@ -46,11 +46,6 @@
 			<category name="settings.privacy.messaging">
 				<parent>settings.privacy</parent>
 			</category>
-			
-			<category name="settings.3rdparty">
-				<showorder>3</showorder>
-				<parent>settings</parent>
-			</category>
 			<!-- /settings -->
 		</categories>
 
@@ -197,63 +192,6 @@
 				<optiontype>boolean</optiontype>
 				<editable>3</editable>
 				<defaultvalue>1</defaultvalue>
-			</option>
-			
-			<!-- settings.3rdparty -->
-			<option name="githubToken">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
-			</option>
-			
-			<option name="twitterUserID">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
-			</option>
-			
-			<option name="twitterData">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
-			</option>
-			
-			<option name="facebookUserID">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
-			</option>
-			
-			<option name="facebookData">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
-			</option>
-			
-			<option name="googleUserID">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
-			</option>
-			
-			<option name="googleData">
-				<categoryname>settings.3rdparty</categoryname>
-				<optiontype>text</optiontype>
-				<visible>0</visible>
-				<editable>0</editable>
-				<defaultvalue></defaultvalue>
 			</option>
 			<!-- /settings -->
 		</options>

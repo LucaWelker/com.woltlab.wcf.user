@@ -35,11 +35,13 @@ class FacebookAuthAction extends AbstractAction {
 		parent::execute();
 		
 		$callbackURL = LinkHandler::getInstance()->getLink('FacebookAuth'); // TODO: appendsession Y/N?
+		// user accepted the connection
 		if (isset($_GET['code']) && isset($_GET['state'])) {
+			// validate state
 			if ($_GET['state'] != WCF::getSession()->getVar('__facebookInit')) throw new IllegalLinkException();
 			
 			try {
-				// call api
+				// fetch access_token
 				$request = new HTTPRequest('https://graph.facebook.com/oauth/access_token?client_id='.FACEBOOK_PUBLIC_KEY.'&redirect_uri='.rawurlencode($callbackURL).'&client_secret='.FACEBOOK_PRIVATE_KEY.'&code='.rawurlencode($_GET['code']));
 				$request->execute();
 				$reply = $request->getReply();
@@ -50,12 +52,11 @@ class FacebookAuthAction extends AbstractAction {
 				throw new IllegalLinkException();
 			}
 			
-			// extract data
 			parse_str($content, $data);
 			
 			try {
-				// call api
-				$request = new HTTPRequest('https://graph.facebook.com/me?access_token='.rawurlencode($data['access_token']));
+				// fetch userdata
+				$request = new HTTPRequest('https://graph.facebook.com/me?access_token='.rawurlencode($data['access_token']).'&fields=birthday,bio,gender,id,location,picture,username,website');
 				$request->execute();
 				$reply = $request->getReply();
 				
@@ -65,34 +66,37 @@ class FacebookAuthAction extends AbstractAction {
 				throw new IllegalLinkException();
 			}
 			
-			$data = JSON::decode($content);
+			$userData = JSON::decode($content);
 			
-			$user = $this->getUser($data['id']);
+			// check whether a user is connected to this facebook account
+			$user = $this->getUser($userData['id']);
 			
 			if ($user->userID) {
+				// a user is already connected, but we are logged in, break
 				if (WCF::getUser()->userID) {
 					throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.facebook.connect.error.inuse'));
 				}
+				// perform login
 				else {
-					// login
 					WCF::getSession()->changeUser($user);
 					WCF::getSession()->update();
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink());
 				}
 			}
 			else {
+				// save data for connection
 				if (WCF::getUser()->userID) {
-					WCF::getSession()->register('__facebookUsername', $data['name']);
-					WCF::getSession()->register('__facebookData', $data);
+					WCF::getSession()->register('__facebookUsername', $userData['name']);
+					WCF::getSession()->register('__facebookData', $userData);
 					
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink('AccountManagement').'#3rdParty');
 				}
+				// save data and redirect to registration
 				else {
-					WCF::getSession()->register('__username', $data['name']);
-					if (isset($data['email'])) WCF::getSession()->register('__email', $data['email']);
-						
-					// save token
-					WCF::getSession()->register('__facebookData', $data);
+					WCF::getSession()->register('__username', $userData['name']);
+					if (isset($data['email'])) WCF::getSession()->register('__email', $userData['email']);
+					
+					WCF::getSession()->register('__facebookData', $userData);
 					
 					// we assume that bots won't register on facebook first
 					WCF::getSession()->register('recaptchaDone', true);
@@ -105,10 +109,12 @@ class FacebookAuthAction extends AbstractAction {
 			$this->executed();
 			exit;
 		}
+		// user declined or any other error that may occur
 		if (isset($_GET['error'])) {
 			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.facebook.login.error.'.$_GET['error']));
 		}
 		
+		// start auth by redirecting to facebook
 		$token = StringUtil::getRandomID();
 		WCF::getSession()->register('__facebookInit', $token);
 		HeaderUtil::redirect("https://www.facebook.com/dialog/oauth?client_id=".FACEBOOK_PUBLIC_KEY. "&redirect_uri=".rawurlencode($callbackURL)."&state=".$token."&scope=email,user_about_me,user_birthday,user_interests,user_location,user_website");

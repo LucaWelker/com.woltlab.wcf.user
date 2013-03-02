@@ -58,9 +58,9 @@
 		<item name="wcf.acp.option.twitter_public_key"><![CDATA[Twitter Consumer key]]></item>
 		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[Sie können Ihren Consumer key und Ihr Consumer secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://dev.twitter.com/apps'|rawurlencode}" class="externalURL">Twitter</a> anfordern.]]></item>
 		<item name="wcf.acp.option.twitter_private_key"><![CDATA[Twitter Consumer secret]]></item>
-		<item name="wcf.acp.option.facebook_public_key"><![CDATA[facebook APP-ID]]></item>
-		<item name="wcf.acp.option.facebook_public_key.description"><![CDATA[Sie können Ihre APP-ID und Ihren Anwendungs-Geheimcode bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://developers.facebook.com/apps'|rawurlencode}" class="externalURL">facebook</a> anfordern.]]></item>
-		<item name="wcf.acp.option.facebook_private_key"><![CDATA[facebook Anwendungs-Geheimcode]]></item>
+		<item name="wcf.acp.option.facebook_public_key"><![CDATA[Facebook APP-ID]]></item>
+		<item name="wcf.acp.option.facebook_public_key.description"><![CDATA[Sie können Ihre APP-ID und Ihren Anwendungs-Geheimcode bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://developers.facebook.com/apps'|rawurlencode}" class="externalURL">Facebook</a> anfordern.]]></item>
+		<item name="wcf.acp.option.facebook_private_key"><![CDATA[Facebook Anwendungs-Geheimcode]]></item>
 		<item name="wcf.acp.option.google_public_key"><![CDATA[Google Client ID]]></item>
 		<item name="wcf.acp.option.google_public_key.description"><![CDATA[Sie können Ihre Client ID und Ihr Client Secret bei <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://code.google.com/apis/console/'|rawurlencode}" class="externalURL">Google</a> anfordern.]]></item>
 		<item name="wcf.acp.option.google_private_key"><![CDATA[Google Client Secret]]></item>
@@ -418,15 +418,15 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		<item name="wcf.user.3rdparty.twitter.connect.error.inuse"><![CDATA[Ihr Twitter-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
 		<item name="wcf.user.3rdparty.twitter.disconnect"><![CDATA[Verknüpfung zu Twitter trennen]]></item>
 		<item name="wcf.user.3rdparty.twitter.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem Twitter-Konto wurde erfolgreich getrennt.]]></item>
-		<item name="wcf.user.3rdparty.facebook.login"><![CDATA[Mit facebook anmelden]]></item>
-		<item name="wcf.user.3rdparty.facebook.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit facebook nicht möglich.]]></item>
-		<item name="wcf.user.3rdparty.facebook.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-facebook"></span>&nbsp;facebook. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
-		<item name="wcf.user.3rdparty.facebook.connect"><![CDATA[Mit facebook-Konto {if $__wcf->session->getVar('__facebookUsername')}(„{$__wcf->session->getVar('__facebookUsername')}“){/if} verknüpfen]]></item>
-		<item name="wcf.user.3rdparty.facebook.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://facebook.com" class="externalURL">facebook-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr facebook-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
-		<item name="wcf.user.3rdparty.facebook.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem facebook-Konto verknüpft.]]></item>
-		<item name="wcf.user.3rdparty.facebook.connect.error.inuse"><![CDATA[Ihr facebook-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
-		<item name="wcf.user.3rdparty.facebook.disconnect"><![CDATA[Verknüpfung zu facebook trennen]]></item>
-		<item name="wcf.user.3rdparty.facebook.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem facebook-Konto wurde erfolgreich getrennt.]]></item>
+		<item name="wcf.user.3rdparty.facebook.login"><![CDATA[Mit Facebook anmelden]]></item>
+		<item name="wcf.user.3rdparty.facebook.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit Facebook nicht möglich.]]></item>
+		<item name="wcf.user.3rdparty.facebook.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-facebook"></span>&nbsp;Facebook. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect"><![CDATA[Mit Facebook-Konto {if $__wcf->session->getVar('__facebookUsername')}(„{$__wcf->session->getVar('__facebookUsername')}“){/if} verknüpfen]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect.info"><![CDATA[Wenn Sie Ihr <a href="https://facebook.com" class="externalURL">Facebook-Konto</a> mit Ihrem Benutzerkonto verknüpfen, dann können Sie sich mit einen Klick über Ihr Facebook-Konto anmelden. Nach dem Klick auf dem Button müssen Sie die Verknüpfung noch mit Ihrem Kennwort und dem Setzen eines Hakens bestätigen.]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect.success"><![CDATA[Ihr Benutzerkonto wurde erfolgreich mit Ihrem Facebook-Konto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect.error.inuse"><![CDATA[Ihr Facebook-Konto ist bereits mit einem anderen Benutzerkonto verknüpft.]]></item>
+		<item name="wcf.user.3rdparty.facebook.disconnect"><![CDATA[Verknüpfung zu Facebook trennen]]></item>
+		<item name="wcf.user.3rdparty.facebook.disconnect.success"><![CDATA[Die Verknüpfung mit Ihrem Facebook-Konto wurde erfolgreich getrennt.]]></item>
 		<item name="wcf.user.3rdparty.google.login"><![CDATA[Mit Google anmelden]]></item>
 		<item name="wcf.user.3rdparty.google.login.error.access_denied"><![CDATA[Da du die Berechtigungen verweigert hast ist die Anmeldung mit Google nicht möglich.]]></item>
 		<item name="wcf.user.3rdparty.google.register"><![CDATA[Sie erstellen einen Account über <span class="icon icon16 icon-google-plus"></span>&nbsp;Google. Der Benutzername und Ihre E-Mail-Adresse wurden daher bereits ausgefüllt. Wählen Sie nun noch ein Passwort aus und Sie können sofort loslegen!]]></item>

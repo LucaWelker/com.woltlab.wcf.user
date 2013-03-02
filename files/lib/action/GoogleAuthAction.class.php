@@ -37,10 +37,13 @@ class GoogleAuthAction extends AbstractAction {
 		$callbackURL = LinkHandler::getInstance()->getLink('GoogleAuth', array(
 			'appendSession' => false
 		));
+		// user accepted the connection
 		if (isset($_GET['code']) && isset($_GET['state'])) {
+			// validate state
 			if ($_GET['state'] != WCF::getSession()->getVar('__googleInit')) throw new IllegalLinkException();
+			
 			try {
-				// call api
+				// fetch access_token
 				$request = new HTTPRequest('https://accounts.google.com/o/oauth2/token', array(), array(
 					'code' => $_GET['code'],
 					'client_id' => GOOGLE_PUBLIC_KEY,
@@ -57,11 +60,10 @@ class GoogleAuthAction extends AbstractAction {
 				throw new IllegalLinkException();
 			}
 			
-			// extract data
 			$data = JSON::decode($content);
 			
 			try {
-				// call api
+				// fetch userdata
 				$request = new HTTPRequest('https://www.googleapis.com/oauth2/v1/userinfo');
 				$request->addHeader('Authorization', 'Bearer '.$data['access_token']);
 				$request->execute();
@@ -73,34 +75,37 @@ class GoogleAuthAction extends AbstractAction {
 				throw new IllegalLinkException();
 			}
 			
-			$data = JSON::decode($content);
+			$userData = JSON::decode($content);
 			
-			$user = $this->getUser($data['id']);
+			// check whether a user is connected to this google account
+			$user = $this->getUser($userData['id']);
 			
 			if ($user->userID) {
+				// a user is already connected, but we are logged in, break
 				if (WCF::getUser()->userID) {
 					throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.google.connect.error.inuse'));
 				}
+				// perform login
 				else {
-					// login
 					WCF::getSession()->changeUser($user);
 					WCF::getSession()->update();
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink());
 				}
 			}
 			else {
+				// save data for connection
 				if (WCF::getUser()->userID) {
-					WCF::getSession()->register('__googleUsername', $data['name']);
-					WCF::getSession()->register('__googleData', $data);
+					WCF::getSession()->register('__googleUsername', $userData['name']);
+					WCF::getSession()->register('__googleData', $userData);
 					
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink('AccountManagement').'#3rdParty');
 				}
+				// save data and redirect to registration
 				else {
-					WCF::getSession()->register('__username', $data['name']);
-					if (isset($data['email'])) WCF::getSession()->register('__email', $data['email']);
-						
-					// save token
-					WCF::getSession()->register('__googleData', $data);
+					WCF::getSession()->register('__username', $userData['name']);
+					if (isset($userData['email'])) WCF::getSession()->register('__email', $userData['email']);
+					
+					WCF::getSession()->register('__googleData', $userData);
 					
 					// we assume that bots won't register on facebook first
 					WCF::getSession()->register('recaptchaDone', true);
@@ -113,10 +118,12 @@ class GoogleAuthAction extends AbstractAction {
 			$this->executed();
 			exit;
 		}
+		// user declined or any other error that may occur
 		if (isset($_GET['error'])) {
 			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.google.login.error.'.$_GET['error']));
 		}
 		
+		// start auth by redirecting to google
 		$token = StringUtil::getRandomID();
 		WCF::getSession()->register('__googleInit', $token);
 		HeaderUtil::redirect("https://accounts.google.com/o/oauth2/auth?client_id=".rawurlencode(GOOGLE_PUBLIC_KEY). "&redirect_uri=".rawurlencode($callbackURL)."&state=".$token."&scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&response_type=code");

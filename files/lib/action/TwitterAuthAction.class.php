@@ -34,13 +34,17 @@ class TwitterAuthAction extends AbstractAction {
 	public function execute() {
 		parent::execute();
 		
+		// user accepted
 		if (isset($_GET['oauth_token']) && isset($_GET['oauth_verifier'])) {
+			// fetch data created in the first step
 			$initData = WCF::getSession()->getVar('__twitterInit');
 			if (!$initData) throw new IllegalLinkException();
 			
+			// validate oauth_token
 			if ($_GET['oauth_token'] !== $initData['oauth_token']) throw new IllegalLinkException();
 			
 			try {
+				// fetch access_token
 				$oauthHeader = array(
 					'oauth_consumer_key' => TWITTER_PUBLIC_KEY,
 					'oauth_nonce' => StringUtil::getRandomID(),
@@ -56,7 +60,6 @@ class TwitterAuthAction extends AbstractAction {
 				$signature = $this->createSignature('https://api.twitter.com/oauth/access_token', array_merge($oauthHeader, $postData));
 				$oauthHeader['oauth_signature'] = $signature;
 				
-				// call api
 				$request = new HTTPRequest('https://api.twitter.com/oauth/access_token', array(), $postData);
 				$request->addHeader('Authorization', 'OAuth '.$this->buildOAuthHeader($oauthHeader));
 				$request->execute();
@@ -67,32 +70,35 @@ class TwitterAuthAction extends AbstractAction {
 				throw new IllegalLinkException();
 			}
 			
-			// extract data
 			parse_str($content, $data);
 			
+			// check whether a user is connected to this twitter account
 			$user = $this->getUser($data['user_id']);
+			
 			if ($user->userID) {
+				// a user is already connected, but we are logged in, break
 				if (WCF::getUser()->userID) {
 					throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.twitter.connect.error.inuse'));
 				}
+				// perform login
 				else {
-					// login
 					WCF::getSession()->changeUser($user);
 					WCF::getSession()->update();
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink());
 				}
 			}
 			else {
+				// save data for connection
 				if (WCF::getUser()->userID) {
 					WCF::getSession()->register('__twitterUsername', $data['screen_name']);
 					WCF::getSession()->register('__twitterData', $data);
 					
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink('AccountManagement').'#3rdParty');
 				}
+				// save data and redirect to registration
 				else {
 					WCF::getSession()->register('__username', $data['screen_name']);
 					
-					// save token
 					WCF::getSession()->register('__twitterData', $data);
 					
 					// we assume that bots won't register on twitter first
@@ -107,10 +113,12 @@ class TwitterAuthAction extends AbstractAction {
 			exit;
 		}
 		
+		// user declined
 		if (isset($_GET['denied'])) {
 			throw new NamedUserException(WCF::getLanguage()->get('wcf.user.3rdparty.twitter.login.error.denied'));
 		}
 		
+		// start auth by fetching request_token
 		try {
 			$callbackURL = LinkHandler::getInstance()->getLink('TwitterAuth', array(
 				'appendSession' => false
@@ -138,11 +146,11 @@ class TwitterAuthAction extends AbstractAction {
 			throw new IllegalLinkException();
 		}
 		
-		// extract data
 		parse_str($content, $data);
 		if ($data['oauth_callback_confirmed'] != 'true') throw new IllegalLinkException();
 		
 		WCF::getSession()->register('__twitterInit', $data);
+		// redirect to twitter
 		HeaderUtil::redirect('https://api.twitter.com/oauth/authenticate?oauth_token='.rawurlencode($data['oauth_token']));
 		
 		$this->executed();
