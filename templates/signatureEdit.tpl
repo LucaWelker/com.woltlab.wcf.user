@@ -59,8 +59,10 @@
 								{lang}wcf.global.form.error.empty{/lang}
 							{elseif $errorType == 'tooLong'}
 								{lang}wcf.message.error.tooLong{/lang}
+							{elseif $errorType == 'censoredWordsFound'}
+								{lang}wcf.message.error.censoredWordsFound{/lang}
 							{else}
-								{lang}wbb.post.message.error.{@$errorType}{/lang}
+								{lang}wcf.user.signature.error.{@$errorType}{/lang}
 							{/if}
 						</small>
 					{/if}
