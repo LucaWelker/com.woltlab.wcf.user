@@ -258,6 +258,7 @@ class RegisterForm extends UserAddForm {
 		// TODO: Set this only when the email address is not changed (i.e. the verified email address provided by facebook / github is used)?
 		$registerVia3rdParty = false;
 		
+		$avatarURL = '';
 		if ($this->isExternalAuthentication) {
 			// save github token
 			if (WCF::getSession()->getVar('__githubToken')) {
@@ -294,6 +295,11 @@ class RegisterForm extends UserAddForm {
 				if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
 				if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
 				if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
+				
+				// avatar
+				if (isset($facebookData['picture']) && !$facebookData['picture']['data']['is_silhouette']) {
+					$avatarURL = $facebookData['picture']['data']['url'];
+				}
 			}
 			// save google data
 			if (WCF::getSession()->getVar('__googleData')) {
@@ -342,7 +348,8 @@ class RegisterForm extends UserAddForm {
 			'groups' => $this->groupIDs,
 			'languages' => $this->visibleLanguages,
 			'options' => $saveOptions,
-			'addDefaultGroups' => $addDefaultGroups
+			'addDefaultGroups' => $addDefaultGroups,
+			'avatarURL' => $avatarURL
 		);
 		$this->objectAction = new UserAction(array(), 'create', $data);
 		$result = $this->objectAction->executeAction();

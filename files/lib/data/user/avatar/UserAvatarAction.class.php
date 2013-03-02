@@ -1,5 +1,9 @@
 <?php
 namespace wcf\data\user\avatar;
+use wcf\util\StringUtil;
+
+use wcf\util\HTTPRequest;
+
 use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\PermissionDeniedException;
@@ -50,26 +54,8 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 		try {
 			if (!$file->getValidationErrorType()) {
 				// shrink avatar if necessary
-				$fileLocation = $file->getLocation();
+				$fileLocation = $this->enforceDimensions($file->getLocation());
 				$imageData = getimagesize($fileLocation);
-				if ($imageData[0] > MAX_AVATAR_WIDTH || $imageData[1] > MAX_AVATAR_HEIGHT) {
-					try {
-						$adapter = ImageHandler::getInstance()->getAdapter();
-						$adapter->loadFile($fileLocation);
-						$fileLocation = FileUtil::getTemporaryFilename();
-						$thumbnail = $adapter->createThumbnail(MAX_AVATAR_WIDTH, MAX_AVATAR_HEIGHT, false);
-						$adapter->writeImage($thumbnail, $fileLocation);
-						$imageData = getimagesize($fileLocation);
-					}
-					catch (SystemException $e) {
-						throw new UserInputException('avatar', 'tooLarge');
-					}
-				}
-				
-				// check filesize (after shrink)
-				if (@filesize($fileLocation) > WCF::getSession()->getPermission('user.profile.avatar.maxSize')) {
-					throw new UserInputException('avatar', 'tooLarge');
-				}
 				
 				$data = array(
 					'avatarName' => $file->getFilename(),
@@ -154,5 +140,119 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 				$adapter->writeImage($thumbnail, $avatar->getLocation($size));
 			}
 		}
+	}
+	
+	/**
+	 * Fetches an avatar from a remote server and sets it for given user.
+	 */
+	public function fetchRemoteAvatar() {
+		$avatarID = 0;
+		$filename = '';
+		
+		// fetch avatar from URL
+		try {
+			$request = new HTTPRequest($this->parameters['url']);
+			$request->execute();
+			$reply = $request->getReply();
+			$filename = FileUtil::getTemporaryFilename('avatar_');
+			file_put_contents($filename, $reply['body']);
+		}
+		catch (\Exception $e) {
+			if (!empty($filename)) {
+				@unlink($filename);
+			}
+		}
+		
+		// rescale avatar if required
+		try {
+			$filename = $this->enforceDimensions($filename);
+		}
+		catch (\Exception $e) { /* ignore errors */ }
+		
+		$imageData = getimagesize($filename);
+		$tmp = parse_url($this->parameters['url']);
+		$tmp = pathinfo($tmp['path']);
+		
+		$data = array(
+			'avatarName' => $tmp['basename'],
+			'avatarExtension' => $tmp['extension'],
+			'width' => $imageData[0],
+			'height' => $imageData[1],
+			'userID' => $this->parameters['userEditor']->userID,
+			'fileHash' => sha1_file($filename)
+		);
+		
+		// create avatar
+		$avatar = UserAvatarEditor::create($data);
+		
+		// check avatar directory
+		// and create subdirectory if necessary
+		$dir = dirname($avatar->getLocation());
+		if (!@file_exists($dir)) {
+			FileUtil::makePath($dir, 0777);
+		}
+		
+		// move uploaded file
+		if (@copy($filename, $avatar->getLocation())) {
+			@unlink($filename);
+			
+			// create thumbnails
+			$action = new UserAvatarAction(array($avatar), 'generateThumbnails');
+			$action->executeAction();
+			
+			$avatarID = $avatar->avatarID;
+		}
+		else {
+			// moving failed; delete avatar
+			$editor = new UserAvatarEditor($avatar);
+			$editor->delete();
+		}
+		
+		// update user
+		if ($avatarID) {
+			$this->parameters['userEditor']->update(array(
+				'avatarID' => $avatarID,
+				'enableGravatar' => 0
+			));
+			
+			// delete old avatar
+			if ($this->parameters['userEditor']->avatarID) {
+				$action = new UserAvatarAction(array(WCF::getUser()->avatarID), 'delete');
+				$action->executeAction();
+			
+				// reset user storage
+				UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'avatar');
+			}
+		}
+	}
+	
+	/**
+	 * Enforces dimensions for given avatar.
+	 * 
+	 * @param	string		$filename
+	 * @return	string
+	 */
+	protected function enforceDimensions($filename) {
+		$imageData = getimagesize($filename);
+		if ($imageData[0] > MAX_AVATAR_WIDTH || $imageData[1] > MAX_AVATAR_HEIGHT) {
+			try {
+				$adapter = ImageHandler::getInstance()->getAdapter();
+				$adapter->loadFile($filename);
+				$filename = FileUtil::getTemporaryFilename();
+				$thumbnail = $adapter->createThumbnail(MAX_AVATAR_WIDTH, MAX_AVATAR_HEIGHT, false);
+				$adapter->writeImage($thumbnail, $filename);
+				$imageData = getimagesize($filename);
+			}
+			catch (SystemException $e) {
+				throw new UserInputException('avatar', 'tooLarge');
+			}
+		}
+		
+		// check filesize (after shrink)
+		if (@filesize($filename) > WCF::getSession()->getPermission('user.profile.avatar.maxSize')) {
+			throw new UserInputException('avatar', 'tooLarge');
+		}
+		
+		return $filename;
 	}
 }

@@ -56,7 +56,7 @@ class FacebookAuthAction extends AbstractAction {
 			
 			try {
 				// fetch userdata
-				$request = new HTTPRequest('https://graph.facebook.com/me?access_token='.rawurlencode($data['access_token']).'&fields=birthday,bio,gender,id,location,picture,username,website');
+				$request = new HTTPRequest('https://graph.facebook.com/me?access_token='.rawurlencode($data['access_token']).'&fields=birthday,bio,email,gender,id,location,name,picture.type(large),website');
 				$request->execute();
 				$reply = $request->getReply();
 				
@@ -130,11 +130,15 @@ class FacebookAuthAction extends AbstractAction {
 	 */
 	public function getUser($userID) {
 		$sql = "SELECT	userID
-			FROM	wcf".WCF_N."_user_option_value
-			WHERE	userOption".User::getUserOptionID('facebookUserID')." = ?";
-		$stmt = WCF::getDB()->prepareStatement($sql);
-		$stmt->execute(array($userID));
-		$row = $stmt->fetchArray();
+			FROM	wcf".WCF_N."_user
+			WHERE	authData = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array('facebook:'.$userID));
+		$row = $statement->fetchArray();
+		
+		if ($row === false) {
+			$row = array('userID' => 0);
+		}
 		
 		$user = new User($row['userID']);
 		return $user;
