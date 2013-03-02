@@ -175,12 +175,14 @@ class AccountManagementForm extends AbstractSecureForm {
 		parent::validate();
 		
 		// password
-		if (empty($this->password)) {
-			throw new UserInputException('password');
-		}
-		
-		if (!WCF::getUser()->checkPassword($this->password)) {
-			throw new UserInputException('password', 'false');
+		if (!WCF::getUser()->authData) {
+			if (empty($this->password)) {
+				throw new UserInputException('password');
+			}
+			
+			if (!WCF::getUser()->checkPassword($this->password)) {
+				throw new UserInputException('password', 'false');
+			}
 		}
 		
 		// user name
@@ -203,21 +205,23 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 		
 		// password
-		if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
-			if (empty($this->newPassword)) {
-				throw new UserInputException('newPassword');
-			}
-			
-			if (empty($this->confirmNewPassword)) {
-				throw new UserInputException('confirmNewPassword');
-			}
-			
-			if (!UserRegistrationUtil::isSecurePassword($this->newPassword)) {
-				throw new UserInputException('newPassword', 'notSecure');
-			}
-			
-			if ($this->newPassword != $this->confirmNewPassword) {
-				throw new UserInputException('confirmNewPassword', 'notEqual');
+		if (!WCF::getUser()->authData) {
+			if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
+				if (empty($this->newPassword)) {
+					throw new UserInputException('newPassword');
+				}
+				
+				if (empty($this->confirmNewPassword)) {
+					throw new UserInputException('confirmNewPassword');
+				}
+				
+				if (!UserRegistrationUtil::isSecurePassword($this->newPassword)) {
+					throw new UserInputException('newPassword', 'notSecure');
+				}
+				
+				if ($this->newPassword != $this->confirmNewPassword) {
+					throw new UserInputException('confirmNewPassword', 'notEqual');
+				}
 			}
 		}
 		
@@ -361,20 +365,22 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 		
 		// password
-		if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
-			$userEditor->update(array(
-				'password' => $this->newPassword
-			));
-			
-			// update cookie
-			if (isset($_COOKIE[COOKIE_PREFIX.'password'])) {
-				// reload user
-				$user = new User($userEditor->userID);
+		if (WCF::getUser()->authData) {
+			if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
+				$userEditor->update(array(
+					'password' => $this->newPassword
+				));
 				
-				HeaderUtil::setCookie('password', PasswordUtil::getSaltedHash($this->newPassword, $user->password), TIME_NOW + 365 * 24 * 3600);
+				// update cookie
+				if (isset($_COOKIE[COOKIE_PREFIX.'password'])) {
+					// reload user
+					$user = new User($userEditor->userID);
+					
+					HeaderUtil::setCookie('password', PasswordUtil::getSaltedHash($this->newPassword, $user->password), TIME_NOW + 365 * 24 * 3600);
+				}
+				
+				$success[] = 'wcf.user.changePassword.success';
 			}
-			
-			$success[] = 'wcf.user.changePassword.success';
 		}
 		
 		// 3rdParty

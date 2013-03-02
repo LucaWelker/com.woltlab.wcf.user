@@ -36,31 +36,33 @@
 	
 <form method="post" action="{link controller='AccountManagement'}{/link}">
 	<div class="container containerPadding marginTop">
-		<fieldset>
-			<legend><label for="password">{lang}wcf.user.password{/lang}</label></legend>
-			
-			<dl{if $errorField == 'password'} class="formError"{/if}>
-				<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
-				<dd>
-					<input type="password" id="password" name="password" value="" required="required" class="medium" />
-					{if $errorField == 'password'}
-						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'false'}{lang}wcf.user.password.error.false{/lang}{/if}
-						</small>
-					{/if}
-					<small>{lang}wcf.user.accountManagement.password.description{/lang}</small>
-				</dd>
-			</dl>
-			
-			<dl>
-				<dd>
-					<ul class="buttonList">
-						<li><a class="button small" href="{link controller='LostPassword'}{/link}"><span>{lang}wcf.user.lostPassword{/lang}</span></a></li>
-					</ul>
-				</dd>
-			</dl>
-		</fieldset>
+		{if !$__wcf->getUser()->authData}
+			<fieldset>
+				<legend><label for="password">{lang}wcf.user.password{/lang}</label></legend>
+				
+				<dl{if $errorField == 'password'} class="formError"{/if}>
+					<dt><label for="password">{lang}wcf.user.password{/lang}</label></dt>
+					<dd>
+						<input type="password" id="password" name="password" value="" required="required" class="medium" />
+						{if $errorField == 'password'}
+							<small class="innerError">
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
+								{if $errorType == 'false'}{lang}wcf.user.password.error.false{/lang}{/if}
+							</small>
+						{/if}
+						<small>{lang}wcf.user.accountManagement.password.description{/lang}</small>
+					</dd>
+				</dl>
+				
+				<dl>
+					<dd>
+						<ul class="buttonList">
+							<li><a class="button small" href="{link controller='LostPassword'}{/link}"><span>{lang}wcf.user.lostPassword{/lang}</span></a></li>
+						</ul>
+					</dd>
+				</dl>
+			</fieldset>
+		{/if}
 		
 		{if $__wcf->getSession()->getPermission('user.profile.canRename')}
 			<fieldset>
@@ -87,38 +89,40 @@
 			</fieldset>
 		{/if}
 		
-		<fieldset>
-			<legend><label for="newPassword">{lang}wcf.user.changePassword{/lang}</label></legend>
-			
-			<dl{if $errorField == 'newPassword'} class="formError"{/if}>
-				<dt><label for="newPassword">{lang}wcf.user.newPassword{/lang}</label></dt>
-				<dd>
-					<input type="password" id="newPassword" name="newPassword" value="{$newPassword}" class="medium" />
-						
-					{if $errorField == 'newPassword'}
-						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'notSecure'}{lang}wcf.user.password.error.notSecure{/lang}{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			
-			<dl{if $errorField == 'confirmNewPassword'} class="formError"{/if}>
-				<dt><label for="confirmNewPassword">{lang}wcf.user.confirmPassword{/lang}</label></dt>
-				<dd>
-					<input type="password" id="confirmNewPassword" name="confirmNewPassword" value="{$confirmNewPassword}" class="medium" />
-						
-					{if $errorField == 'confirmNewPassword'}
-						<small class="innerError">
-							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'notEqual'}{lang}wcf.user.confirmPassword.error.notEqual{/lang}{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			
-		</fieldset>
+		{if $__wcf->getUser()->authData}
+			<fieldset>
+				<legend><label for="newPassword">{lang}wcf.user.changePassword{/lang}</label></legend>
+				
+				<dl{if $errorField == 'newPassword'} class="formError"{/if}>
+					<dt><label for="newPassword">{lang}wcf.user.newPassword{/lang}</label></dt>
+					<dd>
+						<input type="password" id="newPassword" name="newPassword" value="{$newPassword}" class="medium" />
+							
+						{if $errorField == 'newPassword'}
+							<small class="innerError">
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
+								{if $errorType == 'notSecure'}{lang}wcf.user.password.error.notSecure{/lang}{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+				
+				<dl{if $errorField == 'confirmNewPassword'} class="formError"{/if}>
+					<dt><label for="confirmNewPassword">{lang}wcf.user.confirmPassword{/lang}</label></dt>
+					<dd>
+						<input type="password" id="confirmNewPassword" name="confirmNewPassword" value="{$confirmNewPassword}" class="medium" />
+							
+						{if $errorField == 'confirmNewPassword'}
+							<small class="innerError">
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
+								{if $errorType == 'notEqual'}{lang}wcf.user.confirmPassword.error.notEqual{/lang}{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+				
+			</fieldset>
+		{/if}
 		
 		{if $__wcf->getSession()->getPermission('user.profile.canChangeEmail')}
 			<fieldset>
