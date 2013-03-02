@@ -131,14 +131,14 @@
 			<option name="register_username_min_length">
 				<categoryname>user.register</categoryname>
 				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[3]]></defaultvalue>
+				<defaultvalue>3</defaultvalue>
 				<minvalue>3</minvalue>
 				<maxvalue>255</maxvalue>
 			</option>
 			<option name="register_username_max_length">
 				<categoryname>user.register</categoryname>
 				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[25]]></defaultvalue>
+				<defaultvalue>25</defaultvalue>
 				<minvalue>3</minvalue>
 				<maxvalue>255</maxvalue>
 			</option>
@@ -232,12 +232,14 @@
 			<option name="max_avatar_width">
 				<categoryname>user.avatar</categoryname>
 				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[192]]></defaultvalue>
+				<defaultvalue>192</defaultvalue>
+				<minvalue>48</minvalue>
 			</option>
 			<option name="max_avatar_height">
 				<categoryname>user.avatar</categoryname>
 				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[192]]></defaultvalue>
+				<defaultvalue>192</defaultvalue>
+				<minvalue>48</minvalue>
 			</option>
 			<!-- /user.avatar -->
 			
@@ -247,6 +249,7 @@
 				<optiontype>integer</optiontype>
 				<defaultvalue>25</defaultvalue>
 				<options>module_user_rank</options>
+				<minvalue>0</minvalue>
 			</option>
 			<option name="user_forbidden_titles">
 				<categoryname>user.title</categoryname>
@@ -259,7 +262,8 @@
 			<option name="profile_show_old_username">
 				<categoryname>user.profile</categoryname>
 				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[182]]></defaultvalue>
+				<defaultvalue>182</defaultvalue>
+				<minvalue>0</minvalue>
 			</option>
 			<!-- /user.profile -->
 			
@@ -267,7 +271,7 @@
 			<option name="members_list_users_per_page">
 				<categoryname>user.list.members</categoryname>
 				<optiontype>integer</optiontype>
-				<defaultvalue><![CDATA[30]]></defaultvalue>
+				<defaultvalue>30</defaultvalue>
 			</option>
 			<option name="members_list_default_sort_field">
 				<categoryname>user.list.members</categoryname>
@@ -316,6 +320,7 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 				<categoryname>user.list.online</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<minvalue>0</minvalue>
 			</option>
 			<!-- /user.list.online -->
 			
@@ -324,16 +329,19 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 				<categoryname>user.cleanup</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>60</defaultvalue>
+				<minvalue>0</minvalue>
 			</option>
 			<option name="user_cleanup_activity_event_lifetime">
 				<categoryname>user.cleanup</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>60</defaultvalue>
+				<minvalue>0</minvalue>
 			</option>
 			<option name="user_cleanup_profile_visitor_lifetime">
 				<categoryname>user.cleanup</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>60</defaultvalue>
+				<minvalue>0</minvalue>
 			</option>
 			<!-- /user.cleanup -->
 		</options>
