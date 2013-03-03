@@ -93,6 +93,7 @@ class GithubAuthAction extends AbstractAction {
 				}
 				// save data and redirect to registration
 				else {
+					WCF::getSession()->register('__githubData', $userData);
 					WCF::getSession()->register('__username', $userData['login']);
 					
 					// check whether user has entered a public email
@@ -156,13 +157,16 @@ class GithubAuthAction extends AbstractAction {
 	public function getUser($token) {
 		$sql = "SELECT	userID
 			FROM	wcf".WCF_N."_user
-			WHERE	authData LIKE ?";
+			WHERE	authData = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			'github:'.$token.'%'
-		));
+		$statement->execute(array('github:'.$token));
 		$row = $statement->fetchArray();
 		
-		return new User($row['userID']);
+		if ($row === false) {
+			$row = array('userID' => 0);
+		}
+		
+		$user = new User($row['userID']);
+		return $user;
 	}
 }

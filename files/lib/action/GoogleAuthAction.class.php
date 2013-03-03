@@ -139,11 +139,15 @@ class GoogleAuthAction extends AbstractAction {
 	 */
 	public function getUser($userID) {
 		$sql = "SELECT	userID
-			FROM	wcf".WCF_N."_user_option_value
-			WHERE	userOption".User::getUserOptionID('googleUserID')." = ?";
-		$stmt = WCF::getDB()->prepareStatement($sql);
-		$stmt->execute(array($userID));
-		$row = $stmt->fetchArray();
+			FROM	wcf".WCF_N."_user
+			WHERE	authData = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array('google:'.$userID));
+		$row = $statement->fetchArray();
+		
+		if ($row === false) {
+			$row = array('userID' => 0);
+		}
 		
 		$user = new User($row['userID']);
 		return $user;

@@ -261,16 +261,23 @@ class RegisterForm extends UserAddForm {
 		
 		$avatarURL = '';
 		if ($this->isExternalAuthentication) {
-			// save github token
-			if (WCF::getSession()->getVar('__githubToken')) {
+			// GitHub
+			if (WCF::getSession()->getVar('__githubData')) {
+				$githubData = WCF::getSession()->getVar('__githubData');
+				
 				$this->additionalFields['authData'] = 'github:'.WCF::getSession()->getVar('__githubToken');
+				$this->additionalFields['enableGravatar'] = 1;
+				
+				WCF::getSession()->unregister('__githubData');
 				WCF::getSession()->unregister('__githubToken');
 				
 				$registerVia3rdParty = true;
 				
-				// TODO: Check if we can fill in any profile fields
+				if (isset($githubData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $githubData['bio'];
+				if (isset($githubData['location'])) $saveOptions[User::getUserOptionID('location')] = $githubData['location'];
 			}
-			// save twitter data
+			
+			// Twitter
 			if (WCF::getSession()->getVar('__twitterData')) {
 				$twitterData = WCF::getSession()->getVar('__twitterData');
 				$this->additionalFields['authData'] = 'twitter:'.$twitterData['user_id'];
@@ -279,9 +286,12 @@ class RegisterForm extends UserAddForm {
 				
 				$registerVia3rdParty = true;
 				
+				if (isset($twitterData['description'])) $saveOptions[User::getUserOptionID('aboutMe')] = $twitterData['description'];
+				if (isset($twitterData['location'])) $saveOptions[User::getUserOptionID('location')] = $twitterData['location'];
 				// TODO: Check if we can fill in any profile fields
 			}
-			// save facebook data
+			
+			// Facebook
 			if (WCF::getSession()->getVar('__facebookData')) {
 				$facebookData = WCF::getSession()->getVar('__facebookData');
 				$this->additionalFields['authData'] = 'facebook:'.$facebookData['id'];
@@ -290,7 +300,6 @@ class RegisterForm extends UserAddForm {
 				
 				$registerVia3rdParty = true;
 				
-				// TODO: Check if we can fill in any profile fields
 				$saveOptions[User::getUserOptionID('gender')] = ($facebookData['gender'] == 'male' ? UserProfile::GENDER_MALE : UserProfile::GENDER_FEMALE);
 				if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = implode('-', array_reverse(explode('/', $facebookData['birthday'])));
 				if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
@@ -302,7 +311,8 @@ class RegisterForm extends UserAddForm {
 					$avatarURL = $facebookData['picture']['data']['url'];
 				}
 			}
-			// save google data
+			
+			// Google Plus
 			if (WCF::getSession()->getVar('__googleData')) {
 				$googleData = WCF::getSession()->getVar('__googleData');
 				$this->additionalFields['authData'] = 'google:'.$googleData['id'];

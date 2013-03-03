@@ -97,8 +97,19 @@ class TwitterAuthAction extends AbstractAction {
 				}
 				// save data and redirect to registration
 				else {
+					// fetch user data
+					$twitterData = null;
+					try {
+						$request = new HTTPRequest('https://api.twitter.com/1.1/users/show.json?screen_name=' . $data['screen_name']);
+						$request->execute();
+						$reply = $request->getReply();
+						$twitterData = json_decode($reply['body'], true);
+					}
+					catch (SystemException $e) { /* ignore errors */ }
+					
 					WCF::getSession()->register('__username', $data['screen_name']);
 					
+					if ($twitterData !== null) $data = $twitterData;
 					WCF::getSession()->register('__twitterData', $data);
 					
 					// we assume that bots won't register on twitter first
@@ -209,11 +220,15 @@ class TwitterAuthAction extends AbstractAction {
 	 */
 	public function getUser($userID) {
 		$sql = "SELECT	userID
-			FROM	wcf".WCF_N."_user_option_value
-			WHERE	userOption".User::getUserOptionID('twitterUserID')." = ?";
-		$stmt = WCF::getDB()->prepareStatement($sql);
-		$stmt->execute(array($userID));
-		$row = $stmt->fetchArray();
+			FROM	wcf".WCF_N."_user
+			WHERE	authData = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array('twitter:'.$userID));
+		$row = $statement->fetchArray();
+		
+		if ($row === false) {
+			$row = array('userID' => 0);
+		}
 		
 		$user = new User($row['userID']);
 		return $user;
