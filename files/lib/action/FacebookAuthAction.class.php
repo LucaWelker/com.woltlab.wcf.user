@@ -1,6 +1,5 @@
 <?php
 namespace wcf\action;
-use wcf\data\user\option\UserOption;
 use wcf\data\user\User;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
