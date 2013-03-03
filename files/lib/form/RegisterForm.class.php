@@ -1,6 +1,7 @@
 <?php
 namespace wcf\form;
 use wcf\acp\form\UserAddForm;
+use wcf\data\user\avatar\UserAvatarAction;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserAction;
@@ -348,8 +349,7 @@ class RegisterForm extends UserAddForm {
 			'groups' => $this->groupIDs,
 			'languages' => $this->visibleLanguages,
 			'options' => $saveOptions,
-			'addDefaultGroups' => $addDefaultGroups,
-			'avatarURL' => $avatarURL
+			'addDefaultGroups' => $addDefaultGroups
 		);
 		$this->objectAction = new UserAction(array(), 'create', $data);
 		$result = $this->objectAction->executeAction();
@@ -364,6 +364,15 @@ class RegisterForm extends UserAddForm {
 		// update user online marking
 		$action = new UserProfileAction(array($userEditor), 'updateUserOnlineMarking');
 		$action->executeAction();
+		
+		// set avatar if provided
+		if (!empty($avatarURL)) {
+			$userAvatarAction = new UserAvatarAction(array(), 'fetchRemoteAvatar', array(
+				'url' => $avatarURL,
+				'userEditor' => $userEditor
+			));
+			$userAvatarAction->executeAction();
+		}
 		
 		// update session
 		WCF::getSession()->changeUser($user);

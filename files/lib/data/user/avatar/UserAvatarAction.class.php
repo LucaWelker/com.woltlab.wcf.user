@@ -1,9 +1,5 @@
 <?php
 namespace wcf\data\user\avatar;
-use wcf\util\StringUtil;
-
-use wcf\util\HTTPRequest;
-
 use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\PermissionDeniedException;
@@ -14,6 +10,8 @@ use wcf\system\upload\AvatarUploadFileValidationStrategy;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\FileUtil;
+use wcf\util\HTTPRequest;
+use wcf\util\StringUtil;
 
 /**
  * Executes avatar-related actions.

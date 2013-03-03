@@ -94,8 +94,7 @@ class FacebookAuthAction extends AbstractAction {
 				// save data and redirect to registration
 				else {
 					WCF::getSession()->register('__username', $userData['name']);
-					if (isset($data['email'])) WCF::getSession()->register('__email', $userData['email']);
-					
+					WCF::getSession()->register('__email', $userData['email']);
 					WCF::getSession()->register('__facebookData', $userData);
 					
 					// we assume that bots won't register on facebook first
