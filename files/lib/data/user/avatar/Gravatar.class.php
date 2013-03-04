@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\avatar;
 use wcf\system\exception\SystemException;
+use wcf\system\request\LinkHandler;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
@@ -36,6 +37,12 @@ class Gravatar extends DefaultAvatar {
 	const GRAVATAR_CACHE_EXPIRE = 7;
 	
 	/**
+	 * user id
+	 * @var integer
+	 */
+	public $userID = 0;
+	
+	/**
 	 * gravatar e-mail address
 	 * @var	string
 	 */
@@ -50,9 +57,11 @@ class Gravatar extends DefaultAvatar {
 	/**
 	 * Creates a new Gravatar object.
 	 * 
+	 * @param	integer		$userID
 	 * @param	string		$gravatar
 	 */
-	public function __construct($gravatar) {
+	public function __construct($userID, $gravatar) {
+		$this->userID = $userID;
 		$this->gravatar = $gravatar;
 	}
 	
@@ -69,17 +78,7 @@ class Gravatar extends DefaultAvatar {
 				$this->url[$size] = WCF::getPath().$cachedFilename;
 			}
 			else {
-				$gravatarURL = sprintf(self::GRAVATAR_BASE, md5(StringUtil::toLowerCase($this->gravatar)), $size, '404');
-				try {
-					$tmpFile = FileUtil::downloadFileFromHttp($gravatarURL, 'gravatar');
-					copy($tmpFile, WCF_DIR.$cachedFilename);
-					@unlink($tmpFile);
-					@chmod(WCF_DIR.$cachedFilename, 0777);
-					$this->url[$size] = WCF::getPath().$cachedFilename;
-				}
-				catch (SystemException $e) {
-					$this->url[$size] = parent::getURL();
-				}
+				$this->url[$size] = LinkHandler::getInstance()->getLink('GravatarDownload', array(), 'userID='.$this->userID.'&size='.$size);
 			}
 		}
 		
