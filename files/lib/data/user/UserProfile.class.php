@@ -611,4 +611,53 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	public function getEncodedEmail() {
 		return StringUtil::encodeAllChars($this->email);
 	}
+	
+	/**
+	 * Returns true, if the current user is connected with Facebook.
+	 * 
+	 * @return	boolean
+	 */
+	public function isConnectedWithFacebook() {
+		return StringUtil::startsWith($this->authData, 'facebook:');
+	}
+	
+	/**
+	 * Returns true, if the current user is connected with GitHub.
+	 * 
+	 * @return	boolean
+	 */
+	public function isConnectedWithGithub() {
+		return StringUtil::startsWith($this->authData, 'github:');
+	}
+	
+	/**
+	 * Returns true, if the current user is connected with Google Plus.
+	 * 
+	 * @return	boolean
+	 */
+	public function isConnectedWithGoogle() {
+		return StringUtil::startsWith($this->authData, 'google:');
+	}
+	
+	/**
+	 * Returns true, if the current user is connected with Twitter.
+	 * 
+	 * @return	boolean
+	 */
+	public function isConnectedWithTwitter() {
+		return StringUtil::startsWith($this->authData, 'twitter:');
+	}
+	
+	/**
+	 * Returns 3rd party auth provider name.
+	 * 
+	 * @return	string
+	 */
+	public function getAuthProvider() {
+		if (!$this->authData) {
+			return '';
+		}
+		
+		return StringUtil::substring($this->authData, 0, StringUtil::indexOf($this->authData, ':'));
+	}
 }

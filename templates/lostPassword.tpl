@@ -47,6 +47,7 @@
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 							{if $errorType == 'notFound'}{lang}wcf.user.error.username.notFound{/lang}{/if}
+							{if $errorType == '3rdParty'}{lang}wcf.user.error.username.3rdParty{/lang}{/if}
 						</small>
 					{/if}
 				</dd>
