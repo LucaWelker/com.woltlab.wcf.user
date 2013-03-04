@@ -12,9 +12,8 @@ use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\profile\UserProfileMenu;
-use wcf\system\message\OpenGraphProtocolHandler;
-use wcf\system\message\OpenGraphProtocolTag;
 use wcf\system\request\LinkHandler;
+use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
 
 /**
@@ -144,11 +143,11 @@ class UserPage extends AbstractPage {
 		$this->visitorList->sqlLimit = 10;
 		$this->visitorList->readObjects();
 		
-		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('url', LinkHandler::getInstance()->getLink('User', array('object' => $this->user->getDecoratedObject()))));
-		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('type', 'profile'));
-		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('profile:username', $this->user->username));
-		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('title', WCF::getLanguage()->getDynamicVariable('wcf.user.profile', array('user' => $this->user)) . ' - ' . WCF::getLanguage()->get(PAGE_TITLE)));
-		OpenGraphProtocolHandler::getInstance()->addTag(new OpenGraphProtocolTag('image', $this->user->getAvatar()->getURL()));
+		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('User', array('object' => $this->user->getDecoratedObject())), true);
+		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'profile', true);
+		MetaTagHandler::getInstance()->addTag('og:profile:username', 'og:profile:username', $this->user->username, true);
+		MetaTagHandler::getInstance()->addTag('og:title', 'og:title', WCF::getLanguage()->getDynamicVariable('wcf.user.profile', array('user' => $this->user)) . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
+		MetaTagHandler::getInstance()->addTag('og:image', 'og:image', $this->user->getAvatar()->getURL(), true);
 	}
 	
 	/**
