@@ -13,16 +13,16 @@
 	
 	{if $__wcf->user->userID && $user->userID != $__wcf->user->userID}
 		{if $__wcf->getUserProfileHandler()->isFollowing($user->userID)}
-			<li><a data-following="1" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.unfollow{/lang}"><span class="icon icon16 icon-minus"></span></a></li>
+			<li class="jsOnly"><a data-following="1" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.unfollow{/lang}"><span class="icon icon16 icon-minus"></span></a></li>
 		{else}
-			<li><a data-following="0" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.follow{/lang}"><span class="icon icon16 icon-plus"></span></a></li>
+			<li class="jsOnly"><a data-following="0" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.follow{/lang}"><span class="icon icon16 icon-plus"></span></a></li>
 		{/if}
 		
 		{if !$user->getPermission('user.profile.cannotBeIgnored')}
 			{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}
-				<li><a data-ignored="1" data-object-id="{@$user->userID}" class="jsIgnoreButton jsTooltip" title="{lang}wcf.user.button.unignore{/lang}"><span class="icon icon16 icon-circle-blank"></span></a></li>
+				<li class="jsOnly"><a data-ignored="1" data-object-id="{@$user->userID}" class="jsIgnoreButton jsTooltip" title="{lang}wcf.user.button.unignore{/lang}"><span class="icon icon16 icon-circle-blank"></span></a></li>
 			{else}
-				<li><a data-ignored="0" data-object-id="{@$user->userID}" class="jsIgnoreButton jsTooltip" title="{lang}wcf.user.button.ignore{/lang}"><span class="icon icon16 icon-off"></span></a></li>
+				<li class="jsOnly"><a data-ignored="0" data-object-id="{@$user->userID}" class="jsIgnoreButton jsTooltip" title="{lang}wcf.user.button.ignore{/lang}"><span class="icon icon16 icon-off"></span></a></li>
 			{/if}
 		{/if}
 	{/if}

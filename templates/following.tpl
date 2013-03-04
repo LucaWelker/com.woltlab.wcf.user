@@ -43,7 +43,7 @@
 							<div class="details userInformation">
 								{include file='userInformationHeadline'}
 								
-								<ul class="buttonList">
+								<ul class="buttonList jsOnly">
 									<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unfollow{/lang}" data-object-id="{@$user->followID}"></span></li>
 								</ul>
 								

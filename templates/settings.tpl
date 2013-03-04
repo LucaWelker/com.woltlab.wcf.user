@@ -49,7 +49,6 @@
 							//]]>
 						</script>
 						<noscript>
-							<span><img src="{@$__wcf->getLanguage()->getIconPath}" alt="{$__wcf->getLanguage()}" /></span>
 							<select name="languageID" id="languageID">
 								{foreach from=$availableLanguages item=language}
 									<option value="{@$language->languageID}"{if $language->languageID == $languageID} selected="selected"{/if}>{$language}</option>
