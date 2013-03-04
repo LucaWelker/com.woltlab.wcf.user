@@ -1,7 +1,7 @@
 {if $__wcf->user->userID}
 	<!-- user menu -->
 	<li id="userMenu" class="dropdown">
-		<a class="dropdownToggle framed" data-toggle="userMenu">{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)} {lang}wcf.user.userNote{/lang}</a>
+		<a class="dropdownToggle framed" data-toggle="userMenu" href="{link controller='User' object=$__wcf->user}{/link}">{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(24)} {lang}wcf.user.userNote{/lang}</a>
 		<ul class="dropdownMenu">
 			<li><a href="{link controller='User' object=$__wcf->user}{/link}" class="box32">
 				<div class="framed">{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(32)}</div>
@@ -21,6 +21,8 @@
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="WCF.System.Confirmation.show('{lang}wcf.user.logout.sure{/lang}', $.proxy(function (action) { if (action == 'confirm') window.location.href = $(this).attr('href'); }, this)); return false;">{lang}wcf.user.logout{/lang}</a></li>
 		</ul>
 	</li>
+	
+	<li><a href="{link controller='Settings'}{/link}" class="noJsOnly" style="display: none"><span class="icon icon16 icon-cogs"></span> <span>{lang}wcf.user.menu.settings{/lang}</span></a></li>
 	
 	<!-- user notifications -->
 	<li id="userNotifications" class="dropdown" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
@@ -146,3 +148,7 @@
 {/if}
 
 {event name='menuItems'}
+
+{if $__wcf->user->userID}
+	<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" class="noJsOnly" style="display: none"><span class="icon icon16 icon-signout"></span> <span>{lang}wcf.user.logout{/lang}</span></a></li>
+{/if}

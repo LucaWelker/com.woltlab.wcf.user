@@ -44,7 +44,7 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'custom'} class="formError"{/if} id="avatarUpload">
+			<dl class="jsOnly{if $errorField == 'custom'} formError{/if}" id="avatarUpload">
 				<dt class="framed">{if $avatarType == 'custom'}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(96)}{else}<img src="{@$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon96" />{/if}</dt>
 				<dd>
 					<label><input type="radio" name="avatarType" value="custom" {if $avatarType == 'custom'}checked="checked" {/if}/> {lang}wcf.user.avatar.type.custom{/lang}</label>

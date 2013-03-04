@@ -31,7 +31,7 @@
 
 {capture assign='sidebar'}
 	{assign var=encodedLetter value=$letter|rawurlencode}
-	<div class="javascriptOnly">
+	<div class="jsOnly">
 		<form method="get" action="{if $searchID}{link controller='MembersList' id=$searchID}{/link}{else}{link controller='MembersList'}{/link}{/if}">
 			<fieldset>
 				<legend><label for="username">{lang}wcf.user.search{/lang}</label></legend>

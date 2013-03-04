@@ -80,6 +80,18 @@
 		});
 		//]]>
 	</script>
+	
+	<noscript>
+		<style type="text/css">
+			#profileContent > .tabMenu > ul > li:not(:first-child) {
+				display: none !important;
+			}
+			
+			#profileContent > .tabMenuContent:not(:first-of-type) {
+				display: none !important;
+			}
+		</style>
+	</noscript>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">

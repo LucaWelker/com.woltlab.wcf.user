@@ -48,7 +48,7 @@
 								
 								<p>{@$notification[message]}</p>
 								
-								<ul class="buttonList jsNotificationAction" data-notification-id="{@$notification[notificationID]}">
+								<ul class="buttonList jsNotificationAction jsOnly" data-notification-id="{@$notification[notificationID]}">
 									{foreach from=$notification[buttons] item=button}
 										<li class="button small" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
 									{/foreach}
