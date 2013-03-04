@@ -84,6 +84,11 @@ class LostPasswordForm extends RecaptchaForm {
 			}
 		}
 		
+		// check if using 3rd party @author dtdesign
+		if ($this->user->authData) {
+			throw new UserInputException('username', '3rdParty');
+		}
+		
 		// check whether a lost password request was sent in the last 24 hours
 		if ($this->user->lastLostPasswordRequestTime && TIME_NOW - 86400 < $this->user->lastLostPasswordRequestTime) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.error.tooManyRequests', array('hours' => ceil(($this->user->lastLostPasswordRequestTime - (TIME_NOW - 86400)) / 3600))));
