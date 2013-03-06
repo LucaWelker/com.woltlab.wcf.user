@@ -3,6 +3,8 @@ namespace wcf\system\option;
 use wcf\data\bbcode\BBCodeCache;
 use wcf\data\option\Option;
 use wcf\data\smiley\SmileyCache;
+use wcf\system\bbcode\BBCodeParser;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 
 /**
@@ -36,5 +38,20 @@ class MessageOptionType extends TextareaOptionType {
 		));
 		
 		return WCF::getTPL()->fetch('messageOptionType');
+	}
+	
+	/**
+	 * @see	wcf\system\option\IOptionType::validate()
+	 */
+	public function validate(Option $option, $newValue) {
+		parent::validate($option, $newValue);
+		
+		if ($option->allowedbbcodepermission) {
+			$disallowedBBCodes = BBCodeParser::getInstance()->validateBBCodes($newValue, explode(',', WCF::getSession()->getPermission($option->allowedbbcodepermission)));
+			if (!empty($disallowedBBCodes)) {
+				WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
+				throw new UserInputException($option->optionName, 'disallowedBBCodes');
+			}
+		}
 	}
 }
