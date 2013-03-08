@@ -120,6 +120,11 @@ class UserPage extends AbstractPage {
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.user.members'), LinkHandler::getInstance()->getLink('MembersList')));
 		
 		// get profile content
+		if ($this->editOnInit) {
+			// force 'about' tab as primary if editing profile
+			UserProfileMenu::getInstance()->setActiveMenuItem('about');
+		}
+		
 		$activeMenuItem = UserProfileMenu::getInstance()->getActiveMenuItem();
 		$contentManager = $activeMenuItem->getContentManager();
 		$this->profileContent = $contentManager->getContent($this->user->userID);
