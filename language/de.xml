@@ -262,6 +262,7 @@ Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Admini
 		<item name="wcf.user.search.error.noMatches"><![CDATA[Zu den angegebenen Kriterien wurde kein Mitglied gefunden.]]></item>
 		<item name="wcf.user.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.user.newestMember"><![CDATA[Neuestes Mitglied]]></item>
+		<item name="wcf.user.login.3rdParty"><![CDATA[Anmeldung über Drittanbieter]]></item>
 	</category>
 	
 	<category name="wcf.user.menu">
