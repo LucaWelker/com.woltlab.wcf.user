@@ -10,7 +10,7 @@
 
 <div class="tabularBox tabularBoxTitle marginTop">
 	<hgroup>
-		<h1>{lang}wcf.acp.dashboard.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.package.list.count{/lang}">{#$objectTypes|count}</span></h1>
+		<h1>{lang}wcf.acp.dashboard.list{/lang} <span class="badge badgeInverse">{#$objectTypes|count}</span></h1>
 	</hgroup>
 	
 	<table class="table">

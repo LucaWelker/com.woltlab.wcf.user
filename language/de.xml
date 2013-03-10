@@ -75,7 +75,6 @@
 		<item name="wcf.acp.user.rank.edit"><![CDATA[Benutzerrang bearbeiten]]></item>
 		<item name="wcf.acp.user.rank.image"><![CDATA[Ranggrafik]]></item>
 		<item name="wcf.acp.user.rank.list"><![CDATA[Benutzerränge]]></item>
-		<item name="wcf.acp.user.rank.list.count"><![CDATA[{#$items} {if $items == 1}Benutzerrang{else}Benutzerränge{/if}]]></item>
 		<item name="wcf.acp.user.rank.rankImage.description"><![CDATA[Der Pfad zur Ranggrafik kann relativ zum WCF-Verzeichnis oder absolut angegeben werden.]]></item>
 		<item name="wcf.acp.user.rank.requiredGender.description"><![CDATA[Optional können Sie diesen Benutzerrang auf Benutzer mit einem bestimmten Geschlecht einschränken.]]></item>
 		<item name="wcf.acp.user.rank.requiredPoints"><![CDATA[Punkte]]></item>
