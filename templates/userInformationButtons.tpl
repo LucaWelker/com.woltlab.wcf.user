@@ -18,13 +18,13 @@
 			<li class="jsOnly"><a data-following="0" data-object-id="{@$user->userID}" class="jsFollowButton jsTooltip" title="{lang}wcf.user.button.follow{/lang}"><span class="icon icon16 icon-plus"></span></a></li>
 		{/if}
 		
-		{if !$user->getPermission('user.profile.cannotBeIgnored')}
+		{*if !$user->getPermission('user.profile.cannotBeIgnored')*}{*disabled for performance reasons*}
 			{if $__wcf->getUserProfileHandler()->isIgnoredUser($user->userID)}
 				<li class="jsOnly"><a data-ignored="1" data-object-id="{@$user->userID}" class="jsIgnoreButton jsTooltip" title="{lang}wcf.user.button.unignore{/lang}"><span class="icon icon16 icon-circle-blank"></span></a></li>
 			{else}
 				<li class="jsOnly"><a data-ignored="0" data-object-id="{@$user->userID}" class="jsIgnoreButton jsTooltip" title="{lang}wcf.user.button.ignore{/lang}"><span class="icon icon16 icon-off"></span></a></li>
 			{/if}
-		{/if}
+		{*/if*}
 	{/if}
 	
 	{event name='buttons'}
