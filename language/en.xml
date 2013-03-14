@@ -119,9 +119,9 @@
 		<item name="wcf.user.login.action"><![CDATA[Are you already registered?]]></item>
 		<item name="wcf.user.login.action.login"><![CDATA[Yes, my password is:]]></item>
 		<item name="wcf.user.login.action.register"><![CDATA[No, register now.]]></item>
-		<item name="wcf.user.login.redirect"><![CDATA[You were logged in.]]></item>
+		<item name="wcf.user.login.redirect"><![CDATA[You have been logged in.]]></item>
 		<item name="wcf.user.loginOrRegister"><![CDATA[Login{if !REGISTER_DISABLED} or register{/if}]]></item>
-		<item name="wcf.user.logout.redirect"><![CDATA[You were logged off.]]></item>
+		<item name="wcf.user.logout.redirect"><![CDATA[You have been logged off.]]></item>
 		<item name="wcf.user.useCookies"><![CDATA[Remain logged in]]></item>
 		<item name="wcf.user.usernameOrEmail"><![CDATA[Username or Email Address]]></item>
 		<item name="wcf.user.gender.male"><![CDATA[Male]]></item>
@@ -144,8 +144,8 @@
 		<item name="wcf.user.button.ignore"><![CDATA[Block]]></item>
 		<item name="wcf.user.button.unignore"><![CDATA[Unblock]]></item>
 		<item name="wcf.user.style"><![CDATA[Styles]]></item>
-		<item name="wcf.user.style.description"><![CDATA[User Interface Style]]></item>
-		<item name="wcf.user.username.description"><![CDATA[Username must be at least {REGISTER_USERNAME_MIN_LENGTH} up to {REGISTER_USERNAME_MAX_LENGTH} characters.]]></item>
+		<item name="wcf.user.style.description"><![CDATA[Forces a specific style instead of the default one.]]></item>
+		<item name="wcf.user.username.description"><![CDATA[Username must be {REGISTER_USERNAME_MIN_LENGTH} up to {REGISTER_USERNAME_MAX_LENGTH} characters long.]]></item>
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Password must be at least {REGISTER_PASSWORD_MIN_LENGTH} characters.{else}A secure password should be at least 8 characters long.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Lost Password]]></item>
 		<item name="wcf.user.lostPassword.description"><![CDATA[You must provide your username or email address to request a new password. Contact the site’s administrator if you need assistance.]]></item>
@@ -236,7 +236,7 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.newActivationCode.success"><![CDATA[Activiation code has been sent to “{$email}”.]]></item>
 		<item name="wcf.user.emailActivation.error.emailAlreadyEnabled"><![CDATA[Email address is already activated.]]></item>
 		<item name="wcf.user.emailActivation.success"><![CDATA[Email address has been activated.]]></item>
-		<item name="wcf.user.registerActivation.info"><![CDATA[An email containing 9-digit activation code was sent to “{$__wcf->user->email}”.]]></item>
+		<item name="wcf.user.registerActivation.info"><![CDATA[An email containing the 9-digit activation code was sent to “{$__wcf->user->email}”.]]></item>
 		<item name="wcf.user.username.error.alreadyRenamed"><![CDATA[Username was already changed within the last {#$__wcf->getSession()->getPermission('user.profile.renamePeriod')} day.]]></item>
 		<item name="wcf.user.guest"><![CDATA[Guest]]></item>
 		<item name="wcf.user.signature"><![CDATA[Signature]]></item>
@@ -253,7 +253,7 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.button.mail"><![CDATA[Send Email]]></item>
 		<item name="wcf.user.ignoredUsers"><![CDATA[You’re blocking the following users]]></item>
 		<item name="wcf.user.ignoredUsers.noUsers"><![CDATA[You’re not blocking any users.]]></item>
-		<item name="wcf.user.following"><![CDATA[You’re following these users:]]></item>
+		<item name="wcf.user.following"><![CDATA[You’re following these users]]></item>
 		<item name="wcf.user.following.noUsers"><![CDATA[You’re not following anyone.]]></item>
 		<item name="wcf.user.userTitle"><![CDATA[Custom User Title]]></item>
 		<item name="wcf.user.userTitle.description"><![CDATA[You may enter a custom user title.]]></item>
@@ -325,7 +325,7 @@ You can safely ignore this email if you did not register with the website: {@PAG
 		<item name="wcf.user.register.disclaimer.decline"><![CDATA[Decline]]></item>
 		<item name="wcf.user.register.disclaimer.text"><![CDATA[<p>The registration and use of this forum is completely free for you. Press “Accept” if you agree with the rules mentioned below. You will then be able to register.</p>
 
-<p>Even though administrators and moderators from “{@PAGE_TITLE|language}” try to delete or edit all the unwanted posts, it is impossible for them to check all the posts. All the posts express the opinion of the author, the owners of “{@PAGE_TITLE}” and WoltLab GmbH (the developers of Burning Board) cannot be held responsible for the content of those posts.</p>
+<p>Even though administrators and moderators of “{@PAGE_TITLE|language}” try to delete or edit all the unwanted posts, it is impossible for them to check all the posts. All the posts express the opinion of the author, the owners of “{@PAGE_TITLE}” and WoltLab GmbH (the developers of Burning Board) cannot be held responsible for the content of those posts.</p>
 
 <p>By registering, you agree not to post messages that are vulgar, impolite, disrespectful or that express (extreme) political views or (verbal) law offences.</p>
 
@@ -417,7 +417,7 @@ You can safely ignore this email if you did not register with the website: {@PAG
 		<item name="wcf.user.avatar.edit"><![CDATA[Avatar Management]]></item>
 		<item name="wcf.user.avatar.error.disabled"><![CDATA[The administrators {if $__wcf->user->avatarID || $__wcf->user->enableGravatar}have banned your avatar and {/if}disallowed you from using an avatar{if $__wcf->user->disableAvatarReason}: {$__wcf->user->disableAvatarReason}{/if}.]]></item>
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Upload Own Avatar]]></item>
-		<item name="wcf.user.avatar.type.custom.description"><![CDATA[You may use the following file extensions {"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')} for your avatar with a maximum dimension of {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize}. The minimum dimensions are 48×48 pixel, it is recommend to provide {@MAX_AVATAR_WIDTH}×{@MAX_AVATAR_HEIGHT} pixel. Any avatar that exceeds this limit will be scaled down if possible.]]></item>
+		<item name="wcf.user.avatar.type.custom.description"><![CDATA[You may use the following file extensions “{"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')}” for your avatar with a maximum file size of {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize}. The minimum dimensions are 48×48 pixel, it is recommend to provide a dimension of {@MAX_AVATAR_WIDTH}×{@MAX_AVATAR_HEIGHT} pixel. Any avatar that exceeds this limit will be scaled down if possible.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Use Gravatar]]></item>
 		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Gravatar (Global Recognized Avatar) provides a globally reusable avatar connected with your email address “{$__wcf->user->email}”. Visit <a href="http://www.gravatar.com" class="externalURL">www.gravatar.com</a> to set up or change your avatar.]]></item>
 		<item name="wcf.user.avatar.type.gravatar.error.notFound"><![CDATA[Your email address is not connected with a gravatar.]]></item>
@@ -450,7 +450,7 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
 		<item name="wcf.user.notification.showAll"><![CDATA[Show All Notifications]]></item>
 		<item name="wcf.user.notification.com.woltlab.wcf.user"><![CDATA[User Profiles]]></item>
-		<item name="wcf.user.notification.com.woltlab.wcf.user.follow.following"><![CDATA[Somebody Follows You]]></item>
+		<item name="wcf.user.notification.com.woltlab.wcf.user.follow.following"><![CDATA[New follower]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">
@@ -474,13 +474,14 @@ If you do not want to receive further email notifications for this event, you ca
 	<category name="wcf.user.option">
 		<item name="wcf.user.option.aboutMe"><![CDATA[About Me]]></item>
 		<item name="wcf.user.option.adminCanMail"><![CDATA[Accept emails sent by administrators]]></item>
+		<item name="wcf.user.option.adminComment"><![CDATA[Comment (internal)]]></item>
 		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
 		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Show year of birth]]></item>
 		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[Allows members to view your age.]]></item>
-		<item name="wcf.user.option.canMail"><![CDATA[Can send emails]]></item>
-		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Can see email addresses]]></item>
-		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Can see online status]]></item>
-		<item name="wcf.user.option.canViewProfile"><![CDATA[Can see user profiles]]></item>
+		<item name="wcf.user.option.canMail"><![CDATA[Can send me emails]]></item>
+		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Can View My Email Address]]></item>
+		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Can View My Online Status]]></item>
+		<item name="wcf.user.option.canViewProfile"><![CDATA[Can View My Profile]]></item>
 		
 		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[About Me]]></item>
 		<item name="wcf.user.option.category.profile.contact"><![CDATA[Contact Options]]></item>
@@ -497,7 +498,7 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.option.homepage"><![CDATA[Website]]></item>
 		<item name="wcf.user.option.location"><![CDATA[Location]]></item>
 		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
-		<item name="wcf.user.option.showSignature"><![CDATA[Show other member’s signatures]]></item>
+		<item name="wcf.user.option.showSignature"><![CDATA[Show members signatures]]></item>
 		<item name="wcf.user.option.timezone"><![CDATA[Timezone]]></item>
 	</category>
 	
