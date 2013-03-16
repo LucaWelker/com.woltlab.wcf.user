@@ -1,7 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
 use wcf\data\user\UserList;
-use wcf\system\bbcode\PreParser;
 use wcf\system\event\IEventListener;
 use wcf\system\request\LinkHandler;
 use wcf\system\Regex;
@@ -25,7 +24,7 @@ class PreParserAtUserListener implements IEventListener {
 		if (!$eventObj->text) return;
 		
 		// check if needed url BBCode is allowed
-		if (PreParser::getInstance()->allowedBBCodes !== null && !in_array('url', PreParser::getInstance()->allowedBBCodes)) {
+		if ($eventObj->allowedBBCodes !== null && !in_array('url', $eventObj->allowedBBCodes)) {
 			return;
 		}
 		
