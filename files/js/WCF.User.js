@@ -283,7 +283,7 @@ WCF.User.Profile.Follow = Class.extend({
 	 * Creates the (un-)follow button
 	 */
 	_createButton: function () {
-		this._button = $('<li id="followUser"><a class="button jsTooltip" title="'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'follow')+'"><span class="icon icon16 icon-plus"></span></a></li>').prependTo($('#profileButtonContainer'));
+		this._button = $('<li id="followUser"><a class="button jsTooltip" title="'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'follow')+'"><span class="icon icon16 icon-plus"></span> <span class="invisible">'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'follow')+'</span></a></li>').prependTo($('#profileButtonContainer'));
 		this._button.click($.proxy(this._execute, this));
 	},
 	
@@ -416,7 +416,7 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 	 */
 	_updateButton: function() {
 		if (this._button === null) {
-			this._button = $('<li id="ignoreUser"><a class="button jsTooltip" title="'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'ignore')+'"><span class="icon icon16 icon-off"></span></a></li>').prependTo($('#profileButtonContainer'));
+			this._button = $('<li id="ignoreUser"><a class="button jsTooltip" title="'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'ignore')+'"><span class="icon icon16 icon-off"></span> <span class="invisible">'+WCF.Language.get('wcf.user.button.'+(this._following ? 'un' : '')+'ignore')+'</span></a></li>').prependTo($('#profileButtonContainer'));
 		}
 		
 		this._button.find('.button').data('tooltip', WCF.Language.get('wcf.user.button.' + (this._isIgnoredUser ? 'un' : '') + 'ignore'));
