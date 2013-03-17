@@ -273,8 +273,8 @@ Your {@PAGE_TITLE|language} team]]></item>
 	<category name="wcf.user.menu">
 		<item name="wcf.user.menu.community"><![CDATA[Community]]></item>
 		<item name="wcf.user.menu.community.notification"><![CDATA[Notifications]]></item>
-		<item name="wcf.user.menu.community.following"><![CDATA[Followed users]]></item>
-		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Blocked users]]></item>
+		<item name="wcf.user.menu.community.following"><![CDATA[Followed Users]]></item>
+		<item name="wcf.user.menu.community.ignoredUsers"><![CDATA[Blocked Users]]></item>
 		<item name="wcf.user.menu.profile"><![CDATA[User Account]]></item>
 		<item name="wcf.user.menu.profile.accountManagement"><![CDATA[Account Management]]></item>
 		<item name="wcf.user.menu.profile.avatar"><![CDATA[Avatar]]></item>
