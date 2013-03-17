@@ -14,7 +14,7 @@ use wcf\util\StringUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.event.listener
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class PreParserAtUserListener implements IEventListener {
 	/**
@@ -22,6 +22,11 @@ class PreParserAtUserListener implements IEventListener {
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		if (!$eventObj->text) return;
+		
+		// check if needed url BBCode is allowed
+		if ($eventObj->allowedBBCodes !== null && !in_array('url', $eventObj->allowedBBCodes)) {
+			return;
+		}
 		
 		static $userRegex = null;
 		if ($userRegex === null) {

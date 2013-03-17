@@ -508,6 +508,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 	<category name="wcf.user.option">
 		<item name="wcf.user.option.aboutMe"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.option.adminCanMail"><![CDATA[E-Mails der Administration akzeptieren]]></item>
+		<item name="wcf.user.option.adminComment"><![CDATA[Kommentar (intern)]]></item>
 		<item name="wcf.user.option.birthday"><![CDATA[Geburtstag]]></item>
 		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Geburtsjahr im Profil anzeigen]]></item>
 		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[Mitglieder können dadurch Ihr aktuelles Alter sehen.]]></item>
