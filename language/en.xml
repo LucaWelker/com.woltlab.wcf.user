@@ -478,7 +478,7 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.option.birthday"><![CDATA[Birthday]]></item>
 		<item name="wcf.user.option.birthdayShowYear"><![CDATA[Show year of birth]]></item>
 		<item name="wcf.user.option.birthdayShowYear.description"><![CDATA[Allows members to view your age.]]></item>
-		<item name="wcf.user.option.canMail"><![CDATA[Can send me emails]]></item>
+		<item name="wcf.user.option.canMail"><![CDATA[Can Send Me Emails]]></item>
 		<item name="wcf.user.option.canViewEmailAddress"><![CDATA[Can View My Email Address]]></item>
 		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Can View My Online Status]]></item>
 		<item name="wcf.user.option.canViewProfile"><![CDATA[Can View My Profile]]></item>
