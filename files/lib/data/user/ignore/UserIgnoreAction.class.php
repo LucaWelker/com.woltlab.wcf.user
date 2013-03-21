@@ -25,10 +25,9 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	 * Validates the 'ignore' action.
 	 */
 	public function validateIgnore() {
-		$ignoreUserID = 0;
-		if (!empty($this->parameters['data']['ignoreUserID'])) $ignoreUserID = intval($this->parameters['data']['ignoreUserID']);
+		$this->readInteger('ignoreUserID', false, 'data');
 		
-		$userProfile = UserProfile::getUserProfile($ignoreUserID);
+		$userProfile = UserProfile::getUserProfile($this->parameters['data']['ignoreUserID']);
 		if ($userProfile === null || $userProfile->userID == WCF::getUser()->userID) {
 			throw new IllegalLinkException();
 		}
@@ -64,10 +63,9 @@ class UserIgnoreAction extends AbstractDatabaseObjectAction {
 	 * Validates the 'unignore' action.
 	 */
 	public function validateUnignore() {
-		$ignoreUserID = 0;
-		if (!empty($this->parameters['data']['ignoreUserID'])) $ignoreUserID = intval($this->parameters['data']['ignoreUserID']);
+		$this->readInteger('ignoreUserID', false, 'data');
 		
-		$userProfile = UserProfile::getUserProfile($ignoreUserID);
+		$userProfile = UserProfile::getUserProfile($this->parameters['data']['ignoreUserID']);
 		if ($userProfile === null) {
 			throw new IllegalLinkException();
 		}

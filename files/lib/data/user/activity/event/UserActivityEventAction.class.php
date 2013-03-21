@@ -25,11 +25,8 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 	 * Validates parameters to load recent activity entries.
 	 */
 	public function validateLoad() {
-		if (isset($this->parameters['userID']) && !intval($this->parameters['userID'])) {
-			throw new UserInputException('userID');
-		}
-		
 		$this->readInteger('lastEventTime');
+		$this->readInteger('userID');
 	}
 	
 	/**

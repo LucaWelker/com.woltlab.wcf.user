@@ -66,10 +66,7 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 * Validates if given notification id is valid for current user.
 	 */
 	public function validateMarkAsConfirmed() {
-		// validate notification id
-		if (!isset($this->parameters['notificationID'])) {
-			throw new UserInputException('notificationID');
-		}
+		$this->readInteger('notificationID');
 		
 		$sql = "SELECT	COUNT(*) AS count
 			FROM	wcf".WCF_N."_user_notification_to_user

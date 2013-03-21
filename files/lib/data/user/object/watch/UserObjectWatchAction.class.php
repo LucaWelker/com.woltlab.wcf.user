@@ -149,11 +149,9 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 * Validates the subscribe action.
 	 */
 	protected function __validateSubscribe() {
-		// check parameters
-		if (!isset($this->parameters['data']['objectType']) || !isset($this->parameters['data']['objectID'])) {
-			throw new UserInputException('objectType');
-		}
-	
+		$this->readInteger('objectID', false, 'data');
+		$this->readString('objectType', false, 'data');
+		
 		// validate object type
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $this->parameters['data']['objectType']);
 		if ($objectType === null) {

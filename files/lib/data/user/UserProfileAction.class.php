@@ -37,9 +37,7 @@ class UserProfileAction extends UserAction {
 	 * Validates parameters for signature preview.
 	 */
 	public function validateGetMessagePreview() {
-		if (!isset($this->parameters['data']['message'])) {
-			throw new UserInputException('message');
-		}
+		$this->readString('message', true, 'data');
 		
 		if (!isset($this->parameters['options'])) {
 			throw new UserInputException('options');

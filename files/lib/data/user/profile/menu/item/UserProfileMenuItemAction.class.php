@@ -30,10 +30,9 @@ class UserProfileMenuItemAction extends AbstractDatabaseObjectAction {
 	 * Validates menu item.
 	 */
 	public function validateGetContent() {
-		if (isset($this->parameters['data']['menuItem'])) {
-			$this->menuItem = UserProfileMenu::getInstance()->getMenuItem($this->parameters['data']['menuItem']);
-		}
+		$this->readString('menuItem', false, 'data');
 		
+		$this->menuItem = UserProfileMenu::getInstance()->getMenuItem($this->parameters['data']['menuItem']);
 		if ($this->menuItem === null) {
 			throw new UserInputException('menuItem');
 		}
