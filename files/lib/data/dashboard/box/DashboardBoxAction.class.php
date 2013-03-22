@@ -13,7 +13,7 @@ use wcf\util\ArrayUtil;
  * Executes dashboard box-related actions.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	data.dashboard.box
@@ -45,26 +45,25 @@ class DashboardBoxAction extends AbstractDatabaseObjectAction implements ISortab
 		// validate permissions
 		WCF::getSession()->checkPermissions(array('admin.content.dashboard.canEditDashboard'));
 		
+		$this->readString('boxType');
+		$this->readInteger('objectTypeID');
+		
 		// validate box type
-		if (!isset($this->parameters['boxType'])) {
-			throw new UserInputException('boxType');
-		}
-		else if (!in_array($this->parameters['boxType'], array('content', 'sidebar'))) {
+		if (!in_array($this->parameters['boxType'], array('content', 'sidebar'))) {
 			throw new UserInputException('boxType');
 		}
 		
 		// validate object type
-		if (isset($this->parameters['objectTypeID'])) {
-			$objectType = ObjectTypeCache::getInstance()->getObjectType($this->parameters['objectTypeID']);
-			if ($objectType !== null) {
-				$objectTypeDefinition = ObjectTypeCache::getInstance()->getDefinitionByName('com.woltlab.wcf.user.dashboardContainer');
-				if ($objectTypeDefinition !== null) {
-					if ($objectType->definitionID == $objectTypeDefinition->definitionID) {
-						$this->objectType = $objectType;
-					}
+		$objectType = ObjectTypeCache::getInstance()->getObjectType($this->parameters['objectTypeID']);
+		if ($objectType !== null) {
+			$objectTypeDefinition = ObjectTypeCache::getInstance()->getDefinitionByName('com.woltlab.wcf.user.dashboardContainer');
+			if ($objectTypeDefinition !== null) {
+				if ($objectType->definitionID == $objectTypeDefinition->definitionID) {
+					$this->objectType = $objectType;
 				}
 			}
 		}
+		
 		if ($this->objectType === null) {
 			throw new UserInputException('objectTypeID');
 		}

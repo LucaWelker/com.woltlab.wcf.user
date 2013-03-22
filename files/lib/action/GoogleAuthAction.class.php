@@ -1,10 +1,12 @@
 <?php
 namespace wcf\action;
 use wcf\data\user\User;
+use wcf\data\user\UserEditor;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\SystemException;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\authentication\UserAuthenticationFactory;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\HTTPRequest;
@@ -86,6 +88,14 @@ class GoogleAuthAction extends AbstractAction {
 				}
 				// perform login
 				else {
+					if (UserAuthenticationFactory::getInstance()->getUserAuthentication()->supportsPersistentLogins()) {
+						$password = StringUtil::getRandomID();
+						$userEditor = new UserEditor($user);
+						$userEditor->update(array('password' => $password));
+							
+						UserAuthenticationFactory::getInstance()->getUserAuthentication()->storeAccessData($user, $user->username, $password);
+					}
+					
 					WCF::getSession()->changeUser($user);
 					WCF::getSession()->update();
 					HeaderUtil::redirect(LinkHandler::getInstance()->getLink());

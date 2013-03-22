@@ -25,35 +25,29 @@ class UserRegistrationAction extends UserAction {
 	 * Validates the validate username function.
 	 */
 	public function validateValidateUsername() {
-		if (empty($this->parameters['username'])) {
-			throw new UserInputException('username');
-		}
+		$this->readString('username');
 	}
 	
 	/**
 	 * Validates the validate email address function.
 	 */
 	public function validateValidateEmailAddress() {
-		if (empty($this->parameters['email'])) {
-			throw new UserInputException('email');
-		}
+		$this->readString('email');
 	}
 	
 	/**
 	 * Validates the validate password function.
 	 */
 	public function validateValidatePassword() {
-		if (empty($this->parameters['password'])) {
-			throw new UserInputException('password');
-		}
+		$this->readString('password');
 	}
 	
 	/**
 	 * Validates the given username.
+	 * 
+	 * @return	array
 	 */
 	public function validateUsername() {
-		$this->parameters['username'] = StringUtil::trim($this->parameters['username']);
-		
 		if (!UserRegistrationUtil::isValidUsername($this->parameters['username'])) {
 			return array(
 				'isValid' => false,
@@ -75,10 +69,10 @@ class UserRegistrationAction extends UserAction {
 	
 	/**
 	 * Validates given email address.
+	 * 
+	 * @return	array
 	 */
 	public function validateEmailAddress() {
-		$this->parameters['email'] = StringUtil::trim($this->parameters['email']);
-		
 		if (!UserRegistrationUtil::isValidEmail($this->parameters['email'])) {
 			return array(
 				'isValid' => false,
@@ -100,6 +94,8 @@ class UserRegistrationAction extends UserAction {
 	
 	/**
 	 * Validates given password.
+	 * 
+	 * @return	array
 	 */
 	public function validatePassword() {
 		if (!UserRegistrationUtil::isSecurePassword($this->parameters['password'])) {

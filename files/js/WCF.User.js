@@ -70,6 +70,7 @@ WCF.User.Login = Class.extend({
 					self._dialog = $('#loginForm').wcfDialog({
 						title: WCF.Language.get('wcf.user.login')
 					});
+					self._dialog.find('#username').focus();
 				}
 				else {
 					self._dialog.wcfDialog('open');
