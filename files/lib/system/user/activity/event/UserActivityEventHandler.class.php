@@ -69,12 +69,13 @@ class UserActivityEventHandler extends SingletonFactory {
 	 * 
 	 * @param	string		$objectType
 	 * @param	integer		$objectID
+	 * @param	integer		$languageID
 	 * @param	integer		$userID
 	 * @param	integer		$time
 	 * @param	array		$additonalData
 	 * @return	wcf\data\user\activity\event\UserActivityEvent
 	 */
-	public function fireEvent($objectType, $objectID, $userID = null, $time = TIME_NOW, $additonalData = array()) {
+	public function fireEvent($objectType, $objectID, $languageID = null, $userID = null, $time = TIME_NOW, $additonalData = array()) {
 		$objectTypeID = $this->getObjectTypeID($objectType);
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
@@ -82,6 +83,7 @@ class UserActivityEventHandler extends SingletonFactory {
 			'data' => array(
 				'objectTypeID' => $objectTypeID,
 				'objectID' => $objectID,
+				'languageID' => $languageID,
 				'userID' => $userID,
 				'time' => $time,
 				'additionalData' => serialize($additonalData)

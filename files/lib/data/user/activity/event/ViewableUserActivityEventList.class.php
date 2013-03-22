@@ -1,7 +1,9 @@
 <?php
 namespace wcf\data\user\activity\event;
 use wcf\data\user\UserProfile;
+use wcf\system\language\LanguageFactory;
 use wcf\system\user\activity\event\UserActivityEventHandler;
+use wcf\system\WCF;
 
 /**
  * Represents a list of viewable user activity events.
@@ -28,6 +30,17 @@ class ViewableUserActivityEventList extends UserActivityEventList {
 	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
 	 */
 	public $sqlOrderBy = 'user_activity_event.time DESC';
+	
+	/**
+	 * Creates a new ViewableUserActivityEventList object.
+	 */
+	public function __construct() {
+		parent::__construct();
+		
+		if (LanguageFactory::getInstance()->multilingualismEnabled() && count(WCF::getUser()->getLanguageIDs())) {
+			$this->getConditionBuilder()->add('(user_activity_event.languageID IN (?) OR user_activity_event.languageID IS NULL)', array(WCF::getUser()->getLanguageIDs()));
+		}
+	}
 	
 	/**
 	 * @see	wcf\data\DatabaseObjectList::readObjects()

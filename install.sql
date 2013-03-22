@@ -217,6 +217,7 @@ CREATE TABLE wcf1_user_activity_event (
 	eventID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	objectTypeID INT(10) NOT NULL,
 	objectID INT(10) NOT NULL,
+	languageID INT(10),
 	userID INT(10) NOT NULL,
 	time INT(10) NOT NULL,
 	additionalData TEXT,
@@ -313,6 +314,7 @@ ALTER TABLE wcf1_user_rank ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group 
 
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE wcf1_user_activity_event ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user_activity_point ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_user_activity_point ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
