@@ -77,6 +77,11 @@
 			{/if}
 			
 			{event name='javascriptInit'}
+			
+			// mobile safari hover workaround
+			if ($.browser.mobile) {
+				$('#profileButtonContainer').hover(function() { });
+			}
 		});
 		//]]>
 	</script>
@@ -101,6 +106,8 @@
 {include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline userHeadline">
+	<span class="framed invisible">{@$user->getAvatar()->getImageTag(48)}</span>
+	
 	<hgroup>
 		<h1>{$user->username}{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1>
 	</hgroup>

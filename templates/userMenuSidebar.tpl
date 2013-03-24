@@ -1,5 +1,6 @@
 {capture assign='sidebar'}
 	{assign var=__userMenuActiveItems value=$__wcf->getUserMenu()->getActiveMenuItems()}
+	
 	{foreach from=$__wcf->getUserMenu()->getMenuItems('') item=menuCategory}
 		<fieldset>
 			<legend>{lang}{$menuCategory->menuItem}{/lang}</legend>
@@ -13,4 +14,15 @@
 			</nav>
 		</fieldset>
 	{/foreach}
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			// mobile safari hover workaround
+			if ($.browser.mobile) {
+				$('.sidebar').addClass('mobileSidebar').hover(function() { });
+			}
+		});
+		//]]>
+	</script> 
 {/capture}
