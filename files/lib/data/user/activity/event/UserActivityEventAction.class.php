@@ -26,7 +26,7 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateLoad() {
 		$this->readInteger('lastEventTime');
-		$this->readInteger('userID');
+		$this->readInteger('userID', true);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 		$eventList->getConditionBuilder()->add("user_activity_event.time < ?", array($this->parameters['lastEventTime']));
 		
 		// profile view
-		if (isset($this->parameters['userID'])) {
+		if ($this->parameters['userID']) {
 			$eventList->getConditionBuilder()->add("user_activity_event.userID = ?", array($this->parameters['userID']));
 		}
 		
