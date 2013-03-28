@@ -123,7 +123,7 @@ WCF.User.QuickLogin = {
 	 * @param	string	message
 	 */
 	show: function(message) {
-		$('#loginMessage').show().html(message);
+		$('#loginMessage').show().text(message);
 		this._render();
 	},
 	
