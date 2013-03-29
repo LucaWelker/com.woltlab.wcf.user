@@ -94,7 +94,6 @@
 			<environment>user</environment>
 		</eventlistener>
 		
-		
 		<eventlistener>
 			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
 			<eventname>execute</eventname>
@@ -105,6 +104,19 @@
 			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
 			<eventname>execute</eventname>
 			<listenerclassname>wcf\system\event\listener\UserCleanUpListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\UserActionPresetNotificationListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\UserActionPresetNotificationListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
 	</import>

@@ -161,6 +161,7 @@ CREATE TABLE wcf1_user_notification_event (
 	className VARCHAR(255) NOT NULL DEFAULT '',
 	permissions TEXT,
 	options TEXT,
+	preset TINYINT(1) NOT DEFAULT 0,
 	UNIQUE KEY eventName (eventName, objectTypeID)
 );
 
