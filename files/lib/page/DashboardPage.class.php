@@ -22,6 +22,11 @@ class DashboardPage extends AbstractPage {
 	public $activeMenuItem = 'wcf.user.dashboard';
 	
 	/**
+	 * @see	wcf\page\AbstractPage::$neededModules
+	 */
+	public $neededModules = array('MODULE_DASHBOARD_PAGE');
+	
+	/**
 	 * @see wcf\page\IPage::readData()
 	 */
 	public function readData() {
