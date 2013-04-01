@@ -19,4 +19,12 @@ interface IUserProfileMenuContent {
 	 * @return	string
 	 */
 	public function getContent($userID);
+	
+	/**
+	 * Returns true if the associated menu item should be visible for the active user.
+	 * 
+	 * @param	integer		$userID
+	 * @return	boolean
+	 */
+	public function isVisible($userID);
 }

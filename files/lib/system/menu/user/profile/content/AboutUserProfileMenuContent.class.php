@@ -1,7 +1,6 @@
 <?php
 namespace wcf\system\menu\user\profile\content;
 use wcf\data\user\User;
-use wcf\system\event\EventHandler;
 use wcf\system\option\user\UserOptionHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -24,22 +23,15 @@ class AboutUserProfileMenuContent extends SingletonFactory implements IUserProfi
 	public $optionHandler = null;
 	
 	/**
-	 * @see	wcf\system\SingletonFactory::init()
-	 */
-	protected function init() {
-		EventHandler::getInstance()->fireAction($this, 'shouldInit');
-		
-		$this->optionHandler = new UserOptionHandler(false, '', 'profile');
-		$this->optionHandler->enableEditMode(false);
-		$this->optionHandler->showEmptyOptions(false);
-		
-		EventHandler::getInstance()->fireAction($this, 'didInit');
-	}
-	
-	/**
 	 * @see	wcf\system\menu\user\profile\content\IUserProfileMenuContent::getContent()
 	 */
 	public function getContent($userID) {
+		if ($this->optionHandler === null) {
+			$this->optionHandler = new UserOptionHandler(false, '', 'profile');
+			$this->optionHandler->enableEditMode(false);
+			$this->optionHandler->showEmptyOptions(false);
+		}
+		
 		$user = new User($userID);
 		$this->optionHandler->setUser($user);
 		
@@ -49,5 +41,12 @@ class AboutUserProfileMenuContent extends SingletonFactory implements IUserProfi
 		));
 		
 		return WCF::getTPL()->fetch('userProfileAbout');
+	}
+	
+	/**
+	 * @see	wcf\system\menu\user\profile\content\IUserProfileMenuContent::isVisible()
+	 */
+	public function isVisible($userID) {
+		return true;
 	}
 }

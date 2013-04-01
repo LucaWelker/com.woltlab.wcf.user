@@ -138,17 +138,21 @@
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
+				{if $menuItem->getContentManager()->isVisible($userID)}
+					<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
+				{/if}
 			{/foreach}
 		</ul>
 	</nav>
 	
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-		<div id="{$menuItem->getIdentifier()}" class="container tabMenuContent" data-menu-item="{$menuItem->menuItem}">
-			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
-				{@$profileContent}
-			{/if}
-		</div>
+		{if $menuItem->getContentManager()->isVisible($userID)}
+			<div id="{$menuItem->getIdentifier()}" class="container tabMenuContent" data-menu-item="{$menuItem->menuItem}">
+				{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
+					{@$profileContent}
+				{/if}
+			</div>
+		{/if}
 	{/foreach}
 </section>
 

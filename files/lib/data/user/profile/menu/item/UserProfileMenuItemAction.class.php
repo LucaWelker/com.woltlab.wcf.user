@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\profile\menu\item;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\menu\user\profile\UserProfileMenu;
 
@@ -31,10 +32,15 @@ class UserProfileMenuItemAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateGetContent() {
 		$this->readString('menuItem', false, 'data');
+		$this->readInteger('userID', false, 'data');
+		$this->readInteger('containerID', false, 'data');
 		
 		$this->menuItem = UserProfileMenu::getInstance()->getMenuItem($this->parameters['data']['menuItem']);
 		if ($this->menuItem === null) {
 			throw new UserInputException('menuItem');
+		}
+		if (!$this->menuItem->getContentManager()->isVisible($this->parameters['data']['userID'])) {
+			throw new PermissionDeniedException();
 		}
 	}
 	
