@@ -21,7 +21,7 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.notification.notifications{/lang} <span class="badge jsNotificationsBadge">{#$notifications[count]}</span></h1>
+		<h1>{lang}wcf.user.notification.notifications{/lang} <span class="badge jsNotificationsBadge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></h1>
 	</hgroup>
 </header>
 
