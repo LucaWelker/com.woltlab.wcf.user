@@ -24,7 +24,7 @@ class PreParserAtUserListener implements IEventListener {
 		if (!$eventObj->text) return;
 		
 		// check if needed url BBCode is allowed
-		if ($eventObj->allowedBBCodes !== null && !in_array('url', $eventObj->allowedBBCodes)) {
+		if ($eventObj->allowedBBCodes !== null && !in_array('all', $eventObj->allowedBBCodes) && !in_array('url', $eventObj->allowedBBCodes)) {
 			return;
 		}
 		
