@@ -21,7 +21,7 @@
 
 <header class="boxHeadline">
 	<hgroup>
-		<h1>{lang}wcf.user.notification.notifications{/lang} <span class="badge jsNotificationsBadge">{#$notifications[count]}</span></h1>
+		<h1>{lang}wcf.user.notification.notifications{/lang} <span class="badge jsNotificationsBadge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></h1>
 	</hgroup>
 </header>
 
@@ -41,34 +41,32 @@
 	{/hascontent}
 </div>
 
-{hascontent}
+{if $notifications[notifications]}
 	<div class="container marginTop">
 		<ul class="containerList">
-			{content}
-				{foreach from=$notifications[notifications] item=$notification}
-					<li class="jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
-						<div class="box48">
-							<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="framed">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
-							
-							<div class="details">
-								<hgroup class="containerHeadline">
-									<h1><a href="{link controller='User' object=$notification[author]}{/link}" class="userLink" data-user-id="{@$notification[author]->userID}">{$notification[author]->username}</a></h1> 
-									<h2><small>{@$notification[time]|time}</small></h2>
-								</hgroup>
-								
-								<p>{@$notification[message]}</p>
-								
-								<ul class="buttonList jsNotificationAction jsOnly" data-notification-id="{@$notification[notificationID]}">
-									{foreach from=$notification[buttons] item=button}
-										<li class="button small" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
-									{/foreach}
-									{event name='buttons'}
-								</ul>
-							</div>
+			{foreach from=$notifications[notifications] item=$notification}
+				<li class="jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
+					<div class="box48">
+						<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="framed">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
+
+						<div class="details">
+							<hgroup class="containerHeadline">
+								<h1><a href="{link controller='User' object=$notification[author]}{/link}" class="userLink" data-user-id="{@$notification[author]->userID}">{$notification[author]->username}</a></h1> 
+								<h2><small>{@$notification[time]|time}</small></h2>
+							</hgroup>
+
+							<p>{@$notification[message]}</p>
+
+							<ul class="buttonList jsNotificationAction jsOnly" data-notification-id="{@$notification[notificationID]}">
+								{foreach from=$notification[buttons] item=button}
+									<li class="button small" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
+								{/foreach}
+								{event name='buttons'}
+							</ul>
 						</div>
-					</li>
-				{/foreach}
-			{/content}
+					</div>
+				</li>
+			{/foreach}
 		</ul>
 	</div>
 	
@@ -85,9 +83,9 @@
 			</nav>
 		{/hascontent}
 	</div>
-{hascontentelse}
+{else}
 	<p class="info">{lang}wcf.user.notification.noNotifications{/lang}</p>
-{/hascontent}
+{/if}
 
 {include file='footer'}
 

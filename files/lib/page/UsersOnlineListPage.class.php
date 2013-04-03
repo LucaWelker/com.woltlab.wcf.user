@@ -21,7 +21,7 @@ class UsersOnlineListPage extends SortablePage {
 	/**
 	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.user.members';
+	public $activeMenuItem = 'wcf.user.usersOnline';
 	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
