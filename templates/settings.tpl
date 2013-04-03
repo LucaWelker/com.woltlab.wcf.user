@@ -23,6 +23,18 @@
 	<p class="success">{lang}wcf.global.success.edit{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='Settings'}{/link}">
 	<div class="container containerPadding marginTop">
 		{if $category == 'general'}
@@ -70,6 +82,8 @@
 						<small>{lang}wcf.user.visibleLanguages.description{/lang}</small></dd>
 					</dl>
 				{/hascontent}
+				
+				{event name='languageFields'}
 			</fieldset>
 			
 			<fieldset>
@@ -88,6 +102,8 @@
 						<small>{lang}wcf.user.style.description{/lang}</small>
 					</dd>
 				</dl>
+				
+				{event name='styleFields'}
 			</fieldset>
 		{/if}
 		
@@ -98,6 +114,8 @@
 				{include file='userProfileOptionFieldList' options=$optionCategory[options] langPrefix='wcf.user.option.'}
 			</fieldset>
 		{/foreach}
+		
+		{event name='fieldsets'}
 	</div>
 	
 	<div class="formSubmit">

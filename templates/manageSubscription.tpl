@@ -11,6 +11,8 @@
 			<label><input type="radio" name="subscribe" value="0"{if !$userObjectWatch} checked="checked"{/if} /> {lang}wcf.user.objectWatch.unsubscribe.{@$objectType->objectType}{/lang}</label>
 		</dd>
 	</dl>
+	
+	{event name='fields'}
 </fieldset>
 
 <div class="formSubmit">

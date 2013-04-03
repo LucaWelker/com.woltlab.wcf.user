@@ -21,6 +21,18 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 	
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+	
 <form method="post" action="{link controller='RegisterNewActivationCode'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>

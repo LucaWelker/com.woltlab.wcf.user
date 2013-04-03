@@ -78,4 +78,4 @@
 	</fieldset>
 {/if}
 
-{* @todo: placeholder *}
+{event name='boxes'}

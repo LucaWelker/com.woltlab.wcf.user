@@ -13,6 +13,9 @@
 			</a></li>
 			{if $__wcf->getUserProfileHandler()->canEditOwnProfile()}<li><a href="{link controller='User' object=$__wcf->user}editOnInit=true#about{/link}">{lang}wcf.user.editProfile{/lang}</a></li>{/if}
 			<li><a href="{link controller='Settings'}{/link}">{lang}wcf.user.menu.settings{/lang}</a></li>
+			
+			{event name='userMenuItems'}
+			
 			{if $__wcf->session->getPermission('admin.general.canUseAcp')}
 				<li class="dropdownDivider"></li>
 				<li><a href="acp/index.php">{lang}wcf.global.acp.short{/lang}</a></li>
@@ -101,7 +104,7 @@
 							</dl>
 						{/if}
 						
-						{event name='additionalLoginFields'}
+						{event name='loginFields'}
 						
 						<div class="formSubmit">
 							<input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.user.button.login{/lang}" accesskey="s" />

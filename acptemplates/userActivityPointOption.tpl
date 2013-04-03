@@ -33,7 +33,7 @@
 			<li><a id="updateCache" title="{lang}wcf.acp.user.activityPoint.updateCache{/lang}" class="button"><span class="icon icon16 icon-repeat"></span> <span>{lang}wcf.acp.user.activityPoint.updateCache{/lang}</span></a></li>
 			<li><a id="updateEvents" title="{lang}wcf.acp.user.activityPoint.updateEvents{/lang}" class="button"><span class="icon icon16 icon-repeat"></span> <span>{lang}wcf.acp.user.activityPoint.updateEvents{/lang}</span></a></li>
 			
-			{event name='largeButtons'}
+			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>

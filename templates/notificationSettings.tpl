@@ -45,6 +45,18 @@
 	<p class="success">{lang}wcf.global.success.edit{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='NotificationSettings'}{/link}">
 	<div class="container containerPadding marginTop" id="notificationSettings">
 		{foreach from=$events key='eventCategory' item='eventList'}
@@ -68,6 +80,8 @@
 				</dl>
 			</fieldset>
 		{/foreach}
+		
+		{event name='fieldsets'}
 	</div>
 	
 	<div class="formSubmit">

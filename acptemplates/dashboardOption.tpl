@@ -22,7 +22,7 @@
 		<ul>
 			<li><a href="{link controller='DashboardList'}{/link}" title="{lang}wcf.acp.menu.link.dashboard.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.dashboard.list{/lang}</span></a></li>
 			
-			{event name='largeButtons'}
+			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
 </div>
@@ -136,6 +136,8 @@
 			</script>
 		</div>
 	{/if}
+	
+	{event name='tabMenuContents'}
 </div>
 
 <div class="contentNavigation">
@@ -143,7 +145,7 @@
 		<ul>
 			<li><a href="{link controller='DashboardList'}{/link}" title="{lang}wcf.acp.menu.link.dashboard.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.dashboard.list{/lang}</span></a></li>
 			
-			{event name='largeButtons'}
+			{event name='contentNavigationButtonsBottom'}
 		</ul>
 	</nav>
 </div>

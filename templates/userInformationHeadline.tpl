@@ -5,5 +5,7 @@
 		{if $user->getAge()}<li>{@$user->getAge()}</li>{/if}
 		{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
 		<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
+		
+		{event name='userData'}			
 	</ul></h2>
 </hgroup>

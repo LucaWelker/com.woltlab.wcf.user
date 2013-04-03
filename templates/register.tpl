@@ -57,6 +57,18 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='Register'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -78,6 +90,8 @@
 					<small>{lang}wcf.user.username.description{/lang}</small>
 				</dd>
 			</dl>
+			
+			{event name='usernameFields'}
 		</fieldset>
 		
 		<fieldset>
@@ -112,6 +126,8 @@
 					{/if}
 				</dd>
 			</dl>
+			
+			{event name='emailFields'}
 		</fieldset>
 		
 		{if !$isExternalAuthentication}
@@ -147,6 +163,8 @@
 						{/if}
 					</dd>
 				</dl>
+				
+				{event name='passwordFields'}
 			</fieldset>
 		{/if}
 		
@@ -178,6 +196,8 @@
 						<small>{lang}wcf.user.visibleLanguages.description{/lang}</small></dd>
 					</dl>
 				{/hascontent}
+				
+				{event name='languageFields'}
 			</fieldset>
 		{/if}
 		

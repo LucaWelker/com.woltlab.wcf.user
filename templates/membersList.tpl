@@ -104,6 +104,16 @@
 	{else}
 		{pages print=true assign=pagesLinks controller='MembersList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&letter=$encodedLetter"}
 	{/if}
+	
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsTop'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
 </div>
 
 {if $items}
@@ -117,10 +127,19 @@
 {else}
 	<p class="info">{lang}wcf.user.members.noMembers{/lang}</p>
 {/if}
-	
 
 <div class="contentNavigation">
 	{@$pagesLinks}
+	
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsBottom'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
 </div>
 
 {include file='footer'}

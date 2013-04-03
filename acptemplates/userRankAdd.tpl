@@ -18,6 +18,8 @@
 	<nav>
 		<ul>
 			<li><a href="{link controller='UserRankList'}{/link}" title="{lang}wcf.acp.menu.link.user.rank.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.rank.list{/lang}</span></a></li>
+			
+			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>
@@ -67,6 +69,8 @@
 					<small>{lang}wcf.acp.user.rank.cssClassName.description{/lang}</small>
 				</dd>
 			</dl>
+			
+			{event name='dataFields'}
 		</fieldset>
 		
 		<fieldset>
@@ -104,6 +108,8 @@
 					<dd>{@$rank->getImage()}</dd>
 				</dl>
 			{/if}
+			
+			{event name='imageFields'}
 		</fieldset>
 		
 		<fieldset>
@@ -160,8 +166,10 @@
 				</dd>
 			</dl>
 			
-			
+			{event name='requirementFields'}
 		</fieldset>
+		
+		{event name='fieldsets'}
 	</div>
 	
 	<div class="formSubmit">

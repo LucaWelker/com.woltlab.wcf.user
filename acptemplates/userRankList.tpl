@@ -27,7 +27,7 @@
 			<li><a id="updateUserRanks" title="{lang}wcf.acp.user.rank.updateRanks{/lang}" class="button"><span class="icon icon16 icon-repeat"></span> <span>{lang}wcf.acp.user.rank.updateRanks{/lang}</span></a></li>
 			<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
 			
-			{event name='largeButtonsTop'}
+			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
 </div>
@@ -48,7 +48,7 @@
 					<th class="columnText columnRequiredGender{if $sortField == 'requiredGender'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredGender&sortOrder={if $sortField == 'requiredGender' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.user.option.gender{/lang}</a></th>
 					<th class="columnDigits columnRequiredPoints{if $sortField == 'requiredPoints'} active {@$sortOrder}{/if}"><a href="{link controller='UserRankList'}pageNo={@$pageNo}&sortField=requiredPoints&sortOrder={if $sortField == 'requiredPoints' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.user.rank.requiredPoints{/lang}</a></th>
 					
-					{event name='headColumns'}
+					{event name='columnHeads'}
 				</tr>
 			</thead>
 			
@@ -60,7 +60,7 @@
 								<a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$userRank->rankID}" data-confirm-message="{lang}wcf.acp.user.rank.delete.sure{/lang}"></span>
 								
-								{event name='buttons'}
+								{event name='rowButtons'}
 							</td>
 							<td class="columnID columnRankID"><p>{@$userRank->rankID}</p></td>
 							<td class="columnTitle columnRankTitle"><p><a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}" title="{lang}wcf.acp.user.rank.edit{/lang}" class="badge label{if $userRank->cssClassName} {$userRank->cssClassName}{/if}">{$userRank->rankTitle|language}</a></p></td>
@@ -85,7 +85,7 @@
 			<ul>
 				<li><a href="{link controller='UserRankAdd'}{/link}" title="{lang}wcf.acp.user.rank.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.user.rank.add{/lang}</span></a></li>
 				
-				{event name='largeButtonsBottom'}
+				{event name='contentNavigationButtonsBottom'}
 			</ul>
 		</nav>
 	</div>

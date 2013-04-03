@@ -38,6 +38,18 @@
 
 {include file='userNotice'}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsTop'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 {foreach from=$objects->getTeams() item=team}
 	<header class="boxHeadline boxSubHeadline">
 		<hgroup>
@@ -53,6 +65,18 @@
 		</ol>
 	</div>
 {/foreach}
+
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsBottom'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
 
 {include file='footer'}
 

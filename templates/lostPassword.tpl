@@ -32,6 +32,18 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='LostPassword'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -67,7 +79,11 @@
 					{/if}
 				</dd>
 			</dl>
+			
+			{event name='fields'}
 		</fieldset>
+		
+		{event name='fieldsets'}
 		
 		{if $useCaptcha}{include file='recaptcha'}{/if}
 	</div>

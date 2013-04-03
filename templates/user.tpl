@@ -118,11 +118,13 @@
 		{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
 		{if $user->getOldUsername()}<li>{lang}wcf.user.profile.oldUsername{/lang}</li>{/if}
 		<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
+		{event name='userDataRow1'}
 	</ul>
 	{if $user->getLastActivityTime()}
 		<dl class="plain inlineDataList">
 			<dt>{lang}wcf.user.usersOnline.lastActivity{/lang}</dt>
 			<dd>{@$user->getLastActivityTime()|time}{if $user->getCurrentLocation()}, {@$user->getCurrentLocation()}{/if}</dd>
+			{event name='userDataRow2'}
 		</dl>
 	{/if}
 	
@@ -133,6 +135,18 @@
 </header>
 
 {include file='userNotice'}
+
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
 
 <section id="profileContent" class="marginTop tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">

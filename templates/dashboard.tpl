@@ -32,9 +32,33 @@
 
 {include file='userNotice'}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsTop'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <section id="dashboard">
 	{if $__boxContent|isset}{@$__boxContent}{/if}
 </section>
+
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsBottom'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
 
 {include file='footer'}
 

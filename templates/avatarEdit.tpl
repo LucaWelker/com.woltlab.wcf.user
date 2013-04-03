@@ -32,6 +32,18 @@
 	<p class="success">{lang}wcf.global.success.edit{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='AvatarEdit'}{/link}" id="avatarForm">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -76,7 +88,11 @@
 					</dd>
 				</dl>
 			{/if}
+			
+			{event name='avatarFields'}
 		</fieldset>
+		
+		{event name='fieldsets'}
 	</div>
 	
 	{if !$__wcf->user->disableAvatar}
