@@ -38,4 +38,11 @@ class RecentActivityUserProfileMenuContent extends SingletonFactory implements I
 		
 		return WCF::getTPL()->fetch('recentActivities');
 	}
+	
+	/**
+	 * @see	wcf\system\menu\user\profile\content\IUserProfileMenuContent::isVisible()
+	 */
+	public function isVisible($userID) {
+		return true;
+	}
 }

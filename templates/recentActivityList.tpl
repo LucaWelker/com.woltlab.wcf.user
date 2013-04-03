@@ -34,7 +34,17 @@
 
 {include file='userNotice'}
 
-<div class="contentNavigation"></div>
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsTop'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
 
 <div class="container marginTop">
 	<ul id="recentActivities" class="containerList recentActivityList" data-last-event-time="{@$lastEventTime}">
@@ -42,7 +52,17 @@
 	</ul>
 </div>
 
-<div class="contentNavigation"></div>
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsBottom'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
 
 {include file='footer'}
 

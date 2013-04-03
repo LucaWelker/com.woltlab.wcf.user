@@ -34,6 +34,18 @@
 	<p class="error">{lang}wcf.user.search.error.noMatches{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='UserSearch'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -45,6 +57,8 @@
 					<input type="text" id="username" name="username" value="{$username}" class="medium" />
 				</dd>
 			</dl>
+			
+			{event name='generalFields'}
 		</fieldset>
 		
 		{foreach from=$optionTree[0][categories] item=category}
@@ -56,6 +70,8 @@
 			</fieldset>
 		{/foreach}
 	</div>
+	
+	{event name='fieldsets'}
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

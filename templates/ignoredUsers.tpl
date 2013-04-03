@@ -29,6 +29,16 @@
 
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='IgnoredUsers' link="pageNo=%d"}
+	
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsTop'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
 </div>
 
 {hascontent}
@@ -45,6 +55,7 @@
 								
 								<ul class="buttonList jsOnly">
 									<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unignore{/lang}" data-object-id="{@$user->ignoreID}"></span></li>
+									{event name='userButtons'}
 								</ul>
 								
 								{include file='userInformationStatistics'}
@@ -58,6 +69,16 @@
 	
 	<div class="contentNavigation">
 		{@$pagesLinks}
+		
+		{hascontent}
+			<nav>
+				<ul>
+					{content}
+						{event name='contentNavigationButtonsBottom'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
 	</div>
 {hascontentelse}
 	<p class="info">{lang}wcf.user.ignoredUsers.noUsers{/lang}</p>

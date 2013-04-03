@@ -35,7 +35,19 @@
 {/if}
 
 {assign var=__authProvider value=$__wcf->getUserProfileHandler()->getAuthProvider()}
-	
+
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='AccountManagement'}{/link}">
 	<div class="container containerPadding marginTop">
 		{if !$__authProvider}
@@ -63,6 +75,8 @@
 						</ul>
 					</dd>
 				</dl>
+				
+				{event name='passwordFields'}
 			</fieldset>
 		{/if}
 		
@@ -88,6 +102,8 @@
 						{/if}
 					</dd>
 				</dl>
+				
+				{event name='changeUsernameFields'}
 			</fieldset>
 		{/if}
 		
@@ -123,6 +139,7 @@
 					</dd>
 				</dl>
 				
+				{event name='changePasswordFields'}
 			</fieldset>
 		{/if}
 		
@@ -158,6 +175,8 @@
 					</dd>
 				</dl>
 				
+				{event name='changeEmailFields'}
+				
 				{if REGISTER_ACTIVATION_METHOD == 1 && $__wcf->getUser()->reactivationCode != 0}
 					<dl>
 						<dd>
@@ -188,6 +207,8 @@
 						</dd>
 					</dl>
 				{/if}
+				
+				{event name='quitFields'}
 			</fieldset>
 		{/if}
 		
@@ -256,6 +277,8 @@
 							</dl>
 						{/if}
 					{/if}
+					
+					{event name='3rdpartyFields'}
 				{/content}
 			</fieldset>
 		{/hascontent}

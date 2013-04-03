@@ -118,11 +118,13 @@
 		{if $user->location}<li>{lang}wcf.user.membersList.location{/lang}</li>{/if}
 		{if $user->getOldUsername()}<li>{lang}wcf.user.profile.oldUsername{/lang}</li>{/if}
 		<li>{lang}wcf.user.membersList.registrationDate{/lang}</li>
+		{event name='userDataRow1'}
 	</ul>
 	{if $user->getLastActivityTime()}
 		<dl class="plain inlineDataList">
 			<dt>{lang}wcf.user.usersOnline.lastActivity{/lang}</dt>
 			<dd>{@$user->getLastActivityTime()|time}{if $user->getCurrentLocation()}, {@$user->getCurrentLocation()}{/if}</dd>
+			{event name='userDataRow2'}
 		</dl>
 	{/if}
 	
@@ -134,21 +136,37 @@
 
 {include file='userNotice'}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <section id="profileContent" class="marginTop tabMenuContainer" data-active="{$__wcf->getUserProfileMenu()->getActiveMenuItem()->getIdentifier()}">
 	<nav class="tabMenu">
 		<ul>
 			{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-				<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
+				{if $menuItem->getContentManager()->isVisible($userID)}
+					<li><a href="{$__wcf->getAnchor($menuItem->getIdentifier())}">{lang}wcf.user.profile.menu.{@$menuItem->menuItem}{/lang}</a></li>
+				{/if}
 			{/foreach}
 		</ul>
 	</nav>
 	
 	{foreach from=$__wcf->getUserProfileMenu()->getMenuItems() item=menuItem}
-		<div id="{$menuItem->getIdentifier()}" class="container tabMenuContent" data-menu-item="{$menuItem->menuItem}">
-			{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
-				{@$profileContent}
-			{/if}
-		</div>
+		{if $menuItem->getContentManager()->isVisible($userID)}
+			<div id="{$menuItem->getIdentifier()}" class="container tabMenuContent" data-menu-item="{$menuItem->menuItem}">
+				{if $menuItem === $__wcf->getUserProfileMenu()->getActiveMenuItem()}
+					{@$profileContent}
+				{/if}
+			</div>
+		{/if}
 	{/foreach}
 </section>
 

@@ -29,6 +29,16 @@
 
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='NotificationList' link="pageNo=%d"}
+	
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtonsTop'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
 </div>
 
 {hascontent}
@@ -52,6 +62,7 @@
 									{foreach from=$notification[buttons] item=button}
 										<li class="button small" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
 									{/foreach}
+									{event name='buttons'}
 								</ul>
 							</div>
 						</div>
@@ -63,6 +74,16 @@
 	
 	<div class="contentNavigation">
 		{@$pagesLinks}
+		
+		{hascontent}
+			<nav>
+				<ul>
+					{content}
+						{event name='contentNavigationButtonsBottom'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
 	</div>
 {hascontentelse}
 	<p class="info">{lang}wcf.user.notification.noNotifications{/lang}</p>

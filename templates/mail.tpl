@@ -21,6 +21,18 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+	{hascontent}
+		<nav>
+			<ul>
+				{content}
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	{/hascontent}
+</div>
+
 <form method="post" action="{link controller='Mail' object=$user}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -65,6 +77,8 @@
 					</dd>
 				</dl>
 			{/if}
+			
+			{event name='informationFields'}
 		</fieldset>
 		
 		<fieldset>
@@ -84,7 +98,11 @@
 					{/if}
 				</dd>
 			</dl>
+			
+			{event name='messageFields'}
 		</fieldset>
+		
+		{event name='fieldsets'}
 		
 		{if $useCaptcha}
 			{include file='recaptcha'}
