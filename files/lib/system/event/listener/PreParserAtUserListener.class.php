@@ -3,6 +3,7 @@ namespace wcf\system\event\listener;
 use wcf\data\user\UserList;
 use wcf\system\event\IEventListener;
 use wcf\system\request\LinkHandler;
+use wcf\system\Callback;
 use wcf\system\Regex;
 use wcf\util\StringUtil;
 
@@ -30,27 +31,54 @@ class PreParserAtUserListener implements IEventListener {
 		
 		static $userRegex = null;
 		if ($userRegex === null) {
-			$userRegex = new Regex('(?<=^|\s)@([^,\s]*)');
+			$userRegex = new Regex("(?<=^|\s)@([^',\s][^,\s]{2,}|'(?:''|[^'])*')");
 		}
 		
 		$userRegex->match($eventObj->text, true);
 		$matches = $userRegex->getMatches();
 		
 		if (!empty($matches[1])) {
-			// remove duplicates
-			$matches[1] = array_unique($matches[1]);
+			$usernames = array();
+			foreach ($matches[1] as $match) {
+				$username = self::getUsername($match);
+				if (!in_array($username, $usernames)) $usernames[] = $username; 
+			}
 			
-			// fetch users
-			$userList = new UserList();
-			$userList->getConditionBuilder()->add('user_table.username IN (?)', array($matches[1]));
-			$userList->readObjects();
-			foreach ($userList as $user) {
-				$link = LinkHandler::getInstance()->getLink('User', array(
-					'object' => $user
-				));
+			if (!empty($usernames)) {
+				// fetch users
+				$userList = new UserList();
+				$userList->getConditionBuilder()->add('user_table.username IN (?)', array($usernames));
+				$userList->readObjects();
+				$users = array();
+				foreach ($userList as $user) {
+					$users[StringUtil::toLowerCase($user->username)] = $user; 
+				}
 				
-				$eventObj->text = StringUtil::replace('@'.$user->username, "[url='".$link."']@".$user->username.'[/url]', $eventObj->text);
+				$eventObj->text = $userRegex->replace($eventObj->text, new Callback(function ($matches) use ($users) {
+					$username = PreParserAtUserListener::getUsername($matches[1]);
+					
+					if (isset($users[$username])) {
+						$link = LinkHandler::getInstance()->getLink('User', array(
+							'object' => $users[$username]
+						));
+						return "[url='".$link."']@".$users[$username]->username.'[/url]';
+					}
+					
+					return $matches[0];
+				}));
 			}
 		}
+	}
+	
+	public static function getUsername($match) {
+		// remove escaped single quotation mark
+		$match = StringUtil::replace("''", "'", $match);
+		
+		// remove single quotation marks
+		if ($match{0} == "'") {
+			$match = StringUtil::substring($match, 1, -1);
+		}
+		
+		return StringUtil::toLowerCase($match);
 	}
 }
