@@ -67,6 +67,8 @@
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Aktivitätspunkte]]></item>
 		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Aktivitätspunkte neu vergeben]]></item>
 		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Punkte pro Aktivität aktualisieren]]></item>
+		<item name="wcf.acp.user.delete"><![CDATA[Benutzer löschen]]></item>
+		<item name="wcf.acp.user.general"><![CDATA[Benutzer]]></item>
 		<item name="wcf.acp.user.rank.add"><![CDATA[Benutzerrang hinzufügen]]></item>
 		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[CSS-Klassen]]></item>
 		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[Sie können aus den vorgegebenen Darstellungen wählen oder eine eigene Darstellung durch Angabe einer <abbr title="Cascading Style Sheets">CSS</abbr>-Klasse nutzen.]]></item>
@@ -518,9 +520,11 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Kann Online-Status sehen]]></item>
 		<item name="wcf.user.option.canViewProfile"><![CDATA[Kann Benutzerprofil sehen]]></item>
 		
+		<item name="wcf.user.option.category.profile"><![CDATA[Persönliche Daten]]></item>
 		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[Über mich]]></item>
 		<item name="wcf.user.option.category.profile.contact"><![CDATA[Kontaktmöglichkeiten]]></item>
 		<item name="wcf.user.option.category.profile.personal"><![CDATA[Persönliche Informationen]]></item>
+		<item name="wcf.user.option.category.settings"><![CDATA[Einstellungen]]></item>
 		<item name="wcf.user.option.category.settings.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Datum &amp; Zeit]]></item>
 		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Anzeige]]></item>

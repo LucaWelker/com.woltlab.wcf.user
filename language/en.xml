@@ -67,6 +67,8 @@
 		<item name="wcf.acp.user.activityPoint.option"><![CDATA[Activity Points]]></item>
 		<item name="wcf.acp.user.activityPoint.updateCache"><![CDATA[Update Activity Point Cache]]></item>
 		<item name="wcf.acp.user.activityPoint.updateEvents"><![CDATA[Update Points Per Activity]]></item>
+		<item name="wcf.acp.user.delete"><![CDATA[Delete user(s)]]></item>
+		<item name="wcf.acp.user.general"><![CDATA[User]]></item>
 		<item name="wcf.acp.user.rank.add"><![CDATA[Add User Rank]]></item>
 		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[CSS Class Name]]></item>
 		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[You can select a predefined appearance or provide an own <abbr title="Cascading Style Sheets">CSS</abbr> class name.]]></item>
@@ -484,9 +486,11 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.option.canViewOnlineStatus"><![CDATA[Can View My Online Status]]></item>
 		<item name="wcf.user.option.canViewProfile"><![CDATA[Can View My Profile]]></item>
 		
+		<item name="wcf.user.option.category.profile"><![CDATA[Personal Data]]></item>
 		<item name="wcf.user.option.category.profile.aboutMe"><![CDATA[About Me]]></item>
 		<item name="wcf.user.option.category.profile.contact"><![CDATA[Contact Options]]></item>
 		<item name="wcf.user.option.category.profile.personal"><![CDATA[Personal Details]]></item>
+		<item name="wcf.user.option.category.settings"><![CDATA[Settings]]></item>
 		<item name="wcf.user.option.category.settings.general"><![CDATA[General]]></item>
 		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Date &amp; Time]]></item>
 		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Appearance]]></item>
