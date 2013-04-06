@@ -435,8 +435,9 @@ You can safely ignore this email if you did not register with the website: {@PAG
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.button.confirmed"><![CDATA[OK]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "No Notifications" } else if (data.returnValues.count == 1) { "1 Notification" } else { data.returnValues.count + " Notifications" }]]></item>
-		<item name="wcf.user.notification.follow.output"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> follows you.]]></item>
-		<item name="wcf.user.notification.follow.shortOutput"><![CDATA[New Follower]]></item>
+		<item name="wcf.user.notification.follow.message"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> follows you.]]></item>
+		<item name="wcf.user.notification.follow.mail"><![CDATA[{@$author->username} follows you.]]></item>
+		<item name="wcf.user.notification.follow.title"><![CDATA[New Follower]]></item>
 		<item name="wcf.user.notification.mail.disabled"><![CDATA[Email notification has been disabled.]]></item>
 		<item name="wcf.user.notification.mail.footer"><![CDATA[You can manage your notification settings for {@PAGE_TITLE|language} on the page below:
 {link controller='NotificationSettings' encode=false}{/link} 

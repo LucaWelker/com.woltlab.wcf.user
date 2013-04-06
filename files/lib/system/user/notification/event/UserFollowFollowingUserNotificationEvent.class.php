@@ -1,7 +1,6 @@
 <?php
 namespace wcf\system\user\notification\event;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
-use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
@@ -19,14 +18,21 @@ class UserFollowFollowingUserNotificationEvent extends AbstractUserNotificationE
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
 	 */
 	public function getTitle() {
-		return WCF::getLanguage()->get('wcf.user.notification.follow.shortOutput');
+		return $this->getLanguage()->get('wcf.user.notification.follow.title');
 	}
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
 	 */
 	public function getMessage() {
-		return WCF::getLanguage()->getDynamicVariable('wcf.user.notification.follow.output', array('author' => $this->author));
+		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.follow.message', array('author' => $this->author));
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailMessage()
+	 */
+	public function getEmailMessage() {
+		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.follow.mail', array('author' => $this->author));
 	}
 	
 	/**

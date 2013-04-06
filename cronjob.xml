@@ -28,5 +28,19 @@
 			<canbeedited>1</canbeedited>
 			<canbedisabled>1</canbedisabled>
 		</cronjob>
+		
+		<cronjob>
+			<classname>wcf\system\cronjob\DailyMailNotificationCronjob</classname>
+			<description><![CDATA[Sends daily mail notifications]]></description>
+			<description language="de"><![CDATA[Versendet tägliche E-Mail-Benachrichtigungen]]></description>
+			<startminute>*/30</startminute>
+			<starthour>*</starthour>
+			<startdom>*</startdom>
+			<startmonth>*</startmonth>
+			<startdow>*</startdow>
+			<active>1</active>
+			<canbeedited>1</canbeedited>
+			<canbedisabled>1</canbedisabled>
+		</cronjob>
 	</import>
 </data>

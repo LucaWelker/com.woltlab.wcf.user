@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\user\notification\event;
+use wcf\data\language\Language;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\UserProfile;
 use wcf\data\IDatabaseObjectProcessor;
@@ -95,4 +96,11 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	 * @param	array<mixed>							$additionalData
 	 */
 	public function setObject(UserNotification $notification, IUserNotificationObject $object, UserProfile $author, array $additionalData = array());
+	
+	/**
+	 * Sets the language for the event
+	 * 
+	 * @param	wcf\data\language\Language	$language
+	 */
+	public function setLanguage(Language $language);
 }

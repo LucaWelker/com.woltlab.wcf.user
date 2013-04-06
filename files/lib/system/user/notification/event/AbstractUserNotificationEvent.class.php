@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\user\notification\event;
+use wcf\data\language\Language;
 use wcf\data\user\notification\UserNotification;
 use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectDecorator;
@@ -52,6 +53,12 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	 * @var	array<array>
 	 */
 	protected $actions = array();
+	
+	/**
+	 * language object
+	 * @var wcf\data\language\Language
+	 */
+	protected $language = null;
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getActions()
@@ -138,5 +145,22 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 		));
 		
 		return WCF::getTPL()->fetch('userNotificationDetails');
+	}
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::setLanguage()
+	 */
+	public function setLanguage(Language $language) {
+		$this->language = $language;
+	}
+	
+	/**
+	 * Gets the language of this event.
+	 * 
+	 * @return	wcf\data\language\Language
+	 */
+	public function getLanguage() {
+		if ($this->language !== null) return $this->language;
+		return WCF::getLanguage();
 	}
 }
