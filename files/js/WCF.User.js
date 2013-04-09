@@ -2289,10 +2289,17 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 	_dialog: null,
 	
 	/**
+	 * system notification
+	 * @var	WCF.System.Notification
+	 */
+	_notification: null,
+	
+	/**
 	 * WCF.User.ObjectWatch.Subscribe object.
 	 */
 	init: function() {
 		this._buttons = { };
+		this._notification = null;
 		
 		// initialize proxy
 		this._proxy = new WCF.Action.Proxy({
@@ -2369,6 +2376,12 @@ WCF.User.ObjectWatch.Subscribe = Class.extend({
 		}
 		else if (data.actionName === 'saveSubscription' && this._dialog.is(':visible')) {
 			this._dialog.wcfDialog('close');
+			
+			if (this._notification === null) {
+				this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success.edit'));
+			}
+			
+			this._notification.show();
 		}
 	},
 	
