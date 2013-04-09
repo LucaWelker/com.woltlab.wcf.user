@@ -2,6 +2,7 @@
 namespace wcf\form;
 use wcf\data\user\UserAction;
 use wcf\system\bbcode\MessageParser;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
@@ -25,6 +26,11 @@ class SignatureEditForm extends MessageForm {
 	 * @see	wcf\page\AbstractPage::$loginRequired
 	 */
 	public $loginRequired = true;
+	
+	/**
+	 * @see	wcf\page\AbstractPage::$neededModules
+	 */
+	public $neededModules = array('MODULE_USER_SIGNATURE');
 	
 	/**
 	 * @see	wcf\page\AbstractPage::$templateName
@@ -71,6 +77,8 @@ class SignatureEditForm extends MessageForm {
 	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
+		if (WCF::getUser()->disableSignature) throw new PermissionDeniedException();
+		
 		AbstractForm::validate();
 		
 		if (!empty($this->text)) {

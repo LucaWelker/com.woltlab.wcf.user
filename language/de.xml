@@ -238,6 +238,7 @@ Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Admini
 		<item name="wcf.user.signature"><![CDATA[Signatur]]></item>
 		<item name="wcf.user.signature.edit"><![CDATA[Signatur bearbeiten]]></item>
 		<item name="wcf.user.signature.current"><![CDATA[Aktuelle Signatur]]></item>
+		<item name="wcf.user.signature.error.disabled"><![CDATA[Ihre Signatur wurde vom Administrator gesperrt{if $__wcf->user->disableSignatureReason}: {$__wcf->user->disableSignatureReason}{else}.{/if}]]></item>
 		<item name="wcf.user.activityPoint"><![CDATA[Punkte]]></item>
 		<item name="wcf.user.activityPoint.showDetails"><![CDATA[Zeige Details]]></item>
 		<item name="wcf.user.activityPoint.objects"><![CDATA[Anzahl der Objekte]]></item>

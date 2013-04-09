@@ -660,4 +660,17 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 		
 		return StringUtil::substring($this->authData, 0, StringUtil::indexOf($this->authData, ':'));
 	}
+	
+	/**
+	 * Return true if this signature is visible.
+	 * 
+	 * @return boolean
+	 */
+	public function showSignature() {
+		if (!$this->signatureCache) return false;
+		if ($this->disabledSignature) return false;
+		if (WCF::getUser()->userID && !WCF::getUser()->showSignature) return false;
+		
+		return true;
+	}
 }
