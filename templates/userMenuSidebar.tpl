@@ -19,7 +19,7 @@
 		//<![CDATA[
 		$(function() {
 			// mobile safari hover workaround
-			if ($.browser.mobile) {
+			if ($(window).width() <= 768) {
 				$('.sidebar').addClass('mobileSidebar').hover(function() { });
 			}
 		});

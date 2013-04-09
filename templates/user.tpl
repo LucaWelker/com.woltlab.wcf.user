@@ -79,7 +79,7 @@
 			{event name='javascriptInit'}
 			
 			// mobile safari hover workaround
-			if ($.browser.mobile) {
+			if ($(window).width() <= 768) {
 				$('#profileButtonContainer').hover(function() { });
 			}
 		});
