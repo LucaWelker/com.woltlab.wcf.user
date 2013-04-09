@@ -5,6 +5,7 @@ use wcf\system\user\authentication\UserAuthenticationFactory;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
+use wcf\util\UserUtil; 
 
 /**
  * Shows the user login form.
@@ -37,7 +38,12 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		parent::readFormParameters();
 		
 		if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'register') {
-			WCF::getSession()->register('__username', $this->username);
+			// if the usernamefield is an email, save it as email for the registration
+			if (UserUtil::isValidEmail($this->username)) {
+				WCF::getSession()->register('__email', $this->username);
+			} else {
+				WCF::getSession()->register('__username', $this->username);
+			}
 			WCF::getSession()->update();
 			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Register'));
 			exit;
