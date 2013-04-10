@@ -53,7 +53,6 @@ class FacebookAuthAction extends AbstractAction {
 			// validate state, validation of state is executed after fetching the access_token to invalidate 'code'
 			if (!isset($_GET['state']) || $_GET['state'] != WCF::getSession()->getVar('__facebookInit')) throw new IllegalLinkException();
 			
-			
 			parse_str($content, $data);
 			
 			try {
