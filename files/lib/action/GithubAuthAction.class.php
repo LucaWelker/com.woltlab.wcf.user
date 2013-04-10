@@ -53,6 +53,9 @@ class GithubAuthAction extends AbstractAction {
 				throw new IllegalLinkException();
 			}
 			
+			// validate state, validation of state is executed after fetching the access_token to invalidate 'code'
+			if (!isset($_GET['state']) || $_GET['state'] != WCF::getSession()->getVar('__githubInit')) throw new IllegalLinkException();
+			
 			parse_str($content, $data);
 			
 			// check whether the token is okay
@@ -152,7 +155,9 @@ class GithubAuthAction extends AbstractAction {
 		}
 		
 		// start auth by redirecting to github
-		HeaderUtil::redirect("https://github.com/login/oauth/authorize?client_id=".rawurlencode(GITHUB_PUBLIC_KEY)."&scope=".rawurlencode('user:email'));
+		$token = StringUtil::getRandomID();
+		WCF::getSession()->register('__githubInit', $token);
+		HeaderUtil::redirect("https://github.com/login/oauth/authorize?client_id=".rawurlencode(GITHUB_PUBLIC_KEY)."&scope=".rawurlencode('user:email')."&state=".$token);
 		$this->executed();
 		exit;
 	}

@@ -37,10 +37,7 @@ class FacebookAuthAction extends AbstractAction {
 		
 		$callbackURL = LinkHandler::getInstance()->getLink('FacebookAuth'); // TODO: appendsession Y/N?
 		// user accepted the connection
-		if (isset($_GET['code']) && isset($_GET['state'])) {
-			// validate state
-			if ($_GET['state'] != WCF::getSession()->getVar('__facebookInit')) throw new IllegalLinkException();
-			
+		if (isset($_GET['code'])) {
 			try {
 				// fetch access_token
 				$request = new HTTPRequest('https://graph.facebook.com/oauth/access_token?client_id='.FACEBOOK_PUBLIC_KEY.'&redirect_uri='.rawurlencode($callbackURL).'&client_secret='.FACEBOOK_PRIVATE_KEY.'&code='.rawurlencode($_GET['code']));
@@ -52,6 +49,10 @@ class FacebookAuthAction extends AbstractAction {
 			catch (SystemException $e) {
 				throw new IllegalLinkException();
 			}
+			
+			// validate state, validation of state is executed after fetching the access_token to invalidate 'code'
+			if (!isset($_GET['state']) || $_GET['state'] != WCF::getSession()->getVar('__facebookInit')) throw new IllegalLinkException();
+			
 			
 			parse_str($content, $data);
 			

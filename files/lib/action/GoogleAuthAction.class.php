@@ -39,10 +39,7 @@ class GoogleAuthAction extends AbstractAction {
 			'appendSession' => false
 		));
 		// user accepted the connection
-		if (isset($_GET['code']) && isset($_GET['state'])) {
-			// validate state
-			if ($_GET['state'] != WCF::getSession()->getVar('__googleInit')) throw new IllegalLinkException();
-			
+		if (isset($_GET['code'])) {
 			try {
 				// fetch access_token
 				$request = new HTTPRequest('https://accounts.google.com/o/oauth2/token', array(), array(
@@ -60,6 +57,10 @@ class GoogleAuthAction extends AbstractAction {
 			catch (SystemException $e) {
 				throw new IllegalLinkException();
 			}
+			
+			// validate state, validation of state is executed after fetching the access_token to invalidate 'code'
+			if (!isset($_GET['state']) || $_GET['state'] != WCF::getSession()->getVar('__googleInit')) throw new IllegalLinkException();
+			
 			
 			$data = JSON::decode($content);
 			
