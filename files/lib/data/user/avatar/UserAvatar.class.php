@@ -56,7 +56,7 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	 */
 	public function getURL($size = null) {
 		if ($size !== null) {
-			if ($size > $this->width || $size > $this->height) $size = null;
+			if ($size >= $this->width || $size >= $this->height) $size = null;
 		}
 		
 		return WCF::getPath() . 'images/avatars/' . $this->getFilename($size);
