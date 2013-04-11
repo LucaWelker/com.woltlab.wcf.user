@@ -121,7 +121,8 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		UserObjectWatchEditor::create(array(
 			'userID' => WCF::getUser()->userID,
 			'objectID' => intval($this->parameters['data']['objectID']),
-			'objectTypeID' => $objectType->objectTypeID
+			'objectTypeID' => $objectType->objectTypeID,
+			'notification' => (!empty($this->parameters['enableNotification']) ? 1 : 0)
 		));
 	
 		// reset user storage

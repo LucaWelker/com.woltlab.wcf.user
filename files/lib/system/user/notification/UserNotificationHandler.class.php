@@ -478,4 +478,27 @@ class UserNotificationHandler extends SingletonFactory {
 			UserStorageHandler::getInstance()->resetAll('userNotificationCount');
 		}
 	}
+	
+	/**
+	 * Gets user's notification setting for given event.
+	 *
+	 * @param	string		$objectType
+	 * @param	string		$eventName
+	 * @return	mixed
+	 */
+	public function getEventSetting($objectType, $eventName) {
+		// get event
+		$event = $this->getEvent($objectType, $eventName);
+		
+		// get setting
+		$sql = "SELECT	mailNotificationType
+			FROM	wcf".WCF_N."_user_notification_event_to_user
+			WHERE	eventID = ?
+				AND userID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($event->eventID, WCF::getUser()->userID));
+		$row = $statement->fetchArray();
+		if ($row === false) return false;
+		return $row['mailNotificationType'];
+	}
 }
