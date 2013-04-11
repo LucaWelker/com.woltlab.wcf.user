@@ -111,6 +111,12 @@ WCF.User.QuickLogin = {
 	_dialog: null,
 	
 	/**
+	 * login message container
+	 * @var	jQuery
+	 */
+	_loginMessage: null,
+	
+	/**
 	 * Initializes the quick login box
 	 */
 	init: function() {
@@ -123,7 +129,17 @@ WCF.User.QuickLogin = {
 	 * @param	string	message
 	 */
 	show: function(message) {
-		$('#loginMessage').show().text(message);
+		if (message) {
+			if (this._loginMessage === null) {
+				this._loginMessage = $('<p class="info" />').hide().prependTo($('#loginForm > form'));
+			}
+			
+			this._loginMessage.show().text(message);
+		}
+		else if (this._loginMessage !== null) {
+			this._loginMessage.hide();
+		}
+		
 		this._render();
 	},
 	
@@ -139,10 +155,7 @@ WCF.User.QuickLogin = {
 		
 		if (this._dialog === null) {
 			this._dialog = $('#loginForm').wcfDialog({
-				title: WCF.Language.get('wcf.user.login'),
-				onClose: function() {
-					$('#loginMessage').empty().hide();
-				}
+				title: WCF.Language.get('wcf.user.login')
 			});
 			this._dialog.find('#username').focus();
 		}

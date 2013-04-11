@@ -71,8 +71,6 @@
 				{/capture}
 				
 				<form method="post" action="{link controller='Login'}{/link}">
-					<p class="info invisible" id="loginMessage" />
-					
 					<fieldset>
 						{if $__3rdPartyButtons|trim}<legend>{lang}wcf.user.login{/lang}</legend>{/if}
 						
