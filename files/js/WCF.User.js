@@ -7,17 +7,11 @@
  */
 
 /**
- * Quick login box
+ * User login
  * 
  * @param	boolean		isQuickLogin
  */
 WCF.User.Login = Class.extend({
-	/**
-	 * dialog overlay
-	 * @var	jQuery
-	 */
-	_dialog: null,
-	
 	/**
 	 * login button
 	 * @var	jQuery
@@ -49,7 +43,7 @@ WCF.User.Login = Class.extend({
 	_useCookiesContainer: null,
 	
 	/**
-	 * Initializes the quick login box
+	 * Initializes the user login
 	 * 
 	 * @param	boolean		isQuickLogin
 	 */
@@ -64,20 +58,7 @@ WCF.User.Login = Class.extend({
 		$loginForm.find('input[name=action]').change($.proxy(this._change, this));
 		
 		if (isQuickLogin) {
-			var self = this;
-			$('.loginLink').click(function() {
-				if (self._dialog === null) {
-					self._dialog = $('#loginForm').wcfDialog({
-						title: WCF.Language.get('wcf.user.login')
-					});
-					self._dialog.find('#username').focus();
-				}
-				else {
-					self._dialog.wcfDialog('open');
-				}
-				
-				return false;
-			});
+			WCF.User.QuickLogin.init();
 		}
 	},
 	
@@ -118,6 +99,58 @@ WCF.User.Login = Class.extend({
 		this._loginSubmitButton.val(buttonTitle);
 	}
 });
+
+/**
+ * Quick login box
+ */
+WCF.User.QuickLogin = {
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
+	/**
+	 * Initializes the quick login box
+	 */
+	init: function() {
+		$('.loginLink').click($.proxy(this._render, this));
+	},
+	
+	/**
+	 * Displays the quick login box with a info message
+	 * 
+	 * @param	string	message
+	 */
+	show: function(message) {
+		$('#loginMessage').show().text(message);
+		this._render();
+	},
+	
+	/**
+	 * Renders the dialog
+	 * 
+	 * @param	jQuery.Event	event
+	 */
+	_render: function(event) {
+		if (event !== undefined) {
+			event.preventDefault();
+		}
+		
+		if (this._dialog === null) {
+			this._dialog = $('#loginForm').wcfDialog({
+				title: WCF.Language.get('wcf.user.login'),
+				onClose: function() {
+					$('#loginMessage').empty().hide();
+				}
+			});
+			this._dialog.find('#username').focus();
+		}
+		else {
+			this._dialog.wcfDialog('open');
+		}
+	}
+};
 
 /**
  * UserProfile namespace
