@@ -31,10 +31,25 @@
 
 /* user information */
 .userInformation {
-	> hgroup > h2,
 	> .inlineDataList,
 	> .dataList {
 		font-size: @wcfSmallFontSize;
+	}
+	
+	> .dataList {
+		margin-top: 0;
+	}
+	
+	> .inlineDataList {
+		margin-top: @wcfGapSmall;
+		
+		~ .inlineDataList {
+			margin-top: 0;
+		}
+	}
+	
+	> .containerHeadline + .inlineDataList {
+		margin-top: 0;
 	}
 }
 

@@ -105,8 +105,9 @@
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
 							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1> 
-							<h2>{@$sessionData}</h2>
 						</hgroup>
+						
+						{@$sessionData}
 						
 						{include file='userInformationButtons'}
 					</div>
@@ -126,8 +127,9 @@
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
 							<h1><a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Robot</a></h1> 
-							<h2>{@$sessionData}</h2>
 						</hgroup>
+						
+						{@$sessionData}
 					</div>
 				</div>
 			</li>
@@ -145,8 +147,9 @@
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
 							<h1>{lang}wcf.user.guest{/lang}</h1> 
-							<h2>{@$sessionData}</h2>
 						</hgroup>
+						
+						{@$sessionData}
 					</div>
 				</div>
 			</li>
