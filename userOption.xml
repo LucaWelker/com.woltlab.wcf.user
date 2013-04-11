@@ -27,12 +27,16 @@
 				<showorder>1</showorder>
 				<parent>settings</parent>
 			</category>
-			<category name="settings.general.interface">
+			<category name="settings.general.appearance">
 				<showorder>1</showorder>
 				<parent>settings.general</parent>
 			</category>
-			<category name="settings.general.date">
+			<category name="settings.general.interface">
 				<showorder>2</showorder>
+				<parent>settings.general</parent>
+			</category>
+			<category name="settings.general.date">
+				<showorder>3</showorder>
 				<parent>settings.general</parent>
 			</category>
 			
@@ -137,7 +141,7 @@
 				<defaultvalue>Europe/London</defaultvalue>
 			</option>
 			<option name="showSignature">
-				<categoryname>settings.general.interface</categoryname>
+				<categoryname>settings.general.appearance</categoryname>
 				<optiontype>boolean</optiontype>
 				<editable>3</editable>
 				<defaultvalue>1</defaultvalue>

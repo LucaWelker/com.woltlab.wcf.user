@@ -536,7 +536,8 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.option.category.settings"><![CDATA[Einstellungen]]></item>
 		<item name="wcf.user.option.category.settings.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.user.option.category.settings.general.date"><![CDATA[Datum &amp; Zeit]]></item>
-		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Anzeige]]></item>
+		<item name="wcf.user.option.category.settings.general.appearance"><![CDATA[Anzeige]]></item>
+		<item name="wcf.user.option.category.settings.general.interface"><![CDATA[Bedienung]]></item>
 		<item name="wcf.user.option.category.settings.privacy"><![CDATA[Privatsphäre]]></item>
 		<item name="wcf.user.option.category.settings.privacy.content"><![CDATA[Inhalt]]></item>
 		<item name="wcf.user.option.category.settings.privacy.messaging"><![CDATA[Kommunikation]]></item>
