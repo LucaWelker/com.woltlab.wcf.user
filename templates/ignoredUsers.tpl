@@ -41,29 +41,27 @@
 	{/hascontent}
 </div>
 
-{hascontent}
+{if $objects|count}
 	<div class="container marginTop">
 		<ol class="containerList doubleColumned userList">
-			{content}
-				{foreach from=$objects item=user}
-					<li class="jsIgnoredUser">
-						<div class="box48">
-							<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
-								
-							<div class="details userInformation">
-								{include file='userInformationHeadline'}
-								
-								<ul class="buttonList jsOnly">
-									<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unignore{/lang}" data-object-id="{@$user->ignoreID}"></span></li>
-									{event name='userButtons'}
-								</ul>
-								
-								{include file='userInformationStatistics'}
-							</div>
+			{foreach from=$objects item=user}
+				<li class="jsIgnoredUser">
+					<div class="box48">
+						<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
+							
+						<div class="details userInformation">
+							{include file='userInformationHeadline'}
+							
+							<ul class="buttonList jsOnly">
+								<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unignore{/lang}" data-object-id="{@$user->ignoreID}"></span></li>
+								{event name='userButtons'}
+							</ul>
+							
+							{include file='userInformationStatistics'}
 						</div>
-					</li>
-				{/foreach}
-			{/content}
+					</div>
+				</li>
+			{/foreach}
 		</ol>
 	</div>
 	
@@ -80,9 +78,9 @@
 			</nav>
 		{/hascontent}
 	</div>
-{hascontentelse}
+{else}
 	<p class="info">{lang}wcf.user.ignoredUsers.noUsers{/lang}</p>
-{/hascontent}
+{/if}
 
 {include file='footer'}
 
