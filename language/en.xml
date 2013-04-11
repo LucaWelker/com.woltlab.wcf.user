@@ -520,7 +520,7 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.mail.information"><![CDATA[Details]]></item>
 		<item name="wcf.user.mail.mail"><![CDATA[Dear {@$recipient->username},
 
-"{@$username}" send you a message on "{@PAGE_TITLE|language}":
+"{@$username}" sent you a message on "{@PAGE_TITLE|language}":
 {@$message}]]></item>
 		<item name="wcf.user.mail.mail.subject"><![CDATA[Message From {@$username}: {@$subject}]]></item>
 		<item name="wcf.user.mail.message"><![CDATA[Message]]></item>
