@@ -202,7 +202,7 @@ Sie können Ihr Kennwort unter folgender Adresse jederzeit ändern:
 		<item name="wcf.user.changeUsername.success"><![CDATA[Ihr Benutzername wurde erfolgreich geändert.]]></item>
 		<item name="wcf.user.changeEmail.success"><![CDATA[Ihre E-Mail-Adresse wurde erfolgreich geändert.]]></item>
 		<item name="wcf.user.changeEmail.needReactivation"><![CDATA[Ihre neue E-Mail-Adresse muss noch aktiviert werden. Dazu wurde eine E-Mail mit einem Aktivierungslink an die neue Adresse gesandt. Sie müssen diesen Aktivierungslink aufrufen, um die neue E-Mail-Adresse zu aktivieren.]]></item>
-		<item name="wcf.user.changeEmail.needReactivation.mail"><![CDATA[Hallo {@$username}:
+		<item name="wcf.user.changeEmail.needReactivation.mail"><![CDATA[Hallo {@$username},
 
 Sie haben Ihre E-Mail-Adresse auf der Website: {@PAGE_TITLE|language} geändert. Zum Abschließen dieser Änderung müssen Sie einmalig die Gültigkeit Ihrer neuen E-Mail-Adresse bestätigen.
 
@@ -299,9 +299,9 @@ Sie erreichen das Benutzerprofil des neuen Benutzers, indem Sie folgenden Link a
 		<item name="wcf.user.register.notification.mail.subject"><![CDATA[Neue Benutzeranmeldung auf der Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.register.error.disabled"><![CDATA[Die Registrierung ist momentan deaktiviert.]]></item>
 		<item name="wcf.user.register.success"><![CDATA[Vielen Dank für die Registrierung, {$user->username}. Ihre Registrierung ist hiermit vollständig abgeschlossen.]]></item>
-		<item name="wcf.user.register.needActivation.mail"><![CDATA[Hallo {@$user->username}!
+		<item name="wcf.user.register.needActivation.mail"><![CDATA[Hallo {@$user->username},
 
-Vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}. 
+vielen Dank für Ihre Registrierung auf der Website: {@PAGE_TITLE|language}. 
 Bevor wir Ihre Registrierung aktivieren können, müssen Sie einmalig die Gültigkeit Ihrer E-Mail-Adresse bestätigen.
 
 Bitte bestätigen Sie die Gültigkeit Ihrer E-Mail-Adresse, indem Sie folgenden Link aufrufen:
@@ -481,6 +481,7 @@ Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben,
 
 Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, können Sie folgenden Link aufrufen, um die Benachrichtigung abzuschalten:
 {link controller='NotificationDisable' encode=false}eventID={@$notification->eventID}&userID={@$user->userID}&token={@$token}{/link}]]></item>
+		<item name="wcf.user.notification.mail.header"><![CDATA[Hallo {@$user->username},]]></item>
 		<item name="wcf.user.notification.mail.subject"><![CDATA[Neue Benachrichtigung: {@$title}]]></item>
 		<item name="wcf.user.notification.mail.daily.subject"><![CDATA[{if $count == 1}Neue Benachrichtigung{else}{#$count} neue Benachrichtigungen{/if}]]></item>
 		<item name="wcf.user.notification.mail.daily.footer"><![CDATA[Sie können die Einstellungen für Ihre Benachrichtigungen auf {@PAGE_TITLE|language} unter folgender URL detailliert konfigurieren:

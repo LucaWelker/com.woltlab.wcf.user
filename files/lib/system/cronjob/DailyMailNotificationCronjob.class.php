@@ -128,7 +128,11 @@ class DailyMailNotificationCronjob extends AbstractCronjob {
 			if (!isset($users[$userID])) continue;
 			$user = $users[$userID];
 			
-			$message = '';
+			// add mail header
+			$message = $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.header', array(
+				'user' => $user
+			))."\n\n";
+		
 			foreach ($events as $event) {
 				$className = $eventObjects[$event['eventID']]->className;
 				$class = new $className($eventObjects[$event['eventID']]);

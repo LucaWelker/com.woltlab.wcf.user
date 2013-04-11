@@ -406,8 +406,16 @@ class UserNotificationHandler extends SingletonFactory {
 	 * @param	wcf\system\user\notification\event\IUserNotificationEvent	$event
 	 */
 	public function sendInstantMailNotification(UserNotification $notification, User $user, IUserNotificationEvent $event) {
+		// recipient's language
+		$event->setLanguage($user->getLanguage());
+		
+		// add mail header
+		$message = $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.header', array(
+			'user' => $user
+		))."\n\n";
+		
 		// get message
-		$message = $event->getEmailMessage();
+		$message .= $event->getEmailMessage();
 		
 		// append notification mail footer
 		$token = $user->notificationMailToken;

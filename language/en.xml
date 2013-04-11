@@ -307,9 +307,9 @@ Open the link below to access the user profile:
 		<item name="wcf.user.register.error.disabled"><![CDATA[Registration is currently disabled.]]></item>
 		<item name="wcf.user.register.success"><![CDATA[Thank you for registering, {$user->username}.<br />
 Your registration is now completed.]]></item>
-		<item name="wcf.user.register.needActivation.mail"><![CDATA[Dear {@$user->username}!
+		<item name="wcf.user.register.needActivation.mail"><![CDATA[Dear {@$user->username},
 
-Thank you for registering on our website: {@PAGE_TITLE|language}. 
+thank you for registering on our website: {@PAGE_TITLE|language}. 
 Please validate your email address to complete your registration.
 
 Open the link below:
@@ -447,6 +447,7 @@ You can safely ignore this email if you did not register with the website: {@PAG
 
 If you do not want to receive further email notifications for this event, you can quickly disable it by opening the link below:
 {link controller='NotificationDisable' encode=false}eventID={@$notification->eventID}&userID={@$user->userID}&token={@$token}{/link}]]></item>
+		<item name="wcf.user.notification.mail.header"><![CDATA[Dear {@$user->username},]]></item>
 		<item name="wcf.user.notification.mail.subject"><![CDATA[New Notification: {@$title}]]></item>
 		<item name="wcf.user.notification.mail.daily.subject"><![CDATA[{if $count == 1}New Notification{else}{#$count} New Notifications{/if}]]></item>
 		<item name="wcf.user.notification.mail.daily.footer"><![CDATA[You can manage your notification settings for {@PAGE_TITLE|language} on the page below:
