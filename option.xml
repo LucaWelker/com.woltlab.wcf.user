@@ -24,9 +24,6 @@
 				<category name="user.list.online">
 					<parent>user.list</parent>
 				</category>
-				<!-- <category name="user.list.team"> @todo
-					<parent>user.list</parent>
-				</category>-->
 			
 			<category name="user.register">
 				<parent>user</parent>
