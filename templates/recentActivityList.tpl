@@ -46,23 +46,29 @@
 	{/hascontent}
 </div>
 
-<div class="container marginTop">
-	<ul id="recentActivities" class="containerList recentActivityList" data-last-event-time="{@$lastEventTime}">
-		{include file='recentActivityListItem'}
-	</ul>
-</div>
+{if $eventList|count}
+	<div class="container marginTop">
+		<ul id="recentActivities" class="containerList recentActivityList" data-last-event-time="{@$lastEventTime}">
+			{include file='recentActivityListItem'}
+		</ul>
+	</div>
+	
+	<div class="contentNavigation">
+		{hascontent}
+			<nav>
+				<ul>
+					{content}
+						{event name='contentNavigationButtonsBottom'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
+	</div>
+{else}
+	<p class="info">{lang}wcf.user.recentActivity.noEntries{/lang}</p>
+{/if}
 
-<div class="contentNavigation">
-	{hascontent}
-		<nav>
-			<ul>
-				{content}
-					{event name='contentNavigationButtonsBottom'}
-				{/content}
-			</ul>
-		</nav>
-	{/hascontent}
-</div>
+
 
 {include file='footer'}
 
