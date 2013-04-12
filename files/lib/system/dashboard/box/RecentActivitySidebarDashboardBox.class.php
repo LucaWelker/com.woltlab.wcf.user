@@ -29,10 +29,8 @@ class RecentActivitySidebarDashboardBox extends AbstractSidebarDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		// TODO: add setting
-		// TODO: use caching here?
 		$this->eventList = new ViewableUserActivityEventList();
-		$this->eventList->sqlLimit = 5;
+		$this->eventList->sqlLimit = RECENT_ACTIVITY_SIDEBAR_ITEMS;
 		$this->eventList->readObjects();
 		
 		// removes orphaned and non-accessable events

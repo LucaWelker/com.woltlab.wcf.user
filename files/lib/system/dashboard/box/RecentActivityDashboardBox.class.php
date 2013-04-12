@@ -46,7 +46,7 @@ class RecentActivityDashboardBox extends AbstractContentDashboardBox {
 			$this->filteredByFollowedUsers = true;
 			$this->eventList->getConditionBuilder()->add('user_activity_event.userID IN (?)', array(WCF::getUserProfileHandler()->getFollowingUsers()));
 		}
-		$this->eventList->sqlLimit = 10; // TODO: add setting
+		$this->eventList->sqlLimit = RECENT_ACTIVITY_ITEMS;
 		$this->eventList->readObjects();
 		$this->lastEventTime = $this->eventList->getLastEventTime();
 		

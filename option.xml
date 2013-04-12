@@ -40,9 +40,17 @@
 				<category name="dashboard.content">
 					<parent>dashboard</parent>
 				</category>
+					<category name="dashboard.content.recentActivities">
+						<parent>dashboard.content</parent>
+					</category>
+				
 				<category name="dashboard.sidebar">
 					<parent>dashboard</parent>
 				</category>
+					<category name="dashboard.sidebar.recentActivities">
+						<parent>dashboard.sidebar</parent>
+					</category>
+				
 		</categories>
 		
 		<options>
@@ -341,6 +349,20 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 				<minvalue>0</minvalue>
 			</option>
 			<!-- /user.cleanup -->
+			
+			<!-- dashboard -->
+			<option name="recent_activity_items">
+				<categoryname>dashboard.content.recentActivities</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>10</defaultvalue>
+			</option>
+			
+			<option name="recent_activity_sidebar_items">
+				<categoryname>dashboard.sidebar.recentActivities</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>5</defaultvalue>
+			</option>
+			<!-- /dashboard -->
 		</options>
 	</import>
 </data>
