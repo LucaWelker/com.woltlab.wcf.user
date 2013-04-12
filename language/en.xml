@@ -516,6 +516,10 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.option.occupation"><![CDATA[Occupation]]></item>
 		<item name="wcf.user.option.showSignature"><![CDATA[Show members signatures]]></item>
 		<item name="wcf.user.option.timezone"><![CDATA[Timezone]]></item>
+		<item name="wcf.user.option.icq"><![CDATA[ICQ]]></item>
+		<item name="wcf.user.option.skype"><![CDATA[Skype]]></item>
+		<item name="wcf.user.option.facebook"><![CDATA[Facebook]]></item>
+		<item name="wcf.user.option.twitter"><![CDATA[Twitter]]></item>
 	</category>
 	
 	<category name="wcf.user.mail">
