@@ -255,8 +255,6 @@ class RegisterForm extends UserAddForm {
 		
 		// get options
 		$saveOptions = $this->optionHandler->save();
-		
-		// TODO: Set this only when the email address is not changed (i.e. the verified email address provided by facebook / github is used)?
 		$registerVia3rdParty = false;
 		
 		$avatarURL = '';
@@ -288,7 +286,6 @@ class RegisterForm extends UserAddForm {
 				
 				if (isset($twitterData['description'])) $saveOptions[User::getUserOptionID('aboutMe')] = $twitterData['description'];
 				if (isset($twitterData['location'])) $saveOptions[User::getUserOptionID('location')] = $twitterData['location'];
-				// TODO: Check if we can fill in any profile fields
 			}
 			
 			// Facebook
@@ -321,7 +318,6 @@ class RegisterForm extends UserAddForm {
 				
 				$registerVia3rdParty = true;
 				
-				// TODO: Check if we can fill in any profile fields
 				switch ($googleData['gender']) {
 					case 'male':
 						$saveOptions[User::getUserOptionID('gender')] = UserProfile::GENDER_MALE;

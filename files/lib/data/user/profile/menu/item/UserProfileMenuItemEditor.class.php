@@ -33,8 +33,6 @@ class UserProfileMenuItemEditor extends DatabaseObjectEditor implements IEditabl
 	
 	/**
 	 * @see	wcf\data\IEditableObject::update()
-	 * 
-	 * @todo Handle language id and update related language item
 	 */
 	public function update(array $parameters = array()) {
 		if (isset($parameters['showOrder'])) {
