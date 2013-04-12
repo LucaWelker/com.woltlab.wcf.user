@@ -19,6 +19,8 @@ class FacebookUserOptionOutput implements IUserOptionOutput {
 	 * @see	wcf\system\option\user\IUserOptionOutput::getOutput()
 	 */
 	public function getOutput(User $user, UserOption $option, $value) {
+		if (empty($value)) return '';
+		
 		$url = StringUtil::encodeHTML('http://www.facebook.com/'.$value);
 		$value = StringUtil::encodeHTML($value);
 		
