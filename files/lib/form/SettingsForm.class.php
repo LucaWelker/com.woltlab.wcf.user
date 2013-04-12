@@ -1,6 +1,8 @@
 <?php
 namespace wcf\form;
+use wcf\data\user\option\category\UserOptionCategory;
 use wcf\data\user\UserAction;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\option\user\UserOptionHandler;
@@ -84,8 +86,14 @@ class SettingsForm extends AbstractForm {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if (!empty($_REQUEST['category'])) $this->category = $_REQUEST['category'];
-		// todo validate category
+		if (!empty($_REQUEST['category'])) {
+			$this->category = $_REQUEST['category'];
+			
+			// validate category
+			if (UserOptionCategory::getCategoryByName('settings.'.$this->category) === null) {
+				throw new IllegalLinkException();
+			}
+		}
 		
 		$this->optionHandler = new UserOptionHandler(false, '', 'settings.'.$this->category);
 		$this->optionHandler->setUser(WCF::getUser());
