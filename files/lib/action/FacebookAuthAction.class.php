@@ -35,7 +35,7 @@ class FacebookAuthAction extends AbstractAction {
 	public function execute() {
 		parent::execute();
 		
-		$callbackURL = LinkHandler::getInstance()->getLink('FacebookAuth'); // TODO: appendsession Y/N?
+		$callbackURL = LinkHandler::getInstance()->getLink('FacebookAuth');
 		// user accepted the connection
 		if (isset($_GET['code'])) {
 			try {

@@ -46,7 +46,6 @@ class BirthdayOptionType extends DateOptionType {
 		$dateFrom = DateUtil::getDateTimeByTimestamp(TIME_NOW)->sub(new \DateInterval('P'.($ageTo + 1).'Y'))->add(new \DateInterval('P1D'));
 		$dateTo = DateUtil::getDateTimeByTimestamp(TIME_NOW)->sub(new \DateInterval('P'.$ageFrom.'Y'));
 		
-		// @todo: check/fix postgresql support
 		$conditions->add("option_value.userOption".User::getUserOptionID('birthdayShowYear')." = ? AND option_value.userOption".$option->optionID." BETWEEN DATE(?) AND DATE(?)", array(1, $dateFrom->format('Y-m-d'), $dateTo->format('Y-m-d')));
 		return true;
 	}
