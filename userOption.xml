@@ -138,7 +138,6 @@
 				<categoryname>settings.general.date</categoryname>
 				<optiontype>timezone</optiontype>
 				<editable>3</editable>
-				<defaultvalue>Europe/London</defaultvalue>
 			</option>
 			<option name="showSignature">
 				<categoryname>settings.general.appearance</categoryname>
