@@ -135,7 +135,7 @@
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
-				<validationpattern>^([0-9](-| )?)+[0-9]$</validationpattern>
+				<validationpattern>^$|^([0-9](-| )?)+[0-9]$</validationpattern>
 				<visible>15</visible>
 				<editable>3</editable>
 			</option>
@@ -150,7 +150,7 @@
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\FacebookUserOptionOutput</outputclass>
-				<validationpattern>^[A-Za-z\d.]{5,}$</validationpattern>
+				<validationpattern>^$|^[A-Za-z\d.]{5,}$</validationpattern>
 				<searchable>1</searchable>
 				<visible>15</visible>
 				<editable>3</editable>
@@ -159,7 +159,7 @@
 				<categoryname>profile.contact</categoryname>
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\TwitterUserOptionOutput</outputclass>
-				<validationpattern>^[A-Za-z0-9_]+$</validationpattern>
+				<validationpattern>^$|^[A-Za-z0-9_]+$</validationpattern>
 				<searchable>1</searchable>
 				<visible>15</visible>
 				<editable>3</editable>
