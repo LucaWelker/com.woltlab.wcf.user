@@ -138,6 +138,9 @@ class RegisterNewActivationCodeForm extends AbstractForm {
 		if (!empty($this->email)) $parameters['email'] = $this->email;
 		$userEditor->update($parameters);
 		
+		// reload user to reflect changes
+		$this->user = new User($this->user->userID);
+		
 		// send activation mail
 		$mail = new Mail(array($this->user->username => (!empty($this->email) ? $this->email : $this->user->email)), WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.register.needActivation.mail', array('user' => $this->user)));
 		$mail->send();
