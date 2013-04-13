@@ -67,7 +67,7 @@ class UserAddFormUserTitleListener implements IEventListener {
 	 * Handles the readFormParameters event.
 	 */
 	protected function readFormParameters() {
-		if (isset($_POST['userTitle'])) $this->userTitle = intval($_POST['userTitle']);
+		if (isset($_POST['userTitle'])) $this->userTitle = $_POST['userTitle'];
 	}
 	
 	/**
