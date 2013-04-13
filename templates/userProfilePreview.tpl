@@ -25,7 +25,6 @@
 	<div class="userInformation">
 		{include file='userInformation'}
 		
-		{*TODO: show additional fields*}
 		{hascontent}
 			<dl class="plain dataList userFields">
 				{content}
@@ -37,6 +36,7 @@
 						<dt>{lang}wcf.user.option.hobbies{/lang}</dt>
 						<dd>{$user->hobbies}</dd>
 					{/if}
+					{include file='userFields'}
 				{/content}
 			</dl>
 		{/hascontent}
