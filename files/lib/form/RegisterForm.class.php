@@ -298,7 +298,11 @@ class RegisterForm extends UserAddForm {
 				$registerVia3rdParty = true;
 				
 				$saveOptions[User::getUserOptionID('gender')] = ($facebookData['gender'] == 'male' ? UserProfile::GENDER_MALE : UserProfile::GENDER_FEMALE);
-				if (isset($facebookData['birthday'])) $saveOptions[User::getUserOptionID('birthday')] = implode('-', array_reverse(explode('/', $facebookData['birthday'])));
+				
+				if (isset($facebookData['birthday'])) {
+					list($month, $day, $year) = explode('/', $facebookData['birthday']);
+					$saveOptions[User::getUserOptionID('birthday')] = $year.'-'.$month.'-'.$day;
+				}
 				if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
 				if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
 				if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
