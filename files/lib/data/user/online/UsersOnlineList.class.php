@@ -20,7 +20,7 @@ class UsersOnlineList extends SessionList {
 	/**
 	 * @see	wcf\data\DatabaseObjectList::$objectClassName
 	 */
-	public $objectClassName = 'wcf\data\user\User';
+	//public $objectClassName = 'wcf\data\user\User';
 	
 	/**
 	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
@@ -57,7 +57,11 @@ class UsersOnlineList extends SessionList {
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_group user_group ON (user_group.groupID = user_table.userOnlineGroupID)";
 		
-		$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
+		//$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
+	}
+	
+	public function getDatabaseTableIndexName() {
+		return 'sessionID';
 	}
 	
 	/**
@@ -68,11 +72,12 @@ class UsersOnlineList extends SessionList {
 		
 		$objects = $this->objects;
 		$this->indexToObject = $this->objects = array();
+		
 		foreach ($objects as $object) {
-			if (self::isVisible($object->userID, $object->canViewOnlineStatus)) {
-				$object = new UserOnline($object);
-				$this->objects[$object->userID] = $object;
-				$this->indexToObject[] = $object->userID;
+			if (!$object->userID || self::isVisible($object->userID, $object->canViewOnlineStatus)) {
+				$object = new UserOnline(new User(null, null, $object));
+				$this->objects[$object->sessionID] = $object;
+				$this->indexToObject[] = $object->sessionID;
 			}
 		}
 		$this->objectIDs = $this->indexToObject;
