@@ -27,7 +27,7 @@
 		
 		{*TODO: show additional fields*}
 		{hascontent}
-			<dl class="plain dataList">
+			<dl class="plain dataList userFields">
 				{content}
 					{if $user->occupation}
 						<dt>{lang}wcf.user.option.occupation{/lang}</dt>
