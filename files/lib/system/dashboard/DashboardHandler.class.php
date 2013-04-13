@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\dashboard;
+use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
 use wcf\system\cache\builder\DashboardBoxCacheBuilder;
@@ -116,7 +117,7 @@ class DashboardHandler extends SingletonFactory {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("boxName IN (?)", array(array_keys($enableBoxNames)));
 			
-			$sql = "SELECT	boxID, boxName
+			$sql = "SELECT	boxID, boxName, boxType
 				FROM	wcf".WCF_N."_dashboard_box
 				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -148,7 +149,7 @@ class DashboardHandler extends SingletonFactory {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("boxName IN (?)", array(array_keys($enableBoxNames)));
 			
-			$sql = "SELECT	boxID, boxName
+			$sql = "SELECT	boxID, boxName, boxType
 				FROM	wcf".WCF_N."_dashboard_box
 				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -157,30 +158,35 @@ class DashboardHandler extends SingletonFactory {
 		
 		$boxes = array();
 		while ($row = $statement->fetchArray()) {
-			$boxes[$row['boxID']] = $enableBoxNames[$row['boxName']];
+			$boxes[$row['boxID']] = new DashboardBox(null, $row);
 		}
 		
 		if (!empty($boxes)) {
-			// remove previous settings
-			$sql = "DELETE FROM	wcf".WCF_N."_dashboard_option
-				WHERE		objectTypeID = ?";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(
-				$objectTypeID
-			));
-			
-			// insert associations
+			$sql = "UPDATE		wcf".WCF_N."_dashboard_option
+				SET		showOrder = showOrder + 1
+				WHERE		objectTypeID = ?
+						AND boxID IN (SELECT boxID FROM wcf".WCF_N."_dashboard_box WHERE boxType = ?)
+						AND showOrder >= ?";
+			$updateStatement = WCF::getDB()->prepareStatement($sql);
 			$sql = "INSERT INTO	wcf".WCF_N."_dashboard_option
 						(objectTypeID, boxID, showOrder)
 				VALUES		(?, ?, ?)";
-			$statement = WCF::getDB()->prepareStatement($sql);
+			$insertStatement = WCF::getDB()->prepareStatement($sql);
 			
 			WCF::getDB()->beginTransaction();
-			foreach ($boxes as $boxID => $showOrder) {
-				$statement->execute(array(
+			foreach ($boxes as $boxID => $box) {
+				// move other boxes
+				$updateStatement->execute(array(
+					$objectTypeID,
+					$box->boxType,
+					$enableBoxNames[$box->boxName]
+				));
+			
+				// insert associations
+				$insertStatement->execute(array(
 					$objectTypeID,
 					$boxID,
-					$showOrder
+					$enableBoxNames[$box->boxName]
 				));
 			}
 			WCF::getDB()->commitTransaction();
