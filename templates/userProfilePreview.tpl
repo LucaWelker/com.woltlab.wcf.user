@@ -36,7 +36,7 @@
 						<dt>{lang}wcf.user.option.hobbies{/lang}</dt>
 						<dd>{$user->hobbies}</dd>
 					{/if}
-					{include file='userFields'}
+					{event name='userFields'}
 				{/content}
 			</dl>
 		{/hascontent}
