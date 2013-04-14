@@ -18,11 +18,6 @@ use wcf\util\StringUtil;
  */
 class UsersOnlineList extends SessionList {
 	/**
-	 * @see	wcf\data\DatabaseObjectList::$objectClassName
-	 */
-	//public $objectClassName = 'wcf\data\user\User';
-	
-	/**
 	 * @see	wcf\data\DatabaseObjectList::$sqlOrderBy
 	 */
 	public $sqlOrderBy = 'user_table.username';
@@ -58,10 +53,6 @@ class UsersOnlineList extends SessionList {
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_group user_group ON (user_group.groupID = user_table.userOnlineGroupID)";
 		
 		$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
-	}
-	
-	public function getDatabaseTableIndexName() {
-		return 'sessionID';
 	}
 	
 	/**

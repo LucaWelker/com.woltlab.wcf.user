@@ -72,6 +72,19 @@ class UsersOnlineListPage extends SortablePage {
 	}
 	
 	/**
+	 * @see	wcf\page\MultipleLinkPage::readParameters()
+	 */
+	protected function initObjectList() {
+		parent::initObjectList();
+		
+		if (!USERS_ONLINE_SHOW_ROBOTS) $this->objectList->getConditionBuilder()->add('session.spiderID = 0');
+		if (!USERS_ONLINE_SHOW_GUESTS) {
+			if (USERS_ONLINE_SHOW_ROBOTS) $this->objectList->getConditionBuilder()->add('(session.userID IS NOT NULL OR session.spiderID <> 0)');
+			else $this->objectList->getConditionBuilder()->add('session.userID IS NOT NULL');
+		}
+	}
+	
+	/**
 	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
