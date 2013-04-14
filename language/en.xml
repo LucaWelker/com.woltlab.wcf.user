@@ -405,7 +405,7 @@ You can safely ignore this email if you did not register with the website: {@PAG
 		<item name="wcf.user.3rdparty.facebook.login"><![CDATA[Facebook]]></item>
 		<item name="wcf.user.3rdparty.facebook.login.error.access_denied"><![CDATA[Access to your Facebook account has been rejected.]]></item>
 		<item name="wcf.user.3rdparty.facebook.register"><![CDATA[You’re creating an account through <span class="icon icon16 icon-facebook"></span>&nbsp;Facebook.]]></item>
-		<item name="wcf.user.3rdparty.facebook.connect"><![CDATA[Connect with your GitHub account{if $__wcf->session->getVar('__facebookUsername')} “{$__wcf->session->getVar('__facebookUsername')}”{/if}]]></item>
+		<item name="wcf.user.3rdparty.facebook.connect"><![CDATA[Connect with your Facebook account{if $__wcf->session->getVar('__facebookUsername')} “{$__wcf->session->getVar('__facebookUsername')}”{/if}]]></item>
 		<item name="wcf.user.3rdparty.facebook.connect.success"><![CDATA[Your user account has been connected with Facebook.]]></item>
 		<item name="wcf.user.3rdparty.facebook.connect.error.inuse"><![CDATA[Your Facebook account is already connected to a different user.]]></item>
 		<item name="wcf.user.3rdparty.facebook.disconnect"><![CDATA[Cancel connection with Facebook]]></item>
