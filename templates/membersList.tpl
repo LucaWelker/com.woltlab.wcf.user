@@ -18,7 +18,7 @@
 				new WCF.User.Action.Follow($('.userList > li'));
 				new WCF.User.Action.Ignore($('.userList > li'));
 				
-				new WCF.Search.User('#username', function(data) {
+				new WCF.Search.User('#searchUsername', function(data) {
 					var $link = '{link controller='User' id=2147483646 title='wcfTitlePlaceholder' encode=false}{/link}';
 					window.location = $link.replace('2147483646', data.objectID).replace('wcfTitlePlaceholder', data.label);
 				}, false, [ ], false);
@@ -34,11 +34,11 @@
 	<div class="jsOnly">
 		<form method="get" action="{if $searchID}{link controller='MembersList' id=$searchID}{/link}{else}{link controller='MembersList'}{/link}{/if}">
 			<fieldset>
-				<legend><label for="username">{lang}wcf.user.search{/lang}</label></legend>
+				<legend><label for="searchUsername">{lang}wcf.user.search{/lang}</label></legend>
 				
 				<dl>
 					<dd>
-						<input type="text" id="username" name="username" class="long" placeholder="{lang}wcf.user.username{/lang}" />
+						<input type="text" id="searchUsername" name="username" class="long" placeholder="{lang}wcf.user.username{/lang}" />
 					</dd>
 				</dl>
 			</fieldset>
