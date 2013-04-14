@@ -189,7 +189,7 @@
 1:wcf.user.access.registered
 2:wcf.user.access.following
 3:wcf.user.access.nobody]]></selectoptions>
-				<defaultvalue>0</defaultvalue>
+				<defaultvalue>2</defaultvalue>
 			</option>
 			<option name="canViewProfile">
 				<categoryname>settings.privacy.content</categoryname>
@@ -221,7 +221,7 @@
 1:wcf.user.access.registered
 2:wcf.user.access.following
 3:wcf.user.access.nobody]]></selectoptions>
-				<defaultvalue>0</defaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
 			<option name="adminCanMail">
 				<categoryname>settings.privacy.messaging</categoryname>
