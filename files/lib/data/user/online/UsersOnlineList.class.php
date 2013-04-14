@@ -57,7 +57,7 @@ class UsersOnlineList extends SessionList {
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_group user_group ON (user_group.groupID = user_table.userOnlineGroupID)";
 		
-		//$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
+		$this->getConditionBuilder()->add('session.lastActivityTime > ?', array(TIME_NOW - USER_ONLINE_TIMEOUT));
 	}
 	
 	public function getDatabaseTableIndexName() {
@@ -74,8 +74,8 @@ class UsersOnlineList extends SessionList {
 		$this->indexToObject = $this->objects = array();
 		
 		foreach ($objects as $object) {
+			$object = new UserOnline(new User(null, null, $object));
 			if (!$object->userID || self::isVisible($object->userID, $object->canViewOnlineStatus)) {
-				$object = new UserOnline(new User(null, null, $object));
 				$this->objects[$object->sessionID] = $object;
 				$this->indexToObject[] = $object->sessionID;
 			}

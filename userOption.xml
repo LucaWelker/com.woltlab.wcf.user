@@ -189,7 +189,7 @@
 1:wcf.user.access.registered
 2:wcf.user.access.following
 3:wcf.user.access.nobody]]></selectoptions>
-				<defaultvalue>2</defaultvalue>
+				<defaultvalue>0</defaultvalue>
 			</option>
 			<option name="canViewProfile">
 				<categoryname>settings.privacy.content</categoryname>
