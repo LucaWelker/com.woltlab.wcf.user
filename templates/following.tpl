@@ -20,7 +20,7 @@
 {include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline"> 
-	<hgroup >
+	<hgroup>
 		<h1>{lang}wcf.user.following{/lang} <span class="badge">{#$items}</span></h1>
 	</hgroup>
 </header>
