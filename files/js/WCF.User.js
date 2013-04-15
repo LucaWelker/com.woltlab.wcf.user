@@ -770,6 +770,9 @@ WCF.User.Profile.Editor = Class.extend({
 			return data.returnValues.template;
 		});
 		
+		// block autocomplete
+		this._tab.find('input[type=text]').attr('autocomplete', 'off');
+		
 		// bind event listener
 		this._tab.find('.formSubmit > button[data-type=save]').click($.proxy(this._save, this));
 		this._tab.find('.formSubmit > button[data-type=restore]').click($.proxy(this._restore, this));
