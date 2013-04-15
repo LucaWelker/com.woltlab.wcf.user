@@ -18,6 +18,21 @@ use wcf\util\DateUtil;
  */
 class BirthdayOptionType extends DateOptionType {
 	/**
+	 * input css class
+	 * @var	string
+	 */
+	protected $inputClass = 'birthday';
+	
+	/**
+	 * @see	wcf\system\option\IOptionType::getFormElement()
+	 */
+	public function getFormElement(Option $option, $value) {
+		if ($value == '0000-00-00') $value = '';
+		
+		return parent::getFormElement($option, $value);
+	}
+	
+	/**
 	 * @see	wcf\system\option\ISearchableUserOption::getSearchFormElement()
 	 */
 	public function getSearchFormElement(Option $option, $value) {
