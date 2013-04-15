@@ -25,6 +25,7 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 	 * Validates parameters to load recent activity entries.
 	 */
 	public function validateLoad() {
+		$this->readBoolean('filteredByFollowedUsers', true);
 		$this->readInteger('lastEventTime');
 		$this->readInteger('userID', true);
 	}
@@ -41,6 +42,9 @@ class UserActivityEventAction extends AbstractDatabaseObjectAction {
 		// profile view
 		if ($this->parameters['userID']) {
 			$eventList->getConditionBuilder()->add("user_activity_event.userID = ?", array($this->parameters['userID']));
+		}
+		else if ($this->parameters['filteredByFollowedUsers'] && count(WCF::getUserProfileHandler()->getFollowingUsers())) {
+			$eventList->getConditionBuilder()->add('user_activity_event.userID IN (?)', array(WCF::getUserProfileHandler()->getFollowingUsers()));
 		}
 		
 		$eventList->readObjects();

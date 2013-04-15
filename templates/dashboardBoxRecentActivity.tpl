@@ -19,7 +19,7 @@
 			'wcf.user.recentActivity.noMoreEntries': '{lang}wcf.user.recentActivity.noMoreEntries{/lang}'
 		});
 		
-		new WCF.User.RecentActivityLoader(null);
+		new WCF.User.RecentActivityLoader(null, {if $filteredByFollowedUsers}true{else}false{/if});
 	});
 	//]]>
 </script>
