@@ -1728,6 +1728,12 @@ WCF.User.RecentActivityLoader = Class.extend({
 	_container: null,
 	
 	/**
+	 * true if list should be filtered by followed users
+	 * @var	boolean
+	 */
+	_filteredByFollowedUsers: false,
+	
+	/**
 	 * button to load next events
 	 * @var	jQuery
 	 */
@@ -1749,9 +1755,11 @@ WCF.User.RecentActivityLoader = Class.extend({
 	 * Initializes a new RecentActivityLoader object.
 	 * 
 	 * @param	integer		userID
+	 * @param	boolean		filteredByFollowedUsers
 	 */
-	init: function(userID) {
+	init: function(userID, filteredByFollowedUsers) {
 		this._container = $('#recentActivities');
+		this._filteredByFollowedUsers = (filteredByFollowedUsers === true);
 		this._userID = userID;
 		
 		if (this._userID !== null && !this._userID) {
@@ -1778,6 +1786,9 @@ WCF.User.RecentActivityLoader = Class.extend({
 		};
 		if (this._userID) {
 			$parameters.userID = this._userID;
+		}
+		else if (this._filteredByFollowedUsers) {
+			$parameters.filteredByFollowedUsers = 1;
 		}
 		
 		this._proxy.setOption('data', {
