@@ -8,6 +8,9 @@
 				<category name="user.avatar">
 					<parent>user.profile</parent>
 				</category>
+				<category name="user.signature">
+					<parent>user.profile</parent>
+				</category>
 				<category name="user.title">
 					<parent>user.profile</parent>
 				</category>
@@ -247,6 +250,14 @@
 				<minvalue>48</minvalue>
 			</option>
 			<!-- /user.avatar -->
+			
+			<!-- user.signature -->
+			<option name="signature_max_image_height">
+				<categoryname>user.signature</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>150</defaultvalue>
+			</option>
+			<!-- /user.signature -->
 			
 			<!-- user.title -->
 			<option name="user_title_max_length">
