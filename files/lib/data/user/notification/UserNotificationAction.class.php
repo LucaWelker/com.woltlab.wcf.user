@@ -79,8 +79,9 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 		));
 		$row = $statement->fetchArray();
 		
+		// pretend it was marked as confirmed
 		if (!$row['count']) {
-			throw new UserInputException('notificationID');
+			$this->parameters['alreadyConfirmed'] = true;
 		}
 	}
 	
@@ -90,28 +91,30 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 * @return	array
 	 */
 	public function markAsConfirmed() {
-		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user
-			WHERE		notificationID = ?
-					AND userID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$this->parameters['notificationID'],
-			WCF::getUser()->userID
-		));
-		
-		// remove entirely read notifications
-		$sql = "SELECT	COUNT(*) as count
-			FROM	wcf".WCF_N."_user_notification_to_user
-			WHERE	notificationID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->parameters['notificationID']));
-		$row = $statement->fetchArray();
-		if (!$row['count']) {
-			UserNotificationEditor::deleteAll(array($this->parameters['notificationID']));
+		if (!isset($this->parameters['alreadyConfirmed'])) {
+			$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user
+				WHERE		notificationID = ?
+						AND userID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$this->parameters['notificationID'],
+				WCF::getUser()->userID
+			));
+			
+			// remove entirely read notifications
+			$sql = "SELECT	COUNT(*) as count
+				FROM	wcf".WCF_N."_user_notification_to_user
+				WHERE	notificationID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->parameters['notificationID']));
+			$row = $statement->fetchArray();
+			if (!$row['count']) {
+				UserNotificationEditor::deleteAll(array($this->parameters['notificationID']));
+			}
+			
+			// reset notification count
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount');
 		}
-		
-		// reset notification count
-		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount');
 		
 		return array(
 			'notificationID' => $this->parameters['notificationID'],
