@@ -404,6 +404,7 @@ Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben,
 		<item name="wcf.user.usersOnline.ipAddress"><![CDATA[IP-Adresse]]></item>
 		<item name="wcf.user.usersOnline.userAgent"><![CDATA[Browser]]></item>
 		<item name="wcf.user.usersOnline.lastActivity"><![CDATA[Letzte Aktivität]]></item>
+		<item name="wcf.user.usersOnline.location.unknown"><![CDATA[Unbekannter Ort]]></item>
 	</category>
 	
 	<category name="wcf.user.recentActivity">

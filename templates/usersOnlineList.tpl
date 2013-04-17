@@ -73,18 +73,13 @@
 {assign var=guestsOnlineList value=''}
 {assign var=guestsOnline value=0}
 {foreach from=$objects item=user}
+	{capture assign=locationData}
+		<h2>
+			{if $user->getLocation()}{@$user->getLocation()}{else}{lang}wcf.user.usersOnline.location.unknown{/lang}{/if} <small>- {@$user->lastActivityTime|time}</small>
+		</h2>
+	{/capture}
+	
 	{capture assign=sessionData}
-		{if $user->getLocation()}
-			<dl class="plain inlineDataList">
-				<dt>{lang}wcf.user.usersOnline.location{/lang}</dt>
-				<dd>{@$user->getLocation()}</dd>
-			</dl>
-		{/if}
-		<dl class="plain inlineDataList">
-			<dt>{lang}wcf.user.usersOnline.lastActivity{/lang}</dt>
-			<dd>{@$user->lastActivityTime|time}</dd>
-		</dl>
-		
 		{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
 			<dl class="plain inlineDataList">
 				<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
@@ -104,7 +99,8 @@
 					
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
-							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1> 
+							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1>
+							{@$locationData} 
 						</hgroup>
 						
 						{@$sessionData}
@@ -126,7 +122,8 @@
 					
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
-							<h1><a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Robot</a></h1> 
+							<h1>{lang}wcf.user.usersOnline.robot{/lang}</h1>
+							{@$locationData} 
 						</hgroup>
 						
 						{@$sessionData}
@@ -146,7 +143,8 @@
 					
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
-							<h1>{lang}wcf.user.guest{/lang}</h1> 
+							<h1>{lang}wcf.user.guest{/lang}</h1>
+							{@$locationData} 
 						</hgroup>
 						
 						{@$sessionData}
