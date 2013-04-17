@@ -48,7 +48,7 @@ class TeamList extends UserProfileList {
 			ON		(user_table.userID = user_to_group.userID)
 			WHERE		user_to_group.groupID = user_group.groupID
 					AND user_group.showOnTeamPage = 1
-			".(!empty($this->sqlOrderBy) ? "ORDER BY ".$this->sqlOrderBy : '');
+			ORDER BY	user_group.priority DESC".(!empty($this->sqlOrderBy) ? ", ".$this->sqlOrderBy : '');
 		$statement = WCF::getDB()->prepareStatement($sql, $this->sqlLimit, $this->sqlOffset);
 		$statement->execute();
 		while ($row = $statement->fetchArray()) {
@@ -69,7 +69,7 @@ class TeamList extends UserProfileList {
 			ON		(user_table.userID = user_to_group.userID)
 			WHERE		user_to_group.groupID = user_group.groupID
 					AND user_group.showOnTeamPage = 1
-			".(!empty($this->sqlOrderBy) ? "ORDER BY ".$this->sqlOrderBy : '');
+			ORDER BY	user_group.priority DESC".(!empty($this->sqlOrderBy) ? ", ".$this->sqlOrderBy : '');
 		$statement = WCF::getDB()->prepareStatement($sql, $this->sqlLimit, $this->sqlOffset);
 		$statement->execute();
 		while ($row = $statement->fetchArray()) {
