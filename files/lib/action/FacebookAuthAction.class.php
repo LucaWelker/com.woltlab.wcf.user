@@ -84,6 +84,9 @@ class FacebookAuthAction extends AbstractAction {
 						$userEditor = new UserEditor($user);
 						$userEditor->update(array('password' => $password));
 						
+						// reload user to retrieve salt
+						$user = new User($user->userID);
+						
 						UserAuthenticationFactory::getInstance()->getUserAuthentication()->storeAccessData($user, $user->username, $password);
 					}
 					
