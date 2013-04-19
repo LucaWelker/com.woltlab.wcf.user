@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\online;
 use wcf\data\user\UserProfile;
+use wcf\system\cache\builder\SpiderCacheBuilder;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
@@ -21,6 +22,12 @@ class UserOnline extends UserProfile {
 	 * @var	string
 	 */
 	protected $location = '';
+	
+	/**
+	 * spider object
+	 * @var wcf\data\spider\Spider
+	 */
+	protected $spider = null;
 	
 	/**
 	 * Returns the formatted username.
@@ -104,5 +111,21 @@ class UserOnline extends UserProfile {
 		}
 		
 		return $this->userAgent;
+	}
+	
+	/**
+	 * Returns the spider object
+	 * 
+	 * @return \wcf\data\spider\Spider
+	 */
+	public function getSpider() {
+		if (!$this->spiderID) return null;
+		
+		if ($this->spider === null) {
+			$spiderList = SpiderCacheBuilder::getInstance()->getData();
+			$this->spider = $spiderList[$this->spiderID];
+		}
+		
+		return $this->spider;
 	}
 }

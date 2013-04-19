@@ -83,9 +83,9 @@
 		{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
 			<dl class="plain inlineDataList">
 				<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
-				<dd>{$user->getFormattedIPAddress()}</dd>
+				<dd title="{$user->getFormattedIPAddress()}">{$user->getFormattedIPAddress()|truncate:30}</dd>
 				<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
-				<dd title="{$user->userAgent}">{$user->getBrowser()}</dd>
+				<dd title="{$user->userAgent}">{$user->getBrowser()|truncate:30}</dd>
 			</dl>
 		{/if}
 	{/capture}
@@ -122,7 +122,7 @@
 					
 					<div class="details userInformation">
 						<hgroup class="containerHeadline">
-							<h1>{lang}wcf.user.usersOnline.robot{/lang}</h1>
+							<h1>{if $user->getSpider()->spiderURL}<a href="{$user->getSpider()->spiderURL}" class="externalURL"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>{$user->getSpider()->spiderName}</a>{else}{$user->getSpider()->spiderName}{/if}</h1>
 							{@$locationData} 
 						</hgroup>
 						
