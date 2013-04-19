@@ -294,10 +294,19 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * @return	boolean
 	 */
 	public function isOnline() {
-		if ($this->lastActivityTime && $this->lastActivityTime > (TIME_NOW - USER_ONLINE_TIMEOUT) && (WCF::getUser()->userID == $this->userID || !$this->invisible || WCF::getUser()->getPermission('admin.general.canViewInvisible') || ($this->invisible == 2 && WCF::getUserProfileHandler()->isFollower($this->userID)))) {
+		if ($this->lastActivityTime && $this->lastActivityTime > (TIME_NOW - USER_ONLINE_TIMEOUT) && $this->canViewOnlineStatus()) {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns true if the active user can view the online status of this user.
+	 * 
+	 * @return	boolean
+	 */
+	public function canViewOnlineStatus() {
+		return (WCF::getUser()->userID == $this->userID || WCF::getSession()->getPermission('admin.user.canViewInvisible') || $this->isAccessible('canViewOnlineStatus'));
 	}
 	
 	/**
