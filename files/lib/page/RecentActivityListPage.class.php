@@ -60,7 +60,8 @@ class RecentActivityListPage extends AbstractPage {
 			'eventList' => $this->eventList,
 			'lastEventTime' => $lastEventTime,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersListPage'),
-			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage'
+			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage',
+			'allowSpidersToIndexThisPage' => true
 		));
 	}
 }

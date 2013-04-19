@@ -172,7 +172,8 @@ class UserPage extends AbstractPage {
 			'following' => $this->followingList->getObjects(),
 			'followingCount' => $this->followingList->countObjects(),
 			'visitors' => $this->visitorList->getObjects(),
-			'visitorCount' => $this->visitorList->countObjects()
+			'visitorCount' => $this->visitorList->countObjects(),
+			'allowSpidersToIndexThisPage' => true
 		));
 	}
 	

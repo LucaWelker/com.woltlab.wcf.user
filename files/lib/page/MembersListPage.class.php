@@ -145,7 +145,8 @@ class MembersListPage extends SortablePage {
 			'letter' => $this->letter,
 			'searchID' => $this->searchID,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersListPage'),
-			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage'
+			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage',
+			'allowSpidersToIndexThisPage' => true
 		));
 	}
 }

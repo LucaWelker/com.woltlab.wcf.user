@@ -78,7 +78,8 @@ class TeamPage extends MultipleLinkPage {
 	
 		WCF::getTPL()->assign(array(
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'com.woltlab.wcf.user.MembersListPage'),
-			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage'
+			'sidebarName' => 'com.woltlab.wcf.user.MembersListPage',
+			'allowSpidersToIndexThisPage' => true
 		));
 	}
 }
