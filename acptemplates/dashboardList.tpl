@@ -41,10 +41,8 @@
 						
 						{event name='rowButtons'}
 					</td>
-					<td class="columnID"><p>{#$objectType->objectTypeID}</p></td>
-					<td class="columnText">
-						<p><a href="{link controller='DashboardOption' id=$objectType->objectTypeID}{/link}">{lang}wcf.dashboard.objectType.{$objectType->objectType}{/lang}</a></p>
-					</td>
+					<td class="columnID">{#$objectType->objectTypeID}</td>
+					<td class="columnText"><a href="{link controller='DashboardOption' id=$objectType->objectTypeID}{/link}">{lang}wcf.dashboard.objectType.{$objectType->objectType}{/lang}</a></td>
 					
 					{event name='columns'}
 				</tr>

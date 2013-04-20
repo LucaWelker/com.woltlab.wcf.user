@@ -62,12 +62,12 @@
 								
 								{event name='rowButtons'}
 							</td>
-							<td class="columnID columnRankID"><p>{@$userRank->rankID}</p></td>
-							<td class="columnTitle columnRankTitle"><p><a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}" title="{lang}wcf.acp.user.rank.edit{/lang}" class="badge label{if $userRank->cssClassName} {$userRank->cssClassName}{/if}">{$userRank->rankTitle|language}</a></p></td>
-							<td class="columnText columnRankImage">{if $userRank->rankImage}<p>{@$userRank->getImage()}</p>{/if}</td>
-							<td class="columnText columnGroupID"><p>{$userRank->groupName|language}</p></td>
-							<td class="columnText columnRequiredGender">{if $userRank->requiredGender}<p>{if $userRank->requiredGender == 1}{lang}wcf.user.gender.male{/lang}{else}{lang}wcf.user.gender.female{/lang}{/if}</p>{/if}</td>
-							<td class="columnDigits columnRequiredPoints"><p>{#$userRank->requiredPoints}</p></td>
+							<td class="columnID columnRankID">{@$userRank->rankID}</td>
+							<td class="columnTitle columnRankTitle"><a href="{link controller='UserRankEdit' id=$userRank->rankID}{/link}" title="{lang}wcf.acp.user.rank.edit{/lang}" class="badge label{if $userRank->cssClassName} {$userRank->cssClassName}{/if}">{$userRank->rankTitle|language}</a></td>
+							<td class="columnText columnRankImage">{if $userRank->rankImage}{@$userRank->getImage()}{/if}</td>
+							<td class="columnText columnGroupID">{$userRank->groupName|language}</td>
+							<td class="columnText columnRequiredGender">{if $userRank->requiredGender}{if $userRank->requiredGender == 1}{lang}wcf.user.gender.male{/lang}{else}{lang}wcf.user.gender.female{/lang}{/if}{/if}</td>
+							<td class="columnDigits columnRequiredPoints">{#$userRank->requiredPoints}</td>
 							
 							{event name='columns'}
 						</tr>
