@@ -3,6 +3,7 @@ namespace wcf\system\option;
 use wcf\data\option\Option;
 use wcf\data\user\User;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -22,6 +23,20 @@ class BirthdayOptionType extends DateOptionType {
 	 * @var	string
 	 */
 	protected $inputClass = 'birthday';
+	
+	/**
+	 * @see	wcf\system\option\IOptionType::getFormElement()
+	 */
+	public function validate(Option $option, $newValue) {
+		parent::validate($option, $newValue);
+		
+		if (empty($newValue)) return;
+	
+		$timestamp = gmmktime(0, 0, 0, intval(substr($newValue, 5, 2)), intval(substr($newValue, 8, 2)), intval(substr($newValue, 0, 4)));
+		if ($timestamp > TIME_NOW) {
+			throw new UserInputException($option->optionName, 'validationFailed');
+		}
+	}
 	
 	/**
 	 * @see	wcf\system\option\IOptionType::getFormElement()
