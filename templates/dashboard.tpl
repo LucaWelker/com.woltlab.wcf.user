@@ -2,7 +2,10 @@
 
 <head>
 	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'wcf.user.dashboard'}{lang}wcf.user.dashboard{/lang} - {/if}{PAGE_TITLE|language}</title>
+	
 	{include file='headInclude'}
+	
+	<link rel="canonical" href="{link controller='Dashboard'}{/link}" />
 </head>
 
 <body id="tpl{$templateName|ucfirst}">

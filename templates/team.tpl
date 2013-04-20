@@ -5,6 +5,8 @@
 	
 	{include file='headInclude'}
 	
+	<link rel="canonical" href="{link controller='Team'}{/link}" />
+	
 	<script type="text/javascript">
 		//<![CDATA[
 			$(function() {

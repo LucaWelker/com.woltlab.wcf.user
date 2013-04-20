@@ -2,7 +2,10 @@
 
 <head>
 	<title>{lang}wcf.user.profile{/lang} - {lang}wcf.user.members{/lang} - {PAGE_TITLE|language}</title>
+	
 	{include file='headInclude'}
+	
+	<link rel="canonical" href="{link controller='User' object=$user}{/link}" />
 	
 	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
 	{event name='javascriptInclude'}

@@ -2,7 +2,10 @@
 
 <head>
 	<title>{lang}wcf.user.recentActivity{/lang} - {PAGE_TITLE|language}</title>
+	
 	{include file='headInclude'}
+	
+	<link rel="canonical" href="{link controller='RecentActivityList'}{/link}" />
 	
 	<script type="text/javascript">
 		//<![CDATA[
