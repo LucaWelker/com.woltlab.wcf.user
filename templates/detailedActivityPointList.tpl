@@ -2,8 +2,8 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>{lang}wcf.user.activityPoint.objects{/lang}</th>
 				<th>{lang}wcf.user.activityPoint.objectType{/lang}</th>
+				<th>{lang}wcf.user.activityPoint.objects{/lang}</th>
 				<th>{lang}wcf.user.activityPoint.pointsPerObject{/lang}</th>
 				<th>{lang}wcf.user.activityPoint.sum{/lang}</th>
 			</tr>
@@ -14,11 +14,11 @@
 			{foreach from=$activityPointObjectTypes item='objectType'}
 				{if $objectType->activityPoints > 0 && $objectType->points > 0}
 					<tr>
-						<td class="columnDigits">
-							{#$objectType->activityPoints/$objectType->points} &times;
-						</td>
 						<td class="columnTitle">
 							{lang}wcf.user.activityPoint.objectType.{$objectType->objectType}{/lang}
+						</td>
+						<td class="columnDigits">
+							{#$objectType->activityPoints/$objectType->points}
 						</td>
 						<td class="columnDigits">
 							{#$objectType->points}
