@@ -248,9 +248,9 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.signature.error.disabled"><![CDATA[Your signature has been disabled{if $__wcf->user->disableSignatureReason}: {$__wcf->user->disableSignatureReason}{else}.{/if}]]></item>
 		<item name="wcf.user.activityPoint"><![CDATA[Points]]></item>
 		<item name="wcf.user.activityPoint.showDetails"><![CDATA[Show Details]]></item>
-		<item name="wcf.user.activityPoint.objects"><![CDATA[Object Count]]></item>
-		<item name="wcf.user.activityPoint.objectType"><![CDATA[Object Type]]></item>
-		<item name="wcf.user.activityPoint.pointsPerObject"><![CDATA[Points Per Object]]></item>
+		<item name="wcf.user.activityPoint.objects"><![CDATA[Count]]></item>
+		<item name="wcf.user.activityPoint.objectType"><![CDATA[Type]]></item>
+		<item name="wcf.user.activityPoint.pointsPerObject"><![CDATA[Points]]></item>
 		<item name="wcf.user.activityPoint.sum"><![CDATA[Sum]]></item>
 		<item name="wcf.user.stats"><![CDATA[Statistics]]></item>
 		<item name="wcf.user.usercp"><![CDATA[User Account]]></item>
