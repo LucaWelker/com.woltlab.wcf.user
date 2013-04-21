@@ -74,6 +74,10 @@ class MailForm extends RecaptchaForm {
 		if ($this->user === null) {
 			throw new IllegalLinkException();
 		}
+		// validate ignore status
+		if (WCF::getUser()->userID && $this->user->isIgnoredUser(WCF::getUser()->userID)) {
+			throw new PermissionDeniedException();
+		}
 	}
 	
 	/**
