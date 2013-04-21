@@ -196,7 +196,7 @@ class UserRankAddForm extends AbstractForm {
 			// update name
 			$rankEditor = new UserRankEditor($returnValues['returnValues']);
 			$rankEditor->update(array(
-				'rankTitle' => 'wcf.user.rank.generic'.$rankID
+				'rankTitle' => 'wcf.user.rank.userRank'.$rankID
 			));
 		}
 		$this->saved();
