@@ -561,6 +561,8 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.option.skype"><![CDATA[Skype]]></item>
 		<item name="wcf.user.option.facebook"><![CDATA[Facebook]]></item>
 		<item name="wcf.user.option.twitter"><![CDATA[Twitter]]></item>
+		<item name="wcf.user.option.googlePlus"><![CDATA[Google+]]></item>
+		<item name="wcf.user.option.googlePlus.description"><![CDATA[Geben Sie Ihre 21-stellige Google+-ID an.]]></item>
 	</category>
 	
 	<category name="wcf.user.mail">
