@@ -242,9 +242,9 @@ Wenn Sie Probleme mit der Aktivierung haben, wenden Sie sich bitte an den Admini
 		<item name="wcf.user.signature.error.disabled"><![CDATA[Ihre Signatur wurde vom Administrator gesperrt{if $__wcf->user->disableSignatureReason}: {$__wcf->user->disableSignatureReason}{else}.{/if}]]></item>
 		<item name="wcf.user.activityPoint"><![CDATA[Punkte]]></item>
 		<item name="wcf.user.activityPoint.showDetails"><![CDATA[Zeige Details]]></item>
-		<item name="wcf.user.activityPoint.objects"><![CDATA[Anzahl der Objekte]]></item>
-		<item name="wcf.user.activityPoint.objectType"><![CDATA[Objekt-Art]]></item>
-		<item name="wcf.user.activityPoint.pointsPerObject"><![CDATA[Punkte pro Objekt]]></item>
+		<item name="wcf.user.activityPoint.objects"><![CDATA[Anzahl]]></item>
+		<item name="wcf.user.activityPoint.objectType"><![CDATA[Art]]></item>
+		<item name="wcf.user.activityPoint.pointsPerObject"><![CDATA[Punkte]]></item>
 		<item name="wcf.user.activityPoint.sum"><![CDATA[Summe]]></item>
 		<item name="wcf.user.stats"><![CDATA[Statistiken]]></item>
 		<item name="wcf.user.usercp"><![CDATA[Benutzerkonto]]></item>
