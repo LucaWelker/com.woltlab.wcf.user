@@ -685,7 +685,7 @@ WCF.User.Profile.Editor = Class.extend({
 		// collect values
 		var $regExp = /values\[([a-zA-Z0-9._-]+)\]/;
 		var $values = { };
-		this._tab.find('input, textarea').each(function(index, element) {
+		this._tab.find('input, textarea, select').each(function(index, element) {
 			var $element = $(element);
 			
 			if ($element.getTagName() === 'input') {
