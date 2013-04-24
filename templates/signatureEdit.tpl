@@ -36,6 +36,10 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
+{if $success|isset}
+	<p class="success">{lang}wcf.global.success.edit{/lang}</p>
+{/if}
+
 {if $__wcf->user->disableSignature}
 	<p class="error">{lang}wcf.user.signature.error.disabled{/lang}</p>
 {/if}
