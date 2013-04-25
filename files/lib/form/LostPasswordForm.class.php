@@ -14,7 +14,7 @@ use wcf\util\StringUtil;
  * Shows the lost password form.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -110,7 +110,7 @@ class LostPasswordForm extends RecaptchaForm {
 			'lostPasswordKey' => $lostPasswordKey,
 			'lastLostPasswordRequestTime' => TIME_NOW
 		));
-			
+		
 		// send mail
 		$mail = new Mail(array($this->user->username => $this->user->email), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.mail.subject'), WCF::getLanguage()->getDynamicVariable('wcf.user.lostPassword.mail', array(
 			'username' => $this->user->username,

@@ -181,7 +181,7 @@ class DashboardHandler extends SingletonFactory {
 					$box->boxType,
 					$enableBoxNames[$box->boxName]
 				));
-			
+				
 				// insert associations
 				$insertStatement->execute(array(
 					$objectTypeID,

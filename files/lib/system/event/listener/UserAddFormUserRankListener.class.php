@@ -18,7 +18,7 @@ use wcf\system\event\IEventListener;
  */
 class UserAddFormUserRankListener implements IEventListener {
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		if (!MODULE_USER_RANK && !MODULE_USERS_ONLINE) return;

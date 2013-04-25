@@ -6,7 +6,7 @@ use wcf\system\WCF;
 
 /**
  * Option type implementation for user option selection.
- *
+ * 
  * @author	Marcel Werk
  * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -17,7 +17,7 @@ use wcf\system\WCF;
 class UseroptionsOptionType extends AbstractOptionType {
 	/**
 	 * list of available user options
-	 * @var array<string>
+	 * @var	array<string>
 	 */
 	protected static $userOptions = null;
 	

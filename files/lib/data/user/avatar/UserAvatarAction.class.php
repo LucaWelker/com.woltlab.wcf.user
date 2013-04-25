@@ -11,7 +11,6 @@ use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\FileUtil;
 use wcf\util\HTTPRequest;
-use wcf\util\StringUtil;
 
 /**
  * Executes avatar-related actions.

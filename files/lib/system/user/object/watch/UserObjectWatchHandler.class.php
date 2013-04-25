@@ -73,7 +73,7 @@ class UserObjectWatchHandler extends SingletonFactory {
 	
 	/**
 	 * Deletes the given objects.
-	 *
+	 * 
 	 * @param	string		$objectType
 	 * @param	array<integer>	$objectIDs
 	 */

@@ -5,8 +5,8 @@ use wcf\data\IDatabaseObjectProcessor;
 /**
  * Any user menu item provider should implement this interface.
  * 
- * @author	Tim Düsterhus
- * @copyright	2001-2012 WoltLab GmbH
+ * @author	Tim Duesterhus
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf
  * @subpackage	system.menu.user

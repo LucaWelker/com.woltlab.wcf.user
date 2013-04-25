@@ -17,30 +17,30 @@ use wcf\util\StringUtil;
 class UserGroupAddFormAdditionalSettingsListener implements IEventListener {
 	/**
 	 * instance of UserGroupAddForm
-	 * @var wcf\acp\form\UserGroupAddForm
+	 * @var	wcf\acp\form\UserGroupAddForm
 	 */
 	protected $eventObj = null;
 	
 	/**
 	 * group priority
-	 * @var integer
+	 * @var	integer
 	 */
 	protected $priority = 0;
 	
 	/**
 	 * user online marking string
-	 * @var string
+	 * @var	string
 	 */
 	protected $userOnlineMarking = '%s';
 	
 	/**
 	 * shows the members of this group on the team page
-	 * @var unknown_type
+	 * @var	integer
 	 */
 	protected $showOnTeamPage = 0;
 	
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		$this->eventObj = $eventObj;

@@ -114,7 +114,7 @@ class VisitTracker extends SingletonFactory {
 	}
 	
 	/**
-	 * Gets the last visit time for a specific object.
+	 * Returns the last visit time for a specific object.
 	 * 
 	 * @param	string		$objectType
 	 * @param	integer		$objectID
@@ -144,7 +144,7 @@ class VisitTracker extends SingletonFactory {
 	/**
 	 * Deletes all tracked visits of a specific object type.
 	 * 
-	 * @param 	string		$objectType
+	 * @param	string		$objectType
 	 */
 	public function deleteObjectVisits($objectType) {
 		if (WCF::getUser()->userID) {
