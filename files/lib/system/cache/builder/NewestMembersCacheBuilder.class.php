@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\cache\builder;
 use wcf\data\user\UserList;
+
 /**
  * Caches a list of the newest members.
  * 
