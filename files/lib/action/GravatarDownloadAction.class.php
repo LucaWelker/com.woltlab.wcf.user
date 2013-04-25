@@ -10,7 +10,7 @@ use wcf\util\StringUtil;
 
 /**
  * Downloads and caches gravatars.
- *
+ * 
  * @author	Marcel Werk
  * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -36,7 +36,7 @@ class GravatarDownloadAction extends AbstractAction {
 	 * @var integer
 	 */
 	public $size = 150;
-
+	
 	/**
 	 * @see	wcf\action\IAction::readParameters()
 	 */
@@ -83,7 +83,7 @@ class GravatarDownloadAction extends AbstractAction {
 				// disable gravatar
 				$editor = new UserEditor($this->user);
 				$editor->update(array(
-					'enableGravatar' => 0		
+					'enableGravatar' => 0
 				));
 			}
 		}

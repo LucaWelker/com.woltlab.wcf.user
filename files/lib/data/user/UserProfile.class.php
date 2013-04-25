@@ -481,7 +481,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	
 	/**
 	 * Returns the age of this user.
-	 *
+	 * 
 	 * @return	integer
 	 */
 	public function getAge() {
@@ -508,7 +508,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	
 	/**
 	 * Returns the value of the permission with the given name.
-	 *
+	 * 
 	 * @param	string		$permission
 	 * @return	mixed		permission value
 	 */
@@ -521,6 +521,8 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	
 	/**
 	 * Returns the user title of this user.
+	 * 
+	 * @return	string
 	 */
 	public function getUserTitle() {
 		if ($this->userTitle) return $this->userTitle;
@@ -622,7 +624,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if the current user is connected with Facebook.
+	 * Returns true if the current user is connected with Facebook.
 	 * 
 	 * @return	boolean
 	 */
@@ -631,7 +633,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if the current user is connected with GitHub.
+	 * Returns true if the current user is connected with GitHub.
 	 * 
 	 * @return	boolean
 	 */
@@ -640,7 +642,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if the current user is connected with Google Plus.
+	 * Returns true if the current user is connected with Google Plus.
 	 * 
 	 * @return	boolean
 	 */
@@ -649,7 +651,7 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Returns true, if the current user is connected with Twitter.
+	 * Returns true if the current user is connected with Twitter.
 	 * 
 	 * @return	boolean
 	 */
@@ -671,9 +673,9 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	}
 	
 	/**
-	 * Return true if this signature is visible.
+	 * Return true if the user's signature is visible.
 	 * 
-	 * @return boolean
+	 * @return	boolean
 	 */
 	public function showSignature() {
 		if (!$this->signatureCache) return false;

@@ -1,7 +1,6 @@
 <?php
 namespace wcf\data\user\activity\event;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\UserInputException;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
 

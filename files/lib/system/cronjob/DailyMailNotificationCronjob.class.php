@@ -3,7 +3,6 @@ namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
 use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\UserNotificationList;
-use wcf\data\user\UserAction;
 use wcf\data\user\UserEditor;
 use wcf\data\user\UserList;
 use wcf\data\user\UserProfile;
@@ -132,7 +131,7 @@ class DailyMailNotificationCronjob extends AbstractCronjob {
 			$message = $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.header', array(
 				'user' => $user
 			))."\n\n";
-		
+			
 			foreach ($events as $event) {
 				$className = $eventObjects[$event['eventID']]->className;
 				$class = new $className($eventObjects[$event['eventID']]);

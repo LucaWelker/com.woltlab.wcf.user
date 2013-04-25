@@ -2,7 +2,6 @@
 namespace wcf\data\user\notification;
 use wcf\data\user\notification\UserNotificationEditor;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\storage\UserStorageHandler;
@@ -41,9 +40,11 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * Does nothing.
+	 * Validates the 'load' action.
 	 */
-	public function validateLoad() { }
+	public function validateLoad() {
+		// does nothing
+	}
 	
 	/**
 	 * Loads user notifications.

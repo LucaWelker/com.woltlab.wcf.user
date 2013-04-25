@@ -17,7 +17,7 @@ use wcf\system\WCF;
  */
 class UserCleanUpListener implements IEventListener {
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		// clean up notifications

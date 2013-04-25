@@ -71,7 +71,7 @@ class UserNotificationHandler extends SingletonFactory {
 	
 	/**
 	 * Triggers a notification event.
-	 *
+	 * 
 	 * @param	string								$eventName
 	 * @param	string								$objectType
 	 * @param	wcf\system\user\notification\object\IUserNotificationObject	$notificationObject
@@ -438,7 +438,7 @@ class UserNotificationHandler extends SingletonFactory {
 	
 	/**
 	 * Deletes notifications.
-	 *
+	 * 
 	 * @param	string		$eventName
 	 * @param	string		$objectType
 	 * @param	array<integer>	$recipientIDs
@@ -480,8 +480,8 @@ class UserNotificationHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Gets user's notification setting for given event.
-	 *
+	 * Returns the user's notification setting for the given event.
+	 * 
 	 * @param	string		$objectType
 	 * @param	string		$eventName
 	 * @return	mixed

@@ -11,7 +11,7 @@ use wcf\util\DateUtil;
  * Option type implementation for birthday input fields.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.option
@@ -31,7 +31,7 @@ class BirthdayOptionType extends DateOptionType {
 		parent::validate($option, $newValue);
 		
 		if (empty($newValue)) return;
-	
+		
 		$timestamp = @strtotime($newValue); 
 		if ($timestamp > TIME_NOW) {
 			throw new UserInputException($option->optionName, 'validationFailed');

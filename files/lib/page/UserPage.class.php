@@ -89,7 +89,7 @@ class UserPage extends AbstractPage {
 	 * @var	wcf\data\user\profile\visitor\UserProfileVisitorList
 	 */
 	public $visitorList = null;
-		
+	
 	/**
 	 * @see	wcf\page\IPage::readParameters()
 	 */

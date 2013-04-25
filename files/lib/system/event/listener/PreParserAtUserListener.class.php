@@ -70,6 +70,12 @@ class PreParserAtUserListener implements IEventListener {
 		}
 	}
 	
+	/**
+	 * Returns the username for the given regular expression match.
+	 * 
+	 * @param	string		$match
+	 * @return	string
+	 */
 	public static function getUsername($match) {
 		// remove escaped single quotation mark
 		$match = StringUtil::replace("''", "'", $match);

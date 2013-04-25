@@ -134,7 +134,7 @@ class UsersOnlineListPage extends SortablePage {
 	}
 	
 	/**
-	 * Reads object list.
+	 * @see	wcf\page\MultipleLinkPage::readObjects()
 	 */
 	protected function readObjects() {
 		$this->objectList->sqlLimit = 0;

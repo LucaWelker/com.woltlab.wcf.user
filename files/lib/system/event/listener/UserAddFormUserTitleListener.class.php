@@ -9,7 +9,7 @@ use wcf\util\StringUtil;
  * Handles the user title in user administration.
  * 
  * @author	Marcel Werk
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.event.listener
@@ -18,13 +18,13 @@ use wcf\util\StringUtil;
 class UserAddFormUserTitleListener implements IEventListener {
 	/**
 	 * instance of UserAddForm
-	 * @var wcf\acp\form\UserAddForm
+	 * @var	wcf\acp\form\UserAddForm
 	 */
 	protected $eventObj = null;
 	
 	/**
 	 * user title
-	 * @var string
+	 * @var	string
 	 */
 	protected $priority = 0;
 	
@@ -35,7 +35,7 @@ class UserAddFormUserTitleListener implements IEventListener {
 	protected $userTitle = '';
 	
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		if (!MODULE_USER_RANK) return;

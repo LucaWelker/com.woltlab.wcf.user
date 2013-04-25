@@ -82,7 +82,7 @@ class AvatarEditForm extends AbstractForm {
 	 */
 	public function save() {
 		parent::save();
-
+		
 		if ($this->avatarType != 'custom') {
 			// delete custom avatar
 			if (WCF::getUser()->avatarID) {

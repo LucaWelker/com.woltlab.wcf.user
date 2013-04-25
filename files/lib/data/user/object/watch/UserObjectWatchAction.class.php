@@ -117,14 +117,14 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 */
 	public function subscribe() {
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $this->parameters['data']['objectType']);
-	
+		
 		UserObjectWatchEditor::create(array(
 			'userID' => WCF::getUser()->userID,
 			'objectID' => intval($this->parameters['data']['objectID']),
 			'objectTypeID' => $objectType->objectTypeID,
 			'notification' => (!empty($this->parameters['enableNotification']) ? 1 : 0)
 		));
-	
+		
 		// reset user storage
 		$objectType->getProcessor()->resetUserStorage(array(WCF::getUser()->userID));
 	}
@@ -134,14 +134,14 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 */
 	public function unsubscribe() {
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.objectWatch', $this->parameters['data']['objectType']);
-	
+		
 		if ($this->userObjectWatch !== null) $userObjectWatch = $this->userObjectWatch;
 		else {
 			$userObjectWatch = UserObjectWatch::getUserObjectWatch($objectType->objectTypeID, WCF::getUser()->userID, intval($this->parameters['data']['objectID']));
 		}
 		$editor = new UserObjectWatchEditor($userObjectWatch);
 		$editor->delete();
-	
+		
 		// reset user storage
 		$objectType->getProcessor()->resetUserStorage(array(WCF::getUser()->userID));
 	}
@@ -158,10 +158,10 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 		if ($objectType === null) {
 			throw new UserInputException('objectType');
 		}
-	
+		
 		// validate object id
 		$objectType->getProcessor()->validateObjectID(intval($this->parameters['data']['objectID']));
-	
+		
 		// get existing subscription
 		$this->userObjectWatch = UserObjectWatch::getUserObjectWatch($objectType->objectTypeID, WCF::getUser()->userID, intval($this->parameters['data']['objectID']));
 	}
@@ -171,7 +171,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateSubscribe() {
 		$this->__validateSubscribe();
-	
+		
 		if ($this->userObjectWatch !== null) {
 			throw new PermissionDeniedException();
 		}
@@ -182,7 +182,7 @@ class UserObjectWatchAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateUnsubscribe() {
 		$this->__validateSubscribe();
-	
+		
 		if ($this->userObjectWatch === null) {
 			throw new PermissionDeniedException();
 		}
