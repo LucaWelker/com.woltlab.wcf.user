@@ -531,7 +531,7 @@ WCF.User.Profile.TabMenu = Class.extend({
 				success: $.proxy(this._success, this)
 			});
 			
-			this._profileContent.bind('wcftabsselect', $.proxy(this._loadContent, this));
+			this._profileContent.bind('wcftabsbeforeactivate', $.proxy(this._loadContent, this));
 		}
 	},
 	
