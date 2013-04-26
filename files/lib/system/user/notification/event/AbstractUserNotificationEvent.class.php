@@ -12,7 +12,7 @@ use wcf\util\StringUtil;
  * Provides default a implementation for user notification events.
  * 
  * @author	Marcel Werk, Oliver Kliebisch
- * @copyright	2001-2012 WoltLab GmbH, Oliver Kliebisch
+ * @copyright	2001-2013 WoltLab GmbH, Oliver Kliebisch
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	system.user.notification.event
@@ -49,23 +49,10 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	protected $additionalData = array();
 	
 	/**
-	 * list of actions for this event
-	 * @var	array<array>
-	 */
-	protected $actions = array();
-	
-	/**
 	 * language object
 	 * @var wcf\data\language\Language
 	 */
 	protected $language = null;
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getActions()
-	 */
-	public function getActions() {
-		return $this->actions;
-	}
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::setObject()
@@ -75,20 +62,6 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 		$this->userNotificationObject = $object;
 		$this->author = $author;
 		$this->additionalData = $additionalData;
-		
-		$this->addDefaultAction();
-	}
-	
-	/**
-	 * Adds default event action to action list.
-	 */
-	protected function addDefaultAction() {
-		$this->actions[] = array(
-			'actionName' => 'markAsConfirmed',
-			'className' => 'wcf\\data\\user\\notification\\UserNotificationAction',
-			'label' => WCF::getLanguage()->get('wcf.user.notification.button.confirmed'),
-			'objectID' => $this->notification->notificationID
-		);
 	}
 	
 	/**
@@ -131,20 +104,6 @@ abstract class AbstractUserNotificationEvent extends DatabaseObjectDecorator imp
 	 */
 	public function getEventHash() {
 		return StringUtil::getHash($this->packageID . '-'. $this->eventID . '-' . $this->userNotificationObject->getObjectID());
-	}
-	
-	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getRenderedOutput()
-	 */
-	public function getRenderedOutput() {
-		WCF::getTPL()->assign(array(
-			'author' => $this->author,
-			'buttons' => $this->getActions(),
-			'message' => $this->getMessage(),
-			'time' => $this->notification->time
-		));
-		
-		return WCF::getTPL()->fetch('userNotificationDetails');
 	}
 	
 	/**

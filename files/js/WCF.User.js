@@ -1209,6 +1209,117 @@ WCF.User.Registration.LostPassword = Class.extend({
 WCF.Notification = {};
 
 /**
+ * Loads notification for the user panel.
+ * 
+ * @see	WCF.UserPanel
+ */
+WCF.Notification.UserPanel = WCF.UserPanel.extend({
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * link to show all notifications
+	 * @var	string
+	 */
+	_showAllLink: '',
+	
+	/**
+	 * @see	WCF.UserPanel.init()
+	 */
+	init: function(showAllLink) {
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		this._showAllLink = showAllLink;
+		
+		this._super('userNotifications');
+	},
+	
+	/**
+	 * @see	WCF.UserPanel._addDefaultItems()
+	 */
+	_addDefaultItems: function(dropdownMenu) {
+		this._addDivider(dropdownMenu);
+		$('<li><a href="' + this._showAllLink + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo(dropdownMenu);
+		this._addDivider(dropdownMenu);
+		$('<li><a>' + WCF.Language.get('wcf.user.notification.markAllAsConfirmed') + '</a></li>').click($.proxy(this._markAllAsConfirmed, this)).appendTo(dropdownMenu);
+	},
+	
+	/**
+	 * @see	WCF.UserPanel._getParameters()
+	 */
+	_getParameters: function() {
+		return {
+			actionName: 'getOutstandingNotifications',
+			className: 'wcf\\data\\user\\notification\\UserNotificationAction'
+		};
+	},
+	
+	/**
+	 * @see	WCF.UserPanel._after()
+	 */
+	_after: function(dropdownMenu) {
+		this._container.find('li.jsNotificationItem').click($.proxy(this._markAsConfirmed, this));
+	},
+	
+	/**
+	 * Marks a notification as confirmed.
+	 * 
+	 * @param	object		event
+	 */
+	_markAsConfirmed: function(event) {
+		this._proxy.setOption('data', {
+			actionName: 'markAsConfirmed',
+			className: 'wcf\\data\\user\\notification\\UserNotificationAction',
+			parameters: {
+				notificationID: $(event.currentTarget).data('notificationID')
+			}
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Marks all notifications as confirmed.
+	 */
+	_markAllAsConfirmed: function() {
+		WCF.System.Confirmation.show(WCF.Language.get('wcf.user.notification.markAllAsConfirmed.confirmMessage'), $.proxy(function(action) {
+			if (action === 'confirm') {
+				this._proxy.setOption('data', {
+					actionName: 'markAllAsConfirmed',
+					className: 'wcf\\data\\user\\notification\\UserNotificationAction'
+				});
+				this._proxy.sendRequest();
+			}
+		}, this));
+	},
+	
+	/**
+	 * @see	WCF.UserPanel._success()
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		switch (data.actionName) {
+			case 'getOutstandingNotifications':
+			case 'markAllAsConfirmed':
+				this._super(data, textStatus, jqXHR);
+			break;
+			
+			case 'markAsConfirmed':
+				this._container.find('li.jsNotificationItem').each(function(index, item) {
+					var $item = $(item);
+					if (data.returnValues.notificationID == $item.data('notificationID')) {
+						window.location = $item.data('link');
+						return false;
+					}
+				});
+			break;
+		}
+	}
+});
+
+/**
  * Notification Overlay.
  * 
  * @see	WCF.UserPanel

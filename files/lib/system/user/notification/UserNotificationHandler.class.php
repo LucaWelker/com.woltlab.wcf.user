@@ -286,16 +286,10 @@ class UserNotificationHandler extends SingletonFactory {
 				);
 			}
 			else {
-				WCF::getTPL()->assign(array(
-					'author' => $class->getAuthor(),
-					'label' => $class->getTitle(),
-					'time' => $event['time']
-				));
-				
 				$data = array(
-					'message' => $class->getRenderedOutput(),
+					'event' => $class,
 					'notificationID' => $event['notificationID'],
-					'template' => WCF::getTPL()->fetch('userNotificationItem')
+					'time' => $event['time']
 				);
 			}
 			

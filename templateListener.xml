@@ -54,13 +54,6 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User.js"></script>]]></templatecode>
 		</templatelistener>
 		
-		<templatelistener name="javascriptLanguageImport">
-			<environment>user</environment>
-			<templatename>headInclude</templatename>
-			<eventname>javascriptLanguageImport</eventname>
-			<templatecode><![CDATA[,'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}', 'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}']]></templatecode>
-		</templatelistener>
-		
 		<templatelistener name="javascriptInit">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>

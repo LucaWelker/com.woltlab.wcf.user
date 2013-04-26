@@ -480,7 +480,7 @@ Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben,
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.button.confirmed"><![CDATA[OK]]></item>
 		<item name="wcf.user.notification.count"><![CDATA[if (data.returnValues.count == 0) { "Keine Benachrichtigungen" } else if (data.returnValues.count == 1) { "Eine Benachrichtigung" } else { data.returnValues.count + " Benachrichtigungen" }]]></item>
-		<item name="wcf.user.notification.follow.message"><![CDATA[<a href="{link controller='User' object=$author}{/link}">{$author->username}</a> folgt Ihnen.]]></item>
+		<item name="wcf.user.notification.follow.message"><![CDATA[„{$author->username}“ folgt Ihnen.]]></item>
 		<item name="wcf.user.notification.follow.title"><![CDATA[Neuer Follower]]></item>
 		<item name="wcf.user.notification.follow.mail"><![CDATA[{@$author->username} folgt Ihnen.]]></item>
 		<item name="wcf.user.notification.mail.disabled"><![CDATA[Die E-Mail-Benachrichtigung wurde erfolgreich abgeschaltet.]]></item>
@@ -500,6 +500,8 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.notification.mailNotificationType.none"><![CDATA[Keine E-Mail-Benachrichtigung]]></item>
 		<item name="wcf.user.notification.mailNotificationType.instant"><![CDATA[Sofortige E-Mail-Benachrichtigung]]></item>
 		<item name="wcf.user.notification.mailNotificationType.daily"><![CDATA[Tägliche E-Mail-Benachrichtigung]]></item>
+		<item name="wcf.user.notification.markAllAsConfirmed"><![CDATA[Alle bestätigen]]></item>
+		<item name="wcf.user.notification.markAllAsConfirmed.confirmMessage"><![CDATA[Möchten Sie wirklich alle Benachrichtigungen bestätigen?]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[Es sind keine neuen Benachrichtigungen vorhanden.]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Benachrichtigungen]]></item>
 		<item name="wcf.user.notification.showAll"><![CDATA[Alle Benachrichtigungen anzeigen]]></item>
