@@ -391,6 +391,7 @@ Sollten Sie sich nicht auf der Website: {@PAGE_TITLE|language} angemeldet haben,
 		<item name="wcf.user.usersOnline.location.UserPage"><![CDATA[<a href="{link controller='User' object=$user}{/link}" class="userLink" data-user-id="{@$user->userID}">Benutzerprofil von „{$user->username}“</a>]]></item>
 		<item name="wcf.user.usersOnline.location.UsersOnlineListPage"><![CDATA[Benutzer online-Liste]]></item>
 		<item name="wcf.user.usersOnline.location.MembersListPage"><![CDATA[Mitgliederliste]]></item>
+		<item name="wcf.user.usersOnline.location.TeamPage"><![CDATA[Team-Mitglieder]]></item>
 		<item name="wcf.user.usersOnline.location.DashboardPage"><![CDATA[Dashboard]]></item>
 		<item name="wcf.user.usersOnline.location.RegisterForm"><![CDATA[Registrierung]]></item>
 		<item name="wcf.user.usersOnline.location.LostPasswordForm"><![CDATA[Kennwort vergessen-Formular]]></item>

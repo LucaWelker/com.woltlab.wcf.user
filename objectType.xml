@@ -49,6 +49,12 @@
 			<languagevariable>wcf.user.usersOnline.location.MembersListPage</languagevariable>
 		</type>
 		<type>
+			<name>com.woltlab.wcf.user.TeamPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>wcf\page\TeamPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.TeamPage</languagevariable>
+		</type>
+		<type>
 			<name>com.woltlab.wcf.user.DashboardPage</name>
 			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
 			<controller>wcf\page\DashboardPage</controller>
