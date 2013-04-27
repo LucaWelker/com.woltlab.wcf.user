@@ -1,9 +1,7 @@
 {foreach from=$groupedUsers item=group}
 	{if $group}
 		<header class="boxHeadline">
-			<hgroup>
-				<h1>{$group}</h1>
-			</hgroup>
+			<h1>{$group}</h1>
 		</header>
 	{/if}
 	

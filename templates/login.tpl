@@ -19,9 +19,7 @@
 {include file='header' __disableLoginLink=true}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.user.login{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.user.login{/lang}</h1>
 </header>
 
 {include file='userNotice'}

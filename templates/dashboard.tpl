@@ -20,16 +20,12 @@
 
 {if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'wcf.user.dashboard'}
 	<header class="boxHeadline">
-		<hgroup>
-			<h1>{PAGE_TITLE|language}</h1>
-			{hascontent}<h2>{content}{PAGE_DESCRIPTION|language}{/content}</h2>{/hascontent}
-		</hgroup>
+		<h1>{PAGE_TITLE|language}</h1>
+		{hascontent}<p>{content}{PAGE_DESCRIPTION|language}{/content}</p>{/hascontent}
 	</header>
 {else}
 	<header class="boxHeadline">
-		<hgroup>
-			<h1>{lang}wcf.user.dashboard{/lang}</h1>
-		</hgroup>
+		<h1>{lang}wcf.user.dashboard{/lang}</h1>
 	</header>
 {/if}
 

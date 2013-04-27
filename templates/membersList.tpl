@@ -91,9 +91,7 @@
 {include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{if $searchID}{lang}wcf.user.search.results{/lang}{else}{lang}wcf.user.members{/lang}{/if} <span class="badge">{#$items}</span></h1>
-	</hgroup>
+	<h1>{if $searchID}{lang}wcf.user.search.results{/lang}{else}{lang}wcf.user.members{/lang}{/if} <span class="badge">{#$items}</span></h1>
 </header>
 
 {include file='userNotice'}

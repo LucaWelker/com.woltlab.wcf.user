@@ -14,9 +14,7 @@
 </script>
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.user.activityPoint.option{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.user.activityPoint.option{/lang}</h1>
 </header>
 
 {if $errorField}

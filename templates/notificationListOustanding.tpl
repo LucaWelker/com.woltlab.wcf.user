@@ -4,10 +4,10 @@
 			<div class="framed">
 				{@$notification[event]->getAuthor()->getAvatar()->getImageTag(24)}
 			</div>
-			<hgroup>
-				<h1>{$notification[event]->getMessage()}</h1>
-				<h2><small>{$notification[event]->getAuthor()->username} - {@$notification[time]|time}</small></h2>
-			</hgroup>
+			<div>
+				<h3>{$notification[event]->getMessage()}</h3>
+				<small>{$notification[event]->getAuthor()->username} - {@$notification[time]|time}</small>
+			</div>
 		</a>
 	</li>
 {/foreach}

@@ -9,10 +9,8 @@
 </script>
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.dashboard.option{/lang}</h1>
-		<h2>{lang}wcf.dashboard.objectType.{$objectType->objectType}{/lang}</h2>
-	</hgroup>
+	<h1>{lang}wcf.acp.dashboard.option{/lang}</h1>
+	<p>{lang}wcf.dashboard.objectType.{$objectType->objectType}{/lang}</p>
 </header>
 
 <p class="info">{lang}wcf.acp.dashboard.box.sort{/lang}</p>

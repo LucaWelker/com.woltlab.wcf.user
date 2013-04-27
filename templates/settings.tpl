@@ -12,9 +12,7 @@
 {include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.option.category.settings.{$category}{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.user.menu.settings{/lang}: {lang}wcf.user.option.category.settings.{$category}{/lang}</h1>
 </header>
 
 {include file='userNotice'}

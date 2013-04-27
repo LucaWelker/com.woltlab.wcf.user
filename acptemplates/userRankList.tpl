@@ -1,9 +1,7 @@
 {include file='header' pageTitle='wcf.acp.user.rank.list'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.user.rank.list{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.user.rank.list{/lang}</h1>
 	
 	<script type="text/javascript">
 		//<![CDATA[
@@ -34,9 +32,9 @@
 
 {hascontent}
 	<div class="tabularBox tabularBoxTitle marginTop">
-		<hgroup>
-			<h1>{lang}wcf.acp.user.rank.list{/lang} <span class="badge badgeInverse">{#$items}</span></h1>
-		</hgroup>
+		<header>
+			<h2>{lang}wcf.acp.user.rank.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
+		</header>
 		
 		<table class="table">
 			<thead>

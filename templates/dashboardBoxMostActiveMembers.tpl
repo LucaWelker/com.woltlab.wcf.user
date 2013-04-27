@@ -3,10 +3,10 @@
 		<li class="box24">
 			<a href="{link controller='User' object=$activeMember}{/link}" class="framed">{@$activeMember->getAvatar()->getImageTag(24)}</a>
 			
-			<hgroup class="sidebarBoxHeadline">
-				<h1><a href="{link controller='User' object=$activeMember}{/link}" class="userLink" data-user-id="{@$activeMember->userID}">{$activeMember->username}</a></h1>
-				<h2><small>{lang}wcf.dashboard.box.mostActiveMembers.points{/lang}</small></h2>
-			</hgroup>
+			<div class="sidebarBoxHeadline">
+				<h3><a href="{link controller='User' object=$activeMember}{/link}" class="userLink" data-user-id="{@$activeMember->userID}">{$activeMember->username}</a></h3>
+				<small>{lang}wcf.dashboard.box.mostActiveMembers.points{/lang}</small>
+			</div>
 		</li>
 	{/foreach}
 </ul>

@@ -20,9 +20,7 @@
 {include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.user.notification.notifications{/lang} <span class="badge jsNotificationsBadge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></h1>
-	</hgroup>
+	<h1>{lang}wcf.user.notification.notifications{/lang} <span class="badge jsNotificationsBadge">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span></h1>
 </header>
 
 {include file='userNotice'}
@@ -50,10 +48,10 @@
 						<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="framed">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
 
 						<div class="details">
-							<hgroup class="containerHeadline">
-								<h1><a href="{link controller='User' object=$notification[author]}{/link}" class="userLink" data-user-id="{@$notification[author]->userID}">{$notification[author]->username}</a></h1> 
-								<h2><small>{@$notification[time]|time}</small></h2>
-							</hgroup>
+							<div class="containerHeadline">
+								<h3><a href="{link controller='User' object=$notification[author]}{/link}" class="userLink" data-user-id="{@$notification[author]->userID}">{$notification[author]->username}</a></h3> 
+								<small>{@$notification[time]|time}</small>
+							</div>
 
 							<p>{@$notification[message]}</p>
 

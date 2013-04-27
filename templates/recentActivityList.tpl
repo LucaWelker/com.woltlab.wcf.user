@@ -30,9 +30,7 @@
 {include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.user.recentActivity{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.user.recentActivity{/lang}</h1>
 </header>
 
 {include file='userNotice'}

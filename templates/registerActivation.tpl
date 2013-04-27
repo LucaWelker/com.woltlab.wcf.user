@@ -10,9 +10,7 @@
 {include file='header'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.user.registerActivation{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.user.registerActivation{/lang}</h1>
 </header>
 
 {include file='userNotice'}

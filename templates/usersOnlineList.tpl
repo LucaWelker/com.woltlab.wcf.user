@@ -77,9 +77,9 @@
 {assign var=guestsOnline value=0}
 {foreach from=$objects item=user}
 	{capture assign=locationData}
-		<h2>
+		<p>
 			{if $user->getLocation()}{@$user->getLocation()}{else}{lang}wcf.user.usersOnline.location.unknown{/lang}{/if} <small>- {@$user->lastActivityTime|time}</small>
-		</h2>
+		</p>
 	{/capture}
 	
 	{capture assign=sessionData}
@@ -101,10 +101,10 @@
 					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
 					
 					<div class="details userInformation">
-						<hgroup class="containerHeadline">
-							<h1><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h1>
+						<div class="containerHeadline">
+							<h3><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h3>
 							{@$locationData} 
-						</hgroup>
+						</div>
 						
 						{@$sessionData}
 						
@@ -124,10 +124,10 @@
 					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
 					
 					<div class="details userInformation">
-						<hgroup class="containerHeadline">
-							<h1>{if $user->getSpider()->spiderURL}<a href="{$user->getSpider()->spiderURL}" class="externalURL"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>{$user->getSpider()->spiderName}</a>{else}{$user->getSpider()->spiderName}{/if}</h1>
+						<div class="containerHeadline">
+							<h3>{if $user->getSpider()->spiderURL}<a href="{$user->getSpider()->spiderURL}" class="externalURL"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>{$user->getSpider()->spiderName}</a>{else}{$user->getSpider()->spiderName}{/if}</h3>
 							{@$locationData} 
-						</hgroup>
+						</div>
 						
 						{@$sessionData}
 					</div>
@@ -145,10 +145,10 @@
 					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
 					
 					<div class="details userInformation">
-						<hgroup class="containerHeadline">
-							<h1>{lang}wcf.user.guest{/lang}</h1>
+						<div class="containerHeadline">
+							<h3>{lang}wcf.user.guest{/lang}</h3>
 							{@$locationData} 
-						</hgroup>
+						</div>
 						
 						{@$sessionData}
 					</div>
@@ -174,9 +174,7 @@
 
 {if $usersOnline}
 	<header class="boxHeadline">
-		<hgroup>
-			<h1>{lang}wcf.user.usersOnline{/lang} <span class="badge">{#$usersOnline}</span></h1>
-		</hgroup>
+		<h1>{lang}wcf.user.usersOnline{/lang} <span class="badge">{#$usersOnline}</span></h1>
 	</header>
 	
 	<div class="container marginTop">
@@ -188,9 +186,7 @@
 
 {if $guestsOnline && USERS_ONLINE_SHOW_GUESTS}
 	<header class="boxHeadline">
-		<hgroup>
-			<h1>{lang}wcf.user.usersOnline.guests{/lang} <span class="badge">{#$guestsOnline}</span></h1>
-		</hgroup>
+		<h1>{lang}wcf.user.usersOnline.guests{/lang} <span class="badge">{#$guestsOnline}</span></h1>
 	</header>
 	
 	<div class="container marginTop">
@@ -202,9 +198,7 @@
 
 {if $robotsOnline && USERS_ONLINE_SHOW_ROBOTS}
 	<header class="boxHeadline">
-		<hgroup>
-			<h1>{lang}wcf.user.usersOnline.robots{/lang} <span class="badge">{#$robotsOnline}</span></h1>
-		</hgroup>
+		<h1>{lang}wcf.user.usersOnline.robots{/lang} <span class="badge">{#$robotsOnline}</span></h1>
 	</header>
 	
 	<div class="container marginTop">

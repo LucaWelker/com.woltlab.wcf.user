@@ -33,9 +33,7 @@
 {include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.user.team{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.user.team{/lang}</h1>
 </header>
 
 {include file='userNotice'}
@@ -54,9 +52,7 @@
 
 {foreach from=$objects->getTeams() item=team}
 	<header class="boxHeadline boxSubHeadline">
-		<hgroup>
-			<h1>{$team->groupName|language} <span class="badge">{#$team->getMembers()|count}</span></h1>
-		</hgroup>
+		<h2>{$team->groupName|language} <span class="badge">{#$team->getMembers()|count}</span></h2>
 	</header>
 		
 	<div class="container marginTop">
