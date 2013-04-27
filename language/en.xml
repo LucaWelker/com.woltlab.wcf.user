@@ -451,7 +451,9 @@ You can safely ignore this email if you did not register with the website: {@PAG
 		<item name="wcf.user.notification.follow.mail"><![CDATA[{@$author->username} follows you.]]></item>
 		<item name="wcf.user.notification.follow.title"><![CDATA[New Follower]]></item>
 		<item name="wcf.user.notification.mail.disabled"><![CDATA[Email notification has been disabled.]]></item>
-		<item name="wcf.user.notification.mail.footer"><![CDATA[You can manage your notification settings for {@PAGE_TITLE|language} on the page below:
+		<item name="wcf.user.notification.mail.footer"><![CDATA[This is an automatic notification, PLEASE DO NOT REPLY TO THIS EMAIL!
+		
+You can manage your notification settings for {@PAGE_TITLE|language} on the page below:
 {link controller='NotificationSettings' encode=false}{/link} 
 
 If you do not want to receive further email notifications for this event, you can quickly disable it by opening the link below:
@@ -459,7 +461,9 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.notification.mail.header"><![CDATA[Dear {@$user->username},]]></item>
 		<item name="wcf.user.notification.mail.subject"><![CDATA[New Notification: {@$title}]]></item>
 		<item name="wcf.user.notification.mail.daily.subject"><![CDATA[{if $count == 1}New Notification{else}{#$count} New Notifications{/if}]]></item>
-		<item name="wcf.user.notification.mail.daily.footer"><![CDATA[You can manage your notification settings for {@PAGE_TITLE|language} on the page below:
+		<item name="wcf.user.notification.mail.daily.footer"><![CDATA[This is an automatic notification, PLEASE DO NOT REPLY TO THIS EMAIL!
+		
+You can manage your notification settings for {@PAGE_TITLE|language} on the page below:
 {link controller='NotificationSettings' encode=false}{/link} 
 
 If you do not want to receive further email notifications for this event, you can quickly disable it by opening the link below:
@@ -478,9 +482,9 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.profile"><![CDATA[User Profile of “{$user->username}”]]></item>
 		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[{if $userID == $__wcf->getUser()->userID}You did not provide any details yet.{else}There are no details visible to you.{/if}]]></item>
 		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[There are no recent activities available yet.]]></item>
-		<item name="wcf.user.profile.followers"><![CDATA[{$user->username}’s follower]]></item>
+		<item name="wcf.user.profile.followers"><![CDATA[{$user->username}’s Follower]]></item>
 		<item name="wcf.user.profile.userList.showAll"><![CDATA[Show All]]></item>
-		<item name="wcf.user.profile.following"><![CDATA[{$user->username} follows]]></item>
+		<item name="wcf.user.profile.following"><![CDATA[{$user->username} Follows]]></item>
 		<item name="wcf.user.profile.menu.about"><![CDATA[About Me]]></item>
 		<item name="wcf.user.profile.menu.recentActivity"><![CDATA[Recent Activity]]></item>
 		<item name="wcf.user.profile.oldUsername"><![CDATA[Used to be called “{$user->getOldUsername()}”]]></item>
