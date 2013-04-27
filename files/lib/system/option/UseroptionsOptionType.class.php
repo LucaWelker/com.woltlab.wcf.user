@@ -26,11 +26,13 @@ class UseroptionsOptionType extends AbstractOptionType {
 	 */
 	public function validate(Option $option, $newValue) {
 		if (!is_array($newValue)) {
-			throw new UserInputException($option->optionName, 'validationFailed');
+			$newValue = array();
 		}
 		
 		foreach ($newValue as $optionName) {
-			if (!in_array($optionName, self::getUserOptions())) throw new UserInputException($option->optionName, 'validationFailed');
+			if (!in_array($optionName, self::getUserOptions())) {
+				throw new UserInputException($option->optionName, 'validationFailed');
+			}
 		}
 	}
 	
