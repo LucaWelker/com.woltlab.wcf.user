@@ -28,12 +28,20 @@
 	<li><a href="{link controller='Settings'}{/link}" class="noJsOnly" style="display: none"><span class="icon icon16 icon-cogs"></span> <span>{lang}wcf.user.menu.settings{/lang}</span></a></li>
 	
 	<!-- user notifications -->
-	<li id="userNotifications" class="dropdown" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}" data-link="{link controller='NotificationList'}{/link}">
+	<li id="userNotifications" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}">
 		<a href="{link controller='NotificationList'}{/link}"><span class="icon icon16 icon-bell-alt"></span> <span>{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
 		<script type="text/javascript">
 			//<![CDATA[
 			$(function() {
-				new WCF.Notification.Handler();
+				WCF.Language.addObject({
+					'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}',
+					'wcf.user.notification.markAllAsConfirmed': '{lang}wcf.user.notification.markAllAsConfirmed{/lang}',
+					'wcf.user.notification.markAllAsConfirmed.confirmMessage': '{lang}wcf.user.notification.markAllAsConfirmed.confirmMessage{/lang}',
+					'wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}',
+					'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}'
+				});
+				
+				new WCF.Notification.UserPanel('{link controller='NotificationList'}{/link}');
 			});
 			//]]>
 		</script>

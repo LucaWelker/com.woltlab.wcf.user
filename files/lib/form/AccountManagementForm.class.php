@@ -365,7 +365,7 @@ class AccountManagementForm extends AbstractSecureForm {
 		}
 		
 		// password
-		if (WCF::getUser()->authData) {
+		if (!WCF::getUser()->authData) {
 			if (!empty($this->newPassword) || !empty($this->confirmNewPassword)) {
 				$userEditor->update(array(
 					'password' => $this->newPassword

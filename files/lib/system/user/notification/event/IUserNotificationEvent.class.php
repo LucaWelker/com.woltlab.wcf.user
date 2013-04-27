@@ -18,13 +18,6 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  */
 interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	/**
-	 * Returns a list of actions for this notification event.
-	 * 
-	 * @return	array<array>
-	 */
-	public function getActions();
-	
-	/**
 	 * Returns a short title used for the notification overlay, e.g. "New follower".
 	 * 
 	 * @return	string
@@ -39,11 +32,11 @@ interface IUserNotificationEvent extends IDatabaseObjectProcessor {
 	public function getMessage();
 	
 	/**
-	 * Returns rendered HTML used within the notification overlay.
+	 * Returns object link.
 	 * 
 	 * @return	string
 	 */
-	public function getRenderedOutput();
+	public function getLink();
 	
 	/**
 	 * Returns the full title for this notification, e.g. for use with e-mails.

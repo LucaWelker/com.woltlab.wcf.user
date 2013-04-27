@@ -40,9 +40,9 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * Validates the 'load' action.
+	 * Validates the 'getOustandingNotifications' action.
 	 */
-	public function validateLoad() {
+	public function validateGetOutstandingNotifications() {
 		// does nothing
 	}
 	
@@ -51,16 +51,15 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 	 * 
 	 * @return	array<array>
 	 */
-	public function load() {
-		$returnValues = UserNotificationHandler::getInstance()->getNotifications();
-		$returnValues['totalCount'] = UserNotificationHandler::getInstance()->getNotificationCount();
+	public function getOutstandingNotifications() {
+		WCF::getTPL()->assign(array(
+			'notifications' => UserNotificationHandler::getInstance()->getNotifications()
+		));
 		
-		// check if additional notifications are available
-		if ($returnValues['count'] < $returnValues['totalCount']) {
-			$returnValues['showAllLink'] = LinkHandler::getInstance()->getLink('NotificationList');
-		}
-		
-		return $returnValues;
+		return array(
+			'template' => WCF::getTPL()->fetch('notificationListOustanding'),
+			'totalCount' => UserNotificationHandler::getInstance()->getNotificationCount()
+		);
 	}
 	
 	/**
@@ -121,5 +120,24 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 			'notificationID' => $this->parameters['notificationID'],
 			'totalCount' => UserNotificationHandler::getInstance()->getNotificationCount()
 		);
+	}
+	
+	/**
+	 * Validates parameters to mark all notifications of current user as confirmed.
+	 */
+	public function validateMarkAllAsConfirmed() { /* does nothing */ }
+	
+	/**
+	 * Marks all notifications of current user as confirmed.
+	 */
+	public function markAllAsConfirmed() {
+		// remove notifications for this user
+		$sql = "DELETE FROM	wcf".WCF_N."_user_notification_to_user
+			WHERE		userID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(WCF::getUser()->userID));
+		
+		// reset notification count
+		UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'userNotificationCount');
 	}
 }
