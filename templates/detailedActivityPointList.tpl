@@ -32,7 +32,7 @@
 			{/foreach}
 			
 			<tr>
-				<td class="columnTitle focus right" colspan="3">&Sigma;</td>
+				<td class="columnTitle focus right" colspan="3">&sum;</td>
 				<td class="columnDigits focus"><span class="badge">{#$user->activityPoints}</span></td>
 			</tr>
 		</tbody>

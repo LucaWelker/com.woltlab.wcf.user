@@ -192,10 +192,9 @@ class UserNotificationHandler extends SingletonFactory {
 	 * 
 	 * @param	integer		$limit
 	 * @param	integer		$offset
-	 * @param	boolean		$detailedView
 	 * @return	array<array>
 	 */
-	public function getNotifications($limit = 5, $offset = 0, $detailedView = false) {
+	public function getNotifications($limit = 5, $offset = 0) {
 		// build enormous query
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("notification_to_user.userID = ?", array(WCF::getUser()->userID));
@@ -276,22 +275,11 @@ class UserNotificationHandler extends SingletonFactory {
 				unserialize($event['additionalData'])
 			);
 			
-			if ($detailedView) {
-				$data = array(
-					'author' => $class->getAuthor(),
-					'buttons' => $class->getActions(),
-					'notificationID' => $event['notificationID'],
-					'message' => $class->getMessage(),
-					'time' => $event['time']
-				);
-			}
-			else {
-				$data = array(
-					'event' => $class,
-					'notificationID' => $event['notificationID'],
-					'time' => $event['time']
-				);
-			}
+			$data = array(
+				'event' => $class,
+				'notificationID' => $event['notificationID'],
+				'time' => $event['time']
+			);
 			
 			$notifications[] = $data;
 		}

@@ -7,6 +7,10 @@
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
+			WCF.Language.addObject({
+				'wcf.user.notification.markAsConfirmed': '{lang}wcf.user.notification.markAsConfirmed{/lang}'
+			});
+			
 			new WCF.Notification.List();
 		});
 		//]]>
@@ -32,6 +36,8 @@
 		<nav>
 			<ul>
 				{content}
+					{if $notifications[notifications]}<li class="jsOnly"><a class="button jsMarkAllAsConfirmed"><span class="icon icon16 icon-remove"></span> <span>{lang}wcf.user.notification.markAllAsConfirmed{/lang}</span></a></li>{/if}
+					
 					{event name='contentNavigationButtonsTop'}
 				{/content}
 			</ul>
@@ -43,23 +49,20 @@
 	<div class="container marginTop">
 		<ul class="containerList">
 			{foreach from=$notifications[notifications] item=$notification}
-				<li class="jsNotificationItem" data-notification-id="{@$notification[notificationID]}">
+				<li class="jsNotificationItem" data-notification-id="{@$notification[notificationID]}" data-link="{$notification[event]->getLink()}">
 					<div class="box48">
-						<a href="{link controller='User' object=$notification[author]}{/link}" title="{$notification[author]->username}" class="framed">{@$notification[author]->getAvatar()->getImageTag(48)}</a>
-
+						<a href="{link controller='User' object=$notification[event]->getAuthor()}{/link}" title="{$notification[event]->getAuthor()->username}" class="framed">{@$notification[event]->getAuthor()->getAvatar()->getImageTag(48)}</a>
+						
 						<div class="details">
 							<div class="containerHeadline">
-								<h3><a href="{link controller='User' object=$notification[author]}{/link}" class="userLink" data-user-id="{@$notification[author]->userID}">{$notification[author]->username}</a></h3> 
+								<h3><a href="{link controller='User' object=$notification[event]->getAuthor()}{/link}" class="userLink" data-user-id="{@$notification[event]->getAuthor()->userID}">{$notification[event]->getAuthor()->username}</a></h3> 
 								<small>{@$notification[time]|time}</small>
 							</div>
-
-							<p>{@$notification[message]}</p>
-
-							<ul class="buttonList jsNotificationAction jsOnly" data-notification-id="{@$notification[notificationID]}">
-								{foreach from=$notification[buttons] item=button}
-									<li class="button small" data-action-name="{$button[actionName]}" data-class-name="{$button[className]}" data-object-id="{@$button[objectID]}">{$button[label]}</li>
-								{/foreach}
-								{event name='buttons'}
+							
+							<p>{@$notification[event]->getMessage()}</p>
+							
+							<ul class="buttonList jsOnly">
+								<li><a class="jsMarkAsConfirmed jsTooltip" title="{lang}wcf.user.notification.markAsConfirmed{/lang}"><span class="icon icon16 icon-remove"></span></a></li>
 							</ul>
 						</div>
 					</div>
