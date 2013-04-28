@@ -1,6 +1,17 @@
 {capture assign='sidebar'}
 	{assign var=__userMenuActiveItems value=$__wcf->getUserMenu()->getActiveMenuItems()}
 	
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			// mobile safari hover workaround
+			if ($(window).width() <= 768) {
+				$('.sidebar').addClass('mobileSidebar').hover(function() { });
+			}
+		});
+		//]]>
+	</script> 
+	
 	{foreach from=$__wcf->getUserMenu()->getMenuItems('') item=menuCategory}
 		<fieldset>
 			<legend>{lang}{$menuCategory->menuItem}{/lang}</legend>
@@ -14,15 +25,4 @@
 			</nav>
 		</fieldset>
 	{/foreach}
-	
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			// mobile safari hover workaround
-			if ($(window).width() <= 768) {
-				$('.sidebar').addClass('mobileSidebar').hover(function() { });
-			}
-		});
-		//]]>
-	</script> 
 {/capture}
