@@ -5,6 +5,15 @@
 	
 	{include file='headInclude'}
 	
+	{capture assign='canonicalURLParameters'}sortField={@$sortField}&sortOrder={@$sortOrder}{if $letter}&letter={@$letter|rawurlencode}{/if}{/capture}
+	{if $pageNo < $pages}
+		<link rel="next" href="{link controller='MembersList'}pageNo={@$pageNo+1}&{@$canonicalURLParameters}{/link}" />
+	{/if}
+	{if $pageNo > 1}
+		<link rel="prev" href="{link controller='MembersList'}{if $pageNo > 2}pageNo={@$pageNo-1}&{/if}{@$canonicalURLParameters}{/link}" />
+	{/if}
+	<link rel="canonical" href="{link controller='MembersList'}{if $pageNo > 1}pageNo={@$pageNo}&{/if}{@$canonicalURLParameters}{/link}" />
+	
 	<script type="text/javascript">
 		//<![CDATA[
 			$(function() {
@@ -50,9 +59,9 @@
 				
 		<ul class="buttonList letters">
 			{foreach from=$letters item=__letter}
-				<li><a href="{if $searchID}{link controller='MembersList' id=$searchID}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}{else}{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}&letter={$__letter|rawurlencode}{/link}{/if}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
+				<li><a href="{if $searchID}{link controller='MembersList' id=$searchID}sortField={$sortField}&sortOrder={$sortOrder}&letter={$__letter|rawurlencode}{/link}{else}{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&letter={$__letter|rawurlencode}{/link}{/if}" class="button small{if $letter == $__letter} active{/if}">{$__letter}</a></li>
 			{/foreach}
-			{if !$letter|empty}<li><a href="{if $searchID}{link controller='MembersList' id=$searchID}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}{else}{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}&pageNo={@$pageNo}{/link}{/if}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
+			{if !$letter|empty}<li><a href="{if $searchID}{link controller='MembersList' id=$searchID}sortField={$sortField}&sortOrder={$sortOrder}{/link}{else}{link controller='MembersList'}sortField={$sortField}&sortOrder={$sortOrder}{/link}{/if}" class="button small">{lang}wcf.user.members.sort.letters.all{/lang}</a></li>{/if}
 		</ul>
 	</fieldset>
 		
@@ -79,7 +88,6 @@
 			
 			<div class="formSubmit">
 				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-				<input type="hidden" name="pageNo" value="{@$pageNo}" />
 				<input type="hidden" name="letter" value="{$letter}" />
 			</div>
 		</form>
