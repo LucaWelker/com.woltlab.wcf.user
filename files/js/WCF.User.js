@@ -1230,6 +1230,7 @@ WCF.Notification.UserPanel = WCF.UserPanel.extend({
 	 * @see	WCF.UserPanel.init()
 	 */
 	init: function(showAllLink) {
+		this._noItems = 'wcf.user.notification.noMoreNotifications';
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});

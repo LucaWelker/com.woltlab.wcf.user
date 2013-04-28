@@ -37,7 +37,7 @@
 					'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}',
 					'wcf.user.notification.markAllAsConfirmed': '{lang}wcf.user.notification.markAllAsConfirmed{/lang}',
 					'wcf.user.notification.markAllAsConfirmed.confirmMessage': '{lang}wcf.user.notification.markAllAsConfirmed.confirmMessage{/lang}',
-					'wcf.user.notification.noNotifications': '{lang}wcf.user.notification.noNotifications{/lang}',
+					'wcf.user.notification.noMoreNotifications': '{lang}wcf.user.notification.noMoreNotifications{/lang}',
 					'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}'
 				});
 				

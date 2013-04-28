@@ -474,6 +474,7 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.notification.markAllAsConfirmed"><![CDATA[Discard All Notifications]]></item>
 		<item name="wcf.user.notification.markAllAsConfirmed.confirmMessage"><![CDATA[Do you really want to discard all notifications?]]></item>
 		<item name="wcf.user.notification.markAsConfirmed"><![CDATA[Discard]]></item>
+		<item name="wcf.user.notification.noMoreNotifications"><![CDATA[No more notifications]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[There are no more notifications.]]></item>
 		<item name="wcf.user.notification.notifications"><![CDATA[Notifications]]></item>
 		<item name="wcf.user.notification.showAll"><![CDATA[Show All Notifications]]></item>
