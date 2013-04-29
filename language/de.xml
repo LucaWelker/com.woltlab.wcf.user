@@ -87,6 +87,8 @@
 		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Bestimmt wie oft die Grafik wiederholt wird.]]></item>
 		<item name="wcf.acp.user.rank.title"><![CDATA[Rangbezeichnung]]></item>
 		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
+		<item name="wcf.acp.user.disableSignature"><![CDATA[Signatur sperren]]></item>
+		<item name="wcf.acp.user.disableSignatureReason"><![CDATA[Begründung]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">

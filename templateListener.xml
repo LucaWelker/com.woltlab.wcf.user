@@ -36,6 +36,20 @@
 			<eventname>categoryFields</eventname>
 			<templatecode><![CDATA[{include file='__userAddUserTitle'}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userAddSignatureTab">
+			<environment>admin</environment>
+			<templatename>userAdd</templatename>
+			<eventname>tabMenuTabs</eventname>
+			<templatecode><![CDATA[{include file='__userAddSignatureTab'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="userAddSignatureTabContent">
+			<environment>admin</environment>
+			<templatename>userAdd</templatename>
+			<eventname>tabMenuContent</eventname>
+			<templatecode><![CDATA[{include file='__userAddSignatureTabContent'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->
