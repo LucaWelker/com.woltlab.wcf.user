@@ -204,7 +204,8 @@ class UserRankAddForm extends AbstractForm {
 		// reset values
 		$this->rankTitle = $this->cssClassName = $this->customCssClassName = $this->rankImage = '';
 		$this->groupID = $this->repeatImage = $this->requiredPoints = $this->requiredGender = 0;
-		I18nHandler::getInstance()->disableAssignValueVariables();
+		
+		I18nHandler::getInstance()->reset();
 		
 		// show success
 		WCF::getTPL()->assign(array(
