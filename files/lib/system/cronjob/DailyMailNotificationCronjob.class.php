@@ -164,6 +164,7 @@ class DailyMailNotificationCronjob extends AbstractCronjob {
 			
 			// build mail
 			$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.daily.subject', array('count' => count($events))), $message);
+			$mail->setLanguage($user->getLanguage());
 			$mail->send();
 		}
 	}

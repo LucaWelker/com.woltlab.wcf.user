@@ -415,6 +415,7 @@ class UserNotificationHandler extends SingletonFactory {
 		
 		// build mail
 		$mail = new Mail(array($user->username => $user->email), $user->getLanguage()->getDynamicVariable('wcf.user.notification.mail.subject', array('title' => $event->getEmailTitle())), $message);
+		$mail->setLanguage($user->getLanguage());
 		$mail->send();
 	}
 	

@@ -140,6 +140,7 @@ class MailForm extends RecaptchaForm {
 		
 		// build mail
 		$mail = new Mail(array($this->user->username => $this->user->email), $userLanguage->getDynamicVariable('wcf.user.mail.mail.subject', $subjectData), $userLanguage->getDynamicVariable('wcf.user.mail.mail', $messageData));
+		$mail->setLanguage($userLanguage);
 		
 		// add reply-to tag
 		if (WCF::getUser()->userID) {

@@ -419,6 +419,7 @@ class RegisterForm extends UserAddForm {
 				$language->getDynamicVariable('wcf.user.register.notification.mail.subject'),
 				$language->getDynamicVariable('wcf.user.register.notification.mail', array('user' => $user))
 			);
+			$mail->setLanguage($language);
 			$mail->send();
 		}
 		
