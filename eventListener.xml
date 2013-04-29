@@ -119,5 +119,37 @@
 			<listenerclassname>wcf\system\event\listener\UserActionPresetNotificationListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+		
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\UserAddFormSignatureListener</listenerclassname>
+			<inherit>1</inherit>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+			<eventname>readData</eventname>
+			<listenerclassname>wcf\system\event\listener\UserAddFormSignatureListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
+			<eventname>readFormParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\UserAddFormSignatureListener</listenerclassname>
+			<inherit>1</inherit>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
+			<eventname>save</eventname>
+			<listenerclassname>wcf\system\event\listener\UserAddFormSignatureListener</listenerclassname>
+			<inherit>1</inherit>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>
