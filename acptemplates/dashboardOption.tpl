@@ -18,7 +18,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='DashboardList'}{/link}" title="{lang}wcf.acp.menu.link.dashboard.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.dashboard.list{/lang}</span></a></li>
+			<li><a href="{link controller='DashboardList'}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.dashboard.list{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -141,7 +141,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='DashboardList'}{/link}" title="{lang}wcf.acp.menu.link.dashboard.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.dashboard.list{/lang}</span></a></li>
+			<li><a href="{link controller='DashboardList'}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.dashboard.list{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtonsBottom'}
 		</ul>
