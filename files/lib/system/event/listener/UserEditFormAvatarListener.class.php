@@ -59,8 +59,6 @@ class UserEditFormAvatarListener implements IEventListener {
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		if (!MODULE_USER_SIGNATURE) return;
-		
 		$this->eventObj = $eventObj;
 		$this->user = $eventObj->user;
 		$this->$eventName();
