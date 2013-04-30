@@ -1,8 +1,8 @@
 <?php
 namespace wcf\system\event\listener;
 use wcf\data\user\avatar\Gravatar;
-use wcf\data\user\avatar\UserAvatarAction;
 use wcf\data\user\avatar\UserAvatar;
+use wcf\data\user\avatar\UserAvatarAction;
 use wcf\system\event\IEventListener;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
@@ -59,8 +59,6 @@ class UserEditFormAvatarListener implements IEventListener {
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		if (!MODULE_USER_SIGNATURE) return;
-		
 		$this->eventObj = $eventObj;
 		$this->user = $eventObj->user;
 		$this->$eventName();
