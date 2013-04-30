@@ -89,6 +89,8 @@
 		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
 		<item name="wcf.acp.user.disableSignature"><![CDATA[Signatur sperren]]></item>
 		<item name="wcf.acp.user.disableSignatureReason"><![CDATA[Begründung]]></item>
+		<item name="wcf.acp.user.disableAvatar"><![CDATA[Avatar sperren]]></item>
+		<item name="wcf.acp.user.disableAvatarReason"><![CDATA[Begründung]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">

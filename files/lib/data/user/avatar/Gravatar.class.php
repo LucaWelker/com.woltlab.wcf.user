@@ -78,7 +78,9 @@ class Gravatar extends DefaultAvatar {
 				$this->url[$size] = WCF::getPath().$cachedFilename;
 			}
 			else {
-				$this->url[$size] = LinkHandler::getInstance()->getLink('GravatarDownload', array(), 'userID='.$this->userID.'&size='.$size);
+				$this->url[$size] = LinkHandler::getInstance()->getLink('GravatarDownload', array(
+					'forceFrontend' => true		
+				), 'userID='.$this->userID.'&size='.$size);
 			}
 		}
 		

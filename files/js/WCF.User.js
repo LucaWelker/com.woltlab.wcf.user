@@ -1848,8 +1848,15 @@ WCF.User.Avatar = {};
  * @see	WCF.Upload
  */
 WCF.User.Avatar.Upload = WCF.Upload.extend({
-	init: function(buttonSelector) {
+	/**
+	 * user id of avatar owner
+	 * @var	integer
+	 */
+	_userID: 0,
+	
+	init: function(userID) {
 		this._super($('#avatarUpload > dd > div'), undefined, 'wcf\\data\\user\\avatar\\UserAvatarAction');
+		this._userID = userID || 0;
 		
 		$('#avatarForm input[type=radio]').change(function() {
 			if ($(this).val() == 'custom') {
@@ -1897,7 +1904,16 @@ WCF.User.Avatar.Upload = WCF.Upload.extend({
 		}
 		
 		return $span;
-	}
+	},
+	
+	/**
+	 * @see	WCF.Upload._getParameters()
+	 */
+	_getParameters: function() {
+		return {
+			userID: this._userID
+		};
+	},
 });
 
 /**

@@ -50,6 +50,20 @@
 			<eventname>tabMenuContent</eventname>
 			<templatecode><![CDATA[{include file='__userAddSignatureTabContent'}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userAddAvatarTab">
+			<environment>admin</environment>
+			<templatename>userAdd</templatename>
+			<eventname>tabMenuTabs</eventname>
+			<templatecode><![CDATA[{include file='__userAddAvatarTab'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="userAddAvatarTabContent">
+			<environment>admin</environment>
+			<templatename>userAdd</templatename>
+			<eventname>tabMenuContent</eventname>
+			<templatecode><![CDATA[{include file='__userAddAvatarTabContent'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->

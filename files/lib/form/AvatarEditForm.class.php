@@ -67,7 +67,10 @@ class AvatarEditForm extends AbstractForm {
 			break;
 				
 			case 'gravatar':
-				if (!MODULE_GRAVATAR) $this->avatarType = 'none';
+				if (!MODULE_GRAVATAR) {
+					$this->avatarType = 'none';
+					break;
+				}
 				
 				// test gravatar
 				if (!Gravatar::test(WCF::getUser()->email)) {

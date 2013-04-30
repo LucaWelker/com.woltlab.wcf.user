@@ -1,7 +1,9 @@
 <?php
 namespace wcf\data\user\avatar;
+use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
@@ -27,6 +29,19 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	 * Validates the upload action.
 	 */
 	public function validateUpload() {
+		$this->readInteger('userID', true);
+		
+		if ($this->parameters['userID']) {
+			if (!WCF::getSession()->getPermission('admin.user.canEditUser')) {
+				throw new PermissionDeniedException();
+			}
+			
+			$user = new User($this->parameters['userID']);
+			if (!$user->userID) {
+				throw new IllegalLinkException();
+			}
+		}
+		
 		// check upload permissions
 		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar') || WCF::getUser()->disableAvatar) {
 			throw new PermissionDeniedException();
@@ -46,6 +61,8 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	public function upload() {
 		// save files
 		$files = $this->parameters['__files']->getFiles();
+		$userID = (!empty($this->parameters['userID']) ? intval($this->parameters['userID']) : WCF::getUser()->userID);
+		$user = ($userID != WCF::getUser()->userID ? new User($userID) : WCF::getUser());
 		$file = $files[0];
 		
 		try {
@@ -59,7 +76,7 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 					'avatarExtension' => $file->getFileExtension(),
 					'width' => $imageData[0],
 					'height' => $imageData[1],
-					'userID' => WCF::getUser()->userID,
+					'userID' => $userID,
 					'fileHash' => sha1_file($fileLocation)
 				);
 				
@@ -82,20 +99,20 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 					$action->executeAction();
 					
 					// delete old avatar
-					if (WCF::getUser()->avatarID) {
-						$action = new UserAvatarAction(array(WCF::getUser()->avatarID), 'delete');
+					if ($user->avatarID) {
+						$action = new UserAvatarAction(array($user->avatarID), 'delete');
 						$action->executeAction();
 					}
 					
 					// update user
-					$userEditor = new UserEditor(WCF::getUser());
+					$userEditor = new UserEditor($user);
 					$userEditor->update(array(
 						'avatarID' => $avatar->avatarID,
 						'enableGravatar' => 0
 					));
 					
 					// reset user storage
-					UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'avatar');
+					UserStorageHandler::getInstance()->reset(array($userID), 'avatar');
 					
 					// return result
 					return array(

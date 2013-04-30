@@ -120,7 +120,7 @@
 			<environment>admin</environment>
 		</eventlistener>
 		
-		
+		<!-- UserAddFormSignatureListener -->
 		<eventlistener>
 			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
 			<eventname>assignVariables</eventname>
@@ -149,6 +149,42 @@
 			<eventname>save</eventname>
 			<listenerclassname>wcf\system\event\listener\UserAddFormSignatureListener</listenerclassname>
 			<inherit>1</inherit>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<!-- UserEditFormAvatarListener -->
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\UserEditFormAvatarListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+			<eventname>readData</eventname>
+			<listenerclassname>wcf\system\event\listener\UserEditFormAvatarListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+			<eventname>validate</eventname>
+			<listenerclassname>wcf\system\event\listener\UserEditFormAvatarListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+			<eventname>readFormParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\UserEditFormAvatarListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+			<eventname>save</eventname>
+			<listenerclassname>wcf\system\event\listener\UserEditFormAvatarListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
 	</import>
