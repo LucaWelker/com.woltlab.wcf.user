@@ -1,6 +1,7 @@
 <?php
 namespace wcf\form;
 use wcf\acp\form\UserAddForm;
+use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatarAction;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
@@ -264,7 +265,6 @@ class RegisterForm extends UserAddForm {
 				$githubData = WCF::getSession()->getVar('__githubData');
 				
 				$this->additionalFields['authData'] = 'github:'.WCF::getSession()->getVar('__githubToken');
-				$this->additionalFields['enableGravatar'] = 1;
 				
 				WCF::getSession()->unregister('__githubData');
 				WCF::getSession()->unregister('__githubToken');
@@ -347,6 +347,11 @@ class RegisterForm extends UserAddForm {
 			$this->additionalFields['activationCode'] = $activationCode;
 			$addDefaultGroups = false;
 			$this->groupIDs = UserGroup::getGroupIDsByType(array(UserGroup::EVERYONE, UserGroup::GUESTS));
+		}
+		
+		// check gravatar support
+		if (MODULE_GRAVATAR && Gravatar::test($this->email)) {
+			$this->additionalFields['enableGravatar'] = 1;
 		}
 		
 		// create user
