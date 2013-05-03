@@ -9,13 +9,12 @@
 						<dt><label for="__userTitle">{lang}wcf.user.userTitle{/lang}</label></dt>
 						<dd>
 							<input type="text" id="__userTitle" name="values[__userTitle]" value="{$__userTitle}" class="long" maxlength="{@USER_TITLE_MAX_LENGTH}" />
-							<small>{lang}wcf.user.userTitle.description{/lang}</small>
-							
 							{if $errorType[__userTitle]|isset}
 								<small class="innerError">
 									{lang}wcf.user.userTitle.error.{@$errorType[__userTitle]}{/lang}
 								</small>
 							{/if}
+							<small>{lang}wcf.user.userTitle.description{/lang}</small>
 						</dd>
 					</dl>
 				{/if}
