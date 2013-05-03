@@ -76,13 +76,12 @@
 					<dt class="framed"><img src="http://www.gravatar.com/avatar/{@$__wcf->user->email|strtolower|md5}?s=96" /></dt>
 					<dd>
 						<label><input type="radio" name="avatarType" value="gravatar" {if $avatarType == 'gravatar'}checked="checked" {/if}/> {lang}wcf.user.avatar.type.gravatar{/lang}</label>
-						<small>{lang}wcf.user.avatar.type.gravatar.description{/lang}</small>
-						
 						{if $errorField == 'gravatar'}
 							<small class="innerError">
 								{if $errorType == 'notFound'}{lang}wcf.user.avatar.type.gravatar.error.notFound{/lang}{/if}
 							</small>
 						{/if}
+						<small>{lang}wcf.user.avatar.type.gravatar.description{/lang}</small>
 					</dd>
 				</dl>
 			{/if}
