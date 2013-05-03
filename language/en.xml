@@ -93,6 +93,10 @@
 		<item name="wcf.acp.user.disableAvatarReason"><![CDATA[TODO: Begründung]]></item>
 	</category>
 	
+	<category name="wcf.clipboard">
+		<item name="wcf.clipboard.item.com.woltlab.wcf.user.merge"><![CDATA[TODO: Zusammenfügen]]></item>
+	</category>
+	
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.availableBoxes"><![CDATA[Disabled Boxes]]></item>
 		<item name="wcf.dashboard.box.enabledBoxes"><![CDATA[Active Boxes]]></item>
