@@ -187,5 +187,12 @@
 			<listenerclassname>wcf\system\event\listener\UserEditFormAvatarListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\action\UserQuickSearchAction</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>wcf\system\event\listener\ExtendedUserQuickSearchActionListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>

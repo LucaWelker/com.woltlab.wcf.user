@@ -83,6 +83,13 @@
 			<eventname>javascriptInit</eventname>
 			<templatecode><![CDATA[{if $__wcf->session->getPermission('admin.user.canEnableUser')}WCF.ACP.User.EnableHandler.init();{/if}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userSearchExtendedQuickSearchItems">
+			<environment>admin</environment>
+			<templatename>userSearch</templatename>
+			<eventname>quickSearchItems</eventname>
+			<templatecode><![CDATA[{include file='__userSearchExtendedQuickSearchItems'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->

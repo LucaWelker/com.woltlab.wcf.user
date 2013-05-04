@@ -93,6 +93,9 @@
 		<item name="wcf.acp.user.disableAvatarReason"><![CDATA[Begründung]]></item>
 		<item name="wcf.acp.user.disable"><![CDATA[Deaktivieren]]></item>
 		<item name="wcf.acp.user.enable"><![CDATA[Aktivieren]]></item>
+		<item name="wcf.acp.user.quickSearch.disabled"><![CDATA[Nicht aktivierte Benutzer]]></item>
+		<item name="wcf.acp.user.quickSearch.disabledAvatars"><![CDATA[Gesperrte Avatare]]></item>
+		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[Gesperrte Signature]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
