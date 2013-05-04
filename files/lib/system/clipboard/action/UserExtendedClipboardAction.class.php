@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\clipboard\action;
+use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
@@ -22,15 +23,15 @@ class UserExtendedClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	wcf\system\clipboard\action\IClipboardAction::execute()
 	 */
-	public function execute(array $objects, $actionName) {
-		$item = parent::execute($objects, $actionName);
+	public function execute(array $objects, ClipboardAction $action) {
+		$item = parent::execute($objects, $action);
 		
 		if ($item === null) {
 			return null;
 		}
 		
 		// handle actions
-		switch ($actionName) {
+		switch ($action->actionName) {
 			case 'merge':
 				$item->setURL(LinkHandler::getInstance()->getLink('UserMerge'));
 			break;
