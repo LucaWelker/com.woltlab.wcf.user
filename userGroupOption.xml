@@ -36,7 +36,12 @@
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			
+			<option name="admin.user.canEnableUser">
+				<categoryname>admin.user.user</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
 			<option name="admin.user.canEditActivityPoints">
 				<categoryname>admin.user.user</categoryname>
 				<optiontype>boolean</optiontype>

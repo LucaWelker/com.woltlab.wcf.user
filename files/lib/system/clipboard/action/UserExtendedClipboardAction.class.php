@@ -17,7 +17,7 @@ class UserExtendedClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
 	 */
-	protected $supportedActions = array('merge');
+	protected $supportedActions = array('merge', 'enable');
 	
 	/**
 	 * @see	wcf\system\clipboard\action\IClipboardAction::execute()
@@ -51,6 +51,20 @@ class UserExtendedClipboardAction extends AbstractClipboardAction {
 	 */
 	public function getTypeName() {
 		return 'com.woltlab.wcf.user';
+	}
+	
+	/**
+	 * Returns the ids of the users which can be enabled.
+	 *
+	 * @return	array<integer>
+	 */
+	protected function validateEnable() {
+		// check permissions
+		if (!WCF::getSession()->getPermission('admin.user.canEnableUser')) {
+			return array();
+		}
+	
+		return array_keys($this->objects);
 	}
 	
 	/**

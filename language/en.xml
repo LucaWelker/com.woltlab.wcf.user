@@ -91,6 +91,8 @@
 		<item name="wcf.acp.user.disableSignatureReason"><![CDATA[TODO: Begründung]]></item>
 		<item name="wcf.acp.user.disableAvatar"><![CDATA[TODO: Avatar sperren]]></item>
 		<item name="wcf.acp.user.disableAvatarReason"><![CDATA[TODO: Begründung]]></item>
+		<item name="wcf.acp.user.disable"><![CDATA[TODO: Deaktivieren]]></item>
+		<item name="wcf.acp.user.enable"><![CDATA[TODO: Aktivieren]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">

@@ -8,5 +8,12 @@
 				<page><![CDATA[wcf\acp\page\UserListPage]]></page>
 			</pages>
 		</action>
+		<action name="enable">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\UserExtendedClipboardAction]]></actionclassname>
+			<showorder>5</showorder>
+			<pages>
+				<page><![CDATA[wcf\acp\page\UserListPage]]></page>
+			</pages>
+		</action>
 	</import>
 </data>

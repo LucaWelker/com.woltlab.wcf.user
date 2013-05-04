@@ -64,6 +64,25 @@
 			<eventname>tabMenuContent</eventname>
 			<templatecode><![CDATA[{include file='__userAddAvatarTabContent'}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="userListEnableButton">
+			<environment>admin</environment>
+			<templatename>userList</templatename>
+			<eventname>rowButtons</eventname>
+			<templatecode><![CDATA[{include file='__userListEnableButton'}]]></templatecode>
+		</templatelistener>
+		<templatelistener name="userListExtendedJavascriptInclude">
+			<environment>admin</environment>
+			<templatename>userList</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.User.js"></script>]]></templatecode>
+		</templatelistener>
+		<templatelistener name="userListExtendedJavascriptInit">
+			<environment>admin</environment>
+			<templatename>userList</templatename>
+			<eventname>javascriptInit</eventname>
+			<templatecode><![CDATA[{if $__wcf->session->getPermission('admin.user.canEnableUser')}WCF.ACP.User.EnableHandler.init();{/if}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->
