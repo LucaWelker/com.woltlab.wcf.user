@@ -50,10 +50,12 @@
 						<div class="details userInformation">
 							{include file='userInformationHeadline'}
 							
-							<ul class="buttonList jsOnly">
-								<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unfollow{/lang}" data-object-id="{@$user->followID}"></span></li>
-								{event name='userButtons'}
-							</ul>
+							<nav class="jsMobileNavigation buttonGroupNavigation">
+								<ul class="buttonList jsOnly">
+									<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton" title="{lang}wcf.user.button.unfollow{/lang}" data-object-id="{@$user->followID}"></span></li>
+									{event name='userButtons'}
+								</ul>
+							</nav>
 							
 							{include file='userInformationStatistics'}
 						</div>
