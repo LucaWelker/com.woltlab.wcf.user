@@ -519,7 +519,7 @@ Möchten Sie diese E-Mail-Benachrichtigung in Zukunft nicht mehr erhalten, könn
 		<item name="wcf.user.notification.mailNotificationType.instant"><![CDATA[Sofortige E-Mail-Benachrichtigung]]></item>
 		<item name="wcf.user.notification.mailNotificationType.daily"><![CDATA[Tägliche E-Mail-Benachrichtigung]]></item>
 		<item name="wcf.user.notification.markAllAsConfirmed"><![CDATA[Alle Benachrichtigungen verwerfen]]></item>
-		<item name="wcf.user.notification.markAllAsConfirmed.confirmMessage"><![CDATA[Möchten Sie wirklich alle Benachrichtigungen verwerfen?]]></item>
+		<item name="wcf.user.notification.markAllAsConfirmed.confirmMessage"><![CDATA[Wollen Sie wirklich alle Benachrichtigungen verwerfen?]]></item>
 		<item name="wcf.user.notification.markAsConfirmed"><![CDATA[Verwerfen]]></item>
 		<item name="wcf.user.notification.noMoreNotifications"><![CDATA[Keine weiteren Benachrichtigungen]]></item>
 		<item name="wcf.user.notification.noNotifications"><![CDATA[Es sind keine neuen Benachrichtigungen vorhanden.]]></item>
