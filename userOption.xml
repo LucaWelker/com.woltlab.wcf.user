@@ -164,6 +164,15 @@
 				<visible>15</visible>
 				<editable>3</editable>
 			</option>
+			<option name="googlePlus">
+				<categoryname>profile.contact</categoryname>
+				<optiontype>text</optiontype>
+				<outputclass>wcf\system\option\user\GooglePlusUserOptionOutput</outputclass>
+				<validationpattern>^$|^[0-9]{21}$</validationpattern>
+				<searchable>1</searchable>
+				<visible>15</visible>
+				<editable>3</editable>
+			</option>
 			<!-- /profile -->
 			
 			<!-- settings -->
