@@ -136,6 +136,7 @@
 				<optiontype>text</optiontype>
 				<searchable>1</searchable>
 				<validationpattern>^$|^([0-9](-| )?)+[0-9]$</validationpattern>
+				<contentpattern>^(\d{3})-(\d{3})-(\d{3})$</contentpattern>
 				<visible>15</visible>
 				<editable>3</editable>
 			</option>
@@ -151,6 +152,7 @@
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\FacebookUserOptionOutput</outputclass>
 				<validationpattern>^$|^[A-Za-z\d.]{5,}$</validationpattern>
+				<contentpattern>^https?://www.facebook.com/([A-Za-z\d.]{5,})$</contentpattern>
 				<searchable>1</searchable>
 				<visible>15</visible>
 				<editable>3</editable>
@@ -160,6 +162,7 @@
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\TwitterUserOptionOutput</outputclass>
 				<validationpattern>^$|^[A-Za-z0-9_]+$</validationpattern>
+				<contentpattern>^https?://twitter.com/([A-Za-z0-9_]+)$</contentpattern>
 				<searchable>1</searchable>
 				<visible>15</visible>
 				<editable>3</editable>
@@ -169,6 +172,7 @@
 				<optiontype>text</optiontype>
 				<outputclass>wcf\system\option\user\GooglePlusUserOptionOutput</outputclass>
 				<validationpattern>^$|^[0-9]{21}$</validationpattern>
+				<contentpattern>^https?://plus.google.com/([0-9]{21})$</contentpattern>
 				<searchable>1</searchable>
 				<visible>15</visible>
 				<editable>3</editable>
