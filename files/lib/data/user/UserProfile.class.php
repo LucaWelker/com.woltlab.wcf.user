@@ -11,6 +11,7 @@ use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\cache\builder\UserGroupPermissionCacheBuilder;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\online\location\UserOnlineLocationHandler;
+use wcf\system\user\signature\SignatureCache;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -678,10 +679,19 @@ class UserProfile extends DatabaseObjectDecorator implements IBreadcrumbProvider
 	 * @return	boolean
 	 */
 	public function showSignature() {
-		if (!$this->signatureCache) return false;
+		if (!$this->signature) return false;
 		if ($this->disabledSignature) return false;
 		if (WCF::getUser()->userID && !WCF::getUser()->showSignature) return false;
 		
 		return true;
+	}
+	
+	/**
+	 * Returns the parsed signature.
+	 * 
+	 * @return	string
+	 */
+	public function getSignature() {
+		return SignatureCache::getInstance()->getSignature($this->getDecoratedObject());
 	}
 }
