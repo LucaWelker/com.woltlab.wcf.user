@@ -39,6 +39,11 @@ class SettingsForm extends AbstractForm {
 	public $optionHandler = null;
 	
 	/**
+	 * @see	wcf\form\AbstractForm::$errorType
+	 */
+	public $errorType = array();
+	
+	/**
 	 * option category
 	 * @var	string
 	 */
@@ -127,7 +132,12 @@ class SettingsForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 		
-		$this->optionHandler->validate();
+		// dynamic options
+		$optionErrors = $this->optionHandler->validate();
+		if (!empty($optionErrors)) {
+			$this->errorType = $optionErrors;
+			throw new UserInputException('options', $this->errorType);
+		}
 		
 		// static options
 		if ($this->category == 'general') {
