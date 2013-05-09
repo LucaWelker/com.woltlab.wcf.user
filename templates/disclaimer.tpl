@@ -41,7 +41,7 @@
 	
 	<div class="formSubmit">
 		<input type="submit" name="accept" value="{lang}wcf.user.register.disclaimer.accept{/lang}" accesskey="s" />
-		<a class="button" href="{link controller='Index'}{/link}">{lang}wcf.user.register.disclaimer.decline{/lang}</a>
+		<a class="button" href="{link}{/link}">{lang}wcf.user.register.disclaimer.decline{/lang}</a>
 	</div>
 </form>
 

@@ -2,7 +2,6 @@
 namespace wcf\system\event\listener;
 use wcf\data\user\UserProfileAction;
 use wcf\system\event\IEventListener;
-use wcf\system\WCF;
 
 /**
  * Updates user ranks.
@@ -22,11 +21,11 @@ class UserActionAddToGroupsListener implements IEventListener {
 		if ($eventObj->getActionName() != 'addToGroups') return;
 		
 		if (MODULE_USER_RANK) {
-			$action = new UserProfileAction(array($eventObj->getObjects()), 'updateUserRank');
+			$action = new UserProfileAction($eventObj->getObjects(), 'updateUserRank');
 			$action->executeAction();
 		}
 		if (MODULE_USERS_ONLINE) {
-			$action = new UserProfileAction(array($eventObj->getObjects()), 'updateUserOnlineMarking');
+			$action = new UserProfileAction($eventObj->getObjects(), 'updateUserOnlineMarking');
 			$action->executeAction();
 		}
 	}
