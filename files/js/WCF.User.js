@@ -1251,7 +1251,7 @@ WCF.Notification.UserPanel = WCF.UserPanel.extend({
 		this._addDivider(dropdownMenu);
 		$('<li><a href="' + this._showAllLink + '">' + WCF.Language.get('wcf.user.notification.showAll') + '</a></li>').appendTo(dropdownMenu);
 		this._addDivider(dropdownMenu);
-		$('<li><a>' + WCF.Language.get('wcf.user.notification.markAllAsConfirmed') + '</a></li>').click($.proxy(this._markAllAsConfirmed, this)).appendTo(dropdownMenu);
+		$('<li id="userNotificationsMarkAllAsConfirmed"><a>' + WCF.Language.get('wcf.user.notification.markAllAsConfirmed') + '</a></li>').click($.proxy(this._markAllAsConfirmed, this)).appendTo(dropdownMenu);
 	},
 	
 	/**
@@ -1307,8 +1307,17 @@ WCF.Notification.UserPanel = WCF.UserPanel.extend({
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		switch (data.actionName) {
-			case 'getOutstandingNotifications':
 			case 'markAllAsConfirmed':
+				$('.jsNotificationItem').remove();
+				// remove notification count
+				document.title = document.title.replace(/^\(([0-9]+)\) /, '');
+			// fall through
+			case 'getOutstandingNotifications':
+				if (!data.returnValues || !data.returnValues.template) {
+					$('#userNotificationsMarkAllAsConfirmed').prev('.dropdownDivider').remove();
+					$('#userNotificationsMarkAllAsConfirmed').remove();
+				}
+				
 				this._super(data, textStatus, jqXHR);
 			break;
 			
