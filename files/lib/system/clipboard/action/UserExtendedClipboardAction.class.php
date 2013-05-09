@@ -65,7 +65,12 @@ class UserExtendedClipboardAction extends AbstractClipboardAction {
 			return array();
 		}
 	
-		return array_keys($this->objects);
+		$userIDs = array();
+		foreach ($this->objects as $user) {
+			if ($user->activationCode) $userIDs[] = $user->userID;
+		}
+		
+		return $userIDs;
 	}
 	
 	/**
