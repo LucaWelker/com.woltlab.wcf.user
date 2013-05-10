@@ -2,7 +2,7 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.dashboard">
 		<item name="wcf.acp.dashboard.option"><![CDATA[Dashboard-Boxen konfigurieren]]></item>
-		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch Ziehen und Loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, in dem Sie die gewünschte Box in „Aktive Boxen“ bzw. „Deaktivierte Boxen“ verschieben.]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sie können die Boxen durch Ziehen und Loslassen mit der Maus sortieren. Boxen können aktiviert bzw. deaktiviert werden, indem Sie die gewünschte Box in „Aktive Boxen“ bzw. „Deaktivierte Boxen“ verschieben.]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
@@ -26,14 +26,14 @@
 		<item name="wcf.acp.group.option.user.profile.canRename"><![CDATA[Kann Benutzernamen ändern]]></item>
 		<item name="wcf.acp.group.option.user.profile.canViewMembersList"><![CDATA[Kann Mitglieder-Liste sehen]]></item>
 		<item name="wcf.acp.group.option.user.profile.canViewUserProfile"><![CDATA[Kann Benutzerprofile sehen]]></item>
-		<item name="wcf.acp.group.option.user.profile.canViewUsersOnlineList"><![CDATA[Kann Benutzer online-Liste sehen]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUsersOnlineList"><![CDATA[Kann Benutzer-Online-Liste sehen]]></item>
 		<item name="wcf.acp.group.option.user.signature.canUseBBCodes"><![CDATA[Kann BBCodes in der Signatur verwenden]]></item>
 		<item name="wcf.acp.group.option.user.signature.canUseHtml"><![CDATA[Kann HTML in der Signatur verwenden]]></item>
 		<item name="wcf.acp.group.option.user.signature.canUseSmilies"><![CDATA[Kann Smileys in der Signatur verwenden]]></item>
 		<item name="wcf.acp.group.option.user.signature.allowedBBCodes"><![CDATA[Erlaubte BBCodes]]></item>
-		<item name="wcf.acp.group.option.user.signature.allowedBBCodes.description"><![CDATA[Die hier ausgewählten BBCodes dürfen von Mitglieder dieser Benutzergruppe in ihrer Signatur verwendet werden.]]></item>
+		<item name="wcf.acp.group.option.user.signature.allowedBBCodes.description"><![CDATA[Die hier ausgewählten BBCodes dürfen von Mitgliedern dieser Benutzergruppe in ihrer Signatur verwendet werden.]]></item>
 		<item name="wcf.acp.group.priority"><![CDATA[Priorisierung]]></item>
-		<item name="wcf.acp.group.priority.description"><![CDATA[Bestimmt u.a. die Reihenfolge auf der Team-Seite, sowie die Auswahl von Benutzerränge und „Wer ist online“-Darstellungen auf Basis der höchsten Priorität.]]></item>
+		<item name="wcf.acp.group.priority.description"><![CDATA[Bestimmt u.a. die Reihenfolge auf der Team-Seite sowie die Auswahl von Benutzerrängen und „Wer ist online“-Darstellungen auf Basis der höchsten Priorität.]]></item>
 		<item name="wcf.acp.group.userOnlineMarking"><![CDATA[„Benutzer online“-Darstellung]]></item>
 		<item name="wcf.acp.group.userOnlineMarking.description"><![CDATA[Sie können die HTML-Formatierung für Mitglieder dieser Benutzergruppe in der „Wer ist online“-Anzeige anpassen. <em>&lt;strong&gt;%s&lt;/strong&gt;</em> stellt Mitglieder dieser Gruppe beispielsweise in Fettdruck dar.]]></item>
 		<item name="wcf.acp.group.showOnTeamPage"><![CDATA[Mitglieder dieser Benutzergruppe auf der Team-Seite anzeigen]]></item>
@@ -84,7 +84,7 @@
 		<item name="wcf.acp.user.rank.requiredPoints.description"><![CDATA[Benötigte Menge an Aktivitätspunkten, die ein Benutzer erreichen muss, um in diesen Rang aufzusteigen.]]></item>
 		<item name="wcf.acp.user.rank.requirement"><![CDATA[Beschränkungen]]></item>
 		<item name="wcf.acp.user.rank.repeatImage"><![CDATA[Wiederholung der Rankgrafik]]></item>
-		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Bestimmt wie oft die Grafik wiederholt wird.]]></item>
+		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Bestimmt, wie oft die Grafik wiederholt wird.]]></item>
 		<item name="wcf.acp.user.rank.title"><![CDATA[Rangbezeichnung]]></item>
 		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Dieser Benutzerrang steht ausschließlich den Mitgliedern der ausgewählten Benutzergruppe zur Verfügung.]]></item>
 		<item name="wcf.acp.user.disableSignature"><![CDATA[Signatur sperren]]></item>
@@ -95,7 +95,7 @@
 		<item name="wcf.acp.user.enable"><![CDATA[Aktivieren]]></item>
 		<item name="wcf.acp.user.quickSearch.disabled"><![CDATA[Nicht aktivierte Benutzer]]></item>
 		<item name="wcf.acp.user.quickSearch.disabledAvatars"><![CDATA[Gesperrte Avatare]]></item>
-		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[Gesperrte Signature]]></item>
+		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[Gesperrte Signaturen]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
