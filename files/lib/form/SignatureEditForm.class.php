@@ -1,16 +1,18 @@
 <?php
 namespace wcf\form;
+use wcf\data\user\User;
 use wcf\data\user\UserAction;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\user\UserMenu;
+use wcf\system\user\signature\SignatureCache;
 use wcf\system\WCF;
 
 /**
  * Shows the signature edit form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.user
  * @subpackage	form
@@ -97,8 +99,11 @@ class SignatureEditForm extends MessageForm {
 			$this->enableBBCodes = WCF::getUser()->signatureEnableBBCodes;
 			$this->enableHtml = WCF::getUser()->signatureEnableHtml;
 			$this->enableSmilies = WCF::getUser()->signatureEnableSmilies;
+			$this->text = WCF::getUser()->signature;
 			$this->preParse = true;
 		}
+		
+		$this->signatureCache = SignatureCache::getInstance()->getSignature(WCF::getUser());
 	}
 	
 	/**
@@ -119,10 +124,6 @@ class SignatureEditForm extends MessageForm {
 		// set active tab
 		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.profile.signature');
 		
-		// get signature
-		if ($this->signatureCache == null) $this->signatureCache = WCF::getUser()->signatureCache;
-		$this->text = WCF::getUser()->signature;
-		
 		parent::show();
 	}
 	
@@ -132,18 +133,16 @@ class SignatureEditForm extends MessageForm {
 	public function save() {
 		parent::save();
 		
-		$this->signatureCache = MessageParser::getInstance()->parse($this->text, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes, false);
 		$this->objectAction = new UserAction(array(WCF::getUser()), 'update', array(
 			'data' => array(
 				'signature' => $this->text,
-				'signatureCache' => $this->signatureCache,
 				'signatureEnableBBCodes' => $this->enableBBCodes,
 				'signatureEnableHtml' => $this->enableHtml,
 				'signatureEnableSmilies' => $this->enableSmilies
 			)
 		));
 		$this->objectAction->executeAction();
-		
+		SignatureCache::getInstance()->getSignature(new User(WCF::getUser()->userID));
 		$this->saved();
 		
 		// show success message

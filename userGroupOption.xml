@@ -152,6 +152,7 @@
 				<categoryname>user.profile.avatar</categoryname>
 				<optiontype>fileSize</optiontype>
 				<defaultvalue>100000</defaultvalue>
+				<minvalue>10000</minvalue>
 			</option>
 			<option name="user.profile.avatar.allowedFileExtensions">
 				<categoryname>user.profile.avatar</categoryname>

@@ -120,6 +120,19 @@
 			<environment>admin</environment>
 		</eventlistener>
 		
+		<eventlistener>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\UserActionAddToGroupsListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\UserActionAddToGroupsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
 		<!-- UserAddFormSignatureListener -->
 		<eventlistener>
 			<eventclassname>wcf\acp\form\UserAddForm</eventclassname>

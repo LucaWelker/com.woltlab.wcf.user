@@ -100,6 +100,7 @@
 	
 	<category name="wcf.clipboard">
 		<item name="wcf.clipboard.item.com.woltlab.wcf.user.merge"><![CDATA[TODO: Zusammenfügen]]></item>
+		<item name="wcf.clipboard.item.com.woltlab.wcf.user.enable"><![CDATA[TODO: Aktivieren]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">
