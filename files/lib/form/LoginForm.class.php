@@ -73,6 +73,7 @@ class LoginForm extends \wcf\acp\form\LoginForm {
 		$this->saved();
 		
 		// redirect to url
+		WCF::getTPL()->assign('__hideUserMenu', true);
 		HeaderUtil::delayedRedirect($this->url, WCF::getLanguage()->get('wcf.user.login.redirect'));
 		exit;
 	}
