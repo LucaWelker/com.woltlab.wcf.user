@@ -150,6 +150,12 @@
 				<minvalue>3</minvalue>
 				<maxvalue>255</maxvalue>
 			</option>
+			<option name="register_username_force_ascii">
+				<categoryname>user.register</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			
 			<option name="register_disabled">
 				<categoryname>user.register</categoryname>
 				<optiontype>boolean</optiontype>
