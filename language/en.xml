@@ -2,7 +2,7 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="wcf.acp.dashboard">
 		<item name="wcf.acp.dashboard.option"><![CDATA[Configure Dashboard Boxes]]></item>
-		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sort boxes to determine show order. You can enable or disable boxes by moving them between the boxes “Active Boxes” and “Disabled Boxes”.]]></item>
+		<item name="wcf.acp.dashboard.box.sort"><![CDATA[Sort boxes to determine the show order. You can enable or disable boxes by moving them between the boxes “Active Boxes” and “Disabled Boxes”.]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
@@ -17,23 +17,23 @@
 		<item name="wcf.acp.group.option.category.user.rank"><![CDATA[User Ranks]]></item>
 		<item name="wcf.acp.group.option.category.user.signature"><![CDATA[Signatures]]></item>
 		<item name="wcf.acp.group.option.user.profile.avatar.allowedFileExtensions"><![CDATA[Allowed File Extensions]]></item>
-		<item name="wcf.acp.group.option.user.profile.avatar.canUploadAvatar"><![CDATA[Can upload own avatar]]></item>
+		<item name="wcf.acp.group.option.user.profile.avatar.canUploadAvatar"><![CDATA[Can upload one's own avatar]]></item>
 		<item name="wcf.acp.group.option.user.profile.avatar.maxSize"><![CDATA[Maximimum File Size]]></item>
 		<item name="wcf.acp.group.option.user.profile.canChangeEmail"><![CDATA[Can change email address]]></item>
-		<item name="wcf.acp.group.option.user.profile.canEditUserTitle"><![CDATA[Can edit own user title]]></item>
+		<item name="wcf.acp.group.option.user.profile.canEditUserTitle"><![CDATA[Can edit one's own user title]]></item>
 		<item name="wcf.acp.group.option.user.profile.canMail"><![CDATA[Can see email addresses]]></item>
-		<item name="wcf.acp.group.option.user.profile.canQuit"><![CDATA[Can quit own user account]]></item>
+		<item name="wcf.acp.group.option.user.profile.canQuit"><![CDATA[Can quit one's own user account]]></item>
 		<item name="wcf.acp.group.option.user.profile.canRename"><![CDATA[Can rename own user]]></item>
-		<item name="wcf.acp.group.option.user.profile.canViewMembersList"><![CDATA[Can see members list]]></item>
-		<item name="wcf.acp.group.option.user.profile.canViewUserProfile"><![CDATA[Can see user profiles]]></item>
-		<item name="wcf.acp.group.option.user.profile.canViewUsersOnlineList"><![CDATA[Can see users online list]]></item>
-		<item name="wcf.acp.group.option.user.signature.canUseBBCodes"><![CDATA[Can use BBCodes within signature]]></item>
-		<item name="wcf.acp.group.option.user.signature.canUseHtml"><![CDATA[Can use HTML within signature]]></item>
-		<item name="wcf.acp.group.option.user.signature.canUseSmilies"><![CDATA[Can use Smilies within signature]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewMembersList"><![CDATA[Can view members list]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUserProfile"><![CDATA[Can view user profiles]]></item>
+		<item name="wcf.acp.group.option.user.profile.canViewUsersOnlineList"><![CDATA[Can view users online list]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseBBCodes"><![CDATA[Can use BBCodes within the signature]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseHtml"><![CDATA[Can use HTML within the signature]]></item>
+		<item name="wcf.acp.group.option.user.signature.canUseSmilies"><![CDATA[Can use Smilies within the signature]]></item>
 		<item name="wcf.acp.group.option.user.signature.allowedBBCodes"><![CDATA[Allowed BBCodes]]></item>
 		<item name="wcf.acp.group.option.user.signature.allowedBBCodes.description"><![CDATA[All marked BBCodes may be used within the signature.]]></item>
 		<item name="wcf.acp.group.priority"><![CDATA[Priority]]></item>
-		<item name="wcf.acp.group.priority.description"><![CDATA[Determines show order on team page, user rank and “Who is Online” marking based on highest priority.]]></item>
+		<item name="wcf.acp.group.priority.description"><![CDATA[Determines the show order on team page, user rank and “Who is Online” with marking based on the highest priority.]]></item>
 		<item name="wcf.acp.group.userOnlineMarking"><![CDATA[“Who is Online” marking]]></item>
 		<item name="wcf.acp.group.userOnlineMarking.description"><![CDATA[Adjust the HTML formatting for members of this group in the “Who is Online” list. <em>&lt;strong&gt;%s&lt;/strong&gt;</em> results in a bolder appearance.]]></item>
 		<item name="wcf.acp.group.showOnTeamPage"><![CDATA[Show members on team page]]></item>
