@@ -58,8 +58,8 @@
 			</dl>
 		</fieldset>
 		
-		<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js"></script>
-		<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User.js"></script>
+		<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message{if !DEBUG_MODE}.min{/if}.js"></script>
+		<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User{if !DEBUG_MODE}.min{/if}.js"></script>
 		<script type="text/javascript">
 			//<![CDATA[
 			$(function() {

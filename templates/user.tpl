@@ -7,7 +7,7 @@
 	
 	<link rel="canonical" href="{link controller='User' object=$user}{/link}" />
 	
-	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath('wcf')}js/WCF.User{if !DEBUG_MODE}.min{/if}.js"></script>
 	{event name='javascriptInclude'}
 	<script type="text/javascript">
 		//<![CDATA[
