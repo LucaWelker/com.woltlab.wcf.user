@@ -18,7 +18,7 @@
 		<item name="wcf.acp.group.option.category.user.signature"><![CDATA[Signatures]]></item>
 		<item name="wcf.acp.group.option.user.profile.avatar.allowedFileExtensions"><![CDATA[Allowed File Extensions]]></item>
 		<item name="wcf.acp.group.option.user.profile.avatar.canUploadAvatar"><![CDATA[Can upload one's own avatar]]></item>
-		<item name="wcf.acp.group.option.user.profile.avatar.maxSize"><![CDATA[Maximimum File Size]]></item>
+		<item name="wcf.acp.group.option.user.profile.avatar.maxSize"><![CDATA[Maximum File Size]]></item>
 		<item name="wcf.acp.group.option.user.profile.canChangeEmail"><![CDATA[Can change email address]]></item>
 		<item name="wcf.acp.group.option.user.profile.canEditUserTitle"><![CDATA[Can edit one's own user title]]></item>
 		<item name="wcf.acp.group.option.user.profile.canMail"><![CDATA[Can see email addresses]]></item>
@@ -446,7 +446,7 @@ You can safely ignore this email if you did not register with the website: {@PAG
 		<item name="wcf.user.avatar.type.custom"><![CDATA[Upload Own Avatar]]></item>
 		<item name="wcf.user.avatar.type.custom.description"><![CDATA[You may use the following file extensions “{"\n"|str_replace:', ':$__wcf->session->getPermission('user.profile.avatar.allowedFileExtensions')}” for your avatar with a maximum file size of {@$__wcf->session->getPermission('user.profile.avatar.maxSize')|filesize}. The minimum dimensions are 48×48 pixel, it is recommended to provide a dimension of {@MAX_AVATAR_WIDTH}×{@MAX_AVATAR_HEIGHT} pixel. Any avatar that exceeds this limit will be scaled down if possible.]]></item>
 		<item name="wcf.user.avatar.type.gravatar"><![CDATA[Use Gravatar]]></item>
-		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Gravatar (Global Recognized Avatar) provides a globally reusable avatar connected with your email address “{$__wcf->user->email}”. Visit <a href="http://www.gravatar.com" class="externalURL">www.gravatar.com</a> to set up or change your avatar.]]></item>
+		<item name="wcf.user.avatar.type.gravatar.description"><![CDATA[Gravatar (Globally Recognized Avatar) provides a globally reusable avatar connected with your email address “{$__wcf->user->email}”. Visit <a href="http://www.gravatar.com" class="externalURL">www.gravatar.com</a> to set up or change your avatar.]]></item>
 		<item name="wcf.user.avatar.type.gravatar.error.notFound"><![CDATA[Your email address is not connected with a gravatar.]]></item>
 		<item name="wcf.user.avatar.type.none"><![CDATA[No Avatar]]></item>
 		<item name="wcf.user.avatar.type.none.description"><![CDATA[Your currently used avatar will be deleted.]]></item>
@@ -498,7 +498,7 @@ If you do not want to receive further email notifications for this event, you ca
 	
 	<category name="wcf.user.profile">
 		<item name="wcf.user.profile"><![CDATA[User Profile of “{$user->username}”]]></item>
-		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[{if $userID == $__wcf->getUser()->userID}You did not provide any details yet.{else}There are no details visible to you.{/if}]]></item>
+		<item name="wcf.user.profile.content.about.noPublicData"><![CDATA[{if $userID == $__wcf->getUser()->userID}You have not provided any details yet.{else}There are no details visible to you.{/if}]]></item>
 		<item name="wcf.user.profile.content.recentActivity.noEntries"><![CDATA[There are no recent activities available yet.]]></item>
 		<item name="wcf.user.profile.followers"><![CDATA[{$user->username}’s Follower]]></item>
 		<item name="wcf.user.profile.userList.showAll"><![CDATA[Show All]]></item>
@@ -564,7 +564,7 @@ If you do not want to receive further email notifications for this event, you ca
 		<item name="wcf.user.mail.message"><![CDATA[Message]]></item>
 		<item name="wcf.user.mail.senderEmail"><![CDATA[Your email address]]></item>
 		<item name="wcf.user.mail.sent"><![CDATA[Message has been sent to “{$user->username}”.]]></item>
-		<item name="wcf.user.mail.showAddress"><![CDATA[Use my email address as sender address, the recipient can directly reply to me.]]></item>
+		<item name="wcf.user.mail.showAddress"><![CDATA[Use my email address as the sender address, the recipient can reply to me directly.]]></item>
 		<item name="wcf.user.mail.subject"><![CDATA[Subject]]></item>
 		<item name="wcf.user.mail.title"><![CDATA[Send an email to “{$user->username}”]]></item>
 	</category>
@@ -576,11 +576,11 @@ If you do not want to receive further email notifications for this event, you ca
 		
 		<!-- TODO: These rank translations are bullshit, find something better -->
 		
-		<item name="wcf.user.rank.user0"><![CDATA[Beginner]]></item>
-		<item name="wcf.user.rank.user1"><![CDATA[Student]]></item>
-		<item name="wcf.user.rank.user2"><![CDATA[Intermediate]]></item>
-		<item name="wcf.user.rank.user3"><![CDATA[Professional]]></item>
+		<item name="wcf.user.rank.user0"><![CDATA[Learner]]></item>
+		<item name="wcf.user.rank.user1"><![CDATA[Advisee]]></item>
+		<item name="wcf.user.rank.user2"><![CDATA[Advanced Student]]></item>
+		<item name="wcf.user.rank.user3"><![CDATA[Pro]]></item>
 		<item name="wcf.user.rank.user4"><![CDATA[Master]]></item>
-		<item name="wcf.user.rank.user5"><![CDATA[Enlightened]]></item>
+		<item name="wcf.user.rank.user5"><![CDATA[Adept]]></item>
 	</category>
 </language>
