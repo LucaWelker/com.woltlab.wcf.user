@@ -196,7 +196,7 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.newPassword.mail.subject"><![CDATA[New Password for Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.newPassword.success"><![CDATA[You should receive an email with your password shortly.]]></item>
 		<item name="wcf.user.accountManagement"><![CDATA[Account Management]]></item>
-		<item name="wcf.user.accountManagement.warning"><![CDATA[Heads up! You’re editing your own user account, careless changes might lock you out!]]></item>
+		<item name="wcf.user.accountManagement.warning"><![CDATA[Mind! You’re editing your own user account, careless changes might lock you out!]]></item>
 		<item name="wcf.user.accountManagement.password.description"><![CDATA[Please confirm changes with your password!]]></item>
 		<item name="wcf.user.newPassword"><![CDATA[New Password]]></item>
 		<item name="wcf.user.changeUsername"><![CDATA[Change Username]]></item>
@@ -208,8 +208,8 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.newUsername"><![CDATA[New Username]]></item>
 		<item name="wcf.user.quit"><![CDATA[Quit User Account]]></item>
 		<item name="wcf.user.quit.sure"><![CDATA[Do you really want to delete your user account and all associated, private data?]]></item>
-		<item name="wcf.user.quit.cancel"><![CDATA[Your user account will be delete on {$quitStarted+7*86400|date}. Please enable this option if you wish to abort deletion.]]></item>
-		<item name="wcf.user.quit.description"><![CDATA[Note: Post, Attachments and similar content will remain even after your account was deleted.]]></item>
+		<item name="wcf.user.quit.cancel"><![CDATA[Your user account will be deleted on {$quitStarted+7*86400|date}. Please enable this option if you wish to abort deletion.]]></item>
+		<item name="wcf.user.quit.description"><![CDATA[Note: Posts, attachments and similar content will remain unaffected, even after your account was deleted.]]></item>
 		<item name="wcf.user.quit.success"><![CDATA[Your user account will be deleted on {TIME_NOW+7*86400|date}. During this period you can abort deletion on this page.]]></item>
 		<item name="wcf.user.quit.cancel.success"><![CDATA[Account deletion has been aborted.]]></item>
 		<item name="wcf.user.emailActivation"><![CDATA[Verify New Email Address]]></item>
@@ -232,7 +232,7 @@ you’ve changed your email address on: {@PAGE_TITLE|language}. It is required t
 Please open the link below in your browser:
 {link controller='EmailActivation' encode=false}{/link}
 
-Once prompted please provide the following details:
+Once prompted, please provide the following details:
 
 You User ID: 		{@$userID} 
 Activation Code: 	{@$activationCode} 
@@ -242,14 +242,14 @@ If you cannot activate your email address or have any troubles following the ins
 Have a nice day,
 Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.changeEmail.needReactivation.mail.subject"><![CDATA[Email Activation for Website: {@PAGE_TITLE|language}]]></item>
-		<item name="wcf.user.changePassword.success"><![CDATA[Password has been changed.]]></item>
+		<item name="wcf.user.changePassword.success"><![CDATA[The Password has been changed.]]></item>
 		<item name="wcf.user.activationCode"><![CDATA[9-digit Activation Code]]></item>
 		<item name="wcf.user.newActivationCode"><![CDATA[Request New Activation Code]]></item>
 		<item name="wcf.user.registerActivation"><![CDATA[Complete Registration]]></item>
 		<item name="wcf.user.registerActivation.error.userAlreadyEnabled"><![CDATA[User is already activated.]]></item>
 		<item name="wcf.user.registerActivation.success"><![CDATA[User account has been activated.]]></item>
-		<item name="wcf.user.activationCode.error.notValid"><![CDATA[You have provided an invalid activation code. Click the button below if you wish to request a new activation code.]]></item>
-		<item name="wcf.user.registerNewActivationCode.email.description"><![CDATA[You may provide a different email address or leave it empty to send the code to the same email address again.]]></item>
+		<item name="wcf.user.activationCode.error.notValid"><![CDATA[You have provided an invalid activation code. Click the button below, if you wish to request a new activation code.]]></item>
+		<item name="wcf.user.registerNewActivationCode.email.description"><![CDATA[You may provide a different email address or leave it empty in order to send the code to the same email address again.]]></item>
 		<item name="wcf.user.newActivationCode.success"><![CDATA[Activiation code has been sent to “{$email}”.]]></item>
 		<item name="wcf.user.emailActivation.error.emailAlreadyEnabled"><![CDATA[Email address is already activated.]]></item>
 		<item name="wcf.user.emailActivation.success"><![CDATA[Email address has been activated.]]></item>
