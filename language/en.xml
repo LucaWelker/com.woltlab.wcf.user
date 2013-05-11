@@ -50,10 +50,10 @@
 	
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.github_public_key"><![CDATA[GitHub Client ID]]></item>
-		<item name="wcf.acp.option.github_public_key.description"><![CDATA[You can obtain both your Client ID and Client Secret at <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://github.com/settings/applications'|rawurlencode}" class="externalURL">GitHub</a>.]]></item>
+		<item name="wcf.acp.option.github_public_key.description"><![CDATA[You can obtain both,  your Client ID and Client Secret at <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://github.com/settings/applications'|rawurlencode}" class="externalURL">GitHub</a>.]]></item>
 		<item name="wcf.acp.option.github_private_key"><![CDATA[GitHub Client Secret]]></item>
 		<item name="wcf.acp.option.twitter_public_key"><![CDATA[Twitter Consumer key]]></item>
-		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[You can obtain both your Consumer key and Consumer secret at <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://dev.twitter.com/apps'|rawurlencode}" class="externalURL">Twitter</a>.]]></item>
+		<item name="wcf.acp.option.twitter_public_key.description"><![CDATA[You can obtain both, your Consumer key and Consumer secret at <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://dev.twitter.com/apps'|rawurlencode}" class="externalURL">Twitter</a>.]]></item>
 		<item name="wcf.acp.option.twitter_private_key"><![CDATA[Twitter Consumer secret]]></item>
 		<item name="wcf.acp.option.facebook_public_key"><![CDATA[Facebook APP-ID]]></item>
 		<item name="wcf.acp.option.facebook_public_key.description"><![CDATA[You can obtain your APP-ID and Application Secret at <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={'https://developers.facebook.com/apps'|rawurlencode}" class="externalURL">Facebook</a>.]]></item>
@@ -72,7 +72,7 @@
 		<item name="wcf.acp.user.general"><![CDATA[User]]></item>
 		<item name="wcf.acp.user.rank.add"><![CDATA[Add User Rank]]></item>
 		<item name="wcf.acp.user.rank.cssClassName"><![CDATA[CSS Class Name]]></item>
-		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[You can select a predefined appearance or provide an own <abbr title="Cascading Style Sheets">CSS</abbr> class name.]]></item>
+		<item name="wcf.acp.user.rank.cssClassName.description"><![CDATA[You can select a predefined appearance or provide your own <abbr title="Cascading Style Sheets">CSS</abbr> class name.]]></item>
 		<item name="wcf.acp.user.rank.currentImage"><![CDATA[Current Rank Image]]></item>
 		<item name="wcf.acp.user.rank.delete.sure"><![CDATA[Do you really want to delete the user rank “{$userRank->rankTitle|language}”?]]></item>
 		<item name="wcf.acp.user.rank.edit"><![CDATA[Edit User Rank]]></item>
@@ -87,20 +87,20 @@
 		<item name="wcf.acp.user.rank.repeatImage.description"><![CDATA[Number of times the rank image will be repeated.]]></item>
 		<item name="wcf.acp.user.rank.title"><![CDATA[Title]]></item>
 		<item name="wcf.acp.user.rank.userGroup.description"><![CDATA[Rank is restricted to members of the selected user groups.]]></item>
-		<item name="wcf.acp.user.disableSignature"><![CDATA[TODO: Signatur sperren]]></item>
-		<item name="wcf.acp.user.disableSignatureReason"><![CDATA[TODO: Begründung]]></item>
-		<item name="wcf.acp.user.disableAvatar"><![CDATA[TODO: Avatar sperren]]></item>
-		<item name="wcf.acp.user.disableAvatarReason"><![CDATA[TODO: Begründung]]></item>
-		<item name="wcf.acp.user.disable"><![CDATA[TODO: Deaktivieren]]></item>
-		<item name="wcf.acp.user.enable"><![CDATA[TODO: Aktivieren]]></item>
-		<item name="wcf.acp.user.quickSearch.disabled"><![CDATA[TODO: Nicht aktivierte Benutzer]]></item>
-		<item name="wcf.acp.user.quickSearch.disabledAvatars"><![CDATA[TODO: Gesperrte Avatare]]></item>
-		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[TODO: Gesperrte Signature]]></item>
+		<item name="wcf.acp.user.disableSignature"><![CDATA[Block the signature]]></item>
+		<item name="wcf.acp.user.disableSignatureReason"><![CDATA[Explanation]]></item>
+		<item name="wcf.acp.user.disableAvatar"><![CDATA[Block the avatar]]></item>
+		<item name="wcf.acp.user.disableAvatarReason"><![CDATA[Explanation]]></item>
+		<item name="wcf.acp.user.disable"><![CDATA[Disable]]></item>
+		<item name="wcf.acp.user.enable"><![CDATA[Enable]]></item>
+		<item name="wcf.acp.user.quickSearch.disabled"><![CDATA[Disabled users]]></item>
+		<item name="wcf.acp.user.quickSearch.disabledAvatars"><![CDATA[Blocked avatars]]></item>
+		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[Blcoked signatures]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
-		<item name="wcf.clipboard.item.com.woltlab.wcf.user.merge"><![CDATA[TODO: Zusammenfügen]]></item>
-		<item name="wcf.clipboard.item.com.woltlab.wcf.user.enable"><![CDATA[TODO: Aktivieren]]></item>
+		<item name="wcf.clipboard.item.com.woltlab.wcf.user.merge"><![CDATA[Merge]]></item>
+		<item name="wcf.clipboard.item.com.woltlab.wcf.user.enable"><![CDATA[Enable]]></item>
 	</category>
 	
 	<category name="wcf.dashboard">
@@ -157,7 +157,7 @@
 		<item name="wcf.user.online"><![CDATA[Online]]></item>
 		<item name="wcf.user.online.title"><![CDATA[“{$username}” is online]]></item>
 		<item name="wcf.user.button.follow"><![CDATA[Follow]]></item>
-		<item name="wcf.user.button.unfollow"><![CDATA[Unfollow]]></item>
+		<item name="wcf.user.button.unfollow"><![CDATA[De-follow]]></item>
 		<item name="wcf.user.button.ignore"><![CDATA[Block]]></item>
 		<item name="wcf.user.button.unignore"><![CDATA[Unblock]]></item>
 		<item name="wcf.user.style"><![CDATA[Styles]]></item>
@@ -165,13 +165,13 @@
 		<item name="wcf.user.username.description"><![CDATA[Username must be {REGISTER_USERNAME_MIN_LENGTH} up to {REGISTER_USERNAME_MAX_LENGTH} characters long.]]></item>
 		<item name="wcf.user.password.description"><![CDATA[{if REGISTER_ENABLE_PASSWORD_SECURITY_CHECK && REGISTER_PASSWORD_MIN_LENGTH}Password must be at least {REGISTER_PASSWORD_MIN_LENGTH} characters.{else}A secure password should be at least 8 characters long.{/if}]]></item>
 		<item name="wcf.user.lostPassword"><![CDATA[Lost Password]]></item>
-		<item name="wcf.user.lostPassword.description"><![CDATA[You must provide your username or email address to request a new password. Contact the site’s administrator if you need assistance.]]></item>
+		<item name="wcf.user.lostPassword.description"><![CDATA[You must provide your username or email address in order to request a new password. Contact the site’s administrator if you need assistance.]]></item>
 		<item name="wcf.user.lostPassword.email.error.notFound"><![CDATA[“{$email}” is not used by any account.]]></item>
-		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[Password has been requested at least once in the past 24 hours. For security reasons you must wait at least {#$hours} hour{if $hours != 1}s{/if} before requesting it again.]]></item>
+		<item name="wcf.user.lostPassword.error.tooManyRequests"><![CDATA[Password has been requested at least once within the past 24 hours. For security reasons you must wait at least {#$hours} hour{if $hours != 1}s{/if} before requesting it again.]]></item>
 		<item name="wcf.user.lostPassword.mail.subject"><![CDATA[Lost Password for Website: {@PAGE_TITLE|language}]]></item>
 		<item name="wcf.user.lostPassword.mail"><![CDATA[Dear {@$username},
 
-if you have lost your password you can request a new one using the link below.
+if you have lost your password, you can request a new one using the link below.
 Request a new password: {link controller='NewPassword' encode=false}u={@$userID}&k={@$key}{/link}  
 
 If you have not lost your password, you can safely ignore this email.
