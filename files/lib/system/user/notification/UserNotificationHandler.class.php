@@ -116,21 +116,32 @@ class UserNotificationHandler extends SingletonFactory {
 		$recipientList->getConditionBuilder()->add('event_to_user.userID IN (?)', array($recipientIDs));
 		$recipientList->readObjects();
 		if (count($recipientList)) {
-			// save notification
-			$action = new UserNotificationAction(array(), 'create', array(
-				'data' => array(
-					'packageID' => $objectTypeObject->packageID,
-					'eventID' => $event->eventID,
-					'objectID' => $notificationObject->getObjectID(),
-					'authorID' => $event->getAuthorID(),
-					'time' => TIME_NOW,
-					'eventHash' => $event->getEventHash(),
-					'additionalData' => serialize($additionalData)
-				),
-				'recipients' => $recipientList->getObjects()
-			));
-			$result = $action->executeAction();
-			$notification = $result['returnValues'];
+			// find existing notification
+			$notification = UserNotification::getNotification($objectTypeObject->packageID, $event->eventID, $notificationObject->getObjectID());
+			if ($notification !== null) {
+				// only update recipients
+				$action = new UserNotificationAction(array($notification), 'addRecipients', array(
+					'recipients' => $recipientList->getObjects()
+				));
+				$action->executeAction();
+			}
+			else {
+				// create new notification
+				$action = new UserNotificationAction(array(), 'create', array(
+					'data' => array(
+						'packageID' => $objectTypeObject->packageID,
+						'eventID' => $event->eventID,
+						'objectID' => $notificationObject->getObjectID(),
+						'authorID' => $event->getAuthorID(),
+						'time' => TIME_NOW,
+						'eventHash' => $event->getEventHash(),
+						'additionalData' => serialize($additionalData)
+					),
+					'recipients' => $recipientList->getObjects()
+				));
+				$result = $action->executeAction();
+				$notification = $result['returnValues'];
+			}
 			
 			// sends notifications
 			foreach ($recipientList->getObjects() as $recipient) {

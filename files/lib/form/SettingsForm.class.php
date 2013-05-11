@@ -3,6 +3,7 @@ namespace wcf\form;
 use wcf\data\user\option\category\UserOptionCategory;
 use wcf\data\user\UserAction;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\option\user\UserOptionHandler;

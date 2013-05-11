@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\user\notification;
 use wcf\data\DatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a user notification.
@@ -47,5 +48,27 @@ class UserNotification extends DatabaseObject {
 		if (!is_array($this->data['additionalData'])) {
 			$this->data['additionalData'] = array();
 		}
+	}
+	
+	/**
+	 * Returns an existing notification.
+	 * 
+	 * @param	integer		$packageID
+	 * @param	integer		$eventID
+	 * @param	integer		$objectID
+	 * @return	wcf\data\user\notification\UserNotification
+	 */
+	public static function getNotification($packageID, $eventID, $objectID) {
+		$sql = "SELECT	*
+			FROM	wcf".WCF_N."_user_notification
+			WHERE	packageID = ?
+				AND eventID = ?
+				AND objectID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($packageID, $eventID, $objectID));
+		$row = $statement->fetchArray();
+		if ($row !== false) return new UserNotification(null, $row);
+		
+		return null;
 	}
 }

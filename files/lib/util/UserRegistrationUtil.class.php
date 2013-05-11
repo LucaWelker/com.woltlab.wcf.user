@@ -24,8 +24,18 @@ final class UserRegistrationUtil {
 	 * @return	boolean
 	 */
 	public static function isValidUsername($name) {
+		if (!UserUtil::isValidUsername($name)) return false;
+		
 		$length = StringUtil::length($name);
-		return (UserUtil::isValidUsername($name) && $length >= REGISTER_USERNAME_MIN_LENGTH && $length <= REGISTER_USERNAME_MAX_LENGTH && self::checkForbiddenUsernames($name));
+		if ($length < REGISTER_USERNAME_MIN_LENGTH || $length > REGISTER_USERNAME_MAX_LENGTH) return false;
+		
+		if (!self::checkForbiddenUsernames($name)) return false;
+		
+		if (REGISTER_USERNAME_FORCE_ASCII) {
+			if (!preg_match('/^[\x20-\x7E]+$/', $name)) return false;
+		}
+		
+		return true;
 	}
 	
 	/**

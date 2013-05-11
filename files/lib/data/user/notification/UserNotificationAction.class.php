@@ -19,6 +19,22 @@ use wcf\system\WCF;
  */
 class UserNotificationAction extends AbstractDatabaseObjectAction {
 	/**
+	 * Adds notification recipients.
+	 */
+	public function addRecipients() {
+		$sql = "INSERT IGNORE INTO	wcf".WCF_N."_user_notification_to_user
+						(notificationID, userID, mailNotified)
+			VALUES			(?, ?, ?)";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		foreach ($this->objects as $notification) {
+			foreach ($this->parameters['recipients'] as $recipient) {
+				$statement->execute(array($notification->notificationID, $recipient->userID, ($recipient->mailNotificationType == 'daily' ? 0 : 1)));
+			}
+		}
+	}
+	
+	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::create()
 	 */
 	public function create() {
@@ -27,13 +43,10 @@ class UserNotificationAction extends AbstractDatabaseObjectAction {
 		
 		// save recpients
 		if (!empty($this->parameters['recipients'])) {
-			$sql = "INSERT INTO	wcf".WCF_N."_user_notification_to_user
-						(notificationID, userID, mailNotified)
-				VALUES		(?, ?, ?)";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			foreach ($this->parameters['recipients'] as $recipient) {
-				$statement->execute(array($notification->notificationID, $recipient->userID, ($recipient->mailNotificationType == 'daily' ? 0 : 1)));
-			}
+			$action = new UserNotificationAction(array($notification), 'addRecipients', array(
+				'recipients' => $this->parameters['recipients']		
+			));
+			$action->executeAction();
 		}
 		
 		return $notification;
