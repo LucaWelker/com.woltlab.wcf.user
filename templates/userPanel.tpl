@@ -18,7 +18,7 @@
 			
 			{if $__wcf->session->getPermission('admin.general.canUseAcp')}
 				<li class="dropdownDivider"></li>
-				<li><a href="acp/index.php">{lang}wcf.global.acp.short{/lang}</a></li>
+				<li><a href="{link isACP=true}{/link}">{lang}wcf.global.acp.short{/lang}</a></li>
 			{/if}
 			<li class="dropdownDivider"></li>
 			<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="WCF.System.Confirmation.show('{lang}wcf.user.logout.sure{/lang}', $.proxy(function (action) { if (action == 'confirm') window.location.href = $(this).attr('href'); }, this)); return false;">{lang}wcf.user.logout{/lang}</a></li>
@@ -28,24 +28,26 @@
 	<li><a href="{link controller='Settings'}{/link}" class="noJsOnly" style="display: none"><span class="icon icon16 icon-cogs"></span> <span>{lang}wcf.user.menu.settings{/lang}</span></a></li>
 	
 	<!-- user notifications -->
-	<li id="userNotifications" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}">
-		<a href="{link controller='NotificationList'}{/link}"><span class="icon icon16 icon-bell-alt"></span> <span>{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
-		<script type="text/javascript">
-			//<![CDATA[
-			$(function() {
-				WCF.Language.addObject({
-					'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}',
-					'wcf.user.notification.markAllAsConfirmed': '{lang}wcf.user.notification.markAllAsConfirmed{/lang}',
-					'wcf.user.notification.markAllAsConfirmed.confirmMessage': '{lang}wcf.user.notification.markAllAsConfirmed.confirmMessage{/lang}',
-					'wcf.user.notification.noMoreNotifications': '{lang}wcf.user.notification.noMoreNotifications{/lang}',
-					'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}'
+	{if !$__hideUserMenu|isset}
+		<li id="userNotifications" data-count="{#$__wcf->getUserNotificationHandler()->getNotificationCount()}">
+			<a href="{link controller='NotificationList'}{/link}"><span class="icon icon16 icon-bell-alt"></span> <span>{lang}wcf.user.notification.notifications{/lang}</span>{if $__wcf->getUserNotificationHandler()->getNotificationCount()} <span class="badge badgeInverse">{#$__wcf->getUserNotificationHandler()->getNotificationCount()}</span>{/if}</a>
+			<script type="text/javascript">
+				//<![CDATA[
+				$(function() {
+					WCF.Language.addObject({
+						'wcf.user.notification.count': '{lang}wcf.user.notification.count{/lang}',
+						'wcf.user.notification.markAllAsConfirmed': '{lang}wcf.user.notification.markAllAsConfirmed{/lang}',
+						'wcf.user.notification.markAllAsConfirmed.confirmMessage': '{lang}wcf.user.notification.markAllAsConfirmed.confirmMessage{/lang}',
+						'wcf.user.notification.noMoreNotifications': '{lang}wcf.user.notification.noMoreNotifications{/lang}',
+						'wcf.user.notification.showAll': '{lang}wcf.user.notification.showAll{/lang}'
+					});
+					
+					new WCF.Notification.UserPanel('{link controller='NotificationList'}{/link}');
 				});
-				
-				new WCF.Notification.UserPanel('{link controller='NotificationList'}{/link}');
-			});
-			//]]>
-		</script>
-	</li>
+				//]]>
+			</script>
+		</li>
+	{/if}
 {else}
 	{if !$__disableLoginLink|isset}
 		<!-- login box -->
@@ -171,7 +173,9 @@
 	</li>
 {/if}
 
-{event name='menuItems'}
+{if !$__hideUserMenu|isset}
+	{event name='menuItems'}
+{/if}
 
 {if $__wcf->user->userID}
 	<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" class="noJsOnly" style="display: none"><span class="icon icon16 icon-signout"></span> <span>{lang}wcf.user.logout{/lang}</span></a></li>
