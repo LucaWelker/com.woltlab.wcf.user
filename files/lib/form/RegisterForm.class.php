@@ -1,7 +1,5 @@
 <?php
 namespace wcf\form;
-use wcf\system\Regex;
-
 use wcf\acp\form\UserAddForm;
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatarAction;
@@ -19,6 +17,7 @@ use wcf\system\mail\Mail;
 use wcf\system\recaptcha\RecaptchaHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\authentication\UserAuthenticationFactory;
+use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
