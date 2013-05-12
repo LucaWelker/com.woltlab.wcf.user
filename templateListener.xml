@@ -75,7 +75,7 @@
 			<environment>admin</environment>
 			<templatename>userList</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.User{if !DEBUG_MODE}.min{/if}.js"></script>]]></templatecode>
+			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.User{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>]]></templatecode>
 		</templatelistener>
 		<templatelistener name="userListExtendedJavascriptInit">
 			<environment>admin</environment>
@@ -104,8 +104,8 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message{if !DEBUG_MODE}.min{/if}.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User{if !DEBUG_MODE}.min{/if}.js"></script>]]></templatecode>
+			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.User{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>]]></templatecode>
 		</templatelistener>
 		
 		<templatelistener name="javascriptInit">
