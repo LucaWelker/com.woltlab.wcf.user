@@ -373,6 +373,9 @@ WCF.User.Profile.Follow = Class.extend({
 	_success: function (data, textStatus, jqXHR) {
 		this._following = data.returnValues.following;
 		this._showButton();
+		
+		var $notification = new WCF.System.Notification();
+		$notification.show();
 	}
 });
 
@@ -456,6 +459,9 @@ WCF.User.Profile.IgnoreUser = Class.extend({
 	_success: function(data, textStatus, jqXHR) {
 		this._isIgnoredUser = data.returnValues.isIgnoredUser;
 		this._updateButton();
+		
+		var $notification = new WCF.System.Notification();
+		$notification.show();
 	},
 	
 	/**
@@ -1740,6 +1746,9 @@ WCF.User.Action.Follow = Class.extend({
 				return false;
 			}
 		}, this));
+		
+		var $notification = new WCF.System.Notification();
+		$notification.show();
 	}
 });
 
@@ -1843,6 +1852,9 @@ WCF.User.Action.Ignore = Class.extend({
 				return false;
 			}
 		}, this));
+		
+		var $notification = new WCF.System.Notification();
+		$notification.show();
 	}
 });
 
