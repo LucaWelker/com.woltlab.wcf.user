@@ -1,5 +1,7 @@
 <?php
 namespace wcf\form;
+use wcf\system\Regex;
+
 use wcf\acp\form\UserAddForm;
 use wcf\data\user\avatar\Gravatar;
 use wcf\data\user\avatar\UserAvatarAction;
@@ -305,7 +307,13 @@ class RegisterForm extends UserAddForm {
 				}
 				if (isset($facebookData['bio'])) $saveOptions[User::getUserOptionID('aboutMe')] = $facebookData['bio'];
 				if (isset($facebookData['location'])) $saveOptions[User::getUserOptionID('location')] = $facebookData['location']['name'];
-				if (isset($facebookData['website'])) $saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
+				if (isset($facebookData['website'])) {
+					if (!Regex::compile('^https?://')->match($facebookData['website'])) {
+						$facebookData['website'] = 'http://' . $facebookData['website'];
+					}
+					
+					$saveOptions[User::getUserOptionID('homepage')] = $facebookData['website'];
+				}
 				
 				// avatar
 				if (isset($facebookData['picture']) && !$facebookData['picture']['data']['is_silhouette']) {
