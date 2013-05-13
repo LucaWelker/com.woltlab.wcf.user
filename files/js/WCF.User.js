@@ -2003,7 +2003,7 @@ WCF.User.Avatar.Crop = Class.extend({
 	},
 	
 	/**
-	 * Sends the AHAX request to crop the avatar.
+	 * Sends the AJAX request to crop the avatar.
 	 * 
 	 * @param	object		event
 	 */
