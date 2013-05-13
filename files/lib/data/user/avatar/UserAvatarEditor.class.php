@@ -57,6 +57,7 @@ class UserAvatarEditor extends DatabaseObjectEditor {
 			
 			@unlink($this->getLocation($size));
 		}
+		@unlink($this->getLocation('resize'));
 		
 		// delete original size
 		@unlink($this->getLocation());

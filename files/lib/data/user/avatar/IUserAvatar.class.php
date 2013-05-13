@@ -13,6 +13,13 @@ namespace wcf\data\user\avatar;
  */
 interface IUserAvatar {
 	/**
+	 * Returns true if this avatar can be cropped.
+	 * 
+	 * @return	boolean
+	 */
+	public function canCrop();
+	
+	/**
 	 * Returns the url to this avatar.
 	 * 
 	 * @param	integer		$size

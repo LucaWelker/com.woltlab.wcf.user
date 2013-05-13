@@ -50,4 +50,11 @@ class DefaultAvatar implements IUserAvatar {
 	public function getHeight() {
 		return $this->size;
 	}
+	
+	/**
+	 * @see	wcf\data\user\avatar\IUserAvatar::canCrop()
+	 */
+	public function canCrop() {
+		return false;
+	}
 }

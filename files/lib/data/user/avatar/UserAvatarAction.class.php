@@ -2,6 +2,7 @@
 namespace wcf\data\user\avatar;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
+use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -9,6 +10,7 @@ use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\image\ImageHandler;
 use wcf\system\upload\AvatarUploadFileValidationStrategy;
+use wcf\system\upload\UploadFile;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\FileUtil;
@@ -25,6 +27,12 @@ use wcf\util\HTTPRequest;
  * @category	Community Framework
  */
 class UserAvatarAction extends AbstractDatabaseObjectAction {
+	/**
+	 * currently edited avatar
+	 * @var	wcf\data\user\avatar\UserAvatarEditor
+	 */
+	public $avatar = null;
+	
 	/**
 	 * Validates the upload action.
 	 */
@@ -90,6 +98,21 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 					FileUtil::makePath($dir, 0777);
 				}
 				
+				$uploadedImageData = $file->getImageData();
+				$canCrop = $uploadedImageData['width'] != $uploadedImageData['height'];
+				if ($canCrop) {
+					// create 'resized' version
+					$this->createResizedVersion($file, $avatar->getLocation('resized'));
+					
+					// save default crop settings
+					$resizedImageData = getimagesize($avatar->getLocation('resized'));
+					$avatarEditor = new UserAvatarEditor($avatar);
+					$avatarEditor->update(array(
+						'cropX' => ceil(($resizedImageData[0] - min($resizedImageData[0], $resizedImageData[1])) / 2),
+						'cropY' => ceil(($resizedImageData[1] - min($resizedImageData[0], $resizedImageData[1])) / 2)
+					));
+				}
+				
 				// move uploaded file
 				if (@copy($fileLocation, $avatar->getLocation())) {
 					@unlink($fileLocation);
@@ -116,8 +139,10 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 					
 					// return result
 					return array(
+						'avatarID' => $avatar->avatarID,
+						'canCrop' => $canCrop,
 						'errorType' => '',
-						'url' => $avatar->getURL(96)
+						'url' => $canCrop ? $avatar->getURL('resized') : $avatar->getURL(96)
 					);
 				}
 				else {
@@ -267,5 +292,109 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 		}
 		
 		return $filename;
+	}
+	
+	/**
+	 * Creates a resized version of the originally uploaded file and saves it
+	 * using the given resized filename.
+	 * 
+	 * @param	wcf\system\upload\UploadFile	$file
+	 * @param	string				$resizedFilename
+	 */
+	protected function createResizedVersion(UploadFile $file, $resizedFilename) {
+		$originalImageData = $file->getImageData();
+		
+		$width = $originalImageData['width'];
+		$height = $originalImageData['height'];
+		
+		// ensure that the 'resized' version will fullfil the maximum height/width
+		// for its shorter side
+		if ($width > MAX_AVATAR_SIZE && $height > MAX_AVATAR_SIZE) {
+			if ($width > $height) {
+				$height = MAX_AVATAR_SIZE;
+			}
+			else {
+				$width = MAX_AVATAR_SIZE;
+			}
+		}
+		
+		$adapter = ImageHandler::getInstance()->getAdapter();
+		$adapter->loadFile($file->getLocation());
+		$adapter->writeImage($adapter->createThumbnail($width, $height, true), $resizedFilename);
+	}
+	
+	/**
+	 * Validates the 'cropAvatar' action.
+	 */
+	public function validateCropAvatar() {
+		// check parameters
+		$this->readInteger('x', true);
+		$this->readInteger('y', true);
+		
+		if ($this->parameters['x'] < 0) {
+			throw new UserInputException('x');
+		}
+		if ($this->parameters['y'] < 0) {
+			throw new UserInputException('y');
+		}
+		
+		$this->avatar = $this->getSingleObject();
+		
+		// check if user can edit the given avatar
+		if ($this->avatar->userID != WCF::getUser()->userID && !WCF::getSession()->getPermission('admin.user.canEditUser')) {
+			throw new PermissionDeniedException();
+		}
+		
+		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar') || UserProfile::getUserProfile($this->avatar->userID)->disableAvatar) {
+			throw new PermissionDeniedException();
+		}
+	}
+	
+	/**
+	 * Craps an avatar.
+	 */
+	public function cropAvatar() {
+		$adapter = ImageHandler::getInstance()->getAdapter();
+		
+		$resizedImageData = getimagesize($this->avatar->getLocation('resized'));
+		
+		// get square size of the avatar,
+		$squareSize = min($resizedImageData[0], $resizedImageData[1]);
+		
+		// create size-parameter-less image using the 'resized' version
+		// and the given cropping settings
+		$adapter->loadFile($this->avatar->getLocation('resized'));
+		$adapter->clip($this->parameters['x'], $this->parameters['y'], $squareSize, $squareSize);
+		$adapter->writeImage($adapter->getImage(), $this->avatar->getLocation());
+		
+		// check if avatar sizes have been reduced since upload/last cropping
+		if ($squareSize > MAX_AVATAR_SIZE) {
+			$squareSize = MAX_AVATAR_SIZE;
+			
+			$adapter->resize(0, 0, $squareSize, $squareSize, 0, 0, $squareSize, $squareSize);
+			$adapter->writeImage($adapter->getImage(), $this->avatar->getLocation());
+			
+			// delete obsolete thumbnail sizes with old cropping settings
+			foreach (UserAvatar::$avatarThumbnailSizes as $size) {
+				if ($size > $squareSize) {
+					@unlink($this->avatar->getLocation($size));
+				}
+			}
+		}
+		
+		// update database entry
+		$this->avatar->update(array(
+			'cropX' => $this->parameters['x'],
+			'cropY' => $this->parameters['y'],
+			'height' => $squareSize,
+			'width' => $squareSize
+		));
+		
+		// reset user storage
+		UserStorageHandler::getInstance()->reset(array($this->avatar->userID), 'avatar');
+		
+		// update thumbnails
+		$action = new UserAvatarAction(array($this->avatar->avatarID), 'generateThumbnails');
+		$action->executeAction();
 	}
 }

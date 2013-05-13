@@ -104,4 +104,11 @@ class Gravatar extends DefaultAvatar {
 			return false;
 		}
 	}
+	
+	/**
+	 * @see	wcf\data\user\avatar\IUserAvatar::canCrop()
+	 */
+	public function canCrop() {
+		return false;
+	}
 }

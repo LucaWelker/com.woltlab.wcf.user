@@ -55,10 +55,23 @@
 			</dl>
 			
 			<dl class="jsOnly{if $errorField == 'custom'} formError{/if}" id="avatarUpload">
-				<dt class="framed">{if $avatarType == 'custom'}{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(96)}{else}<img src="{@$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon96" />{/if}</dt>
+				<dt class="framed">
+					{if $avatarType == 'custom'}
+						{if $__wcf->getUserProfileHandler()->getAvatar()->canCrop()}
+							<canvas class="userAvatarCrop"></canvas>
+						{else}
+							{@$__wcf->getUserProfileHandler()->getAvatar()->getImageTag(96)}
+						{/if}
+					{else}
+						<img src="{@$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon96" />
+					{/if}
+				</dt>
 				<dd>
 					<label><input type="radio" name="avatarType" value="custom" {if $avatarType == 'custom'}checked="checked" {/if}/> {lang}wcf.user.avatar.type.custom{/lang}</label>
 					<small>{lang}wcf.user.avatar.type.custom.description{/lang}</small>
+					{if $avatarType == 'custom' && $__wcf->getUserProfileHandler()->getAvatar()->canCrop()}
+						<small class="jsUserAvatarCropDescription">{lang}wcf.user.avatar.type.custom.crop{/lang}</small>
+					{/if}
 					
 					{* placeholder for upload button: *}
 					<div></div>
@@ -115,7 +128,15 @@
 		});
 		
 		{if !$__wcf->user->disableAvatar}
-			new WCF.User.Avatar.Upload();
+			var $avatarCrop = null;
+			{if $__wcf->getUserProfileHandler()->getAvatar()->canCrop()}
+				$avatarCrop = new WCF.User.Avatar.Crop({@$__wcf->getUserProfileHandler()->getAvatar()->avatarID}, '{@$__wcf->getUserProfileHandler()->getAvatar()->getURL('resized')|encodeJS}', {
+					x: {@$__wcf->getUserProfileHandler()->getAvatar()->cropX},
+					y: {@$__wcf->getUserProfileHandler()->getAvatar()->cropY}
+				});
+			{/if}
+			
+			new WCF.User.Avatar.Upload(0, $avatarCrop);
 		{/if}
 	});
 	//]]>

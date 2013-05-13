@@ -55,7 +55,7 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	 * @see	wcf\data\user\avatar\IUserAvatar::getURL()
 	 */
 	public function getURL($size = null) {
-		if ($size !== null) {
+		if ($size !== null && $size !== 'resized') {
 			if ($size >= $this->width || $size >= $this->height) $size = null;
 		}
 		
@@ -102,5 +102,12 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	 */
 	public function getHeight() {
 		return $this->height;
+	}
+	
+	/**
+	 * @see	wcf\data\user\avatar\IUserAvatar::canCrop()
+	 */
+	public function canCrop() {
+		return file_exists($this->getLocation('resized'));
 	}
 }
