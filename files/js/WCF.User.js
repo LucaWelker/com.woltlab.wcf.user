@@ -2119,7 +2119,7 @@ WCF.User.Avatar.Crop = Class.extend({
 	},
 	
 	/**
-	 * Handles the 'mousedown' event over the canvas.
+	 * Handles the 'mousemove' event over the canvas.
 	 * 
 	 * @param	object		event
 	 */
