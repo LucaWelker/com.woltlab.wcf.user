@@ -248,17 +248,17 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	 */
 	protected function enforceDimensions($filename) {
 		$imageData = getimagesize($filename);
-		if ($imageData[0] > MAX_AVATAR_SIZE || $imageData[1] > MAX_AVATAR_SIZE) {
-			try {
-				$adapter = ImageHandler::getInstance()->getAdapter();
-				$adapter->loadFile($filename);
-				$filename = FileUtil::getTemporaryFilename();
-				$thumbnail = $adapter->createThumbnail(MAX_AVATAR_SIZE, MAX_AVATAR_SIZE, false);
-				$adapter->writeImage($thumbnail, $filename);
-			}
-			catch (SystemException $e) {
-				throw new UserInputException('avatar', 'tooLarge');
-			}
+		
+		$avatarSize = min($imageData[0], $imageData[1], MAX_AVATAR_SIZE);
+		try {
+			$adapter = ImageHandler::getInstance()->getAdapter();
+			$adapter->loadFile($filename);
+			$filename = FileUtil::getTemporaryFilename();
+			$thumbnail = $adapter->createThumbnail($avatarSize, $avatarSize, false);
+			$adapter->writeImage($thumbnail, $filename);
+		}
+		catch (SystemException $e) {
+			throw new UserInputException('avatar', 'tooLarge');
 		}
 		
 		// check filesize (after shrink)
