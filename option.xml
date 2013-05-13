@@ -243,13 +243,7 @@
 			<!-- /user.security -->
 			
 			<!-- user.avatar -->
-			<option name="max_avatar_width">
-				<categoryname>user.avatar</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>192</defaultvalue>
-				<minvalue>48</minvalue>
-			</option>
-			<option name="max_avatar_height">
+			<option name="max_avatar_size">
 				<categoryname>user.avatar</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>192</defaultvalue>

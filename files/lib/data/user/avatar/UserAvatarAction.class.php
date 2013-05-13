@@ -233,7 +233,7 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 			if ($this->parameters['userEditor']->avatarID) {
 				$action = new UserAvatarAction(array(WCF::getUser()->avatarID), 'delete');
 				$action->executeAction();
-			
+				
 				// reset user storage
 				UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'avatar');
 			}
@@ -248,14 +248,13 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 	 */
 	protected function enforceDimensions($filename) {
 		$imageData = getimagesize($filename);
-		if ($imageData[0] > MAX_AVATAR_WIDTH || $imageData[1] > MAX_AVATAR_HEIGHT) {
+		if ($imageData[0] > MAX_AVATAR_SIZE || $imageData[1] > MAX_AVATAR_SIZE) {
 			try {
 				$adapter = ImageHandler::getInstance()->getAdapter();
 				$adapter->loadFile($filename);
 				$filename = FileUtil::getTemporaryFilename();
-				$thumbnail = $adapter->createThumbnail(MAX_AVATAR_WIDTH, MAX_AVATAR_HEIGHT, false);
+				$thumbnail = $adapter->createThumbnail(MAX_AVATAR_SIZE, MAX_AVATAR_SIZE, false);
 				$adapter->writeImage($thumbnail, $filename);
-				$imageData = getimagesize($filename);
 			}
 			catch (SystemException $e) {
 				throw new UserInputException('avatar', 'tooLarge');
