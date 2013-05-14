@@ -2060,7 +2060,7 @@ WCF.User.Avatar.Crop = Class.extend({
 			
 			// add crop button
 			// todo: replace icon-cut with icon-crop once FontAwesome 3.1. is added
-			this._cropButton = $('<span class="button icon icon16 icon-cut jsTooltip" title="wcf.user.avatar.type.custom.button.crop"></span>').click($.proxy(this._crop, this));
+			this._cropButton = $('<p class="button jsTooltip" title="wcf.user.avatar.type.custom.button.crop"><span class="icon icon16 icon-cut"></span></p>').click($.proxy(this._crop, this));
 			$('#avatarUpload > dd > div').prepend(this._cropButton);
 			
 			// add tooltip/information
