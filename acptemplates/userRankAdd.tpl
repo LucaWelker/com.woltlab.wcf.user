@@ -90,7 +90,7 @@
 			<dl{if $errorField == 'repeatImage'} class="formError"{/if}>
 				<dt><label for="repeatImage">{lang}wcf.acp.user.rank.repeatImage{/lang}</label></dt>
 				<dd>
-					<input type="number" id="repeatImage" name="repeatImage" value="{@$repeatImage}" min="1" class="short" />
+					<input type="number" id="repeatImage" name="repeatImage" value="{@$repeatImage}" min="1" class="tiny" />
 					{if $errorField == 'rankImage'}
 						<small class="innerError">
 							{lang}wcf.acp.user.rank.repeatImage.error.{@$errorType}{/lang}
@@ -154,7 +154,7 @@
 			<dl{if $errorField == 'requiredPoints'} class="formError"{/if}>
 				<dt><label for="requiredPoints">{lang}wcf.acp.user.rank.requiredPoints{/lang}</label></dt>
 				<dd>
-					<input type="number" id="requiredPoints" name="requiredPoints" value="{@$requiredPoints}" min="0" class="medium" />
+					<input type="number" id="requiredPoints" name="requiredPoints" value="{@$requiredPoints}" min="0" class="tiny" />
 					{if $errorField == 'requiredPoints'}
 						<small class="innerError">
 							{lang}wcf.acp.user.rank.requiredPoints.error.{@$errorType}{/lang}

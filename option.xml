@@ -31,6 +31,9 @@
 			<category name="user.register">
 				<parent>user</parent>
 			</category>
+				<category name="user.3rdPartyAuth">
+					<parent>user.register</parent>
+				</category>
 				<category name="user.password">
 					<parent>user.register</parent>
 				</category>
@@ -159,7 +162,7 @@
 			<option name="register_disabled">
 				<categoryname>user.register</categoryname>
 				<optiontype>boolean</optiontype>
-				<enableoptions><![CDATA[!register_enable_disclaimer,!register_admin_notification,!register_activation_method,!register_unique_ip_address]]></enableoptions>
+				<enableoptions><![CDATA[!register_enable_disclaimer,!register_admin_notification,!register_activation_method]]></enableoptions>
 			</option>
 			<option name="register_enable_disclaimer">
 				<categoryname>user.register</categoryname>
@@ -178,57 +181,56 @@
 1:wcf.acp.option.register_activation_method.byUser
 2:wcf.acp.option.register_activation_method.byAdmin]]></selectoptions>
 			</option>
+			<!-- /user.register -->
+			
+			<!-- user.3rdPartyAuth -->
 			<option name="github_public_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="github_private_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="twitter_public_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="twitter_private_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="facebook_public_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="facebook_private_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="google_public_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
 			<option name="google_private_key">
-				<categoryname>user.register</categoryname>
+				<categoryname>user.3rdPartyAuth</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue></defaultvalue>
 			</option>
-			<!-- /user.register -->
+			<!-- /user.3rdPartyAuth -->
 			
 			<!-- user.security -->
 			<option name="register_use_captcha">
 				<categoryname>security.antispam</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue><![CDATA[1]]></defaultvalue>
-			</option>
-			<option name="login_use_captcha">
-				<categoryname>security.antispam</categoryname>
-				<optiontype>boolean</optiontype>
 			</option>
 			<option name="lost_password_use_captcha">
 				<categoryname>security.antispam</categoryname>
