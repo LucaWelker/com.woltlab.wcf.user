@@ -116,9 +116,9 @@
 		<item name="wcf.acp.option.register_activation_method.byAdmin"><![CDATA[Aktivierung erfolgt durch Administrator]]></item>
 		<item name="wcf.acp.option.register_activation_method.byUser"><![CDATA[Benutzer aktiviert sich durch E-Mail-Bestätigung]]></item>
 		<item name="wcf.acp.option.register_activation_method.disabled"><![CDATA[Keine Aktivierung notwendig]]></item>
-		<item name="wcf.acp.option.register_use_captcha"><![CDATA[Registrierung]]></item>
-		<item name="wcf.acp.option.lost_password_use_captcha"><![CDATA[„Kennwort vergessen“]]></item>
-		<item name="wcf.acp.option.profile_mail_use_captcha"><![CDATA[„E-Mail an Benutzer schicken“]]></item>
+		<item name="wcf.acp.option.register_use_captcha"><![CDATA[reCAPTCHA in Registrierung aktivieren]]></item>
+		<item name="wcf.acp.option.lost_password_use_captcha"><![CDATA[reCAPTCHA in „Kennwort vergessen“ aktivieren]]></item>
+		<item name="wcf.acp.option.profile_mail_use_captcha"><![CDATA[reCAPTCHA in „E-Mail an Benutzer schicken“ aktivieren]]></item>
 		<item name="wcf.acp.option.signature_max_image_height"><![CDATA[Maximale Höhe von Signatur-Bildern]]></item>
 		<item name="wcf.acp.option.user_title_max_length"><![CDATA[Maximale Länge des Benutzertitels]]></item>
 		<item name="wcf.acp.option.user_forbidden_titles"><![CDATA[Reservierte Benutzertitel]]></item>
