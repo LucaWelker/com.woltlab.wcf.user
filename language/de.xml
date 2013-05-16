@@ -15,7 +15,7 @@
 		<item name="wcf.acp.group.option.category.admin.content.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="wcf.acp.group.option.category.user.profile"><![CDATA[Benutzerprofile]]></item>
 		<item name="wcf.acp.group.option.category.user.profile.avatar"><![CDATA[Avatare]]></item>
-		<item name="wcf.acp.group.option.category.user.rank"><![CDATA[Benutzerränge]]></item>
+		<item name="wcf.acp.group.option.category.admin.user.rank"><![CDATA[Benutzerränge]]></item>
 		<item name="wcf.acp.group.option.category.user.signature"><![CDATA[Signaturen]]></item>
 		<item name="wcf.acp.group.option.user.profile.avatar.allowedFileExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
 		<item name="wcf.acp.group.option.user.profile.avatar.canUploadAvatar"><![CDATA[Kann eigenen Avatar hochladen]]></item>
