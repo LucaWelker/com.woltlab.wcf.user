@@ -340,7 +340,7 @@ class UserAvatarAction extends AbstractDatabaseObjectAction {
 		));
 		
 		return array(
-			'url' => $this->avatar->getURL('96')
+			'url' => $this->avatar->getURL(96)
 		);
 	}
 }
