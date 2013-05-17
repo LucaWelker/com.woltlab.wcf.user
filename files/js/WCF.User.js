@@ -1868,75 +1868,22 @@ WCF.User.Avatar = {};
  */
 WCF.User.Avatar.Crop = Class.extend({
 	/**
-	 * id of the cropped avatar
+	 * current crop setting in x-direction
 	 * @var	integer
 	 */
-	_avatarID: 0,
+	_cropX: 0,
 	
 	/**
-	 * avatar image object in 'resized' version
-	 * @var	Image
-	 */
-	_avatar: null,
-	
-	/**
-	 * convas object
-	 * @var	object
-	 */
-	_canvas: null,
-	
-	/**
-	 * width/height of the canvas
+	 * current crop setting in y-direction
 	 * @var	integer
 	 */
-	_canvasSize: 96,
+	_cropY: 0,
 	
 	/**
-	 * 2D canvas context
-	 * @var	object
-	 */
-	_context: null,
-	
-	/**
-	 * button to crop the avatar to the current selection
+	 * avatar crop dialog
 	 * @var	jQuery
 	 */
-	_cropButton: null,
-	
-	/**
-	 * current crop settings
-	 * @var	object
-	 */
-	_currentCrop: {
-		x: 0,
-		y: 0
-	},
-	
-	/**
-	 * description text object which descriptions cropping
-	 * @var	jQuery
-	 */
-	_description: null,
-	
-	/**
-	 * original crop settings
-	 * if one value is -1, the settings have to be calculated yet based on the
-	 * center of the image
-	 * @var	object
-	 */
-	_originalCrop: {
-		x: -1,
-		y: -1
-	},
-	
-	/**
-	 * previous mouse offsets used to calculate the distance to move the avatar
-	 * @var	object
-	 */
-	_previousOffsets: {
-		x: 0,
-		y: 0
-	},
+	_dialog: null,
 	
 	/**
 	 * action proxy to send the crop AJAX requests
@@ -1945,234 +1892,158 @@ WCF.User.Avatar.Crop = Class.extend({
 	_proxy: null,
 	
 	/**
-	 * height of the scaled 'resized' version of the avatar
+	 * maximum size of thumbnails
 	 * @var	integer
 	 */
-	_scaledAvatarHeight: 0,
-	
-	/**
-	 * height of the scaled 'resized' version of the avatar
-	 * @var	integer
-	 */
-	_scaledAvatarWidth: 0,
-	
-	/**
-	 * scaled canvas size
-	 * @var	integer
-	 */
-	_scaledCanvasSize: 0,
-	
-	/**
-	 * scale factor between the size of the 'resized' avatar version and the
-	 * disaplayed canvas
-	 * @var	double
-	 */
-	_scaleFactor: 1.0,
+	MAX_THUMBNAIL_SIZE: 128,
 	
 	/**
 	 * Creates a new instance of WCF.User.Avatar.Crop.
 	 * 
 	 * @param	integer		avatarID
-	 * @param	string		resizedAvatarURL
-	 * @param	object		originalCrop
 	 */
-	init: function(avatarID, resizedAvatarURL, originalCrop) {
+	init: function(avatarID) {
 		this._avatarID = avatarID;
-		this._originalCrop = $.extend(true, {
-			x: -1,
-			y: -1
-		}, originalCrop);
 		
-		// load avatar image
-		this._avatar = new Image();
-		this._avatar.onload = $.proxy(this._initCanvas, this);
-		this._avatar.src = resizedAvatarURL;
+		if (this._dialog) {
+			this.destroy();
+		}
+		this._dialog = null;
 		
-		this._proxy  = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
+		// check if object already had been initialized
+		if (!this._proxy) {
+			this._proxy  = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+		}
+		
+		$('.userAvatarCrop').click($.proxy(this._showCropDialog, this));
 	},
 	
 	/**
-	 * Removes the user interface to crop the current custom avatar.
+	 * Destroys the avatar crop interface.
 	 */
-	remove: function() {
-		this._description.remove();
-		this._cropButton.remove();
-		$(this._canvas).remove();
+	destroy: function() {
+		this._dialog.remove();
 	},
 	
 	/**
-	 * Sends the AJAX request to crop the avatar.
+	 * Sends AJAX request to crop avatar.
 	 * 
 	 * @param	object		event
 	 */
 	_crop: function(event) {
-		event.preventDefault();
-		
-		// fix rounding problems
-		var $cropX = Math.ceil(this._currentCrop.x / this._scaleFactor);
-		if ($cropX + this._scaledCanvasSize > this._avatar.width) {
-			$cropX--;
-		}
-		var $cropY = Math.ceil(this._currentCrop.y / this._scaleFactor);
-		if ($cropY + this._scaledCanvasSize > this._avatar.height) {
-			$cropY--;
-		}
-		
 		this._proxy.setOption('data', {
 			actionName: 'cropAvatar',
 			className: 'wcf\\data\\user\\avatar\\UserAvatarAction',
 			objectIDs: [ this._avatarID ],
 			parameters: {
-				x: $cropX,
-				y: $cropY
+				cropX: this._cropX,
+				cropY: this._cropY
 			}
 		});
 		this._proxy.sendRequest();
 	},
 	
 	/**
-	 * Initializes the canvas.
+	 * Initializes the dialog after a successful 'getCropDialog' request.
+	 * 
+	 * @param	object		data
 	 */
-	_initCanvas: function() {
-		// check if canvas has already been initalized
-		if (!this._canvas) {
-			WCF.DOMNodeInsertedHandler.enable();
-			
-			// check if a canvas object already exists
-			var $canvas = $('#avatarUpload > dt > canvas');
-			if ($canvas.length) {
-				this._canvas = $canvas.get(0);
-				this._description = $('small.jsUserAvatarCropDescription');
-			}
-			else {
-				this._canvas = $('<canvas />').addClass('userAvatarCrop').get(0);
-				$('#avatarUpload > dt > *').replaceWith(this._canvas);
-			}
-			
-			// update canvas size
-			this._canvas.width = this._canvasSize;
-			this._canvas.height = this._canvasSize;
-			
-			// get 2D context to draw image
-			this._context = this._canvas.getContext('2d');
-			
-			// add crop button
-			// todo: replace icon-cut with icon-crop once FontAwesome 3.1. is added
-			this._cropButton = $('<p class="button jsTooltip" title="wcf.user.avatar.type.custom.button.crop"><span class="icon icon16 icon-cut"></span></p>').click($.proxy(this._crop, this));
-			$('#avatarUpload > dd > div').prepend(this._cropButton);
-			
-			// add tooltip/information
-			if (!this._description) {
-				this._description = $('<small />').html(WCF.Language.get('wcf.user.avatar.type.custom.crop')).insertAfter($('#avatarUpload > dd > small'));
-			}
-			
-			WCF.DOMNodeInsertedHandler.disable();
+	_getCropDialog: function(data) {
+		if (!this._dialog) {
+			this._dialog = $('<div />').hide().appendTo(document.body);
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('wcf.user.avatar.type.custom.crop')
+			});
 		}
 		
-		// calculate scale factor and scaled lengths
-		this._scaleFactor = this._canvasSize / Math.min(this._avatar.height, this._avatar.width);
-		this._scaledAvatarHeight = Math.ceil(this._avatar.height * this._scaleFactor);
-		this._scaledAvatarWidth = Math.ceil(this._avatar.width * this._scaleFactor);
-		this._scaledCanvasSize = Math.ceil(this._canvasSize / this._scaleFactor);
+		this._dialog.html(data.returnValues.template);
+		this._dialog.find('button[data-type="save"]').click($.proxy(this._crop, this));
 		
-		if (this._originalCrop.x == -1 || this._originalCrop.x == -1) {
-			// calculate original crop
-			this._originalCrop.x = Math.ceil((this._scaledAvatarWidth - this._canvasSize) / 2);
-			this._originalCrop.y = Math.ceil((this._scaledAvatarHeight - this._canvasSize) / 2);
+		this._cropX = data.returnValues.cropX;
+		this._cropY = data.returnValues.cropY;
+		
+		var $image = $('#userAvatarCropSelection > img');
+		$('#userAvatarCropSelection').css({
+			height: $image.height() + 'px',
+			width: $image.width() + 'px'
+		});
+		$('#userAvatarCropOverlaySelection').css({
+			'background-image': 'url(' + $image.attr('src') + ')',
+			'background-position': -this._cropX + 'px ' + -this._cropY + 'px',
+			'left': this._cropX + 'px',
+			'top': this._cropY + 'px'
+		}).draggable({
+			containment: 'parent',
+			drag : $.proxy(this._updateSelection, this),
+			stop : $.proxy(this._updateSelection, this)
+		});
+		
+		this._dialog.find('button[data-type="save"]').click($.proxy(this._save, this));
+		
+		this._dialog.wcfDialog('render');
+	},
+	
+	/**
+	 * Shows the cropping dialog.
+	 */
+	_showCropDialog: function() {
+		if (!this._dialog) {
+			this._proxy.setOption('data', {
+				actionName: 'getCropDialog',
+				className: 'wcf\\data\\user\\avatar\\UserAvatarAction',
+				objectIDs: [ this._avatarID ]
+			});
+			this._proxy.sendRequest();
 		}
 		else {
-			// scale crop to match displayed image dimensions
-			this._originalCrop.x = Math.ceil(this._originalCrop.x * this._scaleFactor);
-			this._originalCrop.y = Math.ceil(this._originalCrop.y * this._scaleFactor);
+			this._dialog.wcfDialog('open');
 		}
-		
-		// set current crop to original crop
-		this._currentCrop.x = this._originalCrop.x;
-		this._currentCrop.y = this._originalCrop.y;
-		
-		this._updateImage();
-		
-		// add event listener to start moving crop selection
-		$(this._canvas).on('mousedown', $.proxy(this._mousedown, this));
 	},
 	
 	/**
-	 * Handles the 'mousedown' event over the canvas.
+	 * Handles successful AJAX request.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
 	 */
-	_mousedown: function(event) {
-		// initalize previous offsets
-		this._previousOffsets = {
-			x: event.offsetX,
-			y: event.offsetY
-		};
-		
-		// bind 'mousemove' event to canvas
-		$(this._canvas).on('mousemove', $.proxy(this._mousemove, this));
-		
-		// bind 'mouseup' event to body to unbind 'mousemove' listener from
-		// canvas
-		$('body').on('mouseup', $.proxy(function() {
-			$(this._canvas).off('mousemove', $.proxy(this._mousemove, this));
-		}, this));
+	_success: function(data, textStatus, jqXHR) {
+		switch (data.actionName) {
+			case 'getCropDialog':
+				this._getCropDialog(data);
+			break;
+			
+			case 'cropAvatar':
+				WCF.DOMNodeInsertedHandler.enable();
+				$('#avatarUpload > dt > img').replaceWith($('<img src="' + data.returnValues.url + '" alt="" class="userAvatarCrop jsTooltip" title="' + WCF.Language.get('wcf.user.avatar.type.custom.crop') + '" />').css({
+					width: '96px',
+					height: '96px'
+				}).click($.proxy(this._showCropDialog, this)));
+				WCF.DOMNodeInsertedHandler.disable();
+				
+				this._dialog.wcfDialog('close');
+				
+				var $notification = new WCF.System.Notification();
+				$notification.show();
+			break;
+		}
 	},
 	
 	/**
-	 * Handles the 'mousemove' event over the canvas.
+	 * Updates the current crop selection if the selection overlay is dragged.
 	 * 
 	 * @param	object		event
+	 * @param	object		ui
 	 */
-	_mousemove: function(event) {
-		var $currentOffsets ={
-			x: event.offsetX,
-			y: event.offsetY
-		};
+	_updateSelection: function(event, ui) {
+		this._cropX = ui.position.left;
+		this._cropY = ui.position.top;
 		
-		// calculate relative mouse movement
-		var $dx = $currentOffsets.x - this._previousOffsets.x;
-		var $dy = $currentOffsets.y - this._previousOffsets.y;
-		
-		// movement in x-direction
-		if ($dx) {
-			// update current crop settings
-			this._currentCrop.x -= $dx;
-			
-			// check if new crop still fullfils boundary conditions
-			if (this._currentCrop.x < 0) {
-				this._currentCrop.x = 0;
-			}
-			else if (this._currentCrop.x > this._scaledAvatarWidth - this._canvasSize) {
-				this._currentCrop.x = this._scaledAvatarWidth - this._canvasSize;
-			}
-		}
-		
-		// movement in y-direction
-		if ($dy) {
-			// update current crop settings
-			this._currentCrop.y -= $dy;
-			
-			// check if new crop still fullfils boundary conditions
-			if (this._currentCrop.y < 0) {
-				this._currentCrop.y = 0;
-			}
-			else if (this._currentCrop.y > this._scaledAvatarHeight - this._canvasSize) {
-				this._currentCrop.y = this._scaledAvatarHeight - this._canvasSize;
-			}
-		}
-		
-		this._updateImage();
-		
-		// update previous offsets
-		this._previousOffsets = $currentOffsets;
-	},
-	
-	/**
-	 * Updates the displayed image (part).
-	 */
-	_updateImage: function() {
-		this._context.clearRect(0, 0, this._canvasSize, this._canvasSize);
-		this._context.drawImage(this._avatar, Math.floor(this._currentCrop.x / this._scaleFactor), Math.floor(this._currentCrop.y / this._scaleFactor), this._scaledCanvasSize, this._scaledCanvasSize, 0, 0, this._canvasSize, this._canvasSize);
+		$('#userAvatarCropOverlaySelection').css({
+			'background-position': -ui.position.left + 'px ' + -ui.position.top + 'px'
+		});
 	}
 });
 
@@ -2194,6 +2065,12 @@ WCF.User.Avatar.Upload = WCF.Upload.extend({
 	 */
 	_userID: 0,
 	
+	/**
+	 * Initalizes a new WCF.User.Avatar.Upload object.
+	 * 
+	 * @param	integer			userID
+	 * @param	WCF.User.Avatar.Crop	avatarCrop
+	 */
 	init: function(userID, avatarCrop) {
 		this._super($('#avatarUpload > dd > div'), undefined, 'wcf\\data\\user\\avatar\\UserAvatarAction');
 		this._userID = userID || 0;
@@ -2212,36 +2089,31 @@ WCF.User.Avatar.Upload = WCF.Upload.extend({
 		}
 	},
 	
+	/**
+	 * @see	WCF.Upload._initFile()
+	 */
 	_initFile: function(file) {
 		return $('#avatarUpload > dt > img');
 	},
 	
+	/**
+	 * @see	WCF.Upload._success()
+	 */
 	_success: function(uploadID, data) {
-		if (data.returnValues['url']) {
+		if (data.returnValues.url) {
+			this._updateImage(data.returnValues.url, data.returnValues.canCrop);
+			
 			if (data.returnValues.canCrop) {
 				if (!this._avatarCrop) {
-					this._avatarCrop = new WCF.User.Avatar.Crop(data.returnValues.avatarID, data.returnValues.url);
+					this._avatarCrop = new WCF.User.Avatar.Crop(data.returnValues.avatarID);
 				}
 				else {
-					this._avatarCrop.init(data.returnValues.avatarID, data.returnValues.url);
+					this._avatarCrop.init(data.returnValues.avatarID);
 				}
 			}
-			else {
-				if (this._avatarCrop) {
-					this._avatarCrop.remove();
-					this._avatarCrop = null;
-				}
-				
-				var $image = $('#avatarUpload > dt > img');
-				if (!$image.length) {
-					$image = $('<img src="" alt="" />');
-					$('#avatarUpload > dt').append($image);
-				}
-				
-				$image.attr('src', data.returnValues['url']).css({
-					width: 'auto',
-					height: 'auto'
-				});
+			else if (this._avatarCrop) {
+				this._avatarCrop.destroy();
+				this._avatarCrop = null;
 			}
 			
 			// hide error
@@ -2251,12 +2123,41 @@ WCF.User.Avatar.Upload = WCF.Upload.extend({
 			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.user.avatar.upload.success'));
 			$notification.show();
 		}
-		else if (data.returnValues['errorType']) {
+		else if (data.returnValues.errorType) {
 			// show error
-			this._getInnerErrorElement().text(WCF.Language.get('wcf.user.avatar.upload.error.'+data.returnValues['errorType']));
+			this._getInnerErrorElement().text(WCF.Language.get('wcf.user.avatar.upload.error.' + data.returnValues.errorType));
 		}
 	},
 	
+	/**
+	 * Updates the displayed avatar image.
+	 * 
+	 * @param	string		url
+	 * @param	boolean		canCrop
+	 */
+	_updateImage: function(url, canCrop) {
+		WCF.DOMNodeInsertedHandler.enable();
+		$('#avatarUpload > dt > img').remove();
+		var $image = $('<img src="' + url + '" alt="" />').css({
+			'height': 'auto',
+			'max-height': '96px',
+			'max-width': '96px',
+			'width': 'auto'
+		});
+		if (canCrop) {
+			$image.addClass('userAvatarCrop').addClass('jsTooltip');
+			$image.attr('title', WCF.Language.get('wcf.user.avatar.type.custom.crop'));
+		}
+		
+		$('#avatarUpload > dt').prepend($image);
+		WCF.DOMNodeInsertedHandler.disable();
+	},
+	
+	/**
+	 * Returns the inner error element.
+	 * 
+	 * @return	jQuery
+	 */
 	_getInnerErrorElement: function() {
 		var $span = $('#avatarUpload > dd > .innerError');
 		if (!$span.length) {

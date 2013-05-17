@@ -180,6 +180,35 @@
 	}
 }
 
+/* avatar cropping */
+
 .userAvatarCrop {
+	cursor: pointer;
+}
+
+#userAvatarCropSelection {
+	position: relative;
+	margin: 0 auto;
+}
+
+#userAvatarCropOverlay {
+	background-color: #000000;
+	height: 100%;
+	opacity: 0.5;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
+
+#userAvatarCropOverlaySelection {
 	cursor: move;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 128px;
+	overflow: hidden;
+	width: 128px;
+	z-index: 20;
 }
