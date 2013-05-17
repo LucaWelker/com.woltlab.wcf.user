@@ -32,6 +32,12 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	protected static $databaseTableIndexName = 'avatarID';
 	
 	/**
+	 * maximum thumbnail size
+	 * @var	integer
+	 */
+	public static $maxThumbnailSize = 128;
+	
+	/**
 	 * Returns the physical location of this avatar.
 	 * 
 	 * @param	integer		$size
@@ -108,6 +114,6 @@ class UserAvatar extends DatabaseObject implements IUserAvatar {
 	 * @see	wcf\data\user\avatar\IUserAvatar::canCrop()
 	 */
 	public function canCrop() {
-		return file_exists($this->getLocation('resized'));
+		return $this->width != $this->height && $this->width > self::$maxThumbnailSize && $this->height > self::$maxThumbnailSize;
 	}
 }
