@@ -1,0 +1,6 @@
+/* ea8f304 */
+ALTER TABLE wcf1_user DROP COLUMN signatureCache;
+
+/* 2782282 */
+ALTER TABLE wcf1_user_avatar ADD COLUMN cropX SMALLINT(5) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_user_avatar ADD COLUMN cropY SMALLINT(5) NOT NULL DEFAULT 0;
