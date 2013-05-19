@@ -90,6 +90,39 @@
 			<eventname>quickSearchItems</eventname>
 			<templatecode><![CDATA[{include file='__userSearchExtendedQuickSearchItems'}]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="usersAwaitingApprovalInfo">
+			<environment>admin</environment>
+			<templatename>index</templatename>
+			<eventname>userNotice</eventname>
+			<templatecode><![CDATA[{include file='__usersAwaitingApprovalInfo'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="userSearchLastActivityTime">
+			<environment>admin</environment>
+			<templatename>userSearch</templatename>
+			<eventname>conditionFields</eventname>
+			<templatecode><![CDATA[{include file='__userSearchLastActivityTime'}]]></templatecode>
+		</templatelistener>
+		<templatelistener name="userBulkProcessingLastActivityTime">
+			<environment>admin</environment>
+			<templatename>userBulkProcessing</templatename>
+			<eventname>conditionFields</eventname>
+			<templatecode><![CDATA[{include file='__userSearchLastActivityTime'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="userSearchEnabledState">
+			<environment>admin</environment>
+			<templatename>userSearch</templatename>
+			<eventname>stateFields</eventname>
+			<templatecode><![CDATA[{include file='__userSearchEnabledState'}]]></templatecode>
+		</templatelistener>
+		<templatelistener name="userBulkProcessingEnabledState">
+			<environment>admin</environment>
+			<templatename>userBulkProcessing</templatename>
+			<eventname>stateFields</eventname>
+			<templatecode><![CDATA[{include file='__userSearchEnabledState'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 		
 		<!-- user -->

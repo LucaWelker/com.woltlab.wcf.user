@@ -179,6 +179,7 @@
 		<item name="wcf.acp.user.quickSearch.disabled"><![CDATA[Users awaiting approval]]></item>
 		<item name="wcf.acp.user.quickSearch.disabledAvatars"><![CDATA[Blocked avatars]]></item>
 		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[Blocked signatures]]></item>
+		<item name="wcf.acp.user.usersAwaitingApprovalInfo"><![CDATA[TODO: <a href="{link controller='UserQuickSearch'}mode=disabled{/link}">{#$usersAwaitingApproval} Benutzer</a> {if $usersAwaitingApproval == 1}wartet auf seine{else}warten auf ihre{/if} Aktivierung.]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">

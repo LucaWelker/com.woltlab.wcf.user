@@ -207,5 +207,50 @@
 			<listenerclassname>wcf\system\event\listener\ExtendedUserQuickSearchActionListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\page\IndexPage</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\UsersAwaitingApprovalInfoListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserSearchForm</eventclassname>
+			<eventname>readParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserSearchForm</eventclassname>
+			<eventname>buildConditions</eventname>
+			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserSearchForm</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserBulkProcessingForm</eventclassname>
+			<eventname>readParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserBulkProcessingForm</eventclassname>
+			<eventname>buildConditions</eventname>
+			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\UserBulkProcessingForm</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>
