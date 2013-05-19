@@ -116,6 +116,6 @@ class UserMenuItem extends ProcessibleDatabaseObject implements ITreeMenuItem {
 	 * @return	string
 	 */
 	public function __toString() {
-		return WCF::getLanguage()->get($this->menuItem);
+		return WCF::getLanguage()->getDynamicVariable($this->menuItem);
 	}
 }
