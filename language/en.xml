@@ -180,6 +180,8 @@
 		<item name="wcf.acp.user.quickSearch.disabledAvatars"><![CDATA[Blocked avatars]]></item>
 		<item name="wcf.acp.user.quickSearch.disabledSignatures"><![CDATA[Blocked signatures]]></item>
 		<item name="wcf.acp.user.usersAwaitingApprovalInfo"><![CDATA[TODO: <a href="{link controller='UserQuickSearch'}mode=disabled{/link}">{#$usersAwaitingApproval} Benutzer</a> {if $usersAwaitingApproval == 1}wartet auf seine{else}warten auf ihre{/if} Aktivierung.]]></item>
+		<item name="wcf.acp.user.search.conditions.state.enabled"><![CDATA[Approved]]></item>
+		<item name="wcf.acp.user.search.conditions.state.disabled"><![CDATA[Awaiting approval]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
@@ -372,6 +374,7 @@ Your {@PAGE_TITLE|language} team]]></item>
 		<item name="wcf.user.newestMember"><![CDATA[Newest Member]]></item>
 		<item name="wcf.user.login.3rdParty"><![CDATA[Third-Party Login]]></item>
 		<item name="wcf.user.search.results"><![CDATA[Search Results]]></item>
+		<item name="wcf.user.lastActivityTime"><![CDATA[Last Activity]]></item>
 	</category>
 	
 	<category name="wcf.user.menu">
