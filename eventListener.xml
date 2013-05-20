@@ -217,7 +217,7 @@
 		
 		<eventlistener>
 			<eventclassname>wcf\acp\form\UserSearchForm</eventclassname>
-			<eventname>readParameters</eventname>
+			<eventname>readFormParameters</eventname>
 			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
@@ -236,7 +236,7 @@
 		
 		<eventlistener>
 			<eventclassname>wcf\acp\form\UserBulkProcessingForm</eventclassname>
-			<eventname>readParameters</eventname>
+			<eventname>readFormParameters</eventname>
 			<listenerclassname>wcf\system\event\listener\UserSearchFormAdditionalConditionsListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>

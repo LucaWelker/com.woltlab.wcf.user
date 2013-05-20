@@ -114,13 +114,13 @@
 		<templatelistener name="userSearchEnabledState">
 			<environment>admin</environment>
 			<templatename>userSearch</templatename>
-			<eventname>stateFields</eventname>
+			<eventname>states</eventname>
 			<templatecode><![CDATA[{include file='__userSearchEnabledState'}]]></templatecode>
 		</templatelistener>
 		<templatelistener name="userBulkProcessingEnabledState">
 			<environment>admin</environment>
 			<templatename>userBulkProcessing</templatename>
-			<eventname>stateFields</eventname>
+			<eventname>states</eventname>
 			<templatecode><![CDATA[{include file='__userSearchEnabledState'}]]></templatecode>
 		</templatelistener>
 		<!-- /admin -->
